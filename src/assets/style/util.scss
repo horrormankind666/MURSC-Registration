@@ -1,0 +1,108 @@
+/*
+=============================================
+Author      : <ยุทธภูมิ ตวันนา>
+Create date : <๐๖/๑๑/๒๕๖๒>
+Modify date : <๐๖/๑๑/๒๕๖๒>
+Description : <style sheet สำหรับจัดรูปแบบการแสดงผล>
+=============================================
+*/
+
+body { 
+    background-color: #FFFFFF;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center bottom;
+    background-size: cover;
+    margin: 0px;
+    padding: 0px;
+    -ms-overflow-style: scrollbar;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    cursor: default;   
+}
+html, body {
+    height: 100%;
+}
+a,
+a:link,
+a:visited,
+a:active,
+a:hover,
+a:focus {
+    text-decoration: none;
+    outline: none;
+}
+a:link.link,
+a:focus.link,
+a:visited.link {
+    color: #000000;
+    text-decoration: underline;
+}
+a:hover.link {
+    color: #C51A1B;
+}
+main {
+    min-height: 100%;    
+    position: relative;
+}
+main header,
+main section,
+main footer,
+.sticky {
+    width: 100%;
+}
+main header .container,
+main section .container,
+main section .container .view,
+main footer .container {    
+    width: 100%;
+    max-width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+main header .container .navbar-top,
+main header .container .navbar-header {
+    width: inherit;
+}
+main header .container .navbar-header {
+    padding: 0px 10px 7px 9px;
+}
+main section {
+    padding: 0px 0px 0px 0px;
+    min-height: 100%;
+}
+main footer {
+    position: absolute;
+    background: #000000;    
+	bottom: 0px;
+	left: 0px;
+    z-index: 1;
+}
+main footer .container {
+    padding: 16px 10px 19px 10px;
+}
+.msg-loading {
+    z-index: 2000;
+    position: absolute;
+    color: white;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 50%;
+    margin-top: 45px;
+}
+.hidden{
+    display: none;
+}
+.panel-table {
+    display: table;
+    width: 100%;
+}
+.panel-table .panel-row {
+    display: table-row;
+}
+.panel-table .panel-col {
+    display: table-cell;
+    vertical-align: top;
+}

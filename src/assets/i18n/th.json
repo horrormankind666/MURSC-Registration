@@ -1,0 +1,7 @@
+{
+    "systemName": "ระบบลงทะเบียนกลาง",
+    "footer": "<span class='font regular size16'><i class='fa fa-copyright' aria-hidden='true'></i></span> สงวนลิขสิทธิ์ พ.ศ. 2562 มหาวิทยาลัยมหิดล, พัฒนาโดย กองเทคโนโลยีสารสนเทศ",
+    "msgLoading": {
+        "loading": "กำลังโหลด"
+    }
+}
