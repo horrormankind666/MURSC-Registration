@@ -1,0 +1,164 @@
+/*
+=============================================
+Author      : <ยุทธภูมิ ตวันนา>
+Create date : <๐๖/๑๑/๒๕๖๒>
+Modify date : <๐๘/๑๑/๒๕๖๒>
+Description : <style sheet สำหรับจัดรูปแบบการแสดงผลของ app-root>
+=============================================
+*/
+
+$screen-max-width: 768px;
+$image-path: "../assets/images";
+
+main header {
+    background: #1D4F91;
+}
+main header .navbar-header {    
+    height: 80px;
+    background-image: url($image-path + '/header-background.png');
+    background-position: bottom right;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+main header .navbar-header .panel-table {
+    width: inherit;
+    height: inherit;
+    table-layout: auto;
+}
+main header .navbar-header .panel-table .panel-row,
+main header .navbar-header .panel-table .panel-col,
+main header .navbar-header .panel-table .panel-col .label {
+    height: inherit;
+    vertical-align: middle;
+}
+main header .navbar-header .panel-table .panel-col.systeminfo {
+    width: 578px;
+}
+main header .navbar-header .panel-table .panel-col.systeminfo .owner {
+    width: 220px;
+}
+main header .navbar-header .panel-table .panel-col.systeminfo .fullname {
+    width: 358px !important;
+}
+main header .navbar-header .panel-table .panel-col.systeminfo .owner .label,
+main header .navbar-header .panel-table .panel-col.systeminfo .fullname {
+    width: inherit;
+    background-image: url($image-path + '/label.png');
+}
+main header .navbar-header .panel-table .panel-col.systeminfo .owner .label-th {
+    background-position: 0px 0px;
+}
+main header .navbar-header .panel-table .panel-col.systeminfo .owner .label-en {
+    background-position: 0px -80px;
+}
+main header .navbar-header .panel-table .panel-col.systeminfo .fullname {
+    background-position: -251px 0px;
+}
+main header .navbar-header .panel-table .panel-col.userinfo {
+    width: auto;
+    float: right;
+    padding-left: 5px;
+}
+main header .navbar-header .panel-table .panel-col.userinfo .flags-icon,
+main header .navbar-header .panel-table .panel-col.userinfo .home-icon {
+    width: 24px;
+    padding-left: 15px;
+}
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon {
+    width: 35px;
+    padding-left: 15px;
+}
+main header .navbar-header .panel-table .panel-col.userinfo .signin-icon {
+    width: 75px;
+    padding-left: 15px;
+}
+main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a,
+main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
+    position: relative;    
+}
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon a,
+main header .navbar-header .panel-table .panel-col.userinfo .signin-icon a {
+    display: inline-block;
+    width: inherit;    
+    height: 35px;
+    line-height: 36px;
+    border-radius: 50%;    
+}
+main header .navbar-header .panel-table .panel-col.userinfo .signin-icon a {
+    border: 1px solid #FFFFFF;
+    border-radius: 4px;
+    line-height: 32px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a {
+        top: -1px;
+    }
+    main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
+        top: 2px;
+    }    
+    _:-ms-lang(x),
+    _:-webkit-full-screen,
+    main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a {
+        top: 0px;
+    }    
+    _:-ms-lang(x),
+    _:-webkit-full-screen,
+    main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
+        top: 2px;
+    }
+    ::i-block-chrome,
+    main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a {
+        top: 0px;
+    }    
+    ::i-block-chrome,
+    main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
+        top: 1px;
+    }
+}
+@media screen and (min--moz-device-pixel-ratio:0) {
+    main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a {
+        top: 0px;
+    }
+}
+@media screen and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
+        top: 2px;
+    }
+}
+@media screen and (max-width: $screen-max-width) {
+    main header .navbar-header .panel-table .panel-col.systeminfo {
+        width: 433px;
+    }
+    main header .navbar-header .panel-table .panel-col.systeminfo .owner {
+        width: 75px;
+    }
+}
+@media screen and (max-width: 623px) {
+    main header .navbar-header .panel-table .panel-col.systeminfo {
+        width: 238px;
+    }
+    main header .navbar-header .panel-table .panel-col.systeminfo .fullname {
+        width: 163px;
+        background-position: -75px -160px;
+    }
+}
+@media screen and (max-width: 428px) {
+    main header .navbar-header .panel-table .panel-col.systeminfo {
+        width: 162px;
+    }
+    main header .navbar-header .panel-table .panel-col.systeminfo .owner {
+        display: none;
+    }
+    main header .navbar-header .panel-table .panel-col.systeminfo .fullname {
+        width: inherit;
+        background-position: 0px -240px;
+    }
+}
+main footer {
+    background: #F2F2F2;
+    border-top: 1px solid lightgrey;
+}
+main footer .container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

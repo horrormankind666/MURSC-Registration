@@ -7,7 +7,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "styleext": "scss"
         }
       },
       "root": "",
@@ -24,7 +25,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "assets": [
-              "src/favicon.ico",
+              "src/mu-favicon.png",
               "src/assets"
             ],
             "styles": [

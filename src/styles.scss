@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+/*
+=============================================
+Author      : <ยุทธภูมิ ตวันนา>
+Create date : <๒๙/๑๐/๒๕๖๒>
+Modify date : <๐๖/๑๑/๒๕๖๒>
+Description : <style sheet สำหรับจัดรูปแบบการแสดงผลของ app>
+=============================================
+*/
+
+@import 'assets/style/font.scss';
+@import 'assets/style/util.scss';
+
+body {
+    overflow-y: auto;
+}
+.font {
+    font-family: $font-family;
+}
