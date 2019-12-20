@@ -1,7 +1,7 @@
-<ngx-loading [show]="loading"></ngx-loading>
-<span class="msg-loading font regular size16" *ngIf="loading">{{'msgLoading.loading' | translate}}</span>
+<ngx-loading [show]="isLoading"></ngx-loading>
+<span class="msg-loading font regular size16" *ngIf="isLoading">{{'msgLoading.loading' | translate}}</span>
 <main>
-  <header>
+  <header #header class="sticky">
     <div class="container">
       <div class="navbar-header">
         <div class="panel-table">
@@ -44,9 +44,9 @@
     </div>
   </header>
   <section>
-      <router-outlet *ngIf="!loading"></router-outlet>
+      <router-outlet *ngIf="!isLoading"></router-outlet>
   </section>
-  <footer>
+  <footer #footer>
     <div class="container text-center">
       <span class="font regular gray size14" [innerHTML]="'footer' | translate"></span>
     </div>

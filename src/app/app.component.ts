@@ -2,18 +2,18 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๑/๑๑/๒๕๖๒>
+Modify date : <๒๐/๑๒/๒๕๖๒>
 Description : <รวมรวบฟังก์ชั่นใช้งานสำหรับ app-root>
 =============================================
 */
 
 'use strict';
 
-import { NgModule, Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { NgModule, Component, ElementRef, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 
 import { AppService } from './app.service';
+import { ɵBrowserDomAdapter } from '@angular/platform-browser';
 
 @NgModule({
   providers: [
@@ -24,29 +24,34 @@ import { AppService } from './app.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  host: {
+    '(window: resize)': 'onResize($event)'
+  }
 })
 
 export class AppComponent implements OnInit {
-  public loading: boolean = true;
-  private userBackgrondColor: string;
+  @ViewChild('footer', { static: false }) footerView: ElementRef;
+  @ViewChild('header', { static: false }) headerView: ElementRef;
+
+  public isLoading: boolean = true;
+  public userBackgrondColor: string;
 
   constructor(
-    private httpClient: HttpClient,
     private router: Router,
-    private appService: AppService,
+    private appService: AppService,    
   ) {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
-          this.loading = true;
+          this.isLoading = true;
           break;
         }
         case event instanceof NavigationEnd:
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           setTimeout(() => {
-            this.loading = false;
+            this.isLoading = false;
           }, 1000);
           break;
         }
@@ -60,10 +65,20 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.appService.setDefaultLang(this.appService.lang);
     this.userBackgrondColor = this.appService.getRandomColor();
+  };
+  
+  ngAfterViewInit() {
+    console.log(this.footerView.nativeElement.style.offsetHeight);
     /*
-    this.appService.doAsyncTask().then(res => {
-      console.log(res);
-    })
+    $("main section").css({
+      "padding-top": ($("main .sticky").outerHeight() + "px"),
+
+    //console.log(document.getElementById('footer-view').style);
     */
   };
+
+  onResize(event) {
+    //console.log(this.footerView.nativeElement.offsetHeight);
+    this.headerView.nativeElement.style.height;
+  }
 }

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๐๖/๑๑/๒๕๖๒>
+Modify date : <๒๐/๑๒/๒๕๖๒>
 Description : <style sheet สำหรับจัดรูปแบบการแสดงผล>
 =============================================
 */
@@ -94,6 +94,10 @@ main footer .container {
 }
 .hidden{
     display: none;
+}
+.sticky {
+    position: fixed;
+    z-index: 10050;
 }
 .panel-table {
     display: table;

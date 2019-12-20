@@ -1,0 +1,52 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <title>Silent Refresh</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+  <link href="mu-favicon.png" rel="shortcut icon" type="image/png" />
+</head>
+<style>
+  @font-face {
+    font-family: 'pridi';
+    font-style: normal;
+    font-weight: 300;
+    src: local('pridi light'), local('pridi-light'), url(assets/font/pridi-light.ttf) format('truetype');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+  }  
+  @font-face {
+    font-family: 'pridi';
+    font-style: normal;
+    font-weight: 500;
+    src: local('pridi medium'), local('pridi-medium'), url(assets/font/pridi-medium.ttf) format('truetype');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+  }
+  .font {
+    font-family: 'pridi';
+  }
+</style>
+<body>
+  <div id="msg" class="font" style="font-weight: 400; font-size: 18px; text-align: center;">Working...</div>
+</body>
+<script>
+  function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+    
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  };  
+
+  var token = getUrlParameter('token');
+
+  if (token) {
+    document.cookie = ('MURSC.Cookies=ADFS,' + token);
+    location.href = '/Home';
+  }
+  else {
+    location.href = 'http://localhost:4279';
+  }
+</script>
