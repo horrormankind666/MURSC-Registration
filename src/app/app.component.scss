@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๐๘/๑๑/๒๕๖๒>
+Modify date : <๒๔/๑๒/๒๕๖๒>
 Description : <style sheet สำหรับจัดรูปแบบการแสดงผลของ app-root>
 =============================================
 */
@@ -64,7 +64,7 @@ main header .navbar-header .panel-table .panel-col.userinfo .home-icon {
     width: 24px;
     padding-left: 15px;
 }
-main header .navbar-header .panel-table .panel-col.userinfo .user-icon {
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon {    
     width: 35px;
     padding-left: 15px;
 }
@@ -78,11 +78,14 @@ main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
 }
 main header .navbar-header .panel-table .panel-col.userinfo .user-icon a,
 main header .navbar-header .panel-table .panel-col.userinfo .signin-icon a {
-    display: inline-block;
-    width: inherit;    
+    display: block;
+    width: inherit;
     height: 35px;
-    line-height: 36px;
-    border-radius: 50%;    
+    border-radius: 50%;   
+    position: relative; 
+}
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon a {
+    line-height: 34px;
 }
 main header .navbar-header .panel-table .panel-col.userinfo .signin-icon a {
     border: 1px solid #FFFFFF;

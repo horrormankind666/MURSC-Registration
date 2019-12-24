@@ -2,18 +2,18 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๐/๑๒/๒๕๖๒>
-Description : <รวมรวบฟังก์ชั่นใช้งานสำหรับ app-root>
+Modify date : <๒๔/๑๒/๒๕๖๒>
+Description : <>
 =============================================
 */
 
 'use strict';
 
-import { NgModule, Component, ElementRef, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { NgModule, Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 
 import { AppService } from './app.service';
-import { ɵBrowserDomAdapter } from '@angular/platform-browser';
+import { AuthService } from './auth.service';
 
 @NgModule({
   providers: [
@@ -31,15 +31,18 @@ import { ɵBrowserDomAdapter } from '@angular/platform-browser';
 })
 
 export class AppComponent implements OnInit {
-  @ViewChild('footer', { static: false }) footerView: ElementRef;
-  @ViewChild('header', { static: false }) headerView: ElementRef;
+  @ViewChild('headerView', { static: false }) headerView: ElementRef;
+  @ViewChild('footerView', { static: false }) footerView: ElementRef;  
 
-  public isLoading: boolean = true;
-  public userBackgrondColor: string;
+  private isLoading: boolean = true;
+  private userBackgrondColor: string;
+  private sectionStyle: {} = {};
+  private today: Date = new Date();
 
   constructor(
     private router: Router,
-    private appService: AppService,    
+    private appService: AppService,
+    private authService: AuthService
   ) {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
@@ -62,23 +65,23 @@ export class AppComponent implements OnInit {
     })
   };
 
-  ngOnInit() {
+  getSectionStyle(): {} {
+    return {
+      'padding-top': (this.headerView.nativeElement.offsetHeight + 'px'),
+      'padding-bottom': (this.footerView.nativeElement.offsetHeight + 'px')
+    }
+  };
+
+  ngOnInit() {  
     this.appService.setDefaultLang(this.appService.lang);
     this.userBackgrondColor = this.appService.getRandomColor();
   };
   
   ngAfterViewInit() {
-    console.log(this.footerView.nativeElement.style.offsetHeight);
-    /*
-    $("main section").css({
-      "padding-top": ($("main .sticky").outerHeight() + "px"),
-
-    //console.log(document.getElementById('footer-view').style);
-    */
+    this.sectionStyle = this.getSectionStyle();
   };
 
-  onResize(event) {
-    //console.log(this.footerView.nativeElement.offsetHeight);
-    this.headerView.nativeElement.style.height;
+  onResize() {
+    this.sectionStyle = this.getSectionStyle();
   }
 }

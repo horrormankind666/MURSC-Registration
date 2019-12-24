@@ -2,8 +2,8 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๒๐/๑๒/๒๕๖๒>
-Description : <guard service ทำหน้าที่เหมือนเป็นด่านกำแพงกั้นการเข้าถึงส่วนที่เราจำกัดสิทธิ์>
+Modify date : <๒๔/๑๒/๒๕๖๒>
+Description : <>
 =============================================
 */
 
@@ -31,8 +31,6 @@ export class AuthGuardService implements CanActivate {
     let url: string = state.url;
 
     return this.authService.getAuthenResource().then((res: any) => {
-      this.authService.isAuthenticated = (res !== null ? res.isAuthenticated : false);
-
       if (this.authService.isAuthenticated) {      
         if (url === '/SignIn')
           this.router.navigate(['Home']);

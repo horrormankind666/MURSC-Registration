@@ -2,8 +2,8 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๒๐/๑๒/๒๕๖๒>
-Description : <service สำหรับใช้ในการล็อกอิน และล็อกเอาท์>
+Modify date : <๒๔/๑๒/๒๕๖๒>
+Description : <>
 =============================================
 */
 
@@ -19,9 +19,18 @@ import { AppService } from './app.service';
 })
 
 export class AuthService {
-  protected urlAuthenResource: string = 'http://localhost:5001/API/AuthenResource/UserInfo';
-  public isAuthenticated: boolean = true;
-  public userInfo: any = {};
+  private userInfo: {} = {
+    email: '',
+    familyName: '',
+    givenName: '',
+    uniqueName: '',
+    winaccountName: ''
+  };
+
+  public urlAuthenResource: string = 'http://localhost:5001/API/AuthenResource/UserInfo';
+  public urlAuthenServer: string = 'http://localhost:4279';
+  public isAuthenticated: boolean = false;  
+  public getUserInfo: {} = this.userInfo;
 
   constructor(
     private http: HttpClient,
@@ -31,48 +40,25 @@ export class AuthService {
   signout() {
     this.isAuthenticated = false
   }
-  /*
-  self.setUserInfo = function (userData) {
-      var personId = "";
-      var username = "";
-      var fullnameTH = "";
-      var fullnameEN = "";
-      var facultyId = "";
-      var programId = "";
-      var depId = "";
-      var permission = "";
-      var systemGroup = "";
-
-      if (userData)
-      {
-          personId    = (userData.PersonId ? userData.PersonId : "");
-          username    = (userData.Username ? userData.Username : "");
-          fullnameTH  = (userData.FullnameTH ? userData.FullnameTH : "");
-          fullnameEN  = (userData.FullnameEN ? userData.FullnameEN : "");
-          facultyId   = (userData.FacultyId ? userData.FacultyId : "");
-          programId   = (userData.ProgramId ? userData.ProgramId : "");
-          depId       = (userData.DepId ? userData.DepId : "");
-          permission  = (userData.Userlevel ? userData.Userlevel : "");
-          systemGroup = (userData.SystemGroup ? userData.SystemGroup : "");
-      }
-
-      self.userInfo = {
-          personId: personId,
-          username: username,
-          fullname: {
-              TH: fullnameTH,
-              EN: fullnameEN
-          },
-          facultyId: facultyId,
-          programId: programId,
-          depId: depId,
-          permission: permission,
-          systemGroup: systemGroup
+  
+  setUserInfo = function (data) {
+      let email: string           = (data.email ? data.email : '');
+      let familyName: string      = (data.family_name ? data.family_name : '');
+      let givenName: string       = (data.given_name ? data.given_name : '');
+      let uniqueName: string      = (data.unique_name ? data.unique_name : '');
+      let winaccountName: string  = (data.winaccountname ? data.winaccountname : '');
+      
+      this.userInfo = {
+        email: email,
+        familyName: familyName,
+        givenName: givenName,
+        uniqueName: uniqueName,
+        winaccountName: winaccountName
       };
 
-      self.getUserInfo = self.userInfo;
+      this.getUserInfo = this.userInfo;
   };
-  */
+  
   getAuthenResource(): Promise<any> {    
     let promise = new Promise((resolve, reject) => {
       this.appService.getCookie(this.appService.cookieName);
@@ -81,12 +67,24 @@ export class AuthService {
         let headers = new HttpHeaders()
           .set('Authorization', ('Bearer ' + this.appService.authenResource.token));
 
-        this.http.get(this.urlAuthenResource, { headers: headers }).subscribe((res: {}) => {          
-          resolve(res['data'][0]);
+        this.http.get(this.urlAuthenResource, { headers: headers }).subscribe((res: {}) => {
+          let data = res['data'];
+
+          this.isAuthenticated = (data !== null ? data[0].isAuthenticated : false);
+          
+          if (this.isAuthenticated) 
+            this.setUserInfo(data[1].payload)
+          else
+            this.getUserInfo = {};
+
+          resolve(data);
         });
       }
-      else
+      else {
+        this.isAuthenticated = false;
+
         resolve(null);
+      }        
     });
 
     return promise;

@@ -1,7 +1,7 @@
 <ngx-loading [show]="isLoading"></ngx-loading>
 <span class="msg-loading font regular size16" *ngIf="isLoading">{{'msgLoading.loading' | translate}}</span>
 <main>
-  <header #header class="sticky">
+  <header #headerView class="sticky">
     <div class="container">
       <div class="navbar-header">
         <div class="panel-table">
@@ -25,15 +25,15 @@
                     <a href="javascript:void(0)" *ngIf="appService.lang === 'th'" (click)="appService.setDefaultLang('en')"><span class="font regular size18 flag-icon flag-icon-gb"></span></a>
                   </div>
                   <div class="panel-col home-icon">
-                    <a routerLink="" routerLinkActive="active" ><span class="font regular white size24"><i class='fa fa-home'></i></span></a>
+                    <a routerLink="Home" routerLinkActive="active"><span class="font regular white size24"><i class='fa fa-home'></i></span></a>
                   </div>
-                  <!--
-                  <div class="panel-col text-center user-icon">
-                    <a href="#" [ngStyle]="{'background-color': userBackgrondColor}"><span class="font regular white size18">{{'yu'[0].toUpperCase() + 'yu'[1]}}</span></a>
+                  <div class="panel-col text-center user-icon" *ngIf="authService.isAuthenticated">
+                    <a href="#" [ngStyle]="{'background-color': userBackgrondColor}">
+                      <span class="font regular white size18">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.givenName[1] | lowercase)}}</span>
+                    </a>
                   </div>
-                  -->
-                  <div class="panel-col text-center signin-icon">
-                    <a href="#"><span class="font regular white size16">Sign in</span></a>
+                  <div class="panel-col text-center signin-icon" *ngIf="!authService.isAuthenticated">
+                    <a routerLink="SignIn" routerLinkActive="active"><span class="font regular white size16">Sign in</span></a>
                   </div>
                 </div>
               </div>
@@ -43,12 +43,17 @@
       </div>
     </div>
   </header>
-  <section>
+  <section [ngStyle]="sectionStyle">
+    <div class="container">
       <router-outlet *ngIf="!isLoading"></router-outlet>
+    </div>      
   </section>
-  <footer #footer>
+  <footer #footerView>
     <div class="container text-center">
-      <span class="font regular gray size14" [innerHTML]="'footer' | translate"></span>
+      <span class="font regular gray size14">
+        <div *ngIf="appService.lang === 'th'"><span class="font regular size16"><i class="fa fa-copyright" aria-hidden="true"></i></span> สงวนลิขสิทธิ์ พ.ศ.2562{{(today.getFullYear() + 543) > 2562 ? (' - ' + (today.getFullYear() + 543)) : ''}} มหาวิทยาลัยมหิดล, พัฒนาโดย กองเทคโนโลยีสารสนเทศ</div>
+        <div *ngIf="appService.lang === 'en'">Copyright <span class="font regular size16"><i class="fa fa-copyright"></i></span> 2019{{today.getFullYear() > 2019 ? (' - ' + today.getFullYear()) : ''}} Mahidol University. All rights reserved.</div>
+      </span>
     </div>
   </footer>  
 </main>

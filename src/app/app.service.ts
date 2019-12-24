@@ -2,8 +2,8 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๐/๑๒/๒๕๖๒>
-Description : <รวมรวบฟังก์ชั่นใช้งานทั่วไปของระบบ>
+Modify date : <๒๔/๑๒/๒๕๖๒>
+Description : <>
 =============================================
 */
 
@@ -44,21 +44,7 @@ export class AppService {
       this.titleService.setTitle(res);
     });
   };
-  /*
-  setSectionLayout() {
-    $timeout(function () {
-        if ($(".bootstrap-dialog.modal") !== undefined)
-            $(".bootstrap-dialog.modal").css({
-                "top": ($("main .sticky").outerHeight() + "px")
-            });
 
-        $("main section").css({
-            "padding-top": ($("main .sticky").outerHeight() + "px"),
-            "padding-bottom": ($("footer").outerHeight() + "px")
-        });
-    }, 0);
-  };
-  */
   getRandomColor(): string {
     let color: string = Math.floor(0x1000000 * Math.random()).toString(16);
     

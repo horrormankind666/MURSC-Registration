@@ -1,6 +1,5 @@
 {
     "systemName": "Mahidol University Registration Support Center ( MURSC )",
-    "footer": "Copyright <span class='font regular size16'><i class='fa fa-copyright'></i></span> 2019 Mahidol University. All rights reserved.",
     "msgLoading": {
         "loading": "Loading..."
     }

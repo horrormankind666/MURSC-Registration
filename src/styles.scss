@@ -2,8 +2,8 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๐๖/๑๑/๒๕๖๒>
-Description : <style sheet สำหรับจัดรูปแบบการแสดงผลของ app>
+Modify date : <๒๓/๑๒/๒๕๖๒>
+Description : <>
 =============================================
 */
 
@@ -15,4 +15,7 @@ body {
 }
 .font {
     font-family: $font-family;
+}
+main section .container {
+    padding: 20px 0px 20px 0px;
 }
