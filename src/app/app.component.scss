@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๔/๑๒/๒๕๖๒>
+Modify date : <๒๖/๑๒/๒๕๖๒>
 Description : <style sheet สำหรับจัดรูปแบบการแสดงผลของ app-root>
 =============================================
 */
@@ -76,7 +76,7 @@ main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a,
 main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
     position: relative;    
 }
-main header .navbar-header .panel-table .panel-col.userinfo .user-icon a,
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon #profile,
 main header .navbar-header .panel-table .panel-col.userinfo .signin-icon a {
     display: block;
     width: inherit;
@@ -84,8 +84,34 @@ main header .navbar-header .panel-table .panel-col.userinfo .signin-icon a {
     border-radius: 50%;   
     position: relative; 
 }
-main header .navbar-header .panel-table .panel-col.userinfo .user-icon a {
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon #profile {
     line-height: 34px;
+}
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon #profile.dropdown-toggle::after {
+    display: none;
+}
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu {
+    width: 293px;
+    border-radius: 10px;
+    padding: 16px 0px 16px 0px;
+}
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu .panel-table,
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu .panel-table .panel-row,
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu .panel-table .panel-col {
+    width: 100%;
+}
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu .panel-table {
+    table-layout: fixed;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu .user-icon {
+    display: block;
+    width: 80px;
+    height: 80px;
+    line-height: 79px;
+    border-radius: 50%;
+    padding-left: 0px;
 }
 main header .navbar-header .panel-table .panel-col.userinfo .signin-icon a {
     border: 1px solid #FFFFFF;

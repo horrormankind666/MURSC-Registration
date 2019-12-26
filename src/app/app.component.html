@@ -1,5 +1,5 @@
-<ngx-loading [show]="isLoading"></ngx-loading>
-<span class="msg-loading font regular size16" *ngIf="isLoading">{{'msgLoading.loading' | translate}}</span>
+<ngx-loading [show]="appService.isLoading"></ngx-loading>
+<span class="msg-loading font regular size16" *ngIf="appService.isLoading">{{'msgLoading.loading' | translate}}</span>
 <main>
   <header #headerView class="sticky">
     <div class="container">
@@ -27,13 +27,35 @@
                   <div class="panel-col home-icon">
                     <a routerLink="Home" routerLinkActive="active"><span class="font regular white size24"><i class='fa fa-home'></i></span></a>
                   </div>
-                  <div class="panel-col text-center user-icon" *ngIf="authService.isAuthenticated">
-                    <a href="#" [ngStyle]="{'background-color': userBackgrondColor}">
-                      <span class="font regular white size18">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.givenName[1] | lowercase)}}</span>
+                  <div class="panel-col text-center user-icon" ngbDropdown placement="bottom-right" *ngIf="authService.isAuthenticated && !appService.isLoading">
+                    <a href="javascript:void(0)" id="profile" ngbDropdownToggle [ngStyle]="{'background-color': userBackgrondColor}">
+                      <span class="font regular white size18">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.familyName[0] | uppercase)}}</span>
                     </a>
+                    <div ngbDropdownMenu aria-labelledby="profile">
+                      <div class="panel-table">
+                        <div class="panel-row">
+                          <div class="panel-col text-center">
+                            <div class="center user-icon" [ngStyle]="{'background-color': userBackgrondColor}">
+                              <span class="font regular white size48">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.familyName[0] | uppercase)}}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel-row">
+                          <div class="panel-col text-center padding-top-10">
+                            <div class="font regular black size18 overflow-ellipsis">{{authService.getUserInfo.givenName}} {{(authService.getUserInfo.familyName)}}</div>
+                            <div class="font regular grey size16 overflow-ellipsis">{{authService.getUserInfo.email}}{{authService.getUserInfo.email}}</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="dropdown-divider margin-top-16 no-margin-botttom"></div>
+                      <a class="text-center" href="javascript:void(0)" role="button" ngbDropdownItem><span class="font regular grey-dark size15">{{'profile.personalInfo' | translate | titlecase}}</span></a>
+                      <a class="text-center" href="javascript:void(0)" role="button" ngbDropdownItem><span class="font regular grey-dark size15">{{'profile.examApplicationInfo' | translate | titlecase}}</span></a>
+                      <div class="dropdown-divider no-margin-top margin-bottom-16"></div>
+                      <a class="btn btn-transparent center" href="javascript:void(0)" role="button"><span class="font regular size16">{{'signout' | translate}}</span></a>
+                    </div>                    
                   </div>
-                  <div class="panel-col text-center signin-icon" *ngIf="!authService.isAuthenticated">
-                    <a routerLink="SignIn" routerLinkActive="active"><span class="font regular white size16">Sign in</span></a>
+                  <div class="panel-col text-center signin-icon" *ngIf="!authService.isAuthenticated && !appService.isLoading">
+                    <a routerLink="SignIn" routerLinkActive="active"><span class="font regular white size15">{{'signin' | translate}}</span></a>
                   </div>
                 </div>
               </div>

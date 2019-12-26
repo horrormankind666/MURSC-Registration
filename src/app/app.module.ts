@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๓/๑๒/๒๕๖๒>
+Modify date : <๒๕/๑๒/๒๕๖๒>
 Description : <>
 =============================================
 */
@@ -16,6 +16,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { CookieService } from 'ngx-cookie-service';
@@ -57,6 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       primaryColour: '#000000',
       secondaryColour: '#FFFFFF'
     }),
+    NgbModule
   ],
   providers: [
     CookieService,

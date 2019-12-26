@@ -1,6 +1,12 @@
 {
     "systemName": "ระบบลงทะเบียนกลาง",
+    "signin": "เข้าสู่ระบบ",
+    "signout": "ออกจากระบบ",
     "msgLoading": {
         "loading": "กำลังโหลด"
+    },
+    "profile": {
+        "personalInfo": "ข้อมูลส่วนตัว",
+        "examApplicationInfo": "ข้อมูลการสมัครสอบ"
     }
 }

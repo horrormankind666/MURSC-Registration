@@ -1,6 +1,12 @@
 {
     "systemName": "Mahidol University Registration Support Center ( MURSC )",
+    "signin": "Sign in",
+    "signout": "Sign out",
     "msgLoading": {
         "loading": "Loading..."
-    }
+    },
+    "profile": {
+        "personalInfo": "Personal information",
+        "examApplicationInfo": "Exam application information"
+    }    
 }

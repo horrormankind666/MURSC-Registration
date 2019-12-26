@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๔/๑๒/๒๕๖๒>
+Modify date : <๒๕/๑๒/๒๕๖๒>
 Description : <>
 =============================================
 */
@@ -21,6 +21,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 
 export class AppService {
+  public isLoading: boolean = true;
   public lang: string = 'th';
   public cookieName: string = 'MURSC.Cookies';
   public authenResource: any = {

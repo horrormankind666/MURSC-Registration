@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๔/๑๒/๒๕๖๒>
+Modify date : <๒๕/๑๒/๒๕๖๒>
 Description : <>
 =============================================
 */
@@ -34,7 +34,6 @@ export class AppComponent implements OnInit {
   @ViewChild('headerView', { static: false }) headerView: ElementRef;
   @ViewChild('footerView', { static: false }) footerView: ElementRef;  
 
-  private isLoading: boolean = true;
   private userBackgrondColor: string;
   private sectionStyle: {} = {};
   private today: Date = new Date();
@@ -47,14 +46,14 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
-          this.isLoading = true;
+          appService.isLoading = true;
           break;
         }
         case event instanceof NavigationEnd:
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           setTimeout(() => {
-            this.isLoading = false;
+            appService.isLoading = false;
           }, 1000);
           break;
         }
