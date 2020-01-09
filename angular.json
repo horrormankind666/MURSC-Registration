@@ -63,7 +63,10 @@
                   "maximumError": "10kb"
                 }
               ]
-            }
+            },
+            "es5": {
+              "tsConfig": "./tsconfig-es5.app.json"
+            }            
           }
         },
         "serve": {
@@ -74,7 +77,10 @@
           "configurations": {
             "production": {
               "browserTarget": "Register:build:production"
-            }
+            },
+            "es5": {
+              "browserTarget": "Register:build:es5"
+            }            
           }
         },
         "extract-i18n": {

@@ -2,13 +2,13 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๒๔/๑๒/๒๕๖๒>
+Modify date : <๐๗/๐๑/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, UrlTree } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -36,7 +36,8 @@ export class AuthGuardService implements CanActivate {
           this.router.navigate(['Home']);
       }      
       else {
-        this.cookieService.delete(this.appService.cookieName);
+        if (this.cookieService.check(this.appService.cookieName))
+          this.cookieService.delete(this.appService.cookieName);
 
         if (url !== '/SignIn')
           this.router.navigate(['SignIn']);

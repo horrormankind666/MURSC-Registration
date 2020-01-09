@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
     }
   };
 
-  ngOnInit() {  
+  ngOnInit() {      
     this.appService.setDefaultLang(this.appService.lang);
     this.userBackgrondColor = this.appService.getRandomColor();
   };
