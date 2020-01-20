@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๕/๑๒/๒๕๖๒>
+Modify date : <๒๐/๐๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,28 +12,71 @@ Description : <>
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { TranslateService } from '@ngx-translate/core';
 
 import { CookieService } from 'ngx-cookie-service';
 
+class Modal {
+  public hasOpenModal: boolean = false;
+
+  private _modalConfig: NgbModalConfig;
+  private _modalService: NgbModal;
+
+  constructor(
+    modalConfig: NgbModalConfig,
+    modalService: NgbModal
+  ) {
+    this._modalConfig = modalConfig;
+    this._modalService = modalService;
+
+    this._modalConfig.backdrop = 'static';
+    this._modalConfig.keyboard = false;
+  }    
+
+  open(content: any, windowClass: string): Promise<any> {
+    let promise = new Promise((resolve, reject) => {
+      this._modalService.open(content, {
+        windowClass: windowClass
+      }).result.then(
+        (result: string) => {
+          resolve(result);
+        },
+        (reason: string) => {
+          resolve(reason);
+        }            
+      )
+    });
+   
+    return promise;
+  }  
+}
+
 @Injectable({
   providedIn: 'root'
 })
+export class AppService  { 
+  constructor(        
+    private titleService: Title,
+    private translateService: TranslateService,
+    private cookieService: CookieService,
+    private modalConfig: NgbModalConfig,
+    private modalService: NgbModal
+  ) {}    
+  
+  public modal = new Modal(
+    this.modalConfig,
+    this.modalService
+  );
 
-export class AppService {
-  public isLoading: boolean = true;
+  public isLoading: boolean = true;  
   public lang: string = 'th';
   public cookieName: string = 'MURSC.Cookies';
   public authenResource: any = {
     type: '',
     token: ''
-  };
-
-  constructor(
-    private titleService: Title,
-    private translateService: TranslateService,
-    private cookieService: CookieService
-  ) { }
+  };  
 
   setDefaultLang(lang?: string) {
     this.lang = (!lang ? this.lang : lang);
@@ -44,13 +87,13 @@ export class AppService {
     this.translateService.get('systemName').subscribe((res: string) => {
       this.titleService.setTitle(res);
     });
-  };
+  }
 
   getRandomColor(): string {
     let color: string = Math.floor(0x1000000 * Math.random()).toString(16);
     
     return ('#' + ('000000' + color).slice(-6)).toUpperCase();
-  };
+  }
 
   getCookie(name: string) {
     if (this.cookieService.check(name)) {
@@ -61,5 +104,9 @@ export class AppService {
         this.authenResource.token = cookieValue[1];
       }
     }
-  };
+    else {
+      this.authenResource.type = '';
+      this.authenResource.token = '';
+    }
+  }
 }

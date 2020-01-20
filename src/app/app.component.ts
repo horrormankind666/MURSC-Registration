@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๕/๑๒/๒๕๖๒>
+Modify date : <๑๗/๐๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -34,10 +34,6 @@ export class AppComponent implements OnInit {
   @ViewChild('headerView', { static: false }) headerView: ElementRef;
   @ViewChild('footerView', { static: false }) footerView: ElementRef;  
 
-  private userBackgrondColor: string;
-  private sectionStyle: {} = {};
-  private today: Date = new Date();
-
   constructor(
     private router: Router,
     private appService: AppService,
@@ -62,25 +58,29 @@ export class AppComponent implements OnInit {
         }
       }
     })
-  };
+  }
 
+  private userBackgrondColor: string;
+  private sectionStyle: {} = {};
+  private today: Date = new Date();
+
+  ngOnInit() {      
+    this.appService.setDefaultLang(this.appService.lang);
+    this.userBackgrondColor = this.appService.getRandomColor();
+  }
+  
+  ngAfterViewInit() {
+    this.sectionStyle = this.getSectionStyle();
+  }
+
+  onResize() {
+    this.sectionStyle = this.getSectionStyle();
+  } 
+  
   getSectionStyle(): {} {
     return {
       'padding-top': (this.headerView.nativeElement.offsetHeight + 'px'),
       'padding-bottom': (this.footerView.nativeElement.offsetHeight + 'px')
     }
-  };
-
-  ngOnInit() {      
-    this.appService.setDefaultLang(this.appService.lang);
-    this.userBackgrondColor = this.appService.getRandomColor();
-  };
-  
-  ngAfterViewInit() {
-    this.sectionStyle = this.getSectionStyle();
-  };
-
-  onResize() {
-    this.sectionStyle = this.getSectionStyle();
-  }
+  }  
 }

@@ -1,10 +1,15 @@
 {
     "systemName": "ระบบลงทะเบียนกลาง",
     "signin": "เข้าสู่ระบบ",
-    "signout": "ออกจากระบบ",
+    "signout": {
+        "label": "ออกจากระบบ",
+        "confirm": "ยืนยันต้องการออกจากระบบ"        
+    },
     "msgLoading": {
         "loading": "กำลังโหลด"
     },
+    "cancel": "ยกเลิก",
+    "ok": "ตกลง",
     "profile": {
         "personalInfo": "ข้อมูลส่วนตัว",
         "examApplicationInfo": "ข้อมูลการสมัครสอบ"

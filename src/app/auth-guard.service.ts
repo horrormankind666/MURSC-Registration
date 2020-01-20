@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๐๗/๐๑/๒๕๖๓>
+Modify date : <๒๐/๐๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -18,19 +18,18 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthGuardService implements CanActivate {  
   constructor(
+    private router: Router,
     private cookieService: CookieService,
     private appService: AppService,
-    private authService: AuthService,
-    private router: Router
+    private authService: AuthService    
   ) { }
   
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     let url: string = state.url;
 
-    return this.authService.getAuthenResource().then((res: any) => {
+    return this.authService.getAuthenResource().then((result: any) => {
       if (this.authService.isAuthenticated) {      
         if (url === '/SignIn')
           this.router.navigate(['Home']);

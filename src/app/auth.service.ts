@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๒๕/๑๒/๒๕๖๒>
+Modify date : <๒๐/๐๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -11,14 +11,59 @@ Description : <>
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppService } from './app.service';
+
+class Signout {
+  private _router: Router;
+  private _cookieService: CookieService;
+  private _appService: AppService;
+  private _authService: AuthService;
+
+  constructor(
+    router: Router,
+    cookieService: CookieService,
+    appService: AppService,
+    authService: AuthService
+  ) {
+    this._router = router;
+    this._cookieService = cookieService;
+    this._appService = appService;
+    this._authService = authService;
+  }  
+
+  modalOpen(content: any) {    
+    if (!this._appService.modal.hasOpenModal) {
+      this._appService.modal.hasOpenModal = true;
+
+      this._appService.modal.open(content, 'confirm-dialog').then((result: string) => {
+        this._appService.modal.hasOpenModal = false;
+
+        if (result === 'Y') {
+          this._authService.isAuthenticated = false;
+          this._cookieService.delete(this._appService.cookieName);
+
+          this._router.navigate(['SignIn']);
+        }
+      });
+    }
+  }
+}
 
 @Injectable({
   providedIn: 'root'
 })
+export class AuthService {    
+  constructor(    
+    private router: Router,    
+    private http: HttpClient,
+    private cookieService: CookieService,
+    private appService: AppService,
+  ) {}  
 
-export class AuthService {
   private userInfo: {} = {
     email: '',
     familyName: '',
@@ -27,27 +72,25 @@ export class AuthService {
     winaccountName: ''
   };
 
+  public signout = new Signout(
+    this.router,
+    this.cookieService,
+    this.appService,
+    this
+  );
+
   public urlAuthenResource: string = 'http://localhost:5001/API/AuthenResource/UserInfo';
   public urlAuthenServer: string = 'http://localhost:4279';
   public isAuthenticated: boolean = false;  
   public getUserInfo: {} = this.userInfo;
-
-  constructor(
-    private http: HttpClient,
-    private appService: AppService
-  ) { }
-
-  signout() {
-    this.isAuthenticated = false
-  }
-  
-  setUserInfo = function (data) {
+ 
+  setUserInfo(data: any) {
       let email: string           = (data.email ? data.email : '');
       let familyName: string      = (data.family_name ? data.family_name : '');
       let givenName: string       = (data.given_name ? data.given_name : '');
       let uniqueName: string      = (data.unique_name ? data.unique_name : '');
       let winaccountName: string  = (data.winaccountname ? data.winaccountname : '');
-      
+
       this.userInfo = {
         email: email,
         familyName: familyName,
@@ -57,12 +100,12 @@ export class AuthService {
       };
 
       this.getUserInfo = this.userInfo;
-  };
+  }
   
   getAuthenResource(): Promise<any> {
     let promise = new Promise((resolve, reject) => {
       this.appService.getCookie(this.appService.cookieName);
-
+      
       if (this.appService.authenResource.type && this.appService.authenResource.token) {
         if (!this.isAuthenticated) {
           let headers = new HttpHeaders()

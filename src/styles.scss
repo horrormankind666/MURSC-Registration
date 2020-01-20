@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๒๓/๑๒/๒๕๖๒>
+Modify date : <๑๗/๐๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -10,11 +10,57 @@ Description : <>
 @import 'assets/style/font.scss';
 @import 'assets/style/util.scss';
 
+$header-max-height: 80px;
+
 body {
     overflow-y: auto;
 }
 .font {
     font-family: $font-family;
+}
+.modal {
+    top: $header-max-height;
+    height: calc(100% - #{$header-max-height});;
+}
+.modal-dialog {
+    margin: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.modal-dialog .modal-content .modal-body {
+    padding: 10px;
+}
+.modal-dialog .modal-content .modal-footer {
+    border-top: 0px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+@media screen and (max-width: 187px) {
+    .modal-dialog .modal-content .modal-footer {
+        display: table;
+        width: 100%;
+    }
+    .modal-dialog .modal-content .modal-footer > :not(:last-child) {
+        margin-right: 0px;    
+    }    
+    .modal-dialog .modal-content .modal-footer > :not(:first-child) {
+        margin-left: 0px;
+        margin-top: .5rem
+    }
+    .modal-dialog .modal-content .modal-footer .btn {
+        display: block;
+        width: 100%;
+    }
+}
+.confirm-dialog .modal-dialog {
+    max-width: 100%;
+    width: 100%;
+}
+.confirm-dialog .modal-content {
+    background-color: $color-primary;
+    border: 0px;
+    border-radius: 0px;
 }
 main section .container {
     padding: 20px 0px 20px 0px;

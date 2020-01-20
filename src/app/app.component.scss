@@ -2,10 +2,12 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๖/๑๒/๒๕๖๒>
+Modify date : <๑๔/๐๑/๒๕๖๓>
 Description : <style sheet สำหรับจัดรูปแบบการแสดงผลของ app-root>
 =============================================
 */
+
+@import '../styles.scss';
 
 $screen-max-width: 768px;
 $image-path: "../assets/images";
@@ -14,7 +16,7 @@ main header {
     background: #1D4F91;
 }
 main header .navbar-header {    
-    height: 80px;
+    height: $header-max-height;
     background-image: url($image-path + '/header-background.png');
     background-position: bottom right;
     background-size: cover;
@@ -142,6 +144,11 @@ main header .navbar-header .panel-table .panel-col.userinfo .signin-icon a {
     ::i-block-chrome,
     main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
         top: 1px;
+    }
+    ::i-block-chrome,
+    main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu.show {
+        transform: translate3d(-243px, 58px, 0);
+        -webkit-transform: translate3d(-243px, 58px, 0);
     }
 }
 @media screen and (min--moz-device-pixel-ratio:0) {
