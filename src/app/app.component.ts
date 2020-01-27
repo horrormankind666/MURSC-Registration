@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๗/๐๑/๒๕๖๓>
+Modify date : <๒๓/๐๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -32,9 +32,10 @@ import { AuthService } from './auth.service';
 
 export class AppComponent implements OnInit {
   @ViewChild('headerView', { static: false }) headerView: ElementRef;
-  @ViewChild('footerView', { static: false }) footerView: ElementRef;  
+  @ViewChild('footerView', { static: false }) footerView: ElementRef;
 
   constructor(
+    private elementRef: ElementRef,
     private router: Router,
     private appService: AppService,
     private authService: AuthService
@@ -64,23 +65,23 @@ export class AppComponent implements OnInit {
   private sectionStyle: {} = {};
   private today: Date = new Date();
 
-  ngOnInit() {      
+  ngOnInit() {
     this.appService.setDefaultLang(this.appService.lang);
     this.userBackgrondColor = this.appService.getRandomColor();
   }
-  
+
   ngAfterViewInit() {
     this.sectionStyle = this.getSectionStyle();
   }
 
   onResize() {
     this.sectionStyle = this.getSectionStyle();
-  } 
-  
+  }
+
   getSectionStyle(): {} {
     return {
       'padding-top': (this.headerView.nativeElement.offsetHeight + 'px'),
       'padding-bottom': (this.footerView.nativeElement.offsetHeight + 'px')
     }
-  }  
+  }
 }

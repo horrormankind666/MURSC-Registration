@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๓/๑๒/๒๕๖๒>
-Modify date : <๒๓/๑๒/๒๕๖๒>
+Modify date : <๒๒/๐๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -10,15 +10,14 @@ Description : <>
 .signin-view {
     max-width: 450px;
     margin-left: auto;
-    margin-right: auto;    
-    padding-left: 10px;
-    padding-right: 10px;
-}    
-.signin-view a.btn {   
-    display: table; 
+    margin-right: auto;
+}
+.signin-view a.btn {
+    display: table;
     width: 100%;
     height: 48px;
-    border-radius: 50px;
+    border: none;
+    border-radius: 5rem;
 }
 .signin-view a.btn div {
     display: table-cell;

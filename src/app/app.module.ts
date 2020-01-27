@@ -39,7 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     SigninComponent,
-    HomeComponent    
+    HomeComponent
   ],
   imports: [
     BrowserModule,

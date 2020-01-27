@@ -1,0 +1,36 @@
+/*
+=============================================
+Author      : <ยุทธภูมิ ตวันนา>
+Create date : <๒๐/๐๑/๒๕๖๓>
+Modify date : <๒๒/๐๑/๒๕๖๓>
+Description : <>
+=============================================
+*/
+
+.home-view .card-group {
+  margin-left: -0.25rem;
+  margin-bottom: -0.25rem;
+}
+.home-view .card-group .card {
+  border: none;
+  border-radius: 0px;
+  background-color: rgba(0,0,0,.05);
+}
+.home-view .card-group .card .card-img-top {
+  border-radius: 0px;
+}
+.home-view .card-group .card .card-body .card-text {
+  line-height: 1.8;
+}
+.home-view .card-group .card .card-footer {
+  border-top: none;
+  background: transparent;
+}
+.home-view .card-group .card .card-footer .btn {
+  border-width: 2px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0px;
+  width: 120px;
+}

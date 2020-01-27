@@ -3,13 +3,14 @@
     "signin": "เข้าสู่ระบบ",
     "signout": {
         "label": "ออกจากระบบ",
-        "confirm": "ยืนยันต้องการออกจากระบบ"        
+        "confirm": "ยืนยันต้องการออกจากระบบ"
     },
     "msgLoading": {
         "loading": "กำลังโหลด"
     },
     "cancel": "ยกเลิก",
     "ok": "ตกลง",
+    "registered": "ลงทะเบียน",
     "profile": {
         "personalInfo": "ข้อมูลส่วนตัว",
         "examApplicationInfo": "ข้อมูลการสมัครสอบ"

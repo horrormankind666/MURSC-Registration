@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๐/๐๑/๒๕๖๓>
+Modify date : <๒๔/๐๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -33,7 +33,7 @@ class Modal {
 
     this._modalConfig.backdrop = 'static';
     this._modalConfig.keyboard = false;
-  }    
+  }
 
   open(content: any, windowClass: string): Promise<any> {
     let promise = new Promise((resolve, reject) => {
@@ -45,45 +45,45 @@ class Modal {
         },
         (reason: string) => {
           resolve(reason);
-        }            
+        }
       )
     });
-   
+
     return promise;
-  }  
+  }
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class AppService  { 
-  constructor(        
+export class AppService  {
+  constructor(
     private titleService: Title,
     private translateService: TranslateService,
     private cookieService: CookieService,
     private modalConfig: NgbModalConfig,
     private modalService: NgbModal
-  ) {}    
-  
+  ) {}
+
   public modal = new Modal(
     this.modalConfig,
     this.modalService
   );
 
-  public isLoading: boolean = true;  
+  public isLoading: boolean = true;
   public lang: string = 'th';
   public cookieName: string = 'MURSC.Cookies';
   public authenResource: any = {
     type: '',
     token: ''
-  };  
+  };
 
   setDefaultLang(lang?: string) {
     this.lang = (!lang ? this.lang : lang);
 
     this.translateService.setDefaultLang(this.lang);
     this.translateService.use(this.lang);
-      
+
     this.translateService.get('systemName').subscribe((res: string) => {
       this.titleService.setTitle(res);
     });
@@ -91,7 +91,7 @@ export class AppService  {
 
   getRandomColor(): string {
     let color: string = Math.floor(0x1000000 * Math.random()).toString(16);
-    
+
     return ('#' + ('000000' + color).slice(-6)).toUpperCase();
   }
 

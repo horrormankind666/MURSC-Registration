@@ -10,8 +10,9 @@
     },
     "cancel":"Cancel",
     "ok": "Ok",
+    "registered": "Registered",
     "profile": {
         "personalInfo": "Personal information",
         "examApplicationInfo": "Exam application information"
-    }    
+    }
 }

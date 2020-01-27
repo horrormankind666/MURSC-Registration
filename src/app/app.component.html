@@ -12,7 +12,7 @@
                     <div class="panel-col owner">
                         <div class='label label-th' *ngIf="appService.lang === 'th'"></div>
                         <div class='label label-en' *ngIf="appService.lang === 'en'"></div>
-                    </div>                    
+                    </div>
                     <div class="panel-col fullname"></div>
                 </div>
               </div>
@@ -31,7 +31,7 @@
                     <a href="javascript:void(0)" id="profile" ngbDropdownToggle [ngStyle]="{'background-color': userBackgrondColor}">
                       <span class="font regular white size18">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.familyName[0] | uppercase)}}</span>
                     </a>
-                    <div ngbDropdownMenu aria-labelledby="profile">
+                    <div ngbDropdownMenu aria-labelledby="profile" class="pt-3 pb-3">
                       <div class="panel-table">
                         <div class="panel-row">
                           <div class="panel-col text-center">
@@ -43,7 +43,7 @@
                         <div class="panel-row">
                           <div class="panel-col text-center padding-top-10">
                             <div class="font regular black size18 overflow-ellipsis">{{authService.getUserInfo.givenName}} {{(authService.getUserInfo.familyName)}}</div>
-                            <div class="font regular grey size16 overflow-ellipsis">{{authService.getUserInfo.email}}{{authService.getUserInfo.email}}</div>
+                            <div class="font regular grey size16 overflow-ellipsis">{{authService.getUserInfo.email}}</div>
                           </div>
                         </div>
                       </div>
@@ -54,7 +54,7 @@
                       <div class="block-fit text-center">
                         <button type="button" class="btn btn-transparent" (click)="$event.stopPropagation(); profileDropdown.close(); authService.signout.modalOpen(signoutDialog)"><span class="font regular size16">{{'signout.label' | translate}}</span></button>
                       </div>
-                    </div>                    
+                    </div>
                   </div>
                   <div class="panel-col text-center signin-icon" *ngIf="!authService.isAuthenticated && !appService.isLoading">
                     <a routerLink="SignIn" routerLinkActive="active"><span class="font regular white size15">{{'signin' | translate}}</span></a>
@@ -70,16 +70,16 @@
   <section [ngStyle]="sectionStyle">
     <div class="container">
       <router-outlet *ngIf="!isLoading"></router-outlet>
-    </div>      
+    </div>
   </section>
   <footer #footerView>
-    <div class="container text-center">
+    <div class="container text-center p-3">
       <span class="font regular gray size14">
         <div *ngIf="appService.lang === 'th'"><span class="font regular size16"><i class="fa fa-copyright" aria-hidden="true"></i></span> สงวนลิขสิทธิ์ พ.ศ.2562{{(today.getFullYear() + 543) > 2562 ? (' - ' + (today.getFullYear() + 543)) : ''}} มหาวิทยาลัยมหิดล, พัฒนาโดย กองเทคโนโลยีสารสนเทศ</div>
         <div *ngIf="appService.lang === 'en'">Copyright <span class="font regular size16"><i class="fa fa-copyright"></i></span> 2019{{today.getFullYear() > 2019 ? (' - ' + today.getFullYear()) : ''}} Mahidol University. All rights reserved.</div>
       </span>
     </div>
-  </footer>  
+  </footer>
 </main>
 <ng-template #signoutDialog let-modal>
   <div class="modal-body">

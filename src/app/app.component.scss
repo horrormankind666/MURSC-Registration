@@ -2,199 +2,201 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๑๔/๐๑/๒๕๖๓>
+Modify date : <๒๒/๐๑/๒๕๖๓>
 Description : <style sheet สำหรับจัดรูปแบบการแสดงผลของ app-root>
 =============================================
 */
 
-@import '../styles.scss';
+@import "../styles.scss";
 
 $screen-max-width: 768px;
 $image-path: "../assets/images";
 
 main header {
-    background: #1D4F91;
+  background: #1d4f91;
 }
-main header .navbar-header {    
-    height: $header-max-height;
-    background-image: url($image-path + '/header-background.png');
-    background-position: bottom right;
-    background-size: cover;
-    background-repeat: no-repeat;
+main header .navbar-header {
+  height: $header-max-height;
+  background-image: url($image-path+"/header-background.png");
+  background-position: bottom right;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-left: 14px !important;
+  padding-right: 14px !important;
 }
 main header .navbar-header .panel-table {
-    width: inherit;
-    height: inherit;
-    table-layout: auto;
+  width: inherit;
+  height: inherit;
+  table-layout: auto;
 }
 main header .navbar-header .panel-table .panel-row,
 main header .navbar-header .panel-table .panel-col,
 main header .navbar-header .panel-table .panel-col .label {
-    height: inherit;
-    vertical-align: middle;
+  height: inherit;
+  vertical-align: middle;
 }
 main header .navbar-header .panel-table .panel-col.systeminfo {
-    width: 578px;
+  width: 578px;
 }
 main header .navbar-header .panel-table .panel-col.systeminfo .owner {
-    width: 220px;
+  width: 220px;
 }
 main header .navbar-header .panel-table .panel-col.systeminfo .fullname {
-    width: 358px !important;
+  width: 358px !important;
 }
 main header .navbar-header .panel-table .panel-col.systeminfo .owner .label,
 main header .navbar-header .panel-table .panel-col.systeminfo .fullname {
-    width: inherit;
-    background-image: url($image-path + '/label.png');
+  width: inherit;
+  background-image: url($image-path+"/label.png");
 }
 main header .navbar-header .panel-table .panel-col.systeminfo .owner .label-th {
-    background-position: 0px 0px;
+  background-position: 0px 0px;
 }
 main header .navbar-header .panel-table .panel-col.systeminfo .owner .label-en {
-    background-position: 0px -80px;
+  background-position: 0px -80px;
 }
 main header .navbar-header .panel-table .panel-col.systeminfo .fullname {
-    background-position: -251px 0px;
+  background-position: -251px 0px;
 }
 main header .navbar-header .panel-table .panel-col.userinfo {
-    width: auto;
-    float: right;
-    padding-left: 5px;
+  width: auto;
+  float: right;
+  padding-left: 5px;
 }
 main header .navbar-header .panel-table .panel-col.userinfo .flags-icon,
 main header .navbar-header .panel-table .panel-col.userinfo .home-icon {
-    width: 24px;
-    padding-left: 15px;
+  width: 24px;
+  padding-left: 15px;
 }
-main header .navbar-header .panel-table .panel-col.userinfo .user-icon {    
-    width: 35px;
-    padding-left: 15px;
+main header .navbar-header .panel-table .panel-col.userinfo .user-icon {
+  width: 35px;
+  padding-left: 15px;
 }
 main header .navbar-header .panel-table .panel-col.userinfo .signin-icon {
-    width: 75px;
-    padding-left: 15px;
+  width: 75px;
+  padding-left: 15px;
 }
 main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a,
 main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
-    position: relative;    
+  position: relative;
 }
 main header .navbar-header .panel-table .panel-col.userinfo .user-icon #profile,
 main header .navbar-header .panel-table .panel-col.userinfo .signin-icon a {
-    display: block;
-    width: inherit;
-    height: 35px;
-    border-radius: 50%;   
-    position: relative; 
+  display: block;
+  width: inherit;
+  height: 35px;
+  border-radius: 5rem;
+  position: relative;
 }
 main header .navbar-header .panel-table .panel-col.userinfo .user-icon #profile {
-    line-height: 34px;
+  line-height: 34px;
 }
 main header .navbar-header .panel-table .panel-col.userinfo .user-icon #profile.dropdown-toggle::after {
-    display: none;
+  display: none;
 }
 main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu {
-    width: 293px;
-    border-radius: 10px;
-    padding: 16px 0px 16px 0px;
+  width: 293px;
+  border-radius: .6rem;
 }
 main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu .panel-table,
 main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu .panel-table .panel-row,
 main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu .panel-table .panel-col {
-    width: 100%;
+  width: 100%;
 }
 main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu .panel-table {
-    table-layout: fixed;
-    padding-left: 15px;
-    padding-right: 15px;
+  table-layout: fixed;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu .user-icon {
-    display: block;
-    width: 80px;
-    height: 80px;
-    line-height: 79px;
-    border-radius: 50%;
-    padding-left: 0px;
+  display: block;
+  width: 80px;
+  height: 80px;
+  line-height: 79px;
+  border-radius: 50%;
+  padding-left: 0px;
 }
 main header .navbar-header .panel-table .panel-col.userinfo .signin-icon a {
-    border: 1px solid #FFFFFF;
-    border-radius: 4px;
-    line-height: 32px;
+  border: 1px solid #ffffff;
+  border-radius: .25rem;
+  line-height: 32px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-    main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a {
-        top: -1px;
-    }
-    main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
-        top: 2px;
-    }    
-    _:-ms-lang(x),
-    _:-webkit-full-screen,
-    main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a {
-        top: 0px;
-    }    
-    _:-ms-lang(x),
-    _:-webkit-full-screen,
-    main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
-        top: 2px;
-    }
-    ::i-block-chrome,
-    main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a {
-        top: 0px;
-    }    
-    ::i-block-chrome,
-    main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
-        top: 1px;
-    }
-    ::i-block-chrome,
-    main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu.show {
-        transform: translate3d(-243px, 58px, 0);
-        -webkit-transform: translate3d(-243px, 58px, 0);
-    }
+  main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a {
+    top: -1px;
+  }
+  main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
+    top: 2px;
+  }
+  _:-ms-lang(x),
+  _:-webkit-full-screen,
+  main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a {
+    top: 0px;
+  }
+  _:-ms-lang(x),
+  _:-webkit-full-screen,
+  main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
+    top: 2px;
+  }
+  ::i-block-chrome,
+  main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a {
+    top: 0px;
+  }
+  ::i-block-chrome,
+  main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
+    top: 1px;
+  }
+  ::i-block-chrome,
+  main header .navbar-header .panel-table .panel-col.userinfo .user-icon .dropdown-menu.show {
+    transform: translate3d(-243px, 58px, 0);
+    -webkit-transform: translate3d(-243px, 58px, 0);
+  }
 }
-@media screen and (min--moz-device-pixel-ratio:0) {
-    main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a {
-        top: 0px;
-    }
+@media screen and (min--moz-device-pixel-ratio: 0) {
+  main header .navbar-header .panel-table .panel-col.userinfo .flags-icon a {
+    top: 0px;
+  }
 }
 @media screen and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
-        top: 2px;
-    }
+  main header .navbar-header .panel-table .panel-col.userinfo .home-icon a {
+    top: 2px;
+  }
 }
 @media screen and (max-width: $screen-max-width) {
-    main header .navbar-header .panel-table .panel-col.systeminfo {
-        width: 433px;
-    }
-    main header .navbar-header .panel-table .panel-col.systeminfo .owner {
-        width: 75px;
-    }
+  main header .navbar-header .panel-table .panel-col.systeminfo {
+    width: 433px;
+  }
+  main header .navbar-header .panel-table .panel-col.systeminfo .owner {
+    width: 75px;
+  }
 }
 @media screen and (max-width: 623px) {
-    main header .navbar-header .panel-table .panel-col.systeminfo {
-        width: 238px;
-    }
-    main header .navbar-header .panel-table .panel-col.systeminfo .fullname {
-        width: 163px;
-        background-position: 0px -240px;
-    }
+  main header .navbar-header .panel-table .panel-col.systeminfo {
+    width: 238px;
+  }
+  main header .navbar-header .panel-table .panel-col.systeminfo .fullname {
+    width: 163px;
+    background-position: 0px -240px;
+  }
 }
 @media screen and (max-width: 428px) {
-    main header .navbar-header .panel-table .panel-col.systeminfo {
-        width: 162px;
-    }
-    main header .navbar-header .panel-table .panel-col.systeminfo .owner {
-        display: none;
-    }
-    main header .navbar-header .panel-table .panel-col.systeminfo .fullname {
-        width: inherit;
-        background-position: 0px -240px;
-    }
+  main header .navbar-header .panel-table .panel-col.systeminfo {
+    width: 162px;
+  }
+  main header .navbar-header .panel-table .panel-col.systeminfo .owner {
+    display: none;
+  }
+  main header .navbar-header .panel-table .panel-col.systeminfo .fullname {
+    width: inherit;
+    background-position: 0px -240px;
+  }
 }
 main footer {
-    background: #F2F2F2;
-    border-top: 1px solid lightgrey;
+  background: #f2f2f2;
+  border-top: 1px solid lightgrey;
 }
+main section .container,
 main footer .container {
-    padding-top: 10px;
-    padding-bottom: 10px;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
 }
