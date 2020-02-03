@@ -2,17 +2,28 @@
     "systemName": "ระบบลงทะเบียนกลาง",
     "signin": "เข้าสู่ระบบ",
     "signout": {
-        "label": "ออกจากระบบ",
-        "confirm": "ยืนยันต้องการออกจากระบบ"
+      "label": "ออกจากระบบ",
+      "confirm": "ยืนยันต้องการออกจากระบบ"
     },
     "msgLoading": {
-        "loading": "กำลังโหลด"
+      "loading": "กำลังโหลด"
     },
     "cancel": "ยกเลิก",
     "ok": "ตกลง",
-    "registered": "ลงทะเบียน",
+    "order": "ลำดับ",
+    "status": "สถานะ",
+    "registrationStatus": {
+      "Y": "ลงทะเบียน",
+      "W": "ยังไม่เปิดลงทะเบียน",
+      "N": "หมดเวลาลงทะเบียน"
+    },
     "profile": {
-        "personalInfo": "ข้อมูลส่วนตัว",
-        "examApplicationInfo": "ข้อมูลการสมัครสอบ"
+      "personalInfo": "ข้อมูลส่วนตัว",
+      "examApplicationInfo": "ข้อมูลการสมัครสอบ"
+    },
+    "project": {
+      "eventName": "โครงการ",
+      "registrationDate": "วันที่ลงทะเบียน",
+      "registrationFee": "ค่าลงทะเบียน"
     }
 }

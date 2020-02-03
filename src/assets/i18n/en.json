@@ -10,9 +10,20 @@
     },
     "cancel":"Cancel",
     "ok": "Ok",
-    "registered": "Registered",
+    "order": "Order",
+    "status": "Status",
+    "registrationStatus": {
+      "Y": "Register",
+      "W": "Not Open",
+      "N": "Expired"
+    },
     "profile": {
         "personalInfo": "Personal information",
         "examApplicationInfo": "Exam application information"
+    },
+    "project": {
+      "eventName": "Event",
+      "registrationDate": "Registration Date",
+      "registrationFee": "Registration Fee"
     }
 }

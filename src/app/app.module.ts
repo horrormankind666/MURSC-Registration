@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๗/๐๑/๒๕๖๒>
+Modify date : <๒๗/๐๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -21,6 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { CookieService } from 'ngx-cookie-service';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 import { AppService } from './app.service';
 import { AuthGuardService } from './auth-guard.service';
@@ -59,7 +60,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       primaryColour: '#000000',
       secondaryColour: '#FFFFFF'
     }),
-    NgbModule
+    NgbModule,
+    DeviceDetectorModule.forRoot()
   ],
   providers: [
     CookieService,

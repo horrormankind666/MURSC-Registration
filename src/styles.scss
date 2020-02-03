@@ -2,62 +2,9 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๒๓/๐๑/๒๕๖๓>
+Modify date : <๓๐/๐๑/๒๕๖๓>
 Description : <>
 =============================================
 */
 
-@import 'assets/style/font.scss';
 @import 'assets/style/util.scss';
-
-$header-max-height: 80px;
-
-.font {
-  font-family: $font-family;
-}
-body.modal-open {
-  padding-right: 0px !important;
-  overflow: hidden !important;
-}
-.modal {
-  top: $header-max-height;
-  height: calc(100% - #{$header-max-height});;
-}
-.modal-dialog {
-  margin: 0px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.modal-dialog .modal-content .modal-body {
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
-}
-.modal-dialog .modal-content .modal-footer {
-  border-top: 0px;
-}
-@media screen and (max-width: 215px) {
-  .modal-dialog .modal-content .modal-footer {
-    display: table;
-    width: 100%;
-  }
-  .modal-dialog .modal-content .modal-footer > :not(:last-child) {
-    margin-right: 0px;
-  }
-  .modal-dialog .modal-content .modal-footer > :not(:first-child) {
-    margin-left: 0px;
-    margin-top: .5rem
-  }
-  .modal-dialog .modal-content .modal-footer .btn {
-    display: block;
-    width: 100%;
-  }
-}
-.confirm-dialog .modal-dialog {
-  max-width: 100%;
-  width: 100%;
-}
-.confirm-dialog .modal-content {
-  background-color: $color-primary;
-  border: 0px;
-  border-radius: 0px;
-}

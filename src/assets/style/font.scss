@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๒๐/๐๑/๒๕๖๓>
+Modify date : <๒๗/๐๑/๒๕๖๓>
 Description : <style sheet สำหรับจัดรูปแบบฟอนต์>
 =============================================
 */
@@ -172,58 +172,4 @@ $font-src-local-medium: 'medium';
 }
 .size10 {
   font-size: 10px;
-}
-.uppercase {
-  text-transform: uppercase;
-}
-.lowercase {
-  text-transform: lowercase;
-}
-.italic {
-  font-style: initial;
-}
-.white {
-  color: #FFFFFF;
-}
-.white-light {
-  color: rgba(255, 255, 255, 0.5);
-}
-.black {
-  color: #000000;
-}
-.red {
-  color: #C51A1B;
-}
-.grey {
-  color: #6C757D
-}
-.grey-light {
-  color: lightgrey;
-}
-.grey-dark {
-  color: #343A40;
-}
-.blue {
-  color: #000099;
-}
-.muted {
-  color: #989DA0;
-}
-.danger {
-  color: #D43F3A;
-}
-.info {
-  color: #46B8DA;
-}
-.success {
-  color: mediumseagreen;
-}
-.text-left {
-  text-align: left !important;
-}
-.text-right {
-  text-align: right !important;
-}
-.text-center {
-  text-align: center !important;
 }

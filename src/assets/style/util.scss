@@ -2,10 +2,12 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๔/๐๑/๒๕๖๓>
+Modify date : <๓๐/๐๑/๒๕๖๓>
 Description : <>
 =============================================
 */
+
+@import 'font.scss';
 
 $color-primary: #337AB7;
 $color-secondary: #A6C;
@@ -14,6 +16,24 @@ $color-danger: #D43F3A;
 $color-warning: #FB3;
 $color-info: #46B8DA;
 
+$screen-max-width: 768px;
+$header-max-height: 80px;
+$image-path: "../assets/images";
+
+@mixin table-responsive-step1($class)
+{
+  #{$class} .table th:not(.col-wrap),
+  #{$class} .table td:not(.col-wrap) {
+    display: none !important;
+  }
+  #{$class} .table td.col-wrap.col-wrap-step1 {
+    display: table-cell;
+  }
+}
+
+.font {
+  font-family: $font-family;
+}
 body {
   background-color: #FFFFFF;
   background-image: none;
@@ -198,6 +218,43 @@ main footer .container {
   display: block;
   width: 100%;
 }
+body.modal-open {
+  padding-right: 0px !important;
+  overflow: hidden !important;
+}
+.modal {
+  top: $header-max-height;
+  height: calc(100% - #{$header-max-height});;
+}
+.modal-dialog {
+  margin: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.modal-dialog .modal-content .modal-body {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+.modal-dialog .modal-content .modal-footer {
+  border-top: 0px;
+}
+@media screen and (max-width: 215px) {
+  .modal-dialog .modal-content .modal-footer {
+    display: table;
+    width: 100%;
+  }
+  .modal-dialog .modal-content .modal-footer > :not(:last-child) {
+    margin-right: 0px;
+  }
+  .modal-dialog .modal-content .modal-footer > :not(:first-child) {
+    margin-left: 0px;
+    margin-top: .5rem
+  }
+  .modal-dialog .modal-content .modal-footer .btn {
+    display: block;
+    width: 100%;
+  }
+}
 .modal-backdrop.show {
   opacity: 0.8;
 }
@@ -214,8 +271,74 @@ main footer .container {
     text-align: right;
   }
 }
+.confirm-dialog .modal-dialog {
+  max-width: 100%;
+  width: 100%;
+}
+.confirm-dialog .modal-content {
+  background-color: $color-primary;
+  border: 0px;
+  border-radius: 0px;
+}
+.card .card-body .card-text {
+  line-height: 1.8;
+}
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .card-img-top {
       min-height: 0.01px;
   }
+}
+.table {
+  table-layout: auto;
+}
+.table-bordered {
+  border: 0 !important;
+}
+.table-bordered thead th,
+.table-bordered thead td {
+  border-bottom-width: 1px;
+}
+.table th,
+.table td,
+.table td.col-wrap {
+  padding: 0.5rem 0.9rem;
+  line-height: 1.8;
+  vertical-align: top;
+}
+.table thead th {
+  border-color: #0062CC;
+  word-break: break-all;
+  word-wrap: break-word;
+  vertical-align: top;
+}
+.table thead th:first-child,
+.table tbody td:first-child {
+  border-left: 0 !important;
+}
+.table thead th.col-wrap,
+.table tbody td.col-wrap {
+    display: none;
+}
+.table tbody td.col-wrap form .form-group {
+  display: table;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+}
+.table tbody td.col-wrap form .form-group .col-form-label {
+  padding-top: .25rem;
+  padding-bottom: 0;
+  line-height: 1.8;
+}
+.table tbody td.col-wrap form .form-group .col-form-label::after {
+  float: right;
+  content: ':';
+  margin-left: 15px;
+}
+.table tbody td.col-wrap form .form-group .col {
+  display: table-cell;
+}
+.table .col-index {
+  width: 98px;
+  min-width: 98px;
 }
