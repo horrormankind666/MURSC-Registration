@@ -30,19 +30,19 @@
       </thead>
       <tbody class="font size16">
         <tr *ngFor="let project of project; index as order">
-          <td class="regular text-center col-index">
+          <td class="regular text-center col-index" ngbTooltip="{{'order' | translate | titlecase}}" title="{{'order' | translate | titlecase}}">
             {{(order + 1) | number}}
           </td>
-          <td class="regular col-event-name">
-            {{project.eventName[appService.lang]}}
+          <td class="regular col-event-name" ngbTooltip="{{'project.eventName' | translate | titlecase}}" title="{{'project.eventName' | translate | titlecase}}">
+            <a class="link" href="javascript:void(0)">{{project.eventName[appService.lang]}}</a>
           </td>
-          <td class="regular col-registration-date">
+          <td class="regular col-registration-date" ngbTooltip="{{'project.registrationDate' | translate | titlecase}}" title="{{'project.registrationDate' | translate | titlecase}}">
             <span class="period">{{project.registrationDate.startDate}}</span> - <span class="period">{{project.registrationDate.endDate}}</span>
           </td>
-          <td class="regular col-registration-fee">
+          <td class="regular col-registration-fee" ngbTooltip="{{'project.registrationFee' | translate | titlecase}}" title="{{'project.registrationFee' | translate | titlecase}}">
             {{project.registrationFee[appService.lang]}}
           </td>
-          <td class="regular text-center col-registration-status">
+          <td class="regular text-center col-registration-status" ngbTooltip="{{('registrationStatus.' + project.registrationStatus) | translate}}" placement="left" title="{{('registrationStatus.' + project.registrationStatus) | translate}}">
             <i class="fa fa-lock size36"
               [ngClass]="{
                 'text-success': (project.registrationStatus === 'Y'),
@@ -79,8 +79,21 @@
                   <span class="form-text regular">{{project.registrationFee[appService.lang]}}</span>
                 </div>
               </div>
+              <div class="form-group row">
+                <label for="col-registration-fee" class="col-form-label bold">{{'status' | translate | titlecase}}</label>
+                <div class="col">
+                  <span class="form-text regular"
+                    [ngClass]="{
+                      'text-success': (project.registrationStatus === 'Y'),
+                      'text-warning': (project.registrationStatus === 'W'),
+                      'text-danger ': (project.registrationStatus === 'N')
+                    }"
+                  >{{('registrationStatus.' + project.registrationStatus) | translate}}
+                  </span>
+                </div>
+              </div>
               <div class="form-footer col-auto mt-2 mb-2 pr-0 pl-0 text-right">
-                <button type="button" class="btn btn-outline-primary"><span class="font regular size16">{{'registerStatus.register' | translate | titlecase}}</span></button>
+                <button type="button" class="btn btn-outline-primary"><span class="font regular size16">{{'detail' | translate | titlecase}}</span></button>
               </div>
             </form>
           </td>

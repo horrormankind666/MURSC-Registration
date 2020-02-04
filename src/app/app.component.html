@@ -21,8 +21,8 @@
               <div class="panel-table">
                 <div class="panel-row">
                   <div class="panel-col flags-icon">
-                    <a href="javascript:void(0)" *ngIf="appService.lang === 'en'" (click)="appService.setDefaultLang('th')"><span class="font regular size18 flag-icon flag-icon-th"></span></a>
-                    <a href="javascript:void(0)" *ngIf="appService.lang === 'th'" (click)="appService.setDefaultLang('en')"><span class="font regular size18 flag-icon flag-icon-gb"></span></a>
+                    <a href="javascript:void(0)" *ngIf="appService.lang === 'en'" (click)="appService.setDefaultLang('th')"><span class="font regular flag-icon flag-icon-th"></span></a>
+                    <a href="javascript:void(0)" *ngIf="appService.lang === 'th'" (click)="appService.setDefaultLang('en')"><span class="font regular flag-icon flag-icon-gb"></span></a>
                   </div>
                   <div class="panel-col home-icon">
                     <a routerLink="Home" routerLinkActive="active"><span class="font regular text-white size24"><i class='fa fa-home'></i></span></a>
@@ -83,10 +83,11 @@
 </main>
 <ng-template #signoutDialog let-modal>
   <div class="modal-body">
-    <span class="font regular white size16">{{'signout.confirm' | translate}}</span>
+    <span class="font regular text-white size16">{{'signout.confirm' | translate}}</span>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="modal.dismiss('N')"><span class="font regular size16">{{'cancel' | translate}}</span></button>
-    <button type="button" class="btn btn-primary" (click)="modal.close('Y')"><span class="font regular size16">{{'ok' | translate}}</span></button>
+    <input class="hidden" type="text" />
+    <button type="button" class="btn btn-primary ml-0" (click)="$event.stopPropagation(); modal.dismiss('N')"><span class="font regular size16">{{'cancel' | translate}}</span></button>
+    <button type="button" class="btn btn-primary mr-0" (click)="$event.stopPropagation(); modal.close('Y')"><span class="font regular size16">{{'ok' | translate}}</span></button>
   </div>
 </ng-template>

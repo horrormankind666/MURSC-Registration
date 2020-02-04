@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๐/๐๑/๒๕๖๓>
-Modify date : <๓๑/๐๑/๒๕๖๓>
+Modify date : <๐๓/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -48,22 +48,28 @@ Description : <>
     max-width: 20%;
   }
 }
+.home-view .project .table .col-event-name a.link {
+  text-decoration: none;
+}
+.home-view .project .table .col-event-name a:hover.link {
+  text-decoration: underline;
+}
 .home-view .project .table .col-registration-date {
   width: 200px;
   min-width: 200px;
+}
+.home-view .project .table td.col-registration-date .period {
+  font-family: Tahoma;
+  font-size: 14px;
+  line-height: 2;
 }
 .home-view .project .table .col-registration-fee {
   width: 30%;
   min-width: 0px;
 }
 .home-view .project .table .col-registration-status {
-  width: 150px;
-  min-width: 150px;
-}
-.home-view .project .table td.col-registration-date .period {
-  font-family: Tahoma;
-  font-size: 14px;
-  line-height: 2;
+  width: 85px;
+  min-width: 85px;
 }
 .home-view .project .table td.col-registration-status {
   line-height: 0;
@@ -73,7 +79,7 @@ Description : <>
 .home-view .project .table td.col-wrap form .form-group .col-form-label {
     width: 151px;
 }
-@media screen and (max-width: 614px) {
+@media screen and (max-width: 699px) {
   @include table-responsive-step1('.home-view .project');
 }
 @media screen and (max-width: 428px) {

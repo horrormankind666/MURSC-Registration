@@ -2,16 +2,18 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๔/๐๑/๒๕๖๓>
-Modify date : <๓๑/๐๑/๒๕๖๓>
+Modify date : <๐๔/๐๑/๒๕๖๓>
 Description : <>
 =============================================
 */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { AppService } from '../app.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-home',

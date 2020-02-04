@@ -12,10 +12,11 @@
     "ok": "Ok",
     "order": "Order",
     "status": "Status",
+    "detail": "Detail",
     "registrationStatus": {
-      "Y": "Register",
-      "W": "Not Open",
-      "N": "Expired"
+      "Y": "Registration is open",
+      "W": "Registration not yet opened",
+      "N": "Registration expired"
     },
     "profile": {
         "personalInfo": "Personal information",
