@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๐๔/๐๒/๒๕๖๓>
+Modify date : <๐๕/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -41,6 +41,7 @@ body {
   background-attachment: fixed;
   background-position: center bottom;
   background-size: cover;
+  min-width: 320px;
   margin: 0;
   padding: 0;
   -ms-overflow-style: scrollbar;
@@ -324,24 +325,30 @@ body.modal-open {
 .table tbody td.col-wrap {
     display: none;
 }
+.card .card-body .card-text form .form-group,
 .table tbody td.col-wrap form .form-group {
   display: table;
   margin-right: 0;
   margin-bottom: 0;
   margin-left: 0;
 }
+.card .card-body .card-text form .form-group .col-form-label,
 .table tbody td.col-wrap form .form-group .col-form-label {
   padding-top: .25rem;
   padding-bottom: 0;
   line-height: 1.8;
 }
+.card .card-body .card-text form .form-group .col-form-label::after,
 .table tbody td.col-wrap form .form-group .col-form-label::after {
   float: right;
   content: ':';
   margin-left: 15px;
 }
+.card .card-body .card-text form .form-group .col,
 .table tbody td.col-wrap form .form-group .col {
   display: table-cell;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 .table .col-index {
   width: 98px;

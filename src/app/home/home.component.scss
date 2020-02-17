@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๐/๐๑/๒๕๖๓>
-Modify date : <๐๓/๐๒/๒๕๖๓>
+Modify date : <๐๕/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -21,7 +21,8 @@ Description : <>
 .home-view .project .card-group .card .card-img-top {
   border-radius: 0px;
 }
-.home-view .project .card-group .card .card-body .card-title .badge-pill {
+.home-view .project .card-group .card .card-body .badge-pill {
+  margin-top: 1px;
   padding-right: 0;
   padding-left: 0;
   border-radius: 5rem;
@@ -83,6 +84,7 @@ Description : <>
   @include table-responsive-step1('.home-view .project');
 }
 @media screen and (max-width: 428px) {
+  .home-view .project .card-group .card .card-footer .btn,
   .home-view .project .table td.col-wrap form .form-footer .btn {
     width: 100%;
   }
