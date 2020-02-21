@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๐๕/๐๒/๒๕๖๓>
+Modify date : <๒๑/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -46,7 +46,7 @@ body {
   padding: 0;
   -ms-overflow-style: scrollbar;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   cursor: default;
 }
 html, body {
@@ -121,28 +121,14 @@ main footer .container {
   top: 50%;
   margin-top: 45px;
 }
-.hidden{
-  display: none;
-}
 .sticky {
   position: fixed;
   z-index: 10050;
 }
-.overflow-ellipsis {
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.panel-table {
-  display: table;
+.d-table {
   width: 100%;
 }
-.panel-table .panel-row {
-  display: table-row;
-}
-.panel-table .panel-col {
-  display: table-cell;
+.d-table .d-table-col {
   vertical-align: top;
 }
 .btn {
@@ -190,31 +176,16 @@ main footer .container {
 .btn-transparent:hover {
   background-color: #F7F8F8;
 }
-.center {
-  margin-left: auto;
-  margin-right: auto;
+.toolbars .d-table .d-table-cell {
+  vertical-align: middle;
 }
-.padding-top-10 {
-  padding-top: 10px;
-}
-.margin-top-16 {
-  margin-top: 16px;
-}
-.margin-bottom-16 {
-  margin-bottom: 16px;
-}
-.no-margin-top {
-  margin-top: 0;
-}
-.no-margin-botttom {
-  margin-bottom: 0;
-}
-.no-border {
-  border: none;
-}
-.block-fit {
-  display: block;
-  width: 100%;
+.toolbars .d-table .d-table-cell.col-button .btn {
+    height: 32px;
+    width: 32px;
+    min-height: 32px;
+    min-width: 32px;
+    padding: 0;
+    border-radius: 0.2rem;
 }
 body.modal-open {
   padding-right: 0 !important;
@@ -354,6 +325,9 @@ body.modal-open {
   width: 98px;
   min-width: 98px;
 }
+.tooltip-custom {
+  z-index: 10051 !important;
+}
 .tooltip-custom .tooltip-inner {
   font-family: $font-family;
   font-size: 110%;
@@ -380,4 +354,28 @@ body.modal-open {
   .bs-tooltip-left .arrow {
     right: 1px;
   }
+}
+.form-control:focus {
+  border-color: #FB542B;
+  outline: 0;
+  box-shadow: 0 0 0 0;
+}
+.inputbox {
+  height: 35px;
+  border-radius: 0;
+  border: 1px solid #BDC3C7;
+  padding: 0 0.3rem 0 0.3rem;
+  color: #000000;
+  background-color: #FFFFFF;
+  outline: none;
+  cursor: default;
+}
+.filter.form .card {
+  background: inherit;
+  border: 0;
+  border-radius: o;
+}
+.filter.form .card-header{
+  background: inherit;
+  border-bottom: 0;
 }

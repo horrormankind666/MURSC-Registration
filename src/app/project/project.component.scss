@@ -1,27 +1,27 @@
 /*
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
-Create date : <๒๐/๐๑/๒๕๖๓>
-Modify date : <๐๕/๐๒/๒๕๖๓>
+Create date : <๒๑/๐๒/๒๕๖๓>
+Modify date : <๒๑/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 @import "../../styles.scss";
 
-.home-view .project .card-group {
+.project-view .card-group {
   margin-left: -0.25rem;
   margin-bottom: -0.25rem;
 }
-.home-view .project .card-group .card {
+.project-view .card-group .card {
   border: none;
   border-radius: 0px;
   background-color: rgba(0,0,0,.05);
 }
-.home-view .project .card-group .card .card-img-top {
+.project-view .card-group .card .card-img-top {
   border-radius: 0px;
 }
-.home-view .project .card-group .card .card-body .badge-pill {
+.project-view .card-group .card .card-body .badge-pill {
   margin-top: 1px;
   padding-right: 0;
   padding-left: 0;
@@ -30,12 +30,12 @@ Description : <>
   height: 32px;
   line-height: 1.8;
 }
-.home-view .project .card-group .card .card-footer {
+.project-view .card-group .card .card-footer {
   border-top: none;
   background: transparent;
 }
-.home-view .project .card-group .card .card-footer .btn,
-.home-view .project .table td.col-wrap form .form-footer .btn {
+.project-view .card-group .card .card-footer .btn,
+.project-view .table td.col-wrap form .form-footer .btn {
   border-top-left-radius: 0px;
   border-top-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -43,49 +43,43 @@ Description : <>
   width: 120px;
 }
 @media (min-width: 1200px) {
-  .home-view .project .card-group .col-xl-2 {
+  .project-view .card-group .col-xl-2 {
     -ms-flex: 0 0 20%;
     flex: 0 0 20%;
     max-width: 20%;
   }
 }
-.home-view .project .table .col-event-name a.link {
-  text-decoration: none;
-}
-.home-view .project .table .col-event-name a:hover.link {
-  text-decoration: underline;
-}
-.home-view .project .table .col-registration-date {
+.project-view .table .col-registration-date {
   width: 200px;
   min-width: 200px;
 }
-.home-view .project .table td.col-registration-date .period {
+.project-view .table td.col-registration-date .period {
   font-family: Tahoma;
   font-size: 14px;
   line-height: 2;
 }
-.home-view .project .table .col-registration-fee {
+.project-view .table .col-registration-fee {
   width: 30%;
   min-width: 0px;
 }
-.home-view .project .table .col-registration-status {
+.project-view .table .col-registration-status {
   width: 85px;
   min-width: 85px;
 }
-.home-view .project .table td.col-registration-status {
+.project-view .table td.col-registration-status {
   line-height: 0;
   padding-top: 5px;
   padding-bottom: 0;
 }
-.home-view .project .table td.col-wrap form .form-group .col-form-label {
+.project-view .table td.col-wrap form .form-group .col-form-label {
     width: 151px;
 }
 @media screen and (max-width: 699px) {
   @include table-responsive-step1('.home-view .project');
 }
 @media screen and (max-width: 428px) {
-  .home-view .project .card-group .card .card-footer .btn,
-  .home-view .project .table td.col-wrap form .form-footer .btn {
+  .project-view .card-group .card .card-footer .btn,
+  .project-view .table td.col-wrap form .form-footer .btn {
     width: 100%;
   }
 }

@@ -2,20 +2,20 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๒๐/๐๑/๒๕๖๓>
+Modify date : <๒๐/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 'use strict';
 
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Router} from '@angular/router';
 
-import { CookieService } from 'ngx-cookie-service';
+import {CookieService} from 'ngx-cookie-service';
 
-import { AppService } from './app.service';
+import {AppService} from './app.service';
 
 class Signout {
   private _router: Router;
@@ -33,9 +33,9 @@ class Signout {
     this._cookieService = cookieService;
     this._appService = appService;
     this._authService = authService;
-  }  
+  }
 
-  modalOpen(content: any) {    
+  modalOpen(content: any) {
     if (!this._appService.modal.hasOpenModal) {
       this._appService.modal.hasOpenModal = true;
 
@@ -56,13 +56,13 @@ class Signout {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {    
-  constructor(    
-    private router: Router,    
+export class AuthService {
+  constructor(
+    private router: Router,
     private http: HttpClient,
     private cookieService: CookieService,
     private appService: AppService,
-  ) {}  
+  ) {}
 
   private userInfo: {} = {
     email: '',
@@ -81,9 +81,9 @@ export class AuthService {
 
   public urlAuthenResource: string = 'http://localhost:5001/API/AuthenResource/UserInfo';
   public urlAuthenServer: string = 'http://localhost:4279';
-  public isAuthenticated: boolean = false;  
+  public isAuthenticated: boolean = false;
   public getUserInfo: {} = this.userInfo;
- 
+
   setUserInfo(data: any) {
       let email: string           = (data.email ? data.email : '');
       let familyName: string      = (data.family_name ? data.family_name : '');
@@ -101,11 +101,11 @@ export class AuthService {
 
       this.getUserInfo = this.userInfo;
   }
-  
+
   getAuthenResource(): Promise<any> {
     let promise = new Promise((resolve, reject) => {
       this.appService.getCookie(this.appService.cookieName);
-      
+
       if (this.appService.authenResource.type && this.appService.authenResource.token) {
         if (!this.isAuthenticated) {
           let headers = new HttpHeaders()
@@ -114,7 +114,7 @@ export class AuthService {
           this.http.get(this.urlAuthenResource, { headers: headers }).subscribe((res: {}) => {
             let data = res['data'];
 
-            this.isAuthenticated = (data !== null ? data[0].isAuthenticated : false);            
+            this.isAuthenticated = (data !== null ? data[0].isAuthenticated : false);
             this.setUserInfo(this.isAuthenticated ? data[1].payload : {});
 
             resolve(this.getUserInfo);

@@ -13,6 +13,12 @@
     "order": "Order",
     "status": "Status",
     "detail": "Detail",
+    "found": "Found",
+    "from": "From",
+    "entries": "Entries",
+    "filter": "Filter",
+    "reload": "Reload",
+    "keyword": "Keyword",
     "registrationStatus": {
       "Y": "Registration is open",
       "W": "Registration not yet opened",

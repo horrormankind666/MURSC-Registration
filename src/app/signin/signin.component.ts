@@ -2,16 +2,16 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๓/๑๒/๒๕๖๒>
-Modify date : <๒๔/๐๑/๒๕๖๓>
+Modify date : <๒๐/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 'use strict';
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { AuthService } from '../auth.service';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -21,7 +21,7 @@ import { AuthService } from '../auth.service';
 export class SigninComponent implements OnInit {
   constructor(
     private authenService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit() {
   }

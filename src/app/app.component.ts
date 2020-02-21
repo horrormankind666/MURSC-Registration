@@ -2,20 +2,20 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๐๔/๐๒/๒๕๖๓>
+Modify date : <๒๐/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 'use strict';
 
-import { NgModule, Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+import {NgModule, Component, ElementRef, ViewChild, OnInit} from '@angular/core';
+import {Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError} from '@angular/router';
 
-import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
+import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 
-import { AppService } from './app.service';
-import { AuthService } from './auth.service';
+import {AppService} from './app.service';
+import {AuthService} from './auth.service';
 
 @NgModule({
   providers: [

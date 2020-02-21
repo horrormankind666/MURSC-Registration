@@ -2,21 +2,21 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๗/๐๑/๒๕๖๓>
+Modify date : <๒๐/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 'use strict';
 
-import { Injectable } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import {Injectable} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 
-import { CookieService } from 'ngx-cookie-service';
+import {CookieService} from 'ngx-cookie-service';
 
 class Modal {
   public hasOpenModal: boolean = false;
@@ -108,5 +108,13 @@ export class AppService  {
       this.authenResource.type = '';
       this.authenResource.token = '';
     }
+  }
+
+  getTextRecordCount(totalSearch: number, total: number): string {
+    let entries: string;
+
+    this.translateService.get('entries').subscribe((res: string) => {entries = res;});
+
+    return (totalSearch !== undefined ? ((totalSearch !== total ? (total.toLocaleString() + ' / ' + totalSearch.toLocaleString()) : totalSearch.toLocaleString()) + ' ' + entries): '');
   }
 }

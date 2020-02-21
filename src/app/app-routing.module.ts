@@ -21,7 +21,7 @@ export const appRouting: Routes = [
     path: 'SignIn',
     component: SigninComponent,
     canActivate: [AuthGuardService]
-  },  
+  },
   {
     path: 'Home',
     component: HomeComponent,
@@ -31,10 +31,10 @@ export const appRouting: Routes = [
     path: '',
     component: HomeComponent,
     canActivate: [AuthGuardService]
-  },      
+  },
   {
     path: '**',
     component: HomeComponent,
     canActivate: [AuthGuardService]
-  }        
+  }
 ];
