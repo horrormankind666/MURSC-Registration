@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๒๑/๐๒/๒๕๖๓>
+Modify date : <๒๕/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -35,7 +35,7 @@ Description : <>
   background: transparent;
 }
 .project-view .card-group .card .card-footer .btn,
-.project-view .table td.col-wrap form .form-footer .btn {
+.project-view .table td.col-wrap .form .form-footer .btn {
   border-top-left-radius: 0px;
   border-top-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -71,15 +71,15 @@ Description : <>
   padding-top: 5px;
   padding-bottom: 0;
 }
-.project-view .table td.col-wrap form .form-group .col-form-label {
+.project-view .table td.col-wrap .form .form-group .col-form-label {
     width: 151px;
 }
 @media screen and (max-width: 699px) {
-  @include table-responsive-step1('.home-view .project');
+  @include table-responsive-step1('.project-view');
 }
 @media screen and (max-width: 428px) {
   .project-view .card-group .card .card-footer .btn,
-  .project-view .table td.col-wrap form .form-footer .btn {
+  .project-view .table td.col-wrap .form .form-footer .btn {
     width: 100%;
   }
 }

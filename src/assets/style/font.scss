@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๐๕/๐๒/๒๕๖๓>
+Modify date : <๒๕/๐๒/๒๕๖๓>
 Description : <style sheet สำหรับจัดรูปแบบฟอนต์>
 =============================================
 */
@@ -16,6 +16,9 @@ $font-style: normal;
 $font-weight-extralight: 200;
 $font-weight-light: 300;
 $font-weight-medium: 500;
+$font-weight-class-light: 200;
+$font-weight-class-regular: 300;
+$font-weight-class-bold: 400;
 $font-src-local-extralight: 'extralight';
 $font-src-local-light: 'light';
 $font-src-local-medium: 'medium';
@@ -117,13 +120,13 @@ $font-src-local-medium: 'medium';
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 .light {
-  font-weight: 200 !important;
+  font-weight: $font-weight-class-light !important;
 }
 .regular {
-  font-weight: 300 !important;
+  font-weight: $font-weight-class-regular !important;
 }
 .bold {
-  font-weight: 400 !important;
+  font-weight: $font-weight-class-bold !important;
 }
 .size72 {
   font-size: 72px !important;

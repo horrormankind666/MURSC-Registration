@@ -19,11 +19,7 @@
     "filter": "ตัวกรอง",
     "reload": "รีโหลด",
     "keyword": "คำค้น",
-    "registrationStatus": {
-      "Y": "เปิดให้ลงทะเบียน",
-      "W": "ยังไม่เปิดให้ลงทะเบียน",
-      "N": "หมดเวลาลงทะเบียน"
-    },
+    "registrationStatus": "สถานะการลงทะเบียน",
     "profile": {
       "personalInfo": "ข้อมูลส่วนตัว",
       "examApplicationInfo": "ข้อมูลการสมัครสอบ"

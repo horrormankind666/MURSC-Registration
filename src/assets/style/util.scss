@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๑/๐๒/๒๕๖๓>
+Modify date : <๒๕/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -16,7 +16,7 @@ $color-danger: #D43F3A;
 $color-warning: #FB3;
 $color-info: #46B8DA;
 
-$screen-max-width: 768px;
+$screen-max-width: 796px;
 $header-max-height: 80px;
 $image-path: "../assets/images";
 
@@ -41,7 +41,7 @@ body {
   background-attachment: fixed;
   background-position: center bottom;
   background-size: cover;
-  min-width: 320px;
+  min-width: 344px;
   margin: 0;
   padding: 0;
   -ms-overflow-style: scrollbar;
@@ -296,27 +296,27 @@ body.modal-open {
 .table tbody td.col-wrap {
     display: none;
 }
-.card .card-body .card-text form .form-group,
-.table tbody td.col-wrap form .form-group {
+.card .card-body .card-text .form .form-group,
+.table tbody td.col-wrap .form .form-group {
   display: table;
   margin-right: 0;
   margin-bottom: 0;
   margin-left: 0;
 }
-.card .card-body .card-text form .form-group .col-form-label,
-.table tbody td.col-wrap form .form-group .col-form-label {
+.card .card-body .card-text .form .form-group .col-form-label,
+.table tbody td.col-wrap .form .form-group .col-form-label {
   padding-top: .25rem;
   padding-bottom: 0;
   line-height: 1.8;
 }
-.card .card-body .card-text form .form-group .col-form-label::after,
-.table tbody td.col-wrap form .form-group .col-form-label::after {
+.card .card-body .card-text .form .form-group .col-form-label::after,
+.table tbody td.col-wrap .form .form-group .col-form-label::after {
   float: right;
   content: ':';
   margin-left: 15px;
 }
-.card .card-body .card-text form .form-group .col,
-.table tbody td.col-wrap form .form-group .col {
+.card .card-body .card-text .form .form-group .col,
+.table tbody td.col-wrap .form .form-group .col {
   display: table-cell;
   word-break: break-all;
   word-wrap: break-word;
@@ -360,8 +360,10 @@ body.modal-open {
   outline: 0;
   box-shadow: 0 0 0 0;
 }
-.inputbox {
+.inputbox,
+.ng-select .ng-select-container {
   height: 35px;
+  min-height: 35px;
   border-radius: 0;
   border: 1px solid #BDC3C7;
   padding: 0 0.3rem 0 0.3rem;
@@ -369,6 +371,21 @@ body.modal-open {
   background-color: #FFFFFF;
   outline: none;
   cursor: default;
+}
+.ng-select.ng-select-single .ng-select-container {
+  height: 35px;
+}
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+  top: 4px;
+  padding-left: 0.3rem;
+}
+.ng-select .ng-select-container .ng-value-container {
+  padding: 0;
+}
+.ng-select div,
+.ng-select input,
+.ng-select span {
+  font-weight: $font-weight-class-regular;
 }
 .filter.form .card {
   background: inherit;

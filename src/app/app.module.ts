@@ -10,6 +10,7 @@ Description : <>
 'use strict';
 
 import {CommonModule} from '@angular/common';
+import {NgSelectModule} from '@ng-select/ng-select';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
@@ -49,6 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     CommonModule,
+    NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

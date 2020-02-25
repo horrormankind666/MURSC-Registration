@@ -19,11 +19,7 @@
     "filter": "Filter",
     "reload": "Reload",
     "keyword": "Keyword",
-    "registrationStatus": {
-      "Y": "Registration is open",
-      "W": "Registration not yet opened",
-      "N": "Registration expired"
-    },
+    "registrationStatus": "Registration Status",
     "profile": {
         "personalInfo": "Personal information",
         "examApplicationInfo": "Exam application information"

@@ -6,32 +6,40 @@
         <button type="button" class="btn btn-secondary" ngbTooltip="{{'reload' | translate | titlecase}}" title="{{'reload' | translate | titlecase}}"><i class="fa fa-refresh text-white size18"></i></button>
       </div>
       <div class="d-table-cell text-right col-recordcount">
-        <span class="regular size15">{{appService.getTextRecordCount((projectService.table.total$ | async), (projectService.table.totalSearch$ | async))}}</span>
+        <span class="regular size15">{{appService.getTextRecordCount((projectService.operate.table.service.total$ | async), (projectService.operate.table.service.totalSearch$ | async))}}</span>
       </div>
     </div>
   </div>
-  <div class="filter form bg-secondary pt-2 pr-3 pb-3 pl-3" *ngIf="projectService.operate.table.filter.showForm">
+  <div class="filter form bg-secondary pt-2 pr-3 pb-0 pl-3" *ngIf="projectService.operate.table.filter.showForm">
     <div class="card">
       <div class="card-header p-0">
         <span class="bold text-white size18">{{'filter' | translate | titlecase}}</span>
       </div>
       <div class="card-body p-0 pt-3">
-        <form>
-          <div class="form-group mb-0">
-            <label for="keyword" class="regular text-white size16">{{'keyword' | translate | titlecase}}</label>
-            <input type="text" class="form-control inputbox regular size16" name="searchTerm" [(ngModel)]="projectService.table.searchTerm" />
+        <div class="form">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="keyword" class="regular text-white size16">{{'keyword' | translate | titlecase}}</label>
+              <input type="text" class="form-control inputbox regular size16" name="keyword" [(ngModel)]="projectService.operate.table.service.keyword" />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="registration-status" class="regular text-white size16">{{'registrationStatus' | translate | titlecase}}</label>
+              <ng-select [(ngModel)]="projectService.operate.table.service.registrationStatus">
+                <ng-option *ngFor="let item of dataService.registrationStatus.getList()" [value]="item.id">{{item.name[appService.lang]}}</ng-option>
+              </ng-select>
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-  <div class="card-group" *ngIf="deviceService.browser !== 'Safari' && !(projectService.table.searching$ | async)">
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1 pl-1 pr-0" *ngFor="let project of projectService.table.data$ | async; index as order">
+  <div class="card-group" *ngIf="deviceService.browser !== 'Safari' && !(projectService.operate.table.service.searching$ | async)">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1 pl-1 pr-0" *ngFor="let project of projectService.operate.table.service.data$ | async; index as order">
       <div class="card h-100">
         <div class="card-body p-3">
           <div class="card-title">
             <div class="float-left badge badge-pill badge-dark bold size14">{{(order + 1) | number}}</div>
-            <div class="float-right" ngbTooltip="{{('registrationStatus.' + project.registrationStatus) | translate}}" placement="left" title="{{('registrationStatus.' + project.registrationStatus) | translate}}">
+            <div class="float-right" ngbTooltip="{{(dataService.registrationStatus.get(project.registrationStatus)).name[appService.lang]}}" placement="left" title="{{(dataService.registrationStatus.get(project.registrationStatus)).name[appService.lang]}}">
               <i class="fa fa-lock size36"
                 [ngClass]="{
                   'text-success': (project.registrationStatus === 'Y'),
@@ -71,8 +79,8 @@
         <th class="col-wrap col-wrap-step1" colspan="5"></th>
       </tr>
     </thead>
-    <tbody class="size16" *ngIf="!(projectService.table.searching$ | async)">
-      <tr *ngFor="let project of projectService.table.data$ | async; index as order">
+    <tbody class="size16" *ngIf="!(projectService.operate.table.service.searching$ | async)">
+      <tr *ngFor="let project of projectService.operate.table.service.data$ | async; index as order">
         <td class="regular text-center col-index" ngbTooltip="{{'order' | translate | titlecase}}" title="{{'order' | translate | titlecase}}">
           {{(order + 1) | number}}
         </td>
@@ -85,7 +93,7 @@
         <td class="regular col-registration-fee" ngbTooltip="{{'project.registrationFee' | translate | titlecase}}" title="{{'project.registrationFee' | translate | titlecase}}">
           {{project.registrationFee[appService.lang]}}
         </td>
-        <td class="regular text-center col-registration-status" ngbTooltip="{{('registrationStatus.' + project.registrationStatus) | translate}}" placement="left" title="{{('registrationStatus.' + project.registrationStatus) | translate}}">
+        <td class="regular text-center col-registration-status" ngbTooltip="{{(dataService.registrationStatus.get(project.registrationStatus)).name[appService.lang]}}" placement="left" title="{{(dataService.registrationStatus.get(project.registrationStatus)).name[appService.lang]}}">
           <i class="fa fa-lock size36"
             [ngClass]="{
               'text-success': (project.registrationStatus === 'Y'),
@@ -97,7 +105,7 @@
           ></i>
         </td>
         <td class="col-wrap col-wrap-step1" colspan="5">
-          <form>
+          <div class="form">
             <div class="form-group row">
               <label for="col-index" class="col-form-label bold">{{'order' | translate | titlecase}}</label>
               <div class="col">
@@ -131,17 +139,16 @@
                     'text-warning': (project.registrationStatus === 'W'),
                     'text-danger ': (project.registrationStatus === 'N')
                   }"
-                >{{('registrationStatus.' + project.registrationStatus) | translate}}
+                >{{(dataService.registrationStatus.get(project.registrationStatus)).name[appService.lang]}}
                 </span>
               </div>
             </div>
             <div class="form-footer col-auto mt-2 mb-2 pr-0 pl-0 text-right">
               <button type="button" class="btn btn-outline-primary"><span class="regular size16">{{'detail' | translate | titlecase}}</span></button>
             </div>
-          </form>
+          </div>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
-

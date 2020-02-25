@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๐/๐๒/๒๕๖๓>
+Modify date : <๒๕/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -87,6 +87,10 @@ export class AppService  {
     this.translateService.get('systemName').subscribe((res: string) => {
       this.titleService.setTitle(res);
     });
+  }
+
+  getCurrentLanguage(): string {
+    return this.translateService.currentLang
   }
 
   getRandomColor(): string {

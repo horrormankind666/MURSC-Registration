@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๐/๐๒/๒๕๖๓>
-Modify date : <๒๑/๐๒/๒๕๖๓>
+Modify date : <๒๔/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -15,145 +15,25 @@ import {DecimalPipe} from '@angular/common';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 
-export interface TableSchema {
-  eventName: {
-    th: string,
-    en: string
-  };
-  registrationDate: {
-    startDate: string,
-    endDate: string
-  };
-  registrationFee: {
-    th: string,
-    en: string
-  };
-  registrationStatus: string
-}
+import {DataService, ProjectSchema} from '../data.service';
 
 interface TableState {
   page: number;
   pageSize: number;
-  searchTerm: string;
+  keyword: string;
+  registrationStatus: string;
 }
 
 interface TableSearchResult {
-  data: TableSchema[];
+  data: ProjectSchema[];
   total: number;
   totalSearch: number;
 }
 
-const TableData: TableSchema[] = [
-  {
-    eventName: {
-      th: 'โครงการพัฒนาบุคลากรภาครัฐและเอกชน ประจำปีงบประมาณ พ.ศ.2563 สำนักส่งเสริมและฝึกอบรม มหาวิทยาลัยเกษตรศาสตร์',
-      en: 'Khalid Free Spirit World Tour Live in Bangkok 2020'
-    },
-    registrationDate: {
-      startDate: '04/11/2019',
-      endDate: '25/08/2020'
-    },
-    registrationFee: {
-      th: '999,999 - 999,999 บาท',
-      en: '2,800 - 9,500 baht'
-    },
-    registrationStatus: 'Y'
-  },
-  {
-    eventName: {
-      th: 'หลักสูตรประกาศนียบัตรกฎหมายปกครองและวิธีพิจารณาคดีปกครอง',
-      en: 'International Forum on Transforming Productivity for Tomorrow Success'
-    },
-    registrationDate: {
-      startDate: '31/10/2019',
-      endDate: '30/06/2020'
-    },
-    registrationFee: {
-      th: '19,000 บาท หรือ 23,000 บาท หรือ 28,000 บาท สำหรับผู้ไม่มีวุฒินิติศาสตร์',
-      en: '19,000 baht or 23,000 baht or 28,000 baht for those without legal qualifications'
-    },
-    registrationStatus: 'Y'
-  },
-  {
-    eventName: {
-      th: 'การฝึกอบรมหลักสูตรด้านการประชาสัมพันธ์และสื่อสารมวลชน',
-      en: 'Speed Friending: Meet ladies & gents quickly! ( 21-40 ) ( FREE Drink / Hosted ) BA'
-    },
-    registrationDate: {
-      startDate: '11/11/2019',
-      endDate: '07/07/2020'
-    },
-    registrationFee: {
-      th: '3,500 - 88,000 บาท',
-      en: '3,500 - 88,000 baht'
-    },
-    registrationStatus: 'Y'
-  },
-  {
-    eventName: {
-      th: 'หลักสูตรฝึกอบรมประจำปี 2563 สำนักการศึกษาต่อเนื่อง มหาวิทยาลัยสุโขทัยธรรมาธิราช',
-      en: 'Introduce 2020 Taiwan International Student Design Competition',
-    },
-    registrationDate: {
-      startDate: '01/02/2020',
-      endDate: '19/12/2020'
-    },
-    registrationFee: {
-      th: '500 - 30,000 บาท',
-      en: '500 - 30,000 baht'
-    },
-    registrationStatus: 'W'
-  },
-  {
-    eventName: {
-      th: 'การประเมินประสิทธิภาพเชิงนิเวศเศรษฐกิจของระบบผลิตภัณฑ์ รุ่นที่ 2',
-      en: 'FREE WORKSHOP: How to make a Great First Impression'
-    },
-    registrationDate: {
-      startDate: '25/11/2019',
-      endDate: '30/01/2020'
-    },
-    registrationFee: {
-      th: '7,000 - 12,000 บาท',
-      en: '7,000 - 12,000 baht'
-    },
-    registrationStatus: 'N'
-  },
-  {
-    eventName: {
-      th: 'โครงการฝึกอบรมเชิงปฏิบัติการหลักสูตร การจัดทำคู่มือการปฏิบัติงาน ( Work Manual ) ด้วยการจัดการความรู้เพื่อพัฒนาความก้าวหน้าในสายอาชีพของบุคคลากรและเพิ่มประสิทธิภาพของกระบวนการทำงาน ประจำปีงบประมาณ 2563 รุ่นที่ 15',
-      en: 'Free Introduction of Bangkok Meditation - 87 Sukhumvit 52 Alley'
-    },
-    registrationDate: {
-      startDate: '24/08/2018',
-      endDate: '27/01/2020'
-    },
-    registrationFee: {
-      th: '3,400 บาท',
-      en: '3,400 baht'
-    },
-    registrationStatus: 'N'
-  },
-  {
-    eventName: {
-      th: 'หลักสูตรการปฏิบัติงานสำหรับเจ้าหน้าที่พัสดุมือใหม่หน่วยงานภาครัฐตามพระราชบัญญัติจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ.2560 และระเบียบกระทรวงการคลังฯ 2560 และศึกษาประเด็นในการปฏิบัติงานสำหรับระบบ eGP ',
-      en: 'Valentine\'s Day Singles Special: Speed Friending for all ages! ( FREE Drink )'
-    },
-    registrationDate: {
-      startDate: '10/10/2019',
-      endDate: '14/12/2019'
-    },
-    registrationFee: {
-      th: '3,900 บาท',
-      en: '3,900 baht'
-    },
-    registrationStatus: 'N'
-  }
-]
-
 class Table {
   constructor(
-    private pipe: DecimalPipe
+    private pipe: DecimalPipe,
+    private dataService: DataService
   ) {
     this._search$.pipe(
       tap(() => this._searching$.next(true)),
@@ -172,14 +52,15 @@ class Table {
 
   private _searching$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _data$ = new BehaviorSubject<TableSchema[]>([]);
+  private _data$ = new BehaviorSubject<ProjectSchema[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
   private _totalSearch$ = new BehaviorSubject<number>(0);
 
   private _state: TableState = {
     page: 1,
     pageSize: 4,
-    searchTerm: ''
+    keyword: '',
+    registrationStatus: ''
   }
 
   get data$() {return this._data$.asObservable();}
@@ -188,11 +69,13 @@ class Table {
   get searching$() {return this._searching$.asObservable();}
   get page() {return this._state.page;}
   get pageSize() {return this._state.pageSize;}
-  get searchTerm() {return this._state.searchTerm;}
+  get keyword() {return this._state.keyword;}
+  get registrationStatus() {return this._state.registrationStatus;}
 
   set page(page: number) {this._set({page});}
   set pageSize(pageSize: number) {this._set({pageSize});}
-  set searchTerm(searchTerm: string) {this._set({searchTerm});}
+  set keyword(keyword: string) {this._set({keyword});}
+  set registrationStatus(registrationStatus: string) {this._set({registrationStatus});}
 
   private _set(patch: Partial<TableState>) {
     Object.assign(this._state, patch);
@@ -200,46 +83,56 @@ class Table {
   }
 
   private _search(): Observable<TableSearchResult> {
-    const {page, pageSize, searchTerm} = this._state;
+    const {page, pageSize, keyword, registrationStatus} = this._state;
 
-    let data = TableData;
+    let data = this.dataService.project.getList();
 
-    data = data.filter(project => this.matches(project, searchTerm, this.pipe));
-    const total: number = TableData.length;
+    data = data.filter(project => this.matches(project, keyword, registrationStatus, this.pipe));
+    const total: number = this.dataService.project.getList().length;
     const totalSearch: number = data.length;
 
     return of({data, total, totalSearch});
   }
 
-  matches(data: TableSchema, term: string, pipe: PipeTransform) {
-    term = term.toLowerCase();
+  matches(data: ProjectSchema, keyword: string, registrationStatus: string, pipe: PipeTransform) {
+    keyword = (keyword ? keyword : '');
+    registrationStatus = (registrationStatus ? registrationStatus : '');
 
     return (
-      data.eventName.th.toLowerCase().includes(term) ||
-      data.eventName.en.toLowerCase().includes(term)
+      (data.eventName.th.toLowerCase().includes(keyword.toLowerCase()) ||
+       data.eventName.en.toLowerCase().includes(keyword.toLowerCase())) &&
+      data.registrationStatus.includes(registrationStatus)
     )
   }
 }
 
 class Operate {
+  constructor(
+    private pipe: DecimalPipe,
+    private dataService: DataService,
+  ) {}
+
   table = {
+    service: new Table(this.pipe, this.dataService),
     filter: {
       showForm: false,
+      keyword: '',
       setValue() {
         this.showForm = false;
       }
     }
-  }
+  };
 }
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
   constructor(
-    private pipe: DecimalPipe
+    private pipe: DecimalPipe,
+    private dataService: DataService
   ) {}
 
-  public table = new Table(this.pipe);
-  public operate = new Operate();
+  public operate = new Operate(this.pipe, this.dataService);
 }

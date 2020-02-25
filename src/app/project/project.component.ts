@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๒๑/๐๒/๒๕๖๓>
+Modify date : <๒๕/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -15,7 +15,8 @@ import {DecimalPipe} from '@angular/common';
 import {DeviceDetectorService} from 'ngx-device-detector';
 
 import {AppService} from '../app.service';
-import {ProjectService, TableSchema} from './project.service';
+import {DataService} from '../data.service';
+import {ProjectService} from './project.service';
 
 @Component({
   selector: 'app-project',
@@ -26,13 +27,13 @@ import {ProjectService, TableSchema} from './project.service';
     DecimalPipe
   ]
 })
-
 export class ProjectComponent implements OnInit  {
   @ContentChild('ProjectView', {static: false}) ProjectView;
 
   constructor(
-    private appService: AppService,
     private deviceService: DeviceDetectorService,
+    private appService: AppService,
+    private dataService: DataService,
     private projectService: ProjectService
   ) {}
 

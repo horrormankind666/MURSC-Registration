@@ -1,0 +1,223 @@
+/*
+=============================================
+Author      : <ยุทธภูมิ ตวันนา>
+Create date : <๒๒/๐๒/๒๕๖๓>
+Modify date : <๒๔/๐๒/๒๕๖๓>
+Description : <>
+=============================================
+*/
+
+'use strict';
+
+import {Injectable} from '@angular/core';
+
+import {TranslateService} from '@ngx-translate/core';
+
+import {AppService} from './app.service';
+
+export interface ProjectSchema {
+  eventName: {
+    th: string,
+    en: string
+  };
+  registrationDate: {
+    startDate: string,
+    endDate: string
+  };
+  registrationFee: {
+    th: string,
+    en: string
+  };
+  registrationStatus: string
+}
+
+interface RegistrationStatusSchema {
+  id: string;
+  name: {
+    th: string,
+    en: string
+  }
+}
+
+class Project {
+  private data = [
+    {
+      eventName: {
+        th: 'โครงการพัฒนาบุคลากรภาครัฐและเอกชน ประจำปีงบประมาณ พ.ศ.2563 สำนักส่งเสริมและฝึกอบรม มหาวิทยาลัยเกษตรศาสตร์',
+        en: 'Khalid Free Spirit World Tour Live in Bangkok 2020'
+      },
+      registrationDate: {
+        startDate: '04/11/2019',
+        endDate: '25/08/2020'
+      },
+      registrationFee: {
+        th: '999,999 - 999,999 บาท',
+        en: '2,800 - 9,500 baht'
+      },
+      registrationStatus: 'Y'
+    },
+    {
+      eventName: {
+        th: 'หลักสูตรประกาศนียบัตรกฎหมายปกครองและวิธีพิจารณาคดีปกครอง',
+        en: 'International Forum on Transforming Productivity for Tomorrow Success'
+      },
+      registrationDate: {
+        startDate: '31/10/2019',
+        endDate: '30/06/2020'
+      },
+      registrationFee: {
+        th: '19,000 บาท หรือ 23,000 บาท หรือ 28,000 บาท สำหรับผู้ไม่มีวุฒินิติศาสตร์',
+        en: '19,000 baht or 23,000 baht or 28,000 baht for those without legal qualifications'
+      },
+      registrationStatus: 'Y'
+    },
+    {
+      eventName: {
+        th: 'การฝึกอบรมหลักสูตรด้านการประชาสัมพันธ์และสื่อสารมวลชน',
+        en: 'Speed Friending: Meet ladies & gents quickly! ( 21-40 ) ( FREE Drink / Hosted ) BA'
+      },
+      registrationDate: {
+        startDate: '11/11/2019',
+        endDate: '07/07/2020'
+      },
+      registrationFee: {
+        th: '3,500 - 88,000 บาท',
+        en: '3,500 - 88,000 baht'
+      },
+      registrationStatus: 'Y'
+    },
+    {
+      eventName: {
+        th: 'หลักสูตรฝึกอบรมประจำปี 2563 สำนักการศึกษาต่อเนื่อง มหาวิทยาลัยสุโขทัยธรรมาธิราช',
+        en: 'Introduce 2020 Taiwan International Student Design Competition',
+      },
+      registrationDate: {
+        startDate: '01/02/2020',
+        endDate: '19/12/2020'
+      },
+      registrationFee: {
+        th: '500 - 30,000 บาท',
+        en: '500 - 30,000 baht'
+      },
+      registrationStatus: 'W'
+    },
+    {
+      eventName: {
+        th: 'การประเมินประสิทธิภาพเชิงนิเวศเศรษฐกิจของระบบผลิตภัณฑ์ รุ่นที่ 2',
+        en: 'FREE WORKSHOP: How to make a Great First Impression'
+      },
+      registrationDate: {
+        startDate: '25/11/2019',
+        endDate: '30/01/2020'
+      },
+      registrationFee: {
+        th: '7,000 - 12,000 บาท',
+        en: '7,000 - 12,000 baht'
+      },
+      registrationStatus: 'N'
+    },
+    {
+      eventName: {
+        th: 'โครงการฝึกอบรมเชิงปฏิบัติการหลักสูตร การจัดทำคู่มือการปฏิบัติงาน ( Work Manual ) ด้วยการจัดการความรู้เพื่อพัฒนาความก้าวหน้าในสายอาชีพของบุคคลากรและเพิ่มประสิทธิภาพของกระบวนการทำงาน ประจำปีงบประมาณ 2563 รุ่นที่ 15',
+        en: 'Free Introduction of Bangkok Meditation - 87 Sukhumvit 52 Alley'
+      },
+      registrationDate: {
+        startDate: '24/08/2018',
+        endDate: '27/01/2020'
+      },
+      registrationFee: {
+        th: '3,400 บาท',
+        en: '3,400 baht'
+      },
+      registrationStatus: 'N'
+    },
+    {
+      eventName: {
+        th: 'หลักสูตรการปฏิบัติงานสำหรับเจ้าหน้าที่พัสดุมือใหม่หน่วยงานภาครัฐตามพระราชบัญญัติจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ.2560 และระเบียบกระทรวงการคลังฯ 2560 และศึกษาประเด็นในการปฏิบัติงานสำหรับระบบ eGP ',
+        en: 'Valentine\'s Day Singles Special: Speed Friending for all ages! ( FREE Drink )'
+      },
+      registrationDate: {
+        startDate: '10/10/2019',
+        endDate: '14/12/2019'
+      },
+      registrationFee: {
+        th: '3,900 บาท',
+        en: '3,900 baht'
+      },
+      registrationStatus: 'N'
+    }
+  ]
+
+  getList(): ProjectSchema[] {
+    let items: ProjectSchema[] = this.data;
+
+    return items;
+  }
+}
+
+class RegistrationStatus {
+  constructor(
+    private translateService: TranslateService,
+    private appService: AppService
+  ) {}
+
+  private data = [
+    {
+      id: 'Y',
+      name: {
+        th: 'เปิดให้ลงทะเบียน',
+        en: 'Registration is open'
+      },
+      fullName: ''
+    },
+    {
+      id: 'W',
+      name: {
+        th: 'ยังไม่เปิดให้ลงทะเบียน',
+        en: 'Registration not yet opened'
+      },
+      fullName: ''
+    },
+    {
+      id: 'N',
+      name: {
+        th: 'หมดเวลาลงทะเบียน',
+        en: 'Registration expired'
+      },
+      fullName: ''
+    }
+  ].map((item) => {
+    item.fullName = this.translateService.instant('registrationStatus');
+
+    return item;
+  });
+
+  get(term?: string): {} {
+    let item: RegistrationStatusSchema[];
+
+    item = this.data.filter(res => {
+      return res.id.includes(term);
+    });
+
+    return item[0];
+  }
+
+  getList(): RegistrationStatusSchema[] {
+    let items: RegistrationStatusSchema[] = this.data;
+
+    return items;
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+  constructor(
+    private translateService: TranslateService,
+    private appService: AppService,
+  ) {}
+
+  public project = new Project();
+  public registrationStatus = new RegistrationStatus(this.translateService, this.appService);
+}
