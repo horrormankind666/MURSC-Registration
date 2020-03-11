@@ -2,12 +2,12 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๒๕/๐๒/๒๕๖๓>
+Modify date : <๑๐/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
 
-@import "../../styles.scss";
+@import '../../styles.scss';
 
 .project-view .card-group {
   margin-left: -0.25rem;
@@ -16,7 +16,7 @@ Description : <>
 .project-view .card-group .card {
   border: none;
   border-radius: 0px;
-  background-color: rgba(0,0,0,.05);
+  background-color: #F2F2F2;
 }
 .project-view .card-group .card .card-img-top {
   border-radius: 0px;
@@ -43,24 +43,46 @@ Description : <>
   width: 120px;
 }
 @media (min-width: 1200px) {
+  /*
   .project-view .card-group .col-xl-2 {
     -ms-flex: 0 0 20%;
     flex: 0 0 20%;
     max-width: 20%;
   }
+  */
+}
+.project-view .d-table.registration-date .d-table-cell {
+  vertical-align: top;
+}
+.project-view .d-table.registration-date .d-table-cell:not(:last-child) {
+  width: 20px;
+  line-height: 1.2;
+}
+.project-view .d-table.registration-date .d-table-cell:last-child {
+  padding-top: 1px;
+}
+@media screen and (min--moz-device-pixel-ratio: 0) {
+  .project-view .d-table.registration-date .d-table-cell:last-child {
+    padding-top: 2px;
+  }
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .project-view .d-table.registration-date .d-table-cell:last-child {
+    padding-top: 2px;
+  }
 }
 .project-view .table .col-registration-date {
-  width: 200px;
-  min-width: 200px;
+  width: 185px;
+  min-width: 185px;
 }
-.project-view .table td.col-registration-date .period {
-  font-family: Tahoma;
-  font-size: 14px;
-  line-height: 2;
+.project-view .table .col-seat {
+  width: 165px;
+  min-width: 165px;
 }
 .project-view .table .col-registration-fee {
-  width: 30%;
-  min-width: 0px;
+  width: 170px;
+  min-width: 170px;
 }
 .project-view .table .col-registration-status {
   width: 85px;
@@ -74,12 +96,9 @@ Description : <>
 .project-view .table td.col-wrap .form .form-group .col-form-label {
     width: 151px;
 }
-@media screen and (max-width: 699px) {
+@media screen and (max-width: 866px) {
   @include table-responsive-step1('.project-view');
 }
-@media screen and (max-width: 428px) {
-  .project-view .card-group .card .card-footer .btn,
-  .project-view .table td.col-wrap .form .form-footer .btn {
-    width: 100%;
-  }
+@media screen and (max-width: 366px) {
+  @include table-responsive-end('.project-view');
 }

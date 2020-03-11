@@ -18,6 +18,13 @@
     "entries": "รายการ",
     "filter": "ตัวกรอง",
     "reload": "รีโหลด",
+    "start": "เริ่มต้น",
+    "end": "สิ้นสุด",
+    "unit": {
+      "label": "หน่วย",
+      "baht": "บาท",
+      "persons": "คน"
+    },
     "keyword": "คำค้น",
     "registrationStatus": "สถานะการลงทะเบียน",
     "profile": {
@@ -25,8 +32,9 @@
       "examApplicationInfo": "ข้อมูลการสมัครสอบ"
     },
     "project": {
-      "eventName": "โครงการ",
+      "projectName": "โครงการ",
       "registrationDate": "วันที่ลงทะเบียน",
+      "seat": "จำนวนที่รับ",
       "registrationFee": "ค่าลงทะเบียน"
     }
 }

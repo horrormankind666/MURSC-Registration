@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๕/๐๒/๒๕๖๓>
+Modify date : <๒๖/๐๒/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -11,9 +11,6 @@ Description : <>
 
 import {NgModule, Component, ElementRef, ViewChild, OnInit} from '@angular/core';
 import {Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError} from '@angular/router';
-
-import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
-import {NgSelectConfig} from '@ng-select/ng-select';
 
 import {TranslateService} from '@ngx-translate/core';
 
@@ -42,8 +39,6 @@ export class AppComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private router: Router,
-    private tooltipConfig: NgbTooltipConfig,
-    private selectConfig: NgSelectConfig,
     private translateService: TranslateService,
     private appService: AppService,
     private authService: AuthService
@@ -67,13 +62,6 @@ export class AppComponent implements OnInit {
         }
       }
     });
-
-    tooltipConfig.placement = 'top';
-    tooltipConfig.container = 'body';
-    tooltipConfig.tooltipClass = 'tooltip-custom';
-
-    selectConfig.notFoundText = 'Not found';
-    selectConfig.appendTo = 'body';
   }
 
   private userBackgrondColor: string;

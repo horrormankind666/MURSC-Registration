@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๒๐/๐๒/๒๕๖๓>
+Modify date : <๐๓/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -79,8 +79,6 @@ export class AuthService {
     this
   );
 
-  public urlAuthenResource: string = 'http://localhost:5001/API/AuthenResource/UserInfo';
-  public urlAuthenServer: string = 'http://localhost:4279';
   public isAuthenticated: boolean = false;
   public getUserInfo: {} = this.userInfo;
 
@@ -111,7 +109,7 @@ export class AuthService {
           let headers = new HttpHeaders()
             .set('Authorization', ('Bearer ' + this.appService.authenResource.token));
 
-          this.http.get(this.urlAuthenResource, { headers: headers }).subscribe((res: {}) => {
+          this.http.get(this.appService.urlAuthenResource, { headers: headers }).subscribe((res: {}) => {
             let data = res['data'];
 
             this.isAuthenticated = (data !== null ? data[0].isAuthenticated : false);

@@ -2,19 +2,19 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๕/๐๒/๒๕๖๓>
+Modify date : <๒๖/๐๒/๒๕๖๓>
 Description : <style sheet สำหรับจัดรูปแบบการแสดงผลของ app-root>
 =============================================
 */
 
-@import "../styles.scss";
+@import '../styles.scss';
 
 main header {
-  background: #1d4f91;
+  background: #1D4F91;
 }
 main header .navbar-header {
   height: $header-max-height;
-  background-image: url($image-path+"/header-background.png");
+  background-image: url($image-path + '/header-background.png');
   background-position: bottom right;
   background-size: cover;
   background-repeat: no-repeat;
@@ -42,7 +42,7 @@ main header .navbar-header .d-table .d-table-cell.systeminfo .fullname {
 main header .navbar-header .d-table .d-table-cell.systeminfo .owner .label,
 main header .navbar-header .d-table .d-table-cell.systeminfo .fullname {
   width: inherit;
-  background-image: url($image-path+"/label.png");
+  background-image: url($image-path + '/label.png');
 }
 main header .navbar-header .d-table .d-table-cell.systeminfo .owner .label-th {
   background-position: 0px 0px;
@@ -106,32 +106,21 @@ main header .navbar-header .d-table .d-table-cell.userinfo .user-icon .dropdown-
   padding-left: 0px;
 }
 main header .navbar-header .d-table .d-table-cell.userinfo .signin-icon a {
-  border: 1px solid #ffffff;
+  border: 1px solid #FFFFFF;
   border-radius: .25rem;
   line-height: 32px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  /*
   main header .navbar-header .d-table .d-table-cell.userinfo .flags-icon a {
-    top: -1px;
+    top: 1px;
   }
-  */
   main header .navbar-header .d-table .d-table-cell.userinfo .home-icon a {
     top: 2px;
   }
   _:-ms-lang(x),
   _:-webkit-full-screen,
   main header .navbar-header .d-table .d-table-cell.userinfo .flags-icon a {
-    top: 0px;
-  }
-  _:-ms-lang(x),
-  _:-webkit-full-screen,
-  main header .navbar-header .d-table .d-table-cell.userinfo .home-icon a {
     top: 2px;
-  }
-  ::i-block-chrome,
-  main header .navbar-header .d-table .d-table-cell.userinfo .flags-icon a {
-    top: 0px;
   }
   ::i-block-chrome,
   main header .navbar-header .d-table .d-table-cell.userinfo .home-icon a {
@@ -149,6 +138,7 @@ main header .navbar-header .d-table .d-table-cell.userinfo .signin-icon a {
   }
 }
 @media screen and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  main header .navbar-header .d-table .d-table-cell.userinfo .flags-icon a,
   main header .navbar-header .d-table .d-table-cell.userinfo .home-icon a {
     top: 2px;
   }
@@ -183,7 +173,7 @@ main header .navbar-header .d-table .d-table-cell.userinfo .signin-icon a {
   }
 }
 main footer {
-  background: #f2f2f2;
+  background: #F2F2F2;
   border-top: 1px solid lightgrey;
 }
 main section .container,

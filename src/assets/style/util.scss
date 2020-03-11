@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๕/๐๒/๒๕๖๓>
+Modify date : <๑๐/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -18,7 +18,9 @@ $color-info: #46B8DA;
 
 $screen-max-width: 796px;
 $header-max-height: 80px;
-$image-path: "../assets/images";
+$image-path: '../assets/images';
+
+$line-clamp-line-height: 1.7;
 
 @mixin table-responsive-step1($class)
 {
@@ -31,10 +33,38 @@ $image-path: "../assets/images";
   }
 }
 
+@mixin table-responsive-end($class)
+{
+  #{$class} .table td.col-wrap .form .form-group {
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+  #{$class} .table td.col-wrap .form .form-group .col-form-label {
+    width: 100%;
+  }
+  #{$class} .table td.col-wrap .form .form-group .col-form-label::after {
+    float: none;
+    content: '';
+    margin-left: 0;
+  }
+  #{$class} .table td.col-wrap .form .form-group .col {
+    display: block;
+    width: 100%;
+    padding-left: 0;
+  }
+  #{$class} .table td.col-wrap .form .form-group .col .form-text{
+    margin-top: 0;
+  }
+}
+
 .font {
   font-family: $font-family;
 }
+.font-tahoma {
+  font-family: Tahoma;
+}
 body {
+  font-family: $font-family !important;
   background-color: #FFFFFF;
   background-image: none;
   background-repeat: no-repeat;
@@ -137,7 +167,6 @@ main footer .container {
   -webkit-box-shadow: none;
   box-shadow: none;
   background-image: none;
-
 }
 .btn:focus,
 .btn:active:focus,
@@ -258,7 +287,7 @@ body.modal-open {
   border-radius: 0;
 }
 .card .card-body .card-text {
-  line-height: 1.8;
+  line-height: 1.5;
 }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .card-img-top {
@@ -269,7 +298,7 @@ body.modal-open {
   table-layout: auto;
 }
 .table-bordered {
-  border: 0 !important;
+  border: 0;
 }
 .table-bordered thead th,
 .table-bordered thead td {
@@ -279,7 +308,7 @@ body.modal-open {
 .table td,
 .table td.col-wrap {
   padding: 0.5rem 0.9rem;
-  line-height: 1.8;
+  line-height: 1.5;
   vertical-align: top;
 }
 .table thead th {
@@ -288,13 +317,9 @@ body.modal-open {
   word-wrap: break-word;
   vertical-align: top;
 }
-.table thead th:first-child,
-.table tbody td:first-child {
-  border-left: 0 !important;
-}
 .table thead th.col-wrap,
 .table tbody td.col-wrap {
-    display: none;
+  display: none;
 }
 .card .card-body .card-text .form .form-group,
 .table tbody td.col-wrap .form .form-group {
@@ -307,7 +332,7 @@ body.modal-open {
 .table tbody td.col-wrap .form .form-group .col-form-label {
   padding-top: .25rem;
   padding-bottom: 0;
-  line-height: 1.8;
+  line-height: 1.5;
 }
 .card .card-body .card-text .form .form-group .col-form-label::after,
 .table tbody td.col-wrap .form .form-group .col-form-label::after {
@@ -318,8 +343,11 @@ body.modal-open {
 .card .card-body .card-text .form .form-group .col,
 .table tbody td.col-wrap .form .form-group .col {
   display: table-cell;
-  word-break: break-all;
+  vertical-align: top;
   word-wrap: break-word;
+}
+.table tbody td.col-wrap .form .form-group .col {
+  padding-right: 0;
 }
 .table .col-index {
   width: 98px;
@@ -355,7 +383,30 @@ body.modal-open {
     right: 1px;
   }
 }
-.form-control:focus {
+.form .form-row,
+.form .form-row .form-group {
+  display: block;
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+@media (min-width: 768px) {
+  .form .form-row {
+    display: table;
+    table-layout: fixed;
+  }
+  .form .form-row .form-group {
+    display: table-cell;
+    padding-bottom: 1rem;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
+.form-control:focus,
+.ng-select.ng-select-opened .ng-select-container,
+.ng-select.ng-select-focused:not(.ng-select-opened) > .ng-select-container,
+.ng-dropdown-panel {
   border-color: #FB542B;
   outline: 0;
   box-shadow: 0 0 0 0;
@@ -363,7 +414,7 @@ body.modal-open {
 .inputbox,
 .ng-select .ng-select-container {
   height: 35px;
-  min-height: 35px;
+  min-height: 35px !important;
   border-radius: 0;
   border: 1px solid #BDC3C7;
   padding: 0 0.3rem 0 0.3rem;
@@ -372,20 +423,77 @@ body.modal-open {
   outline: none;
   cursor: default;
 }
-.ng-select.ng-select-single .ng-select-container {
-  height: 35px;
+.ng-select .ng-select-container {
+  display: table !important;
+  table-layout: fixed;
 }
-.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
-  top: 4px;
-  padding-left: 0.3rem;
+.ng-select .ng-select-container .ng-value-container,
+.ng-select .ng-clear-wrapper,
+.ng-select .ng-arrow-wrapper {
+  display: table-cell !important;
+  vertical-align: middle !important;
+}
+.ng-select .ng-select-container {
+  height: 35px !important;
 }
 .ng-select .ng-select-container .ng-value-container {
   padding: 0;
+}
+.ng-select .ng-select-container .ng-value-container .ng-value {
+  padding-top: 1px !important;
+}
+.ng-select .ng-select-container .ng-value-container .ng-input {
+  top: 4px !important;
+  padding-left: 0.3rem !important;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .ng-select .ng-select-container .ng-value-container .ng-value {
+    padding-top: 0 !important;
+  }
+  ::i-block-chrome,
+  .ng-select .ng-select-container .ng-value-container .ng-input {
+    top: 3px !important;
+  }
+}
+@media screen and (min--moz-device-pixel-ratio: 0) {
+  .ng-select .ng-select-container .ng-value-container .ng-value {
+    padding-top: 0 !important;
+  }
 }
 .ng-select div,
 .ng-select input,
 .ng-select span {
   font-weight: $font-weight-class-regular;
+}
+.ng-select .ng-clear-wrapper .ng-clear {
+  font-size: 32px !important;
+}
+.ng-select.ng-select-opened > .ng-select-container .ng-arrow {
+  top: -3px;
+}
+.ng-dropdown-panel.ng-select-top {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.ng-dropdown-panel.ng-select-bottom {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-top: 0;
+}
+.ng-dropdown-panel {
+  border-top-width: 0;
+  box-shadow: 0;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  font-weight: $font-weight-class-regular;
+  padding-right: 0.3rem;
+  padding-left: 0.3rem;
+  white-space: normal !important;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected .ng-option-label,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked .ng-option-label {
+  font-weight: $font-weight-class-bold;
 }
 .filter.form .card {
   background: inherit;
@@ -395,4 +503,107 @@ body.modal-open {
 .filter.form .card-header{
   background: inherit;
   border-bottom: 0;
+}
+.line-clamp {
+  display: block;
+  display: -webkit-box;
+	-webkit-box-orient: vertical;
+  position: relative;
+  line-height: $line-clamp-line-height;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 0.65rem;
+}
+.line-clamp::before {
+  content: '...';
+  text-align: right;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 1rem;
+}
+.line-clamp::after {
+  content: '';
+  text-align: right;
+  position: absolute;
+  right: 0;
+  width: 1rem;
+  height: 1.2rem;
+  background: #F2F2F2;
+}
+@supports (-webkit-line-clamp: 1) {
+  .line-clamp {
+    padding-right: 0;
+  }
+	.line-clamp::before {
+		display: none !important;
+	}
+}
+.line-clamp-1 {
+  -webkit-line-clamp: 1;
+	max-height: calc(1em * #{$line-clamp-line-height} * 1);
+}
+.line-clamp-2 {
+	-webkit-line-clamp: 2;
+	height: calc(1em * #{$line-clamp-line-height} * 2);
+}
+.line-clamp-3 {
+	-webkit-line-clamp: 3;
+	max-height: calc(1em * #{$line-clamp-line-height} * 3);
+}
+.line-clamp-4 {
+	-webkit-line-clamp: 4;
+  max-height: calc(1em * #{$line-clamp-line-height} * 4);
+}
+.line-clamp-5 {
+	-webkit-line-clamp: 5;
+	max-height: calc(1em * #{$line-clamp-line-height} * 5);
+}
+.datetime-vertical {
+  width: 32px;
+}
+.datetime-vertical .day,
+.datetime-vertical .month,
+.datetime-vertical .year,
+.datetime-vertical .time {
+  width: auto;
+}
+.datetime-vertical .day div,
+.datetime-vertical .month div,
+.datetime-vertical .year div,
+.datetime-vertical .time div {
+  float: left
+}
+.datetime-vertical .day div:not(:first-child):not(:last-child),
+.datetime-vertical .month div:not(:first-child):not(:last-child),
+.datetime-vertical .year div:not(:first-child):not(:last-child),
+.datetime-vertical .time div:not(:first-child):not(:last-child)  {
+  text-align: center;
+}
+.datetime-vertical .day div:last-child,
+.datetime-vertical .month div:last-child,
+.datetime-vertical .year div:last-child,
+.datetime-vertical .time div:last-child {
+  text-align: right;
+}
+.datetime-vertical .day {
+  line-height: 1.2rem;
+}
+.datetime-vertical .day div{
+  width: 50%;
+}
+.datetime-vertical .month {
+  line-height: 1rem;
+}
+.datetime-vertical .month div{
+  width: 33.33%;
+}
+.datetime-vertical .year {
+  line-height: 1rem;
+}
+.datetime-vertical .year div {
+  width: 25%;
+}
+.datetime-vertical .time div {
+  width: 20%;
 }

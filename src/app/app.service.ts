@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๕/๐๒/๒๕๖๓>
+Modify date : <๐๓/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -10,9 +10,12 @@ Description : <>
 'use strict';
 
 import {Injectable} from '@angular/core';
+import {formatDate} from '@angular/common';
+import {HttpClient} from '@angular/common/http';
 import {Title} from '@angular/platform-browser';
 
 import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import {TranslateService} from '@ngx-translate/core';
 
@@ -58,25 +61,34 @@ class Modal {
 })
 export class AppService  {
   constructor(
+    private http: HttpClient,
     private titleService: Title,
-    private translateService: TranslateService,
-    private cookieService: CookieService,
     private modalConfig: NgbModalConfig,
-    private modalService: NgbModal
-  ) {}
+    private modalService: NgbModal,
+    private tooltipConfig: NgbTooltipConfig,
+    private translateService: TranslateService,
+    private cookieService: CookieService
+  ) {
+    tooltipConfig.placement = 'top';
+    tooltipConfig.container = 'body';
+    tooltipConfig.tooltipClass = 'tooltip-custom';
+  }
 
   public modal = new Modal(
     this.modalConfig,
     this.modalService
-  );
-
+  )
   public isLoading: boolean = true;
   public lang: string = 'th';
   public cookieName: string = 'MURSC.Cookies';
   public authenResource: any = {
     type: '',
     token: ''
-  };
+  }
+  public urlAuthenResource: string = 'http://localhost:5001/API/AuthenResource/UserInfo';
+  public urlAuthenServer: string = 'http://localhost:4279';
+  public urlAPI: string = 'http://localhost:3000/API';
+  public dateTimeOnURL: string = formatDate(new Date(), 'dd/MM/yyyyHH:mm:ss', 'en')
 
   setDefaultLang(lang?: string) {
     this.lang = (!lang ? this.lang : lang);
@@ -120,5 +132,39 @@ export class AppService  {
     this.translateService.get('entries').subscribe((res: string) => {entries = res;});
 
     return (totalSearch !== undefined ? ((totalSearch !== total ? (total.toLocaleString() + ' / ' + totalSearch.toLocaleString()) : totalSearch.toLocaleString()) + ' ' + entries): '');
+  }
+
+  getDataSource(routePrefix: string, action: string, query?: string): Promise<any> {
+    routePrefix = (routePrefix === undefined ? "" : routePrefix);
+    action = (action === undefined ? "" : action);
+    query = (query === undefined || query.length === 0 ? "" : query);
+
+    let url = (this.urlAPI + '/' + routePrefix + "/");
+    let route = "";
+
+    switch (action)
+    {
+        case "getlist": {
+            route = "GetList";
+            break;
+        }
+        case "get": {
+            route = "Get";
+            break;
+        }
+    }
+
+    url += (route + "?ver=" + this.dateTimeOnURL + query);
+
+
+    let promise = new Promise((resolve, reject) => {
+      this.http.get(url).subscribe((res: {}) => {
+        let data = res['data'];
+
+        resolve(data !== undefined && data !== null ? data : []);
+      });
+    });
+
+    return promise;
   }
 }

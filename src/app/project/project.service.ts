@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๐/๐๒/๒๕๖๓>
-Modify date : <๒๔/๐๒/๒๕๖๓>
+Modify date : <๐๔/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -35,19 +35,21 @@ class Table {
     private pipe: DecimalPipe,
     private dataService: DataService
   ) {
-    this._search$.pipe(
-      tap(() => this._searching$.next(true)),
-      debounceTime(100),
-      switchMap(() => this._search()),
-      delay(100),
-      tap(() => this._searching$.next(false))
-    ).subscribe(result => {
-      this._data$.next(result.data);
-      this._total$.next(result.total);
-      this._totalSearch$.next(result.totalSearch);
-    });
+    this.dataService.project.getList().then((res: ProjectSchema[]) => {
+      this._search$.pipe(
+        tap(() => this._searching$.next(true)),
+        debounceTime(100),
+        switchMap(() => this._search(res)),
+        delay(100),
+        tap(() => this._searching$.next(false))
+      ).subscribe(result => {
+        this._data$.next(result.data);
+        this._total$.next(result.total);
+        this._totalSearch$.next(result.totalSearch);
+      });
 
-    this._search$.next();
+      this._search$.next();
+    });
   }
 
   private _searching$ = new BehaviorSubject<boolean>(true);
@@ -82,14 +84,16 @@ class Table {
     this._search$.next();
   }
 
-  private _search(): Observable<TableSearchResult> {
+  private _search(data: ProjectSchema[]): Observable<TableSearchResult> {
     const {page, pageSize, keyword, registrationStatus} = this._state;
 
-    let data = this.dataService.project.getList();
+    let tmp = data;
 
-    data = data.filter(project => this.matches(project, keyword, registrationStatus, this.pipe));
-    const total: number = this.dataService.project.getList().length;
-    const totalSearch: number = data.length;
+    tmp = tmp.filter(project => this.matches(project, keyword, registrationStatus, this.pipe));
+    const total: number = data.length;
+    const totalSearch: number = tmp.length;
+
+    data = tmp;
 
     return of({data, total, totalSearch});
   }
@@ -99,8 +103,8 @@ class Table {
     registrationStatus = (registrationStatus ? registrationStatus : '');
 
     return (
-      (data.eventName.th.toLowerCase().includes(keyword.toLowerCase()) ||
-       data.eventName.en.toLowerCase().includes(keyword.toLowerCase())) &&
+      (data.projectName.th.toLowerCase().includes(keyword.toLowerCase()) ||
+       data.projectName.en.toLowerCase().includes(keyword.toLowerCase())) &&
       data.registrationStatus.includes(registrationStatus)
     )
   }
@@ -116,14 +120,12 @@ class Operate {
     service: new Table(this.pipe, this.dataService),
     filter: {
       showForm: false,
-      keyword: '',
       setValue() {
         this.showForm = false;
       }
     }
   };
 }
-
 
 @Injectable({
   providedIn: 'root'

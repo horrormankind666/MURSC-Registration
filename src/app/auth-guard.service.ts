@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๒๑/๐๒/๒๕๖๓>
+Modify date : <๐๓/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -29,7 +29,7 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     let url: string = state.url;
 
-    return this.authService.getAuthenResource().then((result: any) => {
+    return this.authService.getAuthenResource().then((res: any) => {
       if (this.authService.isAuthenticated) {
         //if (url === '/SignIn')
         //  this.router.navigate(['Home']);
