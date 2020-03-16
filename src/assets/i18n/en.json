@@ -32,9 +32,10 @@
       "examApplicationInfo": "Exam application information"
     },
     "project": {
-      "projectName": "Project Name",
+      "name": "Project Name",
       "registrationDate": "Registration Date",
       "seat": "Seat",
-      "registrationFee": "Registration Fee"
+      "registrationFee": "Registration Fee",
+      "detail": "Project Detail"
     }
 }

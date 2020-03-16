@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๑๐/๐๓/๒๕๖๓>
+Modify date : <๑๖/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -13,13 +13,48 @@ Description : <>
   margin-left: -0.25rem;
   margin-bottom: -0.25rem;
 }
-.project-view .card-group .card {
+.project-view .card-group .card-safari,
+.project-detail-dialog .card-group .card-default {
+  display: none;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .project-view .card-group .card-default {
+    display: none;
+  }
+  ::i-block-chrome,
+  .project-view .card-group .card-safari,
+  .project-detail-dialog .card-group .card-safari {
+    display: block;
+  }
+  @media screen and (max-width: 767px) {
+    .project-detail-dialog .card-group .card-default {
+      display: block;
+    }
+    .project-detail-dialog .card-group .card-safari {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 575px) {
+    ::i-block-chrome,
+    .project-view .card-group .card-default {
+      display: block;
+    }
+    ::i-block-chrome,
+    .project-view .card-group .card-safari {
+      display: none;
+    }
+  }
+}
+.project-view .card-group .card,
+.project-detail-dialog .card-group .card {
   border: none;
   border-radius: 0px;
-  background-color: #F2F2F2;
 }
-.project-view .card-group .card .card-img-top {
-  border-radius: 0px;
+.project-view .card-group .card .card-img,
+.project-detail-dialog .card-group .card .card-img {
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
 .project-view .card-group .card .card-body .badge-pill {
   margin-top: 1px;
@@ -29,6 +64,11 @@ Description : <>
   width: 32px;
   height: 32px;
   line-height: 1.8;
+}
+.project-view .card-group .card .card-body .card-title .registration-status i,
+.project-detail-dialog .card-group .card .card-body .card-title .registration-status i {
+  position: relative;
+  top: -2px;
 }
 .project-view .card-group .card .card-footer {
   border-top: none;
@@ -41,15 +81,6 @@ Description : <>
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0px;
   width: 120px;
-}
-@media (min-width: 1200px) {
-  /*
-  .project-view .card-group .col-xl-2 {
-    -ms-flex: 0 0 20%;
-    flex: 0 0 20%;
-    max-width: 20%;
-  }
-  */
 }
 .project-view .d-table.registration-date .d-table-cell {
   vertical-align: top;
@@ -93,8 +124,11 @@ Description : <>
   padding-top: 5px;
   padding-bottom: 0;
 }
+.project-view .card .card-text .form .form-group .col-form-label:not(.w-100) {
+  width: 125px;
+}
 .project-view .table td.col-wrap .form .form-group .col-form-label {
-    width: 151px;
+  width: 151px;
 }
 @media screen and (max-width: 866px) {
   @include table-responsive-step1('.project-view');

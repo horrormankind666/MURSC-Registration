@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๑๐/๐๓/๒๕๖๓>
+Modify date : <๑๖/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -17,7 +17,7 @@ import {AppService} from './app.service';
 export interface ProjectSchema {
   transProjectID?: string;
   logo?: string;
-  projectName?: {
+  name?: {
     th?: string,
     en?: string
   };
@@ -30,6 +30,7 @@ export interface ProjectSchema {
   lastPaymentDate?: string;
   maximumSeat?: string;
   minimumFee?: string;
+  registrationStatus?: string;
   transLocationID?: string;
   locationName?: {
     th?: string,
@@ -47,7 +48,6 @@ export interface ProjectSchema {
   };
   contactEmail?: string,
   contactPhone?: string,
-  registrationStatus?: string
 }
 
 interface RegistrationStatusSchema {
@@ -65,7 +65,7 @@ class Project {
   ) {}
 
   private getDataSource(action: string, query?: string): Promise<ProjectSchema[]> {
-    return this.appService.getDataSource('Project', action).then((res: []) => {
+    return this.appService.getDataSource('Project', action, query).then((res: []) => {
       let items: ProjectSchema[] = [];
 
       for (let dr of res) {
@@ -73,7 +73,7 @@ class Project {
           items.push({
             transProjectID: (dr['transProjectID'] ? dr['transProjectID'] : ''),
             logo: (dr['logo'] ? dr['logo'] : ''),
-            projectName: {
+            name: {
               th: (dr['projectNameTH'] ? dr['projectNameTH'] : ''),
               en: (dr['projectNameEN'] ? dr['projectNameEN'] : dr['projectNameTH'])
             },
@@ -88,6 +88,26 @@ class Project {
             registrationStatus: (dr['registrationStatus'] ? dr['registrationStatus'] : '')
           });
         }
+
+        if (action === 'get') {
+          items.push({
+            transProjectID: (dr['transProjectID'] ? dr['transProjectID'] : ''),
+            logo: (dr['logo'] ? dr['logo'] : ''),
+            name: {
+              th: (dr['projectNameTH'] ? dr['projectNameTH'] : ''),
+              en: (dr['projectNameEN'] ? dr['projectNameEN'] : dr['projectNameTH'])
+            },
+            detail: (dr['detail'] ? dr['detail'] : ''),
+            examDate: (dr['examDates'] ? dr['examDates'] : ''),
+            registrationDate: {
+              startDate: (dr['regisStartDates'] ? dr['regisStartDates'] : ''),
+              endDate: (dr['regisEndDates'] ? dr['regisEndDates'] : '')
+            },
+            lastPaymentDate: (dr['lastPaymentDates'] ? dr['lastPaymentDates'] : ''),
+            maximumSeat: (dr['maximumSeat'] ? dr['maximumSeat'] : ''),
+            registrationStatus: (dr['registrationStatus'] ? dr['registrationStatus'] : '')
+          });
+        }
       }
 
       return items;
@@ -98,6 +118,12 @@ class Project {
     return this.getDataSource('getlist').then((res: ProjectSchema[]) => {
       return res;
     })
+  }
+
+  get(query: string): Promise<ProjectSchema> {
+    return this.getDataSource('get', query).then((res: ProjectSchema[]) => {
+      return res[0];
+    });
   }
 }
 

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๐๓/๐๓/๒๕๖๓>
+Modify date : <๑๖/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -14,7 +14,7 @@ import {formatDate} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {Title} from '@angular/platform-browser';
 
-import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModalConfig, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import {TranslateService} from '@ngx-translate/core';
@@ -28,8 +28,8 @@ class Modal {
   private _modalService: NgbModal;
 
   constructor(
-    modalConfig: NgbModalConfig,
-    modalService: NgbModal
+    private modalConfig: NgbModalConfig,
+    private modalService: NgbModal
   ) {
     this._modalConfig = modalConfig;
     this._modalService = modalService;
@@ -53,6 +53,12 @@ class Modal {
     });
 
     return promise;
+  }
+
+  openref(content: any, windowClass: string): NgbModalRef {
+    return this._modalService.open(content, {
+      windowClass: windowClass
+    });
   }
 }
 

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๐/๐๒/๒๕๖๓>
-Modify date : <๐๔/๐๓/๒๕๖๓>
+Modify date : <๑๓/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -35,21 +35,7 @@ class Table {
     private pipe: DecimalPipe,
     private dataService: DataService
   ) {
-    this.dataService.project.getList().then((res: ProjectSchema[]) => {
-      this._search$.pipe(
-        tap(() => this._searching$.next(true)),
-        debounceTime(100),
-        switchMap(() => this._search(res)),
-        delay(100),
-        tap(() => this._searching$.next(false))
-      ).subscribe(result => {
-        this._data$.next(result.data);
-        this._total$.next(result.total);
-        this._totalSearch$.next(result.totalSearch);
-      });
-
-      this._search$.next();
-    });
+    this.reload();
   }
 
   private _searching$ = new BehaviorSubject<boolean>(true);
@@ -103,10 +89,28 @@ class Table {
     registrationStatus = (registrationStatus ? registrationStatus : '');
 
     return (
-      (data.projectName.th.toLowerCase().includes(keyword.toLowerCase()) ||
-       data.projectName.en.toLowerCase().includes(keyword.toLowerCase())) &&
+      (data.name.th.toLowerCase().includes(keyword.toLowerCase()) ||
+       data.name.en.toLowerCase().includes(keyword.toLowerCase())) &&
       data.registrationStatus.includes(registrationStatus)
     )
+  }
+
+  reload() {
+    this.dataService.project.getList().then((res: ProjectSchema[]) => {
+      this._search$.pipe(
+        tap(() => this._searching$.next(true)),
+        debounceTime(100),
+        switchMap(() => this._search(res)),
+        delay(100),
+        tap(() => this._searching$.next(false))
+      ).subscribe(result => {
+        this._data$.next(result.data);
+        this._total$.next(result.total);
+        this._totalSearch$.next(result.totalSearch);
+      });
+
+      this._search$.next();
+    });
   }
 }
 

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๑๐/๐๓/๒๕๖๓>
+Modify date : <๑๖/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -17,6 +17,7 @@ $color-warning: #FB3;
 $color-info: #46B8DA;
 
 $screen-max-width: 796px;
+$screen-min-width: 344px;
 $header-max-height: 80px;
 $image-path: '../assets/images';
 
@@ -71,7 +72,7 @@ body {
   background-attachment: fixed;
   background-position: center bottom;
   background-size: cover;
-  min-width: 344px;
+  min-width: $screen-min-width;
   margin: 0;
   padding: 0;
   -ms-overflow-style: scrollbar;
@@ -168,6 +169,7 @@ main footer .container {
   box-shadow: none;
   background-image: none;
 }
+button:focus,
 .btn:focus,
 .btn:active:focus,
 .btn.active:focus,
@@ -229,6 +231,42 @@ body.modal-open {
   padding-top: 10px !important;
   padding-bottom: 10px !important;
 }
+.modal-content {
+  border-radius: 0 !important;
+}
+.modal-header {
+  background: #5BC0DE;
+  border-bottom: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  height: 40px;
+  padding: 10px 1rem 10px 1rem;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+.modal-header .close {
+  height: 18px;
+  line-height: 0;
+  font-size: 48px;
+  font-weight: 400;
+  text-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+.modal-title {
+  display: table-cell;
+  font-size: 18px;
+  color: #FFFFFF;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.modal-close {
+  display: table-cell;
+  width: 25px;
+}
 .modal-dialog .modal-content .modal-body {
   padding-top: 10px !important;
   padding-bottom: 10px !important;
@@ -277,17 +315,43 @@ body.modal-open {
     text-align: right;
   }
 }
-.confirm-dialog .modal-dialog {
+.confirm-dialog .modal-dialog,
+.form-dialog .modal-dialog {
   max-width: 100%;
+  min-width: $screen-min-width;
   width: 100%;
 }
 .confirm-dialog .modal-content {
   background-color: $color-primary;
   border: 0;
-  border-radius: 0;
+}
+.form-dialog .modal-dialog {
+  padding-right: 1rem !important;
+  padding-left: 1rem !important;
+}
+.form-dialog .modal-content {
+  border: 10px solid #9AC3BD;
+}
+.card-group .card,
+.card-group .card .line-clamp::after {
+  background-color: #EEEEEE;
+}
+.card-group.card-striped .card-col:nth-of-type(even) .card,
+.card-group.card-striped .card-col:nth-of-type(even) .card .line-clamp::after {
+  background-color: #D5FFD5;
 }
 .card .card-body .card-text {
   line-height: 1.5;
+}
+.card .card-img {
+  border-radius: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .card-img-top {
@@ -322,6 +386,7 @@ body.modal-open {
   display: none;
 }
 .card .card-body .card-text .form .form-group,
+.card .card-footer .card-text .form .form-group,
 .table tbody td.col-wrap .form .form-group {
   display: table;
   margin-right: 0;
@@ -329,18 +394,21 @@ body.modal-open {
   margin-left: 0;
 }
 .card .card-body .card-text .form .form-group .col-form-label,
+.card .card-footer .card-text .form .form-group .col-form-label,
 .table tbody td.col-wrap .form .form-group .col-form-label {
   padding-top: .25rem;
   padding-bottom: 0;
   line-height: 1.5;
 }
-.card .card-body .card-text .form .form-group .col-form-label::after,
-.table tbody td.col-wrap .form .form-group .col-form-label::after {
+.card .card-body .card-text .form .form-group .col-form-label:not(.w-100)::after,
+.card .card-footer .card-text .form .form-group .col-form-label:not(.w-100)::after,
+.table tbody td.col-wrap .form .form-group .col-form-label:not(.w-100)::after {
   float: right;
   content: ':';
   margin-left: 15px;
 }
 .card .card-body .card-text .form .form-group .col,
+.card .card-footer .card-text .form .form-group .col,
 .table tbody td.col-wrap .form .form-group .col {
   display: table-cell;
   vertical-align: top;
@@ -529,15 +597,22 @@ body.modal-open {
   right: 0;
   width: 1rem;
   height: 1.2rem;
-  background: #F2F2F2;
+  background: transparent;
 }
 @supports (-webkit-line-clamp: 1) {
   .line-clamp {
     padding-right: 0;
   }
-	.line-clamp::before {
+  .line-clamp::before {
 		display: none !important;
 	}
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .line-clamp::before,
+  .line-clamp::after {
+    display: none !important;
+  }
 }
 .line-clamp-1 {
   -webkit-line-clamp: 1;

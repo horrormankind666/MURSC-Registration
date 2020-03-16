@@ -48,7 +48,7 @@
                   <a class="text-center" href="javascript:void(0)" role="button" ngbDropdownItem><span class="regular grey-dark size15">{{'profile.examApplicationInfo' | translate | titlecase}}</span></a>
                   <div class="dropdown-divider mb-3 mt-0"></div>
                   <div class="d-block w-100 text-center">
-                    <button type="button" class="btn btn-transparent" (click)="$event.currentTarget.blur(); profileDropdown.close(); authService.signout.modalOpen(SignoutDialog)"><span class="regular size16">{{'signout.label' | translate}}</span></button>
+                    <button type="button" class="btn btn-transparent" (click)="$event.currentTarget.blur(); profileDropdown.close(); authService.signout.modalOpen(signoutDialog)"><span class="regular size16">{{'signout.label' | translate}}</span></button>
                   </div>
                 </div>
               </div>
@@ -75,7 +75,7 @@
     </div>
   </footer>
 </main>
-<ng-template #SignoutDialog let-modal>
+<ng-template #signoutDialog let-modal>
   <div class="font">
     <div class="modal-body">
       <span class="regular text-white size16">{{'signout.confirm' | translate}}</span>

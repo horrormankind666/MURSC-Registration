@@ -32,9 +32,10 @@
       "examApplicationInfo": "ข้อมูลการสมัครสอบ"
     },
     "project": {
-      "projectName": "โครงการ",
+      "name": "โครงการ",
       "registrationDate": "วันที่ลงทะเบียน",
       "seat": "จำนวนที่รับ",
-      "registrationFee": "ค่าลงทะเบียน"
+      "registrationFee": "ค่าลงทะเบียน",
+      "detail": "รายละเอียดโครงการ"
     }
 }
