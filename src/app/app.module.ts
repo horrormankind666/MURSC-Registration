@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๑/๐๒/๒๕๖๓>
+Modify date : <๑๗/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -35,6 +35,7 @@ import {AppComponent} from './app.component';
 import {SigninComponent} from './signin/signin.component';
 import {HomeComponent} from './home/home.component';
 import {ProjectComponent} from './project/project.component';
+import {ProjectDetailComponent} from './project-detail/project-detail.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -45,7 +46,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     SigninComponent,
     HomeComponent,
-    ProjectComponent
+    ProjectComponent,
+    ProjectDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthGuardService,
     AuthService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ProjectDetailComponent]
 })
 
 export class AppModule {}

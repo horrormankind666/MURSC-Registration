@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๖/๐๓/๒๕๖๓>
+Modify date : <๒๐/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -21,16 +21,21 @@ import {TranslateService} from '@ngx-translate/core';
 
 import {CookieService} from 'ngx-cookie-service';
 
+import * as $ from 'jquery';
+
 class Modal {
   public hasOpenModal: boolean = false;
 
+  private _appService: AppService;
   private _modalConfig: NgbModalConfig;
   private _modalService: NgbModal;
 
   constructor(
+    private appService: AppService,
     private modalConfig: NgbModalConfig,
     private modalService: NgbModal
   ) {
+    this._appService = appService;
     this._modalConfig = modalConfig;
     this._modalService = modalService;
 
@@ -38,26 +43,26 @@ class Modal {
     this._modalConfig.keyboard = false;
   }
 
-  open(content: any, windowClass: string): Promise<any> {
-    let promise = new Promise((resolve, reject) => {
-      this._modalService.open(content, {
-        windowClass: windowClass
-      }).result.then(
-        (result: string) => {
-          resolve(result);
-        },
-        (reason: string) => {
-          resolve(reason);
-        }
-      )
+  open(content: any, windowClass: string): NgbModalRef {
+    let modalRef = this._modalService.open(content, {
+      windowClass: windowClass
     });
 
-    return promise;
+    this._appService.modal.hasOpenModal = true;
+    this._appService.setModalHeight();
+
+    return modalRef;
   }
 
-  openref(content: any, windowClass: string): NgbModalRef {
-    return this._modalService.open(content, {
-      windowClass: windowClass
+  close(modalRef: NgbModalRef): Promise<string> {
+    return modalRef.result.then((result: string) => {
+      this._appService.modal.hasOpenModal = false;
+
+      return result;
+    }, (reason) => {
+      this._appService.modal.hasOpenModal = false;
+
+      return reason;
     });
   }
 }
@@ -81,6 +86,7 @@ export class AppService  {
   }
 
   public modal = new Modal(
+    this,
     this.modalConfig,
     this.modalService
   )
@@ -102,9 +108,15 @@ export class AppService  {
     this.translateService.setDefaultLang(this.lang);
     this.translateService.use(this.lang);
 
-    this.translateService.get('systemName').subscribe((res: string) => {
-      this.titleService.setTitle(res);
+    this.translateService.get('systemName').subscribe((result: string) => {
+      this.titleService.setTitle(result);
     });
+  }
+
+  setModalHeight() {
+    setTimeout(() => {
+      $('.modal').height($(window).height() - 80);
+    }, 0)
   }
 
   getCurrentLanguage(): string {
@@ -135,7 +147,7 @@ export class AppService  {
   getTextRecordCount(totalSearch: number, total: number): string {
     let entries: string;
 
-    this.translateService.get('entries').subscribe((res: string) => {entries = res;});
+    this.translateService.get('entries').subscribe((result: string) => {entries = result;});
 
     return (totalSearch !== undefined ? ((totalSearch !== total ? (total.toLocaleString() + ' / ' + totalSearch.toLocaleString()) : totalSearch.toLocaleString()) + ' ' + entries): '');
   }
@@ -164,8 +176,8 @@ export class AppService  {
 
 
     let promise = new Promise((resolve, reject) => {
-      this.http.get(url).subscribe((res: {}) => {
-        let data = res['data'];
+      this.http.get(url).subscribe((result: {}) => {
+        let data = result['data'];
 
         resolve(data !== undefined && data !== null ? data : []);
       });

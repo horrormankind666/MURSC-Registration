@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๐๓/๐๓/๒๕๖๓>
+Modify date : <๒๐/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -39,16 +39,16 @@ class Signout {
     if (!this._appService.modal.hasOpenModal) {
       this._appService.modal.hasOpenModal = true;
 
-      this._appService.modal.open(content, 'confirm-dialog').then((result: string) => {
-        this._appService.modal.hasOpenModal = false;
+      let modalRef = this._appService.modal.open(content, 'confirm-dialog');
 
-        if (result === 'Y') {
+      this._appService.modal.close(modalRef).then((result: string) => {
+        if (result === 'close') {
           this._authService.isAuthenticated = false;
           this._cookieService.delete(this._appService.cookieName);
 
           this._router.navigate(['SignIn']);
         }
-      });
+      })
     }
   }
 }
@@ -109,8 +109,8 @@ export class AuthService {
           let headers = new HttpHeaders()
             .set('Authorization', ('Bearer ' + this.appService.authenResource.token));
 
-          this.http.get(this.appService.urlAuthenResource, { headers: headers }).subscribe((res: {}) => {
-            let data = res['data'];
+          this.http.get(this.appService.urlAuthenResource, { headers: headers }).subscribe((result: {}) => {
+            let data = result['data'];
 
             this.isAuthenticated = (data !== null ? data[0].isAuthenticated : false);
             this.setUserInfo(this.isAuthenticated ? data[1].payload : {});

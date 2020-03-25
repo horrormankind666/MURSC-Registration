@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๑๖/๐๓/๒๕๖๓>
+Modify date : <๒๐/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -18,9 +18,9 @@ import {AppService} from '../app.service';
 import {DataService, ProjectSchema} from '../data.service';
 import {ProjectService} from './project.service';
 
-class ProjectDetail {
-  public data: ProjectSchema;
+import {ProjectDetailComponent} from '../project-detail/project-detail.component'
 
+class ProjectDetail {
   private _appService: AppService;
   private _dataService: DataService;
 
@@ -32,9 +32,8 @@ class ProjectDetail {
     this._dataService = dataService;
   }
 
-  modalOpen(content: any, data: ProjectSchema) {
+  modalOpen(data: ProjectSchema) {
     if (!this._appService.modal.hasOpenModal) {
-      this._appService.modal.hasOpenModal = true;
       this._appService.isLoading = true;
 
       let query = [
@@ -42,22 +41,16 @@ class ProjectDetail {
         ("transProjectID=" + data.transProjectID)
       ].join("&");
 
-      this._dataService.project.get(query).then((res: ProjectSchema) => {
+      this._dataService.project.get(query).then((result: ProjectSchema) => {
         this._appService.isLoading = false;
-        this.data = res;
 
-        let modalRef = this._appService.modal.openref(content, 'form-dialog');
+        let modalRef = this._appService.modal.open(ProjectDetailComponent, 'form-dialog');
 
-        modalRef.result.then((result: string) => {
-          this._appService.modal.hasOpenModal = false;
-        });
+        modalRef.componentInstance.data = result;
 
-        this.init();
+        this._appService.modal.close(modalRef);
       });
     }
-  }
-
-  private init() {
   }
 }
 

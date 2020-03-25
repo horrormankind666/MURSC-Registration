@@ -20,6 +20,12 @@
     "reload": "Reload",
     "start": "Start",
     "end": "End",
+    "total": "Total",
+    "remain": "Remain",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "seat": "Seat",
     "unit": {
       "label": "Unit",
       "baht": "Bath",
@@ -32,10 +38,29 @@
       "examApplicationInfo": "Exam application information"
     },
     "project": {
+      "label": "Project",
       "name": "Project Name",
       "registrationDate": "Registration Date",
       "seat": "Seat",
+      "seatAvailable": "Seat Available",
       "registrationFee": "Registration Fee",
+      "lastPaymentDate": "Last Payment Date",
       "detail": "Project Detail"
+    },
+    "location": {
+      "label": "Location",
+      "info": "Location Info",
+      "name": "Location Name",
+      "seat": "Seat",
+      "seatTotal": "Seat Total",
+      "seatAvailable": "Seat Available"
+    },
+    "building": {
+      "label": "Building",
+      "name": "Building Name"
+    },
+    "contact": {
+      "label": "Contact",
+      "name": "Contact Name"
     }
 }

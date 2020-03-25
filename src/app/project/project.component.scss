@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๑๖/๐๓/๒๕๖๓>
+Modify date : <๒๐/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -13,126 +13,82 @@ Description : <>
   margin-left: -0.25rem;
   margin-bottom: -0.25rem;
 }
-.project-view .card-group .card-safari,
-.project-detail-dialog .card-group .card-default {
+.project-view .card-group .card-horizontal {
   display: none;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   ::i-block-chrome,
-  .project-view .card-group .card-default {
+  .project-view .card-group .card-vertical {
     display: none;
   }
   ::i-block-chrome,
-  .project-view .card-group .card-safari,
-  .project-detail-dialog .card-group .card-safari {
+  .project-view .card-group .card-horizontal {
     display: block;
   }
-  @media screen and (max-width: 767px) {
-    .project-detail-dialog .card-group .card-default {
-      display: block;
+  @media screen and (max-width: 858px) {
+    ::i-block-chrome,
+    .project-view .card-group .card-horizontal .card-body {
+      display: table !important;
+      table-layout: fixed;
     }
-    .project-detail-dialog .card-group .card-safari {
-      display: none;
+    ::i-block-chrome,
+    .project-view .card-group .card-horizontal .card-body .col-sm-3 {
+      display: table-cell !important;
+      vertical-align: top;
+      width: 205px;
+      max-width: 205px !important;
+    }
+    ::i-block-chrome,
+    .project-view .card-group .card-horizontal .card-body .col-sm-9 {
+      display: table-cell;
+      vertical-align: top;
+      width: auto !important;
+      max-width: 100% !important;
     }
   }
-  @media screen and (max-width: 575px) {
+  @media screen and (max-width: 654px) {
     ::i-block-chrome,
-    .project-view .card-group .card-default {
+    .project-view .card-group .card-vertical {
       display: block;
     }
     ::i-block-chrome,
-    .project-view .card-group .card-safari {
+    .project-view .card-group .card-horizontal {
       display: none;
     }
   }
 }
-.project-view .card-group .card,
-.project-detail-dialog .card-group .card {
+.project-view .card-group .card {
   border: none;
   border-radius: 0px;
-}
-.project-view .card-group .card .card-img,
-.project-detail-dialog .card-group .card .card-img {
-  border-bottom-right-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-}
-.project-view .card-group .card .card-body .badge-pill {
-  margin-top: 1px;
-  padding-right: 0;
-  padding-left: 0;
-  border-radius: 5rem;
-  width: 32px;
-  height: 32px;
-  line-height: 1.8;
-}
-.project-view .card-group .card .card-body .card-title .registration-status i,
-.project-detail-dialog .card-group .card .card-body .card-title .registration-status i {
-  position: relative;
-  top: -2px;
 }
 .project-view .card-group .card .card-footer {
   border-top: none;
   background: transparent;
 }
-.project-view .card-group .card .card-footer .btn,
-.project-view .table td.col-wrap .form .form-footer .btn {
+.project-view .card-group .card .card-footer .btn {
   border-top-left-radius: 0px;
   border-top-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0px;
   width: 120px;
 }
-.project-view .d-table.registration-date .d-table-cell {
-  vertical-align: top;
+.project-view .title-info .card-img {
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
-.project-view .d-table.registration-date .d-table-cell:not(:last-child) {
-  width: 20px;
-  line-height: 1.2;
+.project-view .title-info .registration-status i {
+  position: relative;
+  top: -2px;
 }
-.project-view .d-table.registration-date .d-table-cell:last-child {
-  padding-top: 1px;
-}
-@media screen and (min--moz-device-pixel-ratio: 0) {
-  .project-view .d-table.registration-date .d-table-cell:last-child {
-    padding-top: 2px;
-  }
-}
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  ::i-block-chrome,
-  .project-view .d-table.registration-date .d-table-cell:last-child {
-    padding-top: 2px;
-  }
-}
-.project-view .table .col-registration-date {
-  width: 185px;
-  min-width: 185px;
-}
-.project-view .table .col-seat {
-  width: 165px;
-  min-width: 165px;
-}
-.project-view .table .col-registration-fee {
-  width: 170px;
-  min-width: 170px;
-}
-.project-view .table .col-registration-status {
-  width: 85px;
-  min-width: 85px;
-}
-.project-view .table td.col-registration-status {
-  line-height: 0;
-  padding-top: 5px;
-  padding-bottom: 0;
-}
-.project-view .card .card-text .form .form-group .col-form-label:not(.w-100) {
+.project-view .card-group .card-vertical .register-info .form .form-group .col-form-label {
   width: 125px;
 }
-.project-view .table td.col-wrap .form .form-group .col-form-label {
-  width: 151px;
+.project-view .card-group .card-horizontal .register-info .form .form-group .col-form-label {
+  width: 137px;
 }
-@media screen and (max-width: 866px) {
-  @include table-responsive-step1('.project-view');
+.project-view .card-group .card-vertical .register-info .d-table.calendar-date {
+  margin-top: 5px;
 }
-@media screen and (max-width: 366px) {
-  @include table-responsive-end('.project-view');
+.project-view .card-group .card-horizontal .register-info .d-table.calendar-date {
+  margin-top: 2px;
 }

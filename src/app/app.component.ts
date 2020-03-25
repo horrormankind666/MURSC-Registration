@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๖/๐๒/๒๕๖๓>
+Modify date : <๒๐/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,10 +12,14 @@ Description : <>
 import {NgModule, Component, ElementRef, ViewChild, OnInit} from '@angular/core';
 import {Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError} from '@angular/router';
 
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
 import {TranslateService} from '@ngx-translate/core';
 
 import {AppService} from './app.service';
 import {AuthService} from './auth.service';
+
+import * as $ from 'jquery';
 
 @NgModule({
   providers: [
@@ -39,6 +43,7 @@ export class AppComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private router: Router,
+    private modalService: NgbModal,
     private translateService: TranslateService,
     private appService: AppService,
     private authService: AuthService
@@ -46,6 +51,9 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
+          if (this.modalService.hasOpenModals())
+            this.modalService.dismissAll("");
+
           appService.isLoading = true;
           break;
         }
@@ -79,6 +87,7 @@ export class AppComponent implements OnInit {
 
   onResize() {
     this.sectionStyle = this.getSectionStyle();
+    this.appService.setModalHeight();
   }
 
   getSectionStyle(): {} {

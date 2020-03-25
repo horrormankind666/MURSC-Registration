@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๐/๐๒/๒๕๖๓>
-Modify date : <๑๓/๐๓/๒๕๖๓>
+Modify date : <๒๐/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -96,11 +96,11 @@ class Table {
   }
 
   reload() {
-    this.dataService.project.getList().then((res: ProjectSchema[]) => {
+    this.dataService.project.getList().then((result: ProjectSchema[]) => {
       this._search$.pipe(
         tap(() => this._searching$.next(true)),
         debounceTime(100),
-        switchMap(() => this._search(res)),
+        switchMap(() => this._search(result)),
         delay(100),
         tap(() => this._searching$.next(false))
       ).subscribe(result => {
