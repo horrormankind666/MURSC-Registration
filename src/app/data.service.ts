@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๒๐/๐๓/๒๕๖๓>
+Modify date : <๒๗/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -30,6 +30,14 @@ export interface ProjectSchema {
   lastPaymentDate?: string;
   maximumSeat?: string;
   minimumFee?: string;
+  contact?: {
+    name?: {
+      th?: string,
+      en?: string
+    };
+    email?: string,
+    phone?: string
+  };
   registrationStatus?: string;
   location?: ProjectLocationSchema[]
 }
@@ -48,14 +56,6 @@ interface ProjectLocationSchema {
   };
   seatTotal?: string;
   seatAvailable?: string;
-  contact?: {
-    name?: {
-      th?: string,
-      en?: string
-    };
-    email?: string,
-    phone?: string
-  }
 }
 
 interface RegistrationStatusSchema {
@@ -93,6 +93,14 @@ class Project {
             },
             maximumSeat: (dr['maximumSeat'] ? dr['maximumSeat'] : ''),
             minimumFee: (dr['minimumFee'] ? dr['minimumFee'] : ''),
+            contact: {
+              name: {
+                th: (dr['contactNameTH'] ? dr['contactNameTH'] : ''),
+                en: (dr['contactNameEN'] ? dr['contactNameEN'] : dr['contactNameTH'])
+              },
+              email: (dr['contactEmail'] ? dr['contactEmail'] : ''),
+              phone: (dr['contactPhone'] ? dr['contactPhone'] : '')
+            },
             registrationStatus: (dr['registrationStatus'] ? dr['registrationStatus'] : '')
           });
         }
@@ -114,15 +122,7 @@ class Project {
                 }
               },
               seatTotal: (dr1['seatTotal'] ? dr1['seatTotal'] : ''),
-              seatAvailable: (dr1['seatAvailable'] ? dr1['seatAvailable'] : ''),
-              contact: {
-                name: {
-                  th: (dr1['contactNameTH'] ? dr1['contactNameTH'] : ''),
-                  en: (dr1['contactNameEN'] ? dr1['contactNameEN'] : dr1['contactNameTH'])
-                },
-                email: (dr1['contactEmail'] ? dr1['contactEmail'] : ''),
-                phone: (dr1['contactPhone'] ? dr1['contactPhone'] : '')
-              }
+              seatAvailable: (dr1['seatAvailable'] ? dr1['seatAvailable'] : '')
             });
           }
 
@@ -141,6 +141,14 @@ class Project {
             },
             lastPaymentDate: (dr['lastPaymentDates'] ? dr['lastPaymentDates'] : ''),
             maximumSeat: (dr['maximumSeat'] ? dr['maximumSeat'] : ''),
+            contact: {
+              name: {
+                th: (dr['contactNameTH'] ? dr['contactNameTH'] : ''),
+                en: (dr['contactNameEN'] ? dr['contactNameEN'] : dr['contactNameTH'])
+              },
+              email: (dr['contactEmail'] ? dr['contactEmail'] : ''),
+              phone: (dr['contactPhone'] ? dr['contactPhone'] : '')
+            },
             registrationStatus: (dr['registrationStatus'] ? dr['registrationStatus'] : ''),
             location: projectLocation
           });

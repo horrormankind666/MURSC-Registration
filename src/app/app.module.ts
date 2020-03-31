@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๗/๐๓/๒๕๖๓>
+Modify date : <๓๑/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -32,10 +32,13 @@ import {AuthService} from './auth.service';
 
 import {appRouting} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {ModalErrorComponent, ModalConfirmComponent} from './modal/modal.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {SigninComponent} from './signin/signin.component';
 import {HomeComponent} from './home/home.component';
 import {ProjectComponent} from './project/project.component';
 import {ProjectDetailComponent} from './project-detail/project-detail.component';
+import {RegisteredComponent} from './registered/registered.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -44,10 +47,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    ModalErrorComponent,
+    ModalConfirmComponent,
+    PageNotFoundComponent,
     SigninComponent,
     HomeComponent,
     ProjectComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    RegisteredComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +63,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRouting),
+    RouterModule.forRoot(appRouting, {
+      useHash: true
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -81,7 +90,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ProjectDetailComponent]
+  entryComponents: [
+    ModalErrorComponent,
+    ModalConfirmComponent,
+    ProjectDetailComponent
+  ]
 })
 
 export class AppModule {}

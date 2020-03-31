@@ -2,10 +2,84 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๒๔/๐๒/๒๕๖๓>
+Modify date : <๒๗/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 @import '~@ng-select/ng-select/themes/default.theme.css';
 @import 'assets/style/util.scss';
+
+.project-view .title-info .card-img,
+.project-detail-view .title-info .card-img {
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+.project-view .title-info .registration-status i,
+.project-detail-view .title-info .registration-status i {
+  position: relative;
+  top: -2px;
+}
+.project-view .title-info .badge-pill,
+.project-detail-view .title-info .badge-pill {
+  margin-top: 0;
+  padding-right: 0;
+  padding-left: 0;
+  width: 24px;
+  height: 24px;
+  line-height: 0;
+  position: relative;
+  top: -1px;
+}
+.project-view .title-info .badge-pill i,
+.project-detail-view .title-info .badge-pill i {
+  top: 2px;
+}
+.project-view .title-info .badge-pill.dropdown-toggle::after,
+.project-detail-view .title-info .badge-pill.dropdown-toggle::after {
+  border: 0;
+  margin-left: 0;
+}
+.project-view .title-info .dropdown-menu.contact-info,
+.project-detail-view .title-info .dropdown-menu.contact-info {
+  min-width: 246px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .project-view .title-info .dropdown-menu.contact-info,
+  .project-detail-view .title-info .dropdown-menu.contact-info {
+    top: 25px !important;
+  }
+  ::i-block-chrome,
+  .project-view .card-group .card-vertical .title-info .dropdown-menu.contact-info,
+  .project-detail-view .card-group .card-vertical .title-info .dropdown-menu.contact-info {
+    left: -222px !important;
+  }
+}
+.project-view .title-info .dropdown-menu .contact-info,
+.project-detail-view .title-info .dropdown-menu .contact-info {
+  padding: 0 0.5rem;
+}
+.project-view .contact-info .form .form-group .col-form-label,
+.project-detail-view .contact-info .form .form-group .col-form-label {
+  width: 15px !important;
+}
+.project-view .contact-info .form .form-group .col-form-label::after,
+.project-detail-view .contact-info .form .form-group .col-form-label::after {
+  float: none !important;
+  content: '' !important;
+  margin-left: 0 !important;
+}
+.project-view .contact-info .form .form-group .col,
+.project-detail-view .contact-info .form .form-group .col {
+  word-break: break-all;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .project-view .contact-info .form .form-group .col-form-label,
+  .project-detail-view .contact-info .form .form-group .col-form-label,
+  .project-view .contact-info .form .form-group .col,
+  .project-detail-view .contact-info .form .form-group .col {
+    display: table-cell;
+  }
+}

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๐/๐๓/๒๕๖๓>
+Modify date : <๒๗/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -90,7 +90,10 @@ main header .navbar-header .d-table .d-table-cell.userinfo .user-icon #profile.d
 }
 main header .navbar-header .d-table .d-table-cell.userinfo .user-icon .dropdown-menu {
   width: 293px;
-  border-radius: .6rem;
+  opacity: 1;
+}
+main header .navbar-header .d-table .d-table-cell.userinfo .user-icon .dropdown-menu-inner {
+  border-radius: 0.6rem;
 }
 main header .navbar-header .d-table .d-table-cell.userinfo .user-icon .dropdown-menu .d-table {
   table-layout: fixed;

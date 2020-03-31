@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๒๐/๐๓/๒๕๖๓>
+Modify date : <๓๑/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -16,42 +16,9 @@ import {Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
 
 import {AppService} from './app.service';
+import {ModalService} from './modal/modal.service';
 
-class Signout {
-  private _router: Router;
-  private _cookieService: CookieService;
-  private _appService: AppService;
-  private _authService: AuthService;
-
-  constructor(
-    router: Router,
-    cookieService: CookieService,
-    appService: AppService,
-    authService: AuthService
-  ) {
-    this._router = router;
-    this._cookieService = cookieService;
-    this._appService = appService;
-    this._authService = authService;
-  }
-
-  modalOpen(content: any) {
-    if (!this._appService.modal.hasOpenModal) {
-      this._appService.modal.hasOpenModal = true;
-
-      let modalRef = this._appService.modal.open(content, 'confirm-dialog');
-
-      this._appService.modal.close(modalRef).then((result: string) => {
-        if (result === 'close') {
-          this._authService.isAuthenticated = false;
-          this._cookieService.delete(this._appService.cookieName);
-
-          this._router.navigate(['SignIn']);
-        }
-      })
-    }
-  }
-}
+import {ModalConfirmComponent} from './modal/modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +29,7 @@ export class AuthService {
     private http: HttpClient,
     private cookieService: CookieService,
     private appService: AppService,
+    private modalService: ModalService
   ) {}
 
   private userInfo: {} = {
@@ -71,13 +39,6 @@ export class AuthService {
     uniqueName: '',
     winaccountName: ''
   };
-
-  public signout = new Signout(
-    this.router,
-    this.cookieService,
-    this.appService,
-    this
-  );
 
   public isAuthenticated: boolean = false;
   public getUserInfo: {} = this.userInfo;
@@ -130,5 +91,18 @@ export class AuthService {
     });
 
     return promise;
+  }
+
+  signout() {
+    let modalRef = this.modalService.getModalConfirm(false, ModalConfirmComponent, 'signout.confirm');
+
+    this.modalService.close(modalRef).then((result: string) => {
+      if (result === 'ok') {
+        this.isAuthenticated = false;
+        this.cookieService.delete(this.appService.cookieName);
+
+        this.router.navigate(['SignIn']);
+      }
+    });
   }
 }

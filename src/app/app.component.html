@@ -28,27 +28,29 @@
                   <span class="regular text-white size18">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.familyName[0] | uppercase)}}</span>
                 </a>
                 <div ngbDropdownMenu aria-labelledby="profile" class="pt-3 pb-3">
-                  <div class="d-table">
-                    <div class="d-table-row">
-                      <div class="d-table-cell text-center">
-                        <div class="mr-auto ml-auto center user-icon" [ngStyle]="{'background-color': userBackgrondColor}">
-                          <span class="regular text-white size48">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.familyName[0] | uppercase)}}</span>
+                  <div class="dropdown-menu-inner w-100 bg-white border">
+                    <div class="d-table">
+                      <div class="d-table-row">
+                        <div class="d-table-cell text-center">
+                          <div class="mr-auto ml-auto center user-icon" [ngStyle]="{'background-color': userBackgrondColor}">
+                            <span class="regular text-white size48">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.familyName[0] | uppercase)}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-table-row">
+                        <div class="d-table-cell text-center pt-3">
+                          <div class="regular size18 text-truncate">{{authService.getUserInfo.givenName}} {{(authService.getUserInfo.familyName)}}</div>
+                          <div class="regular text-black-50 size16 text-truncate">{{authService.getUserInfo.email}}{{authService.getUserInfo.email}}</div>
                         </div>
                       </div>
                     </div>
-                    <div class="d-table-row">
-                      <div class="d-table-cell text-center pt-3">
-                        <div class="regular size18 text-truncate">{{authService.getUserInfo.givenName}} {{(authService.getUserInfo.familyName)}}</div>
-                        <div class="regular text-black-50 size16 text-truncate">{{authService.getUserInfo.email}}{{authService.getUserInfo.email}}</div>
-                      </div>
+                    <div class="dropdown-divider mt-3 mb-0"></div>
+                    <a class="text-center" href="javascript:void(0)" role="button" ngbDropdownItem><span class="regular grey-dark size15">{{'profile.personalInfo' | translate | titlecase}}</span></a>
+                    <a class="text-center" href="javascript:void(0)" role="button" ngbDropdownItem><span class="regular grey-dark size15">{{'profile.examApplicationInfo' | translate | titlecase}}</span></a>
+                    <div class="dropdown-divider mb-3 mt-0"></div>
+                    <div class="d-block w-100 text-center">
+                      <button type="button" class="btn btn-transparent" (click)="$event.currentTarget.blur(); profileDropdown.close(); authService.signout()"><span class="regular size16">{{'signout.label' | translate}}</span></button>
                     </div>
-                  </div>
-                  <div class="dropdown-divider mt-3 mb-0"></div>
-                  <a class="text-center" href="javascript:void(0)" role="button" ngbDropdownItem><span class="regular grey-dark size15">{{'profile.personalInfo' | translate | titlecase}}</span></a>
-                  <a class="text-center" href="javascript:void(0)" role="button" ngbDropdownItem><span class="regular grey-dark size15">{{'profile.examApplicationInfo' | translate | titlecase}}</span></a>
-                  <div class="dropdown-divider mb-3 mt-0"></div>
-                  <div class="d-block w-100 text-center">
-                    <button type="button" class="btn btn-transparent" (click)="$event.currentTarget.blur(); profileDropdown.close(); authService.signout.modalOpen(signoutDialog)"><span class="regular size16">{{'signout.label' | translate}}</span></button>
                   </div>
                 </div>
               </div>
@@ -75,15 +77,3 @@
     </div>
   </footer>
 </main>
-<ng-template #signoutDialog let-modal>
-  <div class="font">
-    <div class="modal-body">
-      <span class="regular text-white size16">{{'signout.confirm' | translate}}</span>
-    </div>
-    <div class="modal-footer">
-      <input class="d-none" type="text" />
-      <button type="button" class="btn btn-primary ml-0" (click)="$event.currentTarget.blur(); modal.dismiss('dismiss')"><span class="regular size16">{{'cancel' | translate}}</span></button>
-      <button type="button" class="btn btn-primary mr-0" (click)="$event.currentTarget.blur(); modal.close('close')"><span class="regular size16">{{'ok' | translate}}</span></button>
-    </div>
-  </div>
-</ng-template>

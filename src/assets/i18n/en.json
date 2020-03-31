@@ -8,8 +8,11 @@
     "msgLoading": {
       "loading": "Loading..."
     },
+    "pageNotFound": "Page Not Found",
     "cancel":"Cancel",
     "ok": "Ok",
+    "close": "Close",
+    "registered": "Registered",
     "order": "Order",
     "status": "Status",
     "detail": "Detail",
@@ -25,7 +28,11 @@
     "name": "Name",
     "email": "Email",
     "phone": "Phone",
-    "seat": "Seat",
+    "seat": {
+      "label": "Seat",
+      "seatTotal": "Seat Total",
+      "seatAvailable": "Seat Available"
+    },
     "unit": {
       "label": "Unit",
       "baht": "Bath",
@@ -51,7 +58,6 @@
       "label": "Location",
       "info": "Location Info",
       "name": "Location Name",
-      "seat": "Seat",
       "seatTotal": "Seat Total",
       "seatAvailable": "Seat Available"
     },

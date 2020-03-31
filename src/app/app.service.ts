@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๐/๐๓/๒๕๖๓>
+Modify date : <๓๑/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -14,7 +14,6 @@ import {formatDate} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {Title} from '@angular/platform-browser';
 
-import {NgbModalConfig, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import {TranslateService} from '@ngx-translate/core';
@@ -23,50 +22,6 @@ import {CookieService} from 'ngx-cookie-service';
 
 import * as $ from 'jquery';
 
-class Modal {
-  public hasOpenModal: boolean = false;
-
-  private _appService: AppService;
-  private _modalConfig: NgbModalConfig;
-  private _modalService: NgbModal;
-
-  constructor(
-    private appService: AppService,
-    private modalConfig: NgbModalConfig,
-    private modalService: NgbModal
-  ) {
-    this._appService = appService;
-    this._modalConfig = modalConfig;
-    this._modalService = modalService;
-
-    this._modalConfig.backdrop = 'static';
-    this._modalConfig.keyboard = false;
-  }
-
-  open(content: any, windowClass: string): NgbModalRef {
-    let modalRef = this._modalService.open(content, {
-      windowClass: windowClass
-    });
-
-    this._appService.modal.hasOpenModal = true;
-    this._appService.setModalHeight();
-
-    return modalRef;
-  }
-
-  close(modalRef: NgbModalRef): Promise<string> {
-    return modalRef.result.then((result: string) => {
-      this._appService.modal.hasOpenModal = false;
-
-      return result;
-    }, (reason) => {
-      this._appService.modal.hasOpenModal = false;
-
-      return reason;
-    });
-  }
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -74,8 +29,6 @@ export class AppService  {
   constructor(
     private http: HttpClient,
     private titleService: Title,
-    private modalConfig: NgbModalConfig,
-    private modalService: NgbModal,
     private tooltipConfig: NgbTooltipConfig,
     private translateService: TranslateService,
     private cookieService: CookieService
@@ -85,11 +38,6 @@ export class AppService  {
     tooltipConfig.tooltipClass = 'tooltip-custom';
   }
 
-  public modal = new Modal(
-    this,
-    this.modalConfig,
-    this.modalService
-  )
   public isLoading: boolean = true;
   public lang: string = 'th';
   public cookieName: string = 'MURSC.Cookies';

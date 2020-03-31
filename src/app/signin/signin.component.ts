@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๓/๑๒/๒๕๖๒>
-Modify date : <๒๐/๐๒/๒๕๖๓>
+Modify date : <๓๐/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -11,7 +11,7 @@ Description : <>
 
 import {Component, OnInit} from '@angular/core';
 
-import {AuthService} from '../auth.service';
+import {AppService} from '../app.service';
 
 @Component({
   selector: 'app-signin',
@@ -20,7 +20,7 @@ import {AuthService} from '../auth.service';
 })
 export class SigninComponent implements OnInit {
   constructor(
-    private authenService: AuthService
+    private appService: AppService,
   ) {}
 
   ngOnInit() {

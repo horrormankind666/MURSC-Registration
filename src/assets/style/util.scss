@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๕/๐๓/๒๕๖๓>
+Modify date : <๓๑/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -47,27 +47,28 @@ $line-clamp-line-height: 1.7;
   }
 }
 
-@mixin table-responsive-end($class)
+@mixin form-responsive($class)
 {
-  #{$class} .table td.col-wrap .form .form-group {
-    width: 100%;
-    margin-bottom: 0.25rem;
-  }
-  #{$class} .table td.col-wrap .form .form-group .col-form-label {
+  #{$class} .form .form-group {
     width: 100%;
   }
-  #{$class} .table td.col-wrap .form .form-group .col-form-label::after {
-    float: none;
-    content: '';
-    margin-left: 0;
+  #{$class} .form .form-group:not(.nowrap):not(:last-child) {
+    margin-bottom: 0.5rem !important;
   }
-  #{$class} .table td.col-wrap .form .form-group .col {
-    display: block;
-    width: 100%;
+  #{$class} .form .form-group .col-form-label:not(.nowrap) {
+    display: block !important;
+    width: 100% !important;
+    font-weight: $font-weight-class-bold !important;
+  }
+  #{$class} .form .form-group .col-form-label:not(.nowrap)::after {
+    float: none !important;
+    content: '' !important;
+    margin-left: 0 !important;
+  }
+  #{$class} .form .form-group .col:not(.nowrap) {
+    display: block !important;
+    width: 100% !important;
     padding-left: 0;
-  }
-  #{$class} .table td.col-wrap .form .form-group .col .form-text{
-    margin-top: 0;
   }
 }
 
@@ -111,6 +112,17 @@ a:focus.link {
 }
 a:hover.link {
   color: #C51A1B;
+}
+a.badge:focus,
+a.badge.focus {
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
+a.badge-dark:hover {
+  background-color: #1D2124 !important;
+}
+a.badge-dark:focus {
+  background-color: #343A40;
 }
 main {
   min-height: 100%;
@@ -177,7 +189,7 @@ main footer .container {
 }
 .btn {
   min-height: 36px;
-  min-width: 80px;
+  min-width: 75px;
   -webkit-box-shadow: none;
   box-shadow: none;
   background-image: none;
@@ -205,9 +217,14 @@ button:focus,
   box-shadow: none;
 }
 .btn[disabled],
-.btn[disabled]:hover {
-  filter: alpha(opacity=40);
-  opacity: .40;
+.btn.disabled,
+.btn:disabled,
+.btn[disabled]:hover,
+.btn.disabled:hover,
+.btn:disabled:hover {
+  cursor: default;
+  filter: alpha(opacity=45);
+  opacity: .45;
 }
 .btn div {
   display: table-cell;
@@ -331,14 +348,25 @@ body.modal-open {
     text-align: right;
   }
 }
+.error-dialog .modal-dialog,
 .confirm-dialog .modal-dialog,
 .form-dialog .modal-dialog {
   max-width: 100%;
   min-width: $screen-min-width;
   width: 100%;
 }
+.error-dialog .modal-content {
+  background: $color-danger;
+  border: 0;
+}
+.error-dialog .modal-content .modal-footer .btn-danger {
+  background: #D9534F;
+}
+.error-dialog .modal-content .modal-footer .btn-danger:hover {
+  background: #C82333;
+}
 .confirm-dialog .modal-content {
-  background-color: $color-primary;
+  background: $color-primary;
   border: 0;
 }
 .form-dialog .modal-dialog {
@@ -396,14 +424,6 @@ body.modal-open {
   word-wrap: break-word;
   border-bottom: 1px solid #0062CC !important;
 }
-.table thead th:first-child,
-.table tbody td:first-child {
-  border-left: 0 !important;
-}
-.table thead th:nth-last-child(2),
-.table tbody td:nth-last-child(2) {
-  border-right: 0 !important;
-}
 .table thead th.col-wrap,
 .table tbody td.col-wrap {
   display: none;
@@ -423,10 +443,10 @@ body.modal-open {
   padding-bottom: 0;
   line-height: 1.5;
 }
-.table tbody td:not(.col-wrap-step-end) .form .form-group .col-form-label {
+.table tbody td .form .form-group .col-form-label {
   padding-top: 0 !important;
 }
-.table tbody td:not(.col-wrap-step-end) .form .form-group .col .form-text {
+.table tbody td .form .form-group .col .form-text {
   margin-top: 0 !important;
 }
 .card .card-body .card-text .form .form-group .col-form-label:not(.w-100)::after,
@@ -443,9 +463,7 @@ body.modal-open {
   vertical-align: top;
   word-wrap: break-word;
 }
-.table tbody td .form .form-group .col {
-  padding-right: 0;
-}
+
 .table .col-index {
   width: 98px;
   min-width: 98px;
@@ -499,6 +517,9 @@ body.modal-open {
     padding-right: 5px;
     padding-left: 5px;
   }
+}
+.form .form-group .col {
+  padding-right: 0;
 }
 .form-control:focus,
 .ng-select.ng-select-opened .ng-select-container,
@@ -591,6 +612,19 @@ body.modal-open {
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected .ng-option-label,
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked .ng-option-label {
   font-weight: $font-weight-class-bold;
+}
+.dropdown-menu {
+  background: transparent;
+  opacity: 0.9;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border: 0;
+  border-radius: 0;
+}
+.dropdown-menu-inner {
+  background: #000000;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0;
 }
 .filter.form .card {
   background: inherit;
@@ -731,4 +765,7 @@ body.modal-open {
   .d-table.calendar-date .d-table-cell:last-child {
     padding-top: 2px;
   }
+}
+.badge.badge-pill i {
+  position: relative;
 }

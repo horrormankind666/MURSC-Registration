@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๒๐/๐๓/๒๕๖๓>
+Modify date : <๓๑/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -31,16 +31,15 @@ export class AuthGuardService implements CanActivate {
 
     return this.authService.getAuthenResource().then((result: any) => {
       if (this.authService.isAuthenticated) {
-        //if (url === '/SignIn')
-        //  this.router.navigate(['Home']);
+        if (url === '/SignIn')
+          this.router.navigate(['Home']);
       }
       else {
         if (this.cookieService.check(this.appService.cookieName))
           this.cookieService.delete(this.appService.cookieName);
 
-        //this.router.navigate(['Home']);
-        //if (url !== '/SignIn')
-          //this.router.navigate(['SignIn']);
+        if (route.data['signin'])
+          this.router.navigate(['SignIn']);
       }
 
       return true;

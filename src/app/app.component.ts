@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๐/๐๓/๒๕๖๓>
+Modify date : <๓๑/๐๓/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -18,8 +18,6 @@ import {TranslateService} from '@ngx-translate/core';
 
 import {AppService} from './app.service';
 import {AuthService} from './auth.service';
-
-import * as $ from 'jquery';
 
 @NgModule({
   providers: [
