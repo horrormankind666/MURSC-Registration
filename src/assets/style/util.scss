@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๓๑/๐๓/๒๕๖๓>
+Modify date : <๐๓/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -113,6 +113,13 @@ a:focus.link {
 a:hover.link {
   color: #C51A1B;
 }
+a.disabled,
+a:disabled {
+  opacity: 0.65;
+}
+a.disabled {
+  pointer-events: none;
+}
 a.badge:focus,
 a.badge.focus {
   outline: 0 !important;
@@ -142,6 +149,9 @@ main footer .container {
   max-width: 100%;
   padding: 0;
   margin: 0;
+}
+main header .container {
+  min-width: $screen-min-width;
 }
 main header .container .navbar-top,
 main header .container .navbar-header {
@@ -624,7 +634,7 @@ body.modal-open {
 .dropdown-menu-inner {
   background: #000000;
   border-radius: 0.25rem;
-  padding: 0.5rem 0;
+  padding: 0.70rem 0.58rem;
 }
 .filter.form .card {
   background: inherit;

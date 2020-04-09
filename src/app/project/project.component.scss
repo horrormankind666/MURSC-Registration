@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๒๗/๐๓/๒๕๖๓>
+Modify date : <๐๘/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -13,59 +13,77 @@ Description : <>
   margin-left: -0.25rem;
   margin-bottom: -0.25rem;
 }
-.project-view .card-group .card-horizontal {
+@media (max-width: 606px) {
+  .project-view .card-group .card-col.col-sm-6 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+.project-view .project-card-horizontal {
   display: none;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   ::i-block-chrome,
-  .project-view .card-group .card-vertical {
+  .project-view .project-card-vertical {
     display: none;
   }
   ::i-block-chrome,
-  .project-view .card-group .card-horizontal {
+  .project-view .project-card-horizontal {
     display: block;
   }
-  @media screen and (max-width: 858px) {
-    ::i-block-chrome,
-    .project-view .card-group .card-horizontal .card-body {
-      display: table !important;
-      table-layout: fixed;
-    }
-    ::i-block-chrome,
-    .project-view .card-group .card-horizontal .card-body .col-sm-3 {
-      display: table-cell !important;
-      vertical-align: top;
-      width: 205px;
-      max-width: 205px !important;
-    }
-    ::i-block-chrome,
-    .project-view .card-group .card-horizontal .card-body .col-sm-9 {
-      display: table-cell;
-      vertical-align: top;
-      width: auto !important;
-      max-width: 100% !important;
-    }
+}
+@media screen and (max-width: 654px) {
+  ::i-block-chrome,
+  .project-view .project-card-vertical {
+    display: block;
   }
-  @media screen and (max-width: 654px) {
-    ::i-block-chrome,
-    .project-view .card-group .card-vertical {
-      display: block;
-    }
-    ::i-block-chrome,
-    .project-view .card-group .card-horizontal {
-      display: none;
-    }
+  ::i-block-chrome,
+  .project-view .project-card-horizontal {
+    display: none;
   }
 }
-.project-view .card-group .card-vertical .register-info .form .form-group .col-form-label {
-  width: 125px;
+.project-view .dropdown-menu.menu-info {
+  width: 171px;
+  min-width: 171px;
 }
-.project-view .card-group .card-horizontal .register-info .form .form-group .col-form-label {
+.project-view .title-info .dropdown-menu.show.menu-info {
+  transform: translate(0px, -2px) !important;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .project-view .title-info .dropdown-menu.show.menu-info {
+    top: -2px !important;
+    left: 1px !important;
+  }
+  ::i-block-chrome,
+  .project-view .project-info .dropdown-menu.show.menu-info {
+    top: 24px !important;
+  }
+}
+.project-view .project-card-vertical .register-info .form .form-group .col-form-label {
+  width: 126px;
+}
+.project-view .project-card-horizontal .register-info .form .form-group .col-form-label {
   width: 137px;
 }
-.project-view .card-group .card-vertical .register-info .d-table.calendar-date {
+.project-view .project-card-vertical .register-info .form .form-group.col-registrationdate,
+.project-view .project-card-vertical .register-info .form .form-group.col-registrationdate .col-form-label,
+.project-view .project-card-vertical .register-info .form .form-group.col-registrationdate .col {
+  display: block !important;
+  width: 100% !important;
+}
+.project-view .project-card-vertical .register-info .form .form-group.col-registrationdate .col-form-label::after {
+  float: none;
+  content: '';
+  margin-left: 0;
+}
+.project-view .project-card-vertical .register-info .form .form-group.col-registrationdate .col {
+  padding-left: 0 !important;
+}
+.project-view .project-card-vertical .register-info .d-table.calendar-date {
   margin-top: 5px;
 }
-.project-view .card-group .card-horizontal .register-info .d-table.calendar-date {
+.project-view .project-card-horizontal .register-info .d-table.calendar-date {
   margin-top: 2px;
 }

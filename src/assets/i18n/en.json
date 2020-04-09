@@ -52,7 +52,10 @@
       "seatAvailable": "Seat Available",
       "registrationFee": "Registration Fee",
       "lastPaymentDate": "Last Payment Date",
-      "detail": "Project Detail"
+      "detail": "Project Detail",
+      "error": {
+        "notFound": "Project Not Found"
+      }
     },
     "location": {
       "label": "Location",

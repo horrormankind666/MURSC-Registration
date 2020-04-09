@@ -2,28 +2,28 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๗/๐๓/๒๕๖๓>
-Modify date : <๓๐/๐๓/๒๕๖๓>
+Modify date : <๐๘/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 @import '../../styles.scss';
 
-.project-detail-view .card-group .card-vertical {
+.project-detail-view .project-card-vertical {
   display: none;
 }
 @media screen and (max-width: 816px) {
-  .project-detail-view .card-group .card-horizontal .card-body.info {
+  .project-detail-view .project-card-horizontal .project-body {
     display: table !important;
     table-layout: fixed;
   }
-  .project-detail-view .card-group .card-horizontal .card-body.info .col-sm-3 {
+  .project-detail-view .project-card-horizontal .project-body .col-sm-3 {
     display: table-cell !important;
     vertical-align: top;
     width: 180px;
     max-width: 180px !important;
   }
-  .project-detail-view .card-group .card-horizontal .card-body.info .col-sm-9 {
+  .project-detail-view .project-card-horizontal .project-body .col-sm-9 {
     display: table-cell;
     vertical-align: top;
     width: auto !important;
@@ -31,46 +31,14 @@ Description : <>
   }
 }
 @media screen and (max-width: 735px) {
-  .project-detail-view .card-group .card-horizontal {
+  .project-detail-view .project-card-horizontal {
     display: none;
   }
-  .project-detail-view .card-group .card-vertical {
+  .project-detail-view .project-card-vertical {
     display: block;
   }
 }
-.project-detail-view .card-group .card,
-.project-detail-view .card-group .card .line-clamp::after {
-  background-color: #FFFFFF;
-}
-.project-detail-view .card-group .card-vertical .title-info .dropdown-menu.contact-info {
-  transform: translate(-222px, 25px) !important;
-}
-.project-detail-view .card-group .registered-btn {
-  border-width: 2px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0px;
-  width: 161px;
-}
-.project-detail-view .register-info .form .form-group .col-form-label {
-  width: 161px;
-}
-.project-detail-view .register-info .d-table.calendar-date {
-  margin-top: 3px;
-}
-@media screen and (min--moz-device-pixel-ratio: 0) {
-  .project-detail-view .register-info .d-table.calendar-date {
-    margin-top: 2px;
-  }
-}
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  ::i-block-chrome,
-  .project-detail-view .register-info .d-table.calendar-date {
-    margin-top: 2px;
-  }
-}
-.project-detail-view .card-group .registered-btn {
+.project-detail-view .registered-btn {
   border-width: 2px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0.5rem;
@@ -104,7 +72,7 @@ Description : <>
 }
 @media screen and (max-width: 525px) {
   @include form-responsive('.project-detail-view .register-info');
-  .project-detail-view .card-group .registered-btn {
+  .project-detail-view .registered-btn {
     width: 100%;
   }
   @include table-responsive-step2('.project-detail-view .location-info');

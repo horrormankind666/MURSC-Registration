@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๔/๑๑/๒๕๖๒>
-Modify date : <๓๑/๐๓/๒๕๖๒>
+Modify date : <๐๑/๐๔/๒๕๖๒>
 Description : <>
 =============================================
 */
@@ -12,6 +12,7 @@ Description : <>
 import {Routes} from '@angular/router';
 
 import {AuthGuardService} from './auth-guard.service';
+import {ProjectDetailResolver} from './app-routing-resolve.service'
 
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {SigninComponent} from './signin/signin.component';
@@ -49,6 +50,9 @@ export const appRouting: Routes = [
     canActivate: [AuthGuardService],
     data: {
       signin: true
+    },
+    resolve: {
+      project$: ProjectDetailResolver
     }
   },
   {

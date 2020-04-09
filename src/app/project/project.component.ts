@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๓๑/๐๓/๒๕๖๓>
+Modify date : <๐๑/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,7 +12,7 @@ Description : <>
 import {Component, OnInit, ContentChild} from '@angular/core';
 import {DecimalPipe} from '@angular/common';
 
-import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 import {DeviceDetectorService} from 'ngx-device-detector';
 
@@ -36,6 +36,7 @@ export class ProjectComponent implements OnInit  {
   @ContentChild('ProjectView', {static: false}) ProjectView;
 
   constructor(
+    private modal: NgbModal,
     private deviceService: DeviceDetectorService,
     private appService: AppService,
     private modalService: ModalService,
@@ -47,20 +48,15 @@ export class ProjectComponent implements OnInit  {
     this.projectService.operate.table.filter.setValue();
   }
 
-  private getProject(data: ProjectSchema) {
-    if (!this.modalService.hasOpenModal) {
+  getProject(data: ProjectSchema) {
+    if (!this.modal.hasOpenModals()) {
       this.appService.isLoading = true;
 
-      let query = [
-        "",
-        ("transProjectID=" + data.transProjectID)
-      ].join("&");
-
-      this.dataService.project.get(query).then((result: ProjectSchema) => {
+      this.dataService.project.get(data.transProjectID).then((result: ProjectSchema) => {
         this.appService.isLoading = false;
 
         let modalRef: NgbModalRef = this.modalService.getModalForm(true, ProjectDetailComponent);
-        modalRef.componentInstance.data = result;
+        modalRef.componentInstance.data$ = result;
 
         this.modalService.close(modalRef).then((result: string) => {
         });

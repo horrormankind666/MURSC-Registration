@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๓๑/๐๓/๒๕๖๓>
+Modify date : <๐๑/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -21,21 +21,18 @@ import {AppService} from '../app.service';
 export class ModalService {
   constructor(
     private modalConfig: NgbModalConfig,
-    private modalService: NgbModal,
+    private modal: NgbModal,
     private appService: AppService
   ) {
     this.modalConfig.backdrop = 'static';
     this.modalConfig.keyboard = false;
   }
 
-  public hasOpenModal: boolean = false;
-
   private open(content: any, windowClass: string): NgbModalRef {
-    let modalRef = this.modalService.open(content, {
+    let modalRef = this.modal.open(content, {
       windowClass: windowClass
     });
 
-    this.hasOpenModal = true;
     this.appService.setModalHeight();
 
     return modalRef;
@@ -44,12 +41,8 @@ export class ModalService {
   close(modalRef: NgbModalRef): Promise<string> {
     if (modalRef) {
       return modalRef.result.then((result: string) => {
-        this.hasOpenModal = false;
-
         return result;
       }, (reason) => {
-        this.hasOpenModal = false;
-
         return reason;
       });
     }
@@ -64,7 +57,7 @@ export class ModalService {
   private getModal(checkHasOpenModal: boolean, content: any, windowClass: string, message?: string): NgbModalRef {
     let modalRef: NgbModalRef;
 
-    if (!checkHasOpenModal || !this.hasOpenModal) {
+    if (!checkHasOpenModal || !this.modal.hasOpenModals()) {
       modalRef = this.open(content, windowClass);
       if (message) modalRef.componentInstance.message = message;
     }

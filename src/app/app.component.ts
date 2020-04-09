@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๓๑/๐๓/๒๕๖๓>
+Modify date : <๐๑/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -41,16 +41,17 @@ export class AppComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private router: Router,
-    private modalService: NgbModal,
+    private modal: NgbModal,
     private translateService: TranslateService,
     private appService: AppService,
     private authService: AuthService
   ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
-          if (this.modalService.hasOpenModals())
-            this.modalService.dismissAll("");
+          if (this.modal.hasOpenModals())
+            this.modal.dismissAll("");
 
           appService.isLoading = true;
           break;

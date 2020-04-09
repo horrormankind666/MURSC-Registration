@@ -21,14 +21,14 @@
                 <a href="javascript:void(0)" *ngIf="appService.lang === 'th'" (click)="$event.currentTarget.blur(); appService.setDefaultLang('en')"><span class="regular flag-icon flag-icon-gb"></span></a>
               </div>
               <div class="d-table-cell home-icon">
-                <a routerLink="Home" routerLinkActive="active"><span class="regular text-white size24"><i class='fa fa-home'></i></span></a>
+                <a href="Home" [ngClass]="{disabled: appService.isLoading}"><span class="regular text-white size24"><i class='fa fa-home'></i></span></a>
               </div>
               <div class="d-table-cell text-center user-icon" ngbDropdown #profileDropdown="ngbDropdown" placement="bottom-right" *ngIf="authService.isAuthenticated">
-                <a href="javascript:void(0)" id="profile" ngbDropdownToggle [ngStyle]="{'background-color': userBackgrondColor}">
+                <a href="javascript:void(0)" id="profile" ngbDropdownToggle [ngStyle]="{'background-color': userBackgrondColor}" [ngClass]="{disabled: appService.isLoading}">
                   <span class="regular text-white size18">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.familyName[0] | uppercase)}}</span>
                 </a>
                 <div ngbDropdownMenu aria-labelledby="profile" class="pt-3 pb-3">
-                  <div class="dropdown-menu-inner w-100 bg-white border">
+                  <div class="dropdown-menu-inner w-100 bg-white border pr-0 pl-0">
                     <div class="d-table">
                       <div class="d-table-row">
                         <div class="d-table-cell text-center">
@@ -55,7 +55,7 @@
                 </div>
               </div>
               <div class="d-table-cell text-center signin-icon" *ngIf="!authService.isAuthenticated">
-                <a routerLink="SignIn" routerLinkActive="active"><span class="regular text-white size15">{{'signin' | translate}}</span></a>
+                <a href="SignIn" [ngClass]="{disabled: appService.isLoading}"><span class="regular text-white size15">{{'signin' | translate}}</span></a>
               </div>
             </div>
           </div>

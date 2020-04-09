@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๓๑/๐๓/๒๕๖๓>
+Modify date : <๐๑/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -31,6 +31,7 @@ import {AuthGuardService} from './auth-guard.service';
 import {AuthService} from './auth.service';
 
 import {appRouting} from './app-routing.module';
+
 import {AppComponent} from './app.component';
 import {ModalErrorComponent, ModalConfirmComponent} from './modal/modal.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
@@ -64,7 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRouting, {
-      useHash: true
+      useHash: false
     }),
     TranslateModule.forRoot({
       loader: {

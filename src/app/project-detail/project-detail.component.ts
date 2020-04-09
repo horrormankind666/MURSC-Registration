@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๗/๐๓/๒๕๖๓>
-Modify date : <๒๐/๐๓/๒๕๖๓>
+Modify date : <๐๑/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -24,7 +24,7 @@ import {DataService, ProjectSchema} from '../data.service';
   styleUrls: ['./project-detail.component.scss'],
 })
 export class ProjectDetailComponent implements OnInit {
-  @Input() data: ProjectSchema;
+  @Input() data$: ProjectSchema;
 
   constructor(
     private activeModal: NgbActiveModal,

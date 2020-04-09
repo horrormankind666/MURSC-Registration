@@ -38,7 +38,7 @@ export class AuthGuardService implements CanActivate {
         if (this.cookieService.check(this.appService.cookieName))
           this.cookieService.delete(this.appService.cookieName);
 
-        if (route.data['signin'])
+        if (route.data.signin)
           this.router.navigate(['SignIn']);
       }
 

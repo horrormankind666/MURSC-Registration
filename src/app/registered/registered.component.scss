@@ -1,0 +1,25 @@
+/*
+=============================================
+Author      : <ยุทธภูมิ ตวันนา>
+Create date : <๐๗/๐๔/๒๕๖๓>
+Modify date : <๐๘/๐๔/๒๕๖๓>
+Description : <>
+=============================================
+*/
+
+@import '../../styles.scss';
+
+.registered-view .project-card-vertical {
+  display: none;
+}
+@media screen and (max-width: 700px) {
+  .registered-view .project-card-vertical {
+    display: block;
+  }
+  .registered-view .project-card-horizontal {
+    display: none;
+  }
+}
+@media screen and (max-width: 473px) {
+  @include form-responsive('.registered-view .register-info');
+}

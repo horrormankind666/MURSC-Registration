@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๒๗/๐๓/๒๕๖๓>
+Modify date : <๐๑/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -11,6 +11,7 @@ Description : <>
 
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {ActivatedRoute} from '@angular/router';
 
 import {AppService} from './app.service';
 
@@ -68,6 +69,7 @@ interface RegistrationStatusSchema {
 
 class Project {
   constructor(
+    private route: ActivatedRoute,
     private appService: AppService
   ) {}
 
@@ -165,7 +167,12 @@ class Project {
     })
   }
 
-  get(query: string): Promise<ProjectSchema> {
+  get(id: string): Promise<ProjectSchema> {
+    let query = [
+      "",
+      ("transProjectID=" + id)
+    ].join("&");
+
     return this.getDataSource('get', query).then((result: ProjectSchema[]) => {
       return result[0];
     });
@@ -226,9 +233,10 @@ class RegistrationStatus {
 export class DataService {
   constructor(
     private http: HttpClient,
+    private route: ActivatedRoute,
     private appService: AppService
   ) {}
 
-  public project = new Project(this.appService);
+  public project = new Project(this.route, this.appService);
   public registrationStatus = new RegistrationStatus();
 }

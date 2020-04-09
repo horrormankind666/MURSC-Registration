@@ -52,7 +52,10 @@
       "seatAvailable": "จำนวนที่รับคงเหลือ",
       "registrationFee": "ค่าลงทะเบียน",
       "lastPaymentDate": "สิ้นสุดวันที่ชำระเงิน",
-      "detail": "รายละเอียดโครงการ"
+      "detail": "รายละเอียดโครงการ",
+      "error": {
+        "notFound": "ไม่พบข้อมูลโครงการ"
+      }
     },
     "location": {
       "label": "ห้อง",
