@@ -149,13 +149,13 @@
 </ng-template>
 <ng-template #projectInfo let-data="data">
   <div class="project-info">
-    <div class="mb-2" ngbDropdown placement="top-left">
+    <div ngbDropdown placement="top-left">
       <a class="text-wrap bold size18" id="menu-info" href="javascript:void(0)" ngbDropdownToggle>{{data.name[appService.lang]}}</a>
       <div ngbDropdownMenu aria-labelledby="menu-info" class="menu-info">
         <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="menuInfo; context: {data: data}"></ng-container></div>
       </div>
     </div>
-    <p class="mb-0"><span class="regular size16 text-black-50 line-clamp line-clamp-3">{{data.detail}}</span></p>
+    <p class="mt-2 mb-0"><span class="regular text-black-50 size16 line-clamp line-clamp-3">{{data.detail}}</span></p>
   </div>
 </ng-template>
 <ng-template #registerInfo let-data="data">
@@ -198,23 +198,19 @@
 <ng-template #menuInfo let-data="data">
   <div class="menu-info text-white size16">
     <div class="form">
-      <div class="form-group row mr-0 mb-1 ml-0">
+      <div class="form-group row mr-0 mb-0 ml-0">
         <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fa fa-info-circle"></i></label>
         <div class="col text-left">
           <span class="form-text regular mt-0"><a class="link text-white" href="javascript:void(0)" (click)="$event.currentTarget.blur(); getProject(data)">{{'project.detail' | translate | titlecase}}</a></span>
         </div>
       </div>
-      <div class="form-group row mr-0 mb-0 ml-0">
+      <div class="form-group row mt-1 mr-0 mb-0 ml-0" *ngIf="data.registrationStatus === 'Y'">
         <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fa fa-registered"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0"><a class="link text-white" href="Registered/{{data.transProjectID}}">{{'registered' | translate | titlecase}}</a></span>
+          <span class="form-text regular mt-0"><a class="link text-white" href="Registered/{{data.transProjectID}}">{{'registered.label' | translate | titlecase}}</a></span>
         </div>
       </div>
     </div>
-    <!--
-    <div class="mb-1"><a class="link text-white" href="javascript:void(0)" (click)="$event.currentTarget.blur(); getProject(data)">{{'project.detail' | translate | titlecase}}</a></div>
-    <div><a class="link text-white" href="Registered/{{data.transProjectID}}">{{'registered' | translate | titlecase}}</a></div>
-    -->
   </div>
 </ng-template>
 <ng-template #contactInfo let-data="data">

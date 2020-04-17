@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๐๓/๐๔/๒๕๖๓>
+Modify date : <๑๕/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -15,6 +15,7 @@ $color-success: mediumseagreen;
 $color-danger: #D43F3A;
 $color-warning: #FB3;
 $color-info: #46B8DA;
+$color-black-10: rgb(0, 0, 0, .10);
 
 $screen-max-width: 796px;
 $screen-min-width: 344px;
@@ -77,6 +78,24 @@ $line-clamp-line-height: 1.7;
 }
 .font-tahoma {
   font-family: Tahoma;
+}
+.bg-black-10 {
+  background: $color-black-10 !important;
+}
+.p-25 {
+  padding: 0.6rem !important;
+}
+.pt-25 {
+  padding-top: 0.6rem !important;
+}
+.pr-25 {
+  padding-right: 0.6rem !important;
+}
+.pb-25 {
+  padding-bottom: 0.6rem !important;
+}
+.pl-25 {
+  padding-left: 0.6rem !important;
 }
 body {
   font-family: $font-family !important;
@@ -406,6 +425,9 @@ body.modal-open {
   position: absolute;
   top: 0;
   left: 0;
+}
+.card-subtitle {
+  margin-top: -.15rem !important;
 }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .card-img-top {
@@ -778,4 +800,19 @@ body.modal-open {
 }
 .badge.badge-pill i {
   position: relative;
+}
+.text-justify-distribute {
+  text-align: justify !important;
+  word-wrap: break-all;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -o-hyphens: auto;
+  hyphens: auto;
+}
+@supports (text-justify: inter-character) {
+  .text-justify-distribute {
+    text-justify: inter-character;
+    word-break: break-word !important;
+  }
 }

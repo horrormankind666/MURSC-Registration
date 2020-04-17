@@ -4,7 +4,7 @@
       <div class="card bg-white border-0 rounded-0">
         <div class="card-body pt-0 pr-3 pb-0 pl-3">
           <div class="card-title mb-0">
-            <span class="bold size26">{{'registered' | translate | titlecase}}</span>
+            <span class="bold size26">{{'registered.label' | translate | titlecase}}</span>
           </div>
         </div>
       </div>
@@ -17,19 +17,24 @@
           <div class="d-inline-block col-sm-9 pt-2 pr-0 align-top">
             <div class="card-text">
               <div class="mb-3"><ng-container *ngTemplateOutlet="projectInfo"></ng-container></div>
-              <div class="mb-3"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
+              <ng-container *ngTemplateOutlet="registerInfo"></ng-container>
             </div>
           </div>
         </div>
       </div>
       <div class="card card-vertical bg-white border-0 rounded-0 project-card-vertical">
-        <div class="card-body pt-0 pr-3 pb-1 pl-3 project-body">
+        <div class="card-body pt-0 pr-3 pb-0 pl-3 project-body">
           <ng-container *ngTemplateOutlet="titleInfo"></ng-container>
-          <div class="card-text mb-3">
+          <div class="card-text">
             <div class="mt-3 mb-3"><ng-container *ngTemplateOutlet="projectInfo"></ng-container></div>
             <ng-container *ngTemplateOutlet="registerInfo"></ng-container>
           </div>
         </div>
+      </div>
+      <div class="mt-3" *ngIf="data$.registrationStatus === 'Y'">
+        <ng-container *ngTemplateOutlet="registeredInfo; context: {title: 'userRegistered'}"></ng-container>
+        <div class="mt-3"><ng-container *ngTemplateOutlet="registeredInfo; context: {title: 'location'}"></ng-container></div>
+        <div class="mt-3"><ng-container *ngTemplateOutlet="registeredInfo; context: {title: 'fee'}"></ng-container></div>
       </div>
     </div>
   </div>
@@ -95,8 +100,9 @@
 </ng-template>
 <ng-template #projectInfo>
   <div class="project-info">
-    <p class="mb-3"><span class="bold size22">{{data$.name[appService.lang]}}</span></p>
-    <p class="mb-0"><span class="regular size16 text-black-50 line-clamp">{{data$.detail}}</span></p>
+    <p class="mb-0"><span class="bold size22">{{data$.name[appService.lang]}}</span></p>
+    <p *ngIf="data$.registrationStatus !== 'Y'"><span class="regular text-danger size15">( {{(dataService.registrationStatus.get(data$.registrationStatus)).name[appService.lang]}} )</span></p>
+    <p class="mt-3 mb-0"><span class="regular text-justify-distribute text-black-50 size16 line-clamp">{{data$.detail}}</span></p>
   </div>
 </ng-template>
 <ng-template #registerInfo>
@@ -115,7 +121,7 @@
             <span class="form-text regular">{{data$.maximumSeat ? ((data$.maximumSeat | number) + ' ' + ('unit.persons' | translate | titlecase)) : ''}}</span>
           </div>
         </div>
-        <div class="form-group row mb-1">
+        <div class="form-group row mb-0">
           <label for="col-registrationdate" class="col-form-label">{{'project.registrationDate' | translate | titlecase}}</label>
           <div class="col">
             <div class="d-table calendar-date">
@@ -167,6 +173,22 @@
         <div class="col text-left">
           <span class="form-text regular mt-0">{{data$.contact.phone}}</span>
         </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #registeredInfo let-title="title">
+  <div class="registered-info">
+    <div class="card bg-white border-0 rounded-0">
+      <div class="card-header bg-black-10 rounded-0 pt-25 pr-3 pb-25 pl-3">
+        <span class="bold text-primary size18">
+          <span *ngIf="title === 'userRegistered'">{{'user.registered.info' | translate | titlecase}}</span>
+          <span *ngIf="title === 'location'">{{'location.info' | translate | titlecase}}</span>
+          <span *ngIf="title === 'fee'">{{'fee' | translate | titlecase}}</span>
+        </span>
+      </div>
+      <div class="card-body pt-0 pr-3 pb-0 pl-3">
+        <div class="card-text"></div>
       </div>
     </div>
   </div>

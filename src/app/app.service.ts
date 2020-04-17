@@ -47,7 +47,7 @@ export class AppService  {
   }
   public urlAuthenResource: string = 'http://localhost:5001/API/AuthenResource/UserInfo';
   public urlAuthenServer: string = 'http://localhost:4279';
-  public urlAPI: string = 'http://localhost:3000/API';
+  public urlAPI: string = 'https://mursc.mahidol.ac.th/API';
   public dateTimeOnURL: string = formatDate(new Date(), 'dd/MM/yyyyHH:mm:ss', 'en')
 
   setDefaultLang(lang?: string) {

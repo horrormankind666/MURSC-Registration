@@ -12,7 +12,10 @@
     "cancel":"Cancel",
     "ok": "Ok",
     "close": "Close",
-    "registered": "Registered",
+    "registered": {
+      "label": "Registered",
+      "info": "Registered Information"
+    },
     "order": "Order",
     "status": "Status",
     "detail": "Detail",
@@ -28,6 +31,7 @@
     "name": "Name",
     "email": "Email",
     "phone": "Phone",
+    "fee": "Fee",
     "seat": {
       "label": "Seat",
       "seatTotal": "Seat Total",
@@ -40,9 +44,13 @@
     },
     "keyword": "Keyword",
     "registrationStatus": "Registration Status",
-    "profile": {
-      "personalInfo": "Personal information",
-      "examApplicationInfo": "Exam application information"
+    "user": {
+      "label": "User",
+      "info": "User Information",
+      "registered": {
+        "label": "User Registered",
+        "info": "User Registered Information"
+      }
     },
     "project": {
       "label": "Project",
@@ -59,7 +67,7 @@
     },
     "location": {
       "label": "Location",
-      "info": "Location Info",
+      "info": "Location Information",
       "name": "Location Name",
       "seatTotal": "Seat Total",
       "seatAvailable": "Seat Available"
