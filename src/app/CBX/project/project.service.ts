@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๐/๐๒/๒๕๖๓>
-Modify date : <๒๐/๐๓/๒๕๖๓>
+Modify date : <๒๕/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -15,7 +15,7 @@ import {DecimalPipe} from '@angular/common';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 
-import {DataService, ProjectSchema} from '../data.service';
+import {Schema, DataService} from '../../data.service';
 
 interface TableState {
   page: number;
@@ -25,7 +25,7 @@ interface TableState {
 }
 
 interface TableSearchResult {
-  data: ProjectSchema[];
+  data: Schema.CBX.Project[];
   total: number;
   totalSearch: number;
 }
@@ -40,7 +40,7 @@ class Table {
 
   private _searching$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _data$ = new BehaviorSubject<ProjectSchema[]>([]);
+  private _data$ = new BehaviorSubject<Schema.CBX.Project[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
   private _totalSearch$ = new BehaviorSubject<number>(0);
 
@@ -70,7 +70,7 @@ class Table {
     this._search$.next();
   }
 
-  private _search(data: ProjectSchema[]): Observable<TableSearchResult> {
+  private _search(data: Schema.CBX.Project[]): Observable<TableSearchResult> {
     const {page, pageSize, keyword, registrationStatus} = this._state;
 
     let tmp = data;
@@ -84,7 +84,7 @@ class Table {
     return of({data, total, totalSearch});
   }
 
-  matches(data: ProjectSchema, keyword: string, registrationStatus: string, pipe: PipeTransform) {
+  matches(data: Schema.CBX.Project, keyword: string, registrationStatus: string, pipe: PipeTransform) {
     keyword = (keyword ? keyword : '');
     registrationStatus = (registrationStatus ? registrationStatus : '');
 
@@ -96,7 +96,7 @@ class Table {
   }
 
   reload() {
-    this.dataService.project.getList().then((result: ProjectSchema[]) => {
+    this.dataService.cbx.project.getList().then((result: Schema.CBX.Project[]) => {
       this._search$.pipe(
         tap(() => this._searching$.next(true)),
         debounceTime(100),

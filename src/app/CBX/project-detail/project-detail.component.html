@@ -15,7 +15,7 @@
             <div class="d-inline-block col-sm-3 pl-0 align-top">
               <ng-container *ngTemplateOutlet="titleInfo"></ng-container>
             </div>
-            <div class="d-inline-block col-sm-9 pt-2 pr-0 pb-0 align-top">
+            <div class="d-inline-block col-sm-9 pt-1 pr-0 pb-0 align-top">
               <div class="card-text">
                 <div class="mb-3"><ng-container *ngTemplateOutlet="projectInfo"></ng-container></div>
                 <div class="mb-3"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
@@ -33,13 +33,17 @@
             </div>
           </div>
           <div class="card-footer text-right border-top-0 bg-transparent pt-0 pr-3 pb-2 pl-3 project-footer">
-            <ng-container *ngTemplateOutlet="registerButtonInfo"></ng-container>
+            <div class="card-text">
+              <ng-container *ngTemplateOutlet="registerButtonInfo"></ng-container>
+            </div>
           </div>
         </div>
-        <div class="dropdown-divider"></div>
-        <div class="card bg-white border-0 rounded-0">
-          <div class="card-body pt-2 pr-0 pb-0 pl-0 location-body">
-            <ng-container *ngTemplateOutlet="locationInfo"></ng-container>
+        <div class="pt-2 pr-3 pb-3 pl-3">
+          <div class="jumbotron rounded-xl mb-0 p-3">
+            <div class="border-bottom border-white pb-2">
+              <span class="bold text-primary size20">{{'location.info' | translate | titlecase}}</span>
+            </div>
+            <div *ngIf="data$.location.length"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
           </div>
         </div>
       </div>
@@ -81,7 +85,7 @@
         <div class="clearfix"></div>
       </div>
       <div class="float-right">
-        <div class="registration-status text-right" ngbTooltip="{{(dataService.registrationStatus.get(data$.registrationStatus)).name[appService.lang]}}" placement="left" title="{{(dataService.registrationStatus.get(data$.registrationStatus)).name[appService.lang]}}">
+        <div class="registration-status text-right" ngbTooltip="{{(dataService.cbx.registrationStatus.get(data$.registrationStatus)).name[appService.lang]}}" placement="left" title="{{(dataService.cbx.registrationStatus.get(data$.registrationStatus)).name[appService.lang]}}">
           <i class="fa fa-lock size36"
             [ngClass]="{
               'text-success': (data$.registrationStatus === 'Y'),
@@ -107,9 +111,9 @@
 </ng-template>
 <ng-template #projectInfo>
   <div class="project-info">
-    <p class="mb-0"><span class="bold size22">{{data$.name[appService.lang]}}</span></p>
-    <p *ngIf="data$.registrationStatus !== 'Y'"><span class="regular text-danger size15">( {{(dataService.registrationStatus.get(data$.registrationStatus)).name[appService.lang]}} )</span></p>
-    <p class="mt-3 mb-0"><span class="regular text-justify-distribute text-black-50 size16 line-clamp">{{data$.detail}}</span></p>
+    <p class="bold size22 mb-0">{{data$.name[appService.lang]}}</p>
+    <p class="regular text-danger size15" *ngIf="data$.registrationStatus !== 'Y'">( {{(dataService.cbx.registrationStatus.get(data$.registrationStatus)).name[appService.lang]}} )</p>
+    <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0">{{data$.detail}}</p>
   </div>
 </ng-template>
 <ng-template #registerInfo>
@@ -132,7 +136,7 @@
           <label for="col-registrationdate" class="col-form-label">{{'project.registrationDate' | translate | titlecase}}</label>
           <div class="col">
             <div class="d-table calendar-date">
-              <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )" placement="left" title="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )">
+              <div class="d-table-row">
                 <div class="d-table-cell align-bottom"><span class="text-success size20"><i class="fa fa-calendar"></i></span></div>
                 <div class="d-table-cell"
                   [ngClass]="{
@@ -141,9 +145,9 @@
                   }">
                   <span class="text-success size12"><i class="fa fa-play"></i></span>
                 </div>
-                <div class="d-table-cell align-middle"><span class="text-success">{{data$.registrationDate.startDate}}</span></div>
+                <div class="d-table-cell align-middle"><span class="text-success" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )">{{data$.registrationDate.startDate}}</span></div>
               </div>
-              <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )" placement="left" title="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )">
+              <div class="d-table-row">
                 <div class="d-table-cell align-bottom"><span class="text-danger size20"><i class="fa fa-calendar"></i></span></div>
                 <div class="d-table-cell"
                   [ngClass]="{
@@ -151,7 +155,7 @@
                     'pt-1': (deviceService.browser === 'Safari')
                   }"><span class="text-danger size12"><i class="fa fa-stop"></i></span>
                 </div>
-                <div class="d-table-cell align-middle"><span class="text-danger">{{data$.registrationDate.endDate}}</span></div>
+                <div class="d-table-cell align-middle"><span class="text-danger" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )">{{data$.registrationDate.endDate}}</span></div>
               </div>
             </div>
           </div>
@@ -196,43 +200,42 @@
 </ng-template>
 <ng-template #locationInfo>
   <div class="location-info">
-    <table class="table table-striped table-bordered mb-0">
-      <thead class="bg-primary font text-white size18">
+    <table class="table table-bordered mb-0">
+      <thead class="text-black-50 size18">
         <tr>
-          <th class="bold border-left-0 col-index">{{'order' | translate | titlecase}}</th>
-          <th class="bold col-location">{{'location.label' | translate | titlecase}}</th>
-          <th class="bold col-building">{{'building.label' | translate | titlecase}}</th>
-          <th class="bold col-seattotal">{{'location.seatTotal' | translate | titlecase}}</th>
-          <th class="bold border-right-0 col-seatavailable">{{'location.seatAvailable' | translate | titlecase}}</th>
-          <th class="col-wrap col-wrap-step1 bold border-left-0 col-index">{{'order' | translate | titlecase}}</th>
-          <th class="col-wrap col-wrap-step1 bold border-right-0">{{'location.info' | translate | titlecase}}</th>
-          <th class="col-wrap col-wrap-step2 bold border-left-0 border-right-0 col-location-detail">{{'location.info' | translate | titlecase}}</th>
+          <th class="border-top-0 border-left-0 border-white pl-0 bold col-index">{{'order' | translate | titlecase}}</th>
+          <th class="border-top-0 border-white bold col-location">{{'location.label' | translate | titlecase}}</th>
+          <th class="border-top-0 border-white bold col-building">{{'building.label' | translate | titlecase}}</th>
+          <th class="border-top-0 border-white bold col-seattotal">{{'location.seatTotal' | translate | titlecase}}</th>
+          <th class="border-top-0 border-right-0 border-white pr-0 bold col-seatavailable">{{'location.seatAvailable' | translate | titlecase}}</th>
+          <th class="border-top-0 border-left-0 border-white col-wrap col-wrap-step1 pl-0 bold col-index">{{'order' | translate | titlecase}}</th>
+          <th class="border-top-0 border-right-0 border-white col-wrap col-wrap-step1 pr-0 bold">{{'location.info' | translate | titlecase}}</th>
         </tr>
       </thead>
       <tbody class="size16">
         <tr *ngFor="let location of data$.location; index as order">
-          <td class="regular border-left-0 col-index" ngbTooltip="{{'order' | translate | titlecase}}" title="{{'order' | translate | titlecase}}">
+          <td class="border-right-0 border-left-0 pl-0 regular col-index" ngbTooltip="{{'order' | translate | titlecase}}" title="{{'order' | translate | titlecase}}">
             {{(order + 1) | number}}
           </td>
-          <td class="regular col-location" ngbTooltip="{{'location.label' | translate | titlecase}}" title="{{'location.label' | translate | titlecase}}">
+          <td class="border-right-0 border-left-0 regular col-location" ngbTooltip="{{'location.label' | translate | titlecase}}" title="{{'location.label' | translate | titlecase}}">
             {{location.name[appService.lang]}}
           </td>
-          <td class="regular col-building" ngbTooltip="{{'building.label' | translate | titlecase}}" title="{{'building.label' | translate | titlecase}}">
+          <td class="border-right-0 border-left-0 regular col-building" ngbTooltip="{{'building.label' | translate | titlecase}}" title="{{'building.label' | translate | titlecase}}">
             {{location.building.name[appService.lang]}}
           </td>
-          <td class="regular col-seattotal" ngbTooltip="{{'location.seatTotal' | translate | titlecase}}" title="{{'location.seatTotal' | translate | titlecase}}">
+          <td class="border-right-0 border-left-0 regular col-seattotal" ngbTooltip="{{'location.seatTotal' | translate | titlecase}}" title="{{'location.seatTotal' | translate | titlecase}}">
             {{location.seatTotal}}
           </td>
-          <td class="regular border-right-0 col-seatavailable" ngbTooltip="{{'location.seatAvailable' | translate | titlecase}}" title="{{'location.seatAvailable' | translate | titlecase}}">
+          <td class="border-right-0 border-left-0 pr-0 regular col-seatavailable" ngbTooltip="{{'location.seatAvailable' | translate | titlecase}}" title="{{'location.seatAvailable' | translate | titlecase}}">
             {{location.seatAvailable}}
           </td>
-          <td class="col-wrap col-wrap-step1 regular border-left-0 col-index" ngbTooltip="{{'order' | translate | titlecase}}" title="{{'order' | translate | titlecase}}">
+          <td class="border-right-0 border-left-0 pl-0 col-wrap col-wrap-step1 regular col-index" ngbTooltip="{{'order' | translate | titlecase}}" title="{{'order' | translate | titlecase}}">
             {{(order + 1) | number}}
           </td>
-          <td class="col-wrap col-wrap-step1 regular border-right-0 col-location-building-seat">
+          <td class="border-right-0 border-left-0 pr-0 col-wrap col-wrap-step1 regular col-location-building-seat">
             <ng-container *ngTemplateOutlet="locationBuildingSeatInfo; context: {data: location}"></ng-container>
           </td>
-          <td class="col-wrap col-wrap-step2 regular border-left-0 border-right-0 col-location-detail">
+          <td class="border-top-0 border-right-0 border-left-0 pr-0 pl-0 col-wrap col-wrap-step2 regular col-location-detail">
             <ng-container *ngTemplateOutlet="locationDetailInfo; context: {data: location, order: ((order + 1) | number)}"></ng-container>
           </td>
         </tr>
@@ -243,19 +246,19 @@
 <ng-template #locationBuildingSeatInfo let-data="data">
   <div class="location-building-seat-info">
     <div class="form">
-      <div class="form-group row mb-0" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'location.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'location.label' | translate | titlecase}} )">
+      <div class="form-group row mb-1" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'location.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'location.label' | translate | titlecase}} )">
         <label for="col-location" class="col-form-label bold">{{'location.label' | translate | titlecase}}</label>
         <div class="col">
           <span class="form-text regular">{{data.name[appService.lang]}}</span>
         </div>
       </div>
-      <div class="form-group row mb-0" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )>">
+      <div class="form-group row mb-1" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )>">
         <label for="col-building" class="col-form-label bold">{{'building.label' | translate | titlecase}}</label>
         <div class="col">
           <span class="form-text regular">{{data.building.name[appService.lang]}}</span>
         </div>
       </div>
-      <div class="form-group row mb-0" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'seat.seatTotal' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'seat.seatTotal' | translate | titlecase}} )>">
+      <div class="form-group row mb-1" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'seat.seatTotal' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'seat.seatTotal' | translate | titlecase}} )>">
         <label for="col-seattotal" class="col-form-label bold">{{'seat.seatTotal' | translate | titlecase}}</label>
         <div class="col">
           <span class="form-text regular">{{data.seatTotal}}</span>

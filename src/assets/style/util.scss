@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๑๕/๐๔/๒๕๖๓>
+Modify date : <๒๒/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -60,6 +60,7 @@ $line-clamp-line-height: 1.7;
     display: block !important;
     width: 100% !important;
     font-weight: $font-weight-class-bold !important;
+    margin-bottom: 0.15rem !important;
   }
   #{$class} .form .form-group .col-form-label:not(.nowrap)::after {
     float: none !important;
@@ -446,15 +447,17 @@ body.modal-open {
 .table th,
 .table td,
 .table td.col-wrap {
-  padding: 0.5rem 0.9rem !important;
+  padding: 0.5rem 1rem;
   line-height: 1.5;
   vertical-align: top !important;
 }
 .table thead th {
-  border-color: #0062CC;
   word-break: break-all;
   word-wrap: break-word;
-  border-bottom: 1px solid #0062CC !important;
+}
+.table:not(.table-borderless) thead th {
+  border-color: #0062CC;
+  border-bottom: 1px solid #0062CC;
 }
 .table thead th.col-wrap,
 .table tbody td.col-wrap {
@@ -497,8 +500,8 @@ body.modal-open {
 }
 
 .table .col-index {
-  width: 98px;
-  min-width: 98px;
+  width: 80px;
+  min-width: 80px;
 }
 .tooltip-custom {
   z-index: 10051 !important;
@@ -668,15 +671,20 @@ body.modal-open {
   border-bottom: 0;
 }
 .line-clamp {
+  /*
   display: block;
   display: -webkit-box;
 	-webkit-box-orient: vertical;
   position: relative;
+  */
   line-height: $line-clamp-line-height;
+  /*
   overflow: hidden;
   text-overflow: ellipsis;
   padding-right: 0.65rem;
+  */
 }
+/*
 .line-clamp::before {
   content: '...';
   text-align: right;
@@ -729,6 +737,7 @@ body.modal-open {
 	-webkit-line-clamp: 5;
 	max-height: calc(1em * #{$line-clamp-line-height} * 5);
 }
+*/
 .datetime-vertical {
   width: 32px;
 }
@@ -801,18 +810,16 @@ body.modal-open {
 .badge.badge-pill i {
   position: relative;
 }
-.text-justify-distribute {
-  text-align: justify !important;
-  word-wrap: break-all;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-  -o-hyphens: auto;
-  hyphens: auto;
-}
 @supports (text-justify: inter-character) {
   .text-justify-distribute {
+    text-align: justify !important;
     text-justify: inter-character;
-    word-break: break-word !important;
   }
+}
+.rounded-xl {
+  border-radius: 0.5rem !important;
+}
+.rounded-top-0 {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
 }

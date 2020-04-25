@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๐๑/๐๔/๒๕๖๓>
+Modify date : <๒๕/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -16,9 +16,9 @@ import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 import {DeviceDetectorService} from 'ngx-device-detector';
 
-import {AppService} from '../app.service';
-import {ModalService} from '../modal/modal.service';
-import {DataService, ProjectSchema} from '../data.service';
+import {AppService} from '../../app.service';
+import {ModalService} from '../../modal/modal.service';
+import {Schema, DataService} from '../../data.service';
 import {ProjectService} from './project.service';
 
 import {ProjectDetailComponent} from '../project-detail/project-detail.component'
@@ -32,7 +32,8 @@ import {ProjectDetailComponent} from '../project-detail/project-detail.component
     DecimalPipe
   ]
 })
-export class ProjectComponent implements OnInit  {
+
+export class ProjectComponent implements OnInit {
   @ContentChild('ProjectView', {static: false}) ProjectView;
 
   constructor(
@@ -48,11 +49,11 @@ export class ProjectComponent implements OnInit  {
     this.projectService.operate.table.filter.setValue();
   }
 
-  getProject(data: ProjectSchema) {
+  getProject(data: Schema.CBX.Project) {
     if (!this.modal.hasOpenModals()) {
       this.appService.isLoading = true;
 
-      this.dataService.project.get(data.transProjectID).then((result: ProjectSchema) => {
+      this.dataService.cbx.project.get(data.transProjectID).then((result: Schema.CBX.Project) => {
         this.appService.isLoading = false;
 
         let modalRef: NgbModalRef = this.modalService.getModalForm(true, ProjectDetailComponent);

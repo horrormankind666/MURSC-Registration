@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๑๔/๐๔/๒๕๖๓>
+Modify date : <๒๕/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -14,11 +14,11 @@ import {ActivatedRoute} from '@angular/router';
 
 import {DeviceDetectorService} from 'ngx-device-detector';
 
-import {AppService} from '../app.service';
-import {DataService, ProjectSchema} from '../data.service';
-import {ModalService} from '../modal/modal.service';
+import {AppService} from '../../app.service';
+import {Schema, DataService} from '../../data.service';
+import {ModalService} from '../../modal/modal.service';
 
-import {ModalErrorComponent} from '../modal/modal.component';
+import {ModalErrorComponent} from '../../modal/modal.component';
 
 @Component({
   selector: 'app-registered',
@@ -34,7 +34,7 @@ export class RegisteredComponent implements OnInit, AfterViewInit {
     private modalService: ModalService
   ) { }
 
-  private data$: ProjectSchema;
+  private data$: Schema.CBX.Project;
 
   ngOnInit() {
     this.data$ = this.route.snapshot.data.project$;

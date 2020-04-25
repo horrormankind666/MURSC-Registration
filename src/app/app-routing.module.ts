@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๔/๑๑/๒๕๖๒>
-Modify date : <๐๑/๐๔/๒๕๖๒>
+Modify date : <๒๔/๐๔/๒๕๖๒>
 Description : <>
 =============================================
 */
@@ -16,8 +16,8 @@ import {ProjectDetailResolver} from './app-routing-resolve.service'
 
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {SigninComponent} from './signin/signin.component';
-import {HomeComponent} from './home/home.component';
-import {RegisteredComponent} from './registered/registered.component';
+import {HomeComponent} from './CBX/home/home.component';
+import {RegisteredComponent} from './CBX/registered/registered.component';
 
 export const appRouting: Routes = [
   {
@@ -29,7 +29,7 @@ export const appRouting: Routes = [
     }
   },
   {
-    path: 'Home',
+    path: 'CBX/Home',
     component: HomeComponent,
     canActivate: [AuthGuardService],
     data: {

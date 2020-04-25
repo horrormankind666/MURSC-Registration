@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๗/๐๓/๒๕๖๓>
-Modify date : <๐๑/๐๔/๒๕๖๓>
+Modify date : <๒๕/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -15,8 +15,8 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {DeviceDetectorService} from 'ngx-device-detector';
 
-import {AppService} from '../app.service';
-import {DataService, ProjectSchema} from '../data.service';
+import {AppService} from '../../app.service';
+import {Schema, DataService} from '../../data.service';
 
 @Component({
   selector: 'app-project-detail',
@@ -24,7 +24,7 @@ import {DataService, ProjectSchema} from '../data.service';
   styleUrls: ['./project-detail.component.scss'],
 })
 export class ProjectDetailComponent implements OnInit {
-  @Input() data$: ProjectSchema;
+  @Input() data$: Schema.CBX.Project;
 
   constructor(
     private activeModal: NgbActiveModal,

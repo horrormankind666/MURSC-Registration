@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๐๑/๐๔/๒๕๖๓>
+Modify date : <๒๐/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -36,10 +36,10 @@ import {AppComponent} from './app.component';
 import {ModalErrorComponent, ModalConfirmComponent} from './modal/modal.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {SigninComponent} from './signin/signin.component';
-import {HomeComponent} from './home/home.component';
-import {ProjectComponent} from './project/project.component';
-import {ProjectDetailComponent} from './project-detail/project-detail.component';
-import {RegisteredComponent} from './registered/registered.component';
+import {HomeComponent} from './CBX/home/home.component';
+import {ProjectComponent} from './CBX/project/project.component';
+import {ProjectDetailComponent} from './CBX/project-detail/project-detail.component';
+import {RegisteredComponent} from './CBX/registered/registered.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

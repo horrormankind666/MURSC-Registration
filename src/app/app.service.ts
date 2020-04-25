@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๓๑/๐๓/๒๕๖๓>
+Modify date : <๒๐/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -19,8 +19,11 @@ import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
 
 import {CookieService} from 'ngx-cookie-service';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 import * as $ from 'jquery';
+
+declare function $clamp(element, options): any;
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +34,8 @@ export class AppService  {
     private titleService: Title,
     private tooltipConfig: NgbTooltipConfig,
     private translateService: TranslateService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private deviceService: DeviceDetectorService,
   ) {
     tooltipConfig.placement = 'top';
     tooltipConfig.container = 'body';
@@ -47,8 +51,12 @@ export class AppService  {
   }
   public urlAuthenResource: string = 'http://localhost:5001/API/AuthenResource/UserInfo';
   public urlAuthenServer: string = 'http://localhost:4279';
-  public urlAPI: string = 'https://mursc.mahidol.ac.th/API';
+  public urlAPI: string = /*http://localhost:3000/API*/'https://mursc.mahidol.ac.th/API';
   public dateTimeOnURL: string = formatDate(new Date(), 'dd/MM/yyyyHH:mm:ss', 'en')
+
+  textOverflowClamp(e: string, line: number) {
+    $clamp(document.querySelector(e), {clamp: (this.deviceService.browser === 'IE' ? (line + 1) : line)});
+  }
 
   setDefaultLang(lang?: string) {
     this.lang = (!lang ? this.lang : lang);

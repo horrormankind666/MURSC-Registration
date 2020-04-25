@@ -2,12 +2,12 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๗/๐๔/๒๕๖๓>
-Modify date : <๑๔/๐๔/๒๕๖๓>
+Modify date : <๒๕/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
 
-@import '../../styles.scss';
+@import '../styles.scss';
 
 .registered-view .project-card-vertical {
   display: none;
@@ -22,4 +22,12 @@ Description : <>
 }
 @media screen and (max-width: 473px) {
   @include form-responsive('.registered-view .register-info');
+}
+.registered-view .location-info .table .col-seattotal {
+  width: 250px;
+  min-width: 250px;
+}
+.registered-view .location-info .table .col-seatavailable {
+  width: 234px;
+  min-width: 234px;
 }
