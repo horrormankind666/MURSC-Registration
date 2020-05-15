@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๗/๐๓/๒๕๖๓>
-Modify date : <๒๕/๐๔/๒๕๖๓>
+Modify date : <๑๒/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -24,7 +24,7 @@ import {Schema, DataService} from '../../data.service';
   styleUrls: ['./project-detail.component.scss'],
 })
 export class ProjectDetailComponent implements OnInit {
-  @Input() data$: Schema.CBX.Project;
+  @Input() data$: Schema.CBX.TransProject;
 
   constructor(
     private activeModal: NgbActiveModal,

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๒๕/๐๔/๒๕๖๓>
+Modify date : <๑๒/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -49,12 +49,14 @@ export class ProjectComponent implements OnInit {
     this.projectService.operate.table.filter.setValue();
   }
 
-  getProject(data: Schema.CBX.Project) {
+  getTransProject(data: Schema.CBX.TransProject) {
     if (!this.modal.hasOpenModals()) {
-      this.appService.isLoading = true;
+      this.appService.isLoading.show = true;
+      this.appService.isLoading.modal = true;
 
-      this.dataService.cbx.project.get(data.transProjectID).then((result: Schema.CBX.Project) => {
-        this.appService.isLoading = false;
+      this.dataService.cbx.transProject.get(data.transProjectID).then((result: Schema.CBX.TransProject) => {
+        this.appService.isLoading.show = false;
+        this.appService.isLoading.modal = false;
 
         let modalRef: NgbModalRef = this.modalService.getModalForm(true, ProjectDetailComponent);
         modalRef.componentInstance.data$ = result;

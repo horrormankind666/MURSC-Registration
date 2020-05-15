@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๐๑/๐๔/๒๕๖๓>
+Modify date : <๑๒/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -29,8 +29,6 @@ export class PageNotFoundComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.modalService.getModalError(false, ModalErrorComponent, 'pageNotFound');
-    }, 1000);
+    this.modalService.getModalError(false, ModalErrorComponent, 'pageNotFound');
   }
 }

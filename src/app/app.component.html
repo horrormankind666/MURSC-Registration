@@ -1,9 +1,15 @@
-<ngx-loading [show]="appService.isLoading"></ngx-loading>
-<span class="msg-loading font regular size16" *ngIf="appService.isLoading">{{'msgLoading.loading' | translate}}</span>
+<ngx-loading [show]="appService.isLoading.show"></ngx-loading>
+<span class="msg-loading font regular size16">
+  <span *ngIf="appService.isLoading.show && (appService.isLoading.page || appService.isLoading.modal)">{{'msgLoading.loading' | translate}}</span>
+  <span *ngIf="appService.isLoading.show && appService.isLoading.processing">{{'msgLoading.processing' | translate}}</span>
+  <span *ngIf="appService.isLoading.show && appService.isLoading.saving">{{'msgLoading.saving' | translate}}</span>
+  <span *ngIf="appService.isLoading.show && appService.isLoading.checking">{{'msgLoading.checking' | translate}}</span>
+</span>
 <main>
   <header #headerView class="sticky">
     <div class="container">
-      <div class="navbar-header pr-3 pl-3">
+      <div class="navbar-header-background" [ngClass]="{'has-hearder-subtitle': appService.hasHearderSubtitle}"></div>
+      <div class="navbar-header pr-3 pl-3" [ngClass]="{'has-hearder-subtitle': appService.hasHearderSubtitle}">
         <div class="d-table">
           <div class="d-table-cell systeminfo">
             <div class="d-table">
@@ -21,10 +27,10 @@
                 <a href="javascript:void(0)" *ngIf="appService.lang === 'th'" (click)="$event.currentTarget.blur(); appService.setDefaultLang('en')"><span class="regular flag-icon flag-icon-gb"></span></a>
               </div>
               <div class="d-table-cell home-icon">
-                <a href="Home" [ngClass]="{disabled: appService.isLoading}"><span class="regular text-white size24"><i class='fa fa-home'></i></span></a>
+                <a routerLink="Main" routerLinkActive="active" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size24"><i class='fa fa-home'></i></span></a>
               </div>
               <div class="d-table-cell text-center user-icon" ngbDropdown #profileDropdown="ngbDropdown" placement="bottom-right" *ngIf="authService.isAuthenticated">
-                <a href="javascript:void(0)" id="profile" ngbDropdownToggle [ngStyle]="{'background-color': userBackgrondColor}" [ngClass]="{disabled: appService.isLoading}">
+                <a href="javascript:void(0)" id="profile" ngbDropdownToggle [ngStyle]="{'background-color': userBackgrondColor}" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}">
                   <span class="regular text-white size18">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.familyName[0] | uppercase)}}</span>
                 </a>
                 <div ngbDropdownMenu aria-labelledby="profile" class="pt-3 pb-3">
@@ -40,7 +46,7 @@
                       <div class="d-table-row">
                         <div class="d-table-cell text-center pt-3">
                           <div class="regular size18 text-truncate">{{authService.getUserInfo.givenName}} {{(authService.getUserInfo.familyName)}}</div>
-                          <div class="regular text-black-50 size16 text-truncate">{{authService.getUserInfo.email}}{{authService.getUserInfo.email}}</div>
+                          <div class="regular text-black-50 size16 text-truncate">{{authService.getUserInfo.email}}</div>
                         </div>
                       </div>
                     </div>
@@ -55,17 +61,25 @@
                 </div>
               </div>
               <div class="d-table-cell text-center signin-icon" *ngIf="!authService.isAuthenticated">
-                <a href="SignIn" [ngClass]="{disabled: appService.isLoading}"><span class="regular text-white size15">{{'signin' | translate}}</span></a>
+                <a routerLink="SignIn" routerLinkActive="active" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size15">{{'signin' | translate}}</span></a>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="navbar-header-title row mr-0 ml-0" *ngIf="appService.hasHearderSubtitle">
+        <div class="col align-middle text-center text-truncate text-light">
+          <a routerLink="{{appService.rootPath}}" routerLinkActive="active" class="bold size19">
+            <span class="text-light" *ngIf="appService.rootPath === 'CBX'">{{'CBX.label' | translate}} ( {{'CBX.initial' | translate}} )</span>
+            <span class="text-light" *ngIf="appService.rootPath === 'MUFE'">{{'MUFE.label' | translate}} ( {{'MUFE.initial' | translate}} )</span>
+          </a>
         </div>
       </div>
     </div>
   </header>
   <section [ngStyle]="sectionStyle">
     <div class="container pt-3 pb-3">
-      <router-outlet *ngIf="!isLoading"></router-outlet>
+      <router-outlet *ngIf="!appService.isLoading.page"></router-outlet>
     </div>
   </section>
   <footer #footerView>

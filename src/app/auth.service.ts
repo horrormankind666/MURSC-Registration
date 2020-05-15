@@ -66,21 +66,17 @@ export class AuthService {
       this.appService.getCookie(this.appService.cookieName);
 
       if (this.appService.authenResource.type && this.appService.authenResource.token) {
-        if (!this.isAuthenticated) {
-          let headers = new HttpHeaders()
-            .set('Authorization', ('Bearer ' + this.appService.authenResource.token));
+        let headers = new HttpHeaders()
+          .set('Authorization', ('Bearer ' + this.appService.authenResource.token));
 
-          this.http.get(this.appService.urlAuthenResource, { headers: headers }).subscribe((result: {}) => {
-            let data = result['data'];
+        this.http.get(this.appService.urlAuthenResource, { headers: headers }).subscribe((result: {}) => {
+          let data = result['data'];
 
-            this.isAuthenticated = (data !== null ? data[0].isAuthenticated : false);
-            this.setUserInfo(this.isAuthenticated ? data[1].payload : {});
+          this.isAuthenticated = (data !== null ? data[0].isAuthenticated : false);
+          this.setUserInfo(this.isAuthenticated ? data[1].payload : {});
 
-            resolve(this.getUserInfo);
-          });
-        }
-        else
-          resolve(this.getUserInfo)
+          resolve(this.getUserInfo);
+        });
       }
       else {
         this.isAuthenticated = false;

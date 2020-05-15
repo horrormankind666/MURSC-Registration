@@ -2,22 +2,53 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๔/๐๔/๒๕๖๓>
+Modify date : <๐๕/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 @import '../assets/style/util.scss';
 
-main header {
-  background: #1D4F91;
-}
-main header .navbar-header {
-  height: $header-max-height;
+main header .navbar-header-background {
+  width: 163px;
+  height: 126px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
   background-image: url($image-path + '/header-background.png');
   background-position: bottom right;
   background-size: cover;
   background-repeat: no-repeat;
+}
+main header .navbar-header-background:not(.has-hearder-subtitle) {
+  width: 105px;
+  height: 82px;
+}
+main header .navbar-header {
+  height: $header-max-height;
+  background-color: #1D4F91;
+}
+main header .navbar-header:not(.has-hearder-subtitle) {
+  box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.5);
+}
+main header .navbar-header-title {
+  background-color: rgba(29, 79, 145, 0.95);
+  border-bottom-left-radius: 1.3rem !important;
+  box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.5);
+}
+main header .navbar-header-title.row {
+  display: table !important;
+  table-layout: fixed !important;
+  width: 100%;
+  height: 45px;
+  position: relative;
+  top: -1px;
+}
+main header .navbar-header-title.row .col {
+  display: table-cell !important;
+  position: relative;
+  z-index: 2;
 }
 main header .navbar-header .d-table {
   width: inherit;
@@ -56,6 +87,8 @@ main header .navbar-header .d-table .d-table-cell.systeminfo .fullname {
 main header .navbar-header .d-table .d-table-cell.userinfo {
   width: auto;
   float: right;
+  position: relative;
+  z-index: 2;
 }
 main header .navbar-header .d-table .d-table-cell.userinfo .flags-icon,
 main header .navbar-header .d-table .d-table-cell.userinfo .home-icon {

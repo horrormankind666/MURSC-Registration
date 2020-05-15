@@ -29,10 +29,13 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     let url: string = state.url;
 
+    this.appService.rootPath = url.split('/')[1];
+    this.appService.hasHearderSubtitle = route.data.hasHearderSubtitle;
+    
     return this.authService.getAuthenResource().then((result: any) => {
       if (this.authService.isAuthenticated) {
         if (url === '/SignIn')
-          this.router.navigate(['Home']);
+          this.router.navigate(['Main']);
       }
       else {
         if (this.cookieService.check(this.appService.cookieName))

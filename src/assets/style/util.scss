@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๒/๐๔/๒๕๖๓>
+Modify date : <๑๕/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -19,15 +19,15 @@ $color-black-10: rgb(0, 0, 0, .10);
 
 $screen-max-width: 796px;
 $screen-min-width: 344px;
-$header-max-height: 80px;
+$header-max-height: 82px;
 $image-path: '../assets/images';
 
 $line-clamp-line-height: 1.7;
 
 @mixin table-responsive-step1($class)
 {
-  #{$class} .table th:not(.col-wrap),
-  #{$class} .table td:not(.col-wrap) {
+  #{$class} .table th:not(.col-wrap):not(.col-check):not(.col-index),
+  #{$class} .table td:not(.col-wrap):not(.col-check):not(.col-index) {
     display: none !important;
   }
   #{$class} .table th.col-wrap.col-wrap-step1,
@@ -38,9 +38,15 @@ $line-clamp-line-height: 1.7;
 
 @mixin table-responsive-step2($class)
 {
+  #{$class} .table thead,
   #{$class} .table th.col-wrap.col-wrap-step1,
-  #{$class} .table td.col-wrap.col-wrap-step1 {
+  #{$class} .table td.col-wrap.col-wrap-step1,
+  #{$class} .table th.col-index,
+  #{$class} .table td.col-index {
     display: none !important;
+  }
+  #{$class} .table td.col-check {
+    border-top: 0 !important;
   }
   #{$class} .table th.col-wrap.col-wrap-step2,
   #{$class} .table td.col-wrap.col-wrap-step2 {
@@ -70,7 +76,7 @@ $line-clamp-line-height: 1.7;
   #{$class} .form .form-group .col:not(.nowrap) {
     display: block !important;
     width: 100% !important;
-    padding-left: 0;
+    padding-left: 0 !important;
   }
 }
 
@@ -200,7 +206,7 @@ main footer .container {
 .msg-loading {
   z-index: 2000;
   position: fixed;
-  color: white;
+  color: #FFFFFF;
   left: 0;
   right: 0;
   text-align: center;
@@ -223,6 +229,7 @@ main footer .container {
   -webkit-box-shadow: none;
   box-shadow: none;
   background-image: none;
+  transition: none !important;
 }
 button:focus,
 .btn:focus,
@@ -283,7 +290,7 @@ body.modal-open {
   overflow: hidden !important;
 }
 .modal {
-  top: 80px !important;
+  top: 127px !important;
   //height: -webkit-calc(100% - #{$header-max-height}) !important;
   //height: -moz-calc(100% - #{$header-max-height}) !important;
   //height: calc(100% - #{$header-max-height}) !important;
@@ -295,6 +302,7 @@ body.modal-open {
 }
 .modal-content {
   border-radius: 0 !important;
+  background: #5BC0DE;
 }
 .modal-header {
   background: #5BC0DE;
@@ -363,7 +371,8 @@ body.modal-open {
   }
 }
 .modal-backdrop.show {
-  opacity: 0.8 !important;
+  opacity: 0.5 !important;
+  background: #FFFFFF !important;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   ::i-block-chrome,
@@ -455,6 +464,9 @@ body.modal-open {
   word-break: break-all;
   word-wrap: break-word;
 }
+.table tbody td {
+  word-break: break-word;
+}
 .table:not(.table-borderless) thead th {
   border-color: #0062CC;
   border-bottom: 1px solid #0062CC;
@@ -471,25 +483,25 @@ body.modal-open {
   margin-bottom: 0;
   margin-left: 0;
 }
-.card .card-body .card-text .form .form-group .col-form-label,
-.card .card-footer .card-text .form .form-group .col-form-label,
-.table tbody td .form .form-group .col-form-label {
+.card .card-body .card-text .form:not(.horizontal-form) .form-group .col-form-label,
+.card .card-footer .card-text .form:not(.horizontal-form) .form-group .col-form-label,
+.table tbody td .form:not(.horizontal-form) .form-group .col-form-label {
   padding-top: .25rem;
   padding-bottom: 0;
   line-height: 1.5;
 }
-.table tbody td .form .form-group .col-form-label {
+.table tbody td .form:not(.horizontal-form) .form-group .col-form-label {
   padding-top: 0 !important;
 }
-.table tbody td .form .form-group .col .form-text {
+.table tbody td .form:not(.horizontal-form) .form-group .col .form-text {
   margin-top: 0 !important;
 }
-.card .card-body .card-text .form .form-group .col-form-label:not(.w-100)::after,
-.card .card-footer .card-text .form .form-group .col-form-label:not(.w-100)::after,
-.table tbody td .form .form-group .col-form-label:not(.w-100)::after {
+.card .card-body .card-text .form:not(.horizontal-form) .form-group .col-form-label:not(.w-100)::after,
+.card .card-footer .card-text .form:not(.horizontal-form) .form-group .col-form-label:not(.w-100)::after,
+.table tbody td .form:not(.horizontal-form) .form-group .col-form-label:not(.w-100)::after {
   float: right;
   content: ':';
-  margin-left: 15px;
+  margin-left: 0.75rem;
 }
 .card .card-body .card-text .form .form-group .col,
 .card .card-footer .card-text .form .form-group .col,
@@ -497,11 +509,18 @@ body.modal-open {
   display: table-cell;
   vertical-align: top;
   word-wrap: break-word;
+  padding-left: 0.75rem;
 }
-
 .table .col-index {
   width: 80px;
   min-width: 80px;
+}
+.table .col-check {
+  width: 16px;
+  min-width: 16px;
+}
+.d-table-cell.table-cell-divider {
+  width: 16px !important;
 }
 .tooltip-custom {
   z-index: 10051 !important;
@@ -564,17 +583,40 @@ body.modal-open {
   outline: 0;
   box-shadow: 0 0 0 0;
 }
+.form-control,
 .inputbox,
 .ng-select .ng-select-container {
-  height: 35px;
-  min-height: 35px !important;
+  padding-right: 0.3rem;
+  padding-left: 0.3rem;
   border-radius: 0;
   border: 1px solid #BDC3C7;
-  padding: 0 0.3rem 0 0.3rem;
   color: #000000;
   background-color: #FFFFFF;
   outline: none;
   cursor: default;
+}
+.inputbox,
+.ng-select .ng-select-container {
+  height: 35px;
+  min-height: 35px !important;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+textarea {
+  overflow-x: hidden;
+  overflow-y: auto;
+  vertical-align: bottom;
+  box-sizing: border-box;
+  resize: none;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .form.horizontal-form .form-group .col-form-label-sm {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    position: relative;
+    top: 2px;
+  }
 }
 .ng-select .ng-select-container {
   display: table !important;
@@ -819,7 +861,116 @@ body.modal-open {
 .rounded-xl {
   border-radius: 0.5rem !important;
 }
+.rounded-xxl {
+  border-radius: 0.75rem !important;
+}
 .rounded-top-0 {
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
+}
+.rounded-bottom-0 {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+.w-inherit {
+  width: inherit !important;
+}
+.border-left-transparent {
+  border-left-color: transparent !important;
+}
+.border-right-transparent {
+  border-right-color: transparent !important;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #000000;
+  border-color: #FB542B;
+  background-color: #FB542B;
+}
+.custom-control-input:disabled ~ .custom-control-label::before {
+  border-color: #ADB5BD;
+  background-color: #ADB5BD;
+}
+.custom-control-label::before,
+.custom-control-label::after {
+  top: 0.26rem;
+}
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0 !important;
+}
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+  border-color: #ADB5BD;
+}
+.custom-radio .custom-control-label,
+.custom-checkbox .custom-control-label {
+  cursor: pointer;
+}
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after,
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+  font-family: 'FontAwesome';
+  color: #FFFFFF;
+  text-align: center;
+  background-image: none;
+  position: absolute;
+}
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+  content: '\f111';
+  font-size: 8px;
+  top: 0.39rem;
+}
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+  content: '\f00c';
+  font-size: 12px;
+  top: 0.2rem;
+}
+.custom-checkbox .custom-control-label::before {
+  border-radius: 0 !important;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .custom-control-label::before,
+  .custom-control-label::after {
+    top: 0.32rem;
+  }
+  ::i-block-chrome,
+  .custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+    top: 0.45rem;
+  }
+  ::i-block-chrome,
+  .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+    top: 0.25rem;
+  }
+}
+.w-33 {
+  width: 33.333333% !important;
+}
+.w-41 {
+  width: 41.666667% !important;
+}
+.w-58 {
+  width: 58.333333% !important;
+}
+.w-66 {
+  width: 66.666667% !important;
+}
+.w-83 {
+  width: 83.333333% !important;
+}
+.w-91 {
+  width: 91.666667% !important;
+}
+.alert {
+  padding-top: 0.6rem;
+  padding-right: 1rem;
+  padding-bottom: 0.59rem;
+  padding-left: 1rem;
+  border-radius: 0.3rem !important;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .alert {
+    padding-top: 0.65rem;
+  }
+}
+.text-decoration {
+  text-decoration: underline
 }

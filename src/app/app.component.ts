@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๐๑/๐๔/๒๕๖๓>
+Modify date : <๑๒/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -46,21 +46,23 @@ export class AppComponent implements OnInit {
     private appService: AppService,
     private authService: AuthService
   ) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
           if (this.modal.hasOpenModals())
             this.modal.dismissAll("");
 
-          appService.isLoading = true;
+          appService.isLoading.show = true;
+          appService.isLoading.page = true;
           break;
         }
         case event instanceof NavigationEnd:
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           setTimeout(() => {
-            appService.isLoading = false;
+            appService.isLoading.show = false;
+            appService.isLoading.page = false;
           }, 1000);
           break;
         }
@@ -71,22 +73,22 @@ export class AppComponent implements OnInit {
     });
   }
 
-  private userBackgrondColor: string;
-  private sectionStyle: {} = {};
-  private today: Date = new Date();
+  userBackgrondColor: string;
+  sectionStyle: {} = {};
+  today: Date = new Date();
 
   ngOnInit() {
     this.appService.setDefaultLang(this.appService.lang);
     this.userBackgrondColor = this.appService.getRandomColor();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewChecked() {
     this.sectionStyle = this.getSectionStyle();
   }
 
   onResize() {
     this.sectionStyle = this.getSectionStyle();
-    this.appService.setModalHeight();
+    this.appService.setModalSize();
   }
 
   getSectionStyle(): {} {

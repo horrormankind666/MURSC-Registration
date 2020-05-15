@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๐/๐๔/๒๕๖๓>
+Modify date : <๑๒/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -42,17 +42,26 @@ export class AppService  {
     tooltipConfig.tooltipClass = 'tooltip-custom';
   }
 
-  public isLoading: boolean = true;
+  public isLoading: any = {
+    show: false,
+    page: false,
+    modal: false,
+    processing: false,
+    saving: false,
+    checking: false
+  };
   public lang: string = 'th';
   public cookieName: string = 'MURSC.Cookies';
   public authenResource: any = {
     type: '',
     token: ''
   }
-  public urlAuthenResource: string = 'http://localhost:5001/API/AuthenResource/UserInfo';
-  public urlAuthenServer: string = 'http://localhost:4279';
+  public urlAuthenResource: string = /*'http://localhost:5001/API/AuthenResource/UserInfo'*/'https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/UserInfo';
+  public urlAuthenServer: string = /*'http://localhost:50833'*/'https://mursc.mahidol.ac.th/AuthADFS';
   public urlAPI: string = /*http://localhost:3000/API*/'https://mursc.mahidol.ac.th/API';
-  public dateTimeOnURL: string = formatDate(new Date(), 'dd/MM/yyyyHH:mm:ss', 'en')
+  public dateTimeOnURL: string = formatDate(new Date(), 'dd/MM/yyyyHH:mm:ss', 'en');
+  public rootPath: string;
+  public hasHearderSubtitle: boolean = false;
 
   textOverflowClamp(e: string, line: number) {
     $clamp(document.querySelector(e), {clamp: (this.deviceService.browser === 'IE' ? (line + 1) : line)});
@@ -69,10 +78,16 @@ export class AppService  {
     });
   }
 
-  setModalHeight() {
+  setModalPosition() {
     setTimeout(() => {
-      $('.modal').height($(window).height() - 80);
-    }, 0)
+      $('.modal').attr('style', ('top:' + $('header').height() + 'px !important'));
+    }, 0);
+  }
+
+  setModalSize() {
+    setTimeout(() => {
+      $('.modal').height($(window).height() - $('header').height());
+    }, 0);
   }
 
   getCurrentLanguage(): string {
@@ -129,7 +144,6 @@ export class AppService  {
     }
 
     url += (route + "?ver=" + this.dateTimeOnURL + query);
-
 
     let promise = new Promise((resolve, reject) => {
       this.http.get(url).subscribe((result: {}) => {

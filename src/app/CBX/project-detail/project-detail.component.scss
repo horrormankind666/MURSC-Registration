@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๗/๐๓/๒๕๖๓>
-Modify date : <๒๕/๐๔/๒๕๖๓>
+Modify date : <๐๗/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -38,25 +38,9 @@ Description : <>
     display: block;
   }
 }
-.project-detail-view .registered-btn {
-  border-width: 2px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0px;
-  width: 161px;
-}
-.project-detail-view .location-info .table tbody tr:last-child td {
-  padding-bottom: 0;
-  border-bottom: 0;
-}
-.project-detail-view .location-info .table .col-seattotal {
-  width: 250px;
-  min-width: 250px;
-}
-.project-detail-view .location-info .table .col-seatavailable {
-  width: 238px;
-  min-width: 238px;
+.project-detail-view .location-info .table .col-index {
+  width: 64px;
+  min-width: 64px;
 }
 .project-detail-view .location-building-seat-info .form .form-group .col-form-label {
   width: 136px;
@@ -64,13 +48,13 @@ Description : <>
 .project-detail-view .location-detail-info .form .form-group .col-form-label {
   width: 110px;
 }
-@media screen and (max-width: 914px) {
+@media screen and (max-width: 900px) {
   @include table-responsive-step1('.project-detail-view .location-info');
 }
 @media screen and (max-width: 525px) {
   @include form-responsive('.project-detail-view .register-info');
   .project-detail-view .registered-btn {
-    width: 100%;
+    width: 100% !important;
   }
   @include table-responsive-step2('.project-detail-view .location-info');
   @include form-responsive('.project-detail-view .location-info .location-detail-info');

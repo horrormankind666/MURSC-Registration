@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๒>
-Modify date : <๒๕/๐๔/๒๕๖๓>
+Modify date : <๑๒/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -16,17 +16,19 @@ import {Observable} from 'rxjs';
 
 import {Schema, DataService} from './data.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ProjectDetailResolver implements Resolve<Schema.CBX.Project> {
-  constructor(
-    private dataService: DataService
-  ) {}
+export namespace CBX {
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class TransProject implements Resolve<Schema.CBX.TransProject> {
+    constructor(
+      private dataService: DataService
+    ) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Schema.CBX.Project> | Promise<Schema.CBX.Project> | Schema.CBX.Project {
-    return this.dataService.cbx.project.get(route.params['transProjectID']).then((result: Schema.CBX.Project) => {
-      return result;
-    });
+    resolve(route: ActivatedRouteSnapshot): Observable<Schema.CBX.TransProject> | Promise<Schema.CBX.TransProject> | Schema.CBX.TransProject {
+      return this.dataService.cbx.transProject.get(route.params['transProjectID']).then((result: Schema.CBX.TransProject) => {
+        return result;
+      });
+    }
   }
 }

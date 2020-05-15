@@ -1,0 +1,39 @@
+/*
+=============================================
+Author      : <ยุทธภูมิ ตวันนา>
+Create date : <๒๗/๐๔/๒๕๖๓>
+Modify date : <๒๘/๐๔/๒๕๖๓>
+Description : <>
+=============================================
+*/
+
+.main-view a.btn {
+  width: 254px !important;
+  background: transparent;
+}
+.main-view a.btn i {
+  border-color: transparent !important;
+}
+.main-view a.btn:hover,
+.main-view a.btn:focus,
+.main-view a.btn.focus,
+.main-view a.btn:active,
+.main-view a.btn.active {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 15px 0 rgba(0, 0, 0, 0.3) !important;
+}
+.main-view a.btn:hover i,
+.main-view a.btn:focus i,
+.main-view a.btn.focus i,
+.main-view a.btn:active i,
+.main-view a.btn.active i {
+  color: #FFFFFF !important;
+  background: #4DABF7 !important;
+  border-color: #4DABF7 !important;
+}
+@media screen and (max-width: 555px) {
+  .main-view .d-table,
+  .main-view .d-table-cell {
+    display: block !important;
+    width: 254px !important;
+  }
+}

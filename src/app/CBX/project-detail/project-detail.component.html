@@ -38,7 +38,7 @@
             </div>
           </div>
         </div>
-        <div class="pt-2 pr-3 pb-3 pl-3">
+        <div class="bg-white pt-2 pr-3 pb-3 pl-3">
           <div class="jumbotron rounded-xl mb-0 p-3">
             <div class="border-bottom border-white pb-2">
               <span class="bold text-primary size20">{{'location.info' | translate | titlecase}}</span>
@@ -93,8 +93,8 @@
               'text-danger ': (data$.registrationStatus === 'N'),
               'fa-unlock': (data$.registrationStatus === 'Y'),
               'fa-lock': (data$.registrationStatus !== 'Y')
-            }"
-          ></i>
+            }">
+          </i>
         </div>
         <div class="text-right" ngbDropdown placement="bottom-left">
           <a class="badge badge-pill badge-dark" href="javascript:void(0)" ngbDropdownToggle>
@@ -106,6 +106,30 @@
         </div>
       </div>
       <div class="clearfix"></div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #contactInfo>
+  <div class="contact-info text-white size14">
+    <div class="form">
+      <div class="form-group row mr-0 mb-1 ml-0">
+        <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fa fa-address-book-o"></i></label>
+        <div class="col text-left">
+          <span class="form-text regular mt-0">{{data$.contact.name[appService.lang]}}</span>
+        </div>
+      </div>
+      <div class="form-group row mr-0 mb-1 ml-0">
+        <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fa fa-envelope-o"></i></label>
+        <div class="col text-left">
+          <span class="form-text regular mt-0">{{data$.contact.email}}</span>
+        </div>
+      </div>
+      <div class="form-group row mr-0 mb-0 ml-0">
+        <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fa fa-phone"></i></label>
+        <div class="col text-left">
+          <span class="form-text regular mt-0">{{data$.contact.phone}}</span>
+        </div>
+      </div>
     </div>
   </div>
 </ng-template>
@@ -153,7 +177,8 @@
                   [ngClass]="{
                     'align-middle': (deviceService.browser !== 'Safari'),
                     'pt-1': (deviceService.browser === 'Safari')
-                  }"><span class="text-danger size12"><i class="fa fa-stop"></i></span>
+                  }">
+                  <span class="text-danger size12"><i class="fa fa-stop"></i></span>
                 </div>
                 <div class="d-table-cell align-middle"><span class="text-danger" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )">{{data$.registrationDate.endDate}}</span></div>
               </div>
@@ -176,7 +201,8 @@
                   [ngClass]="{
                     'align-middle': (deviceService.browser !== 'Safari'),
                     'pt-1': (deviceService.browser === 'Safari')
-                  }"><span class="text-danger size12"><i class="fa fa-stop"></i></span>
+                  }">
+                  <span class="text-danger size12"><i class="fa fa-stop"></i></span>
                 </div>
                 <div class="d-table-cell align-middle"><span class="text-danger">{{data$.lastPaymentDate}}</span></div>
               </div>
@@ -188,15 +214,17 @@
   </div>
 </ng-template>
 <ng-template #registerButtonInfo>
-  <a href="Registered/{{data$.transProjectID}}" class="btn registered-btn"
-    [ngClass]="{
-      'btn-success': (data$.registrationStatus === 'Y'),
-      'btn-warning': (data$.registrationStatus === 'W'),
-      'btn-danger': (data$.registrationStatus === 'N'),
-      'disabled': (data$.registrationStatus !== 'Y' || data$.location.length === 0)
-    }"
-    ><span class="font regular size16">{{'registered.label' | translate | titlecase}}</span>
-  </a>
+  <div class="registered-btn ml-auto">
+    <a [routerLink]="['CBX/Registered', data$.transProjectID]" routerLinkActive="active" class="btn"
+      [ngClass]="{
+        'btn-success': (data$.registrationStatus === 'Y'),
+        'btn-warning': (data$.registrationStatus === 'W'),
+        'btn-danger': (data$.registrationStatus === 'N'),
+        'disabled': (data$.registrationStatus !== 'Y' || data$.location.length === 0)
+      }">
+      <span class="font bold text-white size20">{{'registered.label' | translate | titlecase}}</span>
+    </a>
+  </div>
 </ng-template>
 <ng-template #locationInfo>
   <div class="location-info">
@@ -208,34 +236,30 @@
           <th class="border-top-0 border-white bold col-building">{{'building.label' | translate | titlecase}}</th>
           <th class="border-top-0 border-white bold col-seattotal">{{'location.seatTotal' | translate | titlecase}}</th>
           <th class="border-top-0 border-right-0 border-white pr-0 bold col-seatavailable">{{'location.seatAvailable' | translate | titlecase}}</th>
-          <th class="border-top-0 border-left-0 border-white col-wrap col-wrap-step1 pl-0 bold col-index">{{'order' | translate | titlecase}}</th>
           <th class="border-top-0 border-right-0 border-white col-wrap col-wrap-step1 pr-0 bold">{{'location.info' | translate | titlecase}}</th>
         </tr>
       </thead>
-      <tbody class="size16">
-        <tr *ngFor="let location of data$.location; index as order">
-          <td class="border-right-0 border-left-0 pl-0 regular col-index" ngbTooltip="{{'order' | translate | titlecase}}" title="{{'order' | translate | titlecase}}">
+      <tbody class="border-top-0 size16" *ngFor="let location of data$.location; index as order">
+        <tr>
+          <td class="border-top-0 border-right-transparent border-left-0 pl-0 regular col-index" ngbTooltip="{{'order' | translate | titlecase}}" title="{{'order' | translate | titlecase}}">
             {{(order + 1) | number}}
           </td>
-          <td class="border-right-0 border-left-0 regular col-location" ngbTooltip="{{'location.label' | translate | titlecase}}" title="{{'location.label' | translate | titlecase}}">
+          <td class="border-top-0 border-right-transparent regular col-location" ngbTooltip="{{'location.label' | translate | titlecase}}" title="{{'location.label' | translate | titlecase}}">
             {{location.name[appService.lang]}}
           </td>
-          <td class="border-right-0 border-left-0 regular col-building" ngbTooltip="{{'building.label' | translate | titlecase}}" title="{{'building.label' | translate | titlecase}}">
+          <td class="border-top-0 border-right-transparent regular col-building" ngbTooltip="{{'building.label' | translate | titlecase}}" title="{{'building.label' | translate | titlecase}}">
             {{location.building.name[appService.lang]}}
           </td>
-          <td class="border-right-0 border-left-0 regular col-seattotal" ngbTooltip="{{'location.seatTotal' | translate | titlecase}}" title="{{'location.seatTotal' | translate | titlecase}}">
+          <td class="border-top-0 border-right-transparent regular col-seattotal" ngbTooltip="{{'location.seatTotal' | translate | titlecase}}" title="{{'location.seatTotal' | translate | titlecase}}">
             {{location.seatTotal}}
           </td>
-          <td class="border-right-0 border-left-0 pr-0 regular col-seatavailable" ngbTooltip="{{'location.seatAvailable' | translate | titlecase}}" title="{{'location.seatAvailable' | translate | titlecase}}">
+          <td class="border-top-0 border-right-0 pr-0 regular col-seatavailable" ngbTooltip="{{'location.seatAvailable' | translate | titlecase}}" title="{{'location.seatAvailable' | translate | titlecase}}">
             {{location.seatAvailable}}
           </td>
-          <td class="border-right-0 border-left-0 pl-0 col-wrap col-wrap-step1 regular col-index" ngbTooltip="{{'order' | translate | titlecase}}" title="{{'order' | translate | titlecase}}">
-            {{(order + 1) | number}}
-          </td>
-          <td class="border-right-0 border-left-0 pr-0 col-wrap col-wrap-step1 regular col-location-building-seat">
+          <td class="border-top-0 border-right-0 pr-0 col-wrap col-wrap-step1 regular col-location-building-seat">
             <ng-container *ngTemplateOutlet="locationBuildingSeatInfo; context: {data: location}"></ng-container>
           </td>
-          <td class="border-top-0 border-right-0 border-left-0 pr-0 pl-0 col-wrap col-wrap-step2 regular col-location-detail">
+          <td class="border-top-0 border-top-0 border-right-0 border-left-0 pr-0 pl-0 col-wrap col-wrap-step2 regular col-location-detail">
             <ng-container *ngTemplateOutlet="locationDetailInfo; context: {data: location, order: ((order + 1) | number)}"></ng-container>
           </td>
         </tr>
@@ -277,36 +301,12 @@
   <div class="location-detail-info">
     <div class="form">
       <div class="form-group row nowrap mb-2" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'order' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'order' | translate | titlecase}} )">
-        <label for="col-contact" class="col-form-label">{{'order' | translate | titlecase}}</label>
+        <label for="col-order" class="col-form-label">{{'order' | translate | titlecase}}</label>
         <div class="col">
           <span class="form-text regular">{{order}}</span>
         </div>
       </div>
     </div>
     <ng-container *ngTemplateOutlet="locationBuildingSeatInfo; context: {data: data}"></ng-container>
-  </div>
-</ng-template>
-<ng-template #contactInfo>
-  <div class="contact-info text-white size14">
-    <div class="form">
-      <div class="form-group row mr-0 mb-1 ml-0">
-        <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fa fa-address-book-o"></i></label>
-        <div class="col text-left">
-          <span class="form-text regular mt-0">{{data$.contact.name[appService.lang]}}</span>
-        </div>
-      </div>
-      <div class="form-group row mr-0 mb-1 ml-0">
-        <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fa fa-envelope-o"></i></label>
-        <div class="col text-left">
-          <span class="form-text regular mt-0">{{data$.contact.email}}</span>
-        </div>
-      </div>
-      <div class="form-group row mr-0 mb-0 ml-0">
-        <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fa fa-phone"></i></label>
-        <div class="col text-left">
-          <span class="form-text regular mt-0">{{data$.contact.phone}}</span>
-        </div>
-      </div>
-    </div>
   </div>
 </ng-template>

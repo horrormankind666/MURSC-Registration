@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๐๑/๐๔/๒๕๖๓>
+Modify date : <๒๘/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -33,7 +33,8 @@ export class ModalService {
       windowClass: windowClass
     });
 
-    this.appService.setModalHeight();
+    this.appService.setModalPosition();
+    this.appService.setModalSize();
 
     return modalRef;
   }

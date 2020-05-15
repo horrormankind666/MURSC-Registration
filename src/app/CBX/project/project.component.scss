@@ -13,7 +13,7 @@ Description : <>
   margin-left: -0.25rem;
   margin-bottom: -0.25rem;
 }
-@media (max-width: 606px) {
+@media screen and (max-width: 606px) {
   .project-view .card-group .card-col.col-sm-6 {
     -ms-flex: 0 0 100%;
     flex: 0 0 100%;
@@ -74,9 +74,9 @@ Description : <>
   width: 100% !important;
 }
 .project-view .project-card-vertical .register-info .form .form-group.col-registrationdate .col-form-label::after {
-  float: none;
-  content: '';
-  margin-left: 0;
+  float: none !important;
+  content: '' !important;
+  margin-left: 0 !important;
 }
 .project-view .project-card-vertical .register-info .form .form-group.col-registrationdate .col {
   padding-left: 0 !important;

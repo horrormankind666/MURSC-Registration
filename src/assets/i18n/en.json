@@ -1,83 +1,134 @@
 {
-    "systemName": "Mahidol University Registration Support Center ( MURSC )",
-    "signin": "Sign in",
-    "signout": {
-      "label": "Sign out",
-      "confirm": "Confirm your would like to sign out."
-    },
-    "msgLoading": {
-      "loading": "Loading..."
-    },
-    "pageNotFound": "Page Not Found",
-    "cancel":"Cancel",
-    "ok": "Ok",
-    "close": "Close",
-    "registered": {
-      "label": "Registered",
-      "info": "Registered Information"
-    },
-    "order": "Order",
-    "status": "Status",
-    "detail": "Detail",
-    "found": "Found",
-    "from": "From",
-    "entries": "Entries",
-    "filter": "Filter",
-    "reload": "Reload",
-    "start": "Start",
-    "end": "End",
-    "total": "Total",
-    "remain": "Remain",
-    "name": "Name",
-    "email": "Email",
-    "phone": "Phone",
-    "fee": "Fee",
-    "seat": {
-      "label": "Seat",
-      "seatTotal": "Seat Total",
-      "seatAvailable": "Seat Available"
-    },
-    "unit": {
-      "label": "Unit",
-      "baht": "Bath",
-      "persons": "Persons"
-    },
-    "keyword": "Keyword",
-    "registrationStatus": "Registration Status",
-    "user": {
-      "label": "User",
-      "info": "User Information",
-      "registered": {
-        "label": "User Registered",
-        "info": "User Registered Information"
-      }
-    },
-    "project": {
-      "label": "Project",
-      "name": "Project Name",
-      "registrationDate": "Registration Date",
-      "seat": "Seat",
-      "seatAvailable": "Seat Available",
-      "registrationFee": "Registration Fee",
-      "lastPaymentDate": "Last Payment Date",
-      "detail": "Project Detail",
+  "systemName": "Mahidol University Registration Support Center ( MURSC )",
+  "CBX": {
+    "label": "Computer-Based Exams",
+    "initial": "CBX"
+  },
+  "MUFE": {
+    "label": "Mahidol University Flexible Education",
+    "initial": "MUFE"
+  },
+  "signin": "Sign in",
+  "signout": {
+    "label": "Sign out",
+    "confirm": "Confirm your would like to sign out."
+  },
+  "msgLoading": {
+    "loading": "Loading...",
+    "processing": "Processing...",
+    "saving": "Saving...",
+    "checking": "Checking..."
+  },
+  "pageNotFound": "Page Not Found",
+  "save": {
+    "label": "Save",
+    "error": "Please fill in the information correctly and completely.",
+    "confirm": "Do you want to save changes ?"
+  },
+  "cancel":"Cancel",
+  "ok": "Ok",
+  "close": "Close",
+  "select": "Select",
+  "registered": {
+    "label": "Registered",
+    "info": "Registered Information",
+    "confirm": "Confirm Registered",
+    "save": {
       "error": {
-        "notFound": "Project Not Found"
+        "location": "Please select a location.",
+        "registrationStatus": {
+          "W": "This project not yet opened for registration.",
+          "N": "This project expired for registration."
+        },
+        "seatAvailable": "This location does not have enough seat available."
       }
-    },
-    "location": {
-      "label": "Location",
-      "info": "Location Information",
-      "name": "Location Name",
-      "seatTotal": "Seat Total",
-      "seatAvailable": "Seat Available"
-    },
-    "building": {
-      "label": "Building",
-      "name": "Building Name"
-    },
-    "contact": {
-      "label": "Contact",
-      "name": "Contact Name"
     }
+  },
+  "items": "Items",
+  "order": "Order",
+  "status": "Status",
+  "detail": "Detail",
+  "found": "Found",
+  "from": "From",
+  "entries": "Entries",
+  "filter": "Filter",
+  "reload": "Reload",
+  "start": "Start",
+  "end": "End",
+  "total": {
+    "label": "Total",
+    "amount": "Total Amount"
+  },
+  "remain": "Remain",
+  "name": "Name",
+  "email": "Email",
+  "phone": "Phone",
+  "fee": "Fee",
+  "amount": "Amount",
+  "seat": {
+    "label": "Seat",
+    "seatTotal": "Seat Total",
+    "seatAvailable": "Seat Available"
+  },
+  "unit": {
+    "label": "Unit",
+    "baht": "Bath",
+    "persons": "Persons"
+  },
+  "keyword": "Keyword",
+  "registrationStatus": "Registration Status",
+  "user": {
+    "label": "User",
+    "info": "User Information",
+    "registered": {
+      "label": "User Registered",
+      "info": "User Registered Information"
+    }
+  },
+  "project": {
+    "label": "Project",
+    "name": "Project Name",
+    "registrationDate": "Registration Date",
+    "seat": "Seat",
+    "seatAvailable": "Seat Available",
+    "registrationFee": "Registration Fee",
+    "lastPaymentDate": "Last Payment Date",
+    "detail": "Project Detail",
+    "error": {
+      "notFound": "Project Not Found"
+    }
+  },
+  "location": {
+    "label": "Location",
+    "info": "Location Information",
+    "name": "Location Name",
+    "seatTotal": "Seat Total",
+    "seatAvailable": "Seat Available"
+  },
+  "building": {
+    "label": "Building",
+    "name": "Building Name"
+  },
+  "contact": {
+    "label": "Contact",
+    "name": "Contact Name"
+  },
+  "address": {
+    "label": "Address",
+    "apartment": "Apartment",
+    "building": "Building",
+    "floor": "Floor",
+    "houseNo": "House No.",
+    "village": "Village",
+    "villageNo": "Village No.",
+    "alley": "Alley",
+    "lane": "Lane",
+    "road": "Road",
+    "street": "Street",
+    "subdistrict": "Sub-district / Sub-area",
+    "district": "District / Area",
+    "province": "Province",
+    "country": "Country",
+    "postalCode": "Postal Code"
+  }
 }

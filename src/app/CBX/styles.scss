@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๒๔/๐๔/๒๕๖๓>
+Modify date : <๑๔/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -158,4 +158,44 @@ Description : <>
     width: auto !important;
     max-width: 100% !important;
   }
+}
+.project-detail-view .registered-btn,
+.registered-view .registered-btn {
+  display: table;
+  width: 215px;
+  height: 50px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .project-detail-view .registered-btn,
+  .registered-view .registered-btn {
+    height: 34px;
+  }
+}
+.project-detail-view .registered-btn .btn,
+.registered-view .registered-btn .btn {
+  display: table-cell !important;
+  width: inherit;
+  height: inherit;
+  vertical-align: middle;
+  border-width: 2px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0px;
+}
+.project-detail-view .location-info .table tbody:last-child td,
+.registered-view .location-info .table tbody:last-child td {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.project-detail-view .location-info .table .col-seattotal,
+.registered-view .location-info .table .col-seattotal {
+  width: 250px;
+  min-width: 250px;
+}
+.project-detail-view .location-info .table .col-seatavailable,
+.registered-view .location-info .table .col-seatavailable {
+  width: 238px;
+  min-width: 238px;
 }

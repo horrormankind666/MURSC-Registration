@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๒๕/๐๔/๒๕๖๓>
+Modify date : <๑๔/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -15,8 +15,9 @@ import {AppService} from './app.service';
 
 export namespace Schema {
   export namespace CBX {
-    export interface Project {
+    export interface TransProject {
       transProjectID?: string;
+      projectID?: string
       logo?: string;
       name?: {
         th?: string,
@@ -40,23 +41,41 @@ export namespace Schema {
         phone?: string
       };
       registrationStatus?: string;
-      location?: ProjectLocation[]
+      location?: TransLocation[];
+      feeType?: TransFeeType[]
     }
 
-    export interface ProjectLocation {
+    export interface TransLocation {
       transLocationID?: string;
+      locationID?: string;
+      transProjectID?: string;
       name?: {
         th?: string,
         en?: string
       };
       building?: {
+        ID?: string,
         name?: {
           th?: string,
           en?: string
         }
       };
-      seatTotal?: string;
-      seatAvailable?: string;
+      seatTotal?: number;
+      seatAvailable?: number;
+    }
+
+    export interface TransFeeType  {
+      transFeeTypeID?: string;
+      feeTypeID?: string;
+      transProjectID?: string;
+      name?: {
+        th?: string,
+        en?: string
+      };
+      amount?: number,
+      requiredStatus?: string,
+      toggle?: string,
+      isSelected?: boolean
     }
 
     export interface RegistrationStatus {
@@ -71,113 +90,137 @@ export namespace Schema {
 
 namespace Data {
   export namespace CBX {
-    export class Project {
+    export class TransProject {
       constructor(
         private appService: AppService
       ) {}
 
-      private getDataSource(action: string, query?: string): Promise<Schema.CBX.Project[]> {
-        return this.appService.getDataSource('Project', action, query).then((result: []) => {
-          let items: Schema.CBX.Project[] = [];
-          let projectLocation: Schema.CBX.ProjectLocation[] = [];
+      private getDataSource(action: string, query?: string): Promise<Schema.CBX.TransProject[]> {
+        return this.appService.getDataSource('TransProject', action, query).then((result: []) => {
+          let transProject: Schema.CBX.TransProject[] = [];
+          let transLocation: Schema.CBX.TransLocation[] = [];
+          let transFeeType: Schema.CBX.TransFeeType[] = [];
 
-          for (let dr of result) {
+          for (let dr1 of result) {
             if (action === 'getlist') {
-              items.push({
-                transProjectID: (dr['transProjectID'] ? dr['transProjectID'] : ''),
-                logo: (dr['logo'] ? dr['logo'] : ''),
+              transProject.push({
+                transProjectID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
+                projectID: (dr1['projectID'] ? dr1['projectID'] : ''),
+                logo: (dr1['logo'] ? dr1['logo'] : ''),
                 name: {
-                  th: (dr['projectNameTH'] ? dr['projectNameTH'] : ''),
-                  en: (dr['projectNameEN'] ? dr['projectNameEN'] : dr['projectNameTH'])
+                  th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : ''),
+                  en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
                 },
-                detail: (dr['detail'] ? dr['detail'] : ''),
-                examDate: (dr['examDates'] ? dr['examDates'] : ''),
+                detail: (dr1['detail'] ? dr1['detail'] : ''),
+                examDate: (dr1['examDates'] ? dr1['examDates'] : ''),
                 registrationDate: {
-                  startDate: (dr['regisStartDates'] ? dr['regisStartDates'] : ''),
-                  endDate: (dr['regisEndDates'] ? dr['regisEndDates'] : '')
+                  startDate: (dr1['regisStartDates'] ? dr1['regisStartDates'] : ''),
+                  endDate: (dr1['regisEndDates'] ? dr1['regisEndDates'] : '')
                 },
-                maximumSeat: (dr['maximumSeat'] ? dr['maximumSeat'] : ''),
-                minimumFee: (dr['minimumFee'] ? dr['minimumFee'] : ''),
+                maximumSeat: (dr1['maximumSeat'] ? dr1['maximumSeat'] : ''),
+                minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
                 contact: {
                   name: {
-                    th: (dr['contactNameTH'] ? dr['contactNameTH'] : ''),
-                    en: (dr['contactNameEN'] ? dr['contactNameEN'] : dr['contactNameTH'])
+                    th: (dr1['contactNameTH'] ? dr1['contactNameTH'] : ''),
+                    en: (dr1['contactNameEN'] ? dr1['contactNameEN'] : dr1['contactNameTH'])
                   },
-                  email: (dr['contactEmail'] ? dr['contactEmail'] : ''),
-                  phone: (dr['contactPhone'] ? dr['contactPhone'] : '')
+                  email: (dr1['contactEmail'] ? dr1['contactEmail'] : ''),
+                  phone: (dr1['contactPhone'] ? dr1['contactPhone'] : '')
                 },
-                registrationStatus: (dr['registrationStatus'] ? dr['registrationStatus'] : '')
+                registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : '')
               });
             }
 
             if (action === 'get') {
-              let location: [] = (dr['location'] ? dr['location'] : []);
+              let location: [] = (dr1['location'] ? dr1['location'] : []);
+              let feeType: [] = (dr1['feeType'] ? dr1['feeType'] : []);
 
-              for (let dr1 of location) {
-                projectLocation.push({
-                  transLocationID: (dr1['transLocationID'] ? dr1['transLocationID'] : ''),
+              for (let dr2 of location) {
+                transLocation.push({
+                  transLocationID: (dr2['transLocationID'] ? dr2['transLocationID'] : ''),
+                  locationID: (dr2['locationID'] ? dr2['locationID'] : ''),
+                  transProjectID: (dr2['transProjectID'] ? dr2['transProjectID'] : ''),
                   name: {
-                    th: (dr1['locationNameTH'] ? dr1['locationNameTH'] : ''),
-                    en: (dr1['locationNameEN'] ? dr1['locationNameEN'] : dr1['locationNameTH'])
+                    th: (dr2['locationNameTH'] ? dr2['locationNameTH'] : ''),
+                    en: (dr2['locationNameEN'] ? dr2['locationNameEN'] : dr2['locationNameTH'])
                   },
                   building: {
+                    ID: (dr2['buildingID'] ? dr2['buildingID'] : ''),
                     name: {
-                      th: (dr1['buildingNameTH'] ? dr1['buildingNameTH'] : ''),
-                      en: (dr1['buildingNameEN'] ? dr1['buildingNameEN'] : dr1['buildingNameTH'])
+                      th: (dr2['buildingNameTH'] ? dr2['buildingNameTH'] : ''),
+                      en: (dr2['buildingNameEN'] ? dr2['buildingNameEN'] : dr2['buildingNameTH'])
                     }
                   },
-                  seatTotal: (dr1['seatTotal'] ? dr1['seatTotal'] : ''),
-                  seatAvailable: (dr1['seatAvailable'] ? dr1['seatAvailable'] : '')
+                  seatTotal: (dr2['seatTotal'] ? parseInt(dr2['seatTotal']) : 0),
+                  seatAvailable: (dr2['seatAvailable'] ? parseInt(dr2['seatAvailable']) : 0)
                 });
               }
 
-              items.push({
-                transProjectID: (dr['transProjectID'] ? dr['transProjectID'] : ''),
-                logo: (dr['logo'] ? dr['logo'] : ''),
+              for (let dr3 of feeType) {
+                transFeeType.push({
+                  transFeeTypeID: (dr3['transFeeTypeID'] ? dr3['transFeeTypeID'] : ''),
+                  feeTypeID: (dr3['feeTypeID'] ? dr3['feeTypeID'] : ''),
+                  transProjectID: (dr3['transProjectID'] ? dr3['transProjectID'] : ''),
+                  name: {
+                    th: (dr3['feeTypeNameTH'] ? dr3['feeTypeNameTH'] : ''),
+                    en: (dr3['feeTypeNameEN'] ? dr3['feeTypeNameEN'] : dr3['feeTypeNameTH'])
+                  },
+                  amount: (dr3['amount'] ? parseFloat(dr3['amount']) : 0),
+                  requiredStatus: (dr3['requiredStatus'] ? dr3['requiredStatus'] : ''),
+                  toggle: (dr3['toggle'] ? dr3['toggle'] : ''),
+                  isSelected: (dr3['requiredStatus'] ? (dr3['requiredStatus'] === 'Y' ? true : false) : false),
+                });
+              }
+
+              transProject.push({
+                transProjectID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
+                projectID: (dr1['projectID'] ? dr1['projectID'] : ''),
+                logo: (dr1['logo'] ? dr1['logo'] : ''),
                 name: {
-                  th: (dr['projectNameTH'] ? dr['projectNameTH'] : ''),
-                  en: (dr['projectNameEN'] ? dr['projectNameEN'] : dr['projectNameTH'])
+                  th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : ''),
+                  en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
                 },
-                detail: (dr['detail'] ? dr['detail'] : ''),
-                examDate: (dr['examDates'] ? dr['examDates'] : ''),
+                detail: (dr1['detail'] ? dr1['detail'] : ''),
+                examDate: (dr1['examDates'] ? dr1['examDates'] : ''),
                 registrationDate: {
-                  startDate: (dr['regisStartDates'] ? dr['regisStartDates'] : ''),
-                  endDate: (dr['regisEndDates'] ? dr['regisEndDates'] : '')
+                  startDate: (dr1['regisStartDates'] ? dr1['regisStartDates'] : ''),
+                  endDate: (dr1['regisEndDates'] ? dr1['regisEndDates'] : '')
                 },
-                lastPaymentDate: (dr['lastPaymentDates'] ? dr['lastPaymentDates'] : ''),
-                maximumSeat: (dr['maximumSeat'] ? dr['maximumSeat'] : ''),
-                minimumFee: (dr['minimumFee'] ? dr['minimumFee'] : ''),
+                lastPaymentDate: (dr1['lastPaymentDates'] ? dr1['lastPaymentDates'] : ''),
+                maximumSeat: (dr1['maximumSeat'] ? dr1['maximumSeat'] : ''),
+                minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
                 contact: {
                   name: {
-                    th: (dr['contactNameTH'] ? dr['contactNameTH'] : ''),
-                    en: (dr['contactNameEN'] ? dr['contactNameEN'] : dr['contactNameTH'])
+                    th: (dr1['contactNameTH'] ? dr1['contactNameTH'] : ''),
+                    en: (dr1['contactNameEN'] ? dr1['contactNameEN'] : dr1['contactNameTH'])
                   },
-                  email: (dr['contactEmail'] ? dr['contactEmail'] : ''),
-                  phone: (dr['contactPhone'] ? dr['contactPhone'] : '')
+                  email: (dr1['contactEmail'] ? dr1['contactEmail'] : ''),
+                  phone: (dr1['contactPhone'] ? dr1['contactPhone'] : '')
                 },
-                registrationStatus: (dr['registrationStatus'] ? dr['registrationStatus'] : ''),
-                location: projectLocation
+                registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : ''),
+                location: transLocation,
+                feeType: transFeeType
               });
             }
           }
 
-          return items;
+          return transProject;
         });
       }
 
-      getList(): Promise<Schema.CBX.Project[]> {
-        return this.getDataSource('getlist').then((result: Schema.CBX.Project[]) => {
+      getList(): Promise<Schema.CBX.TransProject[]> {
+        return this.getDataSource('getlist').then((result: Schema.CBX.TransProject[]) => {
           return result;
         })
       }
 
-      get(id: string): Promise<Schema.CBX.Project> {
+      get(transProjectID: string): Promise<Schema.CBX.TransProject> {
         let query = [
           "",
-          ("transProjectID=" + id)
+          ("transProjectID=" + transProjectID)
         ].join("&");
 
-        return this.getDataSource('get', query).then((result: Schema.CBX.Project[]) => {
+        return this.getDataSource('get', query).then((result: Schema.CBX.TransProject[]) => {
           return result[0];
         });
       }
@@ -242,7 +285,7 @@ export class DataService {
   ) {}
 
   public cbx = {
-    project: new Data.CBX.Project(this.appService),
+    transProject: new Data.CBX.TransProject(this.appService),
     registrationStatus: new Data.CBX.RegistrationStatus()
   }
 }

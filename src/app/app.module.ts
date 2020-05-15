@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๐/๐๔/๒๕๖๓>
+Modify date : <๑๕/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -25,6 +25,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxLoadingModule, ngxLoadingAnimationTypes} from 'ngx-loading';
 import {CookieService} from 'ngx-cookie-service';
 import {DeviceDetectorModule} from 'ngx-device-detector';
+import {TextareaAutosizeModule} from 'ngx-textarea-autosize';
 
 import {AppService} from './app.service';
 import {AuthGuardService} from './auth-guard.service';
@@ -35,11 +36,14 @@ import {appRouting} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ModalErrorComponent, ModalConfirmComponent} from './modal/modal.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {MainComponent} from './main.component';
 import {SigninComponent} from './signin/signin.component';
-import {HomeComponent} from './CBX/home/home.component';
-import {ProjectComponent} from './CBX/project/project.component';
-import {ProjectDetailComponent} from './CBX/project-detail/project-detail.component';
-import {RegisteredComponent} from './CBX/registered/registered.component';
+import {HomeComponent as CBXHomeComponent} from './CBX/home/home.component';
+import {ProjectComponent as CBXProjectComponent} from './CBX/project/project.component';
+import {ProjectDetailComponent as CBXProjectDetailComponent} from './CBX/project-detail/project-detail.component';
+import {RegisteredComponent as CBXRegisteredComponent} from './CBX/registered/registered.component';
+import {HomeComponent as MUEFHomeComponent} from  './MUFE/home/home.component';
+import {TrimOnBlurDirective} from './app.directive';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -51,11 +55,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalErrorComponent,
     ModalConfirmComponent,
     PageNotFoundComponent,
+    MainComponent,
     SigninComponent,
-    HomeComponent,
-    ProjectComponent,
-    ProjectDetailComponent,
-    RegisteredComponent
+    CBXHomeComponent,
+    CBXProjectComponent,
+    CBXProjectDetailComponent,
+    CBXRegisteredComponent,
+    MUEFHomeComponent,
+    TrimOnBlurDirective
   ],
   imports: [
     BrowserModule,
@@ -65,7 +72,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRouting, {
-      useHash: false
+      useHash: true
     }),
     TranslateModule.forRoot({
       loader: {
@@ -76,13 +83,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.circle,
-      backdropBackgroundColour: 'rgba(0, 0, 0, 0.8)',
+      backdropBackgroundColour: 'rgba(0, 0, 0, 0.5)',
       fullScreenBackdrop: true,
       primaryColour: '#000000',
       secondaryColour: '#FFFFFF'
     }),
     NgbModule,
-    DeviceDetectorModule.forRoot()
+    DeviceDetectorModule.forRoot(),
+    TextareaAutosizeModule
   ],
   providers: [
     CookieService,
@@ -94,7 +102,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   entryComponents: [
     ModalErrorComponent,
     ModalConfirmComponent,
-    ProjectDetailComponent
+    CBXProjectDetailComponent
   ]
 })
 
