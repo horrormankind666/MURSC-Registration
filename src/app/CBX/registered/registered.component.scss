@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๗/๐๔/๒๕๖๓>
-Modify date : <๑๕/๐๕/๒๕๖๓>
+Modify date : <๒๕/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -24,11 +24,12 @@ Description : <>
   width: 72px;
   min-width: 72px;
 }
-.registered-view .location-building-seat-info .form .form-group .col-form-label {
-  width: 136px;
+.registered-view .location-info .table .col-seat {
+  width: 202px;
 }
-.registered-view .location-detail-info .form .form-group .col-form-label {
-  width: 110px;
+.registered-view .location-info .location-building-seat-info .form .form-group:last-child .col span:last-child {
+  position: relative;
+  top: -5px;
 }
 .registered-view .fee-info .table .col-check .toggle {
   position: absolute;
@@ -39,19 +40,19 @@ Description : <>
   width: 150px;
   min-width: 150px;
 }
-.registered-view .fee-info .deliaddress-form .col-form-label {
+.registered-view .fee-info #deliaddress-form .col-form-label {
   width: 150px;
 }
-.registered-view .fee-info .deliaddress-form textarea {
+.registered-view .fee-info #deliaddress-form textarea {
   min-height: 52px;
 }
-@media screen and (max-width: 1452px) and (min-width: 992px) {
+@media screen and (max-width: 1452px) and (min-width: 1082px) {
   .registered-view .registered-info .d-table .col-locations {
     width: 50% !important;
   }
   @include table-responsive-step1('.registered-view .location-info');
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1081px) {
   .registered-view .registered-info .d-table,
   .registered-view .registered-info .d-table-cell,
   .registered-view .registered-info .d-table .col-locations {
@@ -68,10 +69,12 @@ Description : <>
 @media screen and (max-width: 870px) {
   @include table-responsive-step1('.registered-view .registered-info .location-info');
 }
+@media screen and (max-width: 565px) {
+  @include table-responsive-step2('.registered-view .registered-info .location-info');
+  @include form-responsive('.registered-view .fee-info #deliaddress-form');
+}
 @media screen and (max-width: 473px) {
   @include form-responsive('.registered-view .register-info');
-  @include table-responsive-step2('.registered-view .registered-info .location-info');
-  @include form-responsive('.registered-view .registered-info .location-info .location-detail-info');
   .registered-view .registered-btn {
     width: 100% !important;
   }

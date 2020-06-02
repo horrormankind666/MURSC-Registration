@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๐/๐๒/๒๕๖๓>
-Modify date : <๑๒/๐๕/๒๕๖๓>
+Modify date : <๐๑/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -48,8 +48,8 @@ class Table {
   private _state: TableState = {
     page: 1,
     pageSize: 4,
-    keyword: '',
-    registrationStatus: ''
+    keyword: null,
+    registrationStatus: null
   }
 
   get data$() {return this._data$.asObservable();}
@@ -90,8 +90,8 @@ class Table {
     registrationStatus = (registrationStatus ? registrationStatus : '');
 
     return (
-      (data.name.th.toLowerCase().includes(keyword.toLowerCase()) ||
-       data.name.en.toLowerCase().includes(keyword.toLowerCase())) &&
+      (data.project.name.th.toLowerCase().includes(keyword.toLowerCase()) ||
+       data.project.name.en.toLowerCase().includes(keyword.toLowerCase())) &&
       data.registrationStatus.includes(registrationStatus)
     )
   }

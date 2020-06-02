@@ -27,16 +27,16 @@
       <div class="card-header p-0">
         <span class="bold text-white size18">{{'filter' | translate | titlecase}}</span>
       </div>
-      <div class="card-body p-0 pt-3">
+      <div class="card-body p-0 pt-1">
         <div class="form">
           <div class="form-row d-table">
             <div class="form-group col-md-6 pl-0">
               <label for="keyword" class="regular text-white size16">{{'keyword' | translate | titlecase}}</label>
-              <input type="text" class="form-control inputbox regular size16" name="keyword" [(ngModel)]="projectService.operate.table.service.keyword" />
+              <input trimOnBlur type="text" class="form-control inputbox regular size16" name="keyword" [(ngModel)]="projectService.operate.table.service.keyword" />
             </div>
             <div class="form-group col-md-6 pr-0">
               <label for="registration-status" class="regular text-white size16">{{'registrationStatus' | translate | titlecase}}</label>
-              <ng-select [(ngModel)]="projectService.operate.table.service.registrationStatus">
+              <ng-select placeholder="{{'placeholder.selectItem' | translate}}" [(ngModel)]="projectService.operate.table.service.registrationStatus">
                 <ng-option *ngFor="let item of dataService.cbx.registrationStatus.getList()" [value]="item.id">{{item.name[appService.lang]}}</ng-option>
               </ng-select>
             </div>
@@ -89,7 +89,7 @@
   <div class="title-info">
     <div class="embed-responsive embed-responsive-16by9 mb-3" ngbDropdown>
       <a href="javascript:void(0)" ngbDropdownToggle>
-        <div class="card-img" [ngStyle]="{'background-image': ('url(' + data.logo + ')')}"></div>
+        <div class="card-img" [ngStyle]="{'background-image': ('url(' + data.project.logo + ')')}"></div>
       </a>
       <div ngbDropdownMenu aria-labelledby="menu-info" class="menu-info">
         <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="menuInfo; context: {data: data}"></ng-container></div>
@@ -141,7 +141,7 @@
             <i class="fa fa-phone text-white size15"></i>
           </a>
           <div ngbDropdownMenu aria-labelledby="contact-info" class="contact-info">
-            <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo; context: {data: data.contact}"></ng-container></div>
+            <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo; context: {data: data.contactPerson}"></ng-container></div>
           </div>
         </div>
       </div>
@@ -152,13 +152,13 @@
 <ng-template #projectInfo let-data="data" let-landscape="landscape">
   <div class="project-info {{landscape}}">
     <div ngbDropdown placement="top-left">
-      <a class="text-wrap bold size18" id="menu-info" href="javascript:void(0)" ngbDropdownToggle>{{data.name[appService.lang]}}</a>
+      <a class="text-wrap bold size18" id="menu-info" href="javascript:void(0)" ngbDropdownToggle>{{data.project.name[appService.lang]}}</a>
       <div ngbDropdownMenu aria-labelledby="menu-info" class="menu-info">
         <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="menuInfo; context: {data: data}"></ng-container></div>
       </div>
     </div>
-    <p class="regular text-black-50 size16 line-clamp line-clamp-{{data.transProjectID}} mt-2 mb-0">{{data.detail}}</p>
-    {{appService.textOverflowClamp(('.' + landscape + ' .line-clamp-' + data.transProjectID), 3)}}
+    <p class="regular text-black-50 size16 line-clamp line-clamp-{{data.ID}} mt-2 mb-0">{{data.project.detail}}</p>
+    {{appService.textOverflowClamp(('.' + landscape + ' .line-clamp-' + data.ID), 3)}}
   </div>
 </ng-template>
 <ng-template #registerInfo let-data="data">
@@ -210,7 +210,7 @@
       <div class="form-group row mt-1 mr-0 mb-0 ml-0" *ngIf="data.registrationStatus === 'Y'">
         <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fa fa-registered"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0"><a [routerLink]="['../Registered', data.transProjectID]" routerLinkActive="active" class="link text-white">{{'registered.label' | translate | titlecase}}</a></span>
+          <span class="form-text regular mt-0"><a [routerLink]="['../Registered', data.ID]" routerLinkActive="active" class="link text-white">{{'registered.label' | translate | titlecase}}</a></span>
         </div>
       </div>
     </div>
@@ -222,7 +222,7 @@
       <div class="form-group row mr-0 mb-1 ml-0">
         <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fa fa-address-book-o"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.name[appService.lang]}}</span>
+          <span class="form-text regular mt-0">{{data.fullName[appService.lang]}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-1 ml-0">
@@ -234,7 +234,7 @@
       <div class="form-group row mr-0 mb-0 ml-0">
         <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fa fa-phone"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.phone}}</span>
+          <span class="form-text regular mt-0">{{data.phoneNumber}}</span>
         </div>
       </div>
     </div>

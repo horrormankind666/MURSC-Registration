@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๒/๐๕/๒๕๖๓>
+Modify date : <๒๗/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -21,6 +21,10 @@ import {TranslateService} from '@ngx-translate/core';
 import {CookieService} from 'ngx-cookie-service';
 import {DeviceDetectorService} from 'ngx-device-detector';
 
+import {ModalService} from './modal/modal.service'
+
+import {ModalErrorComponent} from './modal/modal.component'
+
 import * as $ from 'jquery';
 
 declare function $clamp(element, options): any;
@@ -36,10 +40,11 @@ export class AppService  {
     private translateService: TranslateService,
     private cookieService: CookieService,
     private deviceService: DeviceDetectorService,
+    private modalService: ModalService
   ) {
-    tooltipConfig.placement = 'top';
-    tooltipConfig.container = 'body';
-    tooltipConfig.tooltipClass = 'tooltip-custom';
+    this.tooltipConfig.placement = 'top';
+    this.tooltipConfig.container = 'body';
+    this.tooltipConfig.tooltipClass = 'tooltip-custom';
   }
 
   public isLoading: any = {
@@ -58,7 +63,7 @@ export class AppService  {
   }
   public urlAuthenResource: string = /*'http://localhost:5001/API/AuthenResource/UserInfo'*/'https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/UserInfo';
   public urlAuthenServer: string = /*'http://localhost:50833'*/'https://mursc.mahidol.ac.th/AuthADFS';
-  public urlAPI: string = /*http://localhost:3000/API*/'https://mursc.mahidol.ac.th/API';
+  public urlAPI: string = /*'http://localhost:3000/API'*/'https://mursc.mahidol.ac.th/API';
   public dateTimeOnURL: string = formatDate(new Date(), 'dd/MM/yyyyHH:mm:ss', 'en');
   public rootPath: string;
   public hasHearderSubtitle: boolean = false;
@@ -77,19 +82,7 @@ export class AppService  {
       this.titleService.setTitle(result);
     });
   }
-
-  setModalPosition() {
-    setTimeout(() => {
-      $('.modal').attr('style', ('top:' + $('header').height() + 'px !important'));
-    }, 0);
-  }
-
-  setModalSize() {
-    setTimeout(() => {
-      $('.modal').height($(window).height() - $('header').height());
-    }, 0);
-  }
-
+  
   getCurrentLanguage(): string {
     return this.translateService.currentLang
   }
@@ -124,32 +117,77 @@ export class AppService  {
   }
 
   getDataSource(routePrefix: string, action: string, query?: string): Promise<any> {
-    routePrefix = (routePrefix === undefined ? "" : routePrefix);
-    action = (action === undefined ? "" : action);
-    query = (query === undefined || query.length === 0 ? "" : query);
+    routePrefix = (routePrefix === undefined ? '' : routePrefix);
+    action = (action === undefined ? '' : action);
+    query = (query === undefined || query.length === 0 ? '' : query);
 
-    let url = (this.urlAPI + '/' + routePrefix + "/");
-    let route = "";
+    let url = (this.urlAPI + '/' + routePrefix + '/');
+    let route = '';
 
     switch (action)
     {
-        case "getlist": {
-            route = "GetList";
-            break;
-        }
-        case "get": {
-            route = "Get";
-            break;
-        }
+      case 'getlist': {
+        route = 'GetList';
+        break;
+      }
+      case 'get': {
+        route = 'Get';
+        break;
+      }
     }
 
-    url += (route + "?ver=" + this.dateTimeOnURL + query);
+    url += (route + '?ver=' + this.dateTimeOnURL + query);
 
     let promise = new Promise((resolve, reject) => {
       this.http.get(url).subscribe((result: {}) => {
         let data = result['data'];
 
         resolve(data !== undefined && data !== null ? data : []);
+      });
+    });
+
+    return promise;
+  }
+
+  save(routePrefix: string, method: string, data: string): Promise<any> {
+    routePrefix = (routePrefix === undefined ? '' : routePrefix);
+    method = (method === undefined ? '' : method);
+    data = (data === undefined ? '' : data);
+
+    let url = (this.urlAPI + '/' + routePrefix + "/");
+    var route = "";
+
+    switch (method)
+    {
+      case 'POST': {
+        route = "Post";
+        break;
+      }
+    }
+
+    url += (route + "?ver=" + this.dateTimeOnURL);
+
+    this.isLoading.show = true;
+    this.isLoading.saving = true;
+
+    let promise = new Promise((resolve, reject) => {
+      this.http.post(url, data).subscribe((result: {}) => {
+        this.isLoading.show = false;
+        this.isLoading.saving = false;
+
+        let data = (result['data'] !== undefined && result['data'] !== null ? result['data'][0] : {});
+
+        if (data.errorCode === 1) {
+          let modalRef = this.modalService.getModalError(false, ModalErrorComponent, 'save.error.notSuccess');
+
+          this.modalService.close(modalRef).then((result: string) => {
+            if (result === 'close') {
+              resolve(data);
+            }
+          });
+        }
+        else
+          resolve(data);
       });
     });
 

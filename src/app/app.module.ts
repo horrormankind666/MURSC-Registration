@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๕/๐๕/๒๕๖๓>
+Modify date : <๒๗/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -10,7 +10,6 @@ Description : <>
 'use strict';
 
 import {CommonModule} from '@angular/common';
-import {NgSelectModule} from '@ng-select/ng-select';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
@@ -21,6 +20,7 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 import {NgxLoadingModule, ngxLoadingAnimationTypes} from 'ngx-loading';
 import {CookieService} from 'ngx-cookie-service';
@@ -34,7 +34,7 @@ import {AuthService} from './auth.service';
 import {appRouting} from './app-routing.module';
 
 import {AppComponent} from './app.component';
-import {ModalErrorComponent, ModalConfirmComponent} from './modal/modal.component';
+import {ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent} from './modal/modal.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {MainComponent} from './main.component';
 import {SigninComponent} from './signin/signin.component';
@@ -52,6 +52,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    ModalSuccessComponent,
     ModalErrorComponent,
     ModalConfirmComponent,
     PageNotFoundComponent,
@@ -67,7 +68,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     CommonModule,
-    NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -89,6 +89,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       secondaryColour: '#FFFFFF'
     }),
     NgbModule,
+    NgSelectModule,
     DeviceDetectorModule.forRoot(),
     TextareaAutosizeModule
   ],
@@ -100,6 +101,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent],
   entryComponents: [
+    ModalSuccessComponent,
     ModalErrorComponent,
     ModalConfirmComponent,
     CBXProjectDetailComponent

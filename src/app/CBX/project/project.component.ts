@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๑๒/๐๕/๒๕๖๓>
+Modify date : <๑๙/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -54,7 +54,7 @@ export class ProjectComponent implements OnInit {
       this.appService.isLoading.show = true;
       this.appService.isLoading.modal = true;
 
-      this.dataService.cbx.transProject.get(data.transProjectID).then((result: Schema.CBX.TransProject) => {
+      this.dataService.cbx.transProject.get(data.ID).then((result: Schema.CBX.TransProject) => {
         this.appService.isLoading.show = false;
         this.appService.isLoading.modal = false;
 

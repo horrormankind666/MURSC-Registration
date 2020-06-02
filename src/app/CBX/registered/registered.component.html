@@ -1,4 +1,4 @@
-<div class="registered-view" *ngIf="data$">
+<div class="registered-view" *ngIf="data.transProject$">
   <div class="card-group">
     <div class="card-col pr-0 pl-0 w-100">
       <div class="card bg-white border-0 rounded-0">
@@ -31,12 +31,12 @@
           </div>
         </div>
       </div>
-      <div class="mt-3 pr-3 pl-3" *ngIf="data$.registrationStatus === 'Y'">
+      <div class="mt-3 pr-3 pl-3" *ngIf="data.transProject$.registrationStatus === 'Y'">
         <div class="mb-3"><ng-container *ngTemplateOutlet="registeredInfo"></ng-container></div>
         <div class="registered-btn ml-auto">
           <a class="btn btn-success"
             [ngClass]="{
-              'disabled': (data$.location.length === 0 || data$.feeType.length === 0)
+              'disabled': (data.transProject$.transLocation.length === 0 || data.transProject$.transFeeType.length === 0)
             }"
             (click)="$event.currentTarget.blur(); saveChange.action()">
             <span class="font bold text-white size20">{{'registered.confirm' | translate | titlecase}}</span>
@@ -49,46 +49,46 @@
 <ng-template #titleInfo>
   <div class="title-info">
     <div class="embed-responsive embed-responsive-16by9 mb-3">
-      <div class="card-img" [ngStyle]="{'background-image': ('url(' + data$.logo + ')')}"></div>
+      <div class="card-img" [ngStyle]="{'background-image': ('url(' + data.transProject$.project.logo + ')')}"></div>
     </div>
     <div class="card-title mb-0">
       <div class="float-left datetime-vertical bold text-body">
         <div class="day bolder size24">
-          <div>{{data$.examDate ? (data$.examDate | slice:0:1) : ''}}</div>
-          <div>{{data$.examDate ? (data$.examDate | slice:1:2) : ''}}</div>
+          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:0:1) : ''}}</div>
+          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:1:2) : ''}}</div>
         </div>
         <div class="clearfix"></div>
         <div class="month size16">
-          <div>{{data$.examDate ? ((data$.examDate | slice:3:4) | uppercase) : ''}}</div>
-          <div>{{data$.examDate ? ((data$.examDate | slice:4:5) | uppercase) : ''}}</div>
-          <div>{{data$.examDate ? ((data$.examDate | slice:5:6) | uppercase) : ''}}</div>
+          <div>{{data.transProject$.examDate ? ((data.transProject$.examDate | slice:3:4) | uppercase) : ''}}</div>
+          <div>{{data.transProject$.examDate ? ((data.transProject$.examDate | slice:4:5) | uppercase) : ''}}</div>
+          <div>{{data.transProject$.examDate ? ((data.transProject$.examDate | slice:5:6) | uppercase) : ''}}</div>
         </div>
         <div class="clearfix"></div>
         <div class="year size14">
-          <div>{{data$.examDate ? (data$.examDate | slice:7:8) : ''}}</div>
-          <div>{{data$.examDate ? (data$.examDate | slice:8:9) : ''}}</div>
-          <div>{{data$.examDate ? (data$.examDate | slice:9:10) : ''}}</div>
-          <div>{{data$.examDate ? (data$.examDate | slice:10:11) : ''}}</div>
+          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:7:8) : ''}}</div>
+          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:8:9) : ''}}</div>
+          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:9:10) : ''}}</div>
+          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:10:11) : ''}}</div>
         </div>
         <div class="clearfix"></div>
         <div class="time size11 text-secondary">
-          <div>{{data$.examDate ? (data$.examDate | slice:12:13) : ''}}</div>
-          <div>{{data$.examDate ? (data$.examDate | slice:13:14) : ''}}</div>
-          <div>{{data$.examDate ? (data$.examDate | slice:14:15) : ''}}</div>
-          <div>{{data$.examDate ? (data$.examDate | slice:15:16) : ''}}</div>
-          <div>{{data$.examDate ? (data$.examDate | slice:16:17) : ''}}</div>
+          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:12:13) : ''}}</div>
+          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:13:14) : ''}}</div>
+          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:14:15) : ''}}</div>
+          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:15:16) : ''}}</div>
+          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:16:17) : ''}}</div>
         </div>
         <div class="clearfix"></div>
       </div>
       <div class="float-right">
-        <div class="registration-status text-right" ngbTooltip="{{(dataService.cbx.registrationStatus.get(data$.registrationStatus)).name[appService.lang]}}" placement="left" title="{{(dataService.cbx.registrationStatus.get(data$.registrationStatus)).name[appService.lang]}}">
+        <div class="registration-status text-right" ngbTooltip="{{(dataService.cbx.registrationStatus.get(data.transProject$.registrationStatus)).name[appService.lang]}}" placement="left" title="{{(dataService.cbx.registrationStatus.get(data.transProject$.registrationStatus)).name[appService.lang]}}">
           <i class="fa fa-lock size36"
             [ngClass]="{
-              'text-success': (data$.registrationStatus === 'Y'),
-              'text-warning': (data$.registrationStatus === 'W'),
-              'text-danger ': (data$.registrationStatus === 'N'),
-              'fa-unlock': (data$.registrationStatus === 'Y'),
-              'fa-lock': (data$.registrationStatus !== 'Y')
+              'text-success': (data.transProject$.registrationStatus === 'Y'),
+              'text-warning': (data.transProject$.registrationStatus === 'W'),
+              'text-danger ': (data.transProject$.registrationStatus === 'N'),
+              'fa-unlock': (data.transProject$.registrationStatus === 'Y'),
+              'fa-lock': (data.transProject$.registrationStatus !== 'Y')
             }">
           </i>
         </div>
@@ -111,19 +111,19 @@
       <div class="form-group row mr-0 mb-1 ml-0">
         <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fa fa-address-book-o"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data$.contact.name[appService.lang]}}</span>
+          <span class="form-text regular mt-0">{{data.transProject$.contactPerson.fullName[appService.lang]}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-1 ml-0">
         <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fa fa-envelope-o"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data$.contact.email}}</span>
+          <span class="form-text regular mt-0">{{data.transProject$.contactPerson.email}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-0 ml-0">
         <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fa fa-phone"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data$.contact.phone}}</span>
+          <span class="form-text regular mt-0">{{data.transProject$.contactPerson.phoneNumber}}</span>
         </div>
       </div>
     </div>
@@ -131,9 +131,9 @@
 </ng-template>
 <ng-template #projectInfo>
   <div class="project-info">
-    <p class="bold size22 mb-0">{{data$.name[appService.lang]}}</p>
-    <p class="regular text-danger size15" *ngIf="data$.registrationStatus !== 'Y'">( {{(dataService.cbx.registrationStatus.get(data$.registrationStatus)).name[appService.lang]}} )</p>
-    <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0">{{data$.detail}}</p>
+    <p class="bold size22 mb-0">{{data.transProject$.project.name[appService.lang]}}</p>
+    <p class="regular text-danger size15" *ngIf="data.transProject$.registrationStatus !== 'Y'">( {{(dataService.cbx.registrationStatus.get(data.transProject$.registrationStatus)).name[appService.lang]}} )</p>
+    <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0">{{data.transProject$.project.detail}}</p>
   </div>
 </ng-template>
 <ng-template #registerInfo>
@@ -143,13 +143,13 @@
         <div class="form-group row mb-1">
           <label for="col-seat" class="col-form-label">{{'project.seat' | translate | titlecase}}</label>
           <div class="col">
-            <span class="form-text regular">{{data$.maximumSeat ? ((data$.maximumSeat | number) + ' ' + ('unit.persons' | translate | titlecase)) : ''}}</span>
+            <span class="form-text regular">{{data.transProject$.maximumSeat ? ((data.transProject$.maximumSeat | number) + ' ' + ('unit.persons' | translate | titlecase)) : ''}}</span>
           </div>
         </div>
         <div class="form-group row mb-1">
           <label for="col-seatavailable" class="col-form-label">{{'project.seatAvailable' | translate | titlecase}}</label>
           <div class="col">
-            <span class="form-text regular">{{data$.maximumSeat ? ((data$.maximumSeat | number) + ' ' + ('unit.persons' | translate | titlecase)) : ''}}</span>
+            <span class="form-text regular">{{data.transProject$.seatAvailable + ' ' + ('unit.persons' | translate | titlecase)}}</span>
           </div>
         </div>
         <div class="form-group row mb-0">
@@ -165,7 +165,7 @@
                   }">
                   <span class="text-success size12"><i class="fa fa-play"></i></span>
                 </div>
-                <div class="d-table-cell align-middle"><span class="text-success">{{data$.registrationDate.startDate}}</span></div>
+                <div class="d-table-cell align-middle"><span class="text-success">{{data.transProject$.registrationDate.startDate}}</span></div>
               </div>
               <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )" placement="left" title="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )">
                 <div class="d-table-cell align-bottom"><span class="text-danger size20"><i class="fa fa-calendar"></i></span></div>
@@ -176,7 +176,7 @@
                   }">
                   <span class="text-danger size12"><i class="fa fa-stop"></i></span>
                 </div>
-                <div class="d-table-cell align-middle"><span class="text-danger">{{data$.registrationDate.endDate}}</span></div>
+                <div class="d-table-cell align-middle"><span class="text-danger">{{data.transProject$.registrationDate.endDate}}</span></div>
               </div>
             </div>
           </div>
@@ -195,14 +195,14 @@
             <span class="regular size16">{{'registered.save.error.location' | translate}}</span>
           </div>
         </div>
-        <div *ngIf="data$.location.length"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
+        <div *ngIf="data.transProject$.transLocation.length"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
       </div>
       <div class="d-table-cell table-cell-divider"></div>
       <div class="d-table-cell w-auto jumbotron rounded-xl mb-0 p-3 col-feetype">
         <div class="border-bottom border-light pb-2">
           <span class="bold text-primary size20">{{'fee' | translate | titlecase}}</span>
         </div>
-        <div *ngIf="data$.feeType.length"><ng-container *ngTemplateOutlet="feeInfo"></ng-container></div>
+        <div *ngIf="data.transProject$.transFeeType.length"><ng-container *ngTemplateOutlet="feeInfo"></ng-container></div>
       </div>
     </div>
   </div>
@@ -218,88 +218,87 @@
           <th class="border-top-0 border-white bold col-building">{{'building.label' | translate | titlecase}}</th>
           <th class="border-top-0 border-white bold col-seattotal">{{'location.seatTotal' | translate | titlecase}}</th>
           <th class="border-top-0 border-right-0 border-white pr-0 bold col-seatavailable">{{'location.seatAvailable' | translate | titlecase}}</th>
-          <th class="border-top-0 border-right-0 border-white col-wrap col-wrap-step1 pr-0 bold">{{'location.info' | translate | titlecase}}</th>
+          <th class="border-top-0 border-white bold col-wrap col-wrap-step1 col-location-building">{{'location.label' | translate | titlecase}} / {{'building.label' | translate | titlecase}}</th>
+          <th class="border-top-0 border-right-0 border-white pr-0 bold col-wrap col-wrap-step1 col-seat">{{'seat.label' | translate | titlecase}} <span class="regular text-muted size12">( {{'total.label' | translate | titlecase}} / {{'remain' | translate | titlecase}} )</span></th>
         </tr>
       </thead>
-      <tbody class="border-top-0 size16" *ngFor="let location of data$.location; index as order">
+      <tbody class="border-top-0 size16" *ngFor="let transLocation of data.transProject$.transLocation; index as order">
         <tr>
           <td class="border-top-0 border-right-0 border-left-0 pr-0 pl-0 regular col-check">
             <div class="custom-control custom-radio">
-              <input type="radio" class="custom-control-input" id="select-location-{{location.transLocationID}}" name="select-location"
-                [value]="location"
+              <input type="radio" class="custom-control-input" id="select-location-{{transLocation.ID}}" name="select-location"
+                [value]="transLocation"
                 [(ngModel)]="formField.location.selected"
                 (ngModelChange)="watchChange()"
-                [disabled]="location.seatAvailable === 0">
-              <label class="custom-control-label" for="select-location-{{location.transLocationID}}"></label>
+                [disabled]="transLocation.seatAvailable === 0">
+              <label class="custom-control-label" for="select-location-{{transLocation.ID}}"></label>
             </div>
           </td>
           <td class="border-top-0 border-right-transparent border-left-0 pl-2 regular col-index" ngbTooltip="{{'order' | translate | titlecase}}" title="{{'order' | translate | titlecase}}">
             {{(order + 1) | number}}
           </td>
           <td class="border-top-0 border-right-transparent regular col-location" ngbTooltip="{{'location.label' | translate | titlecase}}" title="{{'location.label' | translate | titlecase}}">
-            {{location.name[appService.lang]}}
+            {{transLocation.location.name[appService.lang]}}
           </td>
           <td class="border-top-0 border-right-transparent regular col-building" ngbTooltip="{{'building.label' | translate | titlecase}}" title="{{'building.label' | translate | titlecase}}">
-            {{location.building.name[appService.lang]}}
+            {{transLocation.location.building.name[appService.lang]}}
           </td>
           <td class="border-top-0 border-right-transparent regular col-seattotal" ngbTooltip="{{'location.seatTotal' | translate | titlecase}}" title="{{'location.seatTotal' | translate | titlecase}}">
-            {{location.seatTotal}}
+            {{transLocation.seatTotal}}
           </td>
           <td class="border-top-0 border-right-0 pr-0 regular col-seatavailable" ngbTooltip="{{'location.seatAvailable' | translate | titlecase}}" title="{{'location.seatAvailable' | translate | titlecase}}">
-            {{location.seatAvailable}}
+            {{transLocation.seatAvailable}}
           </td>
-          <td class="border-top-0 border-right-0 pr-0 col-wrap col-wrap-step1 regular col-location-building-seat">
-            <ng-container *ngTemplateOutlet="locationBuildingSeatInfo; context: {data: location}"></ng-container>
+          <td class="border-top-0 border-right-transparent regular col-wrap col-wrap-step1 col-location-building">
+            <ng-container *ngTemplateOutlet="locationBuildingInfo; context: {data: transLocation}"></ng-container>
           </td>
-          <td class="border-top-0 border-top-0 border-right-0 border-left-0 pr-0 pl-2 col-wrap col-wrap-step2 regular col-location-detail">
-            <ng-container *ngTemplateOutlet="locationDetailInfo; context: {data: location, order: ((order + 1) | number)}"></ng-container>
+          <td class="border-top-0 border-right-0 pr-0 regular col-wrap col-wrap-step1 col-seat">
+            {{transLocation.seatTotal}} / {{transLocation.seatAvailable}}
+          </td>
+          <td class="border-top-0 border-top-0 border-right-0 border-left-0 pr-0 pl-0 col-wrap col-wrap-step2 regular col-location-building-seat">
+            <ng-container *ngTemplateOutlet="locationBuildingSeatInfo; context: {data: transLocation}"></ng-container>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </ng-template>
-<ng-template #locationBuildingSeatInfo let-data="data">
-  <div class="location-building-seat-info">
+<ng-template #locationBuildingInfo let-data="data">
+  <div class="location-building-info">
     <div class="form">
       <div class="form-group row mb-1" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'location.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'location.label' | translate | titlecase}} )">
-        <label for="col-location" class="col-form-label bold">{{'location.label' | translate | titlecase}}</label>
-        <div class="col">
-          <span class="form-text regular">{{data.name[appService.lang]}}</span>
+        <div class="col pl-0">
+          <span class="form-text regular">{{data.location.name[appService.lang]}}</span>
         </div>
       </div>
-      <div class="form-group row mb-1" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )>">
-        <label for="col-building" class="col-form-label bold">{{'building.label' | translate | titlecase}}</label>
-        <div class="col">
-          <span class="form-text regular">{{data.building.name[appService.lang]}}</span>
-        </div>
-      </div>
-      <div class="form-group row mb-1" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'seat.seatTotal' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'seat.seatTotal' | translate | titlecase}} )>">
-        <label for="col-seattotal" class="col-form-label bold">{{'seat.seatTotal' | translate | titlecase}}</label>
-        <div class="col">
-          <span class="form-text regular">{{data.seatTotal}}</span>
-        </div>
-      </div>
-      <div class="form-group row mb-0" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'seat.seatAvailable' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'seat.seatAvailable' | translate | titlecase}} )>">
-        <label for="col-seatavailable" class="col-form-label bold">{{'seat.seatAvailable' | translate | titlecase}}</label>
-        <div class="col">
-          <span class="form-text regular">{{data.seatAvailable}}</span>
+      <div class="form-group row mb-0" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )>">
+        <div class="col pl-0">
+          <span class="form-text regular">{{data.location.building.name[appService.lang]}}</span>
         </div>
       </div>
     </div>
   </div>
 </ng-template>
-<ng-template #locationDetailInfo let-data="data" let-order="order">
-  <div class="location-detail-info">
+<ng-template #locationBuildingSeatInfo let-data="data">
+  <div class="location-building-seat-info">
     <div class="form">
-      <div class="form-group row nowrap mb-2" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'order' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'order' | translate | titlecase}} )">
-        <label for="col-order" class="col-form-label">{{'order' | translate | titlecase}}</label>
-        <div class="col">
-          <span class="form-text regular">{{order}}</span>
+      <div class="form-group row mb-1" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'location.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'location.label' | translate | titlecase}} )">
+        <div class="col pl-0">
+          <span class="form-text regular">{{data.location.name[appService.lang]}}</span>
+        </div>
+      </div>
+      <div class="form-group row mb-1" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )>">
+        <div class="col pl-0">
+          <span class="form-text regular">{{data.location.building.name[appService.lang]}}</span>
+        </div>
+      </div>
+      <div class="form-group row mb-0" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'seat.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'seat.label' | translate | titlecase}} )>">
+        <div class="col pl-0">
+          <span class="form-text regular">{{'seat.label' | translate | titlecase}} {{data.seatTotal}} / {{data.seatAvailable}}</span>
+          <span class="regular text-muted size12">{{'total.label' | translate | titlecase}} / {{'remain' | translate | titlecase}}</span>
         </div>
       </div>
     </div>
-    <ng-container *ngTemplateOutlet="locationBuildingSeatInfo; context: {data: data}"></ng-container>
   </div>
 </ng-template>
 <ng-template #feeInfo>
@@ -311,68 +310,121 @@
           <th class="border-top-0 border-right-0 border-left-0 border-white pr-0 bold col-amount"></th>
         </tr>
       </thead>
-      <tbody class="border-top-0 size16" *ngFor="let feeType of data$.feeType; index as order; let last = last">
+      <tbody class="border-top-0 size16" *ngFor="let transFeeType of data.transProject$.transFeeType; index as order; let last = last">
         <tr>
           <td class="w-auto border-0 pr-0 pb-0 pl-0 regular col-check" [ngClass]="{'pt-1': (order !== 0)}">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="select-feetype-{{feeType.transFeeTypeID}}" name="select-feetype"
-                [value]="feeType.transFeeTypeID"
-                [(ngModel)]="feeType.isSelected"
+              <input type="checkbox" class="custom-control-input" id="select-feetype-{{transFeeType.ID}}" name="select-feetype"
+                [value]="transFeeType.ID"
+                [(ngModel)]="transFeeType.isSelected"
                 (ngModelChange)="watchChange()"
-                [disabled]="feeType.requiredStatus === 'Y'"
-                (change)="totalFeeAmount = getTotalFeeAmount(); setToggle(feeType)">
-              <label class="custom-control-label" for="select-feetype-{{feeType.transFeeTypeID}}">{{feeType.name[appService.lang]}}</label>
-              <a class="toggle ml-3" href="javascript:void(0)" (click)="formField.feeType.toggle[feeType.transFeeTypeID] = !formField.feeType.toggle[feeType.transFeeTypeID]" *ngIf="feeType.toggle">
+                [disabled]="transFeeType.requiredStatus === 'Y'"
+                (change)="totalFeeAmount = getTotalFeeAmount(); setToggle(transFeeType)">
+              <label class="custom-control-label" for="select-feetype-{{transFeeType.ID}}">{{transFeeType.feeType.name[appService.lang]}}</label>
+              <a class="toggle ml-3" href="javascript:void(0)" (click)="formField.feeType.toggle[transFeeType.feeType.toggle] = !formField.feeType.toggle[transFeeType.feeType.toggle]" *ngIf="transFeeType.feeType.toggle">
                 <i class="fa bolder text-dark"
                   [ngClass]="{
-                    'fa-angle-right': !formField.feeType.toggle[feeType.transFeeTypeID],
-                    'fa-angle-down': formField.feeType.toggle[feeType.transFeeTypeID]
+                    'fa-angle-right': !formField.feeType.toggle[transFeeType.feeType.toggle],
+                    'fa-angle-down': formField.feeType.toggle[transFeeType.feeType.toggle]
                   }">
                 </i>
               </a>
             </div>
           </td>
           <td class="border-0 pr-0 pb-0 regular text-right col-amount" [ngClass]="{'pt-1': (order !== 0)}">
-            {{feeType.amount ? ((feeType.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
+            {{transFeeType.feeType.amount ? ((transFeeType.feeType.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
           </td>
         </tr>
         <tr>
-          <td colspan="2" class="border-0 pr-0 pb-0 pl-0" [ngClass]="{'pt-0': !feeType.toggle}">
-            <div class="form horizontal-form deliaddress-form bg-warning p-2" *ngIf="formField.feeType.toggle[feeType.transFeeTypeID]">
-              <div class="form-group row w-100 mb-1">
-                <label for="deliaddress-address" class="col-form-label col-form-label-sm pl-0 regular">{{'address.label' | translate}}</label>
-                <div class="col">
-                  <textarea autosize trimOnBlur class="form-control form-control-sm regular" id="deliaddress-address"></textarea>
+          <td colspan="2" class="border-0 pr-0 pb-0 pl-0" [ngClass]="{'pt-0': !transFeeType.feeType.toggle}">
+            <div class="mb-2" id="deliaddress-form" *ngIf="formField.feeType.toggle[transFeeType.feeType.toggle] && transFeeType.feeType.toggle === 'Address'">
+              <div class="form horizontal-form bg-warning p-3">
+                <div class="alert alert-danger mb-2" role="alert" *ngIf="saveChange.error && !formField.deliAddress.isValid">
+                  <span class="regular size16">{{'registered.save.error.deliaddress' | translate}}</span>
                 </div>
-              </div>
-              <div class="form-group row w-100 mb-1">
-                <label for="deliaddress-country" class="col-form-label col-form-label-sm pl-0 regular">{{'address.country' | translate}}</label>
-                <div class="col">
-                  <input type="text" class="form-control form-control-sm regular" id="deliaddress-country" />
+                <div class="form-group row w-100 mb-1">
+                  <label for="deliaddress-address" class="col-form-label col-form-label-sm pl-0 regular">{{'address.label' | translate}}</label>
+                  <div class="col">
+                    <textarea autosize trimOnBlur class="form-control form-control-sm regular"
+                      [(ngModel)]="formField.deliAddress.address"
+                      (ngModelChange)="watchChange()">
+                    </textarea>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row w-100 mb-1">
-                <label for="deliaddress-province" class="col-form-label col-form-label-sm pl-0 regular">{{'address.province' | translate}}</label>
-                <div class="col">
-                  <input type="text" class="form-control form-control-sm regular" id="deliaddress-province" />
+                <div class="form-group row w-100 mb-1">
+                  <label for="deliaddress-country" class="col-form-label col-form-label-sm pl-0 regular">{{'address.country' | translate}}</label>
+                  <div class="col">
+                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="loading.country"></i>
+                    <ng-select
+                      class="size-sm"
+                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      [(ngModel)]="formField.deliAddress.country.selected"
+                      (ngModelChange)="watchChange()"
+                      (change)="getListProvince()"
+                      *ngIf="!loading.country">
+                      <ng-option *ngFor="let item of data.country$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
+                    </ng-select>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row w-100 mb-1">
-                <label for="deliaddress-district" class="col-form-label col-form-label-sm pl-0 regular">{{'address.district' | translate}}</label>
-                <div class="col">
-                  <input type="text" class="form-control form-control-sm regular" id="deliaddress-district" />
+                <div class="form-group row w-100 mb-1">
+                  <label for="deliaddress-province" class="col-form-label col-form-label-sm pl-0 regular">{{'address.province' | translate}}</label>
+                  <div class="col">
+                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="loading.province"></i>
+                    <ng-select
+                      class="size-sm"
+                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      [(ngModel)]="formField.deliAddress.province.selected"
+                      (ngModelChange)="watchChange()"
+                      (change)="getListDistrict()"
+                      *ngIf="!loading.province">
+                      <ng-option *ngFor="let item of data.province$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
+                    </ng-select>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row w-100 mb-1">
-                <label for="deliaddress-subdistrict" class="col-form-label col-form-label-sm pl-0 regular">{{'address.subdistrict' | translate}}</label>
-                <div class="col">
-                  <input type="text" class="form-control form-control-sm regular" id="deliaddress-subdistrict" />
+                <div class="form-group row w-100 mb-1">
+                  <label for="deliaddress-district" class="col-form-label col-form-label-sm pl-0 regular">{{'address.district' | translate}}</label>
+                  <div class="col">
+                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="loading.district"></i>
+                    <ng-select
+                      class="size-sm"
+                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      [(ngModel)]="formField.deliAddress.district.selected"
+                      (ngModelChange)="watchChange()"
+                      (change)="getListSubdistrict()"
+                      *ngIf="!loading.district">
+                      <ng-option *ngFor="let item of data.district$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
+                    </ng-select>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row w-100">
-                <label for="deliaddress-postalcode" class="col-form-label col-form-label-sm pl-0 regular">{{'address.postalCode' | translate}}</label>
-                <div class="col">
-                  <input type="text" class="form-control form-control-sm regular" id="deliaddress-postalcode" />
+                <div class="form-group row w-100 mb-1">
+                  <label for="deliaddress-subdistrict" class="col-form-label col-form-label-sm pl-0 regular">{{'address.subdistrict' | translate}}</label>
+                  <div class="col">
+                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="loading.subdistrict"></i>
+                    <ng-select
+                      class="size-sm"
+                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      [(ngModel)]="formField.deliAddress.subdistrict.selected"
+                      (ngModelChange)="watchChange()"
+                      *ngIf="!loading.subdistrict">
+                      <ng-option *ngFor="let item of data.subdistrict$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="form-group row w-100 mb-1">
+                  <label for="deliaddress-postalcode" class="col-form-label col-form-label-sm pl-0 regular">{{'address.postalCode' | translate}}</label>
+                  <div class="col">
+                    <input type="text" class="form-control form-control-sm regular"
+                      [(ngModel)]="formField.deliAddress.postalCode"
+                      (ngModelChange)="watchChange()" />
+                  </div>
+                </div>
+                <div class="form-group row w-100">
+                  <label for="deliaddress-phoneNumber" class="col-form-label col-form-label-sm pl-0 regular">{{'phone' | translate}}</label>
+                  <div class="col">
+                    <input trimOnBlur type="text" class="form-control form-control-sm regular"
+                      [(ngModel)]="formField.deliAddress.phoneNumber"
+                      (ngModelChange)="watchChange()" />
+                  </div>
                 </div>
               </div>
             </div>

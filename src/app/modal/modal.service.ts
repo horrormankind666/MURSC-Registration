@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๒๘/๐๔/๒๕๖๓>
+Modify date : <๒๗/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -13,7 +13,7 @@ import {Injectable} from '@angular/core';
 
 import {NgbModalConfig, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
-import {AppService} from '../app.service';
+import * as $ from 'jquery';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +21,7 @@ import {AppService} from '../app.service';
 export class ModalService {
   constructor(
     private modalConfig: NgbModalConfig,
-    private modal: NgbModal,
-    private appService: AppService
+    private modal: NgbModal
   ) {
     this.modalConfig.backdrop = 'static';
     this.modalConfig.keyboard = false;
@@ -33,8 +32,8 @@ export class ModalService {
       windowClass: windowClass
     });
 
-    this.appService.setModalPosition();
-    this.appService.setModalSize();
+    this.setModalPosition();
+    this.setModalSize();
 
     return modalRef;
   }
@@ -55,6 +54,18 @@ export class ModalService {
     }
   }
 
+  setModalPosition() {
+    setTimeout(() => {
+      $('.modal').attr('style', ('top:' + $('header').height() + 'px !important'));
+    }, 0);
+  }
+
+  setModalSize() {
+    setTimeout(() => {
+      $('.modal').height($(window).height() - $('header').height());
+    }, 0);
+  }
+
   private getModal(checkHasOpenModal: boolean, content: any, windowClass: string, message?: string): NgbModalRef {
     let modalRef: NgbModalRef;
 
@@ -62,6 +73,12 @@ export class ModalService {
       modalRef = this.open(content, windowClass);
       if (message) modalRef.componentInstance.message = message;
     }
+
+    return modalRef;
+  }
+
+  getModalSuccess(checkHasOpenModal: boolean, content: any, message: string): NgbModalRef {
+    let modalRef: NgbModalRef = this.getModal(checkHasOpenModal, content, 'success-dialog', message);
 
     return modalRef;
   }

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๒/๐๕/๒๕๖๓>
+Modify date : <๒๗/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -18,6 +18,7 @@ import {TranslateService} from '@ngx-translate/core';
 
 import {AppService} from './app.service';
 import {AuthService} from './auth.service';
+import {ModalService} from './modal/modal.service';
 
 @NgModule({
   providers: [
@@ -44,7 +45,8 @@ export class AppComponent implements OnInit {
     private modal: NgbModal,
     private translateService: TranslateService,
     private appService: AppService,
-    private authService: AuthService
+    private authService: AuthService,
+    private modalService: ModalService
   ) {
     //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.events.subscribe((event: Event) => {
@@ -88,7 +90,7 @@ export class AppComponent implements OnInit {
 
   onResize() {
     this.sectionStyle = this.getSectionStyle();
-    this.appService.setModalSize();
+    this.modalService.setModalSize();
   }
 
   getSectionStyle(): {} {

@@ -22,8 +22,12 @@
   "pageNotFound": "Page Not Found",
   "save": {
     "label": "Save",
-    "error": "Please fill in the information correctly and completely.",
-    "confirm": "Do you want to save changes ?"
+    "error": {
+      "validate": "Please fill in the information correctly and completely.",
+      "notSuccess": "Not successfully saved."
+    },
+    "confirm": "Do you want to save changes ?",
+    "success": "Successfully saved."
   },
   "cancel":"Cancel",
   "ok": "Ok",
@@ -40,7 +44,11 @@
           "W": "This project not yet opened for registration.",
           "N": "This project expired for registration."
         },
-        "seatAvailable": "This location does not have enough seat available."
+        "projectRegistered": "This project has already been registered.",
+        "locationSelected": "Location selected not found.",
+        "seatAvailable": "This location does not have enough seat available.",
+        "fee": "Fee not found.",
+        "deliaddress": "Please fill in the address information correctly and completely."
       }
     }
   },
@@ -74,6 +82,9 @@
     "label": "Unit",
     "baht": "Bath",
     "persons": "Persons"
+  },
+  "placeholder": {
+    "selectItem": "Select item"
   },
   "keyword": "Keyword",
   "registrationStatus": "Registration Status",

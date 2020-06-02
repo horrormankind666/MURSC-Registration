@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๓๑/๐๓/๒๕๖๓>
+Modify date : <๒๖/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -33,6 +33,7 @@ export class AuthService {
   ) {}
 
   private userInfo: {} = {
+    ppid: '',
     email: '',
     familyName: '',
     givenName: '',
@@ -44,6 +45,7 @@ export class AuthService {
   public getUserInfo: {} = this.userInfo;
 
   setUserInfo(data: any) {
+      let ppid: string            = (data.ppid ? data.ppid : '');
       let email: string           = (data.email ? data.email : '');
       let familyName: string      = (data.family_name ? data.family_name : '');
       let givenName: string       = (data.given_name ? data.given_name : '');
@@ -51,6 +53,7 @@ export class AuthService {
       let winaccountName: string  = (data.winaccountname ? data.winaccountname : '');
 
       this.userInfo = {
+        ppid: ppid,
         email: email,
         familyName: familyName,
         givenName: givenName,
@@ -71,7 +74,7 @@ export class AuthService {
 
         this.http.get(this.appService.urlAuthenResource, { headers: headers }).subscribe((result: {}) => {
           let data = result['data'];
-
+          
           this.isAuthenticated = (data !== null ? data[0].isAuthenticated : false);
           this.setUserInfo(this.isAuthenticated ? data[1].payload : {});
 

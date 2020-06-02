@@ -9,7 +9,7 @@ Description : <>
 
 'use strict';
 
-import {Directive, HostListener, Host} from '@angular/core';
+import {Directive, HostListener, Host, ElementRef} from '@angular/core';
 import {NgControl} from '@angular/forms';
 
 @Directive({
@@ -17,15 +17,11 @@ import {NgControl} from '@angular/forms';
 })
 export class TrimOnBlurDirective {
   constructor(
-    private ngControl: NgControl
+    private el: ElementRef
   ) {}
 
-  get ctrl() {
-    return this.ngControl.control;
-  }
-
   @HostListener('blur')
-  onBlur(value) {
-    this.ctrl.setValue(this.ctrl.value.trim());
+  onBlur() {
+    this.el.nativeElement.value = this.el.nativeElement.value.trim();
   }
 }

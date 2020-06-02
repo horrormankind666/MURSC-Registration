@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๓๑/๐๓/๒๕๖๓>
+Modify date : <๒๗/๐๕/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,6 +12,32 @@ Description : <>
 import {Component, OnInit, Input} from '@angular/core';
 
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-modal-success',
+  template: `
+    <div class="font">
+      <div class="modal-body">
+        <span class="regular text-white size16">{{message | translate}}</span>
+      </div>
+      <div class="modal-footer">
+        <input class="d-none" type="text" />
+        <button type="button" class="btn btn-success mr-0" (click)="$event.currentTarget.blur(); activeModal.close('close')"><span class="regular size16">{{'close' | translate}}</span></button>
+      </div>
+    </div>
+  `,
+  styleUrls: []
+})
+export class ModalSuccessComponent implements OnInit {
+  @Input() message;
+
+  constructor(
+    private activeModal: NgbActiveModal
+  ) { }
+
+  ngOnInit() {
+  }
+}
 
 @Component({
   selector: 'app-modal-error',
