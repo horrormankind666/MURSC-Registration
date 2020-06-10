@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๓๑/๐๓/๒๕๖๓>
+Modify date : <๑๐/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -29,9 +29,12 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     let url: string = state.url;
 
+    if (url !== '/SignIn')
+      this.cookieService.set('MURSC.Url', url);
+
     this.appService.rootPath = url.split('/')[1];
     this.appService.hasHearderSubtitle = route.data.hasHearderSubtitle;
-    
+
     return this.authService.getAuthenResource().then((result: any) => {
       if (this.authService.isAuthenticated) {
         if (url === '/SignIn')

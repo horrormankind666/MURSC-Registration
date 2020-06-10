@@ -85,7 +85,7 @@
         <div class="clearfix"></div>
       </div>
       <div class="float-right">
-        <div class="registration-status text-right" ngbTooltip="{{(dataService.cbx.registrationStatus.get(data.transProject$.registrationStatus)).name[appService.lang]}}" placement="left" title="{{(dataService.cbx.registrationStatus.get(data.transProject$.registrationStatus)).name[appService.lang]}}">
+        <div class="registration-status text-right" ngbTooltip="{{(dataService.registrationStatus.get(data.transProject$.registrationStatus)).name[appService.lang]}}" placement="left" title="{{(dataService.registrationStatus.get(data.transProject$.registrationStatus)).name[appService.lang]}}">
           <i class="fa fa-lock size36"
             [ngClass]="{
               'text-success': (data.transProject$.registrationStatus === 'Y'),
@@ -136,8 +136,11 @@
 <ng-template #projectInfo>
   <div class="project-info">
     <p class="bold size22 mb-0">{{data.transProject$.project.name[appService.lang]}}</p>
-    <p class="regular text-danger size15" *ngIf="data.transProject$.registrationStatus !== 'Y'">( {{(dataService.cbx.registrationStatus.get(data.transProject$.registrationStatus)).name[appService.lang]}} )</p>
-    <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0">{{data.transProject$.project.detail}}</p>
+    <p class="regular text-danger size15" *ngIf="data.transProject$.registrationStatus !== 'Y'">( {{(dataService.registrationStatus.get(data.transProject$.registrationStatus)).name[appService.lang]}} )</p>
+    <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0" id="projectDetail" [ngbCollapse]="!isCollapsed.projectDetail">{{data.transProject$.project.detail}}</p>
+    <a class="badge badge-pill badge-secondary mt-2 pr-25 pl-25" href="javascript:void(0)" (click)="isCollapsed.projectDetail = !isCollapsed.projectDetail" [attr.aria-expanded]="isCollapsed.projectDetail" aria-controls="projectDetail">
+      <span class="regular text-white size14">{{'detail' | translate | lowercase}}</span>
+    </a>
   </div>
 </ng-template>
 <ng-template #registerInfo>
@@ -215,7 +218,7 @@
 </ng-template>
 <ng-template #registerButtonInfo>
   <div class="registered-btn ml-auto">
-    <a [routerLink]="['CBX/Registered', data.transProject$.transProjectID]" routerLinkActive="active" class="btn"
+    <a [routerLink]="['CBX/Registered', data.transProject$.ID]" routerLinkActive="active" class="btn"
       [ngClass]="{
         'btn-success': (data.transProject$.registrationStatus === 'Y'),
         'btn-warning': (data.transProject$.registrationStatus === 'W'),

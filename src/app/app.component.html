@@ -27,7 +27,7 @@
                 <a href="javascript:void(0)" *ngIf="appService.lang === 'th'" (click)="$event.currentTarget.blur(); appService.setDefaultLang('en')"><span class="regular flag-icon flag-icon-gb"></span></a>
               </div>
               <div class="d-table-cell home-icon">
-                <a routerLink="Main" routerLinkActive="active" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size24"><i class='fa fa-home'></i></span></a>
+                <a routerLink="Main" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size24"><i class='fa fa-home'></i></span></a>
               </div>
               <div class="d-table-cell text-center user-icon" ngbDropdown #profileDropdown="ngbDropdown" placement="bottom-right" *ngIf="authService.isAuthenticated">
                 <a href="javascript:void(0)" id="profile" ngbDropdownToggle [ngStyle]="{'background-color': userBackgrondColor}" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}">
@@ -51,8 +51,7 @@
                       </div>
                     </div>
                     <div class="dropdown-divider mt-3 mb-0"></div>
-                    <a class="text-center" href="javascript:void(0)" role="button" ngbDropdownItem><span class="regular grey-dark size15">{{'user.info' | translate | titlecase}}</span></a>
-                    <a class="text-center" href="javascript:void(0)" role="button" ngbDropdownItem><span class="regular grey-dark size15">{{'registered.info' | translate | titlecase}}</span></a>
+                    <a routerLink="TransactionRegistered" class="text-center" role="button" ngbDropdownItem><span class="regular grey-dark size15">{{'registered.info' | translate | titlecase}}</span></a>
                     <div class="dropdown-divider mb-3 mt-0"></div>
                     <div class="d-block w-100 text-center">
                       <button type="button" class="btn btn-transparent" (click)="$event.currentTarget.blur(); profileDropdown.close(); authService.signout()"><span class="regular size16">{{'signout.label' | translate}}</span></button>
@@ -61,7 +60,7 @@
                 </div>
               </div>
               <div class="d-table-cell text-center signin-icon" *ngIf="!authService.isAuthenticated">
-                <a routerLink="SignIn" routerLinkActive="active" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size15">{{'signin' | translate}}</span></a>
+                <a routerLink="SignIn" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size15">{{'signin' | translate}}</span></a>
               </div>
             </div>
           </div>
@@ -69,9 +68,11 @@
       </div>
       <div class="navbar-header-title row mr-0 ml-0" *ngIf="appService.hasHearderSubtitle">
         <div class="col align-middle text-center text-truncate text-light">
-          <a routerLink="{{appService.rootPath}}" routerLinkActive="active" class="bold size17">
+          <a routerLink="{{appService.rootPath}}" class="bold size17">
+            <i class='fa fa-hand-pointer-o mr-2 ml-1 size12 text-white-50'></i>
             <span class="text-light" *ngIf="appService.rootPath === 'CBX'">{{'CBX.label' | translate}} ( {{'CBX.initial' | translate}} )</span>
             <span class="text-light" *ngIf="appService.rootPath === 'MUFE'">{{'MUFE.label' | translate}} ( {{'MUFE.initial' | translate}} )</span>
+            <span class="text-light" *ngIf="appService.rootPath === 'TransactionRegistered'">{{'registered.info' | translate}}</span>
           </a>
         </div>
       </div>

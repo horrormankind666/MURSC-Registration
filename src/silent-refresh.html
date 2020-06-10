@@ -40,11 +40,32 @@
       return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
   };
 
+  function getCookie(name) {
+    name = name + "=";
+    var cookie = document.cookie.split(';');
+
+    for(var i = 0; i < cookie.length; i++) {
+      var c = cookie[i];
+
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+
+      if (c.indexOf(name) == 0)
+        return c.substring(name.length, c.length);
+    }
+
+    return "";
+  }
+
   var token = getUrlParameter('token');
 
   if (token) {
     document.cookie = ('MURSC.Cookies=ADFS,' + token);
-    location.href = '/';
+
+    var url = getCookie('MURSC.Url');
+
+    location.href = ('/' + (url ? ('#' + url.replace(/%2F/gi, '/')) : ''));
   }
   else {
     location.href = 'https://mursc.mahidol.ac.th/AuthADFS';

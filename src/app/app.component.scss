@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๑๙/๐๕/๒๕๖๓>
+Modify date : <๐๙/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -49,6 +49,10 @@ main header .navbar-header-title.row .col {
   display: table-cell !important;
   position: relative;
   z-index: 1;
+}
+main header .navbar-header-title.row .col a i {
+  position: relative;
+  top: -2px;
 }
 main header .navbar-header .d-table {
   width: inherit;
@@ -143,6 +147,11 @@ main header .navbar-header .d-table .d-table-cell.userinfo .user-icon .dropdown-
   line-height: 82px;
   border-radius: 50%;
   padding-left: 0px;
+}
+main header .navbar-header .d-table .d-table-cell.userinfo .user-icon .dropdown-menu .dropdown-item.active,
+main header .navbar-header .d-table .d-table-cell.userinfo .user-icon .dropdown-menu .dropdown-item:active {
+  color: #16181B;
+  background-color: #F8F9Fa;
 }
 main header .navbar-header .d-table .d-table-cell.userinfo .signin-icon a {
   border: 1px solid #FFFFFF;

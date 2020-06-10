@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๗/๐๕/๒๕๖๓>
+Modify date : <๑๐/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -10,7 +10,7 @@ Description : <>
 'use strict';
 
 import {NgModule, Component, ElementRef, ViewChild, OnInit} from '@angular/core';
-import {Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError} from '@angular/router';
+import {Router, ActivatedRoute, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError} from '@angular/router';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private router: Router,
+    private route: ActivatedRoute,
     private modal: NgbModal,
     private translateService: TranslateService,
     private appService: AppService,

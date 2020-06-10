@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๐๒/๐๖/๒๕๖๓>
+Modify date : <๑๐/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -35,10 +35,11 @@ export class RegisteredComponent implements OnInit {
     private authService: AuthService,
     private dataService: DataService,
     private modalService: ModalService
-  ) { }
+  ) {}
 
   data: any = {
     transProject$: null,
+    transRegistered$: null,
     country$: null,
     province$: null,
     district$: null,
@@ -50,7 +51,6 @@ export class RegisteredComponent implements OnInit {
     district: false,
     subdistrict: false
   };
-  totalFeeAmount: number = 0;
   formField: any = {
     location: {
       isValid: true,
@@ -81,21 +81,56 @@ export class RegisteredComponent implements OnInit {
       phoneNumber: ''
     }
   }
+  totalFeeAmount: number = 0;
+  isCollapsed: any = {
+    projectDetail: false
+  };
+  show: any = {
+    registeredInfo: false
+  };
 
   ngOnInit() {
     this.setValue();
     this.data.transProject$ = this.route.snapshot.data.transProject$;
 
-    if (!this.data.transProject$)
-      this.modalService.getModalError(false, ModalErrorComponent, 'project.error.notFound');
-    else {
-      this.dataService.country.getList().then((result: Schema.Country[]) => {
-        this.loading.country = false;
-        this.data.country$ = result;
-      });
+    if (!this.data.transProject$) {
+      let modalRef = this.modalService.getModalError(false, ModalErrorComponent, 'project.error.notFound');
 
-      this.saveChange.that = this;
-      this.totalFeeAmount = this.getTotalFeeAmount();
+      this.modalService.close(modalRef).then((result: string) => {
+        if (result === 'close')
+          this.router.navigate(['CBX']);
+      });
+    }
+    else {
+      this.dataService.transRegistered.get(
+        '',
+        (this.authService.getUserInfo['ppid'] ? this.authService.getUserInfo['ppid'] : this.authService.getUserInfo['winaccountName']),
+        this.data.transProject$.ID
+      ).then((result: Schema.TransRegistered) => {
+        this.data.transRegistered$ = result;
+        /*
+        if (this.data.transRegistered$) {
+          let modalRef =  this.modalService.getModalError(false, ModalErrorComponent, 'registered.save.error.projectRegistered');
+
+          this.modalService.close(modalRef).then((result: string) => {
+            if (result === 'close')
+              this.router.navigate(['TransactionRegistered/Detail/' + this.data.transRegistered$.ID]);
+          });
+        }
+        else {
+        */
+          this.dataService.country.getList().then((result: Schema.Country[]) => {
+            this.loading.country = false;
+            this.data.country$ = result;
+          });
+
+          this.saveChange.that = this;
+          this.totalFeeAmount = this.getTotalFeeAmount();
+
+          if (this.data.transProject$.registrationStatus === 'Y')
+            this.show.registeredInfo = true;
+        //}
+      });
     }
   }
 
@@ -120,7 +155,7 @@ export class RegisteredComponent implements OnInit {
     }
   }
 
-  setToggle(transFeeType: Schema.CBX.TransFeeType) {
+  setToggle(transFeeType: Schema.TransFeeType) {
     if (transFeeType.feeType.toggle === 'Address') {
       this.formField.feeType.address.isSelected = transFeeType.isSelected;
       this.formField.feeType.toggle[transFeeType.feeType.toggle] = this.formField.feeType.address.isSelected
@@ -201,7 +236,7 @@ export class RegisteredComponent implements OnInit {
     that: {},
     error: false,
     getValue(): {} {
-      let fee: Schema.CBX.TransFeeType[] = [];
+      let fee: Schema.TransFeeType[] = [];
       let deliAddress: {};
       let result: {};
 
@@ -278,7 +313,7 @@ export class RegisteredComponent implements OnInit {
               if (result === 'ok') {
                 let value: {} = this.getValue();
 
-                this.that.appService.save('TransRegisExam', 'POST', JSON.stringify(value)).then((result: any) => {
+                this.that.appService.save('TransRegistered', 'POST', JSON.stringify(value)).then((result: any) => {
                   let saveResult: any = result;
                   let message: string;
                   let modalRef: any;
@@ -298,15 +333,14 @@ export class RegisteredComponent implements OnInit {
 
                       this.that.modalService.close(modalRef).then((result: string) => {
                         if (result === 'close') {
-                          if (saveResult.errorCode === 3) {
-
-                          }
+                          if (saveResult.errorCode === 3)
+                            this.that.router.navigate(['TransactionRegistered/Detail/' + saveResult.transRegisteredID]);
                           else {
                             this.that.appService.isLoading.show = true;
                             this.that.appService.isLoading.loading = true;
 
-                            this.that.dataService.cbx.transProject.get(this.that.data.transProject$.ID).then((result: Schema.CBX.TransProject) => {
-                              let transProject: Schema.CBX.TransProject = result;
+                            this.that.dataService.transProject.get(this.that.data.transProject$.ID).then((result: Schema.TransProject) => {
+                              let transProject: Schema.TransProject = result;
 
                               if (saveResult.errorCode === 2 || saveResult.errorCode === 4) {
                                 this.that.setValue();
@@ -334,12 +368,12 @@ export class RegisteredComponent implements OnInit {
                     }
                   }
                   else {
-                    if (result.errorCode === 0) {
+                    if (saveResult.errorCode === 0) {
                       modalRef = this.that.modalService.getModalSuccess(false, ModalSuccessComponent, 'save.success');
 
                       this.that.modalService.close(modalRef).then((result: string) => {
-                        if (result === 'close') {
-                        }
+                        if (result === 'close')
+                          this.that.router.navigate(['TransactionRegistered/Detail/' + saveResult.transRegisteredID]);
                       });
                     }
                   }

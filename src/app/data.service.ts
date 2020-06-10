@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๐๑/๐๖/๒๕๖๓>
+Modify date : <๑๐/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -72,154 +72,163 @@ export namespace Schema {
     }
   }
 
-  export namespace CBX {
-    export interface Project {
-      ID?: string,
-      type?: string,
-      name?: {
-        th?: string,
-        en?: string,
-      },
-      detail?: string,
-      ownerCode?: string,
-      minimumPassScore?: number,
-      logo?: string
-    }
+  export interface ProjectCategory {
+    ID?: string,
+    name?: {
+      th?: string,
+      en?: string
+    },
+    logo?: string,
+    initial?: string
+  }
 
-    export interface ContactPerson {
-      ID?: string,
-      transProjectID?: string,
-      fullName?: {
-        th?: string,
-        en?: string
-      },
-      email?: string,
-      phoneNumber?: string
-    }
+  export interface Project {
+    ID?: string,
+    type?: string,
+    name?: {
+      th?: string,
+      en?: string,
+    },
+    detail?: string,
+    ownerCode?: string,
+    minimumPassScore?: number,
+    logo?: string
+  }
 
-    export interface Faculty {
-      code?: string;
-      name?: {
-        th?: string,
-        en?: string
-      }
-    }
+  export interface ContactPerson {
+    ID?: string,
+    transProjectID?: string,
+    fullName?: {
+      th?: string,
+      en?: string
+    },
+    email?: string,
+    phoneNumber?: string
+  }
 
-    export interface Building {
-      ID?: string,
-      name?: {
-        th?: string,
-        en?: string
-      },
-      faculty?: Faculty
+  export interface Faculty {
+    code?: string;
+    name?: {
+      th?: string,
+      en?: string
     }
+  }
 
-    export interface Location {
-      ID?: string,
-      building?: Building,
-      name?: {
-        th?: string,
-        en?: string,
-      },
-      seatMaximum?: number
-    }
+  export interface Building {
+    ID?: string,
+    name?: {
+      th?: string,
+      en?: string
+    },
+    faculty?: Faculty
+  }
 
-    export interface FeeType {
-      ID?: string,
-      name?: {
-        th?: string,
-        en?: string
-      };
-      amount?: number,
-      toggle?: string
-    }
+  export interface Location {
+    ID?: string,
+    building?: Building,
+    name?: {
+      th?: string,
+      en?: string,
+    },
+    seatMaximum?: number
+  }
 
-    export interface Invoice {
-      ID?: string,
-      transRegisExamID?: string,
-      name?: {
-        th?: string,
-        en?: string
-      };
-      namePrintReceipt?: string,
-      billerID?: string,
-      qrRef_1?: string,
-      qrRef_2?: string,
-      qrRef_3?: string,
-      bankRequest?: string,
-      bankTransID?: string,
-      paidAmount?: number,
-      paidBy?: string,
-      paidDate?: string,
-      paidStatus?: string
-    }
+  export interface FeeType {
+    ID?: string,
+    name?: {
+      th?: string,
+      en?: string
+    };
+    amount?: number,
+    toggle?: string
+  }
 
-    export interface InvoiceFee {
-      invoiceID?: string,
-      feeType?: FeeType
-    }
+  export interface Invoice {
+    ID?: string,
+    transRegisteredID?: string,
+    name?: {
+      th?: string,
+      en?: string
+    };
+    namePrintReceipt?: string,
+    billerID?: string,
+    qrRef_1?: string,
+    qrRef_2?: string,
+    qrRef_3?: string,
+    bankRequest?: string,
+    bankTransID?: string,
+    paidAmount?: number,
+    paidBy?: string,
+    paidDate?: string,
+    paidStatus?: string
+  }
 
-    export interface TransProject {
-      ID?: string,
-      project?: Project,
-      examDate?: string,
-      registrationDate?: {
-        startDate?: string,
-        endDate?: string
-      },
-      lastPaymentDate?: string,
-      maximumSeat?: string,
-      seatAvailable?: string,
-      minimumFee?: string,
-      contactPerson?: ContactPerson,
-      registrationStatus?: string,
-      transLocation?: TransLocation[],
-      transFeeType?: TransFeeType[]
-    }
+  export interface InvoiceFee {
+    invoiceID?: string,
+    feeType?: FeeType
+  }
 
-    export interface TransLocation {
-      ID?: string,
-      transProjectID?: string,
-      location?: Location,
-      seatTotal?: number,
-      seatAvailable?: number
-    }
+  export interface TransProject {
+    ID?: string,
+    project?: Project,
+    examDate?: string,
+    registrationDate?: {
+      startDate?: string,
+      endDate?: string
+    },
+    lastPaymentDate?: string,
+    maximumSeat?: string,
+    seatAvailable?: string,
+    minimumFee?: string,
+    contactPerson?: ContactPerson,
+    registrationStatus?: string,
+    transLocation?: TransLocation[],
+    transFeeType?: TransFeeType[]
+  }
 
-    export interface TransFeeType {
-      ID?: string;
-      transProjectID?: string,
-      feeType?: FeeType;
-      requiredStatus?: string,
-      isSelected?: boolean
-    }
+  export interface TransLocation {
+    ID?: string,
+    transProjectID?: string,
+    location?: Location,
+    seatTotal?: number,
+    seatAvailable?: number
+  }
 
-    export interface TransDeliAddress {
-      ID?: string,
-      transRegisExamID?: string,
-      address?: string,
-      country?: Country,
-      province?: Province,
-      district?: District,
-      subdistrict?: Subdistrict,
-      postalCode?: string,
-      phoneNumber?: string
-    }
+  export interface TransFeeType {
+    ID?: string;
+    transProjectID?: string,
+    feeType?: FeeType;
+    requiredStatus?: string,
+    isSelected?: boolean
+  }
 
-    export interface TransRegisExam {
-      ID?: string,
-      transProject?: TransProject,
-      transLocation?: TransLocation,
-      transDeliAddress?: TransDeliAddress,
-      invoice?: Invoice,
-      invoiceFee?: InvoiceFee[]
-    }
+  export interface TransDeliAddress {
+    ID?: string,
+    transRegisteredID?: string,
+    address?: string,
+    country?: Country,
+    province?: Province,
+    district?: District,
+    subdistrict?: Subdistrict,
+    postalCode?: string,
+    phoneNumber?: string
+  }
 
-    export interface RegistrationStatus {
-      id?: string;
-      name: {
-        th?: string,
-        en?: string
-      }
+  export interface TransRegistered {
+    ID?: string,
+    transProject?: TransProject,
+    transLocation?: TransLocation,
+    transDeliAddress?: TransDeliAddress,
+    invoice?: Invoice,
+    invoiceFee?: InvoiceFee[],
+    totalFeeAmount?: number
+  }
+
+  export interface RegistrationStatus {
+    id?: string;
+    name: {
+      th?: string,
+      en?: string
     }
   }
 }
@@ -439,198 +448,363 @@ namespace Data {
     }
   }
 
-  export namespace CBX {
-    export class TransProject {
-      constructor(
-        private appService: AppService
-      ) {}
+  export class ProjectCategory {
+    constructor(
+      private appService: AppService
+    ) {}
 
-      private getDataSource(action: string, query?: string): Promise<Schema.CBX.TransProject[]> {
-        return this.appService.getDataSource('TransProject', action, query).then((result: []) => {
-          let transProject: Schema.CBX.TransProject[] = [];
-          let transLocation: Schema.CBX.TransLocation[] = [];
-          let transFeeType: Schema.CBX.TransFeeType[] = [];
+    private getDataSource(action: string, query?: string): Promise<Schema.ProjectCategory[]> {
+      return this.appService.getDataSource('ProjectCategory', action, query).then((result: []) => {
+        let projectCategory: Schema.ProjectCategory[] = [];
 
-          for (let dr1 of result) {
-            if (action === 'getlist') {
-              transProject.push({
-                ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
-                project: {
-                  ID: (dr1['projectID'] ? dr1['projectID'] : ''),
-                  logo: (dr1['logo'] ? dr1['logo'] : ''),
-                  name: {
-                    th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
-                    en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
-                  },
-                  detail: (dr1['detail'] ? dr1['detail'] : '')
-                },
-                examDate: (dr1['examDates'] ? dr1['examDates'] : ''),
-                registrationDate: {
-                  startDate: (dr1['regisStartDates'] ? dr1['regisStartDates'] : ''),
-                  endDate: (dr1['regisEndDates'] ? dr1['regisEndDates'] : '')
-                },
-                maximumSeat: (dr1['maximumSeat'] ? dr1['maximumSeat'] : ''),
-                minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
-                contactPerson: {
-                  fullName: {
-                    th: (dr1['contactNameTH'] ? dr1['contactNameTH'] : dr1['contactNameEN']),
-                    en: (dr1['contactNameEN'] ? dr1['contactNameEN'] : dr1['contactNameTH'])
-                  },
-                  email: (dr1['contactEmail'] ? dr1['contactEmail'] : ''),
-                  phoneNumber: (dr1['contactPhone'] ? dr1['contactPhone'] : '')
-                },
-                registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : '')
-              });
-            }
+        for (let dr of result) {
+          projectCategory.push({
+            ID: (dr['ID'] ? dr['ID'] : ''),
+            name: {
+              th: (dr['projectCategoryNameTH'] ? dr['projectCategoryNameTH'] : dr['projectCategoryNameEN']),
+              en: (dr['projectCategoryNameEN'] ? dr['projectCategoryNameEN'] : dr['projectCategoryNameTH'])
+            },
+            logo: (dr['logo'] ? dr['logo'] : ''),
+            initial: (dr['initial'] ? dr['initial'] : '')
+          });
+        }
 
-            if (action === 'get') {
-              let location: [] = (dr1['location'] ? dr1['location'] : []);
-              let feeType: [] = (dr1['feeType'] ? dr1['feeType'] : []);
-
-              for (let dr2 of location) {
-                transLocation.push({
-                  ID: (dr2['transLocationID'] ? dr2['transLocationID'] : ''),
-                  transProjectID: (dr2['transProjectID'] ? dr2['transProjectID'] : ''),
-                  location: {
-                    ID: (dr2['locationID'] ? dr2['locationID'] : ''),
-                    name: {
-                      th: (dr2['locationNameTH'] ? dr2['locationNameTH'] : dr2['locationNameEN']),
-                      en: (dr2['locationNameEN'] ? dr2['locationNameEN'] : dr2['locationNameTH'])
-                    },
-                    building: {
-                      ID: (dr2['buildingID'] ? dr2['buildingID'] : ''),
-                      name: {
-                        th: (dr2['buildingNameTH'] ? dr2['buildingNameTH'] : dr2['buildingNameEN']),
-                        en: (dr2['buildingNameEN'] ? dr2['buildingNameEN'] : dr2['buildingNameTH'])
-                      }
-                    },
-                  },
-                  seatTotal: (dr2['seatTotal'] ? parseInt(dr2['seatTotal']) : 0),
-                  seatAvailable: (dr2['seatAvailable'] ? parseInt(dr2['seatAvailable']) : 0)
-                });
-              }
-
-              for (let dr3 of feeType) {
-                transFeeType.push({
-                  ID: (dr3['transFeeTypeID'] ? dr3['transFeeTypeID'] : ''),
-                  transProjectID: (dr3['transProjectID'] ? dr3['transProjectID'] : ''),
-                  feeType: {
-                    ID: (dr3['feeTypeID'] ? dr3['feeTypeID'] : ''),
-                    name: {
-                      th: (dr3['feeTypeNameTH'] ? dr3['feeTypeNameTH'] : dr3['feeTypeNameEN']),
-                      en: (dr3['feeTypeNameEN'] ? dr3['feeTypeNameEN'] : dr3['feeTypeNameTH'])
-                    },
-                    amount: (dr3['amount'] ? parseFloat(dr3['amount']) : 0),
-                    toggle: (dr3['toggle'] ? dr3['toggle'] : ''),
-                  },
-                  requiredStatus: (dr3['requiredStatus'] ? dr3['requiredStatus'] : ''),
-                  isSelected: (dr3['requiredStatus'] ? (dr3['requiredStatus'] === 'Y' ? true : false) : false),
-                });
-              }
-
-              transProject.push({
-                ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
-                project: {
-                  ID: (dr1['projectID'] ? dr1['projectID'] : ''),
-                  logo: (dr1['logo'] ? dr1['logo'] : ''),
-                  name: {
-                    th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
-                    en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
-                  },
-                  detail: (dr1['detail'] ? dr1['detail'] : '')
-                },
-                examDate: (dr1['examDates'] ? dr1['examDates'] : ''),
-                registrationDate: {
-                  startDate: (dr1['regisStartDates'] ? dr1['regisStartDates'] : ''),
-                  endDate: (dr1['regisEndDates'] ? dr1['regisEndDates'] : '')
-                },
-                lastPaymentDate: (dr1['lastPaymentDates'] ? dr1['lastPaymentDates'] : ''),
-                maximumSeat: (dr1['maximumSeat'] ? dr1['maximumSeat'] : ''),
-                seatAvailable: dr1['seatAvailable'],
-                minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
-                contactPerson: {
-                  fullName: {
-                    th: (dr1['contactNameTH'] ? dr1['contactNameTH'] : dr1['contactNameEN']),
-                    en: (dr1['contactNameEN'] ? dr1['contactNameEN'] : dr1['contactNameTH'])
-                  },
-                  email: (dr1['contactEmail'] ? dr1['contactEmail'] : ''),
-                  phoneNumber: (dr1['contactPhone'] ? dr1['contactPhone'] : '')
-                },
-                registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : ''),
-                transLocation: transLocation,
-                transFeeType: transFeeType
-              });
-            }
-          }
-
-          return transProject;
-        });
-      }
-
-      getList(): Promise<Schema.CBX.TransProject[]> {
-        return this.getDataSource('getlist').then((result: Schema.CBX.TransProject[]) => {
-          return result;
-        })
-      }
-
-      get(transProjectID: string): Promise<Schema.CBX.TransProject> {
-        let query = [
-          '',
-          ('transProjectID=' + transProjectID)
-        ].join('&');
-
-        return this.getDataSource('get', query).then((result: Schema.CBX.TransProject[]) => {
-          return result[0];
-        });
-      }
+        return projectCategory;
+      });
     }
 
-    export class RegistrationStatus {
-      private data = [
-        {
-          id: 'Y',
-          name: {
-            th: 'เปิดให้ลงทะเบียน',
-            en: 'Registration is open'
+    getList(): Promise<Schema.ProjectCategory[]> {
+      return this.getDataSource('getlist').then((result: Schema.ProjectCategory[]) => {
+        return result;
+      })
+    }
+  }
+
+  export class TransProject {
+    constructor(
+      private appService: AppService
+    ) {}
+
+    private getDataSource(action: string, query?: string): Promise<Schema.TransProject[]> {
+      return this.appService.getDataSource('TransProject', action, query).then((result: []) => {
+        let transProject: Schema.TransProject[] = [];
+        let transLocation: Schema.TransLocation[] = [];
+        let transFeeType: Schema.TransFeeType[] = [];
+
+        for (let dr1 of result) {
+          if (action === 'getlist') {
+            transProject.push({
+              ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
+              project: {
+                ID: (dr1['projectID'] ? dr1['projectID'] : ''),
+                logo: (dr1['logo'] ? dr1['logo'] : ''),
+                name: {
+                  th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
+                  en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
+                },
+                detail: (dr1['detail'] ? dr1['detail'] : '')
+              },
+              examDate: (dr1['examDates'] ? dr1['examDates'] : ''),
+              registrationDate: {
+                startDate: (dr1['regisStartDates'] ? dr1['regisStartDates'] : ''),
+                endDate: (dr1['regisEndDates'] ? dr1['regisEndDates'] : '')
+              },
+              maximumSeat: (dr1['maximumSeat'] ? dr1['maximumSeat'] : ''),
+              minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
+              contactPerson: {
+                fullName: {
+                  th: (dr1['contactNameTH'] ? dr1['contactNameTH'] : dr1['contactNameEN']),
+                  en: (dr1['contactNameEN'] ? dr1['contactNameEN'] : dr1['contactNameTH'])
+                },
+                email: (dr1['contactEmail'] ? dr1['contactEmail'] : ''),
+                phoneNumber: (dr1['contactPhone'] ? dr1['contactPhone'] : '')
+              },
+              registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : '')
+            });
           }
-        },
-        {
-          id: 'W',
-          name: {
-            th: 'ยังไม่เปิดให้ลงทะเบียน',
-            en: 'Registration not yet opened'
-          }
-        },
-        {
-          id: 'N',
-          name: {
-            th: 'หมดเวลาลงทะเบียน',
-            en: 'Registration expired'
+
+          if (action === 'get') {
+            let location: [] = (dr1['location'] ? dr1['location'] : []);
+            let feeType: [] = (dr1['feeType'] ? dr1['feeType'] : []);
+
+            for (let dr2 of location) {
+              transLocation.push({
+                ID: (dr2['transLocationID'] ? dr2['transLocationID'] : ''),
+                transProjectID: (dr2['transProjectID'] ? dr2['transProjectID'] : ''),
+                location: {
+                  ID: (dr2['locationID'] ? dr2['locationID'] : ''),
+                  name: {
+                    th: (dr2['locationNameTH'] ? dr2['locationNameTH'] : dr2['locationNameEN']),
+                    en: (dr2['locationNameEN'] ? dr2['locationNameEN'] : dr2['locationNameTH'])
+                  },
+                  building: {
+                    ID: (dr2['buildingID'] ? dr2['buildingID'] : ''),
+                    name: {
+                      th: (dr2['buildingNameTH'] ? dr2['buildingNameTH'] : dr2['buildingNameEN']),
+                      en: (dr2['buildingNameEN'] ? dr2['buildingNameEN'] : dr2['buildingNameTH'])
+                    }
+                  },
+                },
+                seatTotal: (dr2['seatTotal'] ? parseInt(dr2['seatTotal']) : 0),
+                seatAvailable: (dr2['seatAvailable'] ? parseInt(dr2['seatAvailable']) : 0)
+              });
+            }
+
+            for (let dr3 of feeType) {
+              transFeeType.push({
+                ID: (dr3['transFeeTypeID'] ? dr3['transFeeTypeID'] : ''),
+                transProjectID: (dr3['transProjectID'] ? dr3['transProjectID'] : ''),
+                feeType: {
+                  ID: (dr3['feeTypeID'] ? dr3['feeTypeID'] : ''),
+                  name: {
+                    th: (dr3['feeTypeNameTH'] ? dr3['feeTypeNameTH'] : dr3['feeTypeNameEN']),
+                    en: (dr3['feeTypeNameEN'] ? dr3['feeTypeNameEN'] : dr3['feeTypeNameTH'])
+                  },
+                  amount: (dr3['amount'] ? parseFloat(dr3['amount']) : 0),
+                  toggle: (dr3['toggle'] ? dr3['toggle'] : ''),
+                },
+                requiredStatus: (dr3['requiredStatus'] ? dr3['requiredStatus'] : ''),
+                isSelected: (dr3['requiredStatus'] ? (dr3['requiredStatus'] === 'Y' ? true : false) : false),
+              });
+            }
+
+            transProject.push({
+              ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
+              project: {
+                ID: (dr1['projectID'] ? dr1['projectID'] : ''),
+                logo: (dr1['logo'] ? dr1['logo'] : ''),
+                name: {
+                  th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
+                  en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
+                },
+                detail: (dr1['detail'] ? dr1['detail'] : '')
+              },
+              examDate: (dr1['examDates'] ? dr1['examDates'] : ''),
+              registrationDate: {
+                startDate: (dr1['regisStartDates'] ? dr1['regisStartDates'] : ''),
+                endDate: (dr1['regisEndDates'] ? dr1['regisEndDates'] : '')
+              },
+              lastPaymentDate: (dr1['lastPaymentDates'] ? dr1['lastPaymentDates'] : ''),
+              maximumSeat: (dr1['maximumSeat'] ? dr1['maximumSeat'] : ''),
+              seatAvailable: dr1['seatAvailable'],
+              minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
+              contactPerson: {
+                fullName: {
+                  th: (dr1['contactNameTH'] ? dr1['contactNameTH'] : dr1['contactNameEN']),
+                  en: (dr1['contactNameEN'] ? dr1['contactNameEN'] : dr1['contactNameTH'])
+                },
+                email: (dr1['contactEmail'] ? dr1['contactEmail'] : ''),
+                phoneNumber: (dr1['contactPhone'] ? dr1['contactPhone'] : '')
+              },
+              registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : ''),
+              transLocation: transLocation,
+              transFeeType: transFeeType
+            });
           }
         }
-      ]
 
-      private getDataSource(action: string, query?: string): Schema.CBX.RegistrationStatus[] {
-        let items: Schema.CBX.RegistrationStatus[];
+        return transProject;
+      });
+    }
 
-        if (action === 'getlist')
-          items = this.data;
+    getList(projectCategory: string): Promise<Schema.TransProject[]> {
+      let query = [
+        '',
+        ('projectCategory=' + projectCategory)
+      ].join('&');
 
-        if (action === 'get')
-          items = this.data.filter(result => {
-            return result.id.includes(query);
-          });
+      return this.getDataSource('getlist', query).then((result: Schema.TransProject[]) => {
+        return result;
+      })
+    }
 
-        return items;
+    get(transProjectID: string): Promise<Schema.TransProject> {
+      let query = [
+        '',
+        ('transProjectID=' + transProjectID)
+      ].join('&');
+
+      return this.getDataSource('get', query).then((result: Schema.TransProject[]) => {
+        return result[0];
+      });
+    }
+  }
+
+  export class TransRegistered {
+    constructor(
+      private appService: AppService
+    ) {}
+
+    private getDataSource(action: string, query?: string): Promise<Schema.TransRegistered[]> {
+      return this.appService.getDataSource('TransRegistered', action, query).then((result: []) => {
+        let transRegistered: Schema.TransRegistered[] = [];
+        let transProject: Schema.TransProject = {};
+        let transLocation: Schema.TransLocation = {};
+        let transDeliAddress: Schema.TransDeliAddress = {};
+        let invoiceFee: Schema.InvoiceFee[] = [];
+
+        for (let dr1 of result) {
+          if (action === 'get') {
+            let fee: [] = (dr1['fee'] ? dr1['fee'] : []);
+
+            transProject = {
+              ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
+              project: {
+                ID: (dr1['projectID'] ? dr1['projectID'] : ''),
+                logo: (dr1['logo'] ? dr1['logo'] : ''),
+                name: {
+                  th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
+                  en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
+                },
+                detail: (dr1['detail'] ? dr1['detail'] : '')
+              },
+              examDate: (dr1['examDates'] ? dr1['examDates'] : ''),
+              lastPaymentDate: (dr1['lastPaymentDates'] ? dr1['lastPaymentDates'] : ''),
+              contactPerson: {
+                fullName: {
+                  th: (dr1['contactNameTH'] ? dr1['contactNameTH'] : dr1['contactNameEN']),
+                  en: (dr1['contactNameEN'] ? dr1['contactNameEN'] : dr1['contactNameTH'])
+                },
+                email: (dr1['contactEmail'] ? dr1['contactEmail'] : ''),
+                phoneNumber: (dr1['contactPhone'] ? dr1['contactPhone'] : '')
+              }
+            };
+
+            transLocation = {
+              ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
+              location: {
+                ID: (dr1['locationID'] ? dr1['locationID'] : ''),
+                name: {
+                  th: (dr1['locationNameTH'] ? dr1['locationNameTH'] : dr1['locationNameEN']),
+                  en: (dr1['locationNameEN'] ? dr1['locationNameEN'] : dr1['locationNameTH'])
+                },
+                building: {
+                  ID: (dr1['buildingID'] ? dr1['buildingID'] : ''),
+                  name: {
+                    th: (dr1['buildingNameTH'] ? dr1['buildingNameTH'] : dr1['buildingNameEN']),
+                    en: (dr1['buildingNameEN'] ? dr1['buildingNameEN'] : dr1['buildingNameTH'])
+                  }
+                },
+              }
+            };
+
+            transDeliAddress = {
+              ID: (dr1['transDeliAddressID'] ? dr1['transDeliAddressID'] : ''),
+              address: (dr1['address'] ? dr1['address'] : ''),
+              country: (dr1['country'] ? dr1['country'][0] : null),
+              province: (dr1['province'] ? dr1['province'][0] : null),
+              district: (dr1['district'] ? dr1['district'][0] : null),
+              subdistrict: (dr1['subdistrict'] ? dr1['subdistrict'][0] : null),
+              postalCode: (dr1['postalCode'] ? dr1['postalCode'] : ''),
+              phoneNumber: (dr1['phoneNumber'] ? dr1['phoneNumber'] : ''),
+            };
+
+            for (let dr2 of fee) {
+              invoiceFee.push({
+                invoiceID: (dr2['invoiceID'] ? dr2['invoiceID'] : ''),
+                feeType: {
+                  ID: (dr2['feeTypeID'] ? dr2['feeTypeID'] : ''),
+                  name: {
+                    th: (dr2['feeTypeNameTH'] ? dr2['feeTypeNameTH'] : dr2['feeTypeNameEN']),
+                    en: (dr2['feeTypeNameEN'] ? dr2['feeTypeNameEN'] : dr2['feeTypeNameTH'])
+                  },
+                  amount: (dr2['amount'] ? parseFloat(dr2['amount']) : 0)
+                }
+              });
+            }
+
+            transRegistered.push({
+              ID: (dr1['transRegisteredID'] ? dr1['transRegisteredID'] : ''),
+              transProject: transProject,
+              transLocation: transLocation,
+              transDeliAddress: transDeliAddress,
+              invoice: {
+                ID: (dr1['invoiceID'] ? dr1['invoiceID'] : ''),
+                name: {
+                  th: (dr1['invoiceNameTH'] ? dr1['invoiceNameTH'] : dr1['invoiceNameEN']),
+                  en: (dr1['invoiceNameEN'] ? dr1['invoiceNameEN'] : dr1['invoiceNameTH'])
+                },
+                namePrintReceipt: (dr1['invoiceNamePrintReceipt'] ? dr1['invoiceNamePrintReceipt'] : ''),
+                billerID: (dr1['billerID'] ? dr1['billerID'] : ''),
+                qrRef_1: (dr1['qrRef_1'] ? dr1['qrRef_1'] : ''),
+                qrRef_2: (dr1['qrRef_2'] ? dr1['qrRef_2'] : ''),
+                qrRef_3: (dr1['qrRef_3'] ? dr1['qrRef_3'] : ''),
+                bankRequest: (dr1['bankRequest'] ? dr1['bankRequest'] : ''),
+                bankTransID: (dr1['bankTransID'] ? dr1['bankTransID'] : ''),
+                paidAmount: (dr1['paidAmount'] ? parseFloat(dr1['paidAmount']) : 0),
+                paidBy: (dr1['paidBy'] ? dr1['paidBy'] : ''),
+                paidDate: (dr1['paidDate'] ? dr1['paidDate'] : ''),
+                paidStatus: (dr1['paidStatus'] ? dr1['paidStatus'] : ''),
+              },
+              invoiceFee: invoiceFee,
+              totalFeeAmount: (dr1['totalFeeAmount'] ? parseFloat(dr1['totalFeeAmount']) : 0),
+            })
+          }
+        }
+
+        return transRegistered;
+      });
+    }
+
+    get(transRegisteredID: string, personID?: string, transProjectID?: string): Promise<Schema.TransRegistered> {
+      let query = [
+        '',
+        ('transRegisteredID=' + transRegisteredID),
+        ('personID=' + personID),
+        ('transProjectID=' + transProjectID)
+      ].join('&');
+
+      return this.getDataSource('get', query).then((result: Schema.TransRegistered[]) => {
+        return result[0];
+      });
+    }
+  }
+
+  export class RegistrationStatus {
+    private data = [
+      {
+        id: 'Y',
+        name: {
+          th: 'เปิดให้ลงทะเบียน',
+          en: 'Registration is open'
+        }
+      },
+      {
+        id: 'W',
+        name: {
+          th: 'ยังไม่เปิดให้ลงทะเบียน',
+          en: 'Registration not yet opened'
+        }
+      },
+      {
+        id: 'N',
+        name: {
+          th: 'หมดเวลาลงทะเบียน',
+          en: 'Registration expired'
+        }
       }
+    ]
 
-      getList(): Schema.CBX.RegistrationStatus[] {
-        return this.getDataSource('getlist')
-      }
+    private getDataSource(action: string, query?: string): Schema.RegistrationStatus[] {
+      let items: Schema.RegistrationStatus[];
 
-      get(query: string): Schema.CBX.RegistrationStatus {
-        return this.getDataSource('get', query)[0];
-      }
+      if (action === 'getlist')
+        items = this.data;
+
+      if (action === 'get')
+        items = this.data.filter(result => {
+          return result.id.includes(query);
+        });
+
+      return items;
+    }
+
+    getList(): Schema.RegistrationStatus[] {
+      return this.getDataSource('getlist')
+    }
+
+    get(query: string): Schema.RegistrationStatus {
+      return this.getDataSource('get', query)[0];
     }
   }
 }
@@ -647,8 +821,8 @@ export class DataService {
   public province = new Data.Province(this.appService);
   public district = new Data.District(this.appService);
   public subdistrict = new Data.Subdistrict(this.appService);
-  public cbx = {
-    transProject: new Data.CBX.TransProject(this.appService),
-    registrationStatus: new Data.CBX.RegistrationStatus()
-  }
+  public projectCategory = new Data.ProjectCategory(this.appService);
+  public transProject = new Data.TransProject(this.appService);
+  public transRegistered = new Data.TransRegistered(this.appService);
+  public registrationStatus = new Data.RegistrationStatus()
 }

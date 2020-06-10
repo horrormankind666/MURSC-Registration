@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๗/๐๔/๒๕๖๓>
-Modify date : <๒๗/๐๔/๒๕๖๓>
+Modify date : <๐๘/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -10,6 +10,10 @@ Description : <>
 'use strict';
 
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+
+import {AppService} from './app.service';
+import {DataService} from './data.service';
 
 @Component({
   selector: 'app-main',
@@ -17,8 +21,17 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private route: ActivatedRoute,
+    private appService: AppService,
+    private dataService: DataService
+  ) {}
+
+  data: any = {
+    projectCategory$: null
+  };
 
   ngOnInit() {
+    this.data.projectCategory$ = this.route.snapshot.data.projectCategory$;
   }
 }

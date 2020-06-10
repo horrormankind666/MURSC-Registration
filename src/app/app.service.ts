@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๗/๐๕/๒๕๖๓>
+Modify date : <๑๐/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -82,7 +82,7 @@ export class AppService  {
       this.titleService.setTitle(result);
     });
   }
-  
+
   getCurrentLanguage(): string {
     return this.translateService.currentLang
   }

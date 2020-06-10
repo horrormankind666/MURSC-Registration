@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๐/๐๒/๒๕๖๓>
-Modify date : <๐๑/๐๖/๒๕๖๓>
+Modify date : <๑๐/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -26,7 +26,7 @@ interface TableState {
 }
 
 interface TableSearchResult {
-  data: Schema.CBX.TransProject[];
+  data: Schema.TransProject[];
   total: number;
   totalSearch: number;
 }
@@ -41,7 +41,7 @@ class Table {
 
   private _searching$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _data$ = new BehaviorSubject<Schema.CBX.TransProject[]>([]);
+  private _data$ = new BehaviorSubject<Schema.TransProject[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
   private _totalSearch$ = new BehaviorSubject<number>(0);
 
@@ -71,7 +71,7 @@ class Table {
     this._search$.next();
   }
 
-  private _search(data: Schema.CBX.TransProject[]): Observable<TableSearchResult> {
+  private _search(data: Schema.TransProject[]): Observable<TableSearchResult> {
     const {page, pageSize, keyword, registrationStatus} = this._state;
 
     let tmp = data;
@@ -85,7 +85,7 @@ class Table {
     return of({data, total, totalSearch});
   }
 
-  matches(data: Schema.CBX.TransProject, keyword: string, registrationStatus: string, pipe: PipeTransform) {
+  matches(data: Schema.TransProject, keyword: string, registrationStatus: string, pipe: PipeTransform) {
     keyword = (keyword ? keyword : '');
     registrationStatus = (registrationStatus ? registrationStatus : '');
 
@@ -97,7 +97,7 @@ class Table {
   }
 
   reload() {
-    this.dataService.cbx.transProject.getList().then((result: Schema.CBX.TransProject[]) => {
+    this.dataService.transProject.getList('CBX').then((result: Schema.TransProject[]) => {
       this._search$.pipe(
         tap(() => this._searching$.next(true)),
         debounceTime(100),

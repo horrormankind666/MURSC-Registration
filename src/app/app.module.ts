@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๗/๐๕/๒๕๖๓>
+Modify date : <๐๙/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -31,6 +31,8 @@ import {AppService} from './app.service';
 import {AuthGuardService} from './auth-guard.service';
 import {AuthService} from './auth.service';
 
+import {TrimOnBlurDirective} from './app.directive';
+
 import {appRouting} from './app-routing.module';
 
 import {AppComponent} from './app.component';
@@ -43,7 +45,8 @@ import {ProjectComponent as CBXProjectComponent} from './CBX/project/project.com
 import {ProjectDetailComponent as CBXProjectDetailComponent} from './CBX/project-detail/project-detail.component';
 import {RegisteredComponent as CBXRegisteredComponent} from './CBX/registered/registered.component';
 import {HomeComponent as MUEFHomeComponent} from  './MUFE/home/home.component';
-import {TrimOnBlurDirective} from './app.directive';
+import {HomeComponent as TransactionRegisteredHomeComponent} from './TransactionRegistered/home/home.component';
+import {RegisteredDetailComponent as TransactionRegisteredDetailComponent} from './TransactionRegistered/registered-detail/registered-detail.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -63,6 +66,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CBXProjectDetailComponent,
     CBXRegisteredComponent,
     MUEFHomeComponent,
+    TransactionRegisteredHomeComponent,
+    TransactionRegisteredDetailComponent,
     TrimOnBlurDirective
   ],
   imports: [

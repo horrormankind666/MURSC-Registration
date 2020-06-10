@@ -74,7 +74,7 @@ export class AuthService {
 
         this.http.get(this.appService.urlAuthenResource, { headers: headers }).subscribe((result: {}) => {
           let data = result['data'];
-          
+
           this.isAuthenticated = (data !== null ? data[0].isAuthenticated : false);
           this.setUserInfo(this.isAuthenticated ? data[1].payload : {});
 

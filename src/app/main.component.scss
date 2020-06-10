@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๗/๐๔/๒๕๖๓>
-Modify date : <๒๘/๐๔/๒๕๖๓>
+Modify date : <๐๘/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -35,5 +35,8 @@ Description : <>
   .main-view .d-table-cell {
     display: block !important;
     width: 254px !important;
+  }
+  .main-view a.d-table-cell:not(:first-child) {
+    margin-top: 16px;
   }
 }

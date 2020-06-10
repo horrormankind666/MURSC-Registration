@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๑๔/๐๕/๒๕๖๓>
+Modify date : <๑๐/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -44,6 +44,12 @@ Description : <>
 .registered-view .title-info .dropdown-toggle::after {
   border: 0;
   margin-left: 0;
+}
+.project-view .project-info a.badge,
+.project-detail-view .project-info a.badge,
+.registered-view .project-info a.badge {
+  line-height: 1.4 !important;
+  width: 80px;
 }
 .project-view .dropdown-menu.contact-info,
 .project-detail-view .dropdown-menu.contact-info,

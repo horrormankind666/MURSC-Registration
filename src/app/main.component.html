@@ -1,19 +1,11 @@
 <div class="main-view pr-3 pl-3">
   <div class="d-table w-auto mr-auto ml-auto">
-      <a routerLink="../CBX" routerLinkActive="active" class="btn d-table-cell border-0 align-top rounded-xxl p-0">
-        <i class="fa fa-laptop fa-5x w-100 border rounded-xxl rounded-bottom-0 text-secondary pt-2 pr-3 pb-1 pl-3"></i>
-        <div class="w-inherit pt-2 pr-3 pb-2 pl-3 regular text-black-50">
-          <span class="bold size18">{{'CBX.label' | translate}}</span><br />
-          <span class="size16">( {{'CBX.initial' | translate | uppercase}} )</span>
-        </div>
-      </a>
-      <div class="d-table-cell table-cell-divider"></div>
-      <a routerLink="../MUFE" routerLinkActive="active" class="btn d-table-cell border-0 align-top rounded-xxl p-0">
-        <i class="fa fa-random fa-5x w-100 border rounded-xxl rounded-bottom-0 text-secondary pt-2 pr-3 pb-1 pl-3"></i>
-        <div class="w-inherit pt-2 pr-3 pb-2 pl-3 regular text-black-50">
-          <span class="bold size18">{{'MUFE.label' | translate}}</span><br />
-          <span class="size16">( {{'MUFE.initial' | translate | uppercase}} )</span>
-        </div>
-      </a>
+    <a routerLink="../{{projectCategory.ID}}" routerLinkActive="active" class="btn d-table-cell border-0 align-top rounded-xxl p-0" *ngFor="let projectCategory of data.projectCategory$">
+      <i class="fa {{projectCategory.logo}} fa-5x w-100 border rounded-xxl rounded-bottom-0 text-secondary pt-2 pr-3 pb-1 pl-3"></i>
+      <div class="w-inherit pt-2 pr-3 pb-2 pl-3 regular text-black-50">
+        <span class="bold size18">{{projectCategory.name[appService.lang]}}</span><br />
+        <span class="size16">( {{projectCategory.initial}} )</span>
+      </div>
+    </a>
   </div>
 </div>

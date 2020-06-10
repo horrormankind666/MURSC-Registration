@@ -36,6 +36,7 @@
   "registered": {
     "label": "Registered",
     "info": "Registered Information",
+    "detail": "Registered Detail",
     "confirm": "Confirm Registered",
     "save": {
       "error": {
@@ -50,6 +51,9 @@
         "fee": "Fee not found.",
         "deliaddress": "Please fill in the address information correctly and completely."
       }
+    },
+    "error": {
+      "notFound": "Registered Detail Not Found"
     }
   },
   "items": "Items",
@@ -106,7 +110,7 @@
     "lastPaymentDate": "Last Payment Date",
     "detail": "Project Detail",
     "error": {
-      "notFound": "Project Not Found"
+      "notFound": "Project Detail Not Found"
     }
   },
   "location": {
