@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๐/๐๖/๒๕๖๓>
+Modify date : <๑๔/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -11,7 +11,7 @@ Description : <>
 
 import {Injectable} from '@angular/core';
 import {formatDate} from '@angular/common';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Title} from '@angular/platform-browser';
 
 import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -61,12 +61,12 @@ export class AppService  {
     type: '',
     token: ''
   }
-  public urlAuthenResource: string = /*'http://localhost:5001/API/AuthenResource/UserInfo'*/'https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/UserInfo';
-  public urlAuthenServer: string = /*'http://localhost:50833'*/'https://mursc.mahidol.ac.th/AuthADFS';
-  public urlAPI: string = /*'http://localhost:3000/API'*/'https://mursc.mahidol.ac.th/API';
   public dateTimeOnURL: string = formatDate(new Date(), 'dd/MM/yyyyHH:mm:ss', 'en');
   public rootPath: string;
   public hasHearderSubtitle: boolean = false;
+  public urlAuthenResource: string = /*'http://localhost:5001/API/AuthenResource/UserInfo'*/('https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/UserInfo?ver=' + this.dateTimeOnURL);
+  public urlAuthenServer: string = /*'http://localhost:50833'*/('https://mursc.mahidol.ac.th/AuthADFS?ver=' + this.dateTimeOnURL);
+  public urlAPI: string = /*'http://localhost:3000/API'*/'https://mursc.mahidol.ac.th/API';
 
   textOverflowClamp(e: string, line: number) {
     $clamp(document.querySelector(e), {clamp: (this.deviceService.browser === 'IE' ? (line + 1) : line)});
@@ -123,6 +123,9 @@ export class AppService  {
 
     let url = (this.urlAPI + '/' + routePrefix + '/');
     let route = '';
+    let option = {
+      headers: new HttpHeaders().set('Authorization', ('Bearer ' + this.authenResource.token))
+    };
 
     switch (action)
     {
@@ -139,7 +142,7 @@ export class AppService  {
     url += (route + '?ver=' + this.dateTimeOnURL + query);
 
     let promise = new Promise((resolve, reject) => {
-      this.http.get(url).subscribe((result: {}) => {
+      this.http.get(url, option).subscribe((result: {}) => {
         let data = result['data'];
 
         resolve(data !== undefined && data !== null ? data : []);
@@ -156,6 +159,9 @@ export class AppService  {
 
     let url = (this.urlAPI + '/' + routePrefix + "/");
     var route = "";
+    let option = {
+      headers: new HttpHeaders().set('Authorization', ('Bearer ' + this.authenResource.token))
+    };
 
     switch (method)
     {
@@ -171,7 +177,7 @@ export class AppService  {
     this.isLoading.saving = true;
 
     let promise = new Promise((resolve, reject) => {
-      this.http.post(url, data).subscribe((result: {}) => {
+      this.http.post(url, data, option).subscribe((result: {}) => {
         this.isLoading.show = false;
         this.isLoading.saving = false;
 

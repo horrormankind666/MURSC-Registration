@@ -2,10 +2,149 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๒๔/๐๔/๒๕๖๓>
+Modify date : <๑๖/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 @import '~@ng-select/ng-select/themes/default.theme.css';
 @import 'assets/style/util.scss';
+
+@mixin project-card-horizontal-fixed($class, $width-fixed)
+{
+  .project-card-horizontal#{$class} .project-body {
+    display: table !important;
+    table-layout: fixed;
+  }
+  .project-card-horizontal#{$class} .project-body .col-sm-3 {
+    display: table-cell !important;
+    vertical-align: top;
+    width: $width-fixed;
+    max-width: $width-fixed !important;
+  }
+  .project-card-horizontal#{$class} .project-body .col-sm-9 {
+    display: table-cell;
+    vertical-align: top;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+}
+
+.project-card-img {
+  border-bottom-right-radius: 1rem !important;
+  border-bottom-left-radius: 1rem !important;
+}
+.project-registration-status i {
+  position: relative;
+  top: -2px;
+}
+.project-btn-badge {
+  line-height: 1.4 !important;
+  padding-right: 1rem !important;
+  padding-left: 1rem !important;
+}
+.project-dropdown .btn-contact-info {
+  margin-top: 0;
+  padding-right: 0;
+  padding-left: 0;
+  width: 24px;
+  height: 24px;
+  line-height: 0;
+  position: relative;
+}
+.project-dropdown .btn-contact-info i {
+  top: 2px;
+}
+.project-dropdown .dropdown-toggle::after {
+  border: 0;
+  margin-left: 0;
+}
+.project-dropdown .dropdown-menu.contact-info {
+  width: 260px;
+  min-width: 260px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .project-dropdown .dropdown-menu.show.contact-info {
+    top: 26px !important;
+    left: 0 !important;
+  }
+}
+.project-text-line-clamp::after {
+  background-color: #FFFFFF;
+}
+.project-register-info .form .form-group .col-form-label {
+  width: 161px;
+}
+.project-register-info .d-table .col-icon {
+  width: 26px;
+}
+.project-register-info .d-table .col-icon.size-l {
+  width: 32px;
+}
+.project-register-info .d-table.calendar-date .col-calendar-registrationdate {
+  width: 156px;
+}
+.project-contact-info .form .form-group .col-form-label,
+.project-menu-info .form .form-group .col-form-label {
+  width: 15px !important;
+}
+.project-contact-info .form .form-group .col-form-label::after,
+.project-menu-info .form .form-group .col-form-label::after {
+  float: none !important;
+  content: '' !important;
+  margin-left: 0 !important;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .project-contact-info .form .form-group .col-form-label,
+  .project-menu-info .form .form-group .col-form-label,
+  .project-contact-info .form .form-group .col,
+  .project-menu-info .form .form-group .col {
+    display: table-cell;
+  }
+}
+.project-registered-btn {
+  display: table;
+  width: 215px;
+  height: 50px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .project-registered-btn {
+    height: 34px;
+  }
+}
+.project-registered-btn .btn {
+  display: table-cell !important;
+  width: inherit;
+  height: inherit;
+  vertical-align: middle;
+  border-width: 2px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0px;
+}
+.project-location-info .table tbody:last-child td {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.project-location-info .table .col-seattotal {
+  width: 250px;
+  min-width: 250px;
+}
+.project-location-info .table .col-seatavailable {
+  width: 238px;
+  min-width: 238px;
+}
+.project-location-info .table .col-seat {
+  width: 202px;
+}
+.project-location-info .location-building-seat-info .form .form-group:last-child .col span:last-child {
+  position: relative;
+  top: -5px;
+}
+@media screen and (max-width: 858px) {
+  @include project-card-horizontal-fixed(':not(.on-modal)', 205px);
+}

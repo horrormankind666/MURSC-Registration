@@ -2,33 +2,18 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๗/๐๓/๒๕๖๓>
-Modify date : <๒๒/๐๕/๒๕๖๓>
+Modify date : <๑๖/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
 
-@import '../styles.scss';
+@import '../../../styles.scss';
 
 .project-detail-view .project-card-vertical {
   display: none;
 }
 @media screen and (max-width: 816px) {
-  .project-detail-view .project-card-horizontal .project-body {
-    display: table !important;
-    table-layout: fixed;
-  }
-  .project-detail-view .project-card-horizontal .project-body .col-sm-3 {
-    display: table-cell !important;
-    vertical-align: top;
-    width: 180px;
-    max-width: 180px !important;
-  }
-  .project-detail-view .project-card-horizontal .project-body .col-sm-9 {
-    display: table-cell;
-    vertical-align: top;
-    width: auto !important;
-    max-width: 100% !important;
-  }
+  @include project-card-horizontal-fixed('.on-modal', 180px);
 }
 @media screen and (max-width: 735px) {
   .project-detail-view .project-card-horizontal {
@@ -42,13 +27,6 @@ Description : <>
   width: 64px;
   min-width: 64px;
 }
-.project-detail-view .location-info .table .col-seat {
-  width: 202px;
-}
-.project-detail-view .location-info .location-building-seat-info .form .form-group:last-child .col span:last-child {
-  position: relative;
-  top: -5px;
-}
 @media screen and (max-width: 900px) {
   @include table-responsive-step1('.project-detail-view .location-info');
 }
@@ -56,7 +34,6 @@ Description : <>
   @include table-responsive-step2('.project-detail-view .location-info');
 }
 @media screen and (max-width: 525px) {
-  @include form-responsive('.project-detail-view .register-info');
   .project-detail-view .registered-btn {
     width: 100% !important;
   }

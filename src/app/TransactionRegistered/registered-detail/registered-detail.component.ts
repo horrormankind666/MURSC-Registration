@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๙/๐๖/๒๕๖๓>
-Modify date : <๑๐/๐๖/๒๕๖๓>
+Modify date : <๑๒/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,6 +12,8 @@ Description : <>
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
+import {AppService} from '../../app.service';
+import {DataService} from '../../data.service';
 import {ModalService} from '../../modal/modal.service';
 
 import {ModalErrorComponent} from '../../modal/modal.component';
@@ -25,11 +27,16 @@ export class RegisteredDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private appService: AppService,
+    private dataService: DataService,
     private modalService: ModalService
   ) {}
 
   data: any = {
     transRegistered$: null
+  };
+  isCollapsed: any = {
+    projectDetail: false
   };
 
   ngOnInit() {

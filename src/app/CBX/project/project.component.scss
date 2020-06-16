@@ -2,12 +2,12 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๒๔/๐๔/๒๕๖๓>
+Modify date : <๑๖/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
 
-@import '../styles.scss';
+@import '../../../styles.scss';
 
 .project-view .card-group {
   margin-left: -0.25rem;
@@ -31,6 +31,14 @@ Description : <>
   ::i-block-chrome,
   .project-view .project-card-horizontal {
     display: block;
+  }
+  ::i-block-chrome,
+  .project-view .title-info .dropdown-menu.show.contact-info {
+    left: 9px !important;
+  }
+  ::i-block-chrome,
+  .project-view .project-card-vertical .title-info .dropdown-menu.show.contact-info {
+    left: -227px !important;
   }
 }
 @media screen and (max-width: 654px) {
@@ -60,30 +68,4 @@ Description : <>
   .project-view .project-info .dropdown-menu.show.menu-info {
     top: 24px !important;
   }
-}
-.project-view .project-card-vertical .register-info .form .form-group .col-form-label {
-  width: 126px;
-}
-.project-view .project-card-horizontal .register-info .form .form-group .col-form-label {
-  width: 137px;
-}
-.project-view .project-card-vertical .register-info .form .form-group.col-registrationdate,
-.project-view .project-card-vertical .register-info .form .form-group.col-registrationdate .col-form-label,
-.project-view .project-card-vertical .register-info .form .form-group.col-registrationdate .col {
-  display: block !important;
-  width: 100% !important;
-}
-.project-view .project-card-vertical .register-info .form .form-group.col-registrationdate .col-form-label::after {
-  float: none !important;
-  content: '' !important;
-  margin-left: 0 !important;
-}
-.project-view .project-card-vertical .register-info .form .form-group.col-registrationdate .col {
-  padding-left: 0 !important;
-}
-.project-view .project-card-vertical .register-info .d-table.calendar-date {
-  margin-top: 5px;
-}
-.project-view .project-card-horizontal .register-info .d-table.calendar-date {
-  margin-top: 2px;
 }

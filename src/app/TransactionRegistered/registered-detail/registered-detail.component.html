@@ -4,11 +4,128 @@
       <div class="card bg-white border-0 rounded-0">
         <div class="card-body pt-0 pr-3 pb-0 pl-3">
           <div class="card-title mb-0">
-            <span class="bold size26">{{'registered.detail' | translate | titlecase}}</span>
+            <span class="bold text-dark size24">{{'registered.detail' | translate | titlecase}}</span>
           </div>
         </div>
       </div>
-      <div class="dropdown-divider mt-1 mb-0"></div>
+      <div class="dropdown-divider mt-2 mb-0"></div>
+      <div class="card card-horizontal bg-white border-0 rounded-0 project-card-horizontal">
+        <div class="card-body pt-0 pr-3 pb-0 pl-3 project-body">
+          <div class="d-inline-block col-sm-3 pl-0 align-top">
+            <ng-container *ngTemplateOutlet="titleInfo"></ng-container>
+          </div>
+          <div class="d-inline-block col-sm-9 pt-1 pr-0 align-top">
+            <div class="card-text">
+              <div class="mb-2"><ng-container *ngTemplateOutlet="projectInfo"></ng-container></div>
+              <ng-container *ngTemplateOutlet="registerInfo"></ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-vertical bg-white border-0 rounded-0 project-card-vertical">
+        <div class="card-body pt-0 pr-3 pb-0 pl-3 project-body">
+          <ng-container *ngTemplateOutlet="titleInfo"></ng-container>
+          <div class="card-text">
+            <div class="mt-3 mb-2"><ng-container *ngTemplateOutlet="projectInfo"></ng-container></div>
+            <ng-container *ngTemplateOutlet="registerInfo"></ng-container>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<ng-template #titleInfo>
+  <div class="title-info">
+    <div class="embed-responsive embed-responsive-16by9 mb-3">
+      <div class="card-img project-card-img" [ngStyle]="{'background-image': ('url(' + data.transRegistered$.transProject.project.logo + ')')}"></div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #projectInfo>
+  <div class="project-info">
+    <p class="bold size22 mb-0">{{data.transRegistered$.transProject.project.name[appService.lang]}}</p>
+  </div>
+</ng-template>
+<ng-template #registerInfo>
+  <div class="register-info project-register-info">
+    <div class="regular size16">
+      <div class="form">
+        <div class="form-group row mb-01">
+          <label for="col-registereddate" class="col-form-label">{{'registered.date' | translate | titlecase}}</label>
+          <div class="col">
+            <span class="form-text regular">{{data.transRegistered$.registeredDate}}</span>
+          </div>
+        </div>
+        <div class="form-group row mb-01">
+          <label for="col-paymentstatus" class="col-form-label">{{'invoice.paymentStatus' | translate | titlecase}}</label>
+          <div class="col">
+            <span class="form-text regular"
+              [ngClass]="{
+                'text-success': (data.transRegistered$.invoice.payment.status === 'Y'),
+                'text-warning': (data.transRegistered$.invoice.payment.status === 'W'),
+                'text-danger': (data.transRegistered$.invoice.payment.status === 'N')
+              }">
+              {{(dataService.statuses.get(dataService.paymentStatus.data$, data.transRegistered$.invoice.payment.status)).name[appService.lang]}}
+            </span>
+          </div>
+        </div>
+        <div class="form-group row mb-01" *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">
+          <label for="col-dateofpayment" class="col-form-label">{{'invoice.dateOfPayment' | translate}}</label>
+          <div class="col">
+            <span class="form-text regular"
+              [ngClass]="{
+                'text-success': (data.transRegistered$.invoice.payment.status === 'Y'),
+                'text-warning': (data.transRegistered$.invoice.payment.status === 'W')
+              }">
+              {{data.transRegistered$.invoice.payment.date}}
+            </span>
+          </div>
+        </div>
+        <div class="form-group row mb-01" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">
+          <label for="col-dateofpayment" class="col-form-label">{{'project.lastPaymentDate' | translate | titlecase}}</label>
+          <div class="col">
+            <span class="form-text regular">{{data.transRegistered$.transProject.lastPaymentDate}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-2">
+    <div class="d-inline project-dropdown" ngbDropdown placement="bottom-left">
+      <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle>
+        <i class="fa fa-phone text-white size15"></i>
+      </a>
+      <div ngbDropdownMenu aria-labelledby="contact-info" class="contact-info">
+        <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo"></ng-container></div>
+      </div>
+    </div>
+    <a class="d-inline badge badge-pill badge-info ml-2 project-btn-badge" href="javascript:void(0)" (click)="$event.currentTarget.blur(); isCollapsed.projectDetail = !isCollapsed.projectDetail" [attr.aria-expanded]="isCollapsed.projectDetail" aria-controls="projectDetail">
+      <span class="regular text-white size13">{{'detail' | translate | lowercase}}</span>
+    </a>
+  </div>
+  <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0 project-text-line-clamp" id="projectDetail" [ngbCollapse]="!isCollapsed.projectDetail">{{data.transRegistered$.transProject.project.detail}}</p>
+</ng-template>
+<ng-template #contactInfo>
+  <div class="contact-info text-white size14 project-contact-info">
+    <div class="form">
+      <div class="form-group row mr-0 mb-1 ml-0">
+        <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fa fa-address-book-o"></i></label>
+        <div class="col text-left">
+          <span class="form-text regular mt-0">{{data.transRegistered$.transProject.contactPerson.fullName[appService.lang]}}</span>
+        </div>
+      </div>
+      <div class="form-group row mr-0 mb-1 ml-0">
+        <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fa fa-envelope-o"></i></label>
+        <div class="col text-left">
+          <span class="form-text regular mt-0">{{data.transRegistered$.transProject.contactPerson.email}}</span>
+        </div>
+      </div>
+      <div class="form-group row mr-0 mb-0 ml-0">
+        <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fa fa-phone"></i></label>
+        <div class="col text-left">
+          <span class="form-text regular mt-0">{{data.transRegistered$.transProject.contactPerson.phoneNumber}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

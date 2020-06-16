@@ -37,6 +37,7 @@
     "label": "Registered",
     "info": "Registered Information",
     "detail": "Registered Detail",
+    "date": "Registered Date",
     "confirm": "Confirm Registered",
     "save": {
       "error": {
@@ -145,5 +146,11 @@
     "province": "Province",
     "country": "Country",
     "postalCode": "Postal Code"
+  },
+  "addressDelivery": "Address for Delivery",
+  "invoice": {
+    "label": "Invoice",
+    "paymentStatus": "Payment Status",
+    "dateOfPayment": "Date of Payment"
   }
 }

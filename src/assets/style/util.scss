@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๗/๐๕/๒๕๖๓>
+Modify date : <๑๖/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -98,6 +98,9 @@ $line-clamp-line-height: 1.7;
 }
 .font-tahoma {
   font-family: Tahoma;
+}
+.line-height-0 {
+  line-height: 0 !important;
 }
 .bg-black-10 {
   background: $color-black-10 !important;
@@ -1098,6 +1101,9 @@ textarea {
 }
 .w-91 {
   width: 91.666667% !important;
+}
+.mb-01 {
+  margin-bottom: 0.1rem !important;
 }
 .mb-044 {
   margin-bottom: 0.44rem !important;

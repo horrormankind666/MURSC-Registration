@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๑๐/๐๖/๒๕๖๓>
+Modify date : <๑๖/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -157,10 +157,12 @@ export namespace Schema {
     qrRef_3?: string,
     bankRequest?: string,
     bankTransID?: string,
-    paidAmount?: number,
-    paidBy?: string,
-    paidDate?: string,
-    paidStatus?: string
+    payment?: {
+      amount?: number,
+      by?: string,
+      date?: string,
+      status?: string
+    }
   }
 
   export interface InvoiceFee {
@@ -177,8 +179,8 @@ export namespace Schema {
       endDate?: string
     },
     lastPaymentDate?: string,
-    maximumSeat?: string,
-    seatAvailable?: string,
+    maximumSeat?: number,
+    seatAvailable?: number,
     minimumFee?: string,
     contactPerson?: ContactPerson,
     registrationStatus?: string,
@@ -216,6 +218,7 @@ export namespace Schema {
 
   export interface TransRegistered {
     ID?: string,
+    registeredDate?: string,
     transProject?: TransProject,
     transLocation?: TransLocation,
     transDeliAddress?: TransDeliAddress,
@@ -224,8 +227,8 @@ export namespace Schema {
     totalFeeAmount?: number
   }
 
-  export interface RegistrationStatus {
-    id?: string;
+  export interface Statuses {
+    ID?: string;
     name: {
       th?: string,
       en?: string
@@ -509,7 +512,8 @@ namespace Data {
                 startDate: (dr1['regisStartDates'] ? dr1['regisStartDates'] : ''),
                 endDate: (dr1['regisEndDates'] ? dr1['regisEndDates'] : '')
               },
-              maximumSeat: (dr1['maximumSeat'] ? dr1['maximumSeat'] : ''),
+              maximumSeat: (dr1['maximumSeat'] ? parseInt(dr1['maximumSeat']) : 0),
+              seatAvailable: dr1['seatAvailable'],
               minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
               contactPerson: {
                 fullName: {
@@ -585,8 +589,8 @@ namespace Data {
                 endDate: (dr1['regisEndDates'] ? dr1['regisEndDates'] : '')
               },
               lastPaymentDate: (dr1['lastPaymentDates'] ? dr1['lastPaymentDates'] : ''),
-              maximumSeat: (dr1['maximumSeat'] ? dr1['maximumSeat'] : ''),
-              seatAvailable: dr1['seatAvailable'],
+              maximumSeat: (dr1['maximumSeat'] ? parseInt(dr1['maximumSeat']) : 0),
+              seatAvailable: (dr1['seatAvailable'] ? (parseInt(dr1['seatAvailable']) > 0 ? (parseInt(dr1['maximumSeat']) - parseInt(dr1['seatAvailable'])) : 0) : 0),
               minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
               contactPerson: {
                 fullName: {
@@ -715,6 +719,7 @@ namespace Data {
 
             transRegistered.push({
               ID: (dr1['transRegisteredID'] ? dr1['transRegisteredID'] : ''),
+              registeredDate: (dr1['registeredDates'] ? dr1['registeredDates'] : ''),
               transProject: transProject,
               transLocation: transLocation,
               transDeliAddress: transDeliAddress,
@@ -731,10 +736,12 @@ namespace Data {
                 qrRef_3: (dr1['qrRef_3'] ? dr1['qrRef_3'] : ''),
                 bankRequest: (dr1['bankRequest'] ? dr1['bankRequest'] : ''),
                 bankTransID: (dr1['bankTransID'] ? dr1['bankTransID'] : ''),
-                paidAmount: (dr1['paidAmount'] ? parseFloat(dr1['paidAmount']) : 0),
-                paidBy: (dr1['paidBy'] ? dr1['paidBy'] : ''),
-                paidDate: (dr1['paidDate'] ? dr1['paidDate'] : ''),
-                paidStatus: (dr1['paidStatus'] ? dr1['paidStatus'] : ''),
+                payment: {
+                  amount: (dr1['paidAmount'] ? parseFloat(dr1['paidAmount']) : 0),
+                  by: (dr1['paidBy'] ? dr1['paidBy'] : ''),
+                  date: (dr1['paidDates'] ? dr1['paidDates'] : ''),
+                  status: (dr1['paidStatus'] ? dr1['paidStatus'] : 'N')
+                }
               },
               invoiceFee: invoiceFee,
               totalFeeAmount: (dr1['totalFeeAmount'] ? parseFloat(dr1['totalFeeAmount']) : 0),
@@ -760,52 +767,86 @@ namespace Data {
     }
   }
 
+  export class Statuses {
+    private data$: Schema.Statuses[] = [];
+
+    private getDataSource(action: string, query?: string): Schema.Statuses[] {
+      let items: Schema.Statuses[];
+
+      if (action === 'getlist')
+        items = this.data$;
+
+      if (action === 'get')
+        items = this.data$.filter(result => {
+          return result.ID.includes(query);
+        });
+
+      return items;
+    }
+
+    getList(data$: Schema.Statuses[]): Schema.Statuses[] {
+      this.data$ = data$;
+
+      return this.getDataSource('getlist')
+    }
+
+    get(data$: Schema.Statuses[], query: string): Schema.Statuses {
+      this.data$ = data$;
+
+      return this.getDataSource('get', query)[0];
+    }
+  }
+
   export class RegistrationStatus {
-    private data = [
+    public data$ = [
       {
-        id: 'Y',
+        ID: 'Y',
         name: {
           th: 'เปิดให้ลงทะเบียน',
           en: 'Registration is open'
         }
       },
       {
-        id: 'W',
+        ID: 'W',
         name: {
           th: 'ยังไม่เปิดให้ลงทะเบียน',
           en: 'Registration not yet opened'
         }
       },
       {
-        id: 'N',
+        ID: 'N',
         name: {
           th: 'หมดเวลาลงทะเบียน',
           en: 'Registration expired'
         }
       }
     ]
+  }
 
-    private getDataSource(action: string, query?: string): Schema.RegistrationStatus[] {
-      let items: Schema.RegistrationStatus[];
-
-      if (action === 'getlist')
-        items = this.data;
-
-      if (action === 'get')
-        items = this.data.filter(result => {
-          return result.id.includes(query);
-        });
-
-      return items;
-    }
-
-    getList(): Schema.RegistrationStatus[] {
-      return this.getDataSource('getlist')
-    }
-
-    get(query: string): Schema.RegistrationStatus {
-      return this.getDataSource('get', query)[0];
-    }
+  export class PaymentStatus {
+    public data$ = [
+      {
+        ID: 'Y',
+        name: {
+          th: 'ชำระเงินเรียบร้อย',
+          en: 'Payment Completed'
+        }
+      },
+      {
+        ID: 'W',
+        name: {
+          th: 'กำลังตรวจสอบการชำระเงิน',
+          en: 'Checking Payment'
+        }
+      },
+      {
+        ID: 'N',
+        name: {
+          th: 'รอการชำระเงิน',
+          en: 'Pending Payment'
+        }
+      }
+    ]
   }
 }
 
@@ -824,5 +865,7 @@ export class DataService {
   public projectCategory = new Data.ProjectCategory(this.appService);
   public transProject = new Data.TransProject(this.appService);
   public transRegistered = new Data.TransRegistered(this.appService);
-  public registrationStatus = new Data.RegistrationStatus()
+  public statuses = new Data.Statuses();
+  public registrationStatus = new Data.RegistrationStatus();
+  public paymentStatus = new Data.PaymentStatus();
 }

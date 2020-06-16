@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๑๐/๐๖/๒๕๖๓>
+Modify date : <๑๑/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -108,7 +108,7 @@ export class RegisteredComponent implements OnInit {
         this.data.transProject$.ID
       ).then((result: Schema.TransRegistered) => {
         this.data.transRegistered$ = result;
-        /*
+
         if (this.data.transRegistered$) {
           let modalRef =  this.modalService.getModalError(false, ModalErrorComponent, 'registered.save.error.projectRegistered');
 
@@ -118,7 +118,6 @@ export class RegisteredComponent implements OnInit {
           });
         }
         else {
-        */
           this.dataService.country.getList().then((result: Schema.Country[]) => {
             this.loading.country = false;
             this.data.country$ = result;
@@ -129,7 +128,7 @@ export class RegisteredComponent implements OnInit {
 
           if (this.data.transProject$.registrationStatus === 'Y')
             this.show.registeredInfo = true;
-        //}
+        }
       });
     }
   }

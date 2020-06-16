@@ -2,12 +2,12 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๗/๐๔/๒๕๖๓>
-Modify date : <๒๕/๐๕/๒๕๖๓>
+Modify date : <๑๖/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
 
-@import '../styles.scss';
+@import '../../../styles.scss';
 
 .registered-view .project-card-vertical {
   display: none;
@@ -23,13 +23,6 @@ Description : <>
 .registered-view .location-info .table .col-index {
   width: 72px;
   min-width: 72px;
-}
-.registered-view .location-info .table .col-seat {
-  width: 202px;
-}
-.registered-view .location-info .location-building-seat-info .form .form-group:last-child .col span:last-child {
-  position: relative;
-  top: -5px;
 }
 .registered-view .fee-info .table .col-check .toggle {
   position: absolute;
@@ -74,7 +67,6 @@ Description : <>
   @include form-responsive('.registered-view .fee-info #deliaddress-form');
 }
 @media screen and (max-width: 473px) {
-  @include form-responsive('.registered-view .register-info');
   .registered-view .registered-btn {
     width: 100% !important;
   }
