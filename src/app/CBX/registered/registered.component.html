@@ -100,33 +100,35 @@
 <ng-template #projectInfo>
   <div class="project-info">
     <p class="bold size22 mb-0">{{data.transProject$.project.name[appService.lang]}}</p>
-    <p class="regular text-danger size15" *ngIf="data.transProject$.registrationStatus !== 'Y'">( {{(dataService.registrationStatus.get(data.transProject$.registrationStatus)).name[appService.lang]}} )</p>
+    <div class="badge badge-pill badge-danger project-btn-badge mt-1 mb-2" *ngIf="data.transProject$.registrationStatus !== 'Y'">
+      <span class="regular text-white size13">{{(dataService.statuses.get(dataService.registrationStatus.data$, data.transProject$.registrationStatus)).name[appService.lang] | lowercase}}</span>
+    </div>
   </div>
 </ng-template>
 <ng-template #registerInfo>
   <div class="register-info project-register-info">
     <div class="regular size16">
-      <div class="d-table w-auto mb-2 calendar-date">
+      <div class="d-table w-auto size-l mb-2 calendar-date">
         <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )">
-          <div class="d-table-cell align-middle col-icon size-l"><span class="text-success size24"><i class="fa fa-calendar"></i></span></div>
-          <div class="d-table-cell align-middle col-calendar-registrationdate"><span class="text-success">{{data.transProject$.registrationDate.startDate ? (data.transProject$.registrationDate.startDate | slice:0:16) : ''}}</span></div>
-          <div class="d-table-cell align-middle col-icon size-l"><span class="text-success size24"><i class="fa fa-clock-o"></i></span></div>
-          <div class="d-table-cell align-middle"><span class="text-success">{{data.transProject$.registrationDate.startDate ? (data.transProject$.registrationDate.startDate | slice:16:22) : ''}}</span></div>
+          <div class="d-table-cell align-middle col-icon"><span class="text-success size24"><i class="fa fa-calendar"></i></span></div>
+          <div class="d-table-cell align-middle col-calendar"><span class="text-success">{{data.transProject$.registrationDate.startDate ? (data.transProject$.registrationDate.startDate | slice:0:16) : ''}}</span></div>
+          <div class="d-table-cell align-middle col-icon"><span class="text-success size24"><i class="fa fa-clock-o"></i></span></div>
+          <div class="d-table-cell align-middle col-clock"><span class="text-success">{{data.transProject$.registrationDate.startDate ? (data.transProject$.registrationDate.startDate | slice:16:22) : ''}}</span></div>
         </div>
         <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )">
-          <div class="d-table-cell align-middle col-icon size-l"><span class="text-danger size24"><i class="fa fa-calendar"></i></span></div>
-          <div class="d-table-cell align-middle col-calendar-registrationdate"><span class="text-danger">{{data.transProject$.registrationDate.endDate ? (data.transProject$.registrationDate.endDate | slice:0:16) : ''}}</span></div>
-          <div class="d-table-cell align-middle col-icon size-l"><span class="text-danger size24"><i class="fa fa-clock-o"></i></span></div>
-          <div class="d-table-cell align-middle"><span class="text-danger">{{data.transProject$.registrationDate.endDate ? (data.transProject$.registrationDate.endDate | slice:16:22) : ''}}</span></div>
+          <div class="d-table-cell align-middle col-icon"><span class="text-danger size24"><i class="fa fa-calendar"></i></span></div>
+          <div class="d-table-cell align-middle col-calendar"><span class="text-danger">{{data.transProject$.registrationDate.endDate ? (data.transProject$.registrationDate.endDate | slice:0:16) : ''}}</span></div>
+          <div class="d-table-cell align-middle col-icon"><span class="text-danger size24"><i class="fa fa-clock-o"></i></span></div>
+          <div class="d-table-cell align-middle col-clock"><span class="text-danger">{{data.transProject$.registrationDate.endDate ? (data.transProject$.registrationDate.endDate | slice:16:22) : ''}}</span></div>
         </div>
       </div>
-      <div class="d-table w-auto">
+      <div class="d-table w-auto size-l">
         <div class="d-table-row line-height-0">
-          <div class="d-table-cell align-middle pb-2 col-icon size-l"><span class="text-dark size22"><i class="fa fa-group"></i></span></div>
+          <div class="d-table-cell align-middle pb-2 col-icon"><span class="text-dark size22"><i class="fa fa-group"></i></span></div>
           <div class="d-table-cell align-middle pb-2"><span class="text-dark">{{'project.seat' | translate | titlecase}}<span class="bold">{{data.transProject$.maximumSeat ? (' ' + (data.transProject$.maximumSeat | number) + ' / ' + (data.transProject$.seatAvailable | number) + ' ') : ''}}</span>{{data.transProject$.maximumSeat ? ('unit.persons' | translate | titlecase) : ''}}</span></div>
         </div>
         <div class="d-table-row line-height-0">
-          <div class="d-table-cell align-middle col-icon size-l"><span class="size22"><i class="fa fa-btc"></i></span></div>
+          <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fa fa-btc"></i></span></div>
           <div class="d-table-cell align-middle"><span class="text-dark">{{'project.registrationFee' | translate | titlecase}}<span class="bold">{{data.transProject$.minimumFee ? (' ' + (data.transProject$.minimumFee | number: '.2') + ' ') : ''}}</span>{{data.transProject$.minimumFee ? ('unit.baht' | translate | titlecase) : ''}}</span></div>
         </div>
       </div>
@@ -141,11 +143,11 @@
         <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo"></ng-container></div>
       </div>
     </div>
-    <a class="d-inline badge badge-pill badge-info ml-2 project-btn-badge" href="javascript:void(0)" (click)="$event.currentTarget.blur(); isCollapsed.projectDetail = !isCollapsed.projectDetail" [attr.aria-expanded]="isCollapsed.projectDetail" aria-controls="projectDetail">
-      <span class="regular text-white size13">{{'detail' | translate | lowercase}}</span>
+    <a class="d-inline badge badge-pill badge-light-dark ml-2 project-btn-badge" href="javascript:void(0)" (click)="$event.currentTarget.blur(); isCollapsed.projectAbout = !isCollapsed.projectAbout" [attr.aria-expanded]="isCollapsed.projectAbout" aria-controls="projectAbout">
+      <span class="regular size13">{{'about' | translate | lowercase}}</span>
     </a>
   </div>
-  <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0 project-text-line-clamp" id="projectDetail" [ngbCollapse]="!isCollapsed.projectDetail">{{data.transProject$.project.detail}}</p>
+  <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0 project-text-line-clamp" id="projectAbout" [ngbCollapse]="!isCollapsed.projectAbout">{{data.transProject$.project.about}}</p>
 </ng-template>
 <ng-template #contactInfo>
   <div class="contact-info text-white size14 project-contact-info">

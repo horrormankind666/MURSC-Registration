@@ -44,6 +44,9 @@
 <ng-template #projectInfo>
   <div class="project-info">
     <p class="bold size22 mb-0">{{data.transRegistered$.transProject.project.name[appService.lang]}}</p>
+    <a routerLink="../../../{{data.transRegistered$.transProject.project.category.ID}}" class="badge badge-pill badge-info mt-1 mb-2 project-btn-badge">
+      <span class="regular text-white size13">{{data.transRegistered$.transProject.project.category.ID + '.label' | translate | titlecase}}</span>
+    </a>
   </div>
 </ng-template>
 <ng-template #registerInfo>
@@ -51,9 +54,16 @@
     <div class="regular size16">
       <div class="form">
         <div class="form-group row mb-01">
-          <label for="col-registereddate" class="col-form-label">{{'registered.date' | translate | titlecase}}</label>
+          <label for="col-registereddate" class="col-form-label">{{'registered.at' | translate | titlecase}}</label>
           <div class="col">
-            <span class="form-text regular">{{data.transRegistered$.registeredDate}}</span>
+            <div class="d-table w-auto size-l calendar-date">
+              <div class="d-table-row">
+                <div class="d-table-cell align-middle col-icon"><span class="size24"><i class="fa fa-calendar"></i></span></div>
+                <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.registeredDate ? (data.transRegistered$.registeredDate | slice:0:16) : ''}}</span></div>
+                <div class="d-table-cell align-middle col-icon"><span class="size24"><i class="fa fa-clock-o"></i></span></div>
+                <div class="d-table-cell align-middle col-clock"><span>{{data.transRegistered$.registeredDate ? (data.transRegistered$.registeredDate | slice:16:22) : ''}}</span></div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="form-group row mb-01">
@@ -84,13 +94,20 @@
         <div class="form-group row mb-01" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">
           <label for="col-dateofpayment" class="col-form-label">{{'project.lastPaymentDate' | translate | titlecase}}</label>
           <div class="col">
-            <span class="form-text regular">{{data.transRegistered$.transProject.lastPaymentDate}}</span>
+            <div class="d-table w-auto size-l calendar-date">
+              <div class="d-table-row">
+                <div class="d-table-cell align-middle col-icon"><span class="size24"><i class="fa fa-calendar"></i></span></div>
+                <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.transProject.lastPaymentDate ? (data.transRegistered$.transProject.lastPaymentDate | slice:0:16) : ''}}</span></div>
+                <div class="d-table-cell align-middle col-icon"><span class="size24"><i class="fa fa-clock-o"></i></span></div>
+                <div class="d-table-cell align-middle col-clock"><span>{{data.transRegistered$.transProject.lastPaymentDate ? (data.transRegistered$.transProject.lastPaymentDate | slice:16:22) : ''}}</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="mt-2">
+  <div class="mt-3">
     <div class="d-inline project-dropdown" ngbDropdown placement="bottom-left">
       <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle>
         <i class="fa fa-phone text-white size15"></i>
@@ -99,11 +116,11 @@
         <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo"></ng-container></div>
       </div>
     </div>
-    <a class="d-inline badge badge-pill badge-info ml-2 project-btn-badge" href="javascript:void(0)" (click)="$event.currentTarget.blur(); isCollapsed.projectDetail = !isCollapsed.projectDetail" [attr.aria-expanded]="isCollapsed.projectDetail" aria-controls="projectDetail">
-      <span class="regular text-white size13">{{'detail' | translate | lowercase}}</span>
+    <a class="d-inline badge badge-pill badge-light-dark ml-2 project-btn-badge" href="javascript:void(0)" (click)="$event.currentTarget.blur(); isCollapsed.projectAbout = !isCollapsed.projectAbout" [attr.aria-expanded]="isCollapsed.projectAbout" aria-controls="projectAbout">
+      <span class="regular size13">{{'about' | translate | lowercase}}</span>
     </a>
   </div>
-  <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0 project-text-line-clamp" id="projectDetail" [ngbCollapse]="!isCollapsed.projectDetail">{{data.transRegistered$.transProject.project.detail}}</p>
+  <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0 project-text-line-clamp" id="projectAbout" [ngbCollapse]="!isCollapsed.projectAbout">{{data.transRegistered$.transProject.project.about}}</p>
 </ng-template>
 <ng-template #contactInfo>
   <div class="contact-info text-white size14 project-contact-info">

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๑๑/๐๖/๒๕๖๓>
+Modify date : <๑๗/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -83,7 +83,7 @@ export class RegisteredComponent implements OnInit {
   }
   totalFeeAmount: number = 0;
   isCollapsed: any = {
-    projectDetail: false
+    projectAbout: false
   };
   show: any = {
     registeredInfo: false

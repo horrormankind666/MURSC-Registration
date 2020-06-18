@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๙/๐๖/๒๕๖๓>
-Modify date : <๑๒/๐๖/๒๕๖๓>
+Modify date : <๑๗/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -36,7 +36,7 @@ export class RegisteredDetailComponent implements OnInit {
     transRegistered$: null
   };
   isCollapsed: any = {
-    projectDetail: false
+    projectAbout: false
   };
 
   ngOnInit() {

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๑๖/๐๖/๒๕๖๓>
+Modify date : <๑๘/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -79,11 +79,32 @@ Description : <>
 .project-register-info .d-table .col-icon {
   width: 26px;
 }
-.project-register-info .d-table .col-icon.size-l {
+.project-register-info .d-table.size-l .col-icon {
   width: 32px;
 }
-.project-register-info .d-table.calendar-date .col-calendar-registrationdate {
+.project-register-info .d-table.calendar-date {
+  table-layout: fixed !important;
+  position: relative;
+}
+.project-register-info .d-table.calendar-date .col-calendar {
   width: 156px;
+}
+.project-register-info .d-table.calendar-date .col-clock span {
+  position: relative;
+}
+.project-register-info .d-table:not(.size-l).calendar-date .col-clock span {
+  top: -1px;
+}
+@media screen and (min--moz-device-pixel-ratio: 0) {
+  .project-register-info .d-table.size-l.calendar-date .col-clock span {
+    top: -1px;
+  }
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .project-register-info .d-table.size-l.calendar-date .col-clock span {
+    top: -2px;
+  }
 }
 .project-contact-info .form .form-group .col-form-label,
 .project-menu-info .form .form-group .col-form-label {

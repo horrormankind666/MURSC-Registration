@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๑๖/๐๖/๒๕๖๓>
+Modify date : <๑๗/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -175,6 +175,18 @@ a.badge-dark:hover {
 }
 a.badge-dark:focus {
   background-color: #343A40;
+}
+.badge-light-dark {
+  color: rgba(0, 0, 0, 0.5);
+  background-color: #DAE0E5;
+}
+a.badge-light-dark:hover, a.badge-light-dark:focus {
+  color: #FFFFFF;
+  background-color: #545B62;
+}
+a.badge-light-dark:focus, a.badge-light-dark.focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(218, 224, 229, 0.5);
 }
 main {
   min-height: 100%;

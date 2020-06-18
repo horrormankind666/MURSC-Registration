@@ -8,6 +8,7 @@
     "label": "Mahidol University Flexible Education",
     "initial": "MUFE"
   },
+  "about": "About",
   "signin": "Sign in",
   "signout": {
     "label": "Sign out",
@@ -38,6 +39,7 @@
     "info": "Registered Information",
     "detail": "Registered Detail",
     "date": "Registered Date",
+    "at": "Registered At",
     "confirm": "Confirm Registered",
     "save": {
       "error": {

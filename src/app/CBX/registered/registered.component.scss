@@ -12,14 +12,6 @@ Description : <>
 .registered-view .project-card-vertical {
   display: none;
 }
-@media screen and (max-width: 700px) {
-  .registered-view .project-card-vertical {
-    display: block;
-  }
-  .registered-view .project-card-horizontal {
-    display: none;
-  }
-}
 .registered-view .location-info .table .col-index {
   width: 72px;
   min-width: 72px;
@@ -65,6 +57,14 @@ Description : <>
 @media screen and (max-width: 565px) {
   @include table-responsive-step2('.registered-view .registered-info .location-info');
   @include form-responsive('.registered-view .fee-info #deliaddress-form');
+}
+@media screen and (max-width: 528px) {
+  .registered-view .project-card-vertical {
+    display: block;
+  }
+  .registered-view .project-card-horizontal {
+    display: none;
+  }
 }
 @media screen and (max-width: 473px) {
   .registered-view .registered-btn {

@@ -67,7 +67,7 @@
           <div class="card-text">
             <div class="mb-3"><ng-container *ngTemplateOutlet="registerInfo; context: {data: project}"></ng-container></div>
             <div class="vertical">
-              <p class="regular text-black-50 size16 line-clamp line-clamp-{{project.ID}} mt-2 mb-0">{{project.project.detail}}</p>
+              <p class="regular text-black-50 size16 line-clamp line-clamp-{{project.ID}} mt-2 mb-0">{{project.project.about}}</p>
               {{appService.textOverflowClamp(('.vertical .line-clamp-' + project.ID), 2)}}
             </div>
           </div>
@@ -83,7 +83,7 @@
               <div class="mb-2"><ng-container *ngTemplateOutlet="projectInfo; context: {data: project}"></ng-container></div>
               <div class="mb-3"><ng-container *ngTemplateOutlet="registerInfo; context: {data: project}"></ng-container></div>
               <div class="horizontal">
-                <p class="regular text-black-50 size16 line-clamp line-clamp-{{project.ID}} mt-2 mb-0">{{project.project.detail}}</p>
+                <p class="regular text-black-50 size16 line-clamp line-clamp-{{project.ID}} mt-2 mb-0">{{project.project.about}}</p>
                 {{appService.textOverflowClamp(('.horizontal .line-clamp-' + project.ID), 2)}}
               </div>
             </div>
@@ -173,15 +173,15 @@
       <div class="d-table w-auto mb-2 calendar-date">
         <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )">
           <div class="d-table-cell align-middle col-icon"><span class="text-success size18"><i class="fa fa-calendar"></i></span></div>
-          <div class="d-table-cell align-middle col-calendar-registrationdate"><span class="text-success">{{data.registrationDate.startDate ? (data.registrationDate.startDate | slice:0:16) : ''}}</span></div>
+          <div class="d-table-cell align-middle col-calendar"><span class="text-success">{{data.registrationDate.startDate ? (data.registrationDate.startDate | slice:0:16) : ''}}</span></div>
           <div class="d-table-cell align-middle col-icon"><span class="text-success size18"><i class="fa fa-clock-o"></i></span></div>
-          <div class="d-table-cell align-middle"><span class="text-success">{{data.registrationDate.startDate ? (data.registrationDate.startDate | slice:16:22) : ''}}</span></div>
+          <div class="d-table-cell align-middle col-clock"><span class="text-success">{{data.registrationDate.startDate ? (data.registrationDate.startDate | slice:16:22) : ''}}</span></div>
         </div>
         <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )">
           <div class="d-table-cell align-middle col-icon"><span class="text-danger size18"><i class="fa fa-calendar"></i></span></div>
-          <div class="d-table-cell align-middle col-calendar-registrationdate"><span class="text-danger">{{data.registrationDate.endDate ? (data.registrationDate.endDate | slice:0:16) : ''}}</span></div>
+          <div class="d-table-cell align-middle col-calendar"><span class="text-danger">{{data.registrationDate.endDate ? (data.registrationDate.endDate | slice:0:16) : ''}}</span></div>
           <div class="d-table-cell align-middle col-icon"><span class="text-danger size18"><i class="fa fa-clock-o"></i></span></div>
-          <div class="d-table-cell align-middle"><span class="text-danger">{{data.registrationDate.endDate ? (data.registrationDate.endDate | slice:16:22) : ''}}</span></div>
+          <div class="d-table-cell align-middle col-clock"><span class="text-danger">{{data.registrationDate.endDate ? (data.registrationDate.endDate | slice:16:22) : ''}}</span></div>
         </div>
       </div>
       <div class="d-table w-auto">

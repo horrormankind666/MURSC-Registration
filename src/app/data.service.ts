@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๑๖/๐๖/๒๕๖๓>
+Modify date : <๑๗/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -84,12 +84,13 @@ export namespace Schema {
 
   export interface Project {
     ID?: string,
+    category?: ProjectCategory,
     type?: string,
     name?: {
       th?: string,
       en?: string,
     },
-    detail?: string,
+    about?: string,
     ownerCode?: string,
     minimumPassScore?: number,
     logo?: string
@@ -500,12 +501,20 @@ namespace Data {
               ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
               project: {
                 ID: (dr1['projectID'] ? dr1['projectID'] : ''),
+                category: {
+                  ID: (dr1['projectCategoryID'] ? dr1['projectCategoryID'] : ''),
+                  name: {
+                    th: (dr1['projectCategoryNameTH'] ? dr1['projectCategoryNameTH'] : dr1['projectCategoryNameEN']),
+                    en: (dr1['projectCategoryNameEN'] ? dr1['projectCategoryNameEN'] : dr1['projectCategoryNameTH'])
+                  },
+                  initial: (dr1['projectCategoryInitial'] ? dr1['projectCategoryInitial'] : '')
+                },
                 logo: (dr1['logo'] ? dr1['logo'] : ''),
                 name: {
                   th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
                   en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
                 },
-                detail: (dr1['detail'] ? dr1['detail'] : '')
+                about: (dr1['about'] ? dr1['about'] : '')
               },
               examDate: (dr1['examDates'] ? dr1['examDates'] : ''),
               registrationDate: {
@@ -576,12 +585,20 @@ namespace Data {
               ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
               project: {
                 ID: (dr1['projectID'] ? dr1['projectID'] : ''),
+                category: {
+                  ID: (dr1['projectCategoryID'] ? dr1['projectCategoryID'] : ''),
+                  name: {
+                    th: (dr1['projectCategoryNameTH'] ? dr1['projectCategoryNameTH'] : dr1['projectCategoryNameEN']),
+                    en: (dr1['projectCategoryNameEN'] ? dr1['projectCategoryNameEN'] : dr1['projectCategoryNameTH'])
+                  },
+                  initial: (dr1['projectCategoryInitial'] ? dr1['projectCategoryInitial'] : '')
+                },
                 logo: (dr1['logo'] ? dr1['logo'] : ''),
                 name: {
                   th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
                   en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
                 },
-                detail: (dr1['detail'] ? dr1['detail'] : '')
+                about: (dr1['about'] ? dr1['about'] : '')
               },
               examDate: (dr1['examDates'] ? dr1['examDates'] : ''),
               registrationDate: {
@@ -655,12 +672,20 @@ namespace Data {
               ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
               project: {
                 ID: (dr1['projectID'] ? dr1['projectID'] : ''),
+                category: {
+                  ID: (dr1['projectCategoryID'] ? dr1['projectCategoryID'] : ''),
+                  name: {
+                    th: (dr1['projectCategoryNameTH'] ? dr1['projectCategoryNameTH'] : dr1['projectCategoryNameEN']),
+                    en: (dr1['projectCategoryNameEN'] ? dr1['projectCategoryNameEN'] : dr1['projectCategoryNameTH'])
+                  },
+                  initial: (dr1['projectCategoryInitial'] ? dr1['projectCategoryInitial'] : '')
+                },
                 logo: (dr1['logo'] ? dr1['logo'] : ''),
                 name: {
                   th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
                   en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
                 },
-                detail: (dr1['detail'] ? dr1['detail'] : '')
+                about: (dr1['about'] ? dr1['about'] : '')
               },
               examDate: (dr1['examDates'] ? dr1['examDates'] : ''),
               lastPaymentDate: (dr1['lastPaymentDates'] ? dr1['lastPaymentDates'] : ''),
