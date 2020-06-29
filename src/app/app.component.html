@@ -23,8 +23,8 @@
           <div class="d-table-cell userinfo">
             <div class="d-table">
               <div class="d-table-cell flags-icon">
-                <a href="javascript:void(0)" *ngIf="appService.lang === 'en'" (click)="$event.currentTarget.blur(); appService.setDefaultLang('th')"><span class="regular flag-icon flag-icon-th"></span></a>
-                <a href="javascript:void(0)" *ngIf="appService.lang === 'th'" (click)="$event.currentTarget.blur(); appService.setDefaultLang('en')"><span class="regular flag-icon flag-icon-gb"></span></a>
+                <a href="javascript:void(0)" *ngIf="appService.lang === 'en'" (click)="appService.setDefaultLang('th')"><span class="regular flag-icon flag-icon-th"></span></a>
+                <a href="javascript:void(0)" *ngIf="appService.lang === 'th'" (click)="appService.setDefaultLang('en')"><span class="regular flag-icon flag-icon-gb"></span></a>
               </div>
               <div class="d-table-cell home-icon">
                 <a routerLink="Main" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size24"><i class='fa fa-home'></i></span></a>
@@ -45,7 +45,7 @@
                       </div>
                       <div class="d-table-row">
                         <div class="d-table-cell text-center pt-3">
-                          <div class="regular size18 text-truncate">{{authService.getUserInfo.givenName}} {{(authService.getUserInfo.familyName)}}</div>
+                          <div class="regular size18 text-truncate">{{authService.getUserInfo.fullName[appService.lang]}}</div>
                           <div class="regular text-black-50 size16 text-truncate">{{authService.getUserInfo.email}}</div>
                         </div>
                       </div>
@@ -54,7 +54,7 @@
                     <a routerLink="TransactionRegistered" class="text-center" role="button" ngbDropdownItem><span class="regular grey-dark size15">{{'registered.info' | translate | titlecase}}</span></a>
                     <div class="dropdown-divider mb-3 mt-0"></div>
                     <div class="d-block w-100 text-center">
-                      <button type="button" class="btn btn-transparent" (click)="$event.currentTarget.blur(); profileDropdown.close(); authService.signout()"><span class="regular size16">{{'signout.label' | translate}}</span></button>
+                      <button type="button" class="btn btn-transparent" (click)="profileDropdown.close(); authService.signout()"><span class="regular size16">{{'signout.label' | translate}}</span></button>
                     </div>
                   </div>
                 </div>

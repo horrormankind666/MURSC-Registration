@@ -11,7 +11,7 @@
       <div class="dropdown-divider mt-2 mb-0"></div>
       <div class="card card-horizontal bg-white border-0 rounded-0 project-card-horizontal">
         <div class="card-body pt-0 pr-3 pb-0 pl-3 project-body">
-          <div class="d-inline-block col-sm-3 pl-0 align-top">
+          <div class="d-inline-block col-sm-3 pr-0 pl-0 align-top">
             <ng-container *ngTemplateOutlet="titleInfo"></ng-container>
           </div>
           <div class="d-inline-block col-sm-9 pt-1 pr-0 align-top">
@@ -31,16 +31,19 @@
           </div>
         </div>
       </div>
-      <div class="mt-3 pr-3 pl-3" *ngIf="show.registeredInfo">
-        <div class="mb-3"><ng-container *ngTemplateOutlet="registeredInfo"></ng-container></div>
-        <div class="registered-btn ml-auto project-registered-btn">
-          <a class="btn btn-success"
-            [ngClass]="{
-              'disabled': (data.transProject$.transLocation.length === 0 || data.transProject$.transFeeType.length === 0)
-            }"
-            (click)="$event.currentTarget.blur(); saveChange.action()">
-            <span class="font bold text-white size20">{{'registered.confirm' | translate | titlecase}}</span>
-          </a>
+      <div class="mt-3 pr-3 pl-3">
+        <div class="w-100 text-center" *ngIf="transRegistered.isLoading"><i class="fa fa-circle-o-notch fa-spin size48"></i></div>
+        <div *ngIf="registeredInfos.show">
+          <div class="mb-3"><ng-container *ngTemplateOutlet="registeredInfo"></ng-container></div>
+          <div class="registered-btn ml-auto project-registered-btn">
+            <a class="btn btn-success"
+              [ngClass]="{
+                'disabled': (data.transProject$.transLocation.length === 0 || data.transProject$.transFeeType.length === 0)
+              }"
+              (click)="saveChange.action()">
+              <span class="font bold text-white size20">{{'registered.confirm' | translate | titlecase}}</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -143,11 +146,11 @@
         <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo"></ng-container></div>
       </div>
     </div>
-    <a class="d-inline badge badge-pill badge-light-dark ml-2 project-btn-badge" href="javascript:void(0)" (click)="$event.currentTarget.blur(); isCollapsed.projectAbout = !isCollapsed.projectAbout" [attr.aria-expanded]="isCollapsed.projectAbout" aria-controls="projectAbout">
+    <a class="d-inline badge badge-pill badge-light-dark ml-2 project-btn-badge" href="javascript:void(0)" (click)="projectAbout.isCollapsed = !projectAbout.isCollapsed" [attr.aria-expanded]="projectAbout.isCollapsed" aria-controls="projectAbout">
       <span class="regular size13">{{'about' | translate | lowercase}}</span>
     </a>
   </div>
-  <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0 project-text-line-clamp" id="projectAbout" [ngbCollapse]="!isCollapsed.projectAbout">{{data.transProject$.project.about}}</p>
+  <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0 project-text-line-clamp" id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed">{{data.transProject$.project.about}}</p>
 </ng-template>
 <ng-template #contactInfo>
   <div class="contact-info text-white size14 project-contact-info">
@@ -173,19 +176,19 @@
     </div>
   </div>
 </ng-template>
-<ng-template #registeredInfo let-title="title">
+<ng-template #registeredInfo>
   <div class="registered-info">
-    <div class="d-table">
+    <div class="d-table table-registered">
       <div class="d-table-cell w-58 jumbotron rounded-xl mb-0 p-3 col-locations">
         <div class="border-bottom border-light pb-2">
           <span class="bold text-primary size20">{{'location.info' | translate | titlecase}}</span>
-          <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="saveChange.error && !formField.location.isValid">
+          <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="!location.saveChange.isValid">
             <span class="regular size16">{{'registered.save.error.location' | translate}}</span>
           </div>
         </div>
         <div *ngIf="data.transProject$.transLocation.length"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
       </div>
-      <div class="d-table-cell table-cell-divider"></div>
+      <div class="d-table-cell table-cell-divider col-wrap"></div>
       <div class="d-table-cell w-auto jumbotron rounded-xl mb-0 p-3 col-feetype">
         <div class="border-bottom border-light pb-2">
           <span class="bold text-primary size20">{{'fee' | translate | titlecase}}</span>
@@ -216,7 +219,7 @@
             <div class="custom-control custom-radio">
               <input type="radio" class="custom-control-input" id="select-location-{{transLocation.ID}}" name="select-location"
                 [value]="transLocation"
-                [(ngModel)]="formField.location.selected"
+                [(ngModel)]="location.formField.room.selected"
                 (ngModelChange)="watchChange()"
                 [disabled]="transLocation.seatAvailable === 0">
               <label class="custom-control-label" for="select-location-{{transLocation.ID}}"></label>
@@ -254,12 +257,12 @@
 <ng-template #locationBuildingInfo let-data="data">
   <div class="location-building-info">
     <div class="form">
-      <div class="form-group row mb-1" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'location.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'location.label' | translate | titlecase}} )">
+      <div class="form-group row mb-1" ngbTooltip="{{'location.label' | translate | titlecase}}" title="{{'location.label' | translate | titlecase}}">
         <div class="col pl-0">
           <span class="form-text regular">{{data.location.name[appService.lang]}}</span>
         </div>
       </div>
-      <div class="form-group row mb-0" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )>">
+      <div class="form-group row mb-0" ngbTooltip="{{'building.label' | translate | titlecase}}" title="{{'building.label' | translate | titlecase}}">
         <div class="col pl-0">
           <span class="form-text regular">{{data.location.building.name[appService.lang]}}</span>
         </div>
@@ -270,17 +273,17 @@
 <ng-template #locationBuildingSeatInfo let-data="data">
   <div class="location-building-seat-info">
     <div class="form">
-      <div class="form-group row mb-1" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'location.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'location.label' | translate | titlecase}} )">
+      <div class="form-group row mb-1" ngbTooltip="{{'location.label' | translate | titlecase}}" title="{{'location.label' | translate | titlecase}}">
         <div class="col pl-0">
           <span class="form-text regular">{{data.location.name[appService.lang]}}</span>
         </div>
       </div>
-      <div class="form-group row mb-1" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'building.label' | translate | titlecase}} )>">
+      <div class="form-group row mb-1" ngbTooltip="{{'building.label' | translate | titlecase}}" title="{{'building.label' | translate | titlecase}}">
         <div class="col pl-0">
           <span class="form-text regular">{{data.location.building.name[appService.lang]}}</span>
         </div>
       </div>
-      <div class="form-group row mb-0" ngbTooltip="{{'location.info' | translate | titlecase}} ( {{'seat.label' | translate | titlecase}} )" title="{{'location.info' | translate | titlecase}} ( {{'seat.label' | translate | titlecase}} )>">
+      <div class="form-group row mb-0" ngbTooltip="{{'seat.label' | translate | titlecase}}" title="{{'seat.label' | translate | titlecase}}">
         <div class="col pl-0">
           <span class="form-text regular">{{'seat.label' | translate | titlecase}} {{data.seatTotal}} / {{data.seatAvailable}}</span>
           <span class="regular text-muted size12">{{'total.label' | translate | titlecase}} / {{'remain' | translate | titlecase}}</span>
@@ -290,7 +293,7 @@
   </div>
 </ng-template>
 <ng-template #feeInfo>
-  <div class="fee-info">
+  <div class="fee-info project-fee-info">
     <table class="table table-bordered mb-0">
       <thead class="text-black-50 size18">
         <tr>
@@ -307,11 +310,16 @@
                 [(ngModel)]="transFeeType.isSelected"
                 (ngModelChange)="watchChange()"
                 [disabled]="transFeeType.requiredStatus === 'Y'"
-                (change)="totalFeeAmount = getTotalFeeAmount(); setToggle(transFeeType)">
+                (change)="feeType.totalFeeAmount = feeType.getTotalFeeAmount(); feeType.setToggle(transFeeType)">
               <label class="custom-control-label" for="select-feetype-{{transFeeType.ID}}">{{transFeeType.feeType.name[appService.lang]}}</label>
             </div>
-            <a class="badge badge-pill badge-info mt-1 project-btn-badge" href="javascript:void(0)" (click)="$event.currentTarget.blur(); formField.feeType.toggle[transFeeType.feeType.toggle] = !formField.feeType.toggle[transFeeType.feeType.toggle]" *ngIf="transFeeType.feeType.toggle">
-              <span class="regular text-white size13" *ngIf="transFeeType.feeType.toggle === 'Address'">{{'addressDelivery' | translate | lowercase}}</span>
+            <a class="badge badge-pill badge-info mt-1 project-btn-badge" href="javascript:void(0)"
+              [ngClass]="{
+                'has-focus': feeType.toggle[transFeeType.feeType.toggle]
+              }"
+              (click)="feeType.toggle[transFeeType.feeType.toggle] = !feeType.toggle[transFeeType.feeType.toggle]"
+              *ngIf="transFeeType.feeType.toggle">
+              <span class="regular text-white size13" *ngIf="transFeeType.feeType.toggle === 'Address'">{{'addressDelivery.label' | translate | lowercase}}</span>
             </a>
           </td>
           <td class="border-0 pr-0 pb-0 regular text-right col-amount" [ngClass]="{'pt-1': (order !== 0)}">
@@ -319,17 +327,17 @@
           </td>
         </tr>
         <tr>
-          <td colspan="2" class="border-0 pr-0 pb-0 pl-0" [ngClass]="{'pt-0': !transFeeType.feeType.toggle}">
-            <div class="mb-2" id="deliaddress-form" *ngIf="formField.feeType.toggle[transFeeType.feeType.toggle] && transFeeType.feeType.toggle === 'Address'">
+          <td colspan="2" class="border-0 p-0">
+            <div class="mt-2" id="deliaddress-form" *ngIf="feeType.toggle[transFeeType.feeType.toggle] && transFeeType.feeType.toggle === 'Address'">
               <div class="form horizontal-form bg-warning p-3">
-                <div class="alert alert-danger mb-2" role="alert" *ngIf="saveChange.error && !formField.deliAddress.isValid">
+                <div class="alert alert-danger mb-2" role="alert" *ngIf="!deliAddress.saveChange.isValid">
                   <span class="regular size16">{{'registered.save.error.deliaddress' | translate}}</span>
                 </div>
                 <div class="form-group row w-100 mb-1">
                   <label for="deliaddress-address" class="col-form-label col-form-label-sm pl-0 regular">{{'address.label' | translate}}</label>
                   <div class="col">
                     <textarea autosize trimOnBlur class="form-control form-control-sm regular"
-                      [(ngModel)]="formField.deliAddress.address"
+                      [(ngModel)]="deliAddress.formField.address"
                       (ngModelChange)="watchChange()">
                     </textarea>
                   </div>
@@ -337,14 +345,14 @@
                 <div class="form-group row w-100 mb-1">
                   <label for="deliaddress-country" class="col-form-label col-form-label-sm pl-0 regular">{{'address.country' | translate}}</label>
                   <div class="col">
-                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="loading.country"></i>
+                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.country.isLoading"></i>
                     <ng-select
                       class="size-sm"
                       placeholder="{{'placeholder.selectItem' | translate}}"
-                      [(ngModel)]="formField.deliAddress.country.selected"
+                      [(ngModel)]="deliAddress.formField.country.selected"
                       (ngModelChange)="watchChange()"
-                      (change)="getListProvince()"
-                      *ngIf="!loading.country">
+                      (change)="deliAddress.getListProvince()"
+                      *ngIf="!deliAddress.formField.country.isLoading">
                       <ng-option *ngFor="let item of data.country$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
                     </ng-select>
                   </div>
@@ -352,14 +360,14 @@
                 <div class="form-group row w-100 mb-1">
                   <label for="deliaddress-province" class="col-form-label col-form-label-sm pl-0 regular">{{'address.province' | translate}}</label>
                   <div class="col">
-                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="loading.province"></i>
+                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.province.isLoading"></i>
                     <ng-select
                       class="size-sm"
                       placeholder="{{'placeholder.selectItem' | translate}}"
-                      [(ngModel)]="formField.deliAddress.province.selected"
+                      [(ngModel)]="deliAddress.formField.province.selected"
                       (ngModelChange)="watchChange()"
-                      (change)="getListDistrict()"
-                      *ngIf="!loading.province">
+                      (change)="deliAddress.getListDistrict()"
+                      *ngIf="!deliAddress.formField.province.isLoading">
                       <ng-option *ngFor="let item of data.province$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
                     </ng-select>
                   </div>
@@ -367,14 +375,14 @@
                 <div class="form-group row w-100 mb-1">
                   <label for="deliaddress-district" class="col-form-label col-form-label-sm pl-0 regular">{{'address.district' | translate}}</label>
                   <div class="col">
-                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="loading.district"></i>
+                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.district.isLoading"></i>
                     <ng-select
                       class="size-sm"
                       placeholder="{{'placeholder.selectItem' | translate}}"
-                      [(ngModel)]="formField.deliAddress.district.selected"
+                      [(ngModel)]="deliAddress.formField.district.selected"
                       (ngModelChange)="watchChange()"
-                      (change)="getListSubdistrict()"
-                      *ngIf="!loading.district">
+                      (change)="deliAddress.getListSubdistrict()"
+                      *ngIf="!deliAddress.formField.district.isLoading">
                       <ng-option *ngFor="let item of data.district$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
                     </ng-select>
                   </div>
@@ -382,13 +390,13 @@
                 <div class="form-group row w-100 mb-1">
                   <label for="deliaddress-subdistrict" class="col-form-label col-form-label-sm pl-0 regular">{{'address.subdistrict' | translate}}</label>
                   <div class="col">
-                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="loading.subdistrict"></i>
+                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.subdistrict.isLoading"></i>
                     <ng-select
                       class="size-sm"
                       placeholder="{{'placeholder.selectItem' | translate}}"
-                      [(ngModel)]="formField.deliAddress.subdistrict.selected"
+                      [(ngModel)]="deliAddress.formField.subdistrict.selected"
                       (ngModelChange)="watchChange()"
-                      *ngIf="!loading.subdistrict">
+                      *ngIf="!deliAddress.formField.subdistrict.isLoading">
                       <ng-option *ngFor="let item of data.subdistrict$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
                     </ng-select>
                   </div>
@@ -396,8 +404,8 @@
                 <div class="form-group row w-100 mb-1">
                   <label for="deliaddress-postalcode" class="col-form-label col-form-label-sm pl-0 regular">{{'address.postalCode' | translate}}</label>
                   <div class="col">
-                    <input type="text" class="form-control form-control-sm regular"
-                      [(ngModel)]="formField.deliAddress.postalCode"
+                    <input trimOnBlur type="text" class="form-control form-control-sm regular"
+                      [(ngModel)]="deliAddress.formField.postalCode"
                       (ngModelChange)="watchChange()" />
                   </div>
                 </div>
@@ -405,7 +413,7 @@
                   <label for="deliaddress-phoneNumber" class="col-form-label col-form-label-sm pl-0 regular">{{'phone' | translate}}</label>
                   <div class="col">
                     <input trimOnBlur type="text" class="form-control form-control-sm regular"
-                      [(ngModel)]="formField.deliAddress.phoneNumber"
+                      [(ngModel)]="deliAddress.formField.phoneNumber"
                       (ngModelChange)="watchChange()" />
                   </div>
                 </div>
@@ -414,11 +422,15 @@
           </td>
         </tr>
       </tbody>
-      <tfoot class="border border-right-0 border-bottom-0 border-left-0 border-white size18">
+      <tfoot>
         <tr>
-          <td class="w-auto border-0 pt-25 pr-0 pb-0 pl-0 bold col-total">{{'total.amount' | translate | titlecase}}</td>
-          <td class="border-0 pt-25 pr-0 pb-0 bold text-right col-total-amount">
-            {{totalFeeAmount ? ((totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
+          <td colspan="2" class="border-0 p-0">
+            <div class="d-table w-100 border border-right-0 border-bottom-0 border-left-0 border-white mt-2 size18">
+              <div class="d-table-cell w-auto pt-25 bold col-total">{{'total.amount' | translate | titlecase}}</div>
+              <div class="d-table-cell pt-25 bold text-right col-total-amount">
+                {{feeType.totalFeeAmount ? ((feeType.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
+              </div>
+            </div>
           </td>
         </tr>
       </tfoot>

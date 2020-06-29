@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๑๗/๐๖/๒๕๖๓>
+Modify date : <๒๒/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -662,10 +662,20 @@ namespace Data {
         let transProject: Schema.TransProject = {};
         let transLocation: Schema.TransLocation = {};
         let transDeliAddress: Schema.TransDeliAddress = {};
+        let deliAddress = {
+          country: {},
+          province: {},
+          district: {},
+          subdistrict: {}
+        };
         let invoiceFee: Schema.InvoiceFee[] = [];
 
         for (let dr1 of result) {
           if (action === 'get') {
+            let country: [] = (dr1['country'] ? dr1['country'] : []);
+            let province: [] = (dr1['province'] ? dr1['province'] : []);
+            let district: [] = (dr1['district'] ? dr1['district'] : []);
+            let subdistrict: [] = (dr1['subdistrict'] ? dr1['subdistrict'] : []);
             let fee: [] = (dr1['fee'] ? dr1['fee'] : []);
 
             transProject = {
@@ -717,27 +727,94 @@ namespace Data {
               }
             };
 
+            for (let dr2 of country) {
+              deliAddress.country = {
+                ID: (dr2['id'] ? dr2['id'] : ''),
+                name: {
+                  th: (dr2['countryNameTH'] ? dr2['countryNameTH'] : dr2['countryNameEN']),
+                  en: (dr2['countryNameEN'] ? dr2['countryNameEN'] : dr2['countryNameTH'])
+                },
+                isoCountryCodes2Letter: (dr2['isoCountryCodes2Letter'] ? dr2['isoCountryCodes2Letter'] : ''),
+                isoCountryCodes3Letter: (dr2['isoCountryCodes3Letter'] ? dr2['isoCountryCodes3Letter'] : '')
+              };
+            }
+
+            for (let dr3 of province) {
+              deliAddress.province = {
+                ID: (dr3['id'] ? dr3['id'] : ''),
+                countryID: (dr3['plcCountryId'] ? dr3['plcCountryId'] : ''),
+                isoCountryCodes3Letter: (dr3['isoCountryCodes3Letter'] ? dr3['isoCountryCodes3Letter'] : ''),
+                name: {
+                  th: (dr3['provinceNameTH'] ? dr3['provinceNameTH'] : dr3['provinceNameEN']),
+                  en: (dr3['provinceNameEN'] ? dr3['provinceNameEN'] : dr3['provinceNameTH'])
+                },
+                regional: (dr3['regionalName'] ? dr3['regionalName'] : '')
+              };
+            }
+
+            for (let dr4 of district) {
+              deliAddress.district = {
+                ID: (dr4['id'] ? dr4['id'] : ''),
+                countryID: (dr4['plcCountryId'] ? dr4['plcCountryId'] : ''),
+                isoCountryCodes3Letter: (dr4['isoCountryCodes3Letter'] ? dr4['isoCountryCodes3Letter'] : ''),
+                provinceID: (dr4['plcProvinceId'] ? dr4['plcProvinceId'] : ''),
+                provinceName: {
+                  th: (dr4['provinceNameTH'] ? dr4['provinceNameTH'] : dr4['provinceNameEN']),
+                  en: (dr4['provinceNameEN'] ? dr4['provinceNameEN'] : dr4['provinceNameTH'])
+                },
+                name: {
+                  th: (dr4['districtNameTH'] ? dr4['districtNameTH'] : dr4['districtNameEN']),
+                  en: (dr4['districtNameEN'] ? dr4['districtNameEN'] : dr4['districtNameTH'])
+                },
+                zipCode: (dr4['zipCode'] ? dr4['zipCode'] : '')
+              };
+            }
+
+            for (let dr5 of subdistrict) {
+              deliAddress.subdistrict = {
+                ID: (dr5['id'] ? dr5['id'] : ''),
+                countryID: (dr5['plcCountryId'] ? dr5['plcCountryId'] : ''),
+                isoCountryCodes3Letter: (dr5['isoCountryCodes3Letter'] ? dr5['isoCountryCodes3Letter'] : ''),
+                provinceID: (dr5['plcProvinceId'] ? dr5['plcProvinceId'] : ''),
+                provinceName: {
+                  th: (dr5['provinceNameTH'] ? dr5['provinceNameTH'] : dr5['provinceNameEN']),
+                  en: (dr5['provinceNameEN'] ? dr5['provinceNameEN'] : dr5['provinceNameTH'])
+                },
+                districtID: (dr5['plcDistrictId'] ? dr5['plcDistrictId'] : ''),
+                districtName: {
+                  th: (dr5['districtNameTH'] ? dr5['districtNameTH'] : dr5['districtNameEN']),
+                  en: (dr5['districtNameEN'] ? dr5['districtNameEN'] : dr5['districtNameTH'])
+                },
+                zipCode: (dr5['zipCode'] ? dr5['zipCode'] : ''),
+                name: {
+                  th: (dr5['subdistrictNameTH'] ? dr5['subdistrictNameTH'] : dr5['subdistrictNameEN']),
+                  en: (dr5['subdistrictNameEN'] ? dr5['subdistrictNameEN'] : dr5['subdistrictNameTH'])
+                }
+              };
+            }
+
             transDeliAddress = {
               ID: (dr1['transDeliAddressID'] ? dr1['transDeliAddressID'] : ''),
               address: (dr1['address'] ? dr1['address'] : ''),
-              country: (dr1['country'] ? dr1['country'][0] : null),
-              province: (dr1['province'] ? dr1['province'][0] : null),
-              district: (dr1['district'] ? dr1['district'][0] : null),
-              subdistrict: (dr1['subdistrict'] ? dr1['subdistrict'][0] : null),
+              country: deliAddress.country,
+              province: deliAddress.province,
+              district: deliAddress.district,
+              subdistrict: deliAddress.subdistrict,
               postalCode: (dr1['postalCode'] ? dr1['postalCode'] : ''),
               phoneNumber: (dr1['phoneNumber'] ? dr1['phoneNumber'] : ''),
             };
 
-            for (let dr2 of fee) {
+            for (let dr6 of fee) {
               invoiceFee.push({
-                invoiceID: (dr2['invoiceID'] ? dr2['invoiceID'] : ''),
+                invoiceID: (dr6['invoiceID'] ? dr6['invoiceID'] : ''),
                 feeType: {
-                  ID: (dr2['feeTypeID'] ? dr2['feeTypeID'] : ''),
+                  ID: (dr6['feeTypeID'] ? dr6['feeTypeID'] : ''),
                   name: {
-                    th: (dr2['feeTypeNameTH'] ? dr2['feeTypeNameTH'] : dr2['feeTypeNameEN']),
-                    en: (dr2['feeTypeNameEN'] ? dr2['feeTypeNameEN'] : dr2['feeTypeNameTH'])
+                    th: (dr6['feeTypeNameTH'] ? dr6['feeTypeNameTH'] : dr6['feeTypeNameEN']),
+                    en: (dr6['feeTypeNameEN'] ? dr6['feeTypeNameEN'] : dr6['feeTypeNameTH'])
                   },
-                  amount: (dr2['amount'] ? parseFloat(dr2['amount']) : 0)
+                  amount: (dr6['amount'] ? parseFloat(dr6['amount']) : 0),
+                  toggle: (dr6['toggle'] ? dr6['toggle'] : ''),
                 }
               });
             }

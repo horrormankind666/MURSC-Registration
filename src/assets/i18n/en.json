@@ -85,6 +85,7 @@
     "seatTotal": "Seat Total",
     "seatAvailable": "Seat Available"
   },
+  "payment": "Payment",
   "unit": {
     "label": "Unit",
     "baht": "Bath",
@@ -149,7 +150,10 @@
     "country": "Country",
     "postalCode": "Postal Code"
   },
-  "addressDelivery": "Address for Delivery",
+  "addressDelivery": {
+    "label": "Address for Delivery",
+    "edit": "Edit Address for Delivery"
+  },
   "invoice": {
     "label": "Invoice",
     "paymentStatus": "Payment Status",

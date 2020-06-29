@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๑/๐๖/๒๕๖๓>
-Modify date : <๑๘/๐๖/๒๕๖๓>
+Modify date : <๒๔/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,7 +12,7 @@ Description : <>
 .registered-detail-view .project-card-vertical {
   display: none;
 }
-@media screen and (max-width: 701px) {
+@media screen and (max-width: 720px) {
   .registered-detail-view .project-card-vertical {
     display: block;
   }
@@ -35,6 +35,74 @@ Description : <>
     top: 3px;
   }
 }
-@media screen and (max-width: 481px) {
+.registered-detail-view .registered-info .d-block.col-locations {
+  display: none !important;
+}
+@media screen and (max-width: 1140px) {
+  .registered-detail-view .registered-info .d-table .col-locations,
+  .registered-detail-view .registered-info .d-table .table-cell-divider.col-wrap {
+    display: none !important;
+  }
+  .registered-detail-view .registered-info .d-block.col-locations {
+    display: block !important;
+    margin-bottom: 1rem !important;
+  }
+  .registered-detail-view .registered-info .d-table .col-feetype {
+    width: 50% !important;
+  }
+}
+@media screen and (max-width: 870px) {
+  .registered-detail-view .registered-info .d-block.col-locations {
+    display: none !important;
+  }
+  .registered-detail-view .registered-info .d-table .col-feetype,
+  .registered-detail-view .registered-info .d-table .col-payment {
+    margin-top: 1rem !important;
+  }
+  .registered-detail-view .registered-info .d-table.table-registered,
+  .registered-detail-view .registered-info .d-table .col-locations,
+  .registered-detail-view .registered-info .d-table .col-feetype,
+  .registered-detail-view .registered-info .d-table .col-payment {
+    display: block !important;
+    width: 100% !important;
+  }
+}
+.registered-detail-view .location-info .form .form-text {
+  line-height: 1.5;
+}
+.registered-detail-view .fee-info .table .col-index {
+  width: 23px !important;
+  min-width: 23px !important;
+}
+.registered-detail-view .fee-info .table .col-index i {
+  position: relative;
+  top: 1px;
+}
+.registered-detail-view .fee-info #deliaddress-form .form .form-group .col .i-saving {
+  display: table-cell;
+  height: 34px;
+  text-align: center;
+  vertical-align: middle;
+}
+@media screen and (max-width: 500px) {
   @include form-responsive('.registered-detail-view .register-info');
+}
+@media screen and (max-width: 428px) {
+  @include form-responsive('.registered-detail-view .fee-info #deliaddress-form');
+  .registered-detail-view .fee-info #deliaddress-form .form .form-group:last-child .col-form-label {
+    display: none !important;
+  }
+  .registered-detail-view .fee-info #deliaddress-form .form .form-group:last-child .col .btn {
+    display: block;
+    margin-top: 0.25rem;
+    margin-left: 0 !important;
+  }
+  .registered-detail-view .fee-info #deliaddress-form .form .form-group:last-child .col .btn:first-child,
+  .registered-detail-view .fee-info #deliaddress-form .form .form-group .col .i-saving {
+    margin-top: 0.5rem;
+  }
+  .registered-detail-view .fee-info #deliaddress-form .form .form-group .col .i-saving {
+    display: block;
+    height: auto;
+  }
 }

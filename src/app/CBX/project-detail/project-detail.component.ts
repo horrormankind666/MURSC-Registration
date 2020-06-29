@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๗/๐๓/๒๕๖๓>
-Modify date : <๑๗/๐๖/๒๕๖๓>
+Modify date : <๒๙/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -36,10 +36,11 @@ export class ProjectDetailComponent implements OnInit {
   data: any = {
     transProject$: null
   };
-  isCollapsed: any = {
-    projectAbout: false
-  };
 
+  projectAbout = {
+    isCollapsed: false
+  };
+  
   ngOnInit() {
     this.data.transProject$ = this.data$;
   }

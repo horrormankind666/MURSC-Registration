@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๑๘/๐๖/๒๕๖๓>
+Modify date : <๒๔/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -15,6 +15,7 @@ Description : <>
   .project-card-horizontal#{$class} .project-body {
     display: table !important;
     table-layout: fixed;
+    width: 100%;
   }
   .project-card-horizontal#{$class} .project-body .col-sm-3 {
     display: table-cell !important;
@@ -23,13 +24,16 @@ Description : <>
     max-width: $width-fixed !important;
   }
   .project-card-horizontal#{$class} .project-body .col-sm-9 {
-    display: table-cell;
+    display: table-cell !important;
     vertical-align: top;
     width: auto !important;
     max-width: 100% !important;
   }
 }
 
+.project-card-horizontal .project-body .col-sm-9 {
+  padding-left: 31px;
+}
 .project-card-img {
   border-bottom-right-radius: 1rem !important;
   border-bottom-left-radius: 1rem !important;
@@ -166,6 +170,18 @@ Description : <>
   position: relative;
   top: -5px;
 }
-@media screen and (max-width: 858px) {
-  @include project-card-horizontal-fixed(':not(.on-modal)', 205px);
+@media screen and (max-width: 800px) {
+  @include project-card-horizontal-fixed(':not(.on-modal)', 189px);
+  @include project-card-horizontal-fixed('.on-modal', 174px);
+}
+.project-fee-info .table .col-amount,
+.project-fee-info .table .col-total-amount {
+  width: 150px;
+  min-width: 150px;
+}
+.project-fee-info #deliaddress-form .col-form-label {
+  width: 150px;
+}
+.project-fee-info #deliaddress-form textarea {
+  min-height: 52px;
 }

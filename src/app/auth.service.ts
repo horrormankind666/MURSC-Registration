@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๑๑/๐๖/๒๕๖๓>
+Modify date : <๒๖/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -20,6 +20,34 @@ import {ModalService} from './modal/modal.service';
 
 import {ModalConfirmComponent} from './modal/modal.component';
 
+interface UserInfo {
+  type?: string,
+  ppid?: string,
+  email?: string,
+  familyName?: string,
+  givenName?: string,
+  uniqueName?: string,
+  winaccountName?: string,
+  personalID?: string,
+  title?: string,
+  firstName?: {
+    th?: string,
+    en?: string
+  },
+  middleName?: {
+    th?: string,
+    en?: string
+  },
+  lastName?: {
+    th?: string,
+    en?: string
+  },
+  fullName?: {
+    th?: string,
+    en?: string
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,39 +60,65 @@ export class AuthService {
     private modalService: ModalService
   ) {}
 
-  private userInfo: {} = {
-    ppid: '',
-    email: '',
-    familyName: '',
-    givenName: '',
-    uniqueName: '',
-    winaccountName: ''
-  };
-
   public isAuthenticated: boolean = false;
-  public getUserInfo: {} = this.userInfo;
+  public getUserInfo: UserInfo = null;
 
-  setUserInfo(data: any) {
-      let ppid: string            = (data.ppid ? data.ppid : '');
-      let email: string           = (data.email ? data.email : '');
-      let familyName: string      = (data.family_name ? data.family_name : '');
-      let givenName: string       = (data.given_name ? data.given_name : '');
-      let uniqueName: string      = (data.unique_name ? data.unique_name : '');
-      let winaccountName: string  = (data.winaccountname ? data.winaccountname : '');
+  setUserInfo(data?: any) {
+    let userInfo: UserInfo = null;
 
-      this.userInfo = {
+    if (data) {
+      let payload: {}             = (data.payload ? data.payload : {});
+      let personal: {}            = (data.personal ? data.personal : {});
+      let type: string            = (personal['type'] ? personal['type'] : '');
+      let ppid: string            = (payload['ppid'] ? payload['ppid'] : '');
+      let email: string           = (payload['email'] ? payload['email'] : '');
+      let familyName: string      = (payload['family_name'] ? payload['family_name'] : '');
+      let givenName: string       = (payload['given_name'] ? payload['given_name'] : '');
+      let uniqueName: string      = (payload['unique_name'] ? payload['unique_name'] : '');
+      let winaccountName: string  = (payload['winaccountname'] ? payload['winaccountname'] : '');
+      let personalID: string      = (personal['personalID'] ? personal['personalID'] : '');
+      let title: string           = (personal['title'] ? personal['title'] : '');
+      let firstNameTH: string     = (personal['firstNameTH'] ? personal['firstNameTH'] : '');
+      let middleNameTH: string    = (personal['middleNameTH'] ? personal['middleNameTH'] : '');
+      let lastNameTH: string      = (personal['lastNameTH'] ? personal['lastNameTH'] : '');
+      let firstNameEN: string     = (personal['firstNameEN'] ? personal['firstNameEN'] : '');
+      let middleNameEN: string    = (personal['middleNameEN'] ? personal['middleNameEN'] : '');
+      let lastNameEN: string      = (personal['lastNameEN'] ? personal['lastNameEN'] : '');
+
+      userInfo = {
+        type: type,
         ppid: ppid,
         email: email,
         familyName: familyName,
         givenName: givenName,
         uniqueName: uniqueName,
-        winaccountName: winaccountName
+        winaccountName: winaccountName,
+        personalID: personalID,
+        title: title,
+        firstName: {
+          th: (firstNameTH ? firstNameTH : firstNameEN),
+          en: (firstNameEN ? firstNameEN : firstNameTH)
+        },
+        middleName: {
+          th: (middleNameTH ? middleNameTH : middleNameEN),
+          en: (middleNameEN ? middleNameEN : middleNameTH)
+        },
+        lastName: {
+          th: (lastNameTH ? lastNameTH : lastNameEN),
+          en: (lastNameEN ? lastNameEN : lastNameTH)
+        },
       };
 
-      this.getUserInfo = this.userInfo;
+      userInfo.fullName = {
+        th: (userInfo.firstName.th + (userInfo.middleName.th ? (' ' + userInfo.middleName.th) : '') + ' ' + userInfo.lastName.th),
+        en: (userInfo.firstName.en + (userInfo.middleName.en ? (' ' + userInfo.middleName.en) : '') + ' ' + userInfo.lastName.en)
+      }
+    }
+
+    this.getUserInfo = userInfo;
   }
 
-  getAuthenResource(): Promise<any> {
+  getIsAuthenticated(): Promise<any> {
     let promise = new Promise((resolve, reject) => {
       this.appService.getCookie(this.appService.cookieName);
 
@@ -72,20 +126,57 @@ export class AuthService {
         let headers = new HttpHeaders()
           .set('Authorization', ('Bearer ' + this.appService.authenResource.token));
 
-        this.http.get(this.appService.urlAuthenResource, { headers: headers }).subscribe((result: {}) => {
-          let data = result['data'];
+        this.http.get(this.appService.urlIsAuthenticated, { headers: headers }).subscribe((result: {}) => {
+          let data = result;
 
-          this.isAuthenticated = (data !== null ? data[0].isAuthenticated : false);
-          this.setUserInfo(this.isAuthenticated ? data[1].payload : {});
-
-          resolve(this.getUserInfo);
+          resolve(data);
         });
       }
       else {
-        this.isAuthenticated = false;
-        this.setUserInfo({});
+        resolve(false);
+      }
+    });
 
-        resolve(this.getUserInfo);
+    return promise;
+  }
+
+  getAuthenResource(): Promise<any> {
+    let promise = new Promise((resolve, reject) => {
+      if (this.getUserInfo === null) {
+        this.appService.getCookie(this.appService.cookieName);
+
+        if (this.appService.authenResource.type && this.appService.authenResource.token) {
+          let headers = new HttpHeaders()
+            .set('Authorization', ('Bearer ' + this.appService.authenResource.token));
+
+          this.http.get(this.appService.urlAuthenResource, { headers: headers }).subscribe((result: {}) => {
+            let data = result['data'];
+
+            this.isAuthenticated = (data !== null ? data[0].isAuthenticated : false);
+            if (this.isAuthenticated)
+              this.setUserInfo(data[1]);
+            else
+              this.setUserInfo
+
+            resolve(this.getUserInfo);
+          });
+        }
+        else {
+          this.isAuthenticated = false;
+          this.setUserInfo();
+
+          resolve(this.getUserInfo);
+        }
+      }
+      else {
+        this.getIsAuthenticated().then((result: boolean) => {
+          this.isAuthenticated = result;
+
+          if (!this.isAuthenticated)
+            this.setUserInfo();
+
+          resolve(this.getUserInfo);
+        })
       }
     });
 

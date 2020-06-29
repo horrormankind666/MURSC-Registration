@@ -3,17 +3,23 @@
     <div class="d-table w-100">
       <div class="d-table-cell col-button">
         <button type="button" class="btn btn-secondary mr-1"
+          [ngClass]="{
+            'has-focus': projectService.operate.table.filter.showForm
+          }"
           [disabled]="(projectService.operate.table.service.searching$ | async)"
           ngbTooltip="{{'filter' | translate | titlecase}}"
           title="{{'filter' | translate | titlecase}}"
-          (click)="$event.currentTarget.blur(); projectService.operate.table.filter.showForm = !projectService.operate.table.filter.showForm">
+          (click)="projectService.operate.table.filter.showForm = !projectService.operate.table.filter.showForm">
           <i class="fa fa-filter text-white size18"></i>
         </button>
         <button type="button" class="btn btn-secondary"
+          [ngClass]="{
+            'has-focus': (projectService.operate.table.service.searching$ | async)
+          }"
           [disabled]="(projectService.operate.table.service.searching$ | async)"
           ngbTooltip="{{'reload' | translate | titlecase}}"
           title="{{'reload' | translate | titlecase}}"
-          (click)="$event.currentTarget.blur(); projectService.operate.table.service.reload()">
+          (click)="projectService.operate.table.service.reload()">
           <i class="fa fa-refresh text-white size18" [ngClass]="{'fa-spin': (projectService.operate.table.service.searching$ | async)}"></i>
         </button>
       </div>
@@ -75,7 +81,7 @@
       </div>
       <div class="card card-horizontal border-0 rounded-0 project-card-horizontal">
         <div class="card-body pt-0 pr-3 pb-0 pl-3 project-body">
-          <div class="d-inline-block col-sm-3 pb-1 pl-0">
+          <div class="d-inline-block col-sm-3 pr-0 pb-3 pl-0">
             <ng-container *ngTemplateOutlet="titleInfo; context: {data: project}"></ng-container>
           </div>
           <div class="d-inline-block col-sm-9 pt-1 pr-0 pb-3 align-top">
@@ -203,7 +209,7 @@
       <div class="form-group row mr-0 mb-0 ml-0">
         <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fa fa-info-circle"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0"><a class="link text-white" href="javascript:void(0)" (click)="$event.currentTarget.blur(); getTransProject(data)">{{'project.detail' | translate | titlecase}}</a></span>
+          <span class="form-text regular mt-0"><a class="link text-white" href="javascript:void(0)" (click)="getTransProject(data)">{{'project.detail' | translate | titlecase}}</a></span>
         </div>
       </div>
       <div class="form-group row mt-1 mr-0 mb-0 ml-0" *ngIf="data.registrationStatus === 'Y'">

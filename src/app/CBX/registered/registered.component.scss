@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๗/๐๔/๒๕๖๓>
-Modify date : <๑๖/๐๖/๒๕๖๓>
+Modify date : <๒๓/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -20,17 +20,6 @@ Description : <>
   position: absolute;
   top: 0;
 }
-.registered-view .fee-info .table .col-amount,
-.registered-view .fee-info .table .col-total-amount {
-  width: 150px;
-  min-width: 150px;
-}
-.registered-view .fee-info #deliaddress-form .col-form-label {
-  width: 150px;
-}
-.registered-view .fee-info #deliaddress-form textarea {
-  min-height: 52px;
-}
 @media screen and (max-width: 1452px) and (min-width: 1082px) {
   .registered-view .registered-info .d-table .col-locations {
     width: 50% !important;
@@ -38,9 +27,12 @@ Description : <>
   @include table-responsive-step1('.registered-view .location-info');
 }
 @media screen and (max-width: 1081px) {
-  .registered-view .registered-info .d-table,
-  .registered-view .registered-info .d-table-cell,
-  .registered-view .registered-info .d-table .col-locations {
+  .registered-view .registered-info .d-table .table-cell-divider.col-wrap {
+    display: none;
+  }
+  .registered-view .registered-info .d-table.table-registered,
+  .registered-view .registered-info .d-table .col-locations,
+  .registered-view .registered-info .d-table .col-feetype {
     display: block !important;
     width: 100% !important;
   }
@@ -58,7 +50,7 @@ Description : <>
   @include table-responsive-step2('.registered-view .registered-info .location-info');
   @include form-responsive('.registered-view .fee-info #deliaddress-form');
 }
-@media screen and (max-width: 528px) {
+@media screen and (max-width: 530px) {
   .registered-view .project-card-vertical {
     display: block;
   }

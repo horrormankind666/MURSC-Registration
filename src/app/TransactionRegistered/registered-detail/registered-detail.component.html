@@ -11,7 +11,7 @@
       <div class="dropdown-divider mt-2 mb-0"></div>
       <div class="card card-horizontal bg-white border-0 rounded-0 project-card-horizontal">
         <div class="card-body pt-0 pr-3 pb-0 pl-3 project-body">
-          <div class="d-inline-block col-sm-3 pl-0 align-top">
+          <div class="d-inline-block col-sm-3 pr-0 pl-0 align-top">
             <ng-container *ngTemplateOutlet="titleInfo"></ng-container>
           </div>
           <div class="d-inline-block col-sm-9 pt-1 pr-0 align-top">
@@ -31,6 +31,9 @@
           </div>
         </div>
       </div>
+      <div class="mt-3 pr-3 pl-3">
+        <ng-container *ngTemplateOutlet="registeredInfo"></ng-container>
+      </div>
     </div>
   </div>
 </div>
@@ -39,12 +42,42 @@
     <div class="embed-responsive embed-responsive-16by9 mb-3">
       <div class="card-img project-card-img" [ngStyle]="{'background-image': ('url(' + data.transRegistered$.transProject.project.logo + ')')}"></div>
     </div>
+    <div class="card-title mb-0">
+      <div class="datetime-vertical bold text-body">
+        <div class="day bolder size24">
+          <div>{{data.transRegistered$.transProject.examDate ? (data.transRegistered$.transProject.examDate | slice:0:1) : ''}}</div>
+          <div>{{data.transRegistered$.transProject.examDate ? (data.transRegistered$.transProject.examDate | slice:1:2) : ''}}</div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="month size16">
+          <div>{{data.transRegistered$.transProject.examDate ? ((data.transRegistered$.transProject.examDate | slice:3:4) | uppercase) : ''}}</div>
+          <div>{{data.transRegistered$.transProject.examDate ? ((data.transRegistered$.transProject.examDate | slice:4:5) | uppercase) : ''}}</div>
+          <div>{{data.transRegistered$.transProject.examDate ? ((data.transRegistered$.transProject.examDate | slice:5:6) | uppercase) : ''}}</div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="year size14">
+          <div>{{data.transRegistered$.transProject.examDate ? (data.transRegistered$.transProject.examDate | slice:7:8) : ''}}</div>
+          <div>{{data.transRegistered$.transProject.examDate ? (data.transRegistered$.transProject.examDate | slice:8:9) : ''}}</div>
+          <div>{{data.transRegistered$.transProject.examDate ? (data.transRegistered$.transProject.examDate | slice:9:10) : ''}}</div>
+          <div>{{data.transRegistered$.transProject.examDate ? (data.transRegistered$.transProject.examDate | slice:10:11) : ''}}</div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="time size11 text-secondary">
+          <div>{{data.transRegistered$.transProject.examDate ? (data.transRegistered$.transProject.examDate | slice:12:13) : ''}}</div>
+          <div>{{data.transRegistered$.transProject.examDate ? (data.transRegistered$.transProject.examDate | slice:13:14) : ''}}</div>
+          <div>{{data.transRegistered$.transProject.examDate ? (data.transRegistered$.transProject.examDate | slice:14:15) : ''}}</div>
+          <div>{{data.transRegistered$.transProject.examDate ? (data.transRegistered$.transProject.examDate | slice:15:16) : ''}}</div>
+          <div>{{data.transRegistered$.transProject.examDate ? (data.transRegistered$.transProject.examDate | slice:16:17) : ''}}</div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
   </div>
 </ng-template>
 <ng-template #projectInfo>
   <div class="project-info">
     <p class="bold size22 mb-0">{{data.transRegistered$.transProject.project.name[appService.lang]}}</p>
-    <a routerLink="../../../{{data.transRegistered$.transProject.project.category.ID}}" class="badge badge-pill badge-info mt-1 mb-2 project-btn-badge">
+    <a routerLink="../../../{{data.transRegistered$.transProject.project.category.ID}}" class="badge badge-pill badge-primary mt-1 mb-2 project-btn-badge">
       <span class="regular text-white size13">{{data.transRegistered$.transProject.project.category.ID + '.label' | translate | titlecase}}</span>
     </a>
   </div>
@@ -56,7 +89,7 @@
         <div class="form-group row mb-01">
           <label for="col-registereddate" class="col-form-label">{{'registered.at' | translate | titlecase}}</label>
           <div class="col">
-            <div class="d-table w-auto size-l calendar-date">
+            <div class="d-table w-100 size-l calendar-date">
               <div class="d-table-row">
                 <div class="d-table-cell align-middle col-icon"><span class="size24"><i class="fa fa-calendar"></i></span></div>
                 <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.registeredDate ? (data.transRegistered$.registeredDate | slice:0:16) : ''}}</span></div>
@@ -94,7 +127,7 @@
         <div class="form-group row mb-01" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">
           <label for="col-dateofpayment" class="col-form-label">{{'project.lastPaymentDate' | translate | titlecase}}</label>
           <div class="col">
-            <div class="d-table w-auto size-l calendar-date">
+            <div class="d-table w-100 size-l calendar-date">
               <div class="d-table-row">
                 <div class="d-table-cell align-middle col-icon"><span class="size24"><i class="fa fa-calendar"></i></span></div>
                 <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.transProject.lastPaymentDate ? (data.transRegistered$.transProject.lastPaymentDate | slice:0:16) : ''}}</span></div>
@@ -116,11 +149,11 @@
         <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo"></ng-container></div>
       </div>
     </div>
-    <a class="d-inline badge badge-pill badge-light-dark ml-2 project-btn-badge" href="javascript:void(0)" (click)="$event.currentTarget.blur(); isCollapsed.projectAbout = !isCollapsed.projectAbout" [attr.aria-expanded]="isCollapsed.projectAbout" aria-controls="projectAbout">
+    <a class="d-inline badge badge-pill badge-light-dark ml-2 project-btn-badge" href="javascript:void(0)" (click)="projectAbout.isCollapsed = !projectAbout.isCollapsed" [attr.aria-expanded]="projectAbout.isCollapsed" aria-controls="projectAbout">
       <span class="regular size13">{{'about' | translate | lowercase}}</span>
     </a>
   </div>
-  <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0 project-text-line-clamp" id="projectAbout" [ngbCollapse]="!isCollapsed.projectAbout">{{data.transRegistered$.transProject.project.about}}</p>
+  <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0 project-text-line-clamp" id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed">{{data.transRegistered$.transProject.project.about}}</p>
 </ng-template>
 <ng-template #contactInfo>
   <div class="contact-info text-white size14 project-contact-info">
@@ -144,5 +177,218 @@
         </div>
       </div>
     </div>
+  </div>
+</ng-template>
+<ng-template #registeredInfo>
+  <div class="registered-info">
+    <div class="d-block w-100 jumbotron rounded-xl mb-0 p-3 col-locations">
+      <div class="border-bottom border-light pb-2">
+        <span class="bold text-primary size20">{{'location.label' | translate | titlecase}}</span>
+      </div>
+      <ng-container *ngTemplateOutlet="locationInfo"></ng-container>
+    </div>
+    <div class="d-table table-registered">
+      <div class="d-table-cell w-25 jumbotron rounded-xl mb-0 p-3 col-locations">
+        <div class="border-bottom border-light pb-2">
+          <span class="bold text-primary size20">{{'location.label' | translate | titlecase}}</span>
+        </div>
+        <ng-container *ngTemplateOutlet="locationInfo"></ng-container>
+      </div>
+      <div class="d-table-cell table-cell-divider col-wrap"></div>
+      <div class="d-table-cell w-375 jumbotron rounded-xl mb-0 p-3 col-feetype">
+        <div class="border-bottom border-light pb-2">
+          <span class="bold text-primary size20">{{'fee' | translate | titlecase}}</span>
+        </div>
+        <ng-container *ngTemplateOutlet="feeInfo"></ng-container>
+      </div>
+      <div class="d-table-cell table-cell-divider"></div>
+      <div class="d-table-cell w-auto jumbotron rounded-xl mb-0 p-3 col-payment">
+        <div class="border-bottom border-light pb-2">
+          <span class="bold text-primary size20">{{'payment' | translate | titlecase}}</span>
+        </div>
+        <!--<div *ngIf="data.transProject$.transFeeType.length"><ng-container *ngTemplateOutlet="feeInfo"></ng-container></div>-->
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #locationInfo>
+  <div class="location-info project-location-info">
+    <table class="table table-bordered mb-0">
+      <tbody class="border-top-0 size16">
+        <tr>
+          <td class="border-top-0 border-right-0 border-left-0 pr-0 pl-0 regular">
+            <div class="form">
+              <div class="form-group row mb-1" ngbTooltip="{{'location.label' | translate | titlecase}}" title="{{'location.label' | translate | titlecase}}">
+                <div class="col pl-0">
+                  <span class="form-text regular">{{data.transRegistered$.transLocation.location.name[appService.lang]}}</span>
+                </div>
+              </div>
+              <div class="form-group row mb-0" ngbTooltip="{{'building.label' | translate | titlecase}}" title="{{'building.label' | translate | titlecase}}">
+                <div class="col pl-0">
+                  <span class="form-text regular">{{data.transRegistered$.transLocation.location.building.name[appService.lang]}}</span>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+<ng-template #feeInfo>
+  <div class="fee-info project-fee-info">
+    <table class="table table-bordered mb-0">
+      <tbody class="border-top-0 size16" [ngClass]="{'pb-1': last}" *ngFor="let invoiceFee of data.transRegistered$.invoiceFee; index as order; let last = last">
+        <tr>
+          <td class="border-0 pr-0 pb-0 pl-0 regular col-index" [ngClass]="{'pt-1': (order !== 0)}">
+            <i class="fa fa-check-square text-muted size18"></i>
+          </td>
+          <td class="w-auto border-0 pr-0 pb-0 pl-0 regular col-name" [ngClass]="{'pt-1': (order !== 0)}">
+            {{invoiceFee.feeType.name[appService.lang]}}
+          </td>
+          <td class="border-0 pr-0 pb-0 regular text-right col-amount" [ngClass]="{'pt-1': (order !== 0)}">
+            {{invoiceFee.feeType.amount ? ((invoiceFee.feeType.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
+          </td>
+        </tr>
+        <tr *ngIf="invoiceFee.feeType.toggle">
+          <td colspan="3" class="border-0 p-0">
+            <a class="badge badge-pill badge-info mt-1 project-btn-badge" href="javascript:void(0)"
+              [ngClass]="{
+                'has-focus': feeType.toggle[invoiceFee.feeType.toggle],
+                'disabled': (invoiceFee.feeType.toggle === 'Address' && deliAddress.isSaving)
+              }"
+              (click)="feeType.toggle[invoiceFee.feeType.toggle] = !feeType.toggle[invoiceFee.feeType.toggle]">
+              <span class="regular text-white size13" *ngIf="invoiceFee.feeType.toggle === 'Address'">{{'addressDelivery.edit' | translate | lowercase}}</span>
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" class="border-0 p-0">
+            <div class="mt-2" id="deliaddress-form" *ngIf="feeType.toggle[invoiceFee.feeType.toggle] && invoiceFee.feeType.toggle === 'Address'">
+              <div class="form horizontal-form bg-warning p-3">
+                <div class="alert alert-danger mb-2" role="alert" *ngIf="!deliAddress.saveChange.isValid">
+                  <span class="regular size16">{{'registered.save.error.deliaddress' | translate}}</span>
+                </div>
+                <div class="form-group row w-100 mb-1">
+                  <label for="deliaddress-address" class="col-form-label col-form-label-sm pl-0 regular">{{'address.label' | translate}}</label>
+                  <div class="col">
+                    <textarea autosize trimOnBlur class="form-control form-control-sm regular"
+                      [(ngModel)]="deliAddress.formField.address"
+                      (ngModelChange)="deliAddress.watchChange()"
+                      [disabled]="deliAddress.saveChange.isSaving">
+                    </textarea>
+                  </div>
+                </div>
+                <div class="form-group row w-100 mb-1">
+                  <label for="deliaddress-country" class="col-form-label col-form-label-sm pl-0 regular">{{'address.country' | translate}}</label>
+                  <div class="col">
+                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.country.isLoading"></i>
+                    <ng-select
+                      class="size-sm"
+                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      [(ngModel)]="deliAddress.formField.country.selected"
+                      (ngModelChange)="deliAddress.watchChange()"
+                      (change)="deliAddress.getListProvince()"
+                      [disabled]="deliAddress.saveChange.isSaving"
+                      *ngIf="!deliAddress.formField.country.isLoading">
+                      <ng-option *ngFor="let item of data.country$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="form-group row w-100 mb-1">
+                  <label for="deliaddress-province" class="col-form-label col-form-label-sm pl-0 regular">{{'address.province' | translate}}</label>
+                  <div class="col">
+                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.province.isLoading"></i>
+                    <ng-select
+                      class="size-sm"
+                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      [(ngModel)]="deliAddress.formField.province.selected"
+                      (ngModelChange)="deliAddress.watchChange()"
+                      (change)="deliAddress.getListDistrict()"
+                      [disabled]="deliAddress.saveChange.isSaving"
+                      *ngIf="!deliAddress.formField.province.isLoading">
+                      <ng-option *ngFor="let item of data.province$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="form-group row w-100 mb-1">
+                  <label for="deliaddress-district" class="col-form-label col-form-label-sm pl-0 regular">{{'address.district' | translate}}</label>
+                  <div class="col">
+                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.district.isLoading"></i>
+                    <ng-select
+                      class="size-sm"
+                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      [(ngModel)]="deliAddress.formField.district.selected"
+                      (ngModelChange)="deliAddress.watchChange()"
+                      (change)="deliAddress.getListSubdistrict()"
+                      [disabled]="deliAddress.saveChange.isSaving"
+                      *ngIf="!deliAddress.formField.district.isLoading">
+                      <ng-option *ngFor="let item of data.district$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="form-group row w-100 mb-1">
+                  <label for="deliaddress-subdistrict" class="col-form-label col-form-label-sm pl-0 regular">{{'address.subdistrict' | translate}}</label>
+                  <div class="col">
+                    <i class="fa fa-circle-o-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.subdistrict.isLoading"></i>
+                    <ng-select
+                      class="size-sm"
+                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      [(ngModel)]="deliAddress.formField.subdistrict.selected"
+                      (ngModelChange)="deliAddress.watchChange()"
+                      [disabled]="deliAddress.saveChange.isSaving"
+                      *ngIf="!deliAddress.formField.subdistrict.isLoading">
+                      <ng-option *ngFor="let item of data.subdistrict$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="form-group row w-100 mb-1">
+                  <label for="deliaddress-postalcode" class="col-form-label col-form-label-sm pl-0 regular">{{'address.postalCode' | translate}}</label>
+                  <div class="col">
+                    <input trimOnBlur type="text" class="form-control form-control-sm regular"
+                      [(ngModel)]="deliAddress.formField.postalCode"
+                      (ngModelChange)="deliAddress.watchChange()"
+                      [disabled]="deliAddress.saveChange.isSaving" />
+                  </div>
+                </div>
+                <div class="form-group row w-100 mb-3">
+                  <label for="deliaddress-phoneNumber" class="col-form-label col-form-label-sm pl-0 regular">{{'phone' | translate}}</label>
+                  <div class="col">
+                    <input trimOnBlur type="text" class="form-control form-control-sm regular"
+                      [(ngModel)]="deliAddress.formField.phoneNumber"
+                      (ngModelChange)="deliAddress.watchChange()"
+                      [disabled]="deliAddress.saveChange.isSaving" />
+                  </div>
+                </div>
+                <div class="form-group row w-100">
+                  <label class="col-form-label"></label>
+                  <div class="col">
+                    <div class="i-saving" *ngIf="deliAddress.saveChange.isSaving"><i class="fa fa-circle-o-notch fa-spin"></i></div>
+                    <a class="btn btn-sm btn-transparent" (click)="deliAddress.setValue(true)" *ngIf="!deliAddress.saveChange.isSaving">
+                      <span class="bold text-danger size16">{{'cancel' | translate | titlecase}}</span>
+                    </a>
+                    <a class="btn btn-sm btn-transparent ml-1" (click)="deliAddress.saveChange.action()" *ngIf="!deliAddress.saveChange.isSaving">
+                      <span class="bold text-success size16">{{'save.label' | translate | titlecase}}</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="border-0 p-0">
+            <div class="d-table w-100 border border-right-0 border-bottom-0 border-left-0 border-white mt-2 size18">
+              <div class="d-table-cell w-auto pt-25 bold col-total">{{'total.amount' | translate | titlecase}}</div>
+              <div class="d-table-cell pt-25 bold text-right col-total-amount">
+                {{data.transRegistered$.totalFeeAmount ? ((data.transRegistered$.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
   </div>
 </ng-template>

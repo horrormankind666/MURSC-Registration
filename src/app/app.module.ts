@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๐๙/๐๖/๒๕๖๓>
+Modify date : <๒๕/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -31,7 +31,7 @@ import {AppService} from './app.service';
 import {AuthGuardService} from './auth-guard.service';
 import {AuthService} from './auth.service';
 
-import {TrimOnBlurDirective} from './app.directive';
+import {TrimOnBlurDirective, FocusRemoverDirective} from './app.directive';
 
 import {appRouting} from './app-routing.module';
 
@@ -68,7 +68,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MUEFHomeComponent,
     TransactionRegisteredHomeComponent,
     TransactionRegisteredDetailComponent,
-    TrimOnBlurDirective
+    TrimOnBlurDirective,
+    FocusRemoverDirective
   ],
   imports: [
     BrowserModule,

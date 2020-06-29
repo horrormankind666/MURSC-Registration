@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๑๗/๐๖/๒๕๖๓>
+Modify date : <๒๕/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -170,23 +170,54 @@ a.badge.focus {
   outline: 0 !important;
   box-shadow: 0 0 0 0 !important;
 }
-a.badge-dark:hover {
-  background-color: #1D2124 !important;
+a.badge-info:not(.has-focus) {
+  color: #FFFFFF;
+  background-color: #17A2B8;
 }
-a.badge-dark:focus {
+a.badge-info.has-focus,
+a.badge-info:not(.has-focus):hover {
+  color: #FFFFFF;
+  background-color: #117A8B;
+}
+@media (hover: none) and (pointer: coarse) {
+  a.badge-info:not(.has-focus):hover {
+    color: #FFFFFF;
+    background-color: #17A2B8;
+  }
+}
+a.badge-dark[aria-expanded=false] {
+  color: #FFFFFF;
   background-color: #343A40;
 }
-.badge-light-dark {
-  color: rgba(0, 0, 0, 0.5);
+a.badge-dark:hover,
+a.badge-dark[aria-expanded=true] {
+  color: #FFFFFF;
+  background-color: #1D2124;
+}
+@media (hover: none) and (pointer: coarse) {
+  a.badge-dark[aria-expanded=false]:hover {
+    color: #FFFFFF;
+    background-color: #343A40;
+  }
+}
+.badge-light-dark[aria-expanded=false] {
+  color: rgba(0, 0, 0, 0.8);
   background-color: #DAE0E5;
 }
-a.badge-light-dark:hover, a.badge-light-dark:focus {
+a.badge-light-dark:hover,
+a.badge-light-dark[aria-expanded=true] {
   color: #FFFFFF;
   background-color: #545B62;
 }
-a.badge-light-dark:focus, a.badge-light-dark.focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(218, 224, 229, 0.5);
+a.badge-light-dark:focus,
+a.badge-light-dark.focus {
+  box-shadow: 0 0 0 0 rgba(218, 224, 229, 0.5) !important;
+}
+@media (hover: none) and (pointer: coarse) {
+  a.badge-light-dark[aria-expanded=false]:hover {
+    color: rgba(0, 0, 0, 0.8);
+    background-color: #DAE0E5;
+  }
 }
 main {
   min-height: 100%;
@@ -262,6 +293,9 @@ main footer .container {
   background-image: none;
   transition: none !important;
 }
+.btn.btn-sm {
+  min-height: 28px;
+}
 button:focus,
 .btn:focus,
 .btn:active:focus,
@@ -300,10 +334,33 @@ button:focus,
 }
 .btn-transparent {
   background-color: transparent;
-  border: 2px solid #DADCE0;
+  border: 1px solid #DADCE0;
 }
 .btn-transparent:hover {
   background-color: #F7F8F8;
+}
+@media (hover: none) and (pointer: coarse) {
+  .btn-transparent:hover {
+    background-color: transparent;
+  }
+}
+.btn-secondary:not(.has-focus) {
+  color: #FFFFFF;
+  background-color: #6C757D;
+  border-color: #6C757D;
+}
+.btn-secondary.has-focus,
+.btn-secondary:not(.has-focus):hover {
+  color: #FFFFFF;
+  background-color: #5A6268;
+  border-color: #545B62;
+}
+@media (hover: none) and (pointer: coarse) {
+  .btn-secondary:not(.has-focus):hover {
+    color: #FFFFFF;
+    background-color: #6C757D;
+    border-color: #6C757D;
+  }
 }
 .toolbars .d-table .d-table-cell {
   vertical-align: middle;
@@ -556,7 +613,7 @@ body.modal-open {
   min-width: 16px;
 }
 .d-table-cell.table-cell-divider {
-  width: 16px !important;
+  width: 15px !important;
 }
 .tooltip-custom {
   z-index: 10051 !important;
@@ -653,8 +710,12 @@ textarea {
   padding-top: 0;
   padding-bottom: 0;
 }
-.ng-select.ng-select-disabled .ng-select-container {
-  background-color: #E9ECEF;
+.form-control:disabled,
+.form-control[readonly],
+.ng-select.ng-select-disabled .ng-select-container,
+.ng-select.ng-select-disabled .ng-select-container .ng-value-container .ng-value .ng-value-label {
+  background: #DDDDDD;
+  color: rgb(0, 0, 0, 0.5) !important;
   opacity: 1;
 }
 .ng-select div,
@@ -1098,6 +1159,9 @@ textarea {
 }
 .w-33 {
   width: 33.333333% !important;
+}
+.w-375 {
+  width: 37.5% !important;
 }
 .w-41 {
   width: 41.666667% !important;

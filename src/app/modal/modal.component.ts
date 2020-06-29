@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๒๗/๐๕/๒๕๖๓>
+Modify date : <๒๕/๐๖/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -22,7 +22,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
       </div>
       <div class="modal-footer">
         <input class="d-none" type="text" />
-        <button type="button" class="btn btn-success mr-0" (click)="$event.currentTarget.blur(); activeModal.close('close')"><span class="regular size16">{{'close' | translate}}</span></button>
+        <button type="button" class="btn btn-success mr-0" (click)="activeModal.close('close')"><span class="regular size16">{{'close' | translate}}</span></button>
       </div>
     </div>
   `,
@@ -48,7 +48,7 @@ export class ModalSuccessComponent implements OnInit {
       </div>
       <div class="modal-footer">
         <input class="d-none" type="text" />
-        <button type="button" class="btn btn-danger mr-0" (click)="$event.currentTarget.blur(); activeModal.close('close')"><span class="regular size16">{{'close' | translate}}</span></button>
+        <button type="button" class="btn btn-danger mr-0" (click)="activeModal.close('close')"><span class="regular size16">{{'close' | translate}}</span></button>
       </div>
     </div>
   `,
@@ -74,8 +74,8 @@ export class ModalErrorComponent implements OnInit {
       </div>
       <div class="modal-footer">
         <input class="d-none" type="text" />
-        <button type="button" class="btn btn-primary ml-0" (click)="$event.currentTarget.blur(); activeModal.dismiss('cancel')"><span class="regular size16">{{'cancel' | translate}}</span></button>
-        <button type="button" class="btn btn-primary mr-0" (click)="$event.currentTarget.blur(); activeModal.close('ok')"><span class="regular size16">{{'ok' | translate}}</span></button>
+        <button type="button" class="btn btn-primary ml-0" (click)="activeModal.dismiss('cancel')"><span class="regular size16">{{'cancel' | translate}}</span></button>
+        <button type="button" class="btn btn-primary mr-0" (click)="activeModal.close('ok')"><span class="regular size16">{{'ok' | translate}}</span></button>
       </div>
     </div>
   `,
