@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๒๒/๐๖/๒๕๖๓>
+Modify date : <๑๔/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -90,7 +90,10 @@ export namespace Schema {
       th?: string,
       en?: string,
     },
-    about?: string,
+    about?: {
+      th?: string,
+      en?: string
+    },
     ownerCode?: string,
     minimumPassScore?: number,
     logo?: string
@@ -174,7 +177,10 @@ export namespace Schema {
   export interface TransProject {
     ID?: string,
     project?: Project,
-    examDate?: string,
+    examDate?: {
+      startDate?: string,
+      endDate?: string
+    },
     registrationDate?: {
       startDate?: string,
       endDate?: string
@@ -234,6 +240,16 @@ export namespace Schema {
       th?: string,
       en?: string
     }
+  }
+
+  export interface QRCode {
+    errorCode?: number,
+    qrCode?: string,
+    qrMessage?: string,
+    qrFormat?: string,
+    qrImage64?: string,
+    qrResponse?: string,
+    qrNewRef1?: string
   }
 }
 
@@ -514,9 +530,15 @@ namespace Data {
                   th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
                   en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
                 },
-                about: (dr1['about'] ? dr1['about'] : '')
+                about: {
+                  th: (dr1['aboutTH'] ? dr1['aboutTH'] : dr1['aboutEN']),
+                  en: (dr1['aboutEN'] ? dr1['aboutEN'] : dr1['aboutTH'])
+                }
               },
-              examDate: (dr1['examDates'] ? dr1['examDates'] : ''),
+              examDate: {
+                startDate: (dr1['examStartDates'] ? dr1['examStartDates'] : ''),
+                endDate: (dr1['examEndDates'] ? dr1['examEndDates'] : '')
+              },
               registrationDate: {
                 startDate: (dr1['regisStartDates'] ? dr1['regisStartDates'] : ''),
                 endDate: (dr1['regisEndDates'] ? dr1['regisEndDates'] : '')
@@ -598,9 +620,15 @@ namespace Data {
                   th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
                   en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
                 },
-                about: (dr1['about'] ? dr1['about'] : '')
+                about: {
+                  th: (dr1['aboutTH'] ? dr1['aboutTH'] : dr1['aboutEN']),
+                  en: (dr1['aboutEN'] ? dr1['aboutEN'] : dr1['aboutTH'])
+                }
               },
-              examDate: (dr1['examDates'] ? dr1['examDates'] : ''),
+              examDate: {
+                startDate: (dr1['examStartDates'] ? dr1['examStartDates'] : ''),
+                endDate: (dr1['examEndDates'] ? dr1['examEndDates'] : '')
+              },
               registrationDate: {
                 startDate: (dr1['regisStartDates'] ? dr1['regisStartDates'] : ''),
                 endDate: (dr1['regisEndDates'] ? dr1['regisEndDates'] : '')
@@ -695,9 +723,15 @@ namespace Data {
                   th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
                   en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
                 },
-                about: (dr1['about'] ? dr1['about'] : '')
+                about: {
+                  th: (dr1['aboutTH'] ? dr1['aboutTH'] : dr1['aboutEN']),
+                  en: (dr1['aboutEN'] ? dr1['aboutEN'] : dr1['aboutTH'])
+                }
               },
-              examDate: (dr1['examDates'] ? dr1['examDates'] : ''),
+              examDate: {
+                startDate: (dr1['examStartDates'] ? dr1['examStartDates'] : ''),
+                endDate: (dr1['examEndDates'] ? dr1['examEndDates'] : '')
+              },
               lastPaymentDate: (dr1['lastPaymentDates'] ? dr1['lastPaymentDates'] : ''),
               contactPerson: {
                 fullName: {
@@ -950,6 +984,38 @@ namespace Data {
       }
     ]
   }
+
+  export class QRCode {
+    constructor(
+      private appService: AppService
+    ) {}
+
+    private getDataSource(routePrefix: string, data: string): Promise<Schema.QRCode[]> {
+      return this.appService.getDataSourceMethodPost(routePrefix, data).then((result: []) => {
+        let qrcode: Schema.QRCode[] = [];
+
+        for (let dr of result) {
+          qrcode.push({
+            errorCode: dr['errorCode'],
+            qrCode: (dr['qrCode'] ? dr['qrCode'] : ''),
+            qrMessage: (dr['qrMessage'] ? dr['qrMessage'] : ''),
+            qrFormat: (dr['qrFormat'] ? dr['qrFormat'] : ''),
+            qrImage64: (dr['qrImage64'] ? dr['qrImage64'] : ''),
+            qrResponse: (dr['qrResponse'] ? dr['qrResponse'] : ''),
+            qrNewRef1: (dr['qrNewRef1'] ? dr['qrNewRef1'] : '')
+          });
+        }
+
+        return qrcode;
+      });
+    }
+
+    get(routePrefix: string, data: string): Promise<Schema.QRCode> {
+      return this.getDataSource(routePrefix, data).then((result: Schema.QRCode[]) => {
+        return result[0];
+      });
+    }
+  }
 }
 
 @Injectable({
@@ -970,4 +1036,5 @@ export class DataService {
   public statuses = new Data.Statuses();
   public registrationStatus = new Data.RegistrationStatus();
   public paymentStatus = new Data.PaymentStatus();
+  public qrcode = new Data.QRCode(this.appService);
 }

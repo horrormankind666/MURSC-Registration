@@ -9,7 +9,7 @@ Description : <>
 
 'use strict';
 
-import {Component, OnInit, ContentChild} from '@angular/core';
+import {Component, OnInit, ContentChild, TemplateRef} from '@angular/core';
 import {DecimalPipe} from '@angular/common';
 
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
@@ -35,6 +35,7 @@ import {ProjectDetailComponent} from '../project-detail/project-detail.component
 
 export class ProjectComponent implements OnInit {
   @ContentChild('ProjectView', {static: false}) ProjectView;
+  @ContentChild('test', {static: false}) public test: TemplateRef<any>;
 
   constructor(
     private modal: NgbModal,

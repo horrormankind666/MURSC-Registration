@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๐/๐๒/๒๕๖๓>
-Modify date : <๑๐/๐๖/๒๕๖๓>
+Modify date : <๑๐/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -11,7 +11,6 @@ Description : <>
 
 import {Injectable, PipeTransform} from '@angular/core';
 import {DecimalPipe} from '@angular/common';
-import {Resolve, ActivatedRouteSnapshot} from '@angular/router';
 
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
@@ -97,7 +96,7 @@ class Table {
   }
 
   reload() {
-    this.dataService.transProject.getList('CBX').then((result: Schema.TransProject[]) => {
+    this.dataService.transProject.getList('CBE').then((result: Schema.TransProject[]) => {
       this._search$.pipe(
         tap(() => this._searching$.next(true)),
         debounceTime(100),

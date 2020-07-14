@@ -2,14 +2,14 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๖/๐๖/๒๕๖๓>
+Modify date : <๑๓/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 'use strict';
 
-import {Injectable} from '@angular/core';
+import {Injectable, ElementRef} from '@angular/core';
 import {formatDate} from '@angular/common';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Title} from '@angular/platform-browser';
@@ -56,6 +56,7 @@ export class AppService  {
     checking: false
   };
   public lang: string = 'th';
+  public headerViewHeight: any;
   public cookieName: string = 'MURSC.Cookies';
   public authenResource: any = {
     type: '',
@@ -153,7 +154,44 @@ export class AppService  {
     return promise;
   }
 
-  save(routePrefix: string, method: string, data: string): Promise<any> {
+  getDataSourceMethodPost(routePrefix: string, data: string): Promise<any> {
+    routePrefix = (routePrefix === undefined ? '' : routePrefix);
+
+    let url = (this.urlAPI + '/' + routePrefix + '?ver=' + this.dateTimeOnURL);
+    let option = {
+      headers: new HttpHeaders().set('Authorization', ('Bearer ' + this.authenResource.token))
+    };
+
+    let promise = new Promise((resolve, reject) => {
+      this.http.post(url, data, option).subscribe((result: {}) => {
+        let data = result['data'];
+
+        resolve(data !== undefined && data !== null ? data : []);
+      });
+    });
+
+    return promise;
+  }
+
+  httpMethod(method: string, url: string, data: string, option: {}): Promise<any> {
+    let promise = new Promise((resolve, reject) => {
+      if (method === 'Post') {
+        this.http.post(url, data, option).subscribe((result: {}) => {
+          resolve(result);
+        });
+      }
+
+      if (method === 'Put') {
+        this.http.put(url, data, option).subscribe((result: {}) => {
+          resolve(result);
+        });
+      }
+    });
+
+    return promise;
+  }
+
+  save(routePrefix: string, method: string, data: string, backdrop: boolean = true): Promise<any> {
     routePrefix = (routePrefix === undefined ? '' : routePrefix);
     method = (method === undefined ? '' : method);
     data = (data === undefined ? '' : data);
@@ -170,15 +208,19 @@ export class AppService  {
         route = "Post";
         break;
       }
+      case 'PUT': {
+        route = "Put";
+        break;
+      }
     }
 
     url += (route + "?ver=" + this.dateTimeOnURL);
 
-    this.isLoading.show = true;
-    this.isLoading.saving = true;
+    this.isLoading.show = backdrop;
+    this.isLoading.saving = backdrop;
 
     let promise = new Promise((resolve, reject) => {
-      this.http.post(url, data, option).subscribe((result: {}) => {
+      this.httpMethod(route, url, data, option).then((result: {}) => {
         this.isLoading.show = false;
         this.isLoading.saving = false;
 
@@ -199,5 +241,14 @@ export class AppService  {
     });
 
     return promise;
+  }
+
+  scrollIntoView(elementID) {
+    let element: any = document.getElementById(elementID);
+
+    if(element) {
+      element.scrollIntoView(true);
+      window.scrollBy(0, -(this.headerViewHeight));
+    }
   }
 }

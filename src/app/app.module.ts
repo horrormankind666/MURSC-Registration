@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๕/๐๖/๒๕๖๓>
+Modify date : <๑๔/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -31,7 +31,7 @@ import {AppService} from './app.service';
 import {AuthGuardService} from './auth-guard.service';
 import {AuthService} from './auth.service';
 
-import {TrimOnBlurDirective, FocusRemoverDirective} from './app.directive';
+import {TrimOnBlurDirective, FocusRemoverDirective, Nl2BrPipe} from './app.directive';
 
 import {appRouting} from './app-routing.module';
 
@@ -40,10 +40,10 @@ import {ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent} from 
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {MainComponent} from './main.component';
 import {SigninComponent} from './signin/signin.component';
-import {HomeComponent as CBXHomeComponent} from './CBX/home/home.component';
-import {ProjectComponent as CBXProjectComponent} from './CBX/project/project.component';
-import {ProjectDetailComponent as CBXProjectDetailComponent} from './CBX/project-detail/project-detail.component';
-import {RegisteredComponent as CBXRegisteredComponent} from './CBX/registered/registered.component';
+import {HomeComponent as CBEHomeComponent} from './CBE/home/home.component';
+import {ProjectComponent as CBEProjectComponent} from './CBE/project/project.component';
+import {ProjectDetailComponent as CBEProjectDetailComponent} from './CBE/project-detail/project-detail.component';
+import {RegisteredComponent as CBERegisteredComponent} from './CBE/registered/registered.component';
 import {HomeComponent as MUEFHomeComponent} from  './MUFE/home/home.component';
 import {HomeComponent as TransactionRegisteredHomeComponent} from './TransactionRegistered/home/home.component';
 import {RegisteredDetailComponent as TransactionRegisteredDetailComponent} from './TransactionRegistered/registered-detail/registered-detail.component';
@@ -61,15 +61,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     PageNotFoundComponent,
     MainComponent,
     SigninComponent,
-    CBXHomeComponent,
-    CBXProjectComponent,
-    CBXProjectDetailComponent,
-    CBXRegisteredComponent,
+    CBEHomeComponent,
+    CBEProjectComponent,
+    CBEProjectDetailComponent,
+    CBERegisteredComponent,
     MUEFHomeComponent,
     TransactionRegisteredHomeComponent,
     TransactionRegisteredDetailComponent,
     TrimOnBlurDirective,
-    FocusRemoverDirective
+    FocusRemoverDirective,
+    Nl2BrPipe
   ],
   imports: [
     BrowserModule,
@@ -110,7 +111,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalSuccessComponent,
     ModalErrorComponent,
     ModalConfirmComponent,
-    CBXProjectDetailComponent
+    CBEProjectDetailComponent
   ]
 })
 

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๒๙/๐๖/๒๕๖๓>
+Modify date : <๐๑/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -313,17 +313,18 @@ export class RegisteredComponent implements OnInit {
             });
 
             this.location.saveChange.that = this;
+            this.location.setValue();
+
             this.feeType.that = this;
             this.feeType.saveChange.that = this;
+            this.feeType.setValue();
+            this.feeType.totalFeeAmount = this.feeType.getTotalFeeAmount();
+
             this.deliAddress.that = this;
             this.deliAddress.saveChange.that = this;
-            this.saveChange.that = this;
-
-            this.location.setValue();
-            this.feeType.setValue();
             this.deliAddress.setValue();
 
-            this.feeType.totalFeeAmount = this.feeType.getTotalFeeAmount();
+            this.saveChange.that = this;
 
             this.registeredInfos.show = true;
           }
@@ -396,8 +397,6 @@ export class RegisteredComponent implements OnInit {
                   let modalRef: any;
 
                   if (saveResult.errorCode !== 0 && saveResult.errorCode !== 1) {
-                    this.error = true;
-
                     if (saveResult.errorCode === 2) message = ('project.error.notFound');
                     if (saveResult.errorCode === 3) message = ('registered.save.error.projectRegistered');
                     if (saveResult.errorCode === 4) message = ('registered.save.error.registrationStatus.' + result.registrationStatus);
@@ -405,52 +404,50 @@ export class RegisteredComponent implements OnInit {
                     if (saveResult.errorCode === 6) message = ('registered.save.error.seatAvailable');
                     if (saveResult.errorCode === 7) message = ('registered.save.error.fee');
 
-                    if (this.error) {
-                      modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message);
+                    modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message);
 
-                      this.that.modalService.close(modalRef).then((result: string) => {
-                        if (result === 'close') {
-                          if (saveResult.errorCode === 2)
-                            this.that.router.navigate(['CBX']);
+                    this.that.modalService.close(modalRef).then((result: string) => {
+                      if (result === 'close') {
+                        if (saveResult.errorCode === 2)
+                          this.that.router.navigate(['CBX']);
+                        else {
+                          if (saveResult.errorCode === 3)
+                            this.that.router.navigate(['TransactionRegistered/Detail/' + saveResult.transRegisteredID]);
                           else {
-                            if (saveResult.errorCode === 3)
-                              this.that.router.navigate(['TransactionRegistered/Detail/' + saveResult.transRegisteredID]);
-                            else {
-                              this.that.appService.isLoading.show = true;
-                              this.that.appService.isLoading.loading = true;
+                            this.that.appService.isLoading.show = true;
+                            this.that.appService.isLoading.loading = true;
 
-                              this.that.dataService.transProject.get(this.that.data.transProject$.ID).then((result: Schema.TransProject) => {
-                                let transProject: Schema.TransProject = result;
+                            this.that.dataService.transProject.get(this.that.data.transProject$.ID).then((result: Schema.TransProject) => {
+                              let transProject: Schema.TransProject = result;
 
-                                if (saveResult.errorCode === 4) {
-                                  this.that.location.setValue();
-                                  this.that.feeType.setValue();
-                                  this.that.deliAddress.setValue();
-                                  this.that.data.transProject$ = transProject;
-                                  this.that.registeredInfos.show = false;
-                                }
-                                if (saveResult.errorCode === 5 || saveResult.errorCode === 6) {
-                                  if (saveResult.errorCode === 6)
-                                    this.that.data.transProject$.seatAvailable = transProject.seatAvailable;
+                              if (saveResult.errorCode === 4) {
+                                this.that.location.setValue();
+                                this.that.feeType.setValue();
+                                this.that.deliAddress.setValue();
+                                this.that.data.transProject$ = transProject;
+                                this.that.registeredInfos.show = false;
+                              }
+                              if (saveResult.errorCode === 5 || saveResult.errorCode === 6) {
+                                if (saveResult.errorCode === 6)
+                                  this.that.data.transProject$.seatAvailable = transProject.seatAvailable;
 
-                                  this.that.location.setValue();
-                                  this.that.data.transProject$.transLocation = transProject.transLocation;
-                                }
-                                if (saveResult.errorCode === 7) {
-                                  this.that.feeType.setValue();
-                                  this.that.deliAddress.setValue();
-                                  this.that.data.transProject$.transFeeType = transProject.transFeeType;
-                                  this.that.feeType.totalFeeAmount = this.that.feeType.getTotalFeeAmount();
-                                }
+                                this.that.location.setValue();
+                                this.that.data.transProject$.transLocation = transProject.transLocation;
+                              }
+                              if (saveResult.errorCode === 7) {
+                                this.that.feeType.setValue();
+                                this.that.deliAddress.setValue();
+                                this.that.data.transProject$.transFeeType = transProject.transFeeType;
+                                this.that.feeType.totalFeeAmount = this.that.feeType.getTotalFeeAmount();
+                              }
 
-                                this.that.appService.isLoading.show = false;
-                                this.that.appService.isLoading.loading = false;
-                              });
-                            }
+                              this.that.appService.isLoading.show = false;
+                              this.that.appService.isLoading.loading = false;
+                            });
                           }
                         }
-                      });
-                    }
+                      }
+                    });
                   }
                   else {
                     if (saveResult.errorCode === 0) {

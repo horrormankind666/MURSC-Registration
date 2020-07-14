@@ -50,39 +50,50 @@
     </div>
   </div>
 </div>
+<ng-template #datetimeVerticalInfo let-data="data">
+  <div class="datetime-vertical bold text-body" *ngIf="data">
+    <div class="day bolder size24">
+      <div>{{data | slice:0:1}}</div>
+      <div>{{data | slice:1:2}}</div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="month size16">
+      <div>{{(data | slice:3:4) | uppercase}}</div>
+      <div>{{(data | slice:4:5) | uppercase}}</div>
+      <div>{{(data | slice:5:6) | uppercase}}</div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="year size14">
+      <div>{{data | slice:7:8}}</div>
+      <div>{{data | slice:8:9}}</div>
+      <div>{{data | slice:9:10}}</div>
+      <div>{{data | slice:10:11}}</div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="time size11 text-secondary">
+      <div>{{data | slice:12:13}}</div>
+      <div>{{data | slice:13:14}}</div>
+      <div>{{data | slice:14:15}}</div>
+      <div>{{data | slice:15:16}}</div>
+      <div>{{data | slice:16:17}}</div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</ng-template>
 <ng-template #titleInfo>
   <div class="title-info">
     <div class="embed-responsive embed-responsive-16by9 mb-3">
       <div class="card-img project-card-img" [ngStyle]="{'background-image': ('url(' + data.transProject$.project.logo + ')')}"></div>
     </div>
     <div class="card-title mb-0">
-      <div class="float-left datetime-vertical bold text-body">
-        <div class="day bolder size24">
-          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:0:1) : ''}}</div>
-          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:1:2) : ''}}</div>
+      <div class="float-left" *ngIf="data.transProject$.examDate.startDate">
+        <ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.transProject$.examDate.startDate}"></ng-container>
+      </div>
+      <div class="float-left" *ngIf="data.transProject$.examDate.endDate">
+        <div class="d-table">
+          <div class="d-table-cell align-middle"><span class="bolder size20">&nbsp;-&nbsp;</span></div>
+          <div class="d-table-cell"><ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.transProject$.examDate.endDate}"></ng-container></div>
         </div>
-        <div class="clearfix"></div>
-        <div class="month size16">
-          <div>{{data.transProject$.examDate ? ((data.transProject$.examDate | slice:3:4) | uppercase) : ''}}</div>
-          <div>{{data.transProject$.examDate ? ((data.transProject$.examDate | slice:4:5) | uppercase) : ''}}</div>
-          <div>{{data.transProject$.examDate ? ((data.transProject$.examDate | slice:5:6) | uppercase) : ''}}</div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="year size14">
-          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:7:8) : ''}}</div>
-          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:8:9) : ''}}</div>
-          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:9:10) : ''}}</div>
-          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:10:11) : ''}}</div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="time size11 text-secondary">
-          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:12:13) : ''}}</div>
-          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:13:14) : ''}}</div>
-          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:14:15) : ''}}</div>
-          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:15:16) : ''}}</div>
-          <div>{{data.transProject$.examDate ? (data.transProject$.examDate | slice:16:17) : ''}}</div>
-        </div>
-        <div class="clearfix"></div>
       </div>
       <div class="float-right">
         <div class="registration-status text-right project-registration-status" ngbTooltip="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.transProject$.registrationStatus)).name[appService.lang]}}" placement="left" title="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.transProject$.registrationStatus)).name[appService.lang]}}">
@@ -140,7 +151,7 @@
   </div>
   <div class="mt-2">
     <div class="d-inline project-dropdown" ngbDropdown placement="bottom-left">
-      <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle>
+      <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle ngbTooltip="{{'contact.label' | translate | titlecase}}" title="{{'contact.label' | translate | titlecase}}">
         <i class="fa fa-phone text-white size15"></i>
       </a>
       <div ngbDropdownMenu aria-labelledby="contact-info" class="contact-info">
@@ -151,11 +162,11 @@
       <span class="regular size13">{{'about' | translate | lowercase}}</span>
     </a>
   </div>
-  <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0 project-text-line-clamp" id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed">{{data.transProject$.project.about}}</p>
+  <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0 project-text-line-clamp" id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed" [innerHTML]="data.transProject$.project.about[appService.lang] | nl2br"></p>
 </ng-template>
 <ng-template #registerButtonInfo>
   <div class="registered-btn ml-auto project-registered-btn">
-    <a [routerLink]="['CBX/Registered', data.transProject$.ID]" routerLinkActive="active" class="btn"
+    <a [routerLink]="[(data.transProject$.project.category.initial + '/Registered'), data.transProject$.ID]" routerLinkActive="active" class="btn"
       [ngClass]="{
         'btn-success': (data.transProject$.registrationStatus === 'Y'),
         'btn-warning': (data.transProject$.registrationStatus === 'W'),

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๑/๐๖/๒๕๖๓>
-Modify date : <๒๔/๐๖/๒๕๖๓>
+Modify date : <๑๓/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -78,7 +78,7 @@ Description : <>
   position: relative;
   top: 1px;
 }
-.registered-detail-view .fee-info #deliaddress-form .form .form-group .col .i-saving {
+.registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group .col .i-saving {
   display: table-cell;
   height: 34px;
   text-align: center;
@@ -89,20 +89,80 @@ Description : <>
 }
 @media screen and (max-width: 428px) {
   @include form-responsive('.registered-detail-view .fee-info #deliaddress-form');
-  .registered-detail-view .fee-info #deliaddress-form .form .form-group:last-child .col-form-label {
+  .registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group:last-child .col-form-label {
     display: none !important;
   }
-  .registered-detail-view .fee-info #deliaddress-form .form .form-group:last-child .col .btn {
+  .registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group:last-child .col .btn {
     display: block;
     margin-top: 0.25rem;
     margin-left: 0 !important;
   }
-  .registered-detail-view .fee-info #deliaddress-form .form .form-group:last-child .col .btn:first-child,
-  .registered-detail-view .fee-info #deliaddress-form .form .form-group .col .i-saving {
+  .registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group:last-child .col .btn:first-child,
+  .registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group .col .i-saving {
     margin-top: 0.5rem;
   }
-  .registered-detail-view .fee-info #deliaddress-form .form .form-group .col .i-saving {
+  .registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group .col .i-saving {
     display: block;
     height: auto;
   }
+}
+.registered-detail-view .payment-info .form.flat-form .form-group label {
+  margin-bottom: 1px !important
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .registered-detail-view .payment-info .form.flat-form .form-group label {
+    margin-bottom: 2px !important
+  }
+}
+.registered-detail-view .payment-info .form .inputbox {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+.registered-detail-view .payment-info .form .form-control:focus {
+  border-color: rgba(0, 0, 0, 0.35) !important;
+}
+.registered-detail-view .payment-info .form .form-group .input-group.has-icon i {
+  top: 7px;
+  right: 0;
+  left: 0;
+}
+.registered-detail-view .payment-info .form.flat-form .form-group .form-text {
+  margin-top: 0.3rem !important;
+}
+@media screen and (min--moz-device-pixel-ratio: 0) {
+  .registered-detail-view .payment-info .form.flat-form .form-group .form-text {
+    margin-top: 0.35rem !important
+  }
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .registered-detail-view .payment-info .form.flat-form .form-group .form-text {
+    margin-top: 0.35rem !important
+  }
+}
+.registered-detail-view .payment-info .payment-btn,
+.registered-detail-view .payment-info .payment-btn .i-saving {
+  height: 42px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .registered-detail-view .payment-info .payment-btn {
+    height: 38px;
+  }
+}
+.registered-detail-view .payment-info .payment-btn .i-saving {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+.registered-detail-view .payment-info .payment-btn .btn {
+  display: table-cell;
+  width: inherit;
+  height: inherit;
+  vertical-align: middle;
+  border-width: 2px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0px;
 }

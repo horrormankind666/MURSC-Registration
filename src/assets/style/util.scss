@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๕/๐๖/๒๕๖๓>
+Modify date : <๑๓/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -105,6 +105,9 @@ $line-clamp-line-height: 1.7;
 .bg-black-10 {
   background: $color-black-10 !important;
 }
+.bg-transparent {
+  background: transparent !important;
+}
 .pr-01 {
   padding-right: 0.1rem !important;
 }
@@ -122,6 +125,15 @@ $line-clamp-line-height: 1.7;
 }
 .pl-25 {
   padding-left: 0.6rem !important;
+}
+.mb-01 {
+  margin-bottom: 0.1rem !important;
+}
+.mb-044 {
+  margin-bottom: 0.44rem !important;
+}
+.mb-055 {
+  margin-bottom: 0.55rem !important;
 }
 body {
   font-family: $font-family !important;
@@ -150,6 +162,10 @@ a:focus {
   text-decoration: none;
   outline: none;
 }
+a.link {
+  text-decoration: none !important;
+  cursor: pointer;
+}
 a:link.link,
 a:focus.link {
   color: #000000;
@@ -157,6 +173,7 @@ a:focus.link {
 }
 a:hover.link {
   color: #C51A1B;
+  text-decoration: underline !important;
 }
 a.disabled,
 a:disabled {
@@ -668,6 +685,14 @@ body.modal-open {
 .form .form-group .col {
   padding-right: 0;
 }
+.form .form-group .input-group.has-icon i {
+  position: absolute;
+  z-index: 3;
+  top: 11px;
+  right: 50px;
+  background: transparent !important;
+  width: 16px;
+}
 textarea {
   overflow-x: hidden;
   overflow-y: auto;
@@ -717,6 +742,20 @@ textarea {
   background: #DDDDDD;
   color: rgb(0, 0, 0, 0.5) !important;
   opacity: 1;
+}
+.form.flat-form .form-control,
+.form.flat-form .inputbox {
+  padding-right: 0;
+  padding-left: 0;
+  border-radius: 0;
+  border-top: 0 !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+  background-color: transparent;
+}
+.form.flat-form .inputbox {
+  height: 32px !important;
+  min-height: 32px !important;
 }
 .ng-select div,
 .ng-select input,
@@ -1178,18 +1217,13 @@ textarea {
 .w-91 {
   width: 91.666667% !important;
 }
-.mb-01 {
-  margin-bottom: 0.1rem !important;
-}
-.mb-044 {
-  margin-bottom: 0.44rem !important;
-}
 .alert {
   padding-top: 0.6rem;
   padding-right: 1rem;
   padding-bottom: 0.59rem;
   padding-left: 1rem;
   border-radius: 0.3rem !important;
+  line-height: 1.4;
 }
 .alert-danger {
   border-color: $color-danger !important;
@@ -1202,4 +1236,11 @@ textarea {
 }
 .text-decoration {
   text-decoration: underline
+}
+.cursor-pointer {
+  cursor: pointer
+}
+.qrcode-image {
+  width: 160px;
+  height:160px;
 }

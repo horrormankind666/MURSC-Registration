@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๒๔/๐๖/๒๕๖๓>
+Modify date : <๑๔/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -181,6 +181,9 @@ Description : <>
 }
 .project-fee-info #deliaddress-form .col-form-label {
   width: 150px;
+}
+.project-fee-info #deliaddress-form .form:not(.horizontal-form) .col-form-label {
+  width: 166px;
 }
 .project-fee-info #deliaddress-form textarea {
   min-height: 52px;

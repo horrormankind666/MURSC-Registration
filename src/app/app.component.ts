@@ -36,8 +36,8 @@ import {ModalService} from './modal/modal.service';
 })
 
 export class AppComponent implements OnInit {
-  @ViewChild('headerView', { static: false }) headerView: ElementRef;
-  @ViewChild('footerView', { static: false }) footerView: ElementRef;
+  @ViewChild('headerView', {static: false}) headerView: ElementRef;
+  @ViewChild('footerView', {static: false}) footerView: ElementRef;
 
   constructor(
     private elementRef: ElementRef,
@@ -95,8 +95,10 @@ export class AppComponent implements OnInit {
   }
 
   getSectionStyle(): {} {
+    this.appService.headerViewHeight = this.headerView.nativeElement.offsetHeight;
+
     return {
-      'padding-top': (this.headerView.nativeElement.offsetHeight + 'px'),
+      'padding-top': (this.appService.headerViewHeight + 'px'),
       'padding-bottom': (this.footerView.nativeElement.offsetHeight + 'px')
     }
   }

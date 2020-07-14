@@ -1,8 +1,8 @@
 {
   "systemName": "Mahidol University Registration Support Center ( MURSC )",
-  "CBX": {
+  "CBE": {
     "label": "Computer-Based Exams",
-    "initial": "CBX"
+    "initial": "CBE"
   },
   "MUFE": {
     "label": "Mahidol University Flexible Education",
@@ -31,6 +31,7 @@
     "success": "Successfully saved."
   },
   "cancel":"Cancel",
+  "reset": "Reset",
   "ok": "Ok",
   "close": "Close",
   "select": "Select",
@@ -56,7 +57,7 @@
       }
     },
     "error": {
-      "notFound": "Registered Detail Not Found"
+      "notFound": "No Registration Details Were Found For This Project"
     }
   },
   "items": "Items",
@@ -85,7 +86,16 @@
     "seatTotal": "Seat Total",
     "seatAvailable": "Seat Available"
   },
-  "payment": "Payment",
+  "payment": {
+    "label": "Payment",
+    "confirm": "Confirm Payment",
+    "goto": "Go To Payment",
+    "save": {
+      "error": {
+        "issueReceiptAs": "Please fill in the name of the recipient of the receipt."
+      }
+    }
+  },
   "unit": {
     "label": "Unit",
     "baht": "Bath",
@@ -157,6 +167,10 @@
   "invoice": {
     "label": "Invoice",
     "paymentStatus": "Payment Status",
-    "dateOfPayment": "Date of Payment"
+    "dateOfPayment": "Date of Payment",
+    "issueReceiptAs": "Issue a Receipt as"
+  },
+  "qrcode": {
+    "error": "Cannot show QR Code."
   }
 }

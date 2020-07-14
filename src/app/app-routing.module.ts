@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๔/๑๑/๒๕๖๒>
-Modify date : <๐๙/๐๖/๒๕๖๓>
+Modify date : <๑๐/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -17,8 +17,8 @@ import {ProjectCategory, TransProject, TransRegistered} from './app-routing-reso
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {MainComponent} from './main.component'
 import {SigninComponent} from './signin/signin.component';
-import {HomeComponent as CBXHomeComponent} from './CBX/home/home.component';
-import {RegisteredComponent as CBXRegisteredComponent} from './CBX/registered/registered.component';
+import {HomeComponent as CBEHomeComponent} from './CBE/home/home.component';
+import {RegisteredComponent as CBERegisteredComponent} from './CBE/registered/registered.component';
 import {HomeComponent as MUFEHomeComponent} from './MUFE/home/home.component';
 import {HomeComponent as TransactionRegisteredHomeComponent} from './TransactionRegistered/home/home.component';
 import {RegisteredDetailComponent as TransactionRegisteredDetailComponent} from './TransactionRegistered/registered-detail/registered-detail.component';
@@ -46,7 +46,7 @@ export const appRouting: Routes = [
     }
   },
   {
-    path: 'CBX',
+    path: 'CBE',
     children:[
       {
         path: '',
@@ -55,7 +55,7 @@ export const appRouting: Routes = [
       },
       {
         path: 'Home',
-        component: CBXHomeComponent,
+        component: CBEHomeComponent,
         canActivate: [AuthGuardService],
         data: {
           signin: false,
@@ -64,7 +64,7 @@ export const appRouting: Routes = [
       },
       {
         path: 'Registered',
-        component: CBXRegisteredComponent,
+        component: CBERegisteredComponent,
         canActivate: [AuthGuardService],
         data: {
           signin: true,
@@ -73,7 +73,7 @@ export const appRouting: Routes = [
       },
       {
         path: 'Registered/:transProjectID',
-        component: CBXRegisteredComponent,
+        component: CBERegisteredComponent,
         canActivate: [AuthGuardService],
         data: {
           signin: true,

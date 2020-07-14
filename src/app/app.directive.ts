@@ -2,14 +2,14 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๕/๐๕/๒๕๖๓>
-Modify date : <๒๙/๐๖/๒๕๖๓>
+Modify date : <๑๔/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 'use strict';
 
-import {Directive, HostListener, Host, ElementRef, Renderer} from '@angular/core';
+import {Directive, HostListener, ElementRef, Renderer, Pipe, PipeTransform} from '@angular/core';
 
 @Directive({
   selector: 'input[trimOnBlur], textarea[trimOnBlur]'
@@ -46,5 +46,15 @@ export class FocusRemoverDirective {
   @HostListener('focus')
   onFocus() {
     this.renderer.invokeElementMethod(this.el.nativeElement, 'blur', []);
+  }
+}
+
+@Pipe({name: 'nl2br'})
+export class Nl2BrPipe implements PipeTransform {
+  transform(value: string): string {
+    if (!value) return value;
+
+    let breakTag = '<br />';
+    return (value + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
   }
 }
