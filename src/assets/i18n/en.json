@@ -104,6 +104,7 @@
   "placeholder": {
     "selectItem": "Select item"
   },
+  "download": "Download",
   "keyword": "Keyword",
   "registrationStatus": "Registration Status",
   "user": {
@@ -168,9 +169,11 @@
     "label": "Invoice",
     "paymentStatus": "Payment Status",
     "dateOfPayment": "Date of Payment",
-    "issueReceiptAs": "Issue a Receipt as"
+    "issueReceiptAs": "Issue a Receipt as",
+    "paymentConfirmedDate": "Payment Confirmed Date"
   },
   "qrcode": {
-    "error": "Cannot show QR Code."
+    "error": "Cannot show QR Code.",
+    "amount": "Amount"
   }
 }

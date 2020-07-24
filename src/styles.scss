@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๑๔/๐๗/๒๕๖๓>
+Modify date : <๒๔/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -30,7 +30,6 @@ Description : <>
     max-width: 100% !important;
   }
 }
-
 .project-card-horizontal .project-body .col-sm-9 {
   padding-left: 31px;
 }
@@ -57,7 +56,7 @@ Description : <>
   position: relative;
 }
 .project-dropdown .btn-contact-info i {
-  top: 2px;
+  top: 3px;
 }
 .project-dropdown .dropdown-toggle::after {
   border: 0;
@@ -70,12 +69,19 @@ Description : <>
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   ::i-block-chrome,
   .project-dropdown .dropdown-menu.show.contact-info {
-    top: 26px !important;
-    left: 0 !important;
+    top: 29px !important;
+    left: 10px !important;
+  }
+  ::i-block-chrome,
+  .project-card-vertical .project-dropdown .dropdown-menu.show.contact-info {
+    left: -226px !important;
   }
 }
 .project-text-line-clamp::after {
   background-color: #FFFFFF;
+}
+.project-title-info .card-title .float-right {
+  width: 34px !important;
 }
 .project-register-info .form .form-group .col-form-label {
   width: 161px;
@@ -183,8 +189,55 @@ Description : <>
   width: 150px;
 }
 .project-fee-info #deliaddress-form .form:not(.horizontal-form) .col-form-label {
-  width: 166px;
+  width: 189px;
 }
 .project-fee-info #deliaddress-form textarea {
   min-height: 52px;
+}
+.card.qrcode-payment {
+  width: 280px;
+  border-radius: 0.75rem !important;
+  border-color: #FFFFFF;
+}
+.card.qrcode-payment .card-header {
+  background: #113566;
+  height: 48px;
+  padding: 0;
+  border-bottom: 0;
+}
+.card.qrcode-payment .card-header:first-child,
+.card.qrcode-payment .card-header img {
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+.card.qrcode-payment .card-header img,
+.card.qrcode-payment .card-footer .btn {
+  width: 100%;
+}
+.card.qrcode-payment .card-body {
+  background: #FFFFFF;
+  padding: 1rem !important;
+  padding-bottom: 0.5rem !important;
+}
+.card.qrcode-payment .card-body .form .form-group .col-form-label {
+  width: 80px;
+}
+.card.qrcode-payment .card-body .form .form-group .col-form-label::after,
+.card.qrcode-payment .card-body .form .form-group .col-form-label::after {
+  float: none !important;
+  content: '' !important;
+  margin-left: 0 !important;
+}
+.card.qrcode-payment .card-footer {
+  padding: 0;
+  border-top: 0
+}
+.card.qrcode-payment .card-footer:last-child,
+.card.qrcode-payment .card-footer .btn {
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+.card.qrcode-payment .card-footer .btn {
+  min-width: 0 !important;
+}
+.card.qrcode-payment .card-footer .btn i {
+  margin-right: 5px;
 }

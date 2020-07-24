@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๔/๑๑/๒๕๖๒>
-Modify date : <๑๐/๐๗/๒๕๖๓>
+Modify date : <๒๔/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,11 +12,10 @@ Description : <>
 import {Routes} from '@angular/router';
 
 import {AuthGuardService} from './auth-guard.service';
-import {ProjectCategory, TransProject, TransRegistered} from './app-routing-resolve.service'
+import {ProjectCategory, TransProject, TransRegistered, AuthenADFSPage} from './app-routing-resolve.service'
 
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
-import {MainComponent} from './main.component'
-import {SigninComponent} from './signin/signin.component';
+import {MainComponent} from './main.component';
 import {HomeComponent as CBEHomeComponent} from './CBE/home/home.component';
 import {RegisteredComponent as CBERegisteredComponent} from './CBE/registered/registered.component';
 import {HomeComponent as MUFEHomeComponent} from './MUFE/home/home.component';
@@ -24,6 +23,13 @@ import {HomeComponent as TransactionRegisteredHomeComponent} from './Transaction
 import {RegisteredDetailComponent as TransactionRegisteredDetailComponent} from './TransactionRegistered/registered-detail/registered-detail.component';
 
 export const appRouting: Routes = [
+  {
+    path: 'SignIn',
+    component: PageNotFoundComponent,
+    resolve: {
+      authenADFSPage: AuthenADFSPage
+    }
+  },
   {
     path: 'Main',
     component: MainComponent,
@@ -34,15 +40,6 @@ export const appRouting: Routes = [
     },
     resolve: {
       projectCategory$: ProjectCategory
-    }
-  },
-  {
-    path: 'SignIn',
-    component: SigninComponent,
-    canActivate: [AuthGuardService],
-    data: {
-      signin: false,
-      hasHearderSubtitle: false
     }
   },
   {
@@ -72,7 +69,7 @@ export const appRouting: Routes = [
         }
       },
       {
-        path: 'Registered/:transProjectID',
+        path: 'Registered/:cuid',
         component: CBERegisteredComponent,
         canActivate: [AuthGuardService],
         data: {
@@ -131,7 +128,7 @@ export const appRouting: Routes = [
         }
       },
       {
-        path: 'Detail/:transRegisteredID',
+        path: 'Detail/:cuid',
         component: TransactionRegisteredDetailComponent,
         canActivate: [AuthGuardService],
         data: {

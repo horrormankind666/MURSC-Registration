@@ -2,14 +2,15 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๓/๐๗/๒๕๖๓>
+Modify date : <๒๔/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 'use strict';
 
-import {Injectable, ElementRef} from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 import {formatDate} from '@angular/common';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Title} from '@angular/platform-browser';
@@ -26,6 +27,7 @@ import {ModalService} from './modal/modal.service'
 import {ModalErrorComponent} from './modal/modal.component'
 
 import * as $ from 'jquery';
+import { stringify } from 'querystring';
 
 declare function $clamp(element, options): any;
 
@@ -34,6 +36,7 @@ declare function $clamp(element, options): any;
 })
 export class AppService  {
   constructor(
+    private router: Router,
     private http: HttpClient,
     private titleService: Title,
     private tooltipConfig: NgbTooltipConfig,
@@ -62,16 +65,29 @@ export class AppService  {
     type: '',
     token: ''
   }
-  public dateTimeOnURL: string = formatDate(new Date(), 'dd/MM/yyyyHH:mm:ss', 'en');
   public rootPath: string;
   public hasHearderSubtitle: boolean = false;
-  public urlIsAuthenticated: string = ('https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/IsAuthenticated?ver=' + this.dateTimeOnURL);
-  public urlAuthenResource: string = /*'http://localhost:5001/API/AuthenResource/UserInfo'*/('https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/UserInfo?ver=' + this.dateTimeOnURL);
-  public urlAuthenServer: string = /*'http://localhost:50833'*/('https://mursc.mahidol.ac.th/AuthADFS?ver=' + this.dateTimeOnURL);
+  public urlIsAuthenticated: string = ('https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/IsAuthenticated?ver=' + this.getDateTimeOnUrl());
+  public urlAuthenResource: string = /*'http://localhost:5001/API/AuthenResource/UserInfo'*/('https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/UserInfo?ver=' + this.getDateTimeOnUrl);
+  public urlAuthenServer: string = /*'http://localhost:50833'*/('https://mursc.mahidol.ac.th/AuthADFS?ver=' + this.getDateTimeOnUrl());
   public urlAPI: string = /*'http://localhost:3000/API'*/'https://mursc.mahidol.ac.th/API';
+  public urlSignOut: string = ('https://mursc.mahidol.ac.th/AuthADFS/Authen/SignOut?ver=' + this.getDateTimeOnUrl());
 
   textOverflowClamp(e: string, line: number) {
     $clamp(document.querySelector(e), {clamp: (this.deviceService.browser === 'IE' ? (line + 1) : line)});
+  }
+
+  generateRandAlphaNumStr(len: number = 10) {
+    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+    let result: string = '';
+
+    for (let i = 0; i < len; i++) {
+      const rnum = Math.floor(Math.random() * chars.length);
+
+      result += chars.substring(rnum, rnum + 1);
+    }
+
+    return result;
   }
 
   setDefaultLang(lang?: string) {
@@ -83,6 +99,10 @@ export class AppService  {
     this.translateService.get('systemName').subscribe((result: string) => {
       this.titleService.setTitle(result);
     });
+  }
+
+  getDateTimeOnUrl(): string {
+    return formatDate(new Date(), 'dd/MM/yyyyHH:mm:ss', 'en');
   }
 
   getCurrentLanguage(): string {
@@ -118,6 +138,18 @@ export class AppService  {
     return (totalSearch !== undefined ? ((totalSearch !== total ? (total.toLocaleString() + ' / ' + totalSearch.toLocaleString()) : totalSearch.toLocaleString()) + ' ' + entries): '');
   }
 
+  getCUID(data: any = []): string {
+    let randAlphaNumStr: string = this.generateRandAlphaNumStr(20);
+
+    return (
+      btoa(
+        (btoa(randAlphaNumStr).split('').reverse().join('')) + '.' +
+        (randAlphaNumStr.split('').reverse().join('')) + '.' +
+        (btoa(data.join('.')).split('').reverse().join(''))
+      )
+    );
+  }
+
   getDataSource(routePrefix: string, action: string, query?: string): Promise<any> {
     routePrefix = (routePrefix === undefined ? '' : routePrefix);
     action = (action === undefined ? '' : action);
@@ -141,7 +173,7 @@ export class AppService  {
       }
     }
 
-    url += (route + '?ver=' + this.dateTimeOnURL + query);
+    url += (route + '?ver=' + this.getDateTimeOnUrl() + query);
 
     let promise = new Promise((resolve, reject) => {
       this.http.get(url, option).subscribe((result: {}) => {
@@ -157,7 +189,7 @@ export class AppService  {
   getDataSourceMethodPost(routePrefix: string, data: string): Promise<any> {
     routePrefix = (routePrefix === undefined ? '' : routePrefix);
 
-    let url = (this.urlAPI + '/' + routePrefix + '?ver=' + this.dateTimeOnURL);
+    let url = (this.urlAPI + '/' + routePrefix + '?ver=' + this.getDateTimeOnUrl());
     let option = {
       headers: new HttpHeaders().set('Authorization', ('Bearer ' + this.authenResource.token))
     };
@@ -214,7 +246,7 @@ export class AppService  {
       }
     }
 
-    url += (route + "?ver=" + this.dateTimeOnURL);
+    url += (route + "?ver=" + this.getDateTimeOnUrl());
 
     this.isLoading.show = backdrop;
     this.isLoading.saving = backdrop;
@@ -250,5 +282,39 @@ export class AppService  {
       element.scrollIntoView(true);
       window.scrollBy(0, -(this.headerViewHeight));
     }
+  }
+
+  downloadBase64Image(base64image: string, fileName: string, fileType: string) {
+    let blobData = this.convertImageBase64ToBlob(base64image, fileType);
+
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveOrOpenBlob(blobData, (fileName + '.' + fileType));
+    }
+    else {
+      let blob = new Blob([blobData], {type: ("image/" + fileType)});
+      let url = window.URL.createObjectURL(blob);
+      let link = document.createElement('a');
+
+      link.href = url;
+      link.download = (fileName + '.' + fileType);
+      link.click();
+    }
+  }
+
+  convertImageBase64ToBlob(base64image: string, imageType: string) {
+    let decodedData = window.atob(base64image);
+    let uInt8Array = new Uint8Array(decodedData.length);
+
+    for (let i = 0; i < decodedData.length; ++i) {
+      uInt8Array[i] = decodedData.charCodeAt(i);
+    }
+
+    return new Blob([uInt8Array], {type: ('image/' + imageType)});
+  }
+
+  gotoSignIn() {
+    this.router.navigateByUrl('SignIn', {
+      skipLocationChange: true
+    });
   }
 }

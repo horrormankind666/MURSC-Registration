@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๑๔/๐๗/๒๕๖๓>
+Modify date : <๒๑/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -156,13 +156,17 @@ export namespace Schema {
     };
     namePrintReceipt?: string,
     billerID?: string,
-    qrRef_1?: string,
-    qrRef_2?: string,
-    qrRef_3?: string,
+    merchantName?: string,
+    qrRef1?: string,
+    qrRef2?: string,
+    qrRef3?: string,
+    qrImage?: string,
+		qrNewRef1?: string,
     bankRequest?: string,
     bankTransID?: string,
     payment?: {
       amount?: number,
+      confirmDate?: string,
       by?: string,
       date?: string,
       status?: string
@@ -176,7 +180,12 @@ export namespace Schema {
 
   export interface TransProject {
     ID?: string,
+    CUID?: string,
     project?: Project,
+    description?: {
+      th?: string,
+      en?: string
+    },
     examDate?: {
       startDate?: string,
       endDate?: string
@@ -515,6 +524,7 @@ namespace Data {
           if (action === 'getlist') {
             transProject.push({
               ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
+              CUID: (dr1['transProjectID'] ? this.appService.getCUID([dr1['transProjectID']]) : ''),
               project: {
                 ID: (dr1['projectID'] ? dr1['projectID'] : ''),
                 category: {
@@ -535,6 +545,10 @@ namespace Data {
                   en: (dr1['aboutEN'] ? dr1['aboutEN'] : dr1['aboutTH'])
                 }
               },
+              description: {
+                th: (dr1['descriptionTH'] ? dr1['descriptionTH'] : dr1['descriptionEN']),
+                en: (dr1['descriptionEN'] ? dr1['descriptionEN'] : dr1['descriptionTH'])
+              },
               examDate: {
                 startDate: (dr1['examStartDates'] ? dr1['examStartDates'] : ''),
                 endDate: (dr1['examEndDates'] ? dr1['examEndDates'] : '')
@@ -547,6 +561,7 @@ namespace Data {
               seatAvailable: dr1['seatAvailable'],
               minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
               contactPerson: {
+                ID: (dr1['contactID'] ? dr1['contactID'] : ''),
                 fullName: {
                   th: (dr1['contactNameTH'] ? dr1['contactNameTH'] : dr1['contactNameEN']),
                   en: (dr1['contactNameEN'] ? dr1['contactNameEN'] : dr1['contactNameTH'])
@@ -605,6 +620,7 @@ namespace Data {
 
             transProject.push({
               ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
+              CUID: (dr1['transProjectID'] ? this.appService.getCUID([dr1['transProjectID']]) : ''),
               project: {
                 ID: (dr1['projectID'] ? dr1['projectID'] : ''),
                 category: {
@@ -625,6 +641,10 @@ namespace Data {
                   en: (dr1['aboutEN'] ? dr1['aboutEN'] : dr1['aboutTH'])
                 }
               },
+              description: {
+                th: (dr1['descriptionTH'] ? dr1['descriptionTH'] : dr1['descriptionEN']),
+                en: (dr1['descriptionEN'] ? dr1['descriptionEN'] : dr1['descriptionTH'])
+              },
               examDate: {
                 startDate: (dr1['examStartDates'] ? dr1['examStartDates'] : ''),
                 endDate: (dr1['examEndDates'] ? dr1['examEndDates'] : '')
@@ -638,6 +658,7 @@ namespace Data {
               seatAvailable: (dr1['seatAvailable'] ? (parseInt(dr1['seatAvailable']) > 0 ? (parseInt(dr1['maximumSeat']) - parseInt(dr1['seatAvailable'])) : 0) : 0),
               minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
               contactPerson: {
+                ID: (dr1['contactID'] ? dr1['contactID'] : ''),
                 fullName: {
                   th: (dr1['contactNameTH'] ? dr1['contactNameTH'] : dr1['contactNameEN']),
                   en: (dr1['contactNameEN'] ? dr1['contactNameEN'] : dr1['contactNameTH'])
@@ -667,10 +688,10 @@ namespace Data {
       })
     }
 
-    get(transProjectID: string): Promise<Schema.TransProject> {
+    get(cuid: string): Promise<Schema.TransProject> {
       let query = [
         '',
-        ('transProjectID=' + transProjectID)
+        ('cuid=' + cuid)
       ].join('&');
 
       return this.getDataSource('get', query).then((result: Schema.TransProject[]) => {
@@ -727,6 +748,10 @@ namespace Data {
                   th: (dr1['aboutTH'] ? dr1['aboutTH'] : dr1['aboutEN']),
                   en: (dr1['aboutEN'] ? dr1['aboutEN'] : dr1['aboutTH'])
                 }
+              },
+              description: {
+                th: (dr1['descriptionTH'] ? dr1['descriptionTH'] : dr1['descriptionEN']),
+                en: (dr1['descriptionEN'] ? dr1['descriptionEN'] : dr1['descriptionTH'])
               },
               examDate: {
                 startDate: (dr1['examStartDates'] ? dr1['examStartDates'] : ''),
@@ -867,13 +892,17 @@ namespace Data {
                 },
                 namePrintReceipt: (dr1['invoiceNamePrintReceipt'] ? dr1['invoiceNamePrintReceipt'] : ''),
                 billerID: (dr1['billerID'] ? dr1['billerID'] : ''),
-                qrRef_1: (dr1['qrRef_1'] ? dr1['qrRef_1'] : ''),
-                qrRef_2: (dr1['qrRef_2'] ? dr1['qrRef_2'] : ''),
-                qrRef_3: (dr1['qrRef_3'] ? dr1['qrRef_3'] : ''),
+                merchantName: (dr1['merchantName'] ? dr1['merchantName'] : ''),
+                qrRef1: (dr1['qrRef1'] ? dr1['qrRef1'] : ''),
+                qrRef2: (dr1['qrRef2'] ? dr1['qrRef2'] : ''),
+                qrRef3: (dr1['qrRef3'] ? dr1['qrRef3'] : ''),
+                qrImage: (dr1['qrImage'] ? dr1['qrImage'] : ''),
+                qrNewRef1: (dr1['qrNewRef1'] ? dr1['qrNewRef1'] : ''),
                 bankRequest: (dr1['bankRequest'] ? dr1['bankRequest'] : ''),
                 bankTransID: (dr1['bankTransID'] ? dr1['bankTransID'] : ''),
                 payment: {
                   amount: (dr1['paidAmount'] ? parseFloat(dr1['paidAmount']) : 0),
+                  confirmDate: (dr1['paymentConfirmDate'] ? dr1['paymentConfirmDate'] : ''),
                   by: (dr1['paidBy'] ? dr1['paidBy'] : ''),
                   date: (dr1['paidDates'] ? dr1['paidDates'] : ''),
                   status: (dr1['paidStatus'] ? dr1['paidStatus'] : 'N')
@@ -889,12 +918,10 @@ namespace Data {
       });
     }
 
-    get(transRegisteredID: string, personID?: string, transProjectID?: string): Promise<Schema.TransRegistered> {
+    get(cuid: string): Promise<Schema.TransRegistered> {
       let query = [
         '',
-        ('transRegisteredID=' + transRegisteredID),
-        ('personID=' + personID),
-        ('transProjectID=' + transProjectID)
+        ('cuid=' + cuid)
       ].join('&');
 
       return this.getDataSource('get', query).then((result: Schema.TransRegistered[]) => {
@@ -990,8 +1017,8 @@ namespace Data {
       private appService: AppService
     ) {}
 
-    private getDataSource(routePrefix: string, data: string): Promise<Schema.QRCode[]> {
-      return this.appService.getDataSourceMethodPost(routePrefix, data).then((result: []) => {
+    private getDataSource(action: string, query?: string): Promise<Schema.QRCode[]> {
+      return this.appService.getDataSource('QRCodePayment', action, query).then((result: []) => {
         let qrcode: Schema.QRCode[] = [];
 
         for (let dr of result) {
@@ -1010,8 +1037,13 @@ namespace Data {
       });
     }
 
-    get(routePrefix: string, data: string): Promise<Schema.QRCode> {
-      return this.getDataSource(routePrefix, data).then((result: Schema.QRCode[]) => {
+    get(cuid: string): Promise<Schema.QRCode> {
+      let query = [
+        '',
+        ('cuid=' + cuid)
+      ].join('&');
+
+      return this.getDataSource('get', query).then((result: Schema.QRCode[]) => {
         return result[0];
       });
     }

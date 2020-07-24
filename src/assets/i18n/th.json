@@ -104,6 +104,7 @@
   "placeholder": {
     "selectItem": "เลือกรายการ"
   },
+  "download": "ดาว์นโหลด",
   "keyword": "คำค้น",
   "registrationStatus": "สถานะการลงทะเบียน",
   "user": {
@@ -168,9 +169,11 @@
     "label": "ใบแจ้งการชำระเงิน",
     "paymentStatus": "สถานะการชำระเงิน",
     "dateOfPayment": "วันที่ชำระเงิน",
-    "issueReceiptAs": "ออกใบเสร็จในนาม"
+    "issueReceiptAs": "ออกใบเสร็จในนาม",
+    "paymentConfirmedDate": "วันที่ยืนยันการชำระเงิน"
   },
   "qrcode": {
-    "error": "ไม่สามารถแสดง QR Code ได้"
+    "error": "ไม่สามารถแสดง QR Code ได้",
+    "amount": "จำนวนเงิน"
   }
 }

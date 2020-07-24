@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๒๖/๐๖/๒๕๖๓>
+Modify date : <๒๒/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -53,8 +53,8 @@ interface UserInfo {
 })
 export class AuthService {
   constructor(
-    private router: Router,
     private http: HttpClient,
+    private router: Router,
     private cookieService: CookieService,
     private appService: AppService,
     private modalService: ModalService
@@ -191,7 +191,7 @@ export class AuthService {
         this.isAuthenticated = false;
         this.cookieService.delete(this.appService.cookieName);
 
-        this.router.navigate(['SignIn']);
+        location.href = this.appService.urlSignOut;
       }
     });
   }

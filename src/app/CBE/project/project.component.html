@@ -10,7 +10,7 @@
           ngbTooltip="{{'filter' | translate | titlecase}}"
           title="{{'filter' | translate | titlecase}}"
           (click)="projectService.operate.table.filter.showForm = !projectService.operate.table.filter.showForm">
-          <i class="fa fa-filter text-white size18"></i>
+          <i class="fas fa-filter text-white size16"></i>
         </button>
         <button type="button" class="btn btn-secondary"
           [ngClass]="{
@@ -20,7 +20,7 @@
           ngbTooltip="{{'reload' | translate | titlecase}}"
           title="{{'reload' | translate | titlecase}}"
           (click)="projectService.operate.table.service.reload()">
-          <i class="fa fa-refresh text-white size18" [ngClass]="{'fa-spin': (projectService.operate.table.service.searching$ | async)}"></i>
+          <i class="fas fa-sync-alt text-white size16" [ngClass]="{'fa-spin': (projectService.operate.table.service.searching$ | async)}"></i>
         </button>
       </div>
       <div class="d-table-cell text-right col-recordcount">
@@ -69,29 +69,33 @@
             </div>
           </div>
         </div>
-        <div class="card-footer bg-transparent border-top-0 pt-0 pr-3 pb-3 pl-3 project-footer">
-          <div class="card-text">
+        <div class="card-footer bg-transparent border-top-0 pt-0 pr-3 pb-07 pl-3 project-footer">
+          <div class="card-text mb-3">
             <div class="mb-3"><ng-container *ngTemplateOutlet="registerInfo; context: {data: project}"></ng-container></div>
             <div class="vertical">
               <p class="regular text-black-50 size16 line-clamp line-clamp-{{project.ID}} mt-2 mb-0" [innerHTML]="project.project.about[appService.lang] | nl2br"></p>
               {{appService.textOverflowClamp(('.vertical .line-clamp-' + project.ID), 2)}}
             </div>
           </div>
+          <ng-container *ngTemplateOutlet="menuButtonInfo; context: {data: project}"></ng-container>
         </div>
       </div>
       <div class="card card-horizontal border-0 rounded-0 project-card-horizontal">
         <div class="card-body pt-0 pr-3 pb-0 pl-3 project-body">
-          <div class="d-inline-block col-sm-3 pr-0 pb-3 pl-0">
+          <div class="d-inline-block col-sm-3 pr-0 pb-0 pl-0">
             <ng-container *ngTemplateOutlet="titleInfo; context: {data: project}"></ng-container>
           </div>
-          <div class="d-inline-block col-sm-9 pt-1 pr-0 pb-3 align-top">
-            <div class="card-text">
+          <div class="d-inline-block col-sm-9 pt-1 pr-0 pb-07 align-top">
+            <div class="card-text mb-3">
               <div class="mb-2"><ng-container *ngTemplateOutlet="projectInfo; context: {data: project}"></ng-container></div>
               <div class="mb-3"><ng-container *ngTemplateOutlet="registerInfo; context: {data: project}"></ng-container></div>
               <div class="horizontal">
                 <p class="regular text-black-50 size16 line-clamp line-clamp-{{project.ID}} mt-2 mb-0" [innerHTML]="project.project.about[appService.lang] | nl2br"></p>
                 {{appService.textOverflowClamp(('.horizontal .line-clamp-' + project.ID), 2)}}
               </div>
+            </div>
+            <div class="project-footer">
+              <ng-container *ngTemplateOutlet="menuButtonInfo; context: {data: project}"></ng-container>
             </div>
           </div>
         </div>
@@ -130,14 +134,11 @@
   </div>
 </ng-template>
 <ng-template #titleInfo let-data="data">
-  <div class="title-info">
-    <div class="embed-responsive embed-responsive-16by9 mb-3 project-dropdown" ngbDropdown>
-      <a href="javascript:void(0)" ngbDropdownToggle>
+  <div class="title-info project-title-info">
+    <div class="embed-responsive embed-responsive-16by9 mb-3 project-dropdown">
+      <a href="javascript:void(0)">
         <div class="card-img project-card-img" [ngStyle]="{'background-image': ('url(' + data.project.logo + ')')}"></div>
       </a>
-      <div ngbDropdownMenu aria-labelledby="menu-info" class="menu-info">
-        <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="menuInfo; context: {data: data}"></ng-container></div>
-      </div>
     </div>
     <div class="card-title mb-0">
       <div class="float-left" *ngIf="data.examDate.startDate">
@@ -151,7 +152,7 @@
       </div>
       <div class="float-right">
         <div class="registration-status text-right project-registration-status" ngbTooltip="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.registrationStatus)).name[appService.lang]}}" placement="left" title="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.registrationStatus)).name[appService.lang]}}">
-          <i class="fa fa-lock size36"
+          <i class="fas fa-lock size30"
             [ngClass]="{
               'text-success': (data.registrationStatus === 'Y'),
               'text-warning': (data.registrationStatus === 'W'),
@@ -163,7 +164,7 @@
         </div>
         <div class="text-right project-dropdown" ngbDropdown placement="bottom-right">
           <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle ngbTooltip="{{'contact.label' | translate | titlecase}}" placement="left" title="{{'contact.label' | translate | titlecase}}">
-            <i class="fa fa-phone text-white size15"></i>
+            <i class="fas fa-phone text-white size11"></i>
           </a>
           <div ngbDropdownMenu aria-labelledby="contact-info" class="contact-info">
             <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo; context: {data: data.contactPerson}"></ng-container></div>
@@ -182,6 +183,7 @@
         <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="menuInfo; context: {data: data}"></ng-container></div>
       </div>
     </div>
+    <div class="regular text-info size15 mt-1 mb-1" *ngIf="data.description[appService.lang]">{{data.description[appService.lang]}}</div>
   </div>
 </ng-template>
 <ng-template #registerInfo let-data="data">
@@ -189,25 +191,25 @@
     <div class="regular size15">
       <div class="d-table w-auto mb-2 calendar-date">
         <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )">
-          <div class="d-table-cell align-middle col-icon"><span class="text-success size18"><i class="fa fa-calendar"></i></span></div>
+          <div class="d-table-cell align-middle col-icon"><span class="text-success size18"><i class="fas fa-calendar-alt"></i></span></div>
           <div class="d-table-cell align-middle col-calendar"><span class="text-success">{{data.registrationDate.startDate ? (data.registrationDate.startDate | slice:0:16) : ''}}</span></div>
-          <div class="d-table-cell align-middle col-icon"><span class="text-success size18"><i class="fa fa-clock-o"></i></span></div>
+          <div class="d-table-cell align-middle col-icon"><span class="text-success size18"><i class="fas fa-clock"></i></span></div>
           <div class="d-table-cell align-middle col-clock"><span class="text-success">{{data.registrationDate.startDate ? (data.registrationDate.startDate | slice:16:22) : ''}}</span></div>
         </div>
         <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )">
-          <div class="d-table-cell align-middle col-icon"><span class="text-danger size18"><i class="fa fa-calendar"></i></span></div>
+          <div class="d-table-cell align-middle col-icon"><span class="text-danger size18"><i class="fas fa-calendar-alt"></i></span></div>
           <div class="d-table-cell align-middle col-calendar"><span class="text-danger">{{data.registrationDate.endDate ? (data.registrationDate.endDate | slice:0:16) : ''}}</span></div>
-          <div class="d-table-cell align-middle col-icon"><span class="text-danger size18"><i class="fa fa-clock-o"></i></span></div>
+          <div class="d-table-cell align-middle col-icon"><span class="text-danger size18"><i class="fas fa-clock"></i></span></div>
           <div class="d-table-cell align-middle col-clock"><span class="text-danger">{{data.registrationDate.endDate ? (data.registrationDate.endDate | slice:16:22) : ''}}</span></div>
         </div>
       </div>
       <div class="d-table w-auto">
         <div class="d-table-row line-height-0">
-          <div class="d-table-cell align-middle pb-2 col-icon"><span class="text-dark size16"><i class="fa fa-group"></i></span></div>
+          <div class="d-table-cell align-middle pb-2 col-icon"><span class="text-dark size14"><i class="fas fa-users"></i></span></div>
           <div class="d-table-cell align-middle pb-2"><span class="text-dark">{{'project.seat' | translate | titlecase}}<span class="bold">{{data.maximumSeat ? (' ' + (data.maximumSeat | number) + ' / ' + (data.seatAvailable | number) + ' ') : ''}}</span>{{data.maximumSeat ? ('unit.persons' | translate | titlecase) : ''}}</span></div>
         </div>
         <div class="d-table-row line-height-0">
-          <div class="d-table-cell align-middle col-icon"><span class="size18"><i class="fa fa-btc"></i></span></div>
+          <div class="d-table-cell align-middle col-icon"><span class="size18"><i class="fab fa-btc"></i></span></div>
           <div class="d-table-cell align-middle"><span class="text-dark">{{'project.registrationFee' | translate | titlecase}}<span class="bold">{{data.minimumFee ? (' ' + (data.minimumFee | number: '.2') + ' ') : ''}}</span>{{data.minimumFee ? ('unit.baht' | translate | titlecase) : ''}}</span></div>
         </div>
       </div>
@@ -218,16 +220,32 @@
   <div class="menu-info text-white size16 project-menu-info">
     <div class="form">
       <div class="form-group row mr-0 mb-0 ml-0">
-        <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fa fa-info-circle"></i></label>
+        <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fas fa-info-circle"></i></label>
         <div class="col text-left">
           <span class="form-text regular mt-0"><a class="link text-white" href="javascript:void(0)" (click)="getTransProject(data)">{{'project.detail' | translate | titlecase}}</a></span>
         </div>
       </div>
       <div class="form-group row mt-1 mr-0 mb-0 ml-0" *ngIf="data.registrationStatus === 'Y'">
-        <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fa fa-registered"></i></label>
+        <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fas fa-registered"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0"><a [routerLink]="['../Registered', data.ID]" routerLinkActive="active" class="link text-white">{{'registered.label' | translate | titlecase}}</a></span>
+          <span class="form-text regular mt-0"><a [routerLink]="['../Registered', data.CUID]" routerLinkActive="active" class="link text-white">{{'registered.label' | translate | titlecase}}</a></span>
         </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #menuButtonInfo let-data="data">
+  <div class="menu-button-info">
+    <div class="d-table">
+      <div class="d-table-cell"
+        [ngClass]="{
+          'w-50': (data.registrationStatus === 'Y'),
+          'w-100': (data.registrationStatus !== 'Y')
+        }">
+        <a class="btn w-100 rounded-0" href="javascript:void(0)" (click)="getTransProject(data)"><span class="regular text-dark size16">{{'detail' | translate | titlecase}}</span></a>
+      </div>
+      <div class="d-table-cell w-50 pl-1" *ngIf="data.registrationStatus === 'Y'">
+        <a [routerLink]="['../Registered', data.CUID]" routerLinkActive="active" class="btn w-100 rounded-0"><span class="regular text-dark size16">{{'registered.label' | translate | titlecase}}</span></a>
       </div>
     </div>
   </div>
@@ -236,19 +254,19 @@
   <div class="contact-info text-white size14 project-contact-info">
     <div class="form">
       <div class="form-group row mr-0 mb-1 ml-0">
-        <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fa fa-address-book-o"></i></label>
+        <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fas fa-address-book"></i></label>
         <div class="col text-left">
           <span class="form-text regular mt-0">{{data.fullName[appService.lang]}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-1 ml-0">
-        <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fa fa-envelope-o"></i></label>
+        <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fas fa-envelope"></i></label>
         <div class="col text-left">
           <span class="form-text regular mt-0">{{data.email}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-0 ml-0">
-        <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fa fa-phone"></i></label>
+        <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fas fa-phone"></i></label>
         <div class="col text-left">
           <span class="form-text regular mt-0">{{data.phoneNumber}}</span>
         </div>

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๐๙/๐๖/๒๕๖๓>
+Modify date : <๒๓/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -171,10 +171,6 @@ main header .navbar-header .d-table .d-table-cell.userinfo .signin-icon a {
     top: 2px;
   }
   ::i-block-chrome,
-  main header .navbar-header .d-table .d-table-cell.userinfo .home-icon a {
-    top: 1px;
-  }
-  ::i-block-chrome,
   main header .navbar-header .d-table .d-table-cell.userinfo .user-icon .dropdown-menu.show {
     transform: translate3d(-243px, 58px, 0);
     -webkit-transform: translate3d(-243px, 58px, 0);
@@ -184,11 +180,16 @@ main header .navbar-header .d-table .d-table-cell.userinfo .signin-icon a {
   main header .navbar-header .d-table .d-table-cell.userinfo .flags-icon a {
     top: 2px;
   }
+  main header .navbar-header .d-table .d-table-cell.userinfo .home-icon a {
+    top: 3px;
+  }
 }
 @media screen and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  main header .navbar-header .d-table .d-table-cell.userinfo .flags-icon a,
-  main header .navbar-header .d-table .d-table-cell.userinfo .home-icon a {
+  main header .navbar-header .d-table .d-table-cell.userinfo .flags-icon a {
     top: 2px;
+  }
+  main header .navbar-header .d-table .d-table-cell.userinfo .home-icon a {
+    top: 3px;
   }
 }
 @media screen and (max-width: $screen-max-width) {

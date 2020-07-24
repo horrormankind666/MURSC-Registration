@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๒๕/๐๖/๒๕๖๓>
+Modify date : <๒๔/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -23,11 +23,6 @@ Description : <>
 .project-view .project-card-horizontal {
   display: none;
 }
-.project-view .project-card-vertical .title-info .dropdown-menu.show.contact-info {
-  top: 26px !important;
-  left: -227px !important;
-  transform: translate(0, 0) !important;
-}
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   ::i-block-chrome,
   .project-view .project-card-vertical {
@@ -36,14 +31,6 @@ Description : <>
   ::i-block-chrome,
   .project-view .project-card-horizontal {
     display: block;
-  }
-  ::i-block-chrome,
-  .project-view .title-info .dropdown-menu.show.contact-info {
-    left: 9px !important;
-  }
-  ::i-block-chrome,
-  .project-view .project-card-vertical .title-info .dropdown-menu.show.contact-info {
-    left: -227px !important;
   }
 }
 @media screen and (max-width: 520px) {
@@ -72,5 +59,29 @@ Description : <>
   ::i-block-chrome,
   .project-view .project-info .dropdown-menu.show.menu-info {
     top: 24px !important;
+  }
+}
+.project-view .project-card-vertical .card-footer .card-text .vertical {
+  min-height: 54px !important;
+}
+.project-view .card-group.card-striped .card-col .card .project-footer .btn,
+.project-view .card-group.card-striped .card-col .card .project-footer .btn:focus,
+.project-view .card-group.card-striped .card-col .card .project-footer .btn.focus {
+  background-color: #DDDDDD;
+}
+.project-view .card-group.card-striped .card-col .card .project-footer .btn:hover {
+  background-color: #BBBBBB;
+}
+.project-view .card-group.card-striped .card-col:nth-of-type(even) .card .project-footer .btn,
+.project-view .card-group.card-striped .card-col:nth-of-type(even) .card .project-footer .btn:focus,
+.project-view .card-group.card-striped .card-col:nth-of-type(even) .card .project-footer .btn.focus {
+  background-color: #ABFFAB;
+}
+.project-view .card-group.card-striped .card-col:nth-of-type(even) .card .project-footer .btn:hover {
+  background-color: #69FF69;
+}
+@media screen and (min-width: 1360px) {
+  .project-view .project-card-horizontal .project-footer .d-table {
+    width: 400px !important;
   }
 }

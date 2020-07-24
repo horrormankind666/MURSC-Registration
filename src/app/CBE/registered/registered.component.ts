@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๐๑/๐๗/๒๕๖๓>
+Modify date : <๒๔/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -286,11 +286,7 @@ export class RegisteredComponent implements OnInit {
     }
     else {
       this.transRegistered.isLoading = true;
-      this.dataService.transRegistered.get(
-        '',
-        (this.authService.getUserInfo['ppid'] ? this.authService.getUserInfo['ppid'] : this.authService.getUserInfo['winaccountName']),
-        this.data.transProject$.ID
-      ).then((result: Schema.TransRegistered) => {
+      this.dataService.transRegistered.get(this.appService.getCUID(['', this.data.transProject$.ID])).then((result: Schema.TransRegistered) => {
         this.transRegistered.isLoading = false;
         this.data.transRegistered$ = result;
 
@@ -299,7 +295,7 @@ export class RegisteredComponent implements OnInit {
 
           this.modalService.close(modalRef).then((result: string) => {
             if (result === 'close')
-              this.router.navigate(['TransactionRegistered/Detail/' + this.data.transRegistered$.ID]);
+              this.router.navigate(['TransactionRegistered/Detail/' + this.appService.getCUID([this.data.transRegistered$.ID, this.data.transProject$.ID])]);
           });
         }
         else {
@@ -345,12 +341,10 @@ export class RegisteredComponent implements OnInit {
     isValid: true,
     getValue(): {} {
       let result: {} = {
-        personID: (this.that.authService.getUserInfo.ppid ? this.that.authService.getUserInfo.ppid : this.that.authService.getUserInfo.winaccountName),
         transProjectID: (this.that.data.transProject$.ID ? this.that.data.transProject$.ID : null),
         transLocationID: this.that.location.saveChange.getValue(),
         fee: this.that.feeType.saveChange.getValue(),
-        deliAddress: this.that.deliAddress.saveChange.getValue(),
-        createdBy: this.that.authService.getUserInfo.winaccountName
+        deliAddress: this.that.deliAddress.saveChange.getValue()
       };
 
       return result;
@@ -372,7 +366,7 @@ export class RegisteredComponent implements OnInit {
           this.that.appService.isLoading.show = false;
           this.that.appService.isLoading.checking = false;
 
-          this.that.router.navigate(['SignIn']);
+          this.that.appService.gotoSignIn();
         }
         else {
           this.that.location.saveChange.action();
@@ -409,15 +403,15 @@ export class RegisteredComponent implements OnInit {
                     this.that.modalService.close(modalRef).then((result: string) => {
                       if (result === 'close') {
                         if (saveResult.errorCode === 2)
-                          this.that.router.navigate(['CBX']);
+                          this.that.router.navigate([this.that.data.transProject$.project.category.initial]);
                         else {
                           if (saveResult.errorCode === 3)
-                            this.that.router.navigate(['TransactionRegistered/Detail/' + saveResult.transRegisteredID]);
+                            this.that.router.navigate(['TransactionRegistered/Detail/' + this.that.appService.getCUID([saveResult.transRegisteredID, this.that.data.transProject$.ID])]);
                           else {
                             this.that.appService.isLoading.show = true;
                             this.that.appService.isLoading.loading = true;
 
-                            this.that.dataService.transProject.get(this.that.data.transProject$.ID).then((result: Schema.TransProject) => {
+                            this.that.dataService.transProject.get(this.that.appService.getCUID([this.that.data.transProject$.ID])).then((result: Schema.TransProject) => {
                               let transProject: Schema.TransProject = result;
 
                               if (saveResult.errorCode === 4) {
@@ -455,7 +449,7 @@ export class RegisteredComponent implements OnInit {
 
                       this.that.modalService.close(modalRef).then((result: string) => {
                         if (result === 'close')
-                          this.that.router.navigate(['TransactionRegistered/Detail/' + saveResult.transRegisteredID]);
+                          this.that.router.navigate(['TransactionRegistered/Detail/' + this.that.appService.getCUID([saveResult.transRegisteredID, this.that.data.transProject$.ID])]);
                       });
                     }
                   }

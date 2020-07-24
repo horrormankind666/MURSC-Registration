@@ -27,7 +27,7 @@
                 <a href="javascript:void(0)" *ngIf="appService.lang === 'th'" (click)="appService.setDefaultLang('en')"><span class="regular flag-icon flag-icon-gb"></span></a>
               </div>
               <div class="d-table-cell home-icon">
-                <a routerLink="Main" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size24"><i class='fa fa-home'></i></span></a>
+                <a routerLink="Main" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size19"><i class='fas fa-home'></i></span></a>
               </div>
               <div class="d-table-cell text-center user-icon" ngbDropdown #profileDropdown="ngbDropdown" placement="bottom-right" *ngIf="authService.isAuthenticated">
                 <a href="javascript:void(0)" id="profile" ngbDropdownToggle [ngStyle]="{'background-color': userBackgrondColor}" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}">
@@ -60,7 +60,7 @@
                 </div>
               </div>
               <div class="d-table-cell text-center signin-icon" *ngIf="!authService.isAuthenticated">
-                <a routerLink="SignIn" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size15">{{'signin' | translate}}</span></a>
+                <a href="javascript:void(0)" (click)="appService.gotoSignIn()" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size15">{{'signin' | translate}}</span></a>
               </div>
             </div>
           </div>
@@ -68,11 +68,10 @@
       </div>
       <div class="navbar-header-title row mr-0 ml-0" *ngIf="appService.hasHearderSubtitle">
         <div class="col align-middle text-center text-truncate text-light">
-          <a routerLink="{{appService.rootPath}}" class="bold size17">
-            <i class='fa fa-hand-pointer-o mr-2 ml-1 size12 text-white-50'></i>
-            <span class="text-light" *ngIf="appService.rootPath === 'CBE'">{{'CBE.label' | translate}} ( {{'CBE.initial' | translate}} )</span>
-            <span class="text-light" *ngIf="appService.rootPath === 'MUFE'">{{'MUFE.label' | translate}} ( {{'MUFE.initial' | translate}} )</span>
-            <span class="text-light" *ngIf="appService.rootPath === 'TransactionRegistered'">{{'registered.info' | translate}}</span>
+          <a routerLink="{{appService.rootPath}}" class="bold size18">
+            <span class="text-light" *ngIf="appService.rootPath === 'CBE'">#{{'CBE.label' | translate}} ( {{'CBE.initial' | translate}} )</span>
+            <span class="text-light" *ngIf="appService.rootPath === 'MUFE'">#{{'MUFE.label' | translate}} ( {{'MUFE.initial' | translate}} )</span>
+            <span class="text-light" *ngIf="appService.rootPath === 'TransactionRegistered'">#{{'registered.info' | translate}}</span>
           </a>
         </div>
       </div>
@@ -86,8 +85,8 @@
   <footer #footerView>
     <div class="container text-center p-3">
       <span class="regular text-secondary size14">
-        <div *ngIf="appService.lang === 'th'"><span class="regular size16"><i class="fa fa-copyright" aria-hidden="true"></i></span> สงวนลิขสิทธิ์ พ.ศ.2562{{(today.getFullYear() + 543) > 2562 ? (' - ' + (today.getFullYear() + 543)) : ''}} มหาวิทยาลัยมหิดล, พัฒนาโดย กองเทคโนโลยีสารสนเทศ</div>
-        <div *ngIf="appService.lang === 'en'">Copyright <span class="regular size16"><i class="fa fa-copyright"></i></span> 2019{{today.getFullYear() > 2019 ? (' - ' + today.getFullYear()) : ''}} Mahidol University. All rights reserved.</div>
+        <div *ngIf="appService.lang === 'th'"><span class="regular size16"><i class="fas fa-copyright"></i></span> สงวนลิขสิทธิ์ พ.ศ.2562{{(today.getFullYear() + 543) > 2562 ? (' - ' + (today.getFullYear() + 543)) : ''}} มหาวิทยาลัยมหิดล, พัฒนาโดย กองเทคโนโลยีสารสนเทศ</div>
+        <div *ngIf="appService.lang === 'en'">Copyright <span class="regular size16"><i class="fas fa-copyright"></i></span> 2019{{today.getFullYear() > 2019 ? (' - ' + today.getFullYear()) : ''}} Mahidol University. All rights reserved.</div>
       </span>
     </div>
   </footer>

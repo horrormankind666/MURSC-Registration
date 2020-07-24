@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๔/๐๗/๒๕๖๓>
+Modify date : <๒๔/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -39,7 +39,6 @@ import {AppComponent} from './app.component';
 import {ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent} from './modal/modal.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {MainComponent} from './main.component';
-import {SigninComponent} from './signin/signin.component';
 import {HomeComponent as CBEHomeComponent} from './CBE/home/home.component';
 import {ProjectComponent as CBEProjectComponent} from './CBE/project/project.component';
 import {ProjectDetailComponent as CBEProjectDetailComponent} from './CBE/project-detail/project-detail.component';
@@ -60,7 +59,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalConfirmComponent,
     PageNotFoundComponent,
     MainComponent,
-    SigninComponent,
     CBEHomeComponent,
     CBEProjectComponent,
     CBEProjectDetailComponent,

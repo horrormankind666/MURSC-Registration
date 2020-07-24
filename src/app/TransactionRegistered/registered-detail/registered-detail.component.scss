@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๑/๐๖/๒๕๖๓>
-Modify date : <๑๓/๐๗/๒๕๖๓>
+Modify date : <๒๐/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -34,6 +34,9 @@ Description : <>
   .registered-detail-view .d-table.calendar-date {
     top: 3px;
   }
+}
+.registered-detail-view .register-info .form .form-group .col-form-label {
+  width: 205px;
 }
 .registered-detail-view .registered-info .d-block.col-locations {
   display: none !important;
@@ -84,7 +87,10 @@ Description : <>
   text-align: center;
   vertical-align: middle;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 748px) and (min-width: 720px) {
+  @include form-responsive('.registered-detail-view .register-info');
+}
+@media screen and (max-width: 526px) {
   @include form-responsive('.registered-detail-view .register-info');
 }
 @media screen and (max-width: 428px) {
