@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๔/๐๗/๒๕๖๓>
+Modify date : <๒๙/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -66,7 +66,7 @@ export class AppService  {
     token: ''
   }
   public rootPath: string;
-  public hasHearderSubtitle: boolean = false;
+  public headerSubtitle: {} = null;
   public urlIsAuthenticated: string = ('https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/IsAuthenticated?ver=' + this.getDateTimeOnUrl());
   public urlAuthenResource: string = /*'http://localhost:5001/API/AuthenResource/UserInfo'*/('https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/UserInfo?ver=' + this.getDateTimeOnUrl);
   public urlAuthenServer: string = /*'http://localhost:50833'*/('https://mursc.mahidol.ac.th/AuthADFS?ver=' + this.getDateTimeOnUrl());

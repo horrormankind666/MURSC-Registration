@@ -1,8 +1,8 @@
 /*
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
-Create date : <๓๐/๐๔/๒๕๖๓>
-Modify date : <๓๐/๐๔/๒๕๖๓>
+Create date : <๒๔/๐๑/๒๕๖๓>
+Modify date : <๒๔/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -10,6 +10,7 @@ Description : <>
 'use strict';
 
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   constructor(
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {

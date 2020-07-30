@@ -2,12 +2,12 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๑/๐๖/๒๕๖๓>
-Modify date : <๒๐/๐๗/๒๕๖๓>
+Modify date : <๒๙/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
 
-@import '../../../styles.scss';
+@import '../../../../styles.scss';
 
 .registered-detail-view .project-card-vertical {
   display: none;
@@ -59,13 +59,15 @@ Description : <>
     display: none !important;
   }
   .registered-detail-view .registered-info .d-table .col-feetype,
-  .registered-detail-view .registered-info .d-table .col-payment {
+  .registered-detail-view .registered-info .d-table .col-payment,
+  .registered-detail-view .registered-info .d-table .col-receipt {
     margin-top: 1rem !important;
   }
   .registered-detail-view .registered-info .d-table.table-registered,
   .registered-detail-view .registered-info .d-table .col-locations,
   .registered-detail-view .registered-info .d-table .col-feetype,
-  .registered-detail-view .registered-info .d-table .col-payment {
+  .registered-detail-view .registered-info .d-table .col-payment,
+  .registered-detail-view .registered-info .d-table .col-receipt {
     display: block !important;
     width: 100% !important;
   }

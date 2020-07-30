@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๘/๐๖/๒๕๖๓>
-Modify date : <๐๘/๐๖/๒๕๖๓>
+Modify date : <๒๙/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,10 +12,10 @@ Description : <>
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html'
+  selector: 'app-transaction-registered-home',
+  templateUrl: './transaction-registered-home.component.html'
 })
-export class HomeComponent implements OnInit {
+export class TransactionRegisteredHomeComponent implements OnInit {
   constructor(
   ) {}
 

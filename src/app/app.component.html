@@ -8,8 +8,8 @@
 <main>
   <header #headerView class="sticky">
     <div class="container">
-      <div class="navbar-header-background" [ngClass]="{'has-hearder-subtitle': appService.hasHearderSubtitle}"></div>
-      <div class="navbar-header pr-3 pl-3" [ngClass]="{'has-hearder-subtitle': appService.hasHearderSubtitle}">
+      <div class="navbar-header-background" [ngClass]="{'has-header-subtitle': appService.headerSubtitle}"></div>
+      <div class="navbar-header pr-3 pl-3" [ngClass]="{'has-header-subtitle': appService.headerSubtitle}">
         <div class="d-table">
           <div class="d-table-cell systeminfo">
             <div class="d-table">
@@ -66,12 +66,10 @@
           </div>
         </div>
       </div>
-      <div class="navbar-header-title row mr-0 ml-0" *ngIf="appService.hasHearderSubtitle">
+      <div class="navbar-header-title row mr-0 ml-0" *ngIf="appService.headerSubtitle !== null">
         <div class="col align-middle text-center text-truncate text-light">
           <a routerLink="{{appService.rootPath}}" class="bold size18">
-            <span class="text-light" *ngIf="appService.rootPath === 'CBE'">#{{'CBE.label' | translate}} ( {{'CBE.initial' | translate}} )</span>
-            <span class="text-light" *ngIf="appService.rootPath === 'MUFE'">#{{'MUFE.label' | translate}} ( {{'MUFE.initial' | translate}} )</span>
-            <span class="text-light" *ngIf="appService.rootPath === 'TransactionRegistered'">#{{'registered.info' | translate}}</span>
+            <span class="text-light">#{{appService.headerSubtitle[appService.lang]}}</span>
           </a>
         </div>
       </div>

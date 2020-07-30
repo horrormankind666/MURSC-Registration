@@ -167,7 +167,7 @@
 </ng-template>
 <ng-template #registerButtonInfo>
   <div class="registered-btn ml-auto project-registered-btn">
-    <a [routerLink]="[(data.transProject$.project.category.initial + '/Registered'), data.transProject$.CUID]" routerLinkActive="active" class="btn"
+    <a [routerLink]="['' (data.transProject$.project.category.initial + '/Registered'), data.transProject$.CUID]" routerLinkActive="active" class="btn"
       [ngClass]="{
         'btn-success': (data.transProject$.registrationStatus === 'Y'),
         'btn-warning': (data.transProject$.registrationStatus === 'W'),

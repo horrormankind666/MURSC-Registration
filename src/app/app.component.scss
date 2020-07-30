@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๓/๐๗/๒๕๖๓>
+Modify date : <๒๕/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -21,7 +21,7 @@ main header .navbar-header-background {
   background-size: cover;
   background-repeat: no-repeat;
 }
-main header .navbar-header-background:not(.has-hearder-subtitle) {
+main header .navbar-header-background:not(.has-header-subtitle) {
   width: 105px;
   height: $header-max-height;
 }
@@ -29,7 +29,7 @@ main header .navbar-header {
   height: $header-max-height;
   background-color: #1D4F91;
 }
-main header .navbar-header:not(.has-hearder-subtitle) {
+main header .navbar-header:not(.has-header-subtitle) {
   box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.5);
 }
 main header .navbar-header-title {

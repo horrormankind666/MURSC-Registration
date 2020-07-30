@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๐/๐๒/๒๕๖๓>
-Modify date : <๑๐/๐๗/๒๕๖๓>
+Modify date : <๒๙/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -10,12 +10,13 @@ Description : <>
 'use strict';
 
 import {Injectable, PipeTransform} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {DecimalPipe} from '@angular/common';
 
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 
-import {Schema, DataService} from '../../data.service';
+import {Schema, DataService} from '../data.service';
 
 interface TableState {
   page: number;
@@ -32,10 +33,11 @@ interface TableSearchResult {
 
 class Table {
   constructor(
+    private route: ActivatedRoute,
     private pipe: DecimalPipe,
     private dataService: DataService
   ) {
-    this.reload();
+    this.reload(this.route.snapshot.params['projectCategory']);
   }
 
   private _searching$ = new BehaviorSubject<boolean>(true);
@@ -95,8 +97,8 @@ class Table {
     )
   }
 
-  reload() {
-    this.dataService.transProject.getList('CBE').then((result: Schema.TransProject[]) => {
+  reload(projectCategory: string) {
+    this.dataService.transProject.getList(projectCategory).then((result: Schema.TransProject[]) => {
       this._search$.pipe(
         tap(() => this._searching$.next(true)),
         debounceTime(100),
@@ -116,12 +118,13 @@ class Table {
 
 class Operate {
   constructor(
+    private route: ActivatedRoute,
     private pipe: DecimalPipe,
     private dataService: DataService,
   ) {}
 
   table = {
-    service: new Table(this.pipe, this.dataService),
+    service: new Table(this.route, this.pipe, this.dataService),
     filter: {
       showForm: false,
       setValue() {
@@ -136,9 +139,10 @@ class Operate {
 })
 export class ProjectService {
   constructor(
+    private route: ActivatedRoute,
     private pipe: DecimalPipe,
     private dataService: DataService
   ) {}
 
-  public operate = new Operate(this.pipe, this.dataService);
+  public operate = new Operate(this.route, this.pipe, this.dataService);
 }

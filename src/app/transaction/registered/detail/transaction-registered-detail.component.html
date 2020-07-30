@@ -100,8 +100,8 @@
   <div class="project-info">
     <p class="bold size22 mb-0">{{data.transRegistered$.transProject.project.name[appService.lang]}}</p>
     <div class="regular text-dark size15 mb-1" *ngIf="data.transRegistered$.transProject.description[appService.lang]">{{data.transRegistered$.transProject.description[appService.lang]}}</div>
-    <a routerLink="../../../{{data.transRegistered$.transProject.project.category.initial}}" class="link tag mt-1 mb-2 regular text-primary size15">
-      #{{data.transRegistered$.transProject.project.category.initial + '.label' | translate}}
+    <a routerLink="../../../../Project/{{data.transRegistered$.transProject.project.category.initial}}" class="link tag mt-1 mb-2 regular text-primary size15">
+      #{{data.transRegistered$.transProject.project.category.name[appService.lang]}}
     </a>
   </div>
 </ng-template>
@@ -132,14 +132,22 @@
                 'text-danger': (data.transRegistered$.invoice.payment.status === 'N')
               }">
               {{(dataService.statuses.get(dataService.paymentStatus.data$, data.transRegistered$.invoice.payment.status)).name[appService.lang]}}
-              <a class="link text-primary" (click)="appService.scrollIntoView('paymentInfo')" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">#{{'payment.goto' | translate | lowercase}}</a>
+              <a class="link text-primary" (click)="appService.scrollIntoView('paymentInfo')" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">#{{'payment.confirm' | translate | lowercase}}</a>
+              <a class="link text-primary" (click)="appService.scrollIntoView('receiptInfo')" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">#{{'receipt.download' | translate | lowercase}}</a>
             </span>
           </div>
         </div>
         <div class="form-group row mb-01" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">
           <label for="col-dateofpayment" class="col-form-label">{{'invoice.dateOfPayment' | translate}}</label>
           <div class="col">
-            <span class="form-text regular">{{data.transRegistered$.invoice.payment.date}}</span>
+            <div class="d-table w-100 size-l calendar-date">
+              <div class="d-table-row">
+                <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
+                <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.invoice.payment.date ? (data.transRegistered$.invoice.payment.date | slice:0:16) : ''}}</span></div>
+                <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
+                <div class="d-table-cell align-middle col-clock"><span>{{data.transRegistered$.invoice.payment.date ? (data.transRegistered$.invoice.payment.date | slice:16:22) : ''}}</span></div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="form-group row mb-01" *ngIf="data.transRegistered$.invoice.payment.status === 'W'">
@@ -225,11 +233,17 @@
         <ng-container *ngTemplateOutlet="feeInfo"></ng-container>
       </div>
       <div class="d-table-cell table-cell-divider"></div>
-      <div id="paymentInfo" class="d-table-cell w-auto jumbotron rounded-xl bg-primary mb-0 p-3 col-payment">
+      <div id="paymentInfo"  class="d-table-cell w-auto jumbotron rounded-xl bg-primary mb-0 p-3 col-payment" *ngIf="data.transRegistered$.invoice.payment.status !== 'Y'">
         <div class="border-bottom border-info pb-2">
           <span class="bold text-white size20">{{'payment.label' | translate | titlecase}}</span>
         </div>
         <ng-container *ngTemplateOutlet="paymentInfo"></ng-container>
+      </div>
+      <div id="receiptInfo"  class="d-table-cell w-auto jumbotron rounded-xl bg-primary mb-0 p-3 col-receipt" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">
+        <div class="border-bottom border-info pb-2">
+          <span class="bold text-white size20">{{'receipt.label' | translate | titlecase}}</span>
+        </div>
+        <!--<ng-container *ngTemplateOutlet="paymentInfo"></ng-container>-->
       </div>
     </div>
   </div>

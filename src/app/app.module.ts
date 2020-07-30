@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๔/๐๗/๒๕๖๓>
+Modify date : <๒๙/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -37,15 +37,15 @@ import {appRouting} from './app-routing.module';
 
 import {AppComponent} from './app.component';
 import {ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent} from './modal/modal.component';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {PageEmptyComponent} from './page-empty.component'
+import {PageNotFoundComponent} from './page-not-found.component';
 import {MainComponent} from './main.component';
-import {HomeComponent as CBEHomeComponent} from './CBE/home/home.component';
-import {ProjectComponent as CBEProjectComponent} from './CBE/project/project.component';
-import {ProjectDetailComponent as CBEProjectDetailComponent} from './CBE/project-detail/project-detail.component';
-import {RegisteredComponent as CBERegisteredComponent} from './CBE/registered/registered.component';
-import {HomeComponent as MUEFHomeComponent} from  './MUFE/home/home.component';
-import {HomeComponent as TransactionRegisteredHomeComponent} from './TransactionRegistered/home/home.component';
-import {RegisteredDetailComponent as TransactionRegisteredDetailComponent} from './TransactionRegistered/registered-detail/registered-detail.component';
+import {HomeComponent} from './home/home.component';
+import {ProjectHomeComponent} from './project/home/project-home.component';
+import {ProjectDetailComponent} from './project/detail/project-detail.component';
+import {RegisteredComponent} from './registered/registered.component';
+import {TransactionRegisteredHomeComponent} from './transaction/registered/home/transaction-registered-home.component';
+import {TransactionRegisteredDetailComponent} from './transaction/registered/detail/transaction-registered-detail.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -57,13 +57,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalSuccessComponent,
     ModalErrorComponent,
     ModalConfirmComponent,
+    PageEmptyComponent,
     PageNotFoundComponent,
     MainComponent,
-    CBEHomeComponent,
-    CBEProjectComponent,
-    CBEProjectDetailComponent,
-    CBERegisteredComponent,
-    MUEFHomeComponent,
+    HomeComponent,
+    ProjectHomeComponent,
+    ProjectDetailComponent,
+    RegisteredComponent,
     TransactionRegisteredHomeComponent,
     TransactionRegisteredDetailComponent,
     TrimOnBlurDirective,
@@ -109,7 +109,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalSuccessComponent,
     ModalErrorComponent,
     ModalConfirmComponent,
-    CBEProjectDetailComponent
+    ProjectDetailComponent
   ]
 })
 

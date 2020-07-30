@@ -11,9 +11,9 @@ Description : <>
 
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 
-import {ModalService} from '../modal/modal.service';
+import {ModalService} from './modal/modal.service';
 
-import {ModalErrorComponent} from '../modal/modal.component';
+import {ModalErrorComponent} from './modal/modal.component';
 
 @Component({
   selector: '',

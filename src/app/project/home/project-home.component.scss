@@ -1,0 +1,87 @@
+/*
+=============================================
+Author      : <ยุทธภูมิ ตวันนา>
+Create date : <๒๑/๐๒/๒๕๖๓>
+Modify date : <๒๙/๐๗/๒๕๖๓>
+Description : <>
+=============================================
+*/
+
+@import '../../../styles.scss';
+
+.project-home-view .card-group {
+  margin-left: -0.25rem;
+  margin-bottom: -0.25rem;
+}
+@media screen and (max-width: 606px) {
+  .project-home-view .card-group .card-col.col-sm-6 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+.project-home-view .project-card-horizontal {
+  display: none;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .project-home-view .project-card-vertical {
+    display: none;
+  }
+  ::i-block-chrome,
+  .project-home-view .project-card-horizontal {
+    display: block;
+  }
+}
+@media screen and (max-width: 520px) {
+  ::i-block-chrome,
+  .project-home-view .project-card-vertical {
+    display: block;
+  }
+  ::i-block-chrome,
+  .project-home-view .project-card-horizontal {
+    display: none;
+  }
+}
+.project-home-view .dropdown-menu.menu-info {
+  width: 171px;
+  min-width: 171px;
+}
+.project-home-view .title-info .dropdown-menu.show.menu-info {
+  transform: translate(0px, -2px) !important;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .project-home-view .title-info .dropdown-menu.show.menu-info {
+    top: -2px !important;
+    left: 1px !important;
+  }
+  ::i-block-chrome,
+  .project-home-view .project-info .dropdown-menu.show.menu-info {
+    top: 24px !important;
+  }
+}
+.project-home-view .project-card-vertical .card-footer .card-text .vertical {
+  min-height: 54px !important;
+}
+.project-home-view .card-group.card-striped .card-col .card .project-footer .btn,
+.project-home-view .card-group.card-striped .card-col .card .project-footer .btn:focus,
+.project-home-view .card-group.card-striped .card-col .card .project-footer .btn.focus {
+  background-color: #DDDDDD;
+}
+.project-home-view .card-group.card-striped .card-col .card .project-footer .btn:hover {
+  background-color: #BBBBBB;
+}
+.project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .project-footer .btn,
+.project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .project-footer .btn:focus,
+.project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .project-footer .btn.focus {
+  background-color: #ABFFAB;
+}
+.project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .project-footer .btn:hover {
+  background-color: #69FF69;
+}
+@media screen and (min-width: 1360px) {
+  .project-home-view .project-card-horizontal .project-footer .d-table {
+    width: 400px !important;
+  }
+}

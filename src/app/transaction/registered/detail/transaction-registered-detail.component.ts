@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๙/๐๖/๒๕๖๓>
-Modify date : <๒๔/๐๗/๒๕๖๓>
+Modify date : <๒๙/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,19 +12,19 @@ Description : <>
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
-import {AppService} from '../../app.service';
-import {AuthService} from '../../auth.service';
-import {Schema, DataService} from '../../data.service';
-import {ModalService} from '../../modal/modal.service';
+import {AppService} from '../../../app.service';
+import {AuthService} from '../../../auth.service';
+import {Schema, DataService} from '../../../data.service';
+import {ModalService} from '../../../modal/modal.service';
 
-import {ModalErrorComponent} from '../../modal/modal.component';
+import {ModalErrorComponent, ModalConfirmComponent} from '../../../modal/modal.component';
 
 @Component({
-  selector: 'app-registered-detail',
-  templateUrl: './registered-detail.component.html',
-  styleUrls: ['./registered-detail.component.scss']
+  selector: 'app-transaction-registered-detail',
+  templateUrl: './transaction-registered-detail.component.html',
+  styleUrls: ['./transaction-registered-detail.component.scss']
 })
-export class RegisteredDetailComponent implements OnInit {
+export class TransactionRegisteredDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -298,10 +298,10 @@ export class RegisteredDetailComponent implements OnInit {
             this.isValid = this.validate();
 
             if (this.isValid) {
-              //let modalRef = this.that.modalService.getModalConfirm(false, ModalConfirmComponent, 'save.confirm');
+              let modalRef = this.that.modalService.getModalConfirm(false, ModalConfirmComponent, 'payment.save.confirm');
 
-              //this.that.modalService.close(modalRef).then((result: string) => {
-                //if (result === 'ok') {
+              this.that.modalService.close(modalRef).then((result: string) => {
+                if (result === 'ok') {
                   let value: {} = this.getValue();
 
                   this.that.appService.save(('QRCodePayment/' + this.that.data.transRegistered$.transProject.project.category.initial), 'PUT', JSON.stringify(value), false).then((result: any) => {
@@ -320,7 +320,7 @@ export class RegisteredDetailComponent implements OnInit {
                       this.that.modalService.close(modalRef).then((result: string) => {
                         if (result === 'close') {
                             if (this.errorCode === 2)
-                              this.that.router.navigate(['TransactionRegistered']);
+                              this.that.router.navigate(['Transaction/Registered']);
                         }
                       });
                     }
@@ -337,6 +337,10 @@ export class RegisteredDetailComponent implements OnInit {
                       }
                     }
                   });
+                }
+                else
+                  this.isSaving = false;
+              });
             }
             else
               this.isSaving = false;

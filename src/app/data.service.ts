@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๒๑/๐๗/๒๕๖๓>
+Modify date : <๓๐/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -507,6 +507,17 @@ namespace Data {
         return result;
       })
     }
+
+    get(projectCategory: string): Promise<Schema.ProjectCategory> {
+      let query = [
+        '',
+        ('projectCategory=' + projectCategory)
+      ].join('&');
+
+      return this.getDataSource('get', query).then((result: Schema.ProjectCategory[]) => {
+        return result[0];
+      });
+    }
   }
 
   export class TransProject {
@@ -688,9 +699,10 @@ namespace Data {
       })
     }
 
-    get(cuid: string): Promise<Schema.TransProject> {
+    get(projectCategory: string, cuid: string): Promise<Schema.TransProject> {
       let query = [
         '',
+        ('projectCategory=' + projectCategory),
         ('cuid=' + cuid)
       ].join('&');
 

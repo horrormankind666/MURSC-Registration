@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๒๔/๐๗/๒๕๖๓>
+Modify date : <๒๙/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -14,12 +14,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {DeviceDetectorService} from 'ngx-device-detector';
 
-import {AppService} from '../../app.service';
-import {AuthService} from '../../auth.service';
-import {Schema, DataService} from '../../data.service';
-import {ModalService} from '../../modal/modal.service';
+import {AppService} from '../app.service';
+import {AuthService} from '../auth.service';
+import {Schema, DataService} from '../data.service';
+import {ModalService} from '../modal/modal.service';
 
-import {ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent} from '../../modal/modal.component';
+import {ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent} from '../modal/modal.component';
 
 @Component({
   selector: 'app-registered',
@@ -281,7 +281,7 @@ export class RegisteredComponent implements OnInit {
 
       this.modalService.close(modalRef).then((result: string) => {
         if (result === 'close')
-          this.router.navigate(['CBX']);
+          this.router.navigate(['Project/' + this.route.snapshot.params['projectCategory']]);
       });
     }
     else {
@@ -295,7 +295,7 @@ export class RegisteredComponent implements OnInit {
 
           this.modalService.close(modalRef).then((result: string) => {
             if (result === 'close')
-              this.router.navigate(['TransactionRegistered/Detail/' + this.appService.getCUID([this.data.transRegistered$.ID, this.data.transProject$.ID])]);
+              this.router.navigate(['Transaction/Registered/Detail/' + this.appService.getCUID([this.data.transRegistered$.ID, this.data.transProject$.ID])]);
           });
         }
         else {
@@ -403,10 +403,10 @@ export class RegisteredComponent implements OnInit {
                     this.that.modalService.close(modalRef).then((result: string) => {
                       if (result === 'close') {
                         if (saveResult.errorCode === 2)
-                          this.that.router.navigate([this.that.data.transProject$.project.category.initial]);
+                          this.that.router.navigate(['Project/' + this.that.data.transProject$.project.category.initial]);
                         else {
                           if (saveResult.errorCode === 3)
-                            this.that.router.navigate(['TransactionRegistered/Detail/' + this.that.appService.getCUID([saveResult.transRegisteredID, this.that.data.transProject$.ID])]);
+                            this.that.router.navigate(['Transaction/Registered/Detail/' + this.that.appService.getCUID([saveResult.transRegisteredID, this.that.data.transProject$.ID])]);
                           else {
                             this.that.appService.isLoading.show = true;
                             this.that.appService.isLoading.loading = true;
@@ -449,7 +449,7 @@ export class RegisteredComponent implements OnInit {
 
                       this.that.modalService.close(modalRef).then((result: string) => {
                         if (result === 'close')
-                          this.that.router.navigate(['TransactionRegistered/Detail/' + this.that.appService.getCUID([saveResult.transRegisteredID, this.that.data.transProject$.ID])]);
+                          this.that.router.navigate(['Transaction/Registered/Detail/' + this.that.appService.getCUID([saveResult.transRegisteredID, this.that.data.transProject$.ID])]);
                       });
                     }
                   }

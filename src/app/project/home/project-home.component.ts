@@ -2,14 +2,14 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๑๗/๐๖/๒๕๖๓>
+Modify date : <๓๐/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 'use strict';
 
-import {Component, OnInit, ContentChild, TemplateRef} from '@angular/core';
+import {Component, OnInit, ContentChild} from '@angular/core';
 import {DecimalPipe} from '@angular/common';
 
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
@@ -19,23 +19,22 @@ import {DeviceDetectorService} from 'ngx-device-detector';
 import {AppService} from '../../app.service';
 import {ModalService} from '../../modal/modal.service';
 import {Schema, DataService} from '../../data.service';
-import {ProjectService} from './project.service';
+import {ProjectService} from '../project.service';
 
-import {ProjectDetailComponent} from '../project-detail/project-detail.component'
+import {ProjectDetailComponent} from '../detail/project-detail.component'
 
 @Component({
-  selector: 'app-project',
-  templateUrl: './project.component.html',
-  styleUrls: ['./project.component.scss'],
+  selector: 'app-project-home',
+  templateUrl: './project-home.component.html',
+  styleUrls: ['./project-home.component.scss'],
   providers: [
     ProjectService,
     DecimalPipe
   ]
 })
 
-export class ProjectComponent implements OnInit {
-  @ContentChild('ProjectView', {static: false}) ProjectView;
-  @ContentChild('test', {static: false}) public test: TemplateRef<any>;
+export class ProjectHomeComponent implements OnInit {
+  @ContentChild('ProjectHomeView', {static: false}) ProjectHomeView;
 
   constructor(
     private modal: NgbModal,
@@ -55,7 +54,7 @@ export class ProjectComponent implements OnInit {
       this.appService.isLoading.show = true;
       this.appService.isLoading.modal = true;
 
-      this.dataService.transProject.get(this.appService.getCUID([data.ID])).then((result: Schema.TransProject) => {
+      this.dataService.transProject.get(data.project.category.initial, this.appService.getCUID([data.ID])).then((result: Schema.TransProject) => {
         this.appService.isLoading.show = false;
         this.appService.isLoading.modal = false;
 
