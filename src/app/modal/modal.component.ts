@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๒๕/๐๖/๒๕๖๓>
+Modify date : <๓๑/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -71,6 +71,9 @@ export class ModalErrorComponent implements OnInit {
     <div class="font">
       <div class="modal-body">
         <span class="regular text-white size16">{{message | translate}}</span>
+        <div class="mt-2" *ngIf="description">
+          <span class="regular text-white-50 size14">{{description | translate}}</span>
+        </div>
       </div>
       <div class="modal-footer">
         <input class="d-none" type="text" />
@@ -83,6 +86,7 @@ export class ModalErrorComponent implements OnInit {
 })
 export class ModalConfirmComponent implements OnInit {
   @Input() message;
+  @Input() description;
 
   constructor(
     private activeModal: NgbActiveModal

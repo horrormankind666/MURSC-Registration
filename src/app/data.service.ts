@@ -1010,8 +1010,8 @@ namespace Data {
       {
         ID: 'W',
         name: {
-          th: 'กำลังตรวจสอบการชำระเงิน',
-          en: 'Checking Payment'
+          th: 'ตรวจสอบการชำระเงิน',
+          en: 'Check Payment'
         }
       },
       {

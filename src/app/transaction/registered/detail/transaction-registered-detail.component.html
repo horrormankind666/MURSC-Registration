@@ -100,7 +100,7 @@
   <div class="project-info">
     <p class="bold size22 mb-0">{{data.transRegistered$.transProject.project.name[appService.lang]}}</p>
     <div class="regular text-dark size15 mb-1" *ngIf="data.transRegistered$.transProject.description[appService.lang]">{{data.transRegistered$.transProject.description[appService.lang]}}</div>
-    <a routerLink="../../../../Project/{{data.transRegistered$.transProject.project.category.initial}}" class="link tag mt-1 mb-2 regular text-primary size15">
+    <a routerLink="../../../../Project/{{data.transRegistered$.transProject.project.category.initial}}" class="link regular size15 mt-1 mb-2">
       #{{data.transRegistered$.transProject.project.category.name[appService.lang]}}
     </a>
   </div>
@@ -132,8 +132,11 @@
                 'text-danger': (data.transRegistered$.invoice.payment.status === 'N')
               }">
               {{(dataService.statuses.get(dataService.paymentStatus.data$, data.transRegistered$.invoice.payment.status)).name[appService.lang]}}
-              <a class="link text-primary" (click)="appService.scrollIntoView('paymentInfo')" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">#{{'payment.confirm' | translate | lowercase}}</a>
-              <a class="link text-primary" (click)="appService.scrollIntoView('receiptInfo')" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">#{{'receipt.download' | translate | lowercase}}</a>
+              <span class="text-primary size15">
+                <a href="javascript:void(0)" class="link" (click)="appService.scrollIntoView('paymentInfo')" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">#{{'payment.confirm' | translate | lowercase}}</a>
+                <a href="javascript:void(0)" class="link" (click)="getRecheckPayment()" *ngIf="data.transRegistered$.invoice.payment.status === 'W'">#{{'recheck' | translate | lowercase}}</a>
+                <a href="javascript:void(0)" class="link" (click)="appService.scrollIntoView('receiptInfo')" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">#{{'receipt.download' | translate | lowercase}}</a>
+              </span>
             </span>
           </div>
         </div>

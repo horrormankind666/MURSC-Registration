@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๑/๐๖/๒๕๖๓>
-Modify date : <๒๙/๐๗/๒๕๖๓>
+Modify date : <๓๐/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,7 +12,7 @@ Description : <>
 .registered-detail-view .project-card-vertical {
   display: none;
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 530px) {
   .registered-detail-view .project-card-vertical {
     display: block;
   }
@@ -89,10 +89,10 @@ Description : <>
   text-align: center;
   vertical-align: middle;
 }
-@media screen and (max-width: 748px) and (min-width: 720px) {
+@media screen and (max-width: 748px) {
   @include form-responsive('.registered-detail-view .register-info');
 }
-@media screen and (max-width: 526px) {
+@media screen and (max-width: 530px) {
   @include form-responsive('.registered-detail-view .register-info');
 }
 @media screen and (max-width: 428px) {

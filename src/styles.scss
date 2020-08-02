@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๒๔/๐๗/๒๕๖๓>
+Modify date : <๓๑/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -65,6 +65,11 @@ Description : <>
 .project-dropdown .dropdown-menu.contact-info {
   width: 260px;
   min-width: 260px;
+}
+.project-card-vertical .project-dropdown .dropdown-menu.show.contact-info {
+  top: 29px !important;
+  left: -226px !important;
+  transform: translate(0, 0) !important;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   ::i-block-chrome,

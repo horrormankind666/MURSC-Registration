@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๔/๐๗/๒๕๖๓>
+Modify date : <๐๒/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -175,17 +175,22 @@ a:focus {
   outline: none;
 }
 a.link {
-  text-decoration: none !important;
+  color: #007BFF;
+  text-decoration: none;
   cursor: pointer;
 }
+a:active.link,
 a:link.link,
 a:focus.link {
-  color: #000000;
   text-decoration: none;
 }
 a:hover.link {
-  color: #C51A1B;
-  text-decoration: underline !important;
+  text-decoration: underline;
+}
+@media (hover: none) and (pointer: coarse) {
+  a:hover.link {
+    text-decoration: none;
+  }
 }
 a.disabled,
 a:disabled {

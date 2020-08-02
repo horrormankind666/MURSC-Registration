@@ -45,7 +45,7 @@ export class HeaderSubtitleProjectCategoryResolve implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): any {
     return this.dataService.projectCategory.get(route.params['projectCategory']).then((result: Schema.ProjectCategory) => {
-      this.appService.headerSubtitle = (result ? result.name : {});
+      this.appService.headerSubtitle = (result ? result.name : null);
 
       return false;
     });

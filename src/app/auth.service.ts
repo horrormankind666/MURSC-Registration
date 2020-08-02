@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๒๒/๐๗/๒๕๖๓>
+Modify date : <๐๒/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -24,8 +24,8 @@ interface UserInfo {
   type?: string,
   ppid?: string,
   email?: string,
-  familyName?: string,
   givenName?: string,
+  familyName?: string,
   uniqueName?: string,
   winaccountName?: string,
   personalID?: string,
@@ -45,7 +45,14 @@ interface UserInfo {
   fullName?: {
     th?: string,
     en?: string
-  }
+  },
+  address?: string,
+  subdistrict?: string,
+  district?: string,
+  province?: string,
+  country?: string,
+  zipCode?: string,
+  phoneNumber?: string
 }
 
 @Injectable({
@@ -72,8 +79,8 @@ export class AuthService {
       let type: string            = (personal['type'] ? personal['type'] : '');
       let ppid: string            = (payload['ppid'] ? payload['ppid'] : '');
       let email: string           = (payload['email'] ? payload['email'] : '');
-      let familyName: string      = (payload['family_name'] ? payload['family_name'] : '');
       let givenName: string       = (payload['given_name'] ? payload['given_name'] : '');
+      let familyName: string      = (payload['family_name'] ? payload['family_name'] : '');
       let uniqueName: string      = (payload['unique_name'] ? payload['unique_name'] : '');
       let winaccountName: string  = (payload['winaccountname'] ? payload['winaccountname'] : '');
       let personalID: string      = (personal['personalID'] ? personal['personalID'] : '');
@@ -84,13 +91,20 @@ export class AuthService {
       let firstNameEN: string     = (personal['firstNameEN'] ? personal['firstNameEN'] : '');
       let middleNameEN: string    = (personal['middleNameEN'] ? personal['middleNameEN'] : '');
       let lastNameEN: string      = (personal['lastNameEN'] ? personal['lastNameEN'] : '');
+      let address: string         = (personal['address'] ? personal['address'] : '');
+      let subdistrict: string     = (personal['subdistrict'] ? personal['subdistrict'] : '');
+      let district: string        = (personal['district'] ? personal['district'] : '');
+      let province: string        = (personal['province'] ? personal['province'] : '');
+      let country: string         = (personal['country'] ? personal['country'] : '');
+      let zipCode: string         = (personal['zipCode'] ? personal['zipCode'] : '');
+      let phoneNumber: string     = (personal['phoneNumber'] ? personal['phoneNumber'] : '');
 
       userInfo = {
         type: type,
         ppid: ppid,
         email: email,
-        familyName: familyName,
         givenName: givenName,
+        familyName: familyName,
         uniqueName: uniqueName,
         winaccountName: winaccountName,
         personalID: personalID,
@@ -107,6 +121,13 @@ export class AuthService {
           th: (lastNameTH ? lastNameTH : lastNameEN),
           en: (lastNameEN ? lastNameEN : lastNameTH)
         },
+        address: address,
+        subdistrict: subdistrict,
+        district: district,
+        province: province,
+        country: country,
+        zipCode: zipCode,
+        phoneNumber: phoneNumber
       };
 
       userInfo.fullName = {

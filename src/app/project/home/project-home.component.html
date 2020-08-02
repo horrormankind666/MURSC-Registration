@@ -178,7 +178,7 @@
 <ng-template #projectInfo let-data="data">
   <div class="project-info">
     <div class="project-dropdown" ngbDropdown placement="top-left">
-      <a class="text-wrap bold size19" id="menu-info" href="javascript:void(0)" ngbDropdownToggle>{{data.project.name[appService.lang]}}</a>
+      <a class="link text-wrap bold size19" id="menu-info" href="javascript:void(0)" ngbDropdownToggle>{{data.project.name[appService.lang]}}</a>
       <div ngbDropdownMenu aria-labelledby="menu-info" class="menu-info">
         <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="menuInfo; context: {data: data}"></ng-container></div>
       </div>

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๙/๐๖/๒๕๖๓>
-Modify date : <๒๙/๐๗/๒๕๖๓>
+Modify date : <๓๑/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -257,7 +257,7 @@ export class TransactionRegisteredDetailComponent implements OnInit {
         this.formField.qrcodeImage = '';
       }
       else {
-        this.formField.issueReceipt = (this.that.authService.getUserInfo.fullName.th ? this.that.authService.getUserInfo.fullName.th : this.that.authService.getUserInfo.fullName[this.that.appService.lang]);
+        this.formField.issueReceipt = (this.that.data.transRegistered$.invoice.payment.status !== 'N' ? this.that.data.transRegistered$.invoice.namePrintReceipt : (this.that.authService.getUserInfo.fullName.th ? this.that.authService.getUserInfo.fullName.th : this.that.authService.getUserInfo.fullName[this.that.appService.lang]));
         this.formField.qrcodeImage = (this.that.data.transRegistered$.invoice.payment.status === 'W' ? this.that.data.transRegistered$.invoice.qrImage : '');
       }
     },
@@ -298,43 +298,57 @@ export class TransactionRegisteredDetailComponent implements OnInit {
             this.isValid = this.validate();
 
             if (this.isValid) {
-              let modalRef = this.that.modalService.getModalConfirm(false, ModalConfirmComponent, 'payment.save.confirm');
+              let modalRef = this.that.modalService.getModalConfirm(false, ModalConfirmComponent, 'payment.save.confirm.label', 'payment.save.confirm.description');
 
               this.that.modalService.close(modalRef).then((result: string) => {
                 if (result === 'ok') {
-                  let value: {} = this.getValue();
+                  this.that.dataService.transRegistered.get(this.that.appService.getCUID([this.that.data.transRegistered$.ID, this.that.data.transRegistered$.transProject.ID])).then((result: Schema.TransRegistered) => {
+                    let transRegistered: Schema.TransRegistered = result;
 
-                  this.that.appService.save(('QRCodePayment/' + this.that.data.transRegistered$.transProject.project.category.initial), 'PUT', JSON.stringify(value), false).then((result: any) => {
-                    let saveResult: any = result;
-                    let message: string;
-                    let modalRef: any;
+                    if (this.that.data.transRegistered$.invoice.payment.status !== transRegistered.invoice.payment.status)
+                      this.that.data.transRegistered$ = transRegistered;
 
-                    this.isSaving = false;
-                    this.errorCode = saveResult.errorCode;
+                    if (this.that.data.transRegistered$.invoice.payment.status === 'N') {
+                      let value: {} = this.getValue();
 
-                    if (this.errorCode !== 0 && this.errorCode !== 1) {
-                      if (this.errorCode === 2) message = ('registered.error.notFound');
+                      this.that.appService.save(('QRCodePayment/' + this.that.data.transRegistered$.transProject.project.category.initial), 'PUT', JSON.stringify(value), false).then((result: any) => {
+                        let saveResult: any = result;
+                        let message: string;
+                        let modalRef: any;
 
-                      modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message);
+                        this.isSaving = false;
+                        this.errorCode = saveResult.errorCode;
 
-                      this.that.modalService.close(modalRef).then((result: string) => {
-                        if (result === 'close') {
-                            if (this.errorCode === 2)
-                              this.that.router.navigate(['Transaction/Registered']);
+                        if (this.errorCode !== 0 && this.errorCode !== 1) {
+                          if (this.errorCode === 2) message = ('registered.error.notFound');
+
+                          modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message);
+
+                          this.that.modalService.close(modalRef).then((result: string) => {
+                            if (result === 'close') {
+                                if (this.errorCode === 2)
+                                  this.that.router.navigate(['Transaction/Registered']);
+                            }
+                          });
+                        }
+                        else {
+                          if (this.errorCode === 0) {
+                            this.that.data.transRegistered$.invoice.merchantName = saveResult.merchantName;
+                            this.that.data.transRegistered$.invoice.qrRef1 = saveResult.qrRef1;
+                            this.that.data.transRegistered$.invoice.qrRef2 = saveResult.qrRef2;
+                            this.that.data.transRegistered$.invoice.qrRef3 = saveResult.qrRef3;
+                            this.that.data.transRegistered$.invoice.payment.amount = saveResult.paidAmount;
+                            this.that.data.transRegistered$.invoice.payment.confirmDate = saveResult.actionDate;
+                            this.that.data.transRegistered$.invoice.payment.status = saveResult.paidStatus;
+                            this.that.payment.formField.qrcodeImage = saveResult.qrImage64;
+                          }
                         }
                       });
                     }
                     else {
-                      if (this.errorCode === 0) {
-                        this.that.data.transRegistered$.invoice.merchantName = saveResult.merchantName;
-                        this.that.data.transRegistered$.invoice.qrRef1 = saveResult.qrRef1;
-                        this.that.data.transRegistered$.invoice.qrRef2 = saveResult.qrRef2;
-                        this.that.data.transRegistered$.invoice.qrRef3 = saveResult.qrRef3;
-                        this.that.data.transRegistered$.invoice.payment.amount = saveResult.paidAmount;
-                        this.that.data.transRegistered$.invoice.payment.confirmDate = saveResult.actionDate;
-                        this.that.data.transRegistered$.invoice.payment.status = saveResult.paidStatus;
-                        this.that.payment.formField.qrcodeImage = saveResult.qrImage64;
-                      }
+                      this.isSaving = false;
+
+                      this.that.payment.setValue(true);
                     }
                   });
                 }
@@ -358,7 +372,7 @@ export class TransactionRegisteredDetailComponent implements OnInit {
 
       this.modalService.close(modalRef).then((result: string) => {
         if (result === 'close')
-          this.router.navigate(['TransactionRegistered']);
+          this.router.navigate(['Transaction/Registered']);
       });
     }
     else {
@@ -370,5 +384,36 @@ export class TransactionRegisteredDetailComponent implements OnInit {
       this.payment.saveChange.that = this;
       this.payment.setValue(true);
     }
+  }
+
+  getRecheckPayment() {
+    this.appService.isLoading.show = true;
+    this.appService.isLoading.checking = true;
+
+    this.authService.getIsAuthenticated().then((result: boolean) => {
+      if (!result) {
+        this.appService.isLoading.show = false;
+        this.appService.isLoading.checking = false;
+
+        this.appService.gotoSignIn();
+      }
+      else {
+        this.dataService.transRegistered.get(this.appService.getCUID([this.data.transRegistered$.ID, this.data.transRegistered$.transProject.ID])).then((result: Schema.TransRegistered) => {
+          let transRegistered: Schema.TransRegistered = result;
+
+          if (this.data.transRegistered$.invoice.payment.status !== transRegistered.invoice.payment.status) {
+            this.data.transRegistered$ = transRegistered;
+
+            if (this.data.transRegistered$.invoice.payment.status === 'N') {
+              this.deliAddress.setValue(true);
+              this.payment.setValue(true);
+            }
+          }
+
+          this.appService.isLoading.show = false;
+          this.appService.isLoading.checking = false;
+        });
+      }
+    });
   }
 }

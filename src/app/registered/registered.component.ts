@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๒๙/๐๗/๒๕๖๓>
+Modify date : <๐๒/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -181,6 +181,19 @@ export class RegisteredComponent implements OnInit {
         this.formField.postalCode = '';
         this.formField.phoneNumber = '';
       }
+      else {
+        this.formField.address = this.that.authService.getUserInfo.address;
+        this.formField.phoneNumber = this.that.authService.getUserInfo.phoneNumber;
+
+        this.formField.country.isLoading = true;
+        this.that.dataService.country.getList().then((result: Schema.Country[]) => {
+          this.formField.country.isLoading = false;
+          this.that.data.country$ = result;
+          this.formField.country.selected = this.that.data.country$[this.that.data.country$.findIndex(k => k.ID === this.that.authService.getUserInfo.country)];
+
+          this.getListProvince(true);
+        });
+      }
     },
     getListProvince(restore?: boolean) {
       let countryID: string = (this.formField.country.selected ? this.formField.country.selected.ID : null);
@@ -191,9 +204,9 @@ export class RegisteredComponent implements OnInit {
       this.that.dataService.province.getList(countryID).then((result: Schema.Province[]) => {
         this.formField.province.isLoading = false;
         this.that.data.province$ = result;
-        this.formField.province.selected = null;
+        this.formField.province.selected = (restore ? this.that.data.province$[this.that.data.province$.findIndex(k => k.ID === this.that.authService.getUserInfo.province)] : null);
 
-        this.getListDistrict();
+        this.getListDistrict(true);
       });
     },
     getListDistrict(restore?: boolean) {
@@ -205,9 +218,9 @@ export class RegisteredComponent implements OnInit {
       this.that.dataService.district.getList(countryID, provinceID).then((result: Schema.District[]) => {
         this.formField.district.isLoading = false;
         this.that.data.district$ = result;
-        this.formField.district.selected = null;
+        this.formField.district.selected = (restore ? this.that.data.district$[this.that.data.district$.findIndex(k => k.ID === this.that.authService.getUserInfo.district)] : null);
 
-        this.getListSubdistrict();
+        this.getListSubdistrict(true);
       });
     },
     getListSubdistrict(restore?: boolean) {
@@ -218,14 +231,14 @@ export class RegisteredComponent implements OnInit {
 
       if (this.formField.district.selected) {
         districtID = this.formField.district.selected.ID;
-        postalCode = this.formField.district.selected.zipCode;
+        postalCode = (this.that.authService.getUserInfo.zipCode ? this.that.authService.getUserInfo.zipCode : this.formField.district.selected.zipCode);
       }
 
       this.formField.postalCode = postalCode;
       this.that.dataService.subdistrict.getList(countryID, provinceID, districtID).then((result: Schema.Subdistrict[]) => {
         this.formField.subdistrict.isLoading = false;
         this.that.data.subdistrict$ = result;
-        this.formField.subdistrict.selected = null;
+        this.formField.subdistrict.selected = (restore ? this.that.data.subdistrict$[this.that.data.subdistrict$.findIndex(k => k.ID === this.that.authService.getUserInfo.subdistrict)] : null);
       });
     },
     watchChange() {
@@ -302,12 +315,6 @@ export class RegisteredComponent implements OnInit {
           if (this.data.transProject$.registrationStatus === 'Y') {
             this.watchChange();
 
-            this.deliAddress.formField.country.isLoading = true;
-            this.dataService.country.getList().then((result: Schema.Country[]) => {
-              this.deliAddress.formField.country.isLoading = false;
-              this.data.country$ = result;
-            });
-
             this.location.saveChange.that = this;
             this.location.setValue();
 
@@ -318,7 +325,7 @@ export class RegisteredComponent implements OnInit {
 
             this.deliAddress.that = this;
             this.deliAddress.saveChange.that = this;
-            this.deliAddress.setValue();
+            this.deliAddress.setValue(true);
 
             this.saveChange.that = this;
 

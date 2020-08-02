@@ -86,7 +86,10 @@
       "error": {
         "issueReceiptAs": "Please fill in the name of the recipient of the receipt."
       },
-      "confirm": "Do you want to confirm payment for this registration ?"
+      "confirm": {
+        "label": "Do you want to confirm payment for this registration ?",
+        "description": "Press \"Ok\" to generate a QR code for payment."
+      }
     }
   },
   "unit": {
@@ -172,5 +175,6 @@
   "receipt": {
     "label": "Receipt",
     "download": "Download Receipt"
-  }
+  },
+  "recheck": "Recheck"
 }

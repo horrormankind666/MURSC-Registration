@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๒๗/๐๕/๒๕๖๓>
+Modify date : <๓๑/๐๗/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -66,12 +66,13 @@ export class ModalService {
     }, 0);
   }
 
-  private getModal(checkHasOpenModal: boolean, content: any, windowClass: string, message?: string): NgbModalRef {
+  private getModal(checkHasOpenModal: boolean, content: any, windowClass: string, message?: string, description?: string): NgbModalRef {
     let modalRef: NgbModalRef;
 
     if (!checkHasOpenModal || !this.modal.hasOpenModals()) {
       modalRef = this.open(content, windowClass);
       if (message) modalRef.componentInstance.message = message;
+      if (description) modalRef.componentInstance.description = description;
     }
 
     return modalRef;
@@ -89,8 +90,8 @@ export class ModalService {
     return modalRef;
   }
 
-  getModalConfirm(checkHasOpenModal: boolean, content: any, message: string): NgbModalRef {
-    let modalRef: NgbModalRef = this.getModal(checkHasOpenModal, content, 'confirm-dialog', message);
+  getModalConfirm(checkHasOpenModal: boolean, content: any, message: string, description?: string): NgbModalRef {
+    let modalRef: NgbModalRef = this.getModal(checkHasOpenModal, content, 'confirm-dialog', message, description);
 
     return modalRef;
   }
