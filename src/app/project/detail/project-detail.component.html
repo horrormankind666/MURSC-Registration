@@ -82,8 +82,11 @@
 </ng-template>
 <ng-template #titleInfo let-cardType="cardType">
   <div class="title-info project-title-info">
-    <div class="embed-responsive embed-responsive-16by9 mb-3">
+    <div class="embed-responsive embed-responsive-16by9 mb-3 project-logo">
       <div class="card-img project-card-img" [ngStyle]="{'background-image': ('url(' + data.transProject$.project.logo + ')')}"></div>
+      <a class="enlarge" href="javascript:void(0)" (click)="appService.enlargeImage(data.transProject$.project.logo)">
+        <i class="fas fa-expand text-white size18"></i>
+      </a>
     </div>
     <div class="card-title mb-0">
       <div class="float-left" *ngIf="data.transProject$.examDate.startDate">

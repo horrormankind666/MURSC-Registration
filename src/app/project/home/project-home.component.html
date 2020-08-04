@@ -19,7 +19,7 @@
           [disabled]="(projectService.operate.table.service.searching$ | async)"
           ngbTooltip="{{'reload' | translate | titlecase}}"
           title="{{'reload' | translate | titlecase}}"
-          (click)="projectService.operate.table.service.reload()">
+          (click)="projectService.operate.table.service.reload(route.snapshot.params['projectCategory'])">
           <i class="fas fa-sync-alt text-white size16" [ngClass]="{'fa-spin': (projectService.operate.table.service.searching$ | async)}"></i>
         </button>
       </div>
@@ -135,9 +135,10 @@
 </ng-template>
 <ng-template #titleInfo let-data="data">
   <div class="title-info project-title-info">
-    <div class="embed-responsive embed-responsive-16by9 mb-3 project-dropdown">
-      <a href="javascript:void(0)">
-        <div class="card-img project-card-img" [ngStyle]="{'background-image': ('url(' + data.project.logo + ')')}"></div>
+    <div class="embed-responsive embed-responsive-16by9 mb-3 project-logo">
+      <div class="card-img project-card-img" [ngStyle]="{'background-image': ('url(' + data.project.logo + ')')}"></div>
+      <a class="enlarge" href="javascript:void(0)" (click)="appService.enlargeImage(data.project.logo)">
+        <i class="fas fa-expand text-white size18"></i>
       </a>
     </div>
     <div class="card-title mb-0">

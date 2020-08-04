@@ -49,7 +49,7 @@
       }
     },
     "error": {
-      "notFound": "No Registration Details Were Found For This Project"
+      "notFound": "No registration details were found for this project."
     }
   },
   "items": "Items",
@@ -121,7 +121,7 @@
     "lastPaymentDate": "Last Payment Date",
     "detail": "Project Detail",
     "error": {
-      "notFound": "Project Detail Not Found"
+      "notFound": "Project detail not found"
     }
   },
   "location": {
@@ -176,5 +176,6 @@
     "label": "Receipt",
     "download": "Download Receipt"
   },
-  "recheck": "Recheck"
+  "recheck": "Recheck",
+  "enlarge": "Enlarge"
 }

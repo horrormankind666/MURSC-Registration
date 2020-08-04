@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๓๑/๐๗/๒๕๖๓>
+Modify date : <๐๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -13,6 +13,8 @@ import {Component, OnInit, Input} from '@angular/core';
 
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-modal-success',
   template: `
@@ -22,7 +24,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
       </div>
       <div class="modal-footer">
         <input class="d-none" type="text" />
-        <button type="button" class="btn btn-success mr-0" (click)="activeModal.close('close')"><span class="regular size16">{{'close' | translate}}</span></button>
+        <button type="button" class="btn btn-success mr-0" (click)="activeModal.close('close')"><span class="regular size14">{{'close' | translate}}</span></button>
       </div>
     </div>
   `,
@@ -48,7 +50,7 @@ export class ModalSuccessComponent implements OnInit {
       </div>
       <div class="modal-footer">
         <input class="d-none" type="text" />
-        <button type="button" class="btn btn-danger mr-0" (click)="activeModal.close('close')"><span class="regular size16">{{'close' | translate}}</span></button>
+        <button type="button" class="btn btn-danger mr-0" (click)="activeModal.close('close')"><span class="regular size14">{{(btnMsg ? btnMsg.close : 'close') | translate}}</span></button>
       </div>
     </div>
   `,
@@ -56,6 +58,7 @@ export class ModalSuccessComponent implements OnInit {
 })
 export class ModalErrorComponent implements OnInit {
   @Input() message;
+  @Input() btnMsg;
 
   constructor(
     private activeModal: NgbActiveModal
@@ -77,8 +80,8 @@ export class ModalErrorComponent implements OnInit {
       </div>
       <div class="modal-footer">
         <input class="d-none" type="text" />
-        <button type="button" class="btn btn-primary ml-0" (click)="activeModal.dismiss('cancel')"><span class="regular size16">{{'cancel' | translate}}</span></button>
-        <button type="button" class="btn btn-primary mr-0" (click)="activeModal.close('ok')"><span class="regular size16">{{'ok' | translate}}</span></button>
+        <button type="button" class="btn btn-primary ml-0" (click)="activeModal.dismiss('cancel')"><span class="regular size14">{{'cancel' | translate}}</span></button>
+        <button type="button" class="btn btn-primary mr-0" (click)="activeModal.close('ok')"><span class="regular size14">{{'ok' | translate}}</span></button>
       </div>
     </div>
   `,
@@ -87,6 +90,31 @@ export class ModalErrorComponent implements OnInit {
 export class ModalConfirmComponent implements OnInit {
   @Input() message;
   @Input() description;
+
+  constructor(
+    private activeModal: NgbActiveModal
+  ) { }
+
+  ngOnInit() {
+  }
+}
+
+@Component({
+  selector: 'app-modal-image',
+  template: `
+    <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class='img' [ngStyle]="{'background-image': ('url(' + message + ')')}"></div>
+    </div>
+  `,
+  styleUrls: []
+})
+export class ModalImageComponent implements OnInit {
+  @Input() message;
 
   constructor(
     private activeModal: NgbActiveModal

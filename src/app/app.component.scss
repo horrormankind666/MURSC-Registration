@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๕/๐๗/๒๕๖๓>
+Modify date : <๐๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -30,12 +30,13 @@ main header .navbar-header {
   background-color: #1D4F91;
 }
 main header .navbar-header:not(.has-header-subtitle) {
-  box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.5);
+  //border-bottom-left-radius: 1.3rem !important;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.4);
 }
 main header .navbar-header-title {
   background-color: rgba(29, 79, 145, 0.95);
-  border-bottom-left-radius: 1.3rem !important;
-  box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.5);
+  //border-bottom-left-radius: 1.3rem !important;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.4);
 }
 main header .navbar-header-title.row {
   display: table !important;

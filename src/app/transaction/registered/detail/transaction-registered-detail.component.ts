@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๙/๐๖/๒๕๖๓>
-Modify date : <๓๑/๐๗/๒๕๖๓>
+Modify date : <๐๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -15,7 +15,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AppService} from '../../../app.service';
 import {AuthService} from '../../../auth.service';
 import {Schema, DataService} from '../../../data.service';
-import {ModalService} from '../../../modal/modal.service';
+import {ModalService, BtnMsg} from '../../../modal/modal.service';
 
 import {ModalErrorComponent, ModalConfirmComponent} from '../../../modal/modal.component';
 
@@ -205,20 +205,26 @@ export class TransactionRegisteredDetailComponent implements OnInit {
               this.that.appService.save('TransDeliveryAddress', 'PUT', JSON.stringify(value), false).then((result: any) => {
                 let saveResult: any = result;
                 let message: string;
+                let btnMsg: BtnMsg;
                 let modalRef: any;
 
                 this.isSaving = false;
                 this.errorCode = saveResult.errorCode;
 
                 if (this.errorCode !== 0 && this.errorCode !== 1) {
-                  if (this.errorCode === 2) message = ('registered.error.notFound');
+                  if (this.errorCode === 2) {
+                    message = ('registered.error.notFound');
+                    btnMsg = {
+                      close: 'registered.info'
+                    };
+                  }
 
-                  modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message);
+                  modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message, btnMsg);
 
                   this.that.modalService.close(modalRef).then((result: string) => {
                     if (result === 'close') {
                         if (this.errorCode === 2)
-                          this.that.router.navigate(['TransactionRegistered']);
+                          this.that.router.navigate(['Transaction/Registered']);
                     }
                   });
                 }
@@ -314,13 +320,19 @@ export class TransactionRegisteredDetailComponent implements OnInit {
                       this.that.appService.save(('QRCodePayment/' + this.that.data.transRegistered$.transProject.project.category.initial), 'PUT', JSON.stringify(value), false).then((result: any) => {
                         let saveResult: any = result;
                         let message: string;
+                        let btnMsg: BtnMsg;
                         let modalRef: any;
 
                         this.isSaving = false;
                         this.errorCode = saveResult.errorCode;
 
                         if (this.errorCode !== 0 && this.errorCode !== 1) {
-                          if (this.errorCode === 2) message = ('registered.error.notFound');
+                          if (this.errorCode === 2) {
+                            message = ('registered.error.notFound');
+                            btnMsg = {
+                              close: 'registered.info'
+                            };
+                          }
 
                           modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message);
 
@@ -368,7 +380,10 @@ export class TransactionRegisteredDetailComponent implements OnInit {
     this.data.transRegistered$ = this.route.snapshot.data.transRegistered$;
 
     if (!this.data.transRegistered$) {
-      let modalRef = this.modalService.getModalError(false, ModalErrorComponent, 'registered.error.notFound');
+      let btnMsg: BtnMsg = {
+        close: 'registered.info'
+      };
+      let modalRef = this.modalService.getModalError(false, ModalErrorComponent, 'registered.error.notFound', btnMsg);
 
       this.modalService.close(modalRef).then((result: string) => {
         if (result === 'close')

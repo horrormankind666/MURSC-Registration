@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๙/๐๗/๒๕๖๓>
+Modify date : <๐๓/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -15,7 +15,7 @@ import {formatDate} from '@angular/common';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Title} from '@angular/platform-browser';
 
-import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalRef, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import {TranslateService} from '@ngx-translate/core';
 
@@ -24,7 +24,7 @@ import {DeviceDetectorService} from 'ngx-device-detector';
 
 import {ModalService} from './modal/modal.service'
 
-import {ModalErrorComponent} from './modal/modal.component'
+import {ModalErrorComponent, ModalImageComponent} from './modal/modal.component'
 
 import * as $ from 'jquery';
 import { stringify } from 'querystring';
@@ -39,6 +39,7 @@ export class AppService  {
     private router: Router,
     private http: HttpClient,
     private titleService: Title,
+    private modal: NgbModal,
     private tooltipConfig: NgbTooltipConfig,
     private translateService: TranslateService,
     private cookieService: CookieService,
@@ -316,5 +317,9 @@ export class AppService  {
     this.router.navigateByUrl('SignIn', {
       skipLocationChange: true
     });
+  }
+
+  enlargeImage(image: string) {
+    let modalRef: NgbModalRef = this.modalService.getModalImage(false, ModalImageComponent, image);
   }
 }

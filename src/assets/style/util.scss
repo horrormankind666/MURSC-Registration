@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๐๒/๐๗/๒๕๖๓>
+Modify date : <๐๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -450,6 +450,7 @@ body.modal-open {
   text-shadow: none;
   padding: 0 !important;
   margin: 0 !important;
+  opacity: 1;
 }
 .modal-title {
   display: table-cell;
@@ -498,7 +499,7 @@ body.modal-open {
   }
 }
 .modal-backdrop.show {
-  opacity: 0.5 !important;
+  opacity: 0.8 !important;
   background: #000000 !important;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
@@ -517,7 +518,8 @@ body.modal-open {
 .success-dialog .modal-dialog,
 .error-dialog .modal-dialog,
 .confirm-dialog .modal-dialog,
-.form-dialog .modal-dialog {
+.form-dialog .modal-dialog,
+.image-dialog .modal-dialog {
   max-width: 100%;
   min-width: $screen-min-width;
   width: 100%;
@@ -546,6 +548,35 @@ body.modal-open {
 }
 .form-dialog .modal-content {
   border: 10px solid #9AC3BD;
+}
+.image-dialog .modal-content {
+  background: transparent;
+  border: 0;
+}
+.image-dialog .modal-header {
+  background: transparent;
+  height: 30px;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.image-dialog .modal-header .close {
+  height: inherit;
+  font-size: 100px;
+  font-weight: 300;
+  color: #FFFFFF;
+  opacity: 1 !important;
+  position: relative;
+  right: -5px;
+}
+.image-dialog .modal-dialog .modal-content .modal-body {
+  padding-bottom: 0;
+  height: auto;
+}
+.image-dialog .modal-dialog .modal-content .modal-body .img {
+  position: relative;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .card-group .card,
 .card-group .card .line-clamp::after {

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๓๑/๐๗/๒๕๖๓>
+Modify date : <๐๓/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -84,6 +84,11 @@ Description : <>
 }
 .project-text-line-clamp::after {
   background-color: #FFFFFF;
+}
+.project-title-info .project-logo .enlarge {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
 }
 .project-title-info .card-title .float-right {
   width: 34px !important;

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๐๒/๐๘/๒๕๖๓>
+Modify date : <๐๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -17,7 +17,7 @@ import {DeviceDetectorService} from 'ngx-device-detector';
 import {AppService} from '../app.service';
 import {AuthService} from '../auth.service';
 import {Schema, DataService} from '../data.service';
-import {ModalService} from '../modal/modal.service';
+import {ModalService, BtnMsg} from '../modal/modal.service';
 
 import {ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent} from '../modal/modal.component';
 
@@ -304,7 +304,10 @@ export class RegisteredComponent implements OnInit {
         this.data.transRegistered$ = result;
 
         if (this.data.transRegistered$) {
-          let modalRef =  this.modalService.getModalError(false, ModalErrorComponent, 'registered.save.error.projectRegistered');
+          let btnMsg: BtnMsg = {
+            close: 'registered.detail'
+          };
+          let modalRef =  this.modalService.getModalError(false, ModalErrorComponent, 'registered.save.error.projectRegistered', btnMsg);
 
           this.modalService.close(modalRef).then((result: string) => {
             if (result === 'close')
@@ -395,17 +398,23 @@ export class RegisteredComponent implements OnInit {
                 this.that.appService.save('TransRegistered', 'POST', JSON.stringify(value)).then((result: any) => {
                   let saveResult: any = result;
                   let message: string;
+                  let btnMsg: BtnMsg;
                   let modalRef: any;
 
                   if (saveResult.errorCode !== 0 && saveResult.errorCode !== 1) {
                     if (saveResult.errorCode === 2) message = ('project.error.notFound');
-                    if (saveResult.errorCode === 3) message = ('registered.save.error.projectRegistered');
+                    if (saveResult.errorCode === 3) {
+                      message = ('registered.save.error.projectRegistered');
+                      btnMsg = {
+                        close: 'registered.detail'
+                      };
+                    }
                     if (saveResult.errorCode === 4) message = ('registered.save.error.registrationStatus.' + result.registrationStatus);
                     if (saveResult.errorCode === 5) message = ('registered.save.error.locationSelected');
                     if (saveResult.errorCode === 6) message = ('registered.save.error.seatAvailable');
                     if (saveResult.errorCode === 7) message = ('registered.save.error.fee');
 
-                    modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message);
+                    modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message, btnMsg);
 
                     this.that.modalService.close(modalRef).then((result: string) => {
                       if (result === 'close') {
@@ -452,7 +461,10 @@ export class RegisteredComponent implements OnInit {
                   }
                   else {
                     if (saveResult.errorCode === 0) {
-                      modalRef = this.that.modalService.getModalSuccess(false, ModalSuccessComponent, 'save.success');
+                      btnMsg = {
+                        close: 'registered.detail'
+                      };
+                      modalRef = this.that.modalService.getModalSuccess(false, ModalSuccessComponent, 'save.success', btnMsg);
 
                       this.that.modalService.close(modalRef).then((result: string) => {
                         if (result === 'close')

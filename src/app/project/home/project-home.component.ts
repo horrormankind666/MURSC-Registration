@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๓๐/๐๗/๒๕๖๓>
+Modify date : <๐๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -10,6 +10,7 @@ Description : <>
 'use strict';
 
 import {Component, OnInit, ContentChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {DecimalPipe} from '@angular/common';
 
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
@@ -37,6 +38,7 @@ export class ProjectHomeComponent implements OnInit {
   @ContentChild('ProjectHomeView', {static: false}) ProjectHomeView;
 
   constructor(
+    private route: ActivatedRoute,
     private modal: NgbModal,
     private deviceService: DeviceDetectorService,
     private appService: AppService,

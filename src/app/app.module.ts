@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๙/๐๗/๒๕๖๓>
+Modify date : <๐๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -36,7 +36,7 @@ import {TrimOnBlurDirective, FocusRemoverDirective, Nl2BrPipe} from './app.direc
 import {appRouting} from './app-routing.module';
 
 import {AppComponent} from './app.component';
-import {ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent} from './modal/modal.component';
+import {ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent, ModalImageComponent} from './modal/modal.component';
 import {PageEmptyComponent} from './page-empty.component'
 import {PageNotFoundComponent} from './page-not-found.component';
 import {MainComponent} from './main.component';
@@ -57,6 +57,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalSuccessComponent,
     ModalErrorComponent,
     ModalConfirmComponent,
+    ModalImageComponent,
     PageEmptyComponent,
     PageNotFoundComponent,
     MainComponent,
@@ -88,7 +89,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.circle,
-      backdropBackgroundColour: 'rgba(0, 0, 0, 0.5)',
+      backdropBackgroundColour: 'rgba(0, 0, 0, 0.8)',
       fullScreenBackdrop: true,
       primaryColour: '#000000',
       secondaryColour: '#FFFFFF'
@@ -109,6 +110,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalSuccessComponent,
     ModalErrorComponent,
     ModalConfirmComponent,
+    ModalImageComponent,
     ProjectDetailComponent
   ]
 })
