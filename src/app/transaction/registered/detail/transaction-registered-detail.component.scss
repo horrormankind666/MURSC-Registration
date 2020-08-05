@@ -2,168 +2,168 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๑/๐๖/๒๕๖๓>
-Modify date : <๓๐/๐๗/๒๕๖๓>
+Modify date : <๐๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 @import '../../../../styles.scss';
 
-.registered-detail-view .project-card-vertical {
+.transaction-registered-detail-view .project-card-vertical {
   display: none;
 }
 @media screen and (max-width: 530px) {
-  .registered-detail-view .project-card-vertical {
+  .transaction-registered-detail-view .project-card-vertical {
     display: block;
   }
-  .registered-detail-view .project-card-horizontal {
+  .transaction-registered-detail-view .project-card-horizontal {
     display: none;
   }
 }
-.registered-detail-view .d-table.calendar-date {
+.transaction-registered-detail-view .d-table.calendar-date {
   position: relative;
   top: 2px;
 }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-  .registered-detail-view .d-table.calendar-date {
+  .transaction-registered-detail-view .d-table.calendar-date {
     top: 1px;
   }
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   ::i-block-chrome,
-  .registered-detail-view .d-table.calendar-date {
+  .transaction-registered-detail-view .d-table.calendar-date {
     top: 3px;
   }
 }
-.registered-detail-view .register-info .form .form-group .col-form-label {
+.transaction-registered-detail-view .register-info .form .form-group .col-form-label {
   width: 205px;
 }
-.registered-detail-view .registered-info .d-block.col-locations {
+.transaction-registered-detail-view .registered-info .d-block.col-locations {
   display: none !important;
 }
 @media screen and (max-width: 1140px) {
-  .registered-detail-view .registered-info .d-table .col-locations,
-  .registered-detail-view .registered-info .d-table .table-cell-divider.col-wrap {
+  .transaction-registered-detail-view .registered-info .d-table .col-locations,
+  .transaction-registered-detail-view .registered-info .d-table .table-cell-divider.col-wrap {
     display: none !important;
   }
-  .registered-detail-view .registered-info .d-block.col-locations {
+  .transaction-registered-detail-view .registered-info .d-block.col-locations {
     display: block !important;
     margin-bottom: 1rem !important;
   }
-  .registered-detail-view .registered-info .d-table .col-feetype {
+  .transaction-registered-detail-view .registered-info .d-table .col-feetype {
     width: 50% !important;
   }
 }
 @media screen and (max-width: 870px) {
-  .registered-detail-view .registered-info .d-block.col-locations {
+  .transaction-registered-detail-view .registered-info .d-block.col-locations {
     display: none !important;
   }
-  .registered-detail-view .registered-info .d-table .col-feetype,
-  .registered-detail-view .registered-info .d-table .col-payment,
-  .registered-detail-view .registered-info .d-table .col-receipt {
+  .transaction-registered-detail-view .registered-info .d-table .col-feetype,
+  .transaction-registered-detail-view .registered-info .d-table .col-payment,
+  .transaction-registered-detail-view .registered-info .d-table .col-receipt {
     margin-top: 1rem !important;
   }
-  .registered-detail-view .registered-info .d-table.table-registered,
-  .registered-detail-view .registered-info .d-table .col-locations,
-  .registered-detail-view .registered-info .d-table .col-feetype,
-  .registered-detail-view .registered-info .d-table .col-payment,
-  .registered-detail-view .registered-info .d-table .col-receipt {
+  .transaction-registered-detail-view .registered-info .d-table.table-registered,
+  .transaction-registered-detail-view .registered-info .d-table .col-locations,
+  .transaction-registered-detail-view .registered-info .d-table .col-feetype,
+  .transaction-registered-detail-view .registered-info .d-table .col-payment,
+  .transaction-registered-detail-view .registered-info .d-table .col-receipt {
     display: block !important;
     width: 100% !important;
   }
 }
-.registered-detail-view .location-info .form .form-text {
+.transaction-registered-detail-view .location-info .form .form-text {
   line-height: 1.5;
 }
-.registered-detail-view .fee-info .table .col-index {
+.transaction-registered-detail-view .fee-info .table .col-index {
   width: 23px !important;
   min-width: 23px !important;
 }
-.registered-detail-view .fee-info .table .col-index i {
+.transaction-registered-detail-view .fee-info .table .col-index i {
   position: relative;
   top: 1px;
 }
-.registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group .col .i-saving {
+.transaction-registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group .col .i-saving {
   display: table-cell;
   height: 34px;
   text-align: center;
   vertical-align: middle;
 }
 @media screen and (max-width: 748px) {
-  @include form-responsive('.registered-detail-view .register-info');
+  @include form-responsive('.transaction-registered-detail-view .register-info');
 }
 @media screen and (max-width: 530px) {
-  @include form-responsive('.registered-detail-view .register-info');
+  @include form-responsive('.transaction-registered-detail-view .register-info');
 }
 @media screen and (max-width: 428px) {
-  @include form-responsive('.registered-detail-view .fee-info #deliaddress-form');
-  .registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group:last-child .col-form-label {
+  @include form-responsive('.transaction-registered-detail-view .fee-info #deliaddress-form');
+  .transaction-registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group:last-child .col-form-label {
     display: none !important;
   }
-  .registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group:last-child .col .btn {
+  .transaction-registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group:last-child .col .btn {
     display: block;
     margin-top: 0.25rem;
     margin-left: 0 !important;
   }
-  .registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group:last-child .col .btn:first-child,
-  .registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group .col .i-saving {
+  .transaction-registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group:last-child .col .btn:first-child,
+  .transaction-registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group .col .i-saving {
     margin-top: 0.5rem;
   }
-  .registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group .col .i-saving {
+  .transaction-registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group .col .i-saving {
     display: block;
     height: auto;
   }
 }
-.registered-detail-view .payment-info .form.flat-form .form-group label {
+.transaction-registered-detail-view .payment-info .form.flat-form .form-group label {
   margin-bottom: 1px !important
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   ::i-block-chrome,
-  .registered-detail-view .payment-info .form.flat-form .form-group label {
+  .transaction-registered-detail-view .payment-info .form.flat-form .form-group label {
     margin-bottom: 2px !important
   }
 }
-.registered-detail-view .payment-info .form .inputbox {
+.transaction-registered-detail-view .payment-info .form .inputbox {
   border-color: rgba(0, 0, 0, 0.15) !important;
 }
-.registered-detail-view .payment-info .form .form-control:focus {
+.transaction-registered-detail-view .payment-info .form .form-control:focus {
   border-color: rgba(0, 0, 0, 0.35) !important;
 }
-.registered-detail-view .payment-info .form .form-group .input-group.has-icon i {
+.transaction-registered-detail-view .payment-info .form .form-group .input-group.has-icon i {
   top: 7px;
   right: 0;
   left: 0;
 }
-.registered-detail-view .payment-info .form.flat-form .form-group .form-text {
+.transaction-registered-detail-view .payment-info .form.flat-form .form-group .form-text {
   margin-top: 0.3rem !important;
 }
 @media screen and (min--moz-device-pixel-ratio: 0) {
-  .registered-detail-view .payment-info .form.flat-form .form-group .form-text {
+  .transaction-registered-detail-view .payment-info .form.flat-form .form-group .form-text {
     margin-top: 0.35rem !important
   }
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   ::i-block-chrome,
-  .registered-detail-view .payment-info .form.flat-form .form-group .form-text {
+  .transaction-registered-detail-view .payment-info .form.flat-form .form-group .form-text {
     margin-top: 0.35rem !important
   }
 }
-.registered-detail-view .payment-info .payment-btn,
-.registered-detail-view .payment-info .payment-btn .i-saving {
+.transaction-registered-detail-view .payment-info .payment-btn,
+.transaction-registered-detail-view .payment-info .payment-btn .i-saving {
   height: 42px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   ::i-block-chrome,
-  .registered-detail-view .payment-info .payment-btn {
+  .transaction-registered-detail-view .payment-info .payment-btn {
     height: 38px;
   }
 }
-.registered-detail-view .payment-info .payment-btn .i-saving {
+.transaction-registered-detail-view .payment-info .payment-btn .i-saving {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
 }
-.registered-detail-view .payment-info .payment-btn .btn {
+.transaction-registered-detail-view .payment-info .payment-btn .btn {
   display: table-cell;
   width: inherit;
   height: inherit;

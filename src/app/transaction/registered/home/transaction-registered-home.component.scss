@@ -1,0 +1,20 @@
+/*
+=============================================
+Author      : <ยุทธภูมิ ตวันนา>
+Create date : <๐๕/๐๘/๒๕๖๓>
+Modify date : <๐๕/๐๘/๒๕๖๓>
+Description : <>
+=============================================
+*/
+
+@import '../../../../styles.scss';
+
+.transaction-registered-home-view .nav-tabs .nav-link {
+  background: #FF0000 !important;
+}
+@media screen and (max-width: 733px) {
+  .transaction-registered-home-view .nav-tabs,
+  .transaction-registered-home-view .nav-tabs .nav-item {
+    display: block !important;
+  }
+}

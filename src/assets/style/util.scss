@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๐๔/๐๘/๒๕๖๓>
+Modify date : <๐๕/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -1299,4 +1299,59 @@ textarea {
 .qrcode-image {
   width: 160px;
   height:160px;
+}
+.nav-tabs {
+  display: table !important;
+  table-layout: fixed;
+  width: 100%;
+  border-bottom: 3px solid #2CC185 !important;
+}
+.nav-tabs .nav-item {
+  display: table-cell !important;
+  vertical-align: bottom;
+  height: 45px;
+}
+.nav-tabs .nav-link,
+.nav-tabs .nav-link:focus {
+  border: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  background: #BDC2C9;
+  color: #FFFFFF;
+  box-shadow: 0 0 0 transparent, -2px 0 0px #FFFFFF;
+  font-weight: $font-weight-class-regular;
+  text-align: center;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #000000 !important;
+  background: #2CC185 !important;
+  box-shadow: 0 0 0 transparent, -2px 0 0px #FFFFFF;
+  font-size: 1.1rem;
+  height: inherit;
+  line-height: 1.9;
+  margin-right: 2px;
+}
+@media screen and (min--moz-device-pixel-ratio: 0) {
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-item.show .nav-link {
+    line-height: 2;
+  }
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-item.show .nav-link {
+    line-height: 1.8;
+  }
+}
+.nav-tabs .nav-item:last-child .nav-link.active,
+.nav-tabs .nav-item:last-child.show .nav-link {
+  margin-right: 0;
+}
+.nav-tabs .nav-link:hover {
+  background: #E08F24;
 }

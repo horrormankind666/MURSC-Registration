@@ -1,0 +1,24 @@
+<div class="transaction-registered-home-view">
+  <ngb-tabset activeId="1" [destroyOnHide]="false">
+    <ngb-tab id="1" title="{{'total.label' | translate}}">
+      <ng-template ngbTabContent>
+        <p>Basic Setting</p>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="2" title="{{(dataService.statuses.get(dataService.paymentStatus.data$, 'Y')).name[appService.lang]}}">
+      <ng-template ngbTabContent>
+        <p>SMS Setting</p>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="3" title="{{(dataService.statuses.get(dataService.paymentStatus.data$, 'W')).name[appService.lang]}}">
+      <ng-template ngbTabContent>
+        <p>Email Setting</p>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="4" title="{{(dataService.statuses.get(dataService.paymentStatus.data$, 'N')).name[appService.lang]}}">
+      <ng-template ngbTabContent>
+        <p>Email Setting</p>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>
