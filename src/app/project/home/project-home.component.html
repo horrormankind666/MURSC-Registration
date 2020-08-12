@@ -42,8 +42,8 @@
             </div>
             <div class="form-group col-md-6 pr-0">
               <label for="registration-status" class="regular text-white size16">{{'registrationStatus' | translate | titlecase}}</label>
-              <ng-select placeholder="{{'placeholder.selectItem' | translate}}" [(ngModel)]="projectService.operate.table.service.registrationStatus">
-                <ng-option *ngFor="let item of dataService.statuses.getList(dataService.registrationStatus.data$)" [value]="item.ID">{{item.name[appService.lang]}}</ng-option>
+              <ng-select placeholder="{{'placeholder.selectItem' | translate | titlecase}}" [(ngModel)]="projectService.operate.table.service.registrationStatus">
+                <ng-option *ngFor="let item of dataService.statuses.getList(dataService.registrationStatus.data$)" [value]="item.ID">{{item.name[appService.lang] | titlecase}}</ng-option>
               </ng-select>
             </div>
           </div>
@@ -152,7 +152,7 @@
         </div>
       </div>
       <div class="float-right">
-        <div class="registration-status text-right project-registration-status" ngbTooltip="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.registrationStatus)).name[appService.lang]}}" placement="left" title="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.registrationStatus)).name[appService.lang]}}">
+        <div class="registration-status text-right project-registration-status" ngbTooltip="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.registrationStatus)).name[appService.lang] | titlecase}}" placement="left" title="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.registrationStatus)).name[appService.lang] | titlecase}}">
           <i class="fas fa-lock size30"
             [ngClass]="{
               'text-success': (data.registrationStatus === 'Y'),
@@ -253,23 +253,24 @@
 </ng-template>
 <ng-template #contactInfo let-data="data">
   <div class="contact-info text-white size14 project-contact-info">
-    <div class="form">
+    <div class="form" *ngFor="let contactPerson of data; index as order">
+      <div class="dropdown-divider mt-2 mb-2" *ngIf="order > 0"></div>
       <div class="form-group row mr-0 mb-1 ml-0">
         <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fas fa-address-book"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.fullName[appService.lang]}}</span>
+          <span class="form-text regular mt-0">{{contactPerson.fullName[appService.lang] | titlecase}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-1 ml-0">
         <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fas fa-envelope"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.email}}</span>
+          <span class="form-text regular mt-0">{{contactPerson.email | lowercase}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-0 ml-0">
         <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fas fa-phone"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.phoneNumber}}</span>
+          <span class="form-text regular mt-0">{{contactPerson.phoneNumber}}</span>
         </div>
       </div>
     </div>

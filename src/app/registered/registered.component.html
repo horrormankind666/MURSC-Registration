@@ -38,7 +38,7 @@
           <div class="registered-btn ml-auto project-registered-btn">
             <a class="btn btn-success"
               [ngClass]="{
-                'disabled': (!data.transProject$.contactPerson.ID || data.transProject$.transLocation.length === 0 || data.transProject$.transFeeType.length === 0)
+                'disabled': (data.transProject$.contactPerson === 0 || data.transProject$.transLocation.length === 0 || data.transProject$.transFeeType.length === 0)
               }"
               (click)="saveChange.action()">
               <span class="font bold text-white size20">{{'registered.confirm' | translate | titlecase}}</span>
@@ -98,7 +98,7 @@
         </div>
       </div>
       <div class="float-right">
-        <div class="registration-status text-right project-registration-status" ngbTooltip="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.transProject$.registrationStatus)).name[appService.lang]}}" placement="left" title="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.transProject$.registrationStatus)).name[appService.lang]}}">
+        <div class="registration-status text-right project-registration-status" ngbTooltip="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.transProject$.registrationStatus)).name[appService.lang] | titlecase}}" placement="left" title="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.transProject$.registrationStatus)).name[appService.lang] | titlecase}}">
           <i class="fas fa-lock size30"
             [ngClass]="{
               'text-success': (data.transProject$.registrationStatus === 'Y'),
@@ -169,23 +169,24 @@
 </ng-template>
 <ng-template #contactInfo>
   <div class="contact-info text-white size14 project-contact-info">
-    <div class="form">
+    <div class="form" *ngFor="let contactPerson of data.transProject$.contactPerson; index as order">
+      <div class="dropdown-divider mt-2 mb-2" *ngIf="order > 0"></div>
       <div class="form-group row mr-0 mb-1 ml-0">
         <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fas fa-address-book"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.transProject$.contactPerson.fullName[appService.lang]}}</span>
+          <span class="form-text regular mt-0">{{contactPerson.fullName[appService.lang] | titlecase}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-1 ml-0">
         <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fas fa-envelope"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.transProject$.contactPerson.email}}</span>
+          <span class="form-text regular mt-0">{{contactPerson.email | lowercase}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-0 ml-0">
         <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fas fa-phone"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.transProject$.contactPerson.phoneNumber}}</span>
+          <span class="form-text regular mt-0">{{contactPerson.phoneNumber}}</span>
         </div>
       </div>
     </div>
@@ -349,7 +350,7 @@
                   <span class="regular size16">{{'registered.save.error.deliaddress' | translate}}</span>
                 </div>
                 <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-address" class="col-form-label col-form-label-sm pl-0 regular">{{'address.label' | translate}}</label>
+                  <label for="col-deliaddress-address" class="col-form-label col-form-label-sm pl-0 regular">{{'address.label' | translate | titlecase}}</label>
                   <div class="col">
                     <textarea autosize trimOnBlur class="form-control form-control-sm regular"
                       name="col-deliaddress-address"
@@ -359,12 +360,12 @@
                   </div>
                 </div>
                 <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-country" class="col-form-label col-form-label-sm pl-0 regular">{{'address.country' | translate}}</label>
+                  <label for="col-deliaddress-country" class="col-form-label col-form-label-sm pl-0 regular">{{'address.country' | translate | titlecase}}</label>
                   <div class="col">
                     <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.country.isLoading"></i>
                     <ng-select
                       class="size-sm"
-                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
                       [(ngModel)]="deliAddress.formField.country.selected"
                       (ngModelChange)="watchChange()"
                       (change)="deliAddress.getListProvince()"
@@ -374,12 +375,12 @@
                   </div>
                 </div>
                 <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-province" class="col-form-label col-form-label-sm pl-0 regular">{{'address.province' | translate}}</label>
+                  <label for="col-deliaddress-province" class="col-form-label col-form-label-sm pl-0 regular">{{'address.province' | translate | titlecase}}</label>
                   <div class="col">
                     <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.province.isLoading"></i>
                     <ng-select
                       class="size-sm"
-                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
                       [(ngModel)]="deliAddress.formField.province.selected"
                       (ngModelChange)="watchChange()"
                       (change)="deliAddress.getListDistrict()"
@@ -389,12 +390,12 @@
                   </div>
                 </div>
                 <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-district" class="col-form-label col-form-label-sm pl-0 regular">{{'address.district' | translate}}</label>
+                  <label for="col-deliaddress-district" class="col-form-label col-form-label-sm pl-0 regular">{{'address.district' | translate | titlecase}}</label>
                   <div class="col">
                     <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.district.isLoading"></i>
                     <ng-select
                       class="size-sm"
-                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
                       [(ngModel)]="deliAddress.formField.district.selected"
                       (ngModelChange)="watchChange()"
                       (change)="deliAddress.getListSubdistrict()"
@@ -404,12 +405,12 @@
                   </div>
                 </div>
                 <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-subdistrict" class="col-form-label col-form-label-sm pl-0 regular">{{'address.subdistrict' | translate}}</label>
+                  <label for="col-deliaddress-subdistrict" class="col-form-label col-form-label-sm pl-0 regular">{{'address.subdistrict' | translate | titlecase}}</label>
                   <div class="col">
                     <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.subdistrict.isLoading"></i>
                     <ng-select
                       class="size-sm"
-                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
                       [(ngModel)]="deliAddress.formField.subdistrict.selected"
                       (ngModelChange)="watchChange()"
                       *ngIf="!deliAddress.formField.subdistrict.isLoading">
@@ -418,7 +419,7 @@
                   </div>
                 </div>
                 <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-postalcode" class="col-form-label col-form-label-sm pl-0 regular">{{'address.postalCode' | translate}}</label>
+                  <label for="col-deliaddress-postalcode" class="col-form-label col-form-label-sm pl-0 regular">{{'address.postalCode' | translate | titlecase}}</label>
                   <div class="col">
                     <input trimOnBlur type="text" class="form-control form-control-sm regular"
                       name="col-deliaddress-postalcode"
@@ -427,7 +428,7 @@
                   </div>
                 </div>
                 <div class="form-group row w-100">
-                  <label for="col-deliaddress-phoneNumber" class="col-form-label col-form-label-sm pl-0 regular">{{'phone' | translate}}</label>
+                  <label for="col-deliaddress-phoneNumber" class="col-form-label col-form-label-sm pl-0 regular">{{'phone' | translate | titlecase}}</label>
                   <div class="col">
                     <input trimOnBlur type="text" class="form-control form-control-sm regular"
                       name="col-deliaddress-phoneNumber"

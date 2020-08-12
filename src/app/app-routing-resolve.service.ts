@@ -67,13 +67,13 @@ export class HeaderSubtitleTransactionRegisteredResolve implements Resolve<any> 
       en: ''
     };
 
-    this.translateService.getTranslation('th').subscribe((result: {}) => {
-      this.appService.headerSubtitle['th'] = result['registered']['info'];
-    });
     this.translateService.getTranslation('en').subscribe((result: {}) => {
       this.appService.headerSubtitle['en'] = result['registered']['info'];
     });
-
+    this.translateService.getTranslation('th').subscribe((result: {}) => {
+      this.appService.headerSubtitle['th'] = result['registered']['info'];
+    });
+    
     return false;
   }
 }

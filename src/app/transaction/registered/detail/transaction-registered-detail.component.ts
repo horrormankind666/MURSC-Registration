@@ -34,8 +34,6 @@ export class TransactionRegisteredDetailComponent implements OnInit {
     private modalService: ModalService
   ) {}
 
-  test: string = 'a';
-
   data: any = {
     transRegistered$: null,
     country$: null,

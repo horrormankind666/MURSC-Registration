@@ -3,8 +3,8 @@
     <a routerLink="../Project/{{projectCategory.initial}}" routerLinkActive="active" class="btn d-table-cell border-0 align-top rounded-xxl p-0" *ngFor="let projectCategory of data.projectCategory$">
       <i class="{{projectCategory.logo}} fa-4x w-100 border rounded-xxl rounded-bottom-0 text-secondary pt-08 pr-3 pb-07 pl-3"></i>
       <div class="w-inherit pt-2 pr-3 pb-2 pl-3 regular text-black-50">
-        <span class="bold size18">{{projectCategory.name[appService.lang]}}</span><br />
-        <span class="size16">( {{projectCategory.initial}} )</span>
+        <span class="bold size18">{{projectCategory.name[appService.lang] | titlecase}}</span><br />
+        <span class="size16">( {{projectCategory.initial | uppercase}} )</span>
       </div>
     </a>
   </div>

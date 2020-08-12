@@ -27,7 +27,7 @@ import {ModalService} from './modal/modal.service'
 import {ModalErrorComponent, ModalImageComponent} from './modal/modal.component'
 
 import * as $ from 'jquery';
-import { stringify } from 'querystring';
+import {stringify} from 'querystring';
 
 declare function $clamp(element, options): any;
 

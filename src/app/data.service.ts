@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๓๐/๐๗/๒๕๖๓>
+Modify date : <๑๐/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -100,8 +100,6 @@ export namespace Schema {
   }
 
   export interface ContactPerson {
-    ID?: string,
-    transProjectID?: string,
     fullName?: {
       th?: string,
       en?: string
@@ -198,7 +196,7 @@ export namespace Schema {
     maximumSeat?: number,
     seatAvailable?: number,
     minimumFee?: string,
-    contactPerson?: ContactPerson,
+    contactPerson?: ContactPerson[],
     registrationStatus?: string,
     transLocation?: TransLocation[],
     transFeeType?: TransFeeType[]
@@ -532,6 +530,20 @@ namespace Data {
         let transFeeType: Schema.TransFeeType[] = [];
 
         for (let dr1 of result) {
+          let contactPerson: Schema.ContactPerson[] = [];
+          let contactPersons: [] = (dr1['contactPerson'] ? dr1['contactPerson'] : []);
+
+          for (let dr2 of contactPersons) {
+            contactPerson.push({
+              fullName: {
+                th: (dr2['FullName']['TH'] ? dr2['FullName']['TH'] : dr2['FullName']['EN']),
+                en: (dr2['FullName']['EN'] ? dr2['FullName']['EN'] : dr2['FullName']['TH']),
+              },
+              email: (dr2['EmailAccount'] ? dr2['EmailAccount'] : ''),
+              phoneNumber: (dr2['TelephoneNO'] ? dr2['TelephoneNO'] : ''),
+            });
+          }
+
           if (action === 'getlist') {
             transProject.push({
               ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
@@ -571,15 +583,7 @@ namespace Data {
               maximumSeat: (dr1['maximumSeat'] ? parseInt(dr1['maximumSeat']) : 0),
               seatAvailable: dr1['seatAvailable'],
               minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
-              contactPerson: {
-                ID: (dr1['contactID'] ? dr1['contactID'] : ''),
-                fullName: {
-                  th: (dr1['contactNameTH'] ? dr1['contactNameTH'] : dr1['contactNameEN']),
-                  en: (dr1['contactNameEN'] ? dr1['contactNameEN'] : dr1['contactNameTH'])
-                },
-                email: (dr1['contactEmail'] ? dr1['contactEmail'] : ''),
-                phoneNumber: (dr1['contactPhone'] ? dr1['contactPhone'] : '')
-              },
+              contactPerson: contactPerson,
               registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : '')
             });
           }
@@ -668,15 +672,7 @@ namespace Data {
               maximumSeat: (dr1['maximumSeat'] ? parseInt(dr1['maximumSeat']) : 0),
               seatAvailable: (dr1['seatAvailable'] ? (parseInt(dr1['seatAvailable']) > 0 ? (parseInt(dr1['maximumSeat']) - parseInt(dr1['seatAvailable'])) : 0) : 0),
               minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
-              contactPerson: {
-                ID: (dr1['contactID'] ? dr1['contactID'] : ''),
-                fullName: {
-                  th: (dr1['contactNameTH'] ? dr1['contactNameTH'] : dr1['contactNameEN']),
-                  en: (dr1['contactNameEN'] ? dr1['contactNameEN'] : dr1['contactNameTH'])
-                },
-                email: (dr1['contactEmail'] ? dr1['contactEmail'] : ''),
-                phoneNumber: (dr1['contactPhone'] ? dr1['contactPhone'] : '')
-              },
+              contactPerson: contactPerson,
               registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : ''),
               transLocation: transLocation,
               transFeeType: transFeeType
@@ -732,202 +728,220 @@ namespace Data {
         let invoiceFee: Schema.InvoiceFee[] = [];
 
         for (let dr1 of result) {
+          let contactPerson: Schema.ContactPerson[] = [];
+          let contactPersons: [] = (dr1['contactPerson'] ? dr1['contactPerson'] : []);
+
+          for (let dr2 of contactPersons) {
+            contactPerson.push({
+              fullName: {
+                th: (dr2['FullName']['TH'] ? dr2['FullName']['TH'] : dr2['FullName']['EN']),
+                en: (dr2['FullName']['EN'] ? dr2['FullName']['EN'] : dr2['FullName']['TH']),
+              },
+              email: (dr2['EmailAccount'] ? dr2['EmailAccount'] : ''),
+              phoneNumber: (dr2['TelephoneNO'] ? dr2['TelephoneNO'] : ''),
+            });
+          }
+
+          let country: [] = (dr1['country'] ? dr1['country'] : []);
+          let province: [] = (dr1['province'] ? dr1['province'] : []);
+          let district: [] = (dr1['district'] ? dr1['district'] : []);
+          let subdistrict: [] = (dr1['subdistrict'] ? dr1['subdistrict'] : []);
+          let fee: [] = (dr1['fee'] ? dr1['fee'] : []);
+
+          transProject = {
+            ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
+            project: {
+              ID: (dr1['projectID'] ? dr1['projectID'] : ''),
+              category: {
+                ID: (dr1['projectCategoryID'] ? dr1['projectCategoryID'] : ''),
+                name: {
+                  th: (dr1['projectCategoryNameTH'] ? dr1['projectCategoryNameTH'] : dr1['projectCategoryNameEN']),
+                  en: (dr1['projectCategoryNameEN'] ? dr1['projectCategoryNameEN'] : dr1['projectCategoryNameTH'])
+                },
+                initial: (dr1['projectCategoryInitial'] ? dr1['projectCategoryInitial'] : '')
+              },
+              logo: (dr1['logo'] ? dr1['logo'] : ''),
+              name: {
+                th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
+                en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
+              },
+              about: {
+                th: (dr1['aboutTH'] ? dr1['aboutTH'] : dr1['aboutEN']),
+                en: (dr1['aboutEN'] ? dr1['aboutEN'] : dr1['aboutTH'])
+              }
+            },
+            description: {
+              th: (dr1['descriptionTH'] ? dr1['descriptionTH'] : dr1['descriptionEN']),
+              en: (dr1['descriptionEN'] ? dr1['descriptionEN'] : dr1['descriptionTH'])
+            },
+            examDate: {
+              startDate: (dr1['examStartDates'] ? dr1['examStartDates'] : ''),
+              endDate: (dr1['examEndDates'] ? dr1['examEndDates'] : '')
+            },
+            lastPaymentDate: (dr1['lastPaymentDates'] ? dr1['lastPaymentDates'] : ''),
+            contactPerson: contactPerson
+          };
+
+          transLocation = {
+            ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
+            location: {
+              ID: (dr1['locationID'] ? dr1['locationID'] : ''),
+              name: {
+                th: (dr1['locationNameTH'] ? dr1['locationNameTH'] : dr1['locationNameEN']),
+                en: (dr1['locationNameEN'] ? dr1['locationNameEN'] : dr1['locationNameTH'])
+              },
+              building: {
+                ID: (dr1['buildingID'] ? dr1['buildingID'] : ''),
+                name: {
+                  th: (dr1['buildingNameTH'] ? dr1['buildingNameTH'] : dr1['buildingNameEN']),
+                  en: (dr1['buildingNameEN'] ? dr1['buildingNameEN'] : dr1['buildingNameTH'])
+                }
+              },
+            }
+          };
+
+          for (let dr3 of country) {
+            deliAddress.country = {
+              ID: (dr3['id'] ? dr3['id'] : ''),
+              name: {
+                th: (dr3['countryNameTH'] ? dr3['countryNameTH'] : dr3['countryNameEN']),
+                en: (dr3['countryNameEN'] ? dr3['countryNameEN'] : dr3['countryNameTH'])
+              },
+              isoCountryCodes2Letter: (dr3['isoCountryCodes2Letter'] ? dr3['isoCountryCodes2Letter'] : ''),
+              isoCountryCodes3Letter: (dr3['isoCountryCodes3Letter'] ? dr3['isoCountryCodes3Letter'] : '')
+            };
+          }
+
+          for (let dr4 of province) {
+            deliAddress.province = {
+              ID: (dr4['id'] ? dr4['id'] : ''),
+              countryID: (dr4['plcCountryId'] ? dr4['plcCountryId'] : ''),
+              isoCountryCodes3Letter: (dr4['isoCountryCodes3Letter'] ? dr4['isoCountryCodes3Letter'] : ''),
+              name: {
+                th: (dr4['provinceNameTH'] ? dr4['provinceNameTH'] : dr4['provinceNameEN']),
+                en: (dr4['provinceNameEN'] ? dr4['provinceNameEN'] : dr4['provinceNameTH'])
+              },
+              regional: (dr4['regionalName'] ? dr4['regionalName'] : '')
+            };
+          }
+
+          for (let dr5 of district) {
+            deliAddress.district = {
+              ID: (dr5['id'] ? dr5['id'] : ''),
+              countryID: (dr5['plcCountryId'] ? dr5['plcCountryId'] : ''),
+              isoCountryCodes3Letter: (dr5['isoCountryCodes3Letter'] ? dr5['isoCountryCodes3Letter'] : ''),
+              provinceID: (dr5['plcProvinceId'] ? dr5['plcProvinceId'] : ''),
+              provinceName: {
+                th: (dr5['provinceNameTH'] ? dr5['provinceNameTH'] : dr5['provinceNameEN']),
+                en: (dr5['provinceNameEN'] ? dr5['provinceNameEN'] : dr5['provinceNameTH'])
+              },
+              name: {
+                th: (dr5['districtNameTH'] ? dr5['districtNameTH'] : dr5['districtNameEN']),
+                en: (dr5['districtNameEN'] ? dr5['districtNameEN'] : dr5['districtNameTH'])
+              },
+              zipCode: (dr5['zipCode'] ? dr5['zipCode'] : '')
+            };
+          }
+
+          for (let dr6 of subdistrict) {
+            deliAddress.subdistrict = {
+              ID: (dr6['id'] ? dr6['id'] : ''),
+              countryID: (dr6['plcCountryId'] ? dr6['plcCountryId'] : ''),
+              isoCountryCodes3Letter: (dr6['isoCountryCodes3Letter'] ? dr6['isoCountryCodes3Letter'] : ''),
+              provinceID: (dr6['plcProvinceId'] ? dr6['plcProvinceId'] : ''),
+              provinceName: {
+                th: (dr6['provinceNameTH'] ? dr6['provinceNameTH'] : dr6['provinceNameEN']),
+                en: (dr6['provinceNameEN'] ? dr6['provinceNameEN'] : dr6['provinceNameTH'])
+              },
+              districtID: (dr6['plcDistrictId'] ? dr6['plcDistrictId'] : ''),
+              districtName: {
+                th: (dr6['districtNameTH'] ? dr6['districtNameTH'] : dr6['districtNameEN']),
+                en: (dr6['districtNameEN'] ? dr6['districtNameEN'] : dr6['districtNameTH'])
+              },
+              zipCode: (dr6['zipCode'] ? dr6['zipCode'] : ''),
+              name: {
+                th: (dr6['subdistrictNameTH'] ? dr6['subdistrictNameTH'] : dr6['subdistrictNameEN']),
+                en: (dr6['subdistrictNameEN'] ? dr6['subdistrictNameEN'] : dr6['subdistrictNameTH'])
+              }
+            };
+          }
+
+          transDeliAddress = {
+            ID: (dr1['transDeliAddressID'] ? dr1['transDeliAddressID'] : ''),
+            address: (dr1['address'] ? dr1['address'] : ''),
+            country: deliAddress.country,
+            province: deliAddress.province,
+            district: deliAddress.district,
+            subdistrict: deliAddress.subdistrict,
+            postalCode: (dr1['postalCode'] ? dr1['postalCode'] : ''),
+            phoneNumber: (dr1['phoneNumber'] ? dr1['phoneNumber'] : ''),
+          };
+
           if (action === 'get') {
-            let country: [] = (dr1['country'] ? dr1['country'] : []);
-            let province: [] = (dr1['province'] ? dr1['province'] : []);
-            let district: [] = (dr1['district'] ? dr1['district'] : []);
-            let subdistrict: [] = (dr1['subdistrict'] ? dr1['subdistrict'] : []);
-            let fee: [] = (dr1['fee'] ? dr1['fee'] : []);
-
-            transProject = {
-              ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
-              project: {
-                ID: (dr1['projectID'] ? dr1['projectID'] : ''),
-                category: {
-                  ID: (dr1['projectCategoryID'] ? dr1['projectCategoryID'] : ''),
-                  name: {
-                    th: (dr1['projectCategoryNameTH'] ? dr1['projectCategoryNameTH'] : dr1['projectCategoryNameEN']),
-                    en: (dr1['projectCategoryNameEN'] ? dr1['projectCategoryNameEN'] : dr1['projectCategoryNameTH'])
-                  },
-                  initial: (dr1['projectCategoryInitial'] ? dr1['projectCategoryInitial'] : '')
-                },
-                logo: (dr1['logo'] ? dr1['logo'] : ''),
-                name: {
-                  th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
-                  en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
-                },
-                about: {
-                  th: (dr1['aboutTH'] ? dr1['aboutTH'] : dr1['aboutEN']),
-                  en: (dr1['aboutEN'] ? dr1['aboutEN'] : dr1['aboutTH'])
-                }
-              },
-              description: {
-                th: (dr1['descriptionTH'] ? dr1['descriptionTH'] : dr1['descriptionEN']),
-                en: (dr1['descriptionEN'] ? dr1['descriptionEN'] : dr1['descriptionTH'])
-              },
-              examDate: {
-                startDate: (dr1['examStartDates'] ? dr1['examStartDates'] : ''),
-                endDate: (dr1['examEndDates'] ? dr1['examEndDates'] : '')
-              },
-              lastPaymentDate: (dr1['lastPaymentDates'] ? dr1['lastPaymentDates'] : ''),
-              contactPerson: {
-                fullName: {
-                  th: (dr1['contactNameTH'] ? dr1['contactNameTH'] : dr1['contactNameEN']),
-                  en: (dr1['contactNameEN'] ? dr1['contactNameEN'] : dr1['contactNameTH'])
-                },
-                email: (dr1['contactEmail'] ? dr1['contactEmail'] : ''),
-                phoneNumber: (dr1['contactPhone'] ? dr1['contactPhone'] : '')
-              }
-            };
-
-            transLocation = {
-              ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
-              location: {
-                ID: (dr1['locationID'] ? dr1['locationID'] : ''),
-                name: {
-                  th: (dr1['locationNameTH'] ? dr1['locationNameTH'] : dr1['locationNameEN']),
-                  en: (dr1['locationNameEN'] ? dr1['locationNameEN'] : dr1['locationNameTH'])
-                },
-                building: {
-                  ID: (dr1['buildingID'] ? dr1['buildingID'] : ''),
-                  name: {
-                    th: (dr1['buildingNameTH'] ? dr1['buildingNameTH'] : dr1['buildingNameEN']),
-                    en: (dr1['buildingNameEN'] ? dr1['buildingNameEN'] : dr1['buildingNameTH'])
-                  }
-                },
-              }
-            };
-
-            for (let dr2 of country) {
-              deliAddress.country = {
-                ID: (dr2['id'] ? dr2['id'] : ''),
-                name: {
-                  th: (dr2['countryNameTH'] ? dr2['countryNameTH'] : dr2['countryNameEN']),
-                  en: (dr2['countryNameEN'] ? dr2['countryNameEN'] : dr2['countryNameTH'])
-                },
-                isoCountryCodes2Letter: (dr2['isoCountryCodes2Letter'] ? dr2['isoCountryCodes2Letter'] : ''),
-                isoCountryCodes3Letter: (dr2['isoCountryCodes3Letter'] ? dr2['isoCountryCodes3Letter'] : '')
-              };
-            }
-
-            for (let dr3 of province) {
-              deliAddress.province = {
-                ID: (dr3['id'] ? dr3['id'] : ''),
-                countryID: (dr3['plcCountryId'] ? dr3['plcCountryId'] : ''),
-                isoCountryCodes3Letter: (dr3['isoCountryCodes3Letter'] ? dr3['isoCountryCodes3Letter'] : ''),
-                name: {
-                  th: (dr3['provinceNameTH'] ? dr3['provinceNameTH'] : dr3['provinceNameEN']),
-                  en: (dr3['provinceNameEN'] ? dr3['provinceNameEN'] : dr3['provinceNameTH'])
-                },
-                regional: (dr3['regionalName'] ? dr3['regionalName'] : '')
-              };
-            }
-
-            for (let dr4 of district) {
-              deliAddress.district = {
-                ID: (dr4['id'] ? dr4['id'] : ''),
-                countryID: (dr4['plcCountryId'] ? dr4['plcCountryId'] : ''),
-                isoCountryCodes3Letter: (dr4['isoCountryCodes3Letter'] ? dr4['isoCountryCodes3Letter'] : ''),
-                provinceID: (dr4['plcProvinceId'] ? dr4['plcProvinceId'] : ''),
-                provinceName: {
-                  th: (dr4['provinceNameTH'] ? dr4['provinceNameTH'] : dr4['provinceNameEN']),
-                  en: (dr4['provinceNameEN'] ? dr4['provinceNameEN'] : dr4['provinceNameTH'])
-                },
-                name: {
-                  th: (dr4['districtNameTH'] ? dr4['districtNameTH'] : dr4['districtNameEN']),
-                  en: (dr4['districtNameEN'] ? dr4['districtNameEN'] : dr4['districtNameTH'])
-                },
-                zipCode: (dr4['zipCode'] ? dr4['zipCode'] : '')
-              };
-            }
-
-            for (let dr5 of subdistrict) {
-              deliAddress.subdistrict = {
-                ID: (dr5['id'] ? dr5['id'] : ''),
-                countryID: (dr5['plcCountryId'] ? dr5['plcCountryId'] : ''),
-                isoCountryCodes3Letter: (dr5['isoCountryCodes3Letter'] ? dr5['isoCountryCodes3Letter'] : ''),
-                provinceID: (dr5['plcProvinceId'] ? dr5['plcProvinceId'] : ''),
-                provinceName: {
-                  th: (dr5['provinceNameTH'] ? dr5['provinceNameTH'] : dr5['provinceNameEN']),
-                  en: (dr5['provinceNameEN'] ? dr5['provinceNameEN'] : dr5['provinceNameTH'])
-                },
-                districtID: (dr5['plcDistrictId'] ? dr5['plcDistrictId'] : ''),
-                districtName: {
-                  th: (dr5['districtNameTH'] ? dr5['districtNameTH'] : dr5['districtNameEN']),
-                  en: (dr5['districtNameEN'] ? dr5['districtNameEN'] : dr5['districtNameTH'])
-                },
-                zipCode: (dr5['zipCode'] ? dr5['zipCode'] : ''),
-                name: {
-                  th: (dr5['subdistrictNameTH'] ? dr5['subdistrictNameTH'] : dr5['subdistrictNameEN']),
-                  en: (dr5['subdistrictNameEN'] ? dr5['subdistrictNameEN'] : dr5['subdistrictNameTH'])
-                }
-              };
-            }
-
-            transDeliAddress = {
-              ID: (dr1['transDeliAddressID'] ? dr1['transDeliAddressID'] : ''),
-              address: (dr1['address'] ? dr1['address'] : ''),
-              country: deliAddress.country,
-              province: deliAddress.province,
-              district: deliAddress.district,
-              subdistrict: deliAddress.subdistrict,
-              postalCode: (dr1['postalCode'] ? dr1['postalCode'] : ''),
-              phoneNumber: (dr1['phoneNumber'] ? dr1['phoneNumber'] : ''),
-            };
-
-            for (let dr6 of fee) {
+            for (let dr7 of fee) {
               invoiceFee.push({
-                invoiceID: (dr6['invoiceID'] ? dr6['invoiceID'] : ''),
+                invoiceID: (dr7['invoiceID'] ? dr7['invoiceID'] : ''),
                 feeType: {
-                  ID: (dr6['feeTypeID'] ? dr6['feeTypeID'] : ''),
+                  ID: (dr7['feeTypeID'] ? dr7['feeTypeID'] : ''),
                   name: {
-                    th: (dr6['feeTypeNameTH'] ? dr6['feeTypeNameTH'] : dr6['feeTypeNameEN']),
-                    en: (dr6['feeTypeNameEN'] ? dr6['feeTypeNameEN'] : dr6['feeTypeNameTH'])
+                    th: (dr7['feeTypeNameTH'] ? dr7['feeTypeNameTH'] : dr7['feeTypeNameEN']),
+                    en: (dr7['feeTypeNameEN'] ? dr7['feeTypeNameEN'] : dr7['feeTypeNameTH'])
                   },
-                  amount: (dr6['amount'] ? parseFloat(dr6['amount']) : 0),
-                  toggle: (dr6['toggle'] ? dr6['toggle'] : ''),
+                  amount: (dr7['amount'] ? parseFloat(dr7['amount']) : 0),
+                  toggle: (dr7['toggle'] ? dr7['toggle'] : ''),
                 }
               });
             }
-
-            transRegistered.push({
-              ID: (dr1['transRegisteredID'] ? dr1['transRegisteredID'] : ''),
-              registeredDate: (dr1['registeredDates'] ? dr1['registeredDates'] : ''),
-              transProject: transProject,
-              transLocation: transLocation,
-              transDeliAddress: transDeliAddress,
-              invoice: {
-                ID: (dr1['invoiceID'] ? dr1['invoiceID'] : ''),
-                name: {
-                  th: (dr1['invoiceNameTH'] ? dr1['invoiceNameTH'] : dr1['invoiceNameEN']),
-                  en: (dr1['invoiceNameEN'] ? dr1['invoiceNameEN'] : dr1['invoiceNameTH'])
-                },
-                namePrintReceipt: (dr1['invoiceNamePrintReceipt'] ? dr1['invoiceNamePrintReceipt'] : ''),
-                billerID: (dr1['billerID'] ? dr1['billerID'] : ''),
-                merchantName: (dr1['merchantName'] ? dr1['merchantName'] : ''),
-                qrRef1: (dr1['qrRef1'] ? dr1['qrRef1'] : ''),
-                qrRef2: (dr1['qrRef2'] ? dr1['qrRef2'] : ''),
-                qrRef3: (dr1['qrRef3'] ? dr1['qrRef3'] : ''),
-                qrImage: (dr1['qrImage'] ? dr1['qrImage'] : ''),
-                qrNewRef1: (dr1['qrNewRef1'] ? dr1['qrNewRef1'] : ''),
-                bankRequest: (dr1['bankRequest'] ? dr1['bankRequest'] : ''),
-                bankTransID: (dr1['bankTransID'] ? dr1['bankTransID'] : ''),
-                payment: {
-                  amount: (dr1['paidAmount'] ? parseFloat(dr1['paidAmount']) : 0),
-                  confirmDate: (dr1['paymentConfirmDate'] ? dr1['paymentConfirmDate'] : ''),
-                  by: (dr1['paidBy'] ? dr1['paidBy'] : ''),
-                  date: (dr1['paidDates'] ? dr1['paidDates'] : ''),
-                  status: (dr1['paidStatus'] ? dr1['paidStatus'] : 'N')
-                }
-              },
-              invoiceFee: invoiceFee,
-              totalFeeAmount: (dr1['totalFeeAmount'] ? parseFloat(dr1['totalFeeAmount']) : 0),
-            })
           }
+
+          transRegistered.push({
+            ID: (dr1['transRegisteredID'] ? dr1['transRegisteredID'] : ''),
+            registeredDate: (dr1['registeredDates'] ? dr1['registeredDates'] : ''),
+            transProject: transProject,
+            transLocation: transLocation,
+            transDeliAddress: transDeliAddress,
+            invoice: {
+              ID: (dr1['invoiceID'] ? dr1['invoiceID'] : ''),
+              name: {
+                th: (dr1['invoiceNameTH'] ? dr1['invoiceNameTH'] : dr1['invoiceNameEN']),
+                en: (dr1['invoiceNameEN'] ? dr1['invoiceNameEN'] : dr1['invoiceNameTH'])
+              },
+              namePrintReceipt: (dr1['invoiceNamePrintReceipt'] ? dr1['invoiceNamePrintReceipt'] : ''),
+              billerID: (dr1['billerID'] ? dr1['billerID'] : ''),
+              merchantName: (dr1['merchantName'] ? dr1['merchantName'] : ''),
+              qrRef1: (dr1['qrRef1'] ? dr1['qrRef1'] : ''),
+              qrRef2: (dr1['qrRef2'] ? dr1['qrRef2'] : ''),
+              qrRef3: (dr1['qrRef3'] ? dr1['qrRef3'] : ''),
+              qrImage: (dr1['qrImage'] ? dr1['qrImage'] : ''),
+              qrNewRef1: (dr1['qrNewRef1'] ? dr1['qrNewRef1'] : ''),
+              bankRequest: (dr1['bankRequest'] ? dr1['bankRequest'] : ''),
+              bankTransID: (dr1['bankTransID'] ? dr1['bankTransID'] : ''),
+              payment: {
+                amount: (dr1['paidAmount'] ? parseFloat(dr1['paidAmount']) : 0),
+                confirmDate: (dr1['paymentConfirmDate'] ? dr1['paymentConfirmDate'] : ''),
+                by: (dr1['paidBy'] ? dr1['paidBy'] : ''),
+                date: (dr1['paidDates'] ? dr1['paidDates'] : ''),
+                status: (dr1['paidStatus'] ? dr1['paidStatus'] : 'N')
+              }
+            },
+            invoiceFee: invoiceFee,
+            totalFeeAmount: (dr1['totalFeeAmount'] ? parseFloat(dr1['totalFeeAmount']) : 0),
+          });
         }
 
         return transRegistered;
       });
+    }
+
+    getList(paymentStatus: string): Promise<Schema.TransRegistered[]> {
+      let query = [
+        '',
+        ('paymentStatus=' + paymentStatus)
+      ].join('&');
+
+      return this.getDataSource('getlist', query).then((result: Schema.TransRegistered[]) => {
+        return result;
+      })
     }
 
     get(cuid: string): Promise<Schema.TransRegistered> {
@@ -1004,21 +1018,21 @@ namespace Data {
         ID: 'Y',
         name: {
           th: 'ชำระเงินเรียบร้อย',
-          en: 'Payment Completed'
+          en: 'Payment completed'
         }
       },
       {
         ID: 'W',
         name: {
           th: 'ตรวจสอบการชำระเงิน',
-          en: 'Check Payment'
+          en: 'Check payment'
         }
       },
       {
         ID: 'N',
         name: {
           th: 'รอการชำระเงิน',
-          en: 'Pending Payment'
+          en: 'Pending payment'
         }
       }
     ]

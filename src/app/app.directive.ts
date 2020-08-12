@@ -2,14 +2,14 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๕/๐๕/๒๕๖๓>
-Modify date : <๑๔/๐๗/๒๕๖๓>
+Modify date : <๑๑/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 'use strict';
 
-import {Directive, HostListener, ElementRef, Renderer, Pipe, PipeTransform} from '@angular/core';
+import {Directive, HostListener, ElementRef, Renderer, Pipe, PipeTransform, Input, OnInit, ComponentFactoryResolver, ViewContainerRef, ChangeDetectorRef, Type} from '@angular/core';
 
 @Directive({
   selector: 'input[trimOnBlur], textarea[trimOnBlur]'
@@ -46,6 +46,27 @@ export class FocusRemoverDirective {
   @HostListener('focus')
   onFocus() {
     this.renderer.invokeElementMethod(this.el.nativeElement, 'blur', []);
+  }
+}
+
+@Directive({
+  selector: '[dynamicComponent]'
+})
+export class DynamicComponentDirective implements OnInit {
+  @Input('dynamicComponent') component: Type<any>;
+
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private viewContainerRef: ViewContainerRef,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
+
+  ngOnInit() {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.component)
+
+    this.viewContainerRef.clear();
+    this.viewContainerRef.createComponent(componentFactory);
+    this.changeDetectorRef.detectChanges();
   }
 }
 

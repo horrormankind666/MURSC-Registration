@@ -104,7 +104,7 @@
     <p class="bold size22 mb-0">{{data.transRegistered$.transProject.project.name[appService.lang]}}</p>
     <div class="regular text-dark size15 mb-1" *ngIf="data.transRegistered$.transProject.description[appService.lang]">{{data.transRegistered$.transProject.description[appService.lang]}}</div>
     <a routerLink="../../../../Project/{{data.transRegistered$.transProject.project.category.initial}}" class="link regular size15 mt-1 mb-2">
-      #{{data.transRegistered$.transProject.project.category.name[appService.lang]}}
+      #{{data.transRegistered$.transProject.project.category.name[appService.lang] | titlecase}}
     </a>
   </div>
 </ng-template>
@@ -134,7 +134,7 @@
                 'text-warning': (data.transRegistered$.invoice.payment.status === 'W'),
                 'text-danger': (data.transRegistered$.invoice.payment.status === 'N')
               }">
-              {{(dataService.statuses.get(dataService.paymentStatus.data$, data.transRegistered$.invoice.payment.status)).name[appService.lang]}}
+              {{(dataService.statuses.get(dataService.paymentStatus.data$, data.transRegistered$.invoice.payment.status)).name[appService.lang] | titlecase}}
               <span class="text-primary size15">
                 <a href="javascript:void(0)" class="link" (click)="appService.scrollIntoView('paymentInfo')" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">#{{'payment.confirm' | translate | lowercase}}</a>
                 <a href="javascript:void(0)" class="link" (click)="getRecheckPayment()" *ngIf="data.transRegistered$.invoice.payment.status === 'W'">#{{'recheck' | translate | lowercase}}</a>
@@ -144,7 +144,7 @@
           </div>
         </div>
         <div class="form-group row mb-01" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">
-          <label for="col-dateofpayment" class="col-form-label">{{'invoice.dateOfPayment' | translate}}</label>
+          <label for="col-dateofpayment" class="col-form-label">{{'invoice.dateOfPayment' | translate | titlecase}}</label>
           <div class="col">
             <div class="d-table w-100 size-l calendar-date">
               <div class="d-table-row">
@@ -157,7 +157,7 @@
           </div>
         </div>
         <div class="form-group row mb-01" *ngIf="data.transRegistered$.invoice.payment.status === 'W'">
-          <label for="col-confirmdateofpayment" class="col-form-label">{{'invoice.paymentConfirmedDate' | translate}}</label>
+          <label for="col-confirmdateofpayment" class="col-form-label">{{'invoice.paymentConfirmedDate' | translate | titlecase}}</label>
           <div class="col">
             <div class="d-table w-100 size-l calendar-date">
               <div class="d-table-row">
@@ -194,23 +194,24 @@
 </ng-template>
 <ng-template #contactInfo>
   <div class="contact-info text-white size14 project-contact-info">
-    <div class="form">
+    <div class="form" *ngFor="let contactPerson of data.transRegistered$.transProject.contactPerson; index as order">
+      <div class="dropdown-divider mt-2 mb-2" *ngIf="order > 0"></div>
       <div class="form-group row mr-0 mb-1 ml-0">
         <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fas fa-address-book"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.transRegistered$.transProject.contactPerson.fullName[appService.lang]}}</span>
+          <span class="form-text regular mt-0">{{contactPerson.fullName[appService.lang] | titlecase}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-1 ml-0">
         <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fas fa-envelope"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.transRegistered$.transProject.contactPerson.email}}</span>
+          <span class="form-text regular mt-0">{{contactPerson.email | lowercase}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-0 ml-0">
         <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fas fa-phone"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.transRegistered$.transProject.contactPerson.phoneNumber}}</span>
+          <span class="form-text regular mt-0">{{contactPerson.phoneNumber}}</span>
         </div>
       </div>
     </div>
@@ -319,7 +320,7 @@
                   </div>
                 </div>
                 <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-address" class="col-form-label col-form-label-sm pl-0 regular">{{'address.label' | translate}}</label>
+                  <label for="col-deliaddress-address" class="col-form-label col-form-label-sm pl-0 regular">{{'address.label' | translate | titlecase}}</label>
                   <div class="col">
                     <textarea autosize trimOnBlur class="form-control form-control-sm regular"
                       name="col-deliaddress-address"
@@ -330,12 +331,12 @@
                   </div>
                 </div>
                 <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-country" class="col-form-label col-form-label-sm pl-0 regular">{{'address.country' | translate}}</label>
+                  <label for="col-deliaddress-country" class="col-form-label col-form-label-sm pl-0 regular">{{'address.country' | translate | titlecase}}</label>
                   <div class="col">
                     <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.country.isLoading"></i>
                     <ng-select
                       class="size-sm"
-                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
                       [(ngModel)]="deliAddress.formField.country.selected"
                       (ngModelChange)="deliAddress.watchChange()"
                       (change)="deliAddress.getListProvince()"
@@ -346,12 +347,12 @@
                   </div>
                 </div>
                 <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-province" class="col-form-label col-form-label-sm pl-0 regular">{{'address.province' | translate}}</label>
+                  <label for="col-deliaddress-province" class="col-form-label col-form-label-sm pl-0 regular">{{'address.province' | translate | titlecase}}</label>
                   <div class="col">
                     <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.province.isLoading"></i>
                     <ng-select
                       class="size-sm"
-                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
                       [(ngModel)]="deliAddress.formField.province.selected"
                       (ngModelChange)="deliAddress.watchChange()"
                       (change)="deliAddress.getListDistrict()"
@@ -362,12 +363,12 @@
                   </div>
                 </div>
                 <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-district" class="col-form-label col-form-label-sm pl-0 regular">{{'address.district' | translate}}</label>
+                  <label for="col-deliaddress-district" class="col-form-label col-form-label-sm pl-0 regular">{{'address.district' | translate | titlecase}}</label>
                   <div class="col">
                     <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.district.isLoading"></i>
                     <ng-select
                       class="size-sm"
-                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
                       [(ngModel)]="deliAddress.formField.district.selected"
                       (ngModelChange)="deliAddress.watchChange()"
                       (change)="deliAddress.getListSubdistrict()"
@@ -378,12 +379,12 @@
                   </div>
                 </div>
                 <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-subdistrict" class="col-form-label col-form-label-sm pl-0 regular">{{'address.subdistrict' | translate}}</label>
+                  <label for="col-deliaddress-subdistrict" class="col-form-label col-form-label-sm pl-0 regular">{{'address.subdistrict' | translate | titlecase}}</label>
                   <div class="col">
                     <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.subdistrict.isLoading"></i>
                     <ng-select
                       class="size-sm"
-                      placeholder="{{'placeholder.selectItem' | translate}}"
+                      placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
                       [(ngModel)]="deliAddress.formField.subdistrict.selected"
                       (ngModelChange)="deliAddress.watchChange()"
                       [disabled]="deliAddress.saveChange.isSaving || payment.saveChange.isSaving"
@@ -393,7 +394,7 @@
                   </div>
                 </div>
                 <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-postalcode" class="col-form-label col-form-label-sm pl-0 regular">{{'address.postalCode' | translate}}</label>
+                  <label for="col-deliaddress-postalcode" class="col-form-label col-form-label-sm pl-0 regular">{{'address.postalCode' | translate | titlecase}}</label>
                   <div class="col">
                     <input trimOnBlur type="text" class="form-control form-control-sm regular"
                       name="col-deliaddress-postalcode"
@@ -406,7 +407,7 @@
                   [ngClass]="{
                     'mb-3': !payment.saveChange.isSaving
                   }">
-                  <label for="col-deliaddress-phoneNumber" class="col-form-label col-form-label-sm pl-0 regular">{{'phone' | translate}}</label>
+                  <label for="col-deliaddress-phoneNumber" class="col-form-label col-form-label-sm pl-0 regular">{{'phone' | translate | titlecase}}</label>
                   <div class="col">
                     <input trimOnBlur type="text" class="form-control form-control-sm regular"
                       name="col-deliaddress-phoneNumber"
@@ -430,43 +431,43 @@
               </div>
               <div class="form bg-success rounded-xxl p-3 size14 regular text-white" *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">
                 <div class="form-group row mb-2">
-                  <label for="col-deliaddress-address" class="col-form-label">{{'address.label' | translate}}</label>
+                  <label for="col-deliaddress-address" class="col-form-label">{{'address.label' | translate | titlecase}}</label>
                   <div class="col">
                     <span class="form-text" [innerHTML]="data.transRegistered$.transDeliAddress.address | nl2br"></span>
                   </div>
                 </div>
                 <div class="form-group row mb-2">
-                  <label for="col-deliaddress-country" class="col-form-label">{{'address.country' | translate}}</label>
+                  <label for="col-deliaddress-country" class="col-form-label">{{'address.country' | translate | titlecase}}</label>
                   <div class="col">
                     <span class="form-text">{{data.transRegistered$.transDeliAddress.country.name[appService.lang]}}</span>
                   </div>
                 </div>
                 <div class="form-group row mb-2">
-                  <label for="col-deliaddress-province" class="col-form-label">{{'address.province' | translate}}</label>
+                  <label for="col-deliaddress-province" class="col-form-label">{{'address.province' | translate | titlecase}}</label>
                   <div class="col">
                     <span class="form-text">{{data.transRegistered$.transDeliAddress.province.name[appService.lang]}}</span>
                   </div>
                 </div>
                 <div class="form-group row mb-2">
-                  <label for="col-deliaddress-district" class="col-form-label">{{'address.district' | translate}}</label>
+                  <label for="col-deliaddress-district" class="col-form-label">{{'address.district' | translate | titlecase}}</label>
                   <div class="col">
                     <span class="form-text">{{data.transRegistered$.transDeliAddress.district.name[appService.lang]}}</span>
                   </div>
                 </div>
                 <div class="form-group row mb-2">
-                  <label for="col-deliaddress-subdistrict" class="col-form-label">{{'address.subdistrict' | translate}}</label>
+                  <label for="col-deliaddress-subdistrict" class="col-form-label">{{'address.subdistrict' | translate | titlecase}}</label>
                   <div class="col">
                     <span class="form-text">{{data.transRegistered$.transDeliAddress.subdistrict.name[appService.lang]}}</span>
                   </div>
                 </div>
                 <div class="form-group row mb-2">
-                  <label for="col-deliaddress-postalcode" class="col-form-label">{{'address.postalCode' | translate}}</label>
+                  <label for="col-deliaddress-postalcode" class="col-form-label">{{'address.postalCode' | translate | titlecase}}</label>
                   <div class="col">
                     <span class="form-text">{{data.transRegistered$.transDeliAddress.postalCode}}</span>
                   </div>
                 </div>
                 <div class="form-group row mb-0">
-                  <label for="col-deliaddress-phoneNumber" class="col-form-label">{{'phone' | translate}}</label>
+                  <label for="col-deliaddress-phoneNumber" class="col-form-label">{{'phone' | translate | titlecase}}</label>
                   <div class="col">
                     <span class="form-text">{{data.transRegistered$.transDeliAddress.phoneNumber}}</span>
                   </div>
@@ -505,7 +506,7 @@
                 </div>
               </div>
               <div class="form-group w-100">
-                <label for="payment-issuereceipt" class="regular text-white">{{'invoice.issueReceiptAs' | translate}}</label>
+                <label for="payment-issuereceipt" class="regular text-white">{{'invoice.issueReceiptAs' | translate | titlecase}}</label>
                 <div class="input-group has-icon" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">
                   <input trimOnBlur type="text" class="form-control inputbox pl-4 regular text-white size14"
                     name="payment-issuereceipt"
@@ -551,7 +552,7 @@
           class="btn btn-warning bold size16"
           (click)="appService.downloadBase64Image(payment.formField.qrcodeImage, ('QRCode' + data.transRegistered$.invoice.qrRef1 + data.transRegistered$.invoice.qrRef2), 'png')">
           <i class="fas fa-download"></i>
-          {{'download' | translate}} QR Code
+          {{'download' | translate | titlecase}} QR Code
         </button>
       </div>
     </div>

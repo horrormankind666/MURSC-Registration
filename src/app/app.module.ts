@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๐๔/๐๘/๒๕๖๓>
+Modify date : <๑๑/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -31,7 +31,7 @@ import {AppService} from './app.service';
 import {AuthGuardService} from './auth-guard.service';
 import {AuthService} from './auth.service';
 
-import {TrimOnBlurDirective, FocusRemoverDirective, Nl2BrPipe} from './app.directive';
+import {TrimOnBlurDirective, FocusRemoverDirective, DynamicComponentDirective, Nl2BrPipe} from './app.directive';
 
 import {appRouting} from './app-routing.module';
 
@@ -45,6 +45,10 @@ import {ProjectHomeComponent} from './project/home/project-home.component';
 import {ProjectDetailComponent} from './project/detail/project-detail.component';
 import {RegisteredComponent} from './registered/registered.component';
 import {TransactionRegisteredHomeComponent} from './transaction/registered/home/transaction-registered-home.component';
+import {TransactionRegisteredAllComponent} from './transaction/registered/home/all/transaction-registered-all.component';
+import {TransactionRegisteredPaymentCompletedComponent} from './transaction/registered/home/payment-completed/transaction-registered-payment-completed.component';
+import {TransactionRegisteredCheckPaymentComponent} from './transaction/registered/home/check-payment/transaction-registered-check-payment.component';
+import {TransactionRegisteredPendingPaymentComponent} from './transaction/registered/home/pending-payment/transaction-registered-pending-payment.component';
 import {TransactionRegisteredDetailComponent} from './transaction/registered/detail/transaction-registered-detail.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -66,9 +70,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProjectDetailComponent,
     RegisteredComponent,
     TransactionRegisteredHomeComponent,
+    TransactionRegisteredAllComponent,
+    TransactionRegisteredPaymentCompletedComponent,
+    TransactionRegisteredCheckPaymentComponent,
+    TransactionRegisteredPendingPaymentComponent,
     TransactionRegisteredDetailComponent,
     TrimOnBlurDirective,
     FocusRemoverDirective,
+    DynamicComponentDirective,
     Nl2BrPipe
   ],
   imports: [
@@ -111,7 +120,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalErrorComponent,
     ModalConfirmComponent,
     ModalImageComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    TransactionRegisteredAllComponent,
+    TransactionRegisteredPaymentCompletedComponent,
+    TransactionRegisteredCheckPaymentComponent,
+    TransactionRegisteredPendingPaymentComponent
   ]
 })
 

@@ -2,19 +2,32 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๕/๐๘/๒๕๖๓>
-Modify date : <๐๕/๐๘/๒๕๖๓>
+Modify date : <๐๗/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 @import '../../../../styles.scss';
 
-.transaction-registered-home-view .nav-tabs .nav-link {
-  background: #FF0000 !important;
+.transaction-registered-home-view .nav-tabs .nav-item {
+  width: 25%;
 }
-@media screen and (max-width: 733px) {
-  .transaction-registered-home-view .nav-tabs,
-  .transaction-registered-home-view .nav-tabs .nav-item {
-    display: block !important;
+.transaction-registered-home-view .tab-title {
+  display: none;
+}
+.transaction-registered-home-view .tab-title .d-table {
+  table-layout: fixed;
+}
+.transaction-registered-home-view .dropdown-divider {
+  border-top-width: 0;
+}
+@media screen and (max-width: 818px) {
+  .transaction-registered-home-view .tab-title {
+    display: -ms-flexbox;
+    display: flex;
   }
+  .transaction-registered-home-view .dropdown-divider {
+    border-top-width: 1px;
+  }
+  @include tabset-responsive('.transaction-registered-home-view');
 }

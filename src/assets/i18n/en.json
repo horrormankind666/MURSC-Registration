@@ -12,7 +12,7 @@
     "saving": "Saving...",
     "checking": "Checking..."
   },
-  "pageNotFound": "Page Not Found",
+  "pageNotFound": "Page not found.",
   "save": {
     "label": "Save",
     "error": {
@@ -29,11 +29,11 @@
   "select": "Select",
   "registered": {
     "label": "Registered",
-    "info": "Registered Information",
-    "detail": "Registered Detail",
-    "date": "Registered Date",
-    "at": "Registered At",
-    "confirm": "Confirm Registered",
+    "info": "Registered information",
+    "detail": "Registered detail",
+    "date": "Registered date",
+    "at": "Registered at",
+    "confirm": "Confirm registered",
     "save": {
       "error": {
         "location": "Please select a location.",
@@ -65,7 +65,7 @@
   "end": "End",
   "total": {
     "label": "Total",
-    "amount": "Total Amount"
+    "amount": "Total amount"
   },
   "remain": "Remain",
   "name": "Name",
@@ -75,13 +75,13 @@
   "amount": "Amount",
   "seat": {
     "label": "Seat",
-    "seatTotal": "Seat Total",
-    "seatAvailable": "Seat Available"
+    "seatTotal": "Seat total",
+    "seatAvailable": "Seat available"
   },
   "payment": {
     "label": "Payment",
-    "confirm": "Confirm Payment",
-    "goto": "Go To Payment",
+    "confirm": "Confirm payment",
+    "goto": "Go to payment",
     "save": {
       "error": {
         "issueReceiptAs": "Please fill in the name of the recipient of the receipt."
@@ -102,79 +102,79 @@
   },
   "download": "Download",
   "keyword": "Keyword",
-  "registrationStatus": "Registration Status",
+  "registrationStatus": "Registration status",
   "user": {
     "label": "User",
-    "info": "User Information",
+    "info": "User information",
     "registered": {
-      "label": "User Registered",
-      "info": "User Registered Information"
+      "label": "User registered",
+      "info": "User registered information"
     }
   },
   "project": {
     "label": "Project",
-    "name": "Project Name",
-    "registrationDate": "Registration Date",
+    "name": "Project name",
+    "registrationDate": "Registration date",
     "seat": "Seat",
-    "seatAvailable": "Seat Available",
-    "registrationFee": "Registration Fee",
-    "lastPaymentDate": "Last Payment Date",
-    "detail": "Project Detail",
+    "seatAvailable": "Seat available",
+    "registrationFee": "Registration fee",
+    "lastPaymentDate": "Last payment date",
+    "detail": "Project detail",
     "error": {
-      "notFound": "Project detail not found"
+      "notFound": "Project detail not found."
     }
   },
   "location": {
     "label": "Location",
-    "info": "Location Information",
-    "name": "Location Name",
-    "seatTotal": "Seat Total",
-    "seatAvailable": "Seat Available"
+    "info": "Location information",
+    "name": "Location name",
+    "seatTotal": "Seat total",
+    "seatAvailable": "Seat available"
   },
   "building": {
     "label": "Building",
-    "name": "Building Name"
+    "name": "Building name"
   },
   "contact": {
     "label": "Contact",
-    "name": "Contact Name"
+    "name": "Contact name"
   },
   "address": {
     "label": "Address",
     "apartment": "Apartment",
     "building": "Building",
     "floor": "Floor",
-    "houseNo": "House No.",
+    "houseNo": "House no.",
     "village": "Village",
-    "villageNo": "Village No.",
+    "villageNo": "Village no.",
     "alley": "Alley",
     "lane": "Lane",
     "road": "Road",
     "street": "Street",
-    "subdistrict": "Sub-district / Sub-area",
-    "district": "District / Area",
+    "subdistrict": "Sub-district / sub-area",
+    "district": "District / area",
     "province": "Province",
     "country": "Country",
-    "postalCode": "Postal Code"
+    "postalCode": "Postal code"
   },
   "addressDelivery": {
-    "label": "Address for Delivery",
-    "edit": "Edit Address for Delivery"
+    "label": "Address for delivery",
+    "edit": "Edit address for delivery"
   },
   "invoice": {
     "label": "Invoice",
-    "paymentStatus": "Payment Status",
-    "dateOfPayment": "Date of Payment",
-    "issueReceiptAs": "Issue a Receipt as",
-    "paymentConfirmedDate": "Payment Confirmed Date"
+    "paymentStatus": "Payment status",
+    "dateOfPayment": "Date of payment",
+    "issueReceiptAs": "Issue a receipt as",
+    "paymentConfirmedDate": "Payment confirmed date"
   },
   "qrcode": {
-    "error": "Cannot show QR Code.",
+    "error": "Cannot show QR code",
     "amount": "Amount"
   },
   "receipt": {
     "label": "Receipt",
-    "download": "Download Receipt"
+    "download": "Download receipt"
   },
   "recheck": "Recheck",
   "enlarge": "Enlarge"

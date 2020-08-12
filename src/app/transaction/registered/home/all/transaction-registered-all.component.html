@@ -1,0 +1,53 @@
+<div class="transaction-registered-all-view">
+  <div class="toolbars pr-3 pb-2 pl-3">
+    <div class="d-table w-100">
+      <div class="d-table-cell col-button">
+        <button type="button" class="btn btn-secondary mr-1"
+          [ngClass]="{
+            'has-focus': transRegisteredService.operate.table.filter.showForm
+          }"
+          [disabled]="(transRegisteredService.operate.table.service.searching$ | async)"
+          ngbTooltip="{{'filter' | translate | titlecase}}"
+          title="{{'filter' | translate | titlecase}}"
+          (click)="transRegisteredService.operate.table.filter.showForm = !transRegisteredService.operate.table.filter.showForm">
+          <i class="fas fa-filter text-white size16"></i>
+        </button>
+        <button type="button" class="btn btn-secondary"
+          [ngClass]="{
+            'has-focus': (transRegisteredService.operate.table.service.searching$ | async)
+          }"
+          [disabled]="(transRegisteredService.operate.table.service.searching$ | async)"
+          ngbTooltip="{{'reload' | translate | titlecase}}"
+          title="{{'reload' | translate | titlecase}}"
+          (click)="transRegisteredService.operate.table.service.reload('')">
+          <i class="fas fa-sync-alt text-white size16" [ngClass]="{'fa-spin': (transRegisteredService.operate.table.service.searching$ | async)}"></i>
+        </button>
+      </div>
+      <div class="d-table-cell text-right col-recordcount">
+        <span class="regular size15" *ngIf="!(transRegisteredService.operate.table.service.searching$ | async)">{{appService.getTextRecordCount((transRegisteredService.operate.table.service.total$ | async), (transRegisteredService.operate.table.service.totalSearch$ | async))}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="filter form bg-secondary pt-2 pr-3 pb-0 pl-3" *ngIf="transRegisteredService.operate.table.filter.showForm">
+    <div class="card">
+      <div class="card-header p-0">
+        <span class="bold text-white size18">{{'filter' | translate | titlecase}}</span>
+      </div>
+      <div class="card-body p-0 pt-1">
+        <div class="form">
+          <div class="form-row d-table">
+            <div class="form-group col-md-12 pr-0 pl-0">
+              <label for="keyword" class="regular text-white size16">{{'keyword' | translate | titlecase}}</label>
+              <input trimOnBlur type="text" class="form-control inputbox regular size16" name="keyword" [(ngModel)]="transRegisteredService.operate.table.service.keyword" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!(transRegisteredService.operate.table.service.searching$ | async)">
+    <div *ngFor="let transRegistered of transRegisteredService.operate.table.service.data$ | async; index as order; let last = last">
+      {{transRegistered.ID}}
+    </div>
+  </div>
+</div>

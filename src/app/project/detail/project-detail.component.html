@@ -99,7 +99,7 @@
         </div>
       </div>
       <div class="float-right">
-        <div class="registration-status text-right project-registration-status" ngbTooltip="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.transProject$.registrationStatus)).name[appService.lang]}}" placement="left" title="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.transProject$.registrationStatus)).name[appService.lang]}}">
+        <div class="registration-status text-right project-registration-status" ngbTooltip="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.transProject$.registrationStatus)).name[appService.lang] | titlecase}}" placement="left" title="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.transProject$.registrationStatus)).name[appService.lang] | titlecase}}">
           <i class="fas fa-lock size30"
             [ngClass]="{
               'text-success': (data.transProject$.registrationStatus === 'Y'),
@@ -175,7 +175,7 @@
         'btn-success': (data.transProject$.registrationStatus === 'Y'),
         'btn-warning': (data.transProject$.registrationStatus === 'W'),
         'btn-danger': (data.transProject$.registrationStatus === 'N'),
-        'disabled': (data.transProject$.registrationStatus !== 'Y' || !data.transProject$.contactPerson.ID || data.transProject$.transLocation.length === 0)
+        'disabled': (data.transProject$.registrationStatus !== 'Y' || !data.transProject$.contactPerson.length === 0 || data.transProject$.transLocation.length === 0)
       }">
       <span class="font bold text-white size20">{{'registered.label' | translate | titlecase}}</span>
     </a>
@@ -183,23 +183,24 @@
 </ng-template>
 <ng-template #contactInfo>
   <div class="contact-info text-white size14 project-contact-info">
-    <div class="form">
+    <div class="form" *ngFor="let contactPerson of data.transProject$.contactPerson; index as order">
+      <div class="dropdown-divider mt-2 mb-2" *ngIf="order > 0"></div>
       <div class="form-group row mr-0 mb-1 ml-0">
         <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fas fa-address-book"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.transProject$.contactPerson.fullName[appService.lang]}}</span>
+          <span class="form-text regular mt-0">{{contactPerson.fullName[appService.lang] | titlecase}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-1 ml-0">
         <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fas fa-envelope"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.transProject$.contactPerson.email}}</span>
+          <span class="form-text regular mt-0">{{contactPerson.email | lowercase}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-0 ml-0">
         <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fas fa-phone"></i></label>
         <div class="col text-left">
-          <span class="form-text regular mt-0">{{data.transProject$.contactPerson.phoneNumber}}</span>
+          <span class="form-text regular mt-0">{{contactPerson.phoneNumber}}</span>
         </div>
       </div>
     </div>

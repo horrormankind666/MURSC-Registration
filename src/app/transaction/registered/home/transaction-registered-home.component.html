@@ -1,24 +1,30 @@
 <div class="transaction-registered-home-view">
-  <ngb-tabset activeId="1" [destroyOnHide]="false">
-    <ngb-tab id="1" title="{{'total.label' | translate}}">
-      <ng-template ngbTabContent>
-        <p>Basic Setting</p>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab id="2" title="{{(dataService.statuses.get(dataService.paymentStatus.data$, 'Y')).name[appService.lang]}}">
-      <ng-template ngbTabContent>
-        <p>SMS Setting</p>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab id="3" title="{{(dataService.statuses.get(dataService.paymentStatus.data$, 'W')).name[appService.lang]}}">
-      <ng-template ngbTabContent>
-        <p>Email Setting</p>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab id="4" title="{{(dataService.statuses.get(dataService.paymentStatus.data$, 'N')).name[appService.lang]}}">
-      <ng-template ngbTabContent>
-        <p>Email Setting</p>
-      </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
+  <div class="card-group">
+    <div class="card-col pr-0 pl-0 w-100">
+      <div class="card bg-white border-0 rounded-0 tab-title">
+        <div class="card-body pt-0 pr-3 pb-0 pl-3">
+          <div class="card-title mb-0">
+            <div class="d-table w-100">
+              <div class="d-table-cell w-auto text-truncate pr-1"><span class="bold text-dark size24">{{tab.title[appService.lang] | titlecase}}</span></div>
+              <div class="d-table-cell btn-toggle"><button class="navbar-toggler" type="button" (click)="tab.isCollapsed = !tab.isCollapsed"><i class="fas fa-bars"></i></button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown-divider mt-2 mb-0"></div>
+      <div class="tabset">
+        <div [ngbCollapse]="tab.isCollapsed">
+          <ul ngbNav class="nav-tabs" #tabContent="ngbNav" (activeId)="tab.active">
+            <li [ngbNavItem]="tabList.ID" *ngFor="let tabList of tab.list">
+              <a ngbNavLink (click)="tab.title = tabList.label">{{tabList.label[appService.lang] | titlecase}}</a>
+              <ng-template ngbNavContent>
+                <ng-template [dynamicComponent]='tabList.component'></ng-template>
+              </ng-template>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div [ngbNavOutlet]="tabContent" class="mt-2"></div>
+    </div>
+  </div>
 </div>

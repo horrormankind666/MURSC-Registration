@@ -1,9 +1,9 @@
 <ngx-loading [show]="appService.isLoading.show"></ngx-loading>
 <span class="msg-loading font regular size16">
-  <span *ngIf="appService.isLoading.show && (appService.isLoading.page || appService.isLoading.modal)">{{'msgLoading.loading' | translate}}</span>
-  <span *ngIf="appService.isLoading.show && appService.isLoading.processing">{{'msgLoading.processing' | translate}}</span>
-  <span *ngIf="appService.isLoading.show && appService.isLoading.saving">{{'msgLoading.saving' | translate}}</span>
-  <span *ngIf="appService.isLoading.show && appService.isLoading.checking">{{'msgLoading.checking' | translate}}</span>
+  <span *ngIf="appService.isLoading.show && (appService.isLoading.page || appService.isLoading.modal)">{{'msgLoading.loading' | translate | titlecase}}</span>
+  <span *ngIf="appService.isLoading.show && appService.isLoading.processing">{{'msgLoading.processing' | translate | titlecase}}</span>
+  <span *ngIf="appService.isLoading.show && appService.isLoading.saving">{{'msgLoading.saving' | translate | titlecase}}</span>
+  <span *ngIf="appService.isLoading.show && appService.isLoading.checking">{{'msgLoading.checking' | translate | titlecase}}</span>
 </span>
 <main>
   <header #headerView class="sticky">
@@ -45,8 +45,8 @@
                       </div>
                       <div class="d-table-row">
                         <div class="d-table-cell text-center pt-3">
-                          <div class="regular size18 text-truncate">{{authService.getUserInfo.fullName[appService.lang]}}</div>
-                          <div class="regular text-black-50 size16 text-truncate">{{authService.getUserInfo.email}}</div>
+                          <div class="regular size18 text-truncate">{{authService.getUserInfo.fullName[appService.lang] | titlecase}}</div>
+                          <div class="regular text-black-50 size16 text-truncate">{{authService.getUserInfo.email | lowercase}}</div>
                         </div>
                       </div>
                     </div>
@@ -54,13 +54,13 @@
                     <a routerLink="Transaction/Registered" class="text-center" role="button" ngbDropdownItem><span class="regular grey-dark size15">{{'registered.info' | translate | titlecase}}</span></a>
                     <div class="dropdown-divider mb-3 mt-0"></div>
                     <div class="d-block w-100 text-center">
-                      <button type="button" class="btn btn-transparent" (click)="profileDropdown.close(); authService.signout()"><span class="regular size16">{{'signout.label' | translate}}</span></button>
+                      <button type="button" class="btn btn-transparent" (click)="profileDropdown.close(); authService.signout()"><span class="regular size16">{{'signout.label' | translate | titlecase}}</span></button>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="d-table-cell text-center signin-icon" *ngIf="!authService.isAuthenticated">
-                <a href="javascript:void(0)" (click)="appService.gotoSignIn()" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size15">{{'signin' | translate}}</span></a>
+                <a href="javascript:void(0)" (click)="appService.gotoSignIn()" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size15">{{'signin' | translate | titlecase}}</span></a>
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@
       <div class="navbar-header-title row mr-0 ml-0" *ngIf="appService.headerSubtitle !== null">
         <div class="col align-middle text-center text-truncate text-light">
           <a routerLink="{{appService.rootPath}}" class="bold size18">
-            <span class="text-light">#{{appService.headerSubtitle[appService.lang]}}</span>
+            <span class="text-light">#{{appService.headerSubtitle[appService.lang] | titlecase}}</span>
           </a>
         </div>
       </div>
