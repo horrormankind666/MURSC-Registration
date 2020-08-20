@@ -138,12 +138,23 @@ class Operate {
   providedIn: 'root'
 })
 export class TransactionRegisteredService {
+  constructor(    
+  ) {}
+
+  public service: any = null;  
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TransactionRegisteredAllService {
   constructor(
     private pipe: DecimalPipe,
     private dataService: DataService
   ) {}
 
-  public operate = new Operate(this.pipe, this.dataService, '');
+  public paymentStatus: string = '';
+  public operate = new Operate(this.pipe, this.dataService, this.paymentStatus);
 }
 
 @Injectable({
@@ -155,7 +166,8 @@ export class TransactionRegisteredPaymentCompletedService {
     private dataService: DataService
   ) {}
 
-  public operate = new Operate(this.pipe, this.dataService, 'Y');
+  public paymentStatus: string = 'Y'
+  public operate = new Operate(this.pipe, this.dataService, this.paymentStatus);
 }
 
 @Injectable({
@@ -167,7 +179,8 @@ export class TransactionRegisteredCheckPaymentService {
     private dataService: DataService
   ) {}
 
-  public operate = new Operate(this.pipe, this.dataService, 'W');
+  public paymentStatus: string = 'W';
+  public operate = new Operate(this.pipe, this.dataService, this.paymentStatus);
 }
 
 @Injectable({
@@ -179,5 +192,6 @@ export class TransactionRegisteredPendingPaymentService {
     private dataService: DataService
   ) {}
 
-  public operate = new Operate(this.pipe, this.dataService, 'N');
+  public paymentStatus: string = 'N';
+  public operate = new Operate(this.pipe, this.dataService, this.paymentStatus);
 }

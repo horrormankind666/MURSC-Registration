@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๙/๐๖/๒๕๖๓>
-Modify date : <๐๔/๐๘/๒๕๖๓>
+Modify date : <๑๘/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -43,6 +43,10 @@ export class TransactionRegisteredDetailComponent implements OnInit {
   };
 
   projectAbout: any = {
+    isCollapsed: false
+  };
+
+  examScore: any = {
     isCollapsed: false
   };
 

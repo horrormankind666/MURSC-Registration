@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๔/๑๑/๒๕๖๒>
-Modify date : <๐๖/๐๘/๒๕๖๓>
+Modify date : <๑๒/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -106,7 +106,8 @@ export const appRouting: Routes = [
           hasHearderSubtitle: true
         },
         resolve: {
-          HeaderSubtitleTransactionRegisteredResolve
+          HeaderSubtitleTransactionRegisteredResolve,
+          projectCategory$: GetListProjectCategoryResolve
         }
       },
       {

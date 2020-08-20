@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๑/๐๖/๒๕๖๓>
-Modify date : <๐๔/๐๘/๒๕๖๓>
+Modify date : <๑๕/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -36,7 +36,7 @@ Description : <>
   }
 }
 .transaction-registered-detail-view .register-info .form .form-group .col-form-label {
-  width: 205px;
+  width: 227px;
 }
 .transaction-registered-detail-view .registered-info .d-block.col-locations {
   display: none !important;
@@ -89,7 +89,7 @@ Description : <>
   text-align: center;
   vertical-align: middle;
 }
-@media screen and (max-width: 748px) {
+@media screen and (max-width: 770px) {
   @include form-responsive('.transaction-registered-detail-view .register-info');
 }
 @media screen and (max-width: 530px) {

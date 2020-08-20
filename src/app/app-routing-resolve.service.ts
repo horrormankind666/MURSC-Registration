@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๒>
-Modify date : <๓๐/๐๗/๒๕๖๓>
+Modify date : <๑๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -28,7 +28,7 @@ export class AuthenADFSPageResolve implements Resolve<boolean> {
   ) {}
 
   resolve(){
-    window.open(this.appService.urlAuthenServer, '_self');
+    this.appService.gotoSignIn();
 
     return false;
   }
@@ -73,7 +73,7 @@ export class HeaderSubtitleTransactionRegisteredResolve implements Resolve<any> 
     this.translateService.getTranslation('th').subscribe((result: {}) => {
       this.appService.headerSubtitle['th'] = result['registered']['info'];
     });
-    
+
     return false;
   }
 }

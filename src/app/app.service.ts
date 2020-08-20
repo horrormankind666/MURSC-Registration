@@ -314,9 +314,12 @@ export class AppService  {
   }
 
   gotoSignIn() {
+    window.open(this.urlAuthenServer, '_self');
+    /*
     this.router.navigateByUrl('SignIn', {
       skipLocationChange: true
     });
+    */
   }
 
   enlargeImage(image: string) {

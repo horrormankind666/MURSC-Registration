@@ -1,7 +1,13 @@
 {
   "systemName": "Mahidol University Registration Support Center ( MURSC )",
   "about": "About",
-  "signin": "Sign in",
+  "undefined": "Undefined",
+  "signin": {
+    "label": "Sign in",
+    "error": {
+      "validate": "Please sign in."
+    }
+  },
   "signout": {
     "label": "Sign out",
     "confirm": "Confirm your would like to sign out."
@@ -32,7 +38,7 @@
     "info": "Registered information",
     "detail": "Registered detail",
     "date": "Registered date",
-    "at": "Registered at",
+    "on": "Registered on",
     "confirm": "Confirm registered",
     "save": {
       "error": {
@@ -76,7 +82,8 @@
   "seat": {
     "label": "Seat",
     "seatTotal": "Seat total",
-    "seatAvailable": "Seat available"
+    "seatAvailable": "Seat available",
+    "seatNo": "Seat No."
   },
   "payment": {
     "label": "Payment",
@@ -120,6 +127,7 @@
     "registrationFee": "Registration fee",
     "lastPaymentDate": "Last payment date",
     "detail": "Project detail",
+    "category": "Project category",
     "error": {
       "notFound": "Project detail not found."
     }
@@ -165,8 +173,15 @@
     "label": "Invoice",
     "paymentStatus": "Payment status",
     "dateOfPayment": "Date of payment",
+    "successfulPayment": {
+      "date": "Successful payment date",
+      "on": "Payment was successful on"
+    },
     "issueReceiptAs": "Issue a receipt as",
-    "paymentConfirmedDate": "Payment confirmed date"
+    "confirmPayment": {
+      "date": "Payment confirmed date",
+      "on": "Confirm payment on"
+    }
   },
   "qrcode": {
     "error": "Cannot show QR code",
@@ -177,5 +192,9 @@
     "download": "Download receipt"
   },
   "recheck": "Recheck",
-  "enlarge": "Enlarge"
+  "enlarge": "Enlarge",
+  "score": "Score",
+  "event": {
+    "date": "Event date"
+  }
 }

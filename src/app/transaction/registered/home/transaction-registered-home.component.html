@@ -14,11 +14,12 @@
       <div class="dropdown-divider mt-2 mb-0"></div>
       <div class="tabset">
         <div [ngbCollapse]="tab.isCollapsed">
-          <ul ngbNav class="nav-tabs" #tabContent="ngbNav" (activeId)="tab.active">
+          <ul ngbNav class="nav-tabs" #tabContent="ngbNav" (activeId)="tab.active" (navChange)="tabOnChange($event)">
             <li [ngbNavItem]="tabList.ID" *ngFor="let tabList of tab.list">
               <a ngbNavLink (click)="tab.title = tabList.label">{{tabList.label[appService.lang] | titlecase}}</a>
               <ng-template ngbNavContent>
                 <ng-template [dynamicComponent]='tabList.component'></ng-template>
+                <ng-container *ngTemplateOutlet="transRegisteredInfo"></ng-container>
               </ng-template>
             </li>
           </ul>
@@ -28,3 +29,379 @@
     </div>
   </div>
 </div>
+<ng-template #transRegisteredInfo>
+  <div class="transaction-registered-info">
+    <div class="toolbars pr-3 pb-2 pl-3">
+      <div class="d-table w-100">
+        <div class="d-table-cell col-button">
+          <button type="button" class="btn btn-secondary mr-1"
+            [ngClass]="{
+              'has-focus': transRegisteredService.service.operate.table.filter.showForm
+            }"
+            [disabled]="(transRegisteredService.service.operate.table.service.searching$ | async)"
+            ngbTooltip="{{'filter' | translate | titlecase}}"
+            title="{{'filter' | translate | titlecase}}"
+            (click)="transRegisteredService.service.operate.table.filter.showForm = !transRegisteredService.service.operate.table.filter.showForm">
+            <i class="fas fa-filter text-white size16"></i>
+          </button>
+          <button type="button" class="btn btn-secondary"
+            [ngClass]="{
+              'has-focus': (transRegisteredService.service.operate.table.service.searching$ | async)
+            }"
+            [disabled]="(transRegisteredService.service.operate.table.service.searching$ | async)"
+            ngbTooltip="{{'reload' | translate | titlecase}}"
+            title="{{'reload' | translate | titlecase}}"
+            (click)="transRegisteredService.service.operate.table.service.reload(transRegisteredService.service.paymentStatus)">
+            <i class="fas fa-sync-alt text-white size16" *ngIf="!(transRegisteredService.service.operate.table.service.searching$ | async)"></i>
+            <i class="fas fa-sync-alt fa-spin text-white size16" *ngIf="(transRegisteredService.service.operate.table.service.searching$ | async)"></i>
+          </button>
+        </div>
+        <div class="d-table-cell text-right col-recordcount">
+          <span class="regular size15" *ngIf="!(transRegisteredService.service.operate.table.service.searching$ | async)">{{appService.getTextRecordCount((transRegisteredService.service.operate.table.service.total$ | async), (transRegisteredService.service.operate.table.service.totalSearch$ | async))}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="filter form bg-secondary pt-2 pr-3 pb-0 pl-3" *ngIf="transRegisteredService.service.operate.table.filter.showForm">
+      <div class="card">
+        <div class="card-header p-0">
+          <span class="bold text-white size18">{{'filter' | translate | titlecase}}</span>
+        </div>
+        <div class="card-body p-0 pt-1">
+          <div class="form">
+            <div class="form-row d-table">
+              <div class="form-group col-md-6 pl-0">
+                <label for="keyword" class="regular text-white size16">{{'keyword' | translate | titlecase}}</label>
+                <input trimOnBlur type="text" class="form-control inputbox regular size16" name="keyword" [(ngModel)]="transRegisteredService.service.operate.table.service.keyword" />
+              </div>
+              <div class="form-group col-md-6 pr-0">
+                <label for="project-category" class="regular text-white size16">{{'project.category' | translate | titlecase}}</label>
+                <ng-select placeholder="{{'placeholder.selectItem' | translate | titlecase}}" [(ngModel)]="transRegisteredService.service.operate.table.service.projectCategory">
+                  <ng-option *ngFor="let item of data.projectCategory$" [value]="item.initial">{{item.name[appService.lang] | titlecase}}</ng-option>
+                </ng-select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-group card-striped" *ngIf="!(transRegisteredService.service.operate.table.service.searching$ | async)">
+      <div class="card-col pr-0 pl-0 w-100" *ngFor="let transRegistered of transRegisteredService.service.operate.table.service.data$ | async; index as order; let last = last">
+        <div class="card card-horizontal border-0 rounded-0 project-card-horizontal">
+          <div class="card-body pt-0 pr-3 pb-3 pl-3 project-body">
+            <div class="d-table w-100">
+              <div class="d-tabel-cell col-sm-3 pr-0 pl-0 align-top">
+                <ng-container *ngTemplateOutlet="titleInfo; context: {data: transRegistered, cardType: 'horizontal'}"></ng-container>
+              </div>
+              <div class="d-tabel-cell col-sm-9 pt-2 pr-0 align-top">
+                <div class="card-text"><ng-container *ngTemplateOutlet="projectInfo; context: {data: transRegistered}"></ng-container></div>
+                <div class="mt-2 hide"><ng-container *ngTemplateOutlet="projectAboutResultInfo; context: {data: transRegistered}"></ng-container></div>
+                <div class="mt-3 hide"><ng-container *ngTemplateOutlet="registerInfo; context: {data: transRegistered}"></ng-container></div>
+                <div class="mt-3 hide text-right"><ng-container *ngTemplateOutlet="registeredInfo; context: {data: transRegistered}"></ng-container></div>
+              </div>
+            </div>
+            <div class="d-block wrap wrap-step1">
+              <div class="mt-2"><ng-container *ngTemplateOutlet="projectAboutResultInfo; context: {data: transRegistered}"></ng-container></div>
+              <div class="mt-3"><ng-container *ngTemplateOutlet="registerInfo; context: {data: transRegistered}"></ng-container></div>
+              <div class="mt-3 text-right"><ng-container *ngTemplateOutlet="registeredInfo; context: {data: transRegistered}"></ng-container></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #datetimeVerticalInfo let-data="data">
+  <div class="datetime-vertical bold text-body" *ngIf="data">
+    <div class="day bolder size24">
+      <div>{{data | slice:5:6}}</div>
+      <div>{{data | slice:6:7}}</div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="month size16">
+      <div>{{(data | slice:8:9) | uppercase}}</div>
+      <div>{{(data | slice:9:10) | uppercase}}</div>
+      <div>{{(data | slice:10:11) | uppercase}}</div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="year size14">
+      <div>{{data | slice:12:13}}</div>
+      <div>{{data | slice:13:14}}</div>
+      <div>{{data | slice:14:15}}</div>
+      <div>{{data | slice:15:16}}</div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="time size11 text-secondary">
+      <div>{{data | slice:17:18}}</div>
+      <div>{{data | slice:18:19}}</div>
+      <div>{{data | slice:19:20}}</div>
+      <div>{{data | slice:20:21}}</div>
+      <div>{{data | slice:21:22}}</div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</ng-template>
+<ng-template #titleInfo let-data="data" let-cardType="cardType">
+  <div class="title-info project-title-info">
+    <div class="embed-responsive embed-responsive-16by9 project-logo">
+      <div class="card-img project-card-img" [ngStyle]="{'background-image': ('url(' + data.transProject.project.logo + ')')}"></div>
+      <a class="enlarge" href="javascript:void(0)" (click)="appService.enlargeImage(data.transProject.project.logo)">
+        <i class="fas fa-expand text-white size18"></i>
+      </a>
+    </div>
+    <div class="card-title hide mt-07 mb-0">
+      <div class="float-left" *ngIf="data.transProject.examDate.startDate">
+        <ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.transProject.examDate.startDate}"></ng-container>
+      </div>
+      <div class="float-left" *ngIf="data.transProject.examDate.endDate">
+        <div class="d-table">
+          <div class="d-table-cell align-middle"><span class="bolder size20">&nbsp;-&nbsp;</span></div>
+          <div class="d-table-cell"><ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.transProject.examDate.endDate}"></ng-container></div>
+        </div>
+      </div>
+      <div class="float-right line-height-0">
+        <div class="text-right project-dropdown" ngbDropdown placement="{{cardType === 'horizontal' ? 'top-left' : 'bottom-right'}}">
+          <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle>
+            <i class="fas fa-phone text-white size11"></i>
+          </a>
+          <div ngbDropdownMenu aria-labelledby="contact-info" class="contact-info">
+            <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo; context: {data: data.transProject.contactPerson, isDropdown: true}"></ng-container></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #projectInfo let-data="data">
+  <div class="project-info">
+    <div><a [routerLink]="['../Detail', data.CUID]" routerLinkActive="active" class="link text-wrap bold size20">{{data.transProject.project.name[appService.lang]}}</a></div>
+    <div class="regular text-dark size15" *ngIf="data.transProject.description[appService.lang]">{{data.transProject.description[appService.lang]}}</div>
+    <a routerLink="../../../Project/{{data.transProject.project.category.initial}}" class="link regular size14">
+      #{{data.transProject.project.category.name[appService.lang] | titlecase}}
+    </a>
+  </div>
+</ng-template>
+<ng-template #projectAboutResultInfo let-data="data">
+  <div class="aboutresult-info project-aboutresult-info">
+    <a class="d-inline-block badge badge-pill badge-light-dark badge-projectabout project-btn-badge" href="javascript:void(0)"
+      (click)="
+        registeredLocationSeatNo.isCollapsed[data.ID] = false;
+        examScore.isCollapsed[data.ID] = false;
+        projectAbout.isCollapsed[data.ID] = !projectAbout.isCollapsed[data.ID]
+      "
+      [attr.aria-expanded]="projectAbout.isCollapsed[data.ID] === undefined ? false : projectAbout.isCollapsed[data.ID]"
+      aria-controls="projectAbout">
+      <span class="regular size13">{{'about' | translate | lowercase}}</span>
+    </a>
+    <a class="d-inline-block badge badge-pill badge-light-dark badge-registeredlocationseatno project-btn-badge ml-2" href="javascript:void(0)"
+      (click)="
+        projectAbout.isCollapsed[data.ID] = false;
+        examScore.isCollapsed[data.ID] = false;
+        registeredLocationSeatNo.isCollapsed[data.ID] = !registeredLocationSeatNo.isCollapsed[data.ID]
+      "
+      [attr.aria-expanded]="registeredLocationSeatNo.isCollapsed[data.ID] === undefined ? false : registeredLocationSeatNo.isCollapsed[data.ID]"
+      aria-controls="registeredLocationSeatNo">
+      <span class="regular size13">{{'location.label' | translate | lowercase}} / {{'seat.seatNo' | translate | lowercase}}</span>
+    </a>
+    <a class="d-inline-block badge badge-pill badge-light-dark badge-examscore project-btn-badge ml-2" href="javascript:void(0)"
+      (click)="
+        projectAbout.isCollapsed[data.ID] = false;
+        registeredLocationSeatNo.isCollapsed[data.ID] = false;
+        examScore.isCollapsed[data.ID] = !examScore.isCollapsed[data.ID]
+      "
+      [attr.aria-expanded]="examScore.isCollapsed[data.ID] === undefined ? false : examScore.isCollapsed[data.ID]"
+      aria-controls="examScore">
+      <span class="regular size13">{{'score' | translate | lowercase}}</span>
+    </a>
+    <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0 project-text-line-clamp">
+      <span id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed[data.ID]">
+        <span [innerHTML]="data.transProject.project.about[appService.lang] | nl2br"></span>
+        <div class="text-dark mt-2">{{'event.date' | translate | titlecase}}</div>
+        <div class="card-text project-register-info">
+          <div class="form">
+            <div class="form-group w-100 row mr-0 mb-0 ml-0" *ngIf="data.transProject.examDate.startDate">
+              <label for="col-eventstartdate" class="col-form-label">{{'start' | translate | titlecase}}</label>
+              <div class="col">
+                <div class="d-table w-100 size-l calendar-date">
+                  <div class="d-table-row">
+                    <div class="d-table-cell align-middle col-calendar"><span>{{data.transProject.examDate.startDate ? (data.transProject.examDate.startDate | slice:0:16) : ''}}</span></div>
+                    <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transProject.examDate.startDate ? (data.transProject.examDate.startDate | slice:16:22) : ''}}</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group w-100 row mr-0 mb-0 ml-0" *ngIf="data.transProject.examDate.endDate">
+              <label for="col-eventenddate" class="col-form-label">{{'end' | translate | titlecase}}</label>
+              <div class="col">
+                <div class="d-table w-100 size-l calendar-date">
+                  <div class="d-table-row">
+                    <div class="d-table-cell align-middle col-calendar"><span>{{data.transProject.examDate.endDate ? (data.transProject.examDate.endDate | slice:0:16) : ''}}</span></div>
+                    <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transProject.examDate.endDate ? (data.transProject.examDate.endDate | slice:16:22) : ''}}</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-dark mt-2">{{'contact.label' | translate | titlecase}}</div>
+        <div><ng-container *ngTemplateOutlet="contactInfo; context: {data: data.transProject.contactPerson, isDropdown: false}"></ng-container></div>
+      </span>
+      <span id="registeredLocationSeatNo" [ngbCollapse]="!registeredLocationSeatNo.isCollapsed[data.ID]">
+        {{data.transLocation.location.name[appService.lang]}}<br />
+        {{data.transLocation.location.building.name[appService.lang]}}<br />
+        <span *ngIf="data.invoice.payment.status === 'Y'">{{'seat.seatNo' | translate | titlecase}} : <span class="text-dark">n/a</span></span>
+      </span>
+      <span id="examScore" [ngbCollapse]="!examScore.isCollapsed[data.ID]"></span>
+    </p>
+  </div>
+</ng-template>
+<ng-template #registerInfo let-data="data">
+  <div class="register-info project-register-info">
+    <div class="d-table w-100">
+      <div class="d-table-row">
+        <div class="d-table-cell registered-info">
+          <div class="card-text">
+            <div class="regular size16">
+              <div class="form">
+                <div class="form-group w-100 row mb-01">
+                  <label for="col-registereddate" class="col-form-label">{{'registered.on' | translate | titlecase}}</label>
+                  <div class="col">
+                    <div class="d-table w-100 size-l calendar-date" *ngIf="data.registeredDate">
+                      <div class="d-table-row">
+                        <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
+                        <div class="d-table-cell align-middle col-calendar"><span>{{data.registeredDate ? (data.registeredDate | slice:0:16) : ''}}</span></div>
+                        <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
+                        <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.registeredDate ? (data.registeredDate | slice:16:22) : ''}}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group w-100 row mb-01 wrap wrap-step2" *ngIf="data.invoice.payment.status === 'N'">
+                  <label for="col-registrationfee" class="col-form-label">{{'project.registrationFee' | translate | titlecase}}</label>
+                  <div class="col">
+                    <span class="form-text regular">{{(data.totalFeeAmount ? ((data.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '')}}</span>
+                  </div>
+                </div>
+                <div class="form-group w-100 row mb-01" *ngIf="data.invoice.payment.status !== 'N'">
+                  <label for="col-confirmdateofpayment" class="col-form-label">{{'invoice.confirmPayment.on' | translate | titlecase}}</label>
+                  <div class="col">
+                    <div class="d-table w-100 size-l calendar-date" *ngIf="data.invoice.payment.confirmDate">
+                      <div class="d-table-row">
+                        <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
+                        <div class="d-table-cell align-middle col-calendar"><span>{{data.invoice.payment.confirmDate ? (data.invoice.payment.confirmDate | slice:0:16) : ''}}</span></div>
+                        <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
+                        <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.invoice.payment.confirmDate ? (data.invoice.payment.confirmDate | slice:16:22) : ''}}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group w-100 row mb-01" *ngIf="data.invoice.payment.status === 'N'">
+                  <label for="col-dateofpayment" class="col-form-label">{{'project.lastPaymentDate' | translate | titlecase}}</label>
+                  <div class="col">
+                    <div class="d-table w-100 size-l calendar-date" *ngIf="data.transProject.lastPaymentDate">
+                      <div class="d-table-row">
+                        <div class="d-table-cell align-middle col-icon"><span class="text-danger size22"><i class="fas fa-calendar-alt"></i></span></div>
+                        <div class="d-table-cell align-middle col-calendar"><span class="text-danger">{{data.transProject.lastPaymentDate ? (data.transProject.lastPaymentDate | slice:0:16) : ''}}</span></div>
+                        <div class="d-table-cell align-middle col-icon"><span class="text-danger size22"><i class="fas fa-clock"></i></span></div>
+                        <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-danger size14">{{data.transProject.lastPaymentDate ? (data.transProject.lastPaymentDate | slice:16:22) : ''}}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group w-100 row mb-01" *ngIf="data.invoice.payment.status === 'Y'">
+                  <label for="col-registeredsuccessfulpayment" class="col-form-label">{{'invoice.successfulPayment.on' | translate | titlecase}}</label>
+                  <div class="col">
+                    <div class="d-table w-100 size-l calendar-date" *ngIf="data.invoice.payment.date">
+                      <div class="d-table-row">
+                        <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
+                        <div class="d-table-cell align-middle col-calendar"><span>{{data.invoice.payment.date ? (data.invoice.payment.date | slice:0:16) : ''}}</span></div>
+                        <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
+                        <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.invoice.payment.date ? (data.invoice.payment.date | slice:16:22) : ''}}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #registeredInfo let-data="data">
+  <div class="registered-info">
+    <div class="d-inline-block jumbotron rounded-xl bg-dark text-left pt-2 pr-3 pb-1 pl-3 mr-2 mb-0 jumbotron-registrationfee" *ngIf="data.invoice.payment.status === 'N'">
+      <div class="regular text-white-50 size14">{{'project.registrationFee' | translate | titlecase}}</div>
+      <div class="jumbotron-body">
+        <div class="regular text-white">
+          <span class="bold size20">
+            {{(data.invoice.payment.status === 'Y' || data.invoice.payment.status === 'W') ? (data.invoice.payment.amount ? (data.invoice.payment.amount | number: '.2') : '') : ''}}
+            {{data.invoice.payment.status === 'N' ? (data.totalFeeAmount ? (data.totalFeeAmount | number: '.2') : '') : ''}}
+          </span>
+          <span>{{'unit.baht' | translate | titlecase}}</span>
+        </div>
+      </div>
+    </div>
+    <div [routerLink]="['../Detail', data.CUID]" routerLinkActive="active" class="d-inline-block jumbotron rounded-xl cursor-pointer text-left pt-2 pr-3 pb-1 pl-3 mb-0 jumbotron-paymentstatus"
+      [ngClass]="{
+        'bg-success': (data.invoice.payment.status === 'Y'),
+        'bg-warning': (data.invoice.payment.status === 'W'),
+        'bg-secondary ': (data.invoice.payment.status === 'N')
+      }">
+      <div class="regular text-black-50 size14">{{'invoice.paymentStatus' | translate | titlecase}}</div>
+      <div class="jumbotron-body">
+        <span class="bold text-white size20">{{(dataService.statuses.get(dataService.paymentStatus.data$, data.invoice.payment.status)).name[appService.lang] | titlecase}}</span>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #contactInfo let-data="data" let-isDropdown="isDropdown">
+  <div class="contact-info project-contact-info"
+    [ngClass]="{
+      'text-white': isDropdown,
+      'text-black-50': !isDropdown,
+      'size14': isDropdown,
+      'size16': !isDropdown
+    }">
+    <div class="form" *ngFor="let contactPerson of data; index as order">
+      <div class="dropdown-divider mt-2 mb-2" *ngIf="order > 0"></div>
+      <div class="form-group row mr-0 mb-0 ml-0">
+        <label for="col-name" class="col-form-label pb-0"
+          [ngClass]="{
+            'pt-0': isDropdown,
+            'pt-015': !isDropdown
+          }">
+          <i class="fas fa-address-book"></i>
+        </label>
+        <div class="col text-left">
+          <span class="form-text regular mt-0">{{contactPerson.fullName[appService.lang] | titlecase}}</span>
+        </div>
+      </div>
+      <div class="form-group row mr-0 mb-0 ml-0">
+        <label for="col-email" class="col-form-label pb-0"
+          [ngClass]="{
+            'pt-0': isDropdown,
+            'pt-015': !isDropdown
+          }">
+          <i class="fas fa-envelope"></i>
+        </label>
+        <div class="col text-left">
+          <span class="form-text regular mt-0">{{contactPerson.email | lowercase}}</span>
+        </div>
+      </div>
+      <div class="form-group row mr-0 mb-0 ml-0">
+        <label for="col-phone" class="col-form-label pb-0"
+          [ngClass]="{
+            'pt-0': isDropdown,
+            'pt-015': !isDropdown
+          }">
+          <i class="fas fa-phone"></i>
+        </label>
+        <div class="col text-left">
+          <span class="form-text regular mt-0">{{contactPerson.phoneNumber}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

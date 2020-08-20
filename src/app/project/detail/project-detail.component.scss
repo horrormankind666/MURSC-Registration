@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๗/๐๓/๒๕๖๓>
-Modify date : <๒๙/๐๖/๒๕๖๓>
+Modify date : <๑๘/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -16,7 +16,7 @@ Description : <>
   width: 64px;
   min-width: 64px;
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 934px) {
   @include table-responsive-step1('.project-detail-view .location-info');
 }
 @media screen and (max-width: 600px) {

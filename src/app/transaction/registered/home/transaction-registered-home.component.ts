@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๘/๐๖/๒๕๖๓>
-Modify date : <๑๑/๐๘/๒๕๖๓>
+Modify date : <๑๘/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -10,14 +10,19 @@ Description : <>
 'use strict';
 
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+
+import {NgbNavChangeEvent} from '@ng-bootstrap/ng-bootstrap';
 
 import {AppService} from '../../../app.service';
+import {AuthService} from '../../../auth.service';
 import {DataService} from '../../../data.service';
+import {TransactionRegisteredService as TransRegisteredService} from '../transaction-registered.service';
 
-import {TransactionRegisteredAllComponent} from './all/transaction-registered-all.component';
-import {TransactionRegisteredPaymentCompletedComponent} from './payment-completed/transaction-registered-payment-completed.component';
-import {TransactionRegisteredCheckPaymentComponent} from './check-payment/transaction-registered-check-payment.component';
-import {TransactionRegisteredPendingPaymentComponent} from './pending-payment/transaction-registered-pending-payment.component';
+import {TransactionRegisteredAllComponent} from './transaction-registered-all.component';
+import {TransactionRegisteredPaymentCompletedComponent} from './transaction-registered-payment-completed.component';
+import {TransactionRegisteredCheckPaymentComponent} from './transaction-registered-check-payment.component';
+import {TransactionRegisteredPendingPaymentComponent} from './transaction-registered-pending-payment.component';
 
 @Component({
   selector: 'app-transaction-registered-home',
@@ -26,9 +31,16 @@ import {TransactionRegisteredPendingPaymentComponent} from './pending-payment/tr
 })
 export class TransactionRegisteredHomeComponent implements OnInit {
   constructor(
+    private route: ActivatedRoute,
     private appService: AppService,
-    private dataService: DataService
+    private authService: AuthService,
+    private dataService: DataService,
+    private transRegisteredService: TransRegisteredService
   ) {}
+
+  data: any = {
+    projectCategory$: null
+  };
 
   tab: any = {
     isCollapsed: true,
@@ -70,7 +82,32 @@ export class TransactionRegisteredHomeComponent implements OnInit {
     ]
   };
 
+  projectAbout: any = {
+    isCollapsed: []
+  };
+
+  registeredLocationSeatNo: any = {
+    isCollapsed: []
+  };
+
+  examScore: any = {
+    isCollapsed: []
+  };
+
+  tabOnChange(e: NgbNavChangeEvent) {
+    this.authService.getIsAuthenticated().then((result: boolean) => {
+      if (!result)
+        this.appService.gotoSignIn();
+      else {
+        this.projectAbout.isCollapsed = [];
+        this.registeredLocationSeatNo.isCollapsed = [];
+        this.examScore.isCollapsed = [];
+      }
+    });
+  }
+
   ngOnInit() {
+    this.data.projectCategory$ = this.route.snapshot.data.projectCategory$;
     this.tab.title = this.tab.list[0].label;
   }
 }

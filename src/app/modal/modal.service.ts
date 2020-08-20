@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๐๔/๐๘/๒๕๖๓>
+Modify date : <๑๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -82,6 +82,12 @@ export class ModalService {
       if (description) modalRef.componentInstance.description = description;
       if (btnMsg) modalRef.componentInstance.btnMsg = btnMsg;
     }
+
+    return modalRef;
+  }
+
+  getModalInfo(checkHasOpenModal: boolean, content: any, message: string): NgbModalRef {
+    let modalRef: NgbModalRef = this.getModal(checkHasOpenModal, content, 'info-dialog', message);
 
     return modalRef;
   }

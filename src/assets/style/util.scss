@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๐๗/๐๘/๒๕๖๓>
+Modify date : <๒๐/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -151,6 +151,9 @@ $line-clamp-line-height: 1.7;
 .p-25 {
   padding: 0.6rem !important;
 }
+.pt-015 {
+  padding-top: 0.15rem !important;
+}
 .pt-07 {
   padding-top: 0.7rem !important;
 }
@@ -175,6 +178,12 @@ $line-clamp-line-height: 1.7;
 .pl-25 {
   padding-left: 0.6rem !important;
 }
+.mt-02 {
+  margin-top: 0.2rem !important
+}
+.mt-07 {
+  margin-top: 0.7rem !important
+}
 .mb-01 {
   margin-bottom: 0.1rem !important;
 }
@@ -183,6 +192,9 @@ $line-clamp-line-height: 1.7;
 }
 .mb-055 {
   margin-bottom: 0.55rem !important;
+}
+.line-height-0 {
+  line-height: 0 !important;
 }
 body {
   font-family: $font-family !important;
@@ -552,6 +564,7 @@ body.modal-open {
     text-align: right;
   }
 }
+.info-dialog .modal-dialog,
 .success-dialog .modal-dialog,
 .error-dialog .modal-dialog,
 .confirm-dialog .modal-dialog,
@@ -560,6 +573,10 @@ body.modal-open {
   max-width: 100%;
   min-width: $screen-min-width;
   width: 100%;
+}
+.info-dialog .modal-content {
+  background: $color-info;
+  border: 0;
 }
 .success-dialog .modal-content {
   background: $color-success;
@@ -1129,6 +1146,9 @@ textarea {
 .datetime-vertical {
   width: 32px;
 }
+.datetime-vertical.size-s {
+  width: 24px;
+}
 .datetime-vertical .day,
 .datetime-vertical .month,
 .datetime-vertical .year,
@@ -1156,17 +1176,18 @@ textarea {
 .datetime-vertical .day {
   line-height: 1.2rem;
 }
+.datetime-vertical .month,
+.datetime-vertical .year {
+  line-height: 1rem;
+}
+.datetime-vertical .time {
+  line-height: 0.8rem;
+}
 .datetime-vertical .day div{
   width: 50%;
 }
-.datetime-vertical .month {
-  line-height: 1rem;
-}
 .datetime-vertical .month div{
   width: 33.33%;
-}
-.datetime-vertical .year {
-  line-height: 1rem;
 }
 .datetime-vertical .year div {
   width: 25%;
@@ -1226,6 +1247,12 @@ textarea {
 }
 .border-right-transparent {
   border-right-color: transparent !important;
+}
+.border-white-50 {
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+.border-black-50 {
+  border-color: rgba(0, 0, 0, 0.5) !important;
 }
 .custom-control-input:checked ~ .custom-control-label::before {
   color: #000000;
@@ -1310,6 +1337,24 @@ textarea {
 .w-91 {
   width: 91.666667% !important;
 }
+.h-1 {
+  height: 0.25rem !important;
+}
+.h-2 {
+  height: 0.5rem !important;;
+}
+.h-3 {
+  height: 1rem !important;
+}
+.h-4 {
+  height: 1.5rem !important;
+}
+.h-5 {
+  height: 3rem !important;;
+}
+.t-0 {
+  top: 0 !important;
+}
 .alert {
   padding-top: 0.6rem;
   padding-right: 1rem;
@@ -1329,6 +1374,9 @@ textarea {
 }
 .text-decoration {
   text-decoration: underline
+}
+.text-black {
+  color: #000000 !important;
 }
 .cursor-pointer {
   cursor: pointer

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๑/๐๘/๒๕๖๓>
-Modify date : <๑๑/๐๘/๒๕๖๓>
+Modify date : <๑๒/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,13 +12,15 @@ Description : <>
 import {Component, OnInit} from '@angular/core';
 import {DecimalPipe} from '@angular/common';
 
-import {AppService} from '../../../../app.service';
-import {TransactionRegisteredPaymentCompletedService as TransRegisteredPaymentCompletedService} from '../../transaction-registered.service';
+import {
+  TransactionRegisteredService as TransRegisteredService,
+  TransactionRegisteredPaymentCompletedService as TransRegisteredPaymentCompletedService
+} from '../transaction-registered.service';
 
 @Component({
   selector: 'app-transaction-registered-payment-completed',
-  templateUrl: './transaction-registered-payment-completed.component.html',
-  styleUrls: ['../transaction-registered-home.component.scss'],
+  template: '',
+  styles: [],
   providers: [
     TransRegisteredPaymentCompletedService,
     DecimalPipe
@@ -26,10 +28,11 @@ import {TransactionRegisteredPaymentCompletedService as TransRegisteredPaymentCo
 })
 export class TransactionRegisteredPaymentCompletedComponent implements OnInit {
   constructor(
-    private appService: AppService,
+    private transRegisteredService: TransRegisteredService,
     private transRegisteredPaymentCompletedService: TransRegisteredPaymentCompletedService
   ) {}
 
   ngOnInit() {
+    this.transRegisteredService.service = this.transRegisteredPaymentCompletedService;
   }
 }

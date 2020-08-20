@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๐๒/๐๘/๒๕๖๓>
+Modify date : <๑๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -210,7 +210,10 @@ export class AuthService {
     this.modalService.close(modalRef).then((result: string) => {
       if (result === 'ok') {
         this.isAuthenticated = false;
-        this.cookieService.delete(this.appService.cookieName);
+        this.cookieService.delete(this.appService.cookieName, '/');
+
+        if (this.cookieService.check(this.appService.cookieName))
+          document.cookie = (this.appService.cookieName + '=; Max-Age=-99999999;');
 
         location.href = this.appService.urlSignOut;
       }

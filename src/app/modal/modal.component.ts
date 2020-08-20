@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๑๐/๐๘/๒๕๖๓>
+Modify date : <๑๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -14,6 +14,32 @@ import {Component, OnInit, Input} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import * as $ from 'jquery';
+
+@Component({
+  selector: 'app-modal-info',
+  template: `
+    <div class="font">
+      <div class="modal-body">
+        <span class="regular text-white size16">{{message | translate}}</span>
+      </div>
+      <div class="modal-footer">
+        <input class="d-none" type="text" />
+        <button type="button" class="btn btn-info mr-0" (click)="activeModal.close('close')"><span class="regular size14">{{'close' | translate | titlecase}}</span></button>
+      </div>
+    </div>
+  `,
+  styleUrls: []
+})
+export class ModalInfoComponent implements OnInit {
+  @Input() message;
+
+  constructor(
+    private activeModal: NgbActiveModal
+  ) { }
+
+  ngOnInit() {
+  }
+}
 
 @Component({
   selector: 'app-modal-success',

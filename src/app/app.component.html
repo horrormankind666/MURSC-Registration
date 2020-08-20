@@ -60,7 +60,7 @@
                 </div>
               </div>
               <div class="d-table-cell text-center signin-icon" *ngIf="!authService.isAuthenticated">
-                <a href="javascript:void(0)" (click)="appService.gotoSignIn()" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size15">{{'signin' | translate | titlecase}}</span></a>
+                <a href="javascript:void(0)" (click)="appService.gotoSignIn()" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size15">{{'signin.label' | translate | titlecase}}</span></a>
               </div>
             </div>
           </div>

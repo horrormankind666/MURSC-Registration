@@ -232,6 +232,7 @@ export namespace Schema {
 
   export interface TransRegistered {
     ID?: string,
+    CUID?: string,
     registeredDate?: string,
     transProject?: TransProject,
     transLocation?: TransLocation,
@@ -896,6 +897,7 @@ namespace Data {
 
           transRegistered.push({
             ID: (dr1['transRegisteredID'] ? dr1['transRegisteredID'] : ''),
+            CUID: ((dr1['transRegisteredID'] && transProject.ID) ? this.appService.getCUID([dr1['transRegisteredID'], transProject.ID]) : ''),
             registeredDate: (dr1['registeredDates'] ? dr1['registeredDates'] : ''),
             transProject: transProject,
             transLocation: transLocation,

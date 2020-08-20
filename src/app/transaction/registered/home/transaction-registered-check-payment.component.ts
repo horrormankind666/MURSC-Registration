@@ -12,13 +12,15 @@ Description : <>
 import {Component, OnInit} from '@angular/core';
 import {DecimalPipe} from '@angular/common';
 
-import {AppService} from '../../../../app.service';
-import {TransactionRegisteredCheckPaymentService as TransRegisteredCheckPaymentService} from '../../transaction-registered.service';
+import {
+  TransactionRegisteredService as TransRegisteredService,
+  TransactionRegisteredCheckPaymentService as TransRegisteredCheckPaymentService
+} from '../transaction-registered.service';
 
 @Component({
   selector: 'app-transaction-registered-check-payment',
-  templateUrl: './transaction-registered-check-payment.component.html',
-  styleUrls: ['../transaction-registered-home.component.scss'],
+  template: '',
+  styles: [],
   providers: [
     TransRegisteredCheckPaymentService,
     DecimalPipe
@@ -26,10 +28,11 @@ import {TransactionRegisteredCheckPaymentService as TransRegisteredCheckPaymentS
 })
 export class TransactionRegisteredCheckPaymentComponent implements OnInit {
   constructor(
-    private appService: AppService,
+    private transRegisteredService: TransRegisteredService,
     private transRegisteredCheckPaymentService: TransRegisteredCheckPaymentService
   ) {}
 
   ngOnInit() {
+    this.transRegisteredService.service = this.transRegisteredCheckPaymentService;
   }
 }

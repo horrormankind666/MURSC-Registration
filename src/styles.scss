@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๐๓/๐๘/๒๕๖๓>
+Modify date : <๑๙/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -23,14 +23,16 @@ Description : <>
     width: $width-fixed;
     max-width: $width-fixed !important;
   }
-  .project-card-horizontal#{$class} .project-body .col-sm-9 {
+  .project-card-horizontal#{$class} .project-body .col-sm-9,
+  .project-card-horizontal#{$class} .project-body .col-sm-12 {
     display: table-cell !important;
     vertical-align: top;
     width: auto !important;
     max-width: 100% !important;
   }
 }
-.project-card-horizontal .project-body .col-sm-9 {
+.project-card-horizontal .project-body .col-sm-9,
+.project-card-horizontal .project-body .col-sm-12 {
   padding-left: 31px;
 }
 .project-card-img {
@@ -39,7 +41,12 @@ Description : <>
 }
 .project-registration-status i {
   position: relative;
-  top: -2px;
+  top: 1px;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .project-registration-status i {
+    top: 2px;
+  }
 }
 .project-btn-badge {
   line-height: 1.4 !important;
@@ -58,6 +65,11 @@ Description : <>
 .project-dropdown .btn-contact-info i {
   top: 3px;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .project-dropdown .btn-contact-info i {
+    top: 4px;
+  }
+}
 .project-dropdown .dropdown-toggle::after {
   border: 0;
   margin-left: 0;
@@ -65,16 +77,17 @@ Description : <>
 .project-dropdown .dropdown-menu.contact-info {
   width: 260px;
   min-width: 260px;
+  line-height: 1.5 !important;
 }
 .project-card-vertical .project-dropdown .dropdown-menu.show.contact-info {
-  top: 29px !important;
+  top: 24px !important;
   left: -226px !important;
   transform: translate(0, 0) !important;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   ::i-block-chrome,
   .project-dropdown .dropdown-menu.show.contact-info {
-    top: 29px !important;
+    top: 26px !important;
     left: 10px !important;
   }
   ::i-block-chrome,
@@ -93,11 +106,23 @@ Description : <>
 .project-title-info .card-title .float-right {
   width: 34px !important;
 }
+.project-aboutresult-info .project-btn-badge.badge-projectabout {
+  width: 77px;
+}
+.project-aboutresult-info .project-btn-badge.badge-registeredlocationseatno {
+  width: 142px;
+}
+.project-aboutresult-info .project-btn-badge.badge-examscore {
+  width: 77px;
+}
 .project-register-info .form .form-group .col-form-label {
   width: 161px;
 }
 .project-register-info .d-table .col-icon {
   width: 26px;
+}
+.project-register-info .d-table.size-s .col-icon {
+  width: 23px;
 }
 .project-register-info .d-table.size-l .col-icon {
   width: 32px;
@@ -106,8 +131,20 @@ Description : <>
   table-layout: fixed !important;
   position: relative;
 }
+.project-register-info .d-table.size-l.calendar-date {
+  top: 3px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .project-register-info .d-table.size-l.calendar-date {
+    top: 4px;
+  }
+}
 .project-register-info .d-table.calendar-date .col-calendar {
   width: 156px;
+}
+.project-register-info .d-table.size-s.calendar-date .col-calendar {
+  width: 146px;
 }
 .project-register-info .d-table.calendar-date .col-clock span {
   position: relative;
@@ -172,12 +209,12 @@ Description : <>
   border-bottom: 0;
 }
 .project-location-info .table .col-seattotal {
-  width: 250px;
-  min-width: 250px;
+  width: 270px;
+  min-width: 270px;
 }
 .project-location-info .table .col-seatavailable {
-  width: 238px;
-  min-width: 238px;
+  width: 258px;
+  min-width: 258px;
 }
 .project-location-info .table .col-seat {
   width: 202px;

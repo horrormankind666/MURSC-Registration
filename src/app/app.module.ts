@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๑/๐๘/๒๕๖๓>
+Modify date : <๑๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -36,7 +36,7 @@ import {TrimOnBlurDirective, FocusRemoverDirective, DynamicComponentDirective, N
 import {appRouting} from './app-routing.module';
 
 import {AppComponent} from './app.component';
-import {ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent, ModalImageComponent} from './modal/modal.component';
+import {ModalInfoComponent, ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent, ModalImageComponent} from './modal/modal.component';
 import {PageEmptyComponent} from './page-empty.component'
 import {PageNotFoundComponent} from './page-not-found.component';
 import {MainComponent} from './main.component';
@@ -45,10 +45,10 @@ import {ProjectHomeComponent} from './project/home/project-home.component';
 import {ProjectDetailComponent} from './project/detail/project-detail.component';
 import {RegisteredComponent} from './registered/registered.component';
 import {TransactionRegisteredHomeComponent} from './transaction/registered/home/transaction-registered-home.component';
-import {TransactionRegisteredAllComponent} from './transaction/registered/home/all/transaction-registered-all.component';
-import {TransactionRegisteredPaymentCompletedComponent} from './transaction/registered/home/payment-completed/transaction-registered-payment-completed.component';
-import {TransactionRegisteredCheckPaymentComponent} from './transaction/registered/home/check-payment/transaction-registered-check-payment.component';
-import {TransactionRegisteredPendingPaymentComponent} from './transaction/registered/home/pending-payment/transaction-registered-pending-payment.component';
+import {TransactionRegisteredAllComponent} from './transaction/registered/home/transaction-registered-all.component';
+import {TransactionRegisteredPaymentCompletedComponent} from './transaction/registered/home/transaction-registered-payment-completed.component';
+import {TransactionRegisteredCheckPaymentComponent} from './transaction/registered/home/transaction-registered-check-payment.component';
+import {TransactionRegisteredPendingPaymentComponent} from './transaction/registered/home/transaction-registered-pending-payment.component';
 import {TransactionRegisteredDetailComponent} from './transaction/registered/detail/transaction-registered-detail.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -58,6 +58,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    ModalInfoComponent,
     ModalSuccessComponent,
     ModalErrorComponent,
     ModalConfirmComponent,
@@ -116,6 +117,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent],
   entryComponents: [
+    ModalInfoComponent,
     ModalSuccessComponent,
     ModalErrorComponent,
     ModalConfirmComponent,

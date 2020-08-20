@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๒๙/๐๗/๒๕๖๓>
+Modify date : <๑๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -30,6 +30,8 @@ export class AuthGuardService implements CanActivate {
     let urlArray: string[] = url.split('/');
 
     this.cookieService.set('MURSC.Url', url);
+    document.cookie = ('MURSC.Url=' + url);
+
     this.appService.rootPath = (urlArray[1] + '/' + urlArray[2]);
     if (!route.data.hasHearderSubtitle) this.appService.headerSubtitle = null;
 
@@ -37,6 +39,9 @@ export class AuthGuardService implements CanActivate {
       if (!this.authService.isAuthenticated) {
         if (this.cookieService.check(this.appService.cookieName))
           this.cookieService.delete(this.appService.cookieName);
+
+        if (this.cookieService.check(this.appService.cookieName))
+          document.cookie = (this.appService.cookieName + '=; Max-Age=-99999999;');
 
         if (route.data.signin) {
           this.appService.gotoSignIn();
