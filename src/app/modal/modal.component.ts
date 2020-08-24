@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๑๔/๐๘/๒๕๖๓>
+Modify date : <๒๑/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -50,7 +50,7 @@ export class ModalInfoComponent implements OnInit {
       </div>
       <div class="modal-footer">
         <input class="d-none" type="text" />
-        <button type="button" class="btn btn-success mr-0" (click)="activeModal.close('close')"><span class="regular size14">{{'close' | translate | titlecase}}</span></button>
+        <button type="button" class="btn btn-success mr-0" (click)="activeModal.close('close')"><span class="regular size14">{{(btnMsg ? btnMsg.close : 'close') | translate | titlecase}}</span></button>
       </div>
     </div>
   `,
@@ -58,6 +58,7 @@ export class ModalInfoComponent implements OnInit {
 })
 export class ModalSuccessComponent implements OnInit {
   @Input() message;
+  @Input() btnMsg;
 
   constructor(
     private activeModal: NgbActiveModal

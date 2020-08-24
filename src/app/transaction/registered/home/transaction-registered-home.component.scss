@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๕/๐๘/๒๕๖๓>
-Modify date : <๒๐/๐๘/๒๕๖๓>
+Modify date : <๒๑/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -25,9 +25,6 @@ Description : <>
   border-top-width: 0;
 }
 @include project-card-horizontal-fixed(':not(.on-modal)', 189px);
-.transaction-registered-home-view .aboutresult-info #projectAbout .project-register-info .form-group .col-form-label {
-  width: 55px;
-}
 .transaction-registered-home-view .register-info .form .form-group .col-form-label {
   width: 227px;
 }
@@ -52,34 +49,7 @@ Description : <>
   @include tabset-responsive('.transaction-registered-home-view');
 }
 @media screen and (max-width: 764px) {
-  @include project-card-horizontal-fixed(':not(.on-modal)', 50px);
-  .transaction-registered-home-view .title-info {
-    margin-top: 0.7rem;
-  }
-  .transaction-registered-home-view .title-info .hide {
-    display: none;
-  }
-  .transaction-registered-home-view .title-info .embed-responsive-16by9::before {
-    padding-top: 100%;
-  }
-  .transaction-registered-home-view .title-info .project-card-img {
-    border-radius: 50% !important;
-  }
-  .transaction-registered-home-view .title-info .project-logo .enlarge {
-    bottom: 0;
-    right: 0;
-    top: 28%;
-    left: 35%
-  }
-  .transaction-registered-home-view .project-card-horizontal .project-body .col-sm-9 {
-    padding-left: 8px;
-  }
-  .transaction-registered-home-view .project-body .hide {
-    display: none !important;
-  }
-  .transaction-registered-home-view .project-body .d-block.wrap.wrap-step1 {
-    display: block !important;
-  }
+  @include project-card-image-fixed('.transaction-registered-home-view');
 }
 @media screen and (max-width: 544px) {
   .transaction-registered-home-view .registered-info .jumbotron.jumbotron-registrationfee {

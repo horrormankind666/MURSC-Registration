@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๑๔/๐๘/๒๕๖๓>
+Modify date : <๒๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -29,7 +29,10 @@ interface UserInfo {
   uniqueName?: string,
   winaccountName?: string,
   personalID?: string,
-  title?: string,
+  titlePrefix?: {
+    th?: string,
+    en?: string
+  },
   firstName?: {
     th?: string,
     en?: string
@@ -43,6 +46,14 @@ interface UserInfo {
     en?: string
   },
   fullName?: {
+    th?: string,
+    en?: string
+  },
+  facultyName?: {
+    th?: string,
+    en?: string
+  },
+  programName?: {
     th?: string,
     en?: string
   },
@@ -70,6 +81,10 @@ export class AuthService {
   public isAuthenticated: boolean = false;
   public getUserInfo: UserInfo = null;
 
+  private decodeURI(encode: string): string {
+    return decodeURIComponent(escape(atob(encode.split('').reverse().join('')))).split('').reverse().join('');
+  }
+
   setUserInfo(data?: any) {
     let userInfo: UserInfo = null;
 
@@ -77,27 +92,34 @@ export class AuthService {
       let payload: {}             = (data.payload ? data.payload : {});
       let personal: {}            = (data.personal ? data.personal : {});
       let type: string            = (personal['type'] ? personal['type'] : '');
-      let ppid: string            = (payload['ppid'] ? payload['ppid'] : '');
-      let email: string           = (payload['email'] ? payload['email'] : '');
-      let givenName: string       = (payload['given_name'] ? payload['given_name'] : '');
-      let familyName: string      = (payload['family_name'] ? payload['family_name'] : '');
-      let uniqueName: string      = (payload['unique_name'] ? payload['unique_name'] : '');
-      let winaccountName: string  = (payload['winaccountname'] ? payload['winaccountname'] : '');
-      let personalID: string      = (personal['personalID'] ? personal['personalID'] : '');
-      let title: string           = (personal['title'] ? personal['title'] : '');
-      let firstNameTH: string     = (personal['firstNameTH'] ? personal['firstNameTH'] : '');
-      let middleNameTH: string    = (personal['middleNameTH'] ? personal['middleNameTH'] : '');
-      let lastNameTH: string      = (personal['lastNameTH'] ? personal['lastNameTH'] : '');
-      let firstNameEN: string     = (personal['firstNameEN'] ? personal['firstNameEN'] : '');
-      let middleNameEN: string    = (personal['middleNameEN'] ? personal['middleNameEN'] : '');
-      let lastNameEN: string      = (personal['lastNameEN'] ? personal['lastNameEN'] : '');
-      let address: string         = (personal['address'] ? personal['address'] : '');
-      let subdistrict: string     = (personal['subdistrict'] ? personal['subdistrict'] : '');
-      let district: string        = (personal['district'] ? personal['district'] : '');
-      let province: string        = (personal['province'] ? personal['province'] : '');
-      let country: string         = (personal['country'] ? personal['country'] : '');
-      let zipCode: string         = (personal['zipCode'] ? personal['zipCode'] : '');
-      let phoneNumber: string     = (personal['phoneNumber'] ? personal['phoneNumber'] : '');
+      let ppid: string            = (payload['ppid'] ? this.decodeURI(payload['ppid']) : '');
+      let email: string           = (payload['email'] ? this.decodeURI(payload['email']) : '');
+      let givenName: string       = (payload['given_name'] ? this.decodeURI(payload['given_name']) : '');
+      let familyName: string      = (payload['family_name'] ? this.decodeURI(payload['family_name']) : '');
+      let uniqueName: string      = (payload['unique_name'] ? this.decodeURI(payload['unique_name']) : '');
+      let winaccountName: string  = (payload['winaccountname'] ? this.decodeURI(payload['winaccountname']) : '');
+      let personalID: string      = (personal['personalID'] ? this.decodeURI(personal['personalID']) : '');
+      let titlePrefixTH: string   = (personal['titleTH'] ? this.decodeURI(personal['titleTH']) : '');
+      let titlePrefixEN: string   = (personal['titleEN'] ? this.decodeURI(personal['titleEN']) : '');
+      let firstNameTH: string     = (personal['firstNameTH'] ? this.decodeURI(personal['firstNameTH']) : '');
+      let middleNameTH: string    = (personal['middleNameTH'] ? this.decodeURI(personal['middleNameTH']) : '');
+      let lastNameTH: string      = (personal['lastNameTH'] ? this.decodeURI(personal['lastNameTH']) : '');
+      let firstNameEN: string     = (personal['firstNameEN'] ? this.decodeURI(personal['firstNameEN']) : '');
+      let middleNameEN: string    = (personal['middleNameEN'] ? this.decodeURI(personal['middleNameEN']) : '');
+      let lastNameEN: string      = (personal['lastNameEN'] ? this.decodeURI(personal['lastNameEN']) : '');
+      let fullNameTH: string      = (personal['fullNameTH'] ? this.decodeURI(personal['fullNameTH']) : '');
+      let fullNameEN: string      = (personal['fullNameEN'] ? this.decodeURI(personal['fullNameEN']) : '');
+      let facultyNameTH: string   = (personal['facultyNameTH'] ? this.decodeURI(personal['facultyNameTH']) : '');
+      let facultyNameEN: string   = (personal['facultyNameEN'] ? this.decodeURI(personal['facultyNameEN']) : '');
+      let programNameTH: string   = (personal['programNameTH'] ? this.decodeURI(personal['programNameTH']) : '');
+      let programNameEN: string   = (personal['programNameEN'] ? this.decodeURI(personal['programNameEN']) : '');
+      let address: string         = (personal['address'] ? this.decodeURI(personal['address']) : '');
+      let subdistrict: string     = (personal['subdistrict'] ? this.decodeURI(personal['subdistrict']) : '');
+      let district: string        = (personal['district'] ? this.decodeURI(personal['district']) : '');
+      let province: string        = (personal['province'] ? this.decodeURI(personal['province']) : '');
+      let country: string         = (personal['country'] ? this.decodeURI(personal['country']) : '');
+      let zipCode: string         = (personal['zipCode'] ? this.decodeURI(personal['zipCode']) : '');
+      let phoneNumber: string     = (personal['phoneNumber'] ? this.decodeURI(personal['phoneNumber']) : '');
 
       userInfo = {
         type: type,
@@ -108,7 +130,10 @@ export class AuthService {
         uniqueName: uniqueName,
         winaccountName: winaccountName,
         personalID: personalID,
-        title: title,
+        titlePrefix: {
+          th: titlePrefixTH,
+          en: titlePrefixEN
+        },
         firstName: {
           th: (firstNameTH ? firstNameTH : firstNameEN),
           en: (firstNameEN ? firstNameEN : firstNameTH)
@@ -120,6 +145,14 @@ export class AuthService {
         lastName: {
           th: (lastNameTH ? lastNameTH : lastNameEN),
           en: (lastNameEN ? lastNameEN : lastNameTH)
+        },
+        facultyName: {
+          th: facultyNameTH,
+          en: facultyNameEN
+        },
+        programName: {
+          th: programNameTH,
+          en: programNameEN
         },
         address: address,
         subdistrict: subdistrict,

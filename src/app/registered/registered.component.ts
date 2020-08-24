@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๐๔/๐๘/๒๕๖๓>
+Modify date : <๒๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -10,6 +10,7 @@ Description : <>
 'use strict';
 
 import {Component, OnInit} from '@angular/core';
+import {TitleCasePipe} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {DeviceDetectorService} from 'ngx-device-detector';
@@ -28,6 +29,7 @@ import {ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent} from 
 })
 export class RegisteredComponent implements OnInit {
   constructor(
+    private titleCase: TitleCasePipe,
     private route: ActivatedRoute,
     private router: Router,
     private deviceService: DeviceDetectorService,
@@ -353,6 +355,16 @@ export class RegisteredComponent implements OnInit {
       let result: {} = {
         transProjectID: (this.that.data.transProject$.ID ? this.that.data.transProject$.ID : null),
         transLocationID: this.that.location.saveChange.getValue(),
+        userType: this.that.authService.getUserInfo.type,
+        titlePrefixTH: this.that.authService.getUserInfo.titlePrefix.th,
+        titlePrefixEN: this.that.titleCase.transform(this.that.authService.getUserInfo.titlePrefix.en),
+        fullNameTH:	this.that.authService.getUserInfo.fullName.th,
+        fullNameEN:	this.that.titleCase.transform(this.that.authService.getUserInfo.fullName.en),
+        facultyNameTH: this.that.authService.getUserInfo.facultyName.th,
+        facultyNameEN: this.that.titleCase.transform(this.that.authService.getUserInfo.facultyName.en),
+        programNameTH: this.that.authService.getUserInfo.programName.th,
+        programNameEN: this.that.titleCase.transform(this.that.authService.getUserInfo.programName.en),
+        phoneNumber: this.that.authService.getUserInfo.phoneNumber,
         fee: this.that.feeType.saveChange.getValue(),
         deliAddress: this.that.deliAddress.saveChange.getValue()
       };
@@ -427,7 +439,7 @@ export class RegisteredComponent implements OnInit {
                             this.that.appService.isLoading.show = true;
                             this.that.appService.isLoading.loading = true;
 
-                            this.that.dataService.transProject.get(this.that.appService.getCUID([this.that.data.transProject$.ID])).then((result: Schema.TransProject) => {
+                            this.that.dataService.transProject.get(this.that.data.transProject$.project.category.initial, this.that.data.transProject$.CUID).then((result: Schema.TransProject) => {
                               let transProject: Schema.TransProject = result;
 
                               if (saveResult.errorCode === 4) {
@@ -439,7 +451,7 @@ export class RegisteredComponent implements OnInit {
                               }
                               if (saveResult.errorCode === 5 || saveResult.errorCode === 6) {
                                 if (saveResult.errorCode === 6)
-                                  this.that.data.transProject$.seatAvailable = transProject.seatAvailable;
+                                  this.that.data.transProject$.seatReserved = transProject.seatReserved;
 
                                 this.that.location.setValue();
                                 this.that.data.transProject$.transLocation = transProject.transLocation;
@@ -462,8 +474,9 @@ export class RegisteredComponent implements OnInit {
                   else {
                     if (saveResult.errorCode === 0) {
                       btnMsg = {
-                        close: 'registered.detail'
+                        close: 'payment.confirm'
                       };
+
                       modalRef = this.that.modalService.getModalSuccess(false, ModalSuccessComponent, 'save.success', btnMsg);
 
                       this.that.modalService.close(modalRef).then((result: string) => {

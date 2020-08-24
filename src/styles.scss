@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๑๙/๐๘/๒๕๖๓>
+Modify date : <๒๑/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -20,7 +20,7 @@ Description : <>
   .project-card-horizontal#{$class} .project-body .col-sm-3 {
     display: table-cell !important;
     vertical-align: top;
-    width: $width-fixed;
+    width: $width-fixed !important;
     max-width: $width-fixed !important;
   }
   .project-card-horizontal#{$class} .project-body .col-sm-9,
@@ -31,6 +31,39 @@ Description : <>
     max-width: 100% !important;
   }
 }
+
+@mixin project-card-image-fixed($class)
+{
+  @include project-card-horizontal-fixed(':not(.on-modal)', 50px);
+  #{$class} .title-info {
+    margin-top: 0.7rem;
+  }
+  #{$class} .title-info .hide {
+    display: none;
+  }
+  #{$class} .title-info .embed-responsive-16by9::before {
+    padding-top: 100%;
+  }
+  #{$class} .title-info .project-card-img {
+    border-radius: 50% !important;
+  }
+  #{$class} .title-info .project-logo .enlarge {
+    bottom: 0;
+    right: 0;
+    top: 28%;
+    left: 35%
+  }
+  #{$class} .project-card-horizontal .project-body .col-sm-9 {
+    padding-left: 8px;
+  }
+  #{$class} .project-body .hide {
+    display: none !important;
+  }
+  #{$class} .project-body .d-block.wrap.wrap-step1 {
+    display: block !important;
+  }
+}
+
 .project-card-horizontal .project-body .col-sm-9,
 .project-card-horizontal .project-body .col-sm-12 {
   padding-left: 31px;
@@ -115,6 +148,9 @@ Description : <>
 .project-aboutresult-info .project-btn-badge.badge-examscore {
   width: 77px;
 }
+.project-aboutresult-info #projectAbout .project-register-info .form-group .col-form-label {
+  width: 55px;
+}
 .project-register-info .form .form-group .col-form-label {
   width: 161px;
 }
@@ -182,6 +218,9 @@ Description : <>
     display: table-cell;
   }
 }
+.project-contact-info .form .form-group .col {
+  word-break: break-all;
+}
 .project-registered-btn {
   display: table;
   width: 215px;
@@ -225,7 +264,7 @@ Description : <>
 }
 @media screen and (max-width: 800px) {
   @include project-card-horizontal-fixed(':not(.on-modal)', 189px);
-  @include project-card-horizontal-fixed('.on-modal', 174px);
+  @include project-card-horizontal-fixed('.on-modal', 162px);
 }
 .project-fee-info .table .col-amount,
 .project-fee-info .table .col-total-amount {

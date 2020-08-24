@@ -63,18 +63,16 @@
       }">
       <div class="card card-vertical border-0 rounded-0 h-100 project-card-vertical">
         <div class="card-body pt-0 pr-3 pb-2 pl-3 project-body">
-          <ng-container *ngTemplateOutlet="titleInfo; context: {data: project}"></ng-container>
           <div class="card-text">
-            <div class="mt-3">
-              <ng-container *ngTemplateOutlet="projectInfo; context: {data: project}"></ng-container>
-            </div>
+            <ng-container *ngTemplateOutlet="titleInfo; context: {data: project}"></ng-container>
+            <div class="mt-3"><ng-container *ngTemplateOutlet="projectInfo; context: {data: project}"></ng-container></div>
           </div>
         </div>
         <div class="card-footer bg-transparent border-top-0 pt-0 pr-3 pb-07 pl-3 project-footer">
-          <div class="card-text mb-3">
-            <div class="mb-3"><ng-container *ngTemplateOutlet="registerInfo; context: {data: project}"></ng-container></div>
+          <div class="card-text">
+            <div class="mt-2"><ng-container *ngTemplateOutlet="registerInfo; context: {data: project}"></ng-container></div>
             <div class="vertical">
-              <p class="regular text-black-50 size16 line-clamp line-clamp-{{project.ID}} mt-2 mb-0" [innerHTML]="project.project.about[appService.lang] | nl2br"></p>
+              <p class="regular text-black-50 size16 line-clamp line-clamp-{{project.ID}} mt-3 mb-0" [innerHTML]="project.project.about[appService.lang] | nl2br"></p>
               {{appService.textOverflowClamp(('.vertical .line-clamp-' + project.ID), 2)}}
             </div>
           </div>
@@ -82,21 +80,25 @@
         </div>
       </div>
       <div class="card card-horizontal border-0 rounded-0 project-card-horizontal">
-        <div class="card-body pt-0 pr-3 pb-0 pl-3 project-body">
-          <div class="d-inline-block col-sm-3 pr-0 pb-0 pl-0">
-            <ng-container *ngTemplateOutlet="titleInfo; context: {data: project}"></ng-container>
-          </div>
-          <div class="d-inline-block col-sm-9 pt-2 pr-0 pb-07 align-top">
-            <div class="card-text mb-3">
-              <div class="mb-2"><ng-container *ngTemplateOutlet="projectInfo; context: {data: project}"></ng-container></div>
-              <div class="mb-3"><ng-container *ngTemplateOutlet="registerInfo; context: {data: project}"></ng-container></div>
-              <div class="horizontal">
-                <p class="regular text-black-50 size16 line-clamp line-clamp-{{project.ID}} mt-2 mb-0" [innerHTML]="project.project.about[appService.lang] | nl2br"></p>
-                {{appService.textOverflowClamp(('.horizontal .line-clamp-' + project.ID), 2)}}
+        <div class="card-body pt-0 pr-3 pb-3 pl-3 project-body">
+          <div class="card-text">
+            <div class="d-table w-100">
+              <div class="d-table-cell col-sm-3 w-25 pr-0 pl-0 align-top">
+                <ng-container *ngTemplateOutlet="titleInfo; context: {data: project}"></ng-container>
               </div>
-            </div>
-            <div class="project-footer">
-              <ng-container *ngTemplateOutlet="menuButtonInfo; context: {data: project}"></ng-container>
+              <div class="d-table-cell col-sm-9 w-75 pt-2 pr-0 align-top">
+                <div>
+                  <ng-container *ngTemplateOutlet="projectInfo; context: {data: project}"></ng-container>
+                  <div class="mt-3"><ng-container *ngTemplateOutlet="registerInfo; context: {data: project}"></ng-container></div>
+                  <div class="horizontal">
+                    <p class="regular text-black-50 size16 line-clamp line-clamp-{{project.ID}} mt-3 mb-0" [innerHTML]="project.project.about[appService.lang] | nl2br"></p>
+                    {{appService.textOverflowClamp(('.horizontal .line-clamp-' + project.ID), 2)}}
+                  </div>
+                </div>
+                <div class="project-footer mt-3">
+                  <ng-container *ngTemplateOutlet="menuButtonInfo; context: {data: project}"></ng-container>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -142,7 +144,7 @@
         <i class="fas fa-expand text-white size18"></i>
       </a>
     </div>
-    <div class="card-title mb-0">
+    <div class="card-title mt-07 mb-0">
       <div class="float-left" *ngIf="data.examDate.startDate">
         <ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.examDate.startDate}"></ng-container>
       </div>
@@ -165,7 +167,7 @@
           </i>
         </div>
         <div class="text-right project-dropdown mt-2" ngbDropdown placement="bottom-right">
-          <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle ngbTooltip="{{'contact.label' | translate | titlecase}}" placement="left" title="{{'contact.label' | translate | titlecase}}">
+          <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle>
             <i class="fas fa-phone text-white size11"></i>
           </a>
           <div ngbDropdownMenu aria-labelledby="contact-info" class="contact-info">
@@ -191,13 +193,15 @@
 <ng-template #registerInfo let-data="data">
   <div class="register-info project-register-info">
     <div class="regular size15">
-      <div class="d-table w-auto mb-2 calendar-date">
+      <div class="d-table w-auto mb-01 calendar-date">
         <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )">
           <div class="d-table-cell align-middle col-icon"><span class="text-success size18"><i class="fas fa-calendar-alt"></i></span></div>
           <div class="d-table-cell align-middle col-calendar"><span class="text-success">{{data.registrationDate.startDate ? (data.registrationDate.startDate | slice:0:16) : ''}}</span></div>
           <div class="d-table-cell align-middle col-icon"><span class="text-success size18"><i class="fas fa-clock"></i></span></div>
           <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-success size14">{{data.registrationDate.startDate ? (data.registrationDate.startDate | slice:16:22) : ''}}</span></div>
         </div>
+      </div>
+      <div class="d-table w-auto calendar-date">
         <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )">
           <div class="d-table-cell align-middle col-icon"><span class="text-danger size18"><i class="fas fa-calendar-alt"></i></span></div>
           <div class="d-table-cell align-middle col-calendar"><span class="text-danger">{{data.registrationDate.endDate ? (data.registrationDate.endDate | slice:0:16) : ''}}</span></div>
@@ -205,10 +209,10 @@
           <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-danger size14">{{data.registrationDate.endDate ? (data.registrationDate.endDate | slice:16:22) : ''}}</span></div>
         </div>
       </div>
-      <div class="d-table w-auto">
+      <div class="d-table w-auto mt-06">
         <div class="d-table-row line-height-0">
           <div class="d-table-cell align-middle pb-2 col-icon"><span class="text-dark size14"><i class="fas fa-users"></i></span></div>
-          <div class="d-table-cell align-middle pb-2"><span class="text-dark">{{'project.seat' | translate | titlecase}}<span class="bold">{{data.maximumSeat ? (' ' + (data.maximumSeat | number) + ' / ' + (data.seatAvailable | number) + ' ') : ''}}</span>{{data.maximumSeat ? ('unit.persons' | translate | titlecase) : ''}}</span></div>
+          <div class="d-table-cell align-middle pb-2"><span class="text-dark">{{'project.seat' | translate | titlecase}}<span class="bold">{{data.maximumSeat ? (' ' + (data.maximumSeat | number) + ' / ' + (data.seatReserved | number) + ' ') : ''}}</span>{{data.maximumSeat ? ('unit.persons' | translate | titlecase) : ''}}</span></div>
         </div>
         <div class="d-table-row line-height-0">
           <div class="d-table-cell align-middle col-icon"><span class="size18"><i class="fab fa-btc"></i></span></div>
@@ -256,13 +260,13 @@
   <div class="contact-info text-white size14 project-contact-info">
     <div class="form" *ngFor="let contactPerson of data; index as order">
       <div class="dropdown-divider mt-2 mb-2" *ngIf="order > 0"></div>
-      <div class="form-group row mr-0 mb-1 ml-0">
+      <div class="form-group row mr-0 mb-0 ml-0">
         <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fas fa-address-book"></i></label>
         <div class="col text-left">
           <span class="form-text regular mt-0">{{contactPerson.fullName[appService.lang] | titlecase}}</span>
         </div>
       </div>
-      <div class="form-group row mr-0 mb-1 ml-0">
+      <div class="form-group row mr-0 mb-0 ml-0">
         <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fas fa-envelope"></i></label>
         <div class="col text-left">
           <span class="form-text regular mt-0">{{contactPerson.email | lowercase}}</span>

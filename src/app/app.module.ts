@@ -2,14 +2,14 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๔/๐๘/๒๕๖๓>
+Modify date : <๒๔/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 'use strict';
 
-import {CommonModule} from '@angular/common';
+import {CommonModule, TitleCasePipe} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
@@ -110,6 +110,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TextareaAutosizeModule
   ],
   providers: [
+    TitleCasePipe,
     CookieService,
     AppService,
     AuthGuardService,

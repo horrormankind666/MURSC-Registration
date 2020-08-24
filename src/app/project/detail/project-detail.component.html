@@ -9,42 +9,45 @@
   </div>
   <div class="modal-body pt-0 pr-0 pb-0 pl-0">
     <div class="card-group">
-      <div class="card-col pr-0 pl-0 w-100">
+      <div class="card-col pr-0 pb-3 pl-0 w-100">
         <div class="card card-horizontal bg-white border-0 rounded-0 project-card-horizontal on-modal">
-          <div class="card-body pt-0 pr-3 pb-2 pl-3 project-body">
-            <div class="d-inline-block col-sm-3 pr-0 pl-0 align-top">
-              <ng-container *ngTemplateOutlet="titleInfo; context: {cardType: 'horizontal'}"></ng-container>
-            </div>
-            <div class="d-inline-block col-sm-9 pt-2 pr-0 pb-0 align-top">
-              <div class="card-text">
-                <div class="mb-2"><ng-container *ngTemplateOutlet="projectInfo"></ng-container></div>
-                <div class="mb-3"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
-                <ng-container *ngTemplateOutlet="registerButtonInfo"></ng-container>
+          <div class="card-body pt-0 pr-3 pb-3 pl-3 project-body">
+            <div class="card-text">
+              <div class="d-table w-100">
+                <div class="d-table-cell col-sm-3 w-25 pr-0 pl-0 align-top">
+                  <ng-container *ngTemplateOutlet="titleInfo; context: {cardType: 'horizontal'}"></ng-container>
+                </div>
+                <div class="d-table-cell col-sm-9 w-75 pt-2 pr-0 align-top">
+                  <ng-container *ngTemplateOutlet="projectInfo"></ng-container>
+                  <div class="mt-2"><ng-container *ngTemplateOutlet="projectAboutResultInfo"></ng-container></div>
+                  <div class="mt-3"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
+                  <div class="mt-3"><ng-container *ngTemplateOutlet="registerButtonInfo"></ng-container></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="card card-vertical bg-white border-0 rounded-0 project-card-vertical">
-          <div class="card-body pt-0 pr-3 pb-0 pl-3 project-body">
+      </div>
+      <div class="card card-vertical bg-white border-0 rounded-0 project-card-vertical">
+        <div class="card-body pt-0 pr-3 pb-3 pl-3 project-body">
+          <div class="card-text">
             <ng-container *ngTemplateOutlet="titleInfo; context: {cardType: 'vertical'}"></ng-container>
-            <div class="card-text mb-3">
-              <div class="mt-3 mb-2"><ng-container *ngTemplateOutlet="projectInfo"></ng-container></div>
-              <ng-container *ngTemplateOutlet="registerInfo"></ng-container>
-            </div>
-          </div>
-          <div class="card-footer text-right border-top-0 bg-transparent pt-0 pr-3 pb-2 pl-3 project-footer">
-            <div class="card-text">
-              <ng-container *ngTemplateOutlet="registerButtonInfo"></ng-container>
-            </div>
+            <div class="mt-3"><ng-container *ngTemplateOutlet="projectInfo"></ng-container></div>
+            <div class="mt-2"><ng-container *ngTemplateOutlet="projectAboutResultInfo"></ng-container></div>
+            <div class="mt-3"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
           </div>
         </div>
-        <div class="bg-white pt-2 pr-3 pb-3 pl-3">
-          <div class="jumbotron rounded-xl mb-0 p-3">
-            <div class="border-bottom border-white pb-2">
-              <span class="bold text-primary size20">{{'location.info' | translate | titlecase}}</span>
-            </div>
-            <div *ngIf="data.transProject$.transLocation.length"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
+        <div class="card-footer text-right border-top-0 bg-transparent pt-0 pr-3 pb-3 pl-3 project-footer">
+          <div class="card-text">
+            <ng-container *ngTemplateOutlet="registerButtonInfo"></ng-container>
           </div>
+        </div>
+      </div>
+      <div class="bg-white pr-3 pl-3">
+        <div class="jumbotron rounded-xl mb-0 p-3">
+          <div class="border-bottom border-white pb-2">
+            <span class="bold text-primary size20">{{'location.info' | translate | titlecase}}</span>
+          </div>
+          <div *ngIf="data.transProject$.transLocation.length"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
         </div>
       </div>
     </div>
@@ -82,13 +85,13 @@
 </ng-template>
 <ng-template #titleInfo let-cardType="cardType">
   <div class="title-info project-title-info">
-    <div class="embed-responsive embed-responsive-16by9 mb-3 project-logo">
+    <div class="embed-responsive embed-responsive-16by9 project-logo">
       <div class="card-img project-card-img" [ngStyle]="{'background-image': ('url(' + data.transProject$.project.logo + ')')}"></div>
       <a class="enlarge" href="javascript:void(0)" (click)="appService.enlargeImage(data.transProject$.project.logo)">
         <i class="fas fa-expand text-white size18"></i>
       </a>
     </div>
-    <div class="card-title mb-0">
+    <div class="card-title mt-07 mb-0">
       <div class="float-left" *ngIf="data.transProject$.examDate.startDate">
         <ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.transProject$.examDate.startDate}"></ng-container>
       </div>
@@ -111,11 +114,11 @@
           </i>
         </div>
         <div class="text-right project-dropdown mt-2" ngbDropdown placement="bottom-{{cardType === 'horizontal' ? 'left' : 'right'}}">
-          <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle ngbTooltip="{{'contact.label' | translate | titlecase}}" placement="left" title="{{'contact.label' | translate | titlecase}}">
+          <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle>
             <i class="fas fa-phone text-white size11"></i>
           </a>
           <div ngbDropdownMenu aria-labelledby="contact-info" class="contact-info">
-            <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo"></ng-container></div>
+            <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo; context: {isDropdown: true}"></ng-container></div>
           </div>
         </div>
       </div>
@@ -125,23 +128,69 @@
 </ng-template>
 <ng-template #projectInfo>
   <div class="project-info">
-    <p class="bold size22 mb-0">{{data.transProject$.project.name[appService.lang]}}</p>
-    <div class="regular text-dark size15 mb-1" *ngIf="data.transProject$.description[appService.lang]">{{data.transProject$.description[appService.lang]}}</div>
+    <p class="bold size20 mb-0">{{data.transProject$.project.name[appService.lang]}}</p>
+    <div class="regular text-dark size15" *ngIf="data.transProject$.description[appService.lang]">{{data.transProject$.description[appService.lang]}}</div>
     <div class="badge badge-pill badge-danger project-btn-badge mt-1 mb-2" *ngIf="data.transProject$.registrationStatus !== 'Y'">
       <span class="regular text-white size13">{{(dataService.statuses.get(dataService.registrationStatus.data$, data.transProject$.registrationStatus)).name[appService.lang] | lowercase}}</span>
     </div>
   </div>
 </ng-template>
+<ng-template #projectAboutResultInfo>
+  <div class="aboutresult-info project-aboutresult-info">
+    <a class="d-inline-block badge badge-pill badge-light-dark badge-projectabout project-btn-badge" href="javascript:void(0)"
+      (click)="projectAbout.isCollapsed = !projectAbout.isCollapsed"
+      [attr.aria-expanded]="projectAbout.isCollapsed"
+      aria-controls="projectAbout">
+      <span class="regular size13">{{'about' | translate | lowercase}}</span>
+    </a>
+    <p class="regular text-black-50 size16 line-clamp mt-2 mb-0">
+      <span id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed">
+        <span class="text-justify-distribute" [innerHTML]="data.transProject$.project.about[appService.lang] | nl2br"></span>
+        <div class="text-dark mt-2">{{'event.date' | translate | titlecase}}</div>
+        <div class="project-register-info">
+          <div class="form">
+            <div class="form-group w-100 row mr-0 mb-0 ml-0" *ngIf="data.transProject$.examDate.startDate">
+              <label for="col-eventstartdate" class="col-form-label">{{'start' | translate | titlecase}}</label>
+              <div class="col">
+                <div class="d-table w-100 size-l calendar-date">
+                  <div class="d-table-row">
+                    <div class="d-table-cell align-middle col-calendar"><span>{{data.transProject$.examDate.startDate ? (data.transProject$.examDate.startDate | slice:0:16) : ''}}</span></div>
+                    <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transProject$.examDate.startDate ? (data.transProject$.examDate.startDate | slice:16:22) : ''}}</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group w-100 row mr-0 mb-0 ml-0" *ngIf="data.transProject$.examDate.endDate">
+              <label for="col-eventenddate" class="col-form-label">{{'end' | translate | titlecase}}</label>
+              <div class="col">
+                <div class="d-table w-100 size-l calendar-date">
+                  <div class="d-table-row">
+                    <div class="d-table-cell align-middle col-calendar"><span>{{data.transProject$.examDate.endDate ? (data.transProject$.examDate.endDate | slice:0:16) : ''}}</span></div>
+                    <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transProject$.examDate.endDate ? (data.transProject$.examDate.endDate | slice:16:22) : ''}}</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-dark mt-2">{{'contact.label' | translate | titlecase}}</div>
+        <div><ng-container *ngTemplateOutlet="contactInfo; context: {isDropdown: false}"></ng-container></div>
+      </span>
+    </p>
+  </div>
+</ng-template>
 <ng-template #registerInfo>
   <div class="register-info project-register-info">
     <div class="regular size16">
-      <div class="d-table w-100 size-l mb-2 calendar-date">
+      <div class="d-table w-100 size-l mb-01 calendar-date">
         <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )">
           <div class="d-table-cell align-middle col-icon"><span class="text-success size22"><i class="fas fa-calendar-alt"></i></span></div>
           <div class="d-table-cell align-middle col-calendar"><span class="text-success">{{data.transProject$.registrationDate.startDate ? (data.transProject$.registrationDate.startDate | slice:0:16) : ''}}</span></div>
           <div class="d-table-cell align-middle col-icon"><span class="text-success size22"><i class="fas fa-clock"></i></span></div>
           <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-success size14">{{data.transProject$.registrationDate.startDate ? (data.transProject$.registrationDate.startDate | slice:16:22) : ''}}</span></div>
         </div>
+      </div>
+      <div class="d-table w-100 size-l calendar-date">
         <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )">
           <div class="d-table-cell align-middle col-icon"><span class="text-danger size22"><i class="fas fa-calendar-alt"></i></span></div>
           <div class="d-table-cell align-middle col-calendar"><span class="text-danger">{{data.transProject$.registrationDate.endDate ? (data.transProject$.registrationDate.endDate | slice:0:16) : ''}}</span></div>
@@ -149,10 +198,10 @@
           <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-danger size14">{{data.transProject$.registrationDate.endDate ? (data.transProject$.registrationDate.endDate | slice:16:22) : ''}}</span></div>
         </div>
       </div>
-      <div class="d-table w-100 size-l">
+      <div class="d-table w-100 size-l mt-06">
         <div class="d-table-row line-height-0">
           <div class="d-table-cell align-middle pb-2 col-icon"><span class="text-dark size18"><i class="fas fa-users"></i></span></div>
-          <div class="d-table-cell align-middle pb-2"><span class="text-dark">{{'project.seat' | translate | titlecase}}<span class="bold">{{data.transProject$.maximumSeat ? (' ' + (data.transProject$.maximumSeat | number) + ' / ' + (data.transProject$.seatAvailable | number) + ' ') : ''}}</span>{{data.transProject$.maximumSeat ? ('unit.persons' | translate | titlecase) : ''}}</span></div>
+          <div class="d-table-cell align-middle pb-2"><span class="text-dark">{{'project.seat' | translate | titlecase}}<span class="bold">{{data.transProject$.maximumSeat ? (' ' + (data.transProject$.maximumSeat | number) + ' / ' + (data.transProject$.seatReserved | number) + ' ') : ''}}</span>{{data.transProject$.maximumSeat ? ('unit.persons' | translate | titlecase) : ''}}</span></div>
         </div>
         <div class="d-table-row line-height-0">
           <div class="d-table-cell align-middle col-icon size-l"><span class="size22"><i class="fab fa-btc"></i></span></div>
@@ -161,12 +210,6 @@
       </div>
     </div>
   </div>
-  <div class="mt-3">
-    <a class="d-inline-block badge badge-pill badge-light-dark badge-projectabout project-btn-badge" href="javascript:void(0)" (click)="projectAbout.isCollapsed = !projectAbout.isCollapsed" [attr.aria-expanded]="projectAbout.isCollapsed" aria-controls="projectAbout">
-      <span class="regular size13">{{'about' | translate | lowercase}}</span>
-    </a>
-  </div>
-  <p class="regular text-justify-distribute text-black-50 size15 line-clamp mt-2 mb-0 project-text-line-clamp" id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed" [innerHTML]="data.transProject$.project.about[appService.lang] | nl2br"></p>
 </ng-template>
 <ng-template #registerButtonInfo>
   <div class="registered-btn ml-auto project-registered-btn">
@@ -181,24 +224,48 @@
     </a>
   </div>
 </ng-template>
-<ng-template #contactInfo>
-  <div class="contact-info text-white size14 project-contact-info">
+<ng-template #contactInfo let-isDropdown="isDropdown">
+  <div class="contact-info project-contact-info"
+    [ngClass]="{
+      'text-white': isDropdown,
+      'text-black-50': !isDropdown,
+      'size14': isDropdown,
+      'size16': !isDropdown
+    }">
     <div class="form" *ngFor="let contactPerson of data.transProject$.contactPerson; index as order">
       <div class="dropdown-divider mt-2 mb-2" *ngIf="order > 0"></div>
-      <div class="form-group row mr-0 mb-1 ml-0">
-        <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fas fa-address-book"></i></label>
+      <div class="form-group row mr-0 mb-0 ml-0">
+        <label for="col-name" class="col-form-label pb-0"
+          [ngClass]="{
+            'pt-0': isDropdown,
+            'pt-015': !isDropdown
+          }">
+          <i class="fas fa-address-book"></i>
+        </label>
         <div class="col text-left">
           <span class="form-text regular mt-0">{{contactPerson.fullName[appService.lang] | titlecase}}</span>
         </div>
       </div>
-      <div class="form-group row mr-0 mb-1 ml-0">
-        <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fas fa-envelope"></i></label>
+      <div class="form-group row mr-0 mb-0 ml-0">
+        <label for="col-email" class="col-form-label pb-0"
+          [ngClass]="{
+            'pt-0': isDropdown,
+            'pt-015': !isDropdown
+          }">
+          <i class="fas fa-envelope"></i>
+        </label>
         <div class="col text-left">
           <span class="form-text regular mt-0">{{contactPerson.email | lowercase}}</span>
         </div>
       </div>
       <div class="form-group row mr-0 mb-0 ml-0">
-        <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fas fa-phone"></i></label>
+        <label for="col-phone" class="col-form-label pb-0"
+          [ngClass]="{
+            'pt-0': isDropdown,
+            'pt-015': !isDropdown
+          }">
+          <i class="fas fa-phone"></i>
+        </label>
         <div class="col text-left">
           <span class="form-text regular mt-0">{{contactPerson.phoneNumber}}</span>
         </div>

@@ -1,6 +1,6 @@
 <div class="transaction-registered-home-view">
   <div class="card-group">
-    <div class="card-col pr-0 pl-0 w-100">
+    <div class="card-col pr-0 pb-0 pl-0 w-100">
       <div class="card bg-white border-0 rounded-0 tab-title">
         <div class="card-body pt-0 pr-3 pb-0 pl-3">
           <div class="card-title mb-0">
@@ -88,21 +88,23 @@
       <div class="card-col pr-0 pl-0 w-100" *ngFor="let transRegistered of transRegisteredService.service.operate.table.service.data$ | async; index as order; let last = last">
         <div class="card card-horizontal border-0 rounded-0 project-card-horizontal">
           <div class="card-body pt-0 pr-3 pb-3 pl-3 project-body">
-            <div class="d-table w-100">
-              <div class="d-tabel-cell col-sm-3 pr-0 pl-0 align-top">
-                <ng-container *ngTemplateOutlet="titleInfo; context: {data: transRegistered, cardType: 'horizontal'}"></ng-container>
+            <div class="card-text">
+              <div class="d-table w-100">
+                <div class="d-table-cell col-sm-3 w-25 pr-0 pl-0 align-top">
+                  <ng-container *ngTemplateOutlet="titleInfo; context: {data: transRegistered, cardType: 'horizontal'}"></ng-container>
+                </div>
+                <div class="d-table-cell col-sm-9 w-75 pt-2 pr-0 align-top">
+                  <ng-container *ngTemplateOutlet="projectInfo; context: {data: transRegistered}"></ng-container>
+                  <div class="mt-2 hide"><ng-container *ngTemplateOutlet="projectAboutResultInfo; context: {data: transRegistered}"></ng-container></div>
+                  <div class="mt-3 hide"><ng-container *ngTemplateOutlet="registerInfo; context: {data: transRegistered}"></ng-container></div>
+                  <div class="mt-3 hide text-right"><ng-container *ngTemplateOutlet="registeredInfo; context: {data: transRegistered}"></ng-container></div>
+                </div>
               </div>
-              <div class="d-tabel-cell col-sm-9 pt-2 pr-0 align-top">
-                <div class="card-text"><ng-container *ngTemplateOutlet="projectInfo; context: {data: transRegistered}"></ng-container></div>
-                <div class="mt-2 hide"><ng-container *ngTemplateOutlet="projectAboutResultInfo; context: {data: transRegistered}"></ng-container></div>
-                <div class="mt-3 hide"><ng-container *ngTemplateOutlet="registerInfo; context: {data: transRegistered}"></ng-container></div>
-                <div class="mt-3 hide text-right"><ng-container *ngTemplateOutlet="registeredInfo; context: {data: transRegistered}"></ng-container></div>
+              <div class="d-block wrap wrap-step1">
+                <div class="mt-2"><ng-container *ngTemplateOutlet="projectAboutResultInfo; context: {data: transRegistered}"></ng-container></div>
+                <div class="mt-3"><ng-container *ngTemplateOutlet="registerInfo; context: {data: transRegistered}"></ng-container></div>
+                <div class="mt-3 text-right"><ng-container *ngTemplateOutlet="registeredInfo; context: {data: transRegistered}"></ng-container></div>
               </div>
-            </div>
-            <div class="d-block wrap wrap-step1">
-              <div class="mt-2"><ng-container *ngTemplateOutlet="projectAboutResultInfo; context: {data: transRegistered}"></ng-container></div>
-              <div class="mt-3"><ng-container *ngTemplateOutlet="registerInfo; context: {data: transRegistered}"></ng-container></div>
-              <div class="mt-3 text-right"><ng-container *ngTemplateOutlet="registeredInfo; context: {data: transRegistered}"></ng-container></div>
             </div>
           </div>
         </div>
@@ -213,11 +215,11 @@
       aria-controls="examScore">
       <span class="regular size13">{{'score' | translate | lowercase}}</span>
     </a>
-    <p class="regular text-justify-distribute text-black-50 size16 line-clamp mt-2 mb-0 project-text-line-clamp">
+    <p class="regular text-black-50 size16 line-clamp mt-2 mb-0">
       <span id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed[data.ID]">
-        <span [innerHTML]="data.transProject.project.about[appService.lang] | nl2br"></span>
+        <span class="text-justify-distribute" [innerHTML]="data.transProject.project.about[appService.lang] | nl2br"></span>
         <div class="text-dark mt-2">{{'event.date' | translate | titlecase}}</div>
-        <div class="card-text project-register-info">
+        <div class="project-register-info">
           <div class="form">
             <div class="form-group w-100 row mr-0 mb-0 ml-0" *ngIf="data.transProject.examDate.startDate">
               <label for="col-eventstartdate" class="col-form-label">{{'start' | translate | titlecase}}</label>
@@ -260,64 +262,62 @@
     <div class="d-table w-100">
       <div class="d-table-row">
         <div class="d-table-cell registered-info">
-          <div class="card-text">
-            <div class="regular size16">
-              <div class="form">
-                <div class="form-group w-100 row mb-01">
-                  <label for="col-registereddate" class="col-form-label">{{'registered.on' | translate | titlecase}}</label>
-                  <div class="col">
-                    <div class="d-table w-100 size-l calendar-date" *ngIf="data.registeredDate">
-                      <div class="d-table-row">
-                        <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
-                        <div class="d-table-cell align-middle col-calendar"><span>{{data.registeredDate ? (data.registeredDate | slice:0:16) : ''}}</span></div>
-                        <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
-                        <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.registeredDate ? (data.registeredDate | slice:16:22) : ''}}</span></div>
-                      </div>
+          <div class="regular size16">
+            <div class="form">
+              <div class="form-group w-100 row mb-01">
+                <label for="col-registereddate" class="col-form-label">{{'registered.on' | translate | titlecase}}</label>
+                <div class="col">
+                  <div class="d-table w-100 size-l calendar-date" *ngIf="data.registeredDate">
+                    <div class="d-table-row">
+                      <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
+                      <div class="d-table-cell align-middle col-calendar"><span>{{data.registeredDate ? (data.registeredDate | slice:0:16) : ''}}</span></div>
+                      <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
+                      <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.registeredDate ? (data.registeredDate | slice:16:22) : ''}}</span></div>
                     </div>
                   </div>
                 </div>
-                <div class="form-group w-100 row mb-01 wrap wrap-step2" *ngIf="data.invoice.payment.status === 'N'">
-                  <label for="col-registrationfee" class="col-form-label">{{'project.registrationFee' | translate | titlecase}}</label>
-                  <div class="col">
-                    <span class="form-text regular">{{(data.totalFeeAmount ? ((data.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '')}}</span>
-                  </div>
+              </div>
+              <div class="form-group w-100 row mb-01 wrap wrap-step2" *ngIf="data.invoice.payment.status === 'N'">
+                <label for="col-registrationfee" class="col-form-label">{{'project.registrationFee' | translate | titlecase}}</label>
+                <div class="col">
+                  <span class="form-text regular">{{(data.totalFeeAmount ? ((data.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '')}}</span>
                 </div>
-                <div class="form-group w-100 row mb-01" *ngIf="data.invoice.payment.status !== 'N'">
-                  <label for="col-confirmdateofpayment" class="col-form-label">{{'invoice.confirmPayment.on' | translate | titlecase}}</label>
-                  <div class="col">
-                    <div class="d-table w-100 size-l calendar-date" *ngIf="data.invoice.payment.confirmDate">
-                      <div class="d-table-row">
-                        <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
-                        <div class="d-table-cell align-middle col-calendar"><span>{{data.invoice.payment.confirmDate ? (data.invoice.payment.confirmDate | slice:0:16) : ''}}</span></div>
-                        <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
-                        <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.invoice.payment.confirmDate ? (data.invoice.payment.confirmDate | slice:16:22) : ''}}</span></div>
-                      </div>
+              </div>
+              <div class="form-group w-100 row mb-01" *ngIf="data.invoice.payment.status !== 'N'">
+                <label for="col-confirmdateofpayment" class="col-form-label">{{'invoice.confirmPayment.on' | translate | titlecase}}</label>
+                <div class="col">
+                  <div class="d-table w-100 size-l calendar-date" *ngIf="data.invoice.payment.confirmDate">
+                    <div class="d-table-row">
+                      <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
+                      <div class="d-table-cell align-middle col-calendar"><span>{{data.invoice.payment.confirmDate ? (data.invoice.payment.confirmDate | slice:0:16) : ''}}</span></div>
+                      <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
+                      <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.invoice.payment.confirmDate ? (data.invoice.payment.confirmDate | slice:16:22) : ''}}</span></div>
                     </div>
                   </div>
                 </div>
-                <div class="form-group w-100 row mb-01" *ngIf="data.invoice.payment.status === 'N'">
-                  <label for="col-dateofpayment" class="col-form-label">{{'project.lastPaymentDate' | translate | titlecase}}</label>
-                  <div class="col">
-                    <div class="d-table w-100 size-l calendar-date" *ngIf="data.transProject.lastPaymentDate">
-                      <div class="d-table-row">
-                        <div class="d-table-cell align-middle col-icon"><span class="text-danger size22"><i class="fas fa-calendar-alt"></i></span></div>
-                        <div class="d-table-cell align-middle col-calendar"><span class="text-danger">{{data.transProject.lastPaymentDate ? (data.transProject.lastPaymentDate | slice:0:16) : ''}}</span></div>
-                        <div class="d-table-cell align-middle col-icon"><span class="text-danger size22"><i class="fas fa-clock"></i></span></div>
-                        <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-danger size14">{{data.transProject.lastPaymentDate ? (data.transProject.lastPaymentDate | slice:16:22) : ''}}</span></div>
-                      </div>
+              </div>
+              <div class="form-group w-100 row mb-01" *ngIf="data.invoice.payment.status === 'N'">
+                <label for="col-dateofpayment" class="col-form-label">{{'project.lastPaymentDate' | translate | titlecase}}</label>
+                <div class="col">
+                  <div class="d-table w-100 size-l calendar-date" *ngIf="data.transProject.lastPaymentDate">
+                    <div class="d-table-row">
+                      <div class="d-table-cell align-middle col-icon"><span class="text-danger size22"><i class="fas fa-calendar-alt"></i></span></div>
+                      <div class="d-table-cell align-middle col-calendar"><span class="text-danger">{{data.transProject.lastPaymentDate ? (data.transProject.lastPaymentDate | slice:0:16) : ''}}</span></div>
+                      <div class="d-table-cell align-middle col-icon"><span class="text-danger size22"><i class="fas fa-clock"></i></span></div>
+                      <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-danger size14">{{data.transProject.lastPaymentDate ? (data.transProject.lastPaymentDate | slice:16:22) : ''}}</span></div>
                     </div>
                   </div>
                 </div>
-                <div class="form-group w-100 row mb-01" *ngIf="data.invoice.payment.status === 'Y'">
-                  <label for="col-registeredsuccessfulpayment" class="col-form-label">{{'invoice.successfulPayment.on' | translate | titlecase}}</label>
-                  <div class="col">
-                    <div class="d-table w-100 size-l calendar-date" *ngIf="data.invoice.payment.date">
-                      <div class="d-table-row">
-                        <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
-                        <div class="d-table-cell align-middle col-calendar"><span>{{data.invoice.payment.date ? (data.invoice.payment.date | slice:0:16) : ''}}</span></div>
-                        <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
-                        <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.invoice.payment.date ? (data.invoice.payment.date | slice:16:22) : ''}}</span></div>
-                      </div>
+              </div>
+              <div class="form-group w-100 row mb-01" *ngIf="data.invoice.payment.status === 'Y'">
+                <label for="col-registeredsuccessfulpayment" class="col-form-label">{{'invoice.successfulPayment.on' | translate | titlecase}}</label>
+                <div class="col">
+                  <div class="d-table w-100 size-l calendar-date" *ngIf="data.invoice.payment.date">
+                    <div class="d-table-row">
+                      <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
+                      <div class="d-table-cell align-middle col-calendar"><span>{{data.invoice.payment.date ? (data.invoice.payment.date | slice:0:16) : ''}}</span></div>
+                      <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
+                      <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.invoice.payment.date ? (data.invoice.payment.date | slice:16:22) : ''}}</span></div>
                     </div>
                   </div>
                 </div>

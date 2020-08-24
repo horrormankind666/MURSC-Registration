@@ -2,23 +2,16 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๑/๐๖/๒๕๖๓>
-Modify date : <๑๕/๐๘/๒๕๖๓>
+Modify date : <๒๑/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 @import '../../../../styles.scss';
 
-.transaction-registered-detail-view .project-card-vertical {
-  display: none;
-}
-@media screen and (max-width: 530px) {
-  .transaction-registered-detail-view .project-card-vertical {
-    display: block;
-  }
-  .transaction-registered-detail-view .project-card-horizontal {
-    display: none;
-  }
+.transaction-registered-detail-view .project-card-vertical,
+.transaction-registered-detail-view .project-body .wrap {
+  display: none !important;
 }
 .transaction-registered-detail-view .d-table.calendar-date {
   position: relative;
@@ -89,10 +82,16 @@ Description : <>
   text-align: center;
   vertical-align: middle;
 }
-@media screen and (max-width: 770px) {
-  @include form-responsive('.transaction-registered-detail-view .register-info');
+@media screen and (max-width: 770px) and (min-width: 545px) {
+  @include project-card-image-fixed('.transaction-registered-detail-view');
 }
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 544px) {
+  .transaction-registered-detail-view .project-card-vertical {
+    display: block !important;
+  }
+  .transaction-registered-detail-view .project-card-horizontal {
+    display: none !important;
+  }
   @include form-responsive('.transaction-registered-detail-view .register-info');
 }
 @media screen and (max-width: 428px) {

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๑๐/๐๘/๒๕๖๓>
+Modify date : <๒๐/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -194,7 +194,7 @@ export namespace Schema {
     },
     lastPaymentDate?: string,
     maximumSeat?: number,
-    seatAvailable?: number,
+    seatReserved?: number,
     minimumFee?: string,
     contactPerson?: ContactPerson[],
     registrationStatus?: string,
@@ -207,7 +207,7 @@ export namespace Schema {
     transProjectID?: string,
     location?: Location,
     seatTotal?: number,
-    seatAvailable?: number
+    seatAvailable?: number,
   }
 
   export interface TransFeeType {
@@ -582,7 +582,7 @@ namespace Data {
                 endDate: (dr1['regisEndDates'] ? dr1['regisEndDates'] : '')
               },
               maximumSeat: (dr1['maximumSeat'] ? parseInt(dr1['maximumSeat']) : 0),
-              seatAvailable: dr1['seatAvailable'],
+              seatReserved: dr1['seatReserved'],
               minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
               contactPerson: contactPerson,
               registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : '')
@@ -671,7 +671,7 @@ namespace Data {
               },
               lastPaymentDate: (dr1['lastPaymentDates'] ? dr1['lastPaymentDates'] : ''),
               maximumSeat: (dr1['maximumSeat'] ? parseInt(dr1['maximumSeat']) : 0),
-              seatAvailable: (dr1['seatAvailable'] ? (parseInt(dr1['seatAvailable']) > 0 ? (parseInt(dr1['maximumSeat']) - parseInt(dr1['seatAvailable'])) : 0) : 0),
+              seatReserved: (dr1['seatReserved'] ? parseInt(dr1['seatReserved']) : 0),
               minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
               contactPerson: contactPerson,
               registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : ''),
