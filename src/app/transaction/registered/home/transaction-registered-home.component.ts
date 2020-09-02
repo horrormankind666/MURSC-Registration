@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๘/๐๖/๒๕๖๓>
-Modify date : <๑๘/๐๘/๒๕๖๓>
+Modify date : <๐๒/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -86,7 +86,7 @@ export class TransactionRegisteredHomeComponent implements OnInit {
     isCollapsed: []
   };
 
-  registeredLocationSeatNo: any = {
+  registeredLocationIDNoSeatNo: any = {
     isCollapsed: []
   };
 
@@ -100,7 +100,7 @@ export class TransactionRegisteredHomeComponent implements OnInit {
         this.appService.gotoSignIn();
       else {
         this.projectAbout.isCollapsed = [];
-        this.registeredLocationSeatNo.isCollapsed = [];
+        this.registeredLocationIDNoSeatNo.isCollapsed = [];
         this.examScore.isCollapsed = [];
       }
     });

@@ -185,36 +185,42 @@
 </ng-template>
 <ng-template #projectAboutResultInfo let-data="data">
   <div class="aboutresult-info project-aboutresult-info">
-    <a class="d-inline-block badge badge-pill badge-light-dark badge-projectabout project-btn-badge" href="javascript:void(0)"
-      (click)="
-        registeredLocationSeatNo.isCollapsed[data.ID] = false;
-        examScore.isCollapsed[data.ID] = false;
-        projectAbout.isCollapsed[data.ID] = !projectAbout.isCollapsed[data.ID]
-      "
-      [attr.aria-expanded]="projectAbout.isCollapsed[data.ID] === undefined ? false : projectAbout.isCollapsed[data.ID]"
-      aria-controls="projectAbout">
-      <span class="regular size13">{{'about' | translate | lowercase}}</span>
-    </a>
-    <a class="d-inline-block badge badge-pill badge-light-dark badge-registeredlocationseatno project-btn-badge ml-2" href="javascript:void(0)"
-      (click)="
-        projectAbout.isCollapsed[data.ID] = false;
-        examScore.isCollapsed[data.ID] = false;
-        registeredLocationSeatNo.isCollapsed[data.ID] = !registeredLocationSeatNo.isCollapsed[data.ID]
-      "
-      [attr.aria-expanded]="registeredLocationSeatNo.isCollapsed[data.ID] === undefined ? false : registeredLocationSeatNo.isCollapsed[data.ID]"
-      aria-controls="registeredLocationSeatNo">
-      <span class="regular size13">{{'location.label' | translate | lowercase}} / {{'seat.seatNo' | translate | lowercase}}</span>
-    </a>
-    <a class="d-inline-block badge badge-pill badge-light-dark badge-examscore project-btn-badge ml-2" href="javascript:void(0)"
-      (click)="
-        projectAbout.isCollapsed[data.ID] = false;
-        registeredLocationSeatNo.isCollapsed[data.ID] = false;
-        examScore.isCollapsed[data.ID] = !examScore.isCollapsed[data.ID]
-      "
-      [attr.aria-expanded]="examScore.isCollapsed[data.ID] === undefined ? false : examScore.isCollapsed[data.ID]"
-      aria-controls="examScore">
-      <span class="regular size13">{{'score' | translate | lowercase}}</span>
-    </a>
+    <div class="d-inline-block badge-projectabout">
+      <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
+        (click)="
+          registeredLocationIDNoSeatNo.isCollapsed[data.ID] = false;
+          examScore.isCollapsed[data.ID] = false;
+          projectAbout.isCollapsed[data.ID] = !projectAbout.isCollapsed[data.ID]
+        "
+        [attr.aria-expanded]="projectAbout.isCollapsed[data.ID] === undefined ? false : projectAbout.isCollapsed[data.ID]"
+        aria-controls="projectAbout">
+        <span class="regular size13">{{'about' | translate | lowercase}}</span>
+      </a>
+    </div>
+    <div class="d-inline-block badge-registeredlocationidnoseatno ml-2">
+      <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
+        (click)="
+          projectAbout.isCollapsed[data.ID] = false;
+          examScore.isCollapsed[data.ID] = false;
+          registeredLocationIDNoSeatNo.isCollapsed[data.ID] = !registeredLocationIDNoSeatNo.isCollapsed[data.ID]
+        "
+        [attr.aria-expanded]="registeredLocationIDNoSeatNo.isCollapsed[data.ID] === undefined ? false : registeredLocationIDNoSeatNo.isCollapsed[data.ID]"
+        aria-controls="registeredLocationIDNoSeatNo">
+        <span class="regular size13">{{'location.label' | translate | lowercase}} / {{'idNo.abbreviations' | translate | lowercase}} / {{'seat.seatNo' | translate | lowercase}}</span>
+      </a>
+    </div>
+    <div class="d-inline-block badge-examscore ml-2">
+      <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
+        (click)="
+          projectAbout.isCollapsed[data.ID] = false;
+          registeredLocationIDNoSeatNo.isCollapsed[data.ID] = false;
+          examScore.isCollapsed[data.ID] = !examScore.isCollapsed[data.ID]
+        "
+        [attr.aria-expanded]="examScore.isCollapsed[data.ID] === undefined ? false : examScore.isCollapsed[data.ID]"
+        aria-controls="examScore">
+        <span class="regular size13">{{'score' | translate | lowercase}}</span>
+      </a>
+    </div>
     <p class="regular text-black-50 size16 line-clamp mt-2 mb-0">
       <span id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed[data.ID]">
         <span class="text-justify-distribute" [innerHTML]="data.transProject.project.about[appService.lang] | nl2br"></span>
@@ -248,12 +254,17 @@
         <div class="text-dark mt-2">{{'contact.label' | translate | titlecase}}</div>
         <div><ng-container *ngTemplateOutlet="contactInfo; context: {data: data.transProject.contactPerson, isDropdown: false}"></ng-container></div>
       </span>
-      <span id="registeredLocationSeatNo" [ngbCollapse]="!registeredLocationSeatNo.isCollapsed[data.ID]">
+      <span id="registeredLocationIDNoSeatNo" [ngbCollapse]="!registeredLocationIDNoSeatNo.isCollapsed[data.ID]">
         {{data.transLocation.location.name[appService.lang]}}<br />
         {{data.transLocation.location.building.name[appService.lang]}}<br />
-        <span *ngIf="data.invoice.payment.status === 'Y'">{{'seat.seatNo' | translate | titlecase}} : <span class="text-dark">n/a</span></span>
+        <div *ngIf="data.invoice.payment.status === 'Y'">
+          <span>{{'idNo.label' | translate | titlecase}} : <span class="bold text-dark">{{data.applicantNO ? data.applicantNO : 'n/a'}}</span></span><br />
+          <span>{{'seat.seatNo' | translate | titlecase}} : <span class="bold text-dark">{{data.seatNO ? data.seatNO : 'n/a'}}</span></span>
+        </div>
       </span>
-      <span id="examScore" [ngbCollapse]="!examScore.isCollapsed[data.ID]"></span>
+      <span id="examScore" [ngbCollapse]="!examScore.isCollapsed[data.ID]">
+        <span class="bold text-dark">n/a</span>
+      </span>
     </p>
   </div>
 </ng-template>

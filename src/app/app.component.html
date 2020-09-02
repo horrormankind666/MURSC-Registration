@@ -29,6 +29,9 @@
               <div class="d-table-cell home-icon">
                 <a routerLink="Main" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size19"><i class='fas fa-home'></i></span></a>
               </div>
+              <div class="d-table-cell manual-icon">
+                <a href="javascript:void(0)" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}" (click)="appService.downloadManual()"><span class="regular text-white size22"><i class='fab fa-readme'></i></span></a>
+              </div>
               <div class="d-table-cell text-center user-icon" ngbDropdown #profileDropdown="ngbDropdown" placement="bottom-right" *ngIf="authService.isAuthenticated">
                 <a href="javascript:void(0)" id="profile" ngbDropdownToggle [ngStyle]="{'background-color': userBackgrondColor}" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}">
                   <span class="regular text-white size18">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.familyName[0] | uppercase)}}</span>

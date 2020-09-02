@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๒๑/๐๘/๒๕๖๓>
+Modify date : <๐๒/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -85,6 +85,7 @@ Description : <>
   line-height: 1.4 !important;
   padding-right: 1rem !important;
   padding-left: 1rem !important;
+  vertical-align: top !important;
 }
 .project-dropdown .btn-contact-info {
   margin-top: 0;
@@ -139,14 +140,17 @@ Description : <>
 .project-title-info .card-title .float-right {
   width: 34px !important;
 }
-.project-aboutresult-info .project-btn-badge.badge-projectabout {
-  width: 77px;
+.project-aboutresult-info .badge-projectabout {
+  width: 70px;
+  vertical-align: top !important;
 }
-.project-aboutresult-info .project-btn-badge.badge-registeredlocationseatno {
-  width: 142px;
+.project-aboutresult-info .badge-registeredlocationidnoseatno {
+  width: 200px;
+  vertical-align: top !important;
 }
-.project-aboutresult-info .project-btn-badge.badge-examscore {
-  width: 77px;
+.project-aboutresult-info .badge-examscore {
+  width: 70px;
+  vertical-align: top !important;
 }
 .project-aboutresult-info #projectAbout .project-register-info .form-group .col-form-label {
   width: 55px;

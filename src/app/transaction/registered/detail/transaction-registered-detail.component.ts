@@ -317,47 +317,55 @@ export class TransactionRegisteredDetailComponent implements OnInit {
                       this.that.data.transRegistered$ = transRegistered;
 
                     if (this.that.data.transRegistered$.invoice.payment.status === 'N') {
-                      let value: {} = this.getValue();
+                      if (this.that.data.transRegistered$.transProject.paymentExpire === 'N') {
 
-                      this.that.appService.save(('QRCodePayment/' + this.that.data.transRegistered$.transProject.project.category.initial), 'PUT', JSON.stringify(value), false).then((result: any) => {
-                        let saveResult: any = result;
-                        let message: string;
-                        let btnMsg: BtnMsg;
-                        let modalRef: any;
+                        
+                        let value: {} = this.getValue();
 
-                        this.isSaving = false;
-                        this.errorCode = saveResult.errorCode;
+                        this.that.appService.save(('QRCodePayment/' + this.that.data.transRegistered$.transProject.project.category.initial), 'PUT', JSON.stringify(value), false).then((result: any) => {
+                          let saveResult: any = result;
+                          let message: string;
+                          let btnMsg: BtnMsg;
+                          let modalRef: any;
 
-                        if (this.errorCode !== 0 && this.errorCode !== 1) {
-                          if (this.errorCode === 2) {
-                            message = ('registered.error.notFound');
-                            btnMsg = {
-                              close: 'registered.info'
-                            };
-                          }
+                          this.isSaving = false;
+                          this.errorCode = saveResult.errorCode;
 
-                          modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message);
-
-                          this.that.modalService.close(modalRef).then((result: string) => {
-                            if (result === 'close') {
-                                if (this.errorCode === 2)
-                                  this.that.router.navigate(['Transaction/Registered']);
+                          if (this.errorCode !== 0 && this.errorCode !== 1) {
+                            if (this.errorCode === 2) {
+                              message = ('registered.error.notFound');
+                              btnMsg = {
+                                close: 'registered.info'
+                              };
                             }
-                          });
-                        }
-                        else {
-                          if (this.errorCode === 0) {
-                            this.that.data.transRegistered$.invoice.merchantName = saveResult.merchantName;
-                            this.that.data.transRegistered$.invoice.qrRef1 = saveResult.qrRef1;
-                            this.that.data.transRegistered$.invoice.qrRef2 = saveResult.qrRef2;
-                            this.that.data.transRegistered$.invoice.qrRef3 = saveResult.qrRef3;
-                            this.that.data.transRegistered$.invoice.payment.amount = saveResult.paidAmount;
-                            this.that.data.transRegistered$.invoice.payment.confirmDate = saveResult.actionDate;
-                            this.that.data.transRegistered$.invoice.payment.status = saveResult.paidStatus;
-                            this.that.payment.formField.qrcodeImage = saveResult.qrImage64;
+
+                            modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message);
+
+                            this.that.modalService.close(modalRef).then((result: string) => {
+                              if (result === 'close') {
+                                  if (this.errorCode === 2)
+                                    this.that.router.navigate(['Transaction/Registered']);
+                              }
+                            });
                           }
-                        }
-                      });
+                          else {
+                            if (this.errorCode === 0) {
+                              this.that.data.transRegistered$.invoice.merchantName = saveResult.merchantName;
+                              this.that.data.transRegistered$.invoice.qrRef1 = saveResult.qrRef1;
+                              this.that.data.transRegistered$.invoice.qrRef2 = saveResult.qrRef2;
+                              this.that.data.transRegistered$.invoice.qrRef3 = saveResult.qrRef3;
+                              this.that.data.transRegistered$.invoice.payment.amount = saveResult.paidAmount;
+                              this.that.data.transRegistered$.invoice.payment.confirmDate = saveResult.actionDate;
+                              this.that.data.transRegistered$.invoice.payment.status = saveResult.paidStatus;
+                              this.that.payment.formField.qrcodeImage = saveResult.qrImage64;
+                            }
+                          }
+                        });
+                      }
+                      else {
+                        this.isSaving = false;
+                        this.errorCode = 3;
+                      }
                     }
                     else {
                       this.isSaving = false;

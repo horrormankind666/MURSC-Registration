@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๐๓/๐๘/๒๕๖๓>
+Modify date : <๓๑/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -13,7 +13,7 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {formatDate} from '@angular/common';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Title} from '@angular/platform-browser';
+import {Title, DomSanitizer} from '@angular/platform-browser';
 
 import {NgbModal, NgbModalRef, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 
@@ -21,6 +21,8 @@ import {TranslateService} from '@ngx-translate/core';
 
 import {CookieService} from 'ngx-cookie-service';
 import {DeviceDetectorService} from 'ngx-device-detector';
+
+import {saveAs} from 'file-saver';
 
 import {ModalService} from './modal/modal.service'
 
@@ -30,6 +32,8 @@ import * as $ from 'jquery';
 import {stringify} from 'querystring';
 
 declare function $clamp(element, options): any;
+declare var require: any;
+const FileSaver = require('file-saver');
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +43,7 @@ export class AppService  {
     private router: Router,
     private http: HttpClient,
     private titleService: Title,
+    private sanitizer: DomSanitizer,
     private modal: NgbModal,
     private tooltipConfig: NgbTooltipConfig,
     private translateService: TranslateService,
@@ -68,11 +73,26 @@ export class AppService  {
   }
   public rootPath: string;
   public headerSubtitle: {} = null;
+  /*
+  //prd
   public urlIsAuthenticated: string = ('https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/IsAuthenticated?ver=' + this.getDateTimeOnUrl());
-  public urlAuthenResource: string = /*'http://localhost:5001/API/AuthenResource/UserInfo'*/('https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/UserInfo?ver=' + this.getDateTimeOnUrl);
-  public urlAuthenServer: string = /*'http://localhost:50833'*/('https://mursc.mahidol.ac.th/AuthADFS?ver=' + this.getDateTimeOnUrl());
-  public urlAPI: string = /*'http://localhost:3000/API'*/'https://mursc.mahidol.ac.th/API';
+  public urlAuthenResource: string = ('https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/UserInfo?ver=' + this.getDateTimeOnUrl);
+  public urlAuthenServer: string = ('https://mursc.mahidol.ac.th/AuthADFS?ver=' + this.getDateTimeOnUrl());
+  public urlAPI: string = 'https://mursc.mahidol.ac.th/API';
   public urlSignOut: string = ('https://mursc.mahidol.ac.th/AuthADFS/Authen/SignOut?ver=' + this.getDateTimeOnUrl());
+  */
+  //qas
+  public urlIsAuthenticated: string = ('https://mursc-qas.mahidol.ac.th/ResourceADFS/API/AuthenResource/IsAuthenticated?ver=' + this.getDateTimeOnUrl());
+  public urlAuthenResource: string = ('https://mursc-qas.mahidol.ac.th/ResourceADFS/API/AuthenResource/UserInfo?ver=' + this.getDateTimeOnUrl);
+  public urlAuthenServer: string = ('https://mursc-qas.mahidol.ac.th/AuthADFS?ver=' + this.getDateTimeOnUrl());
+  public urlAPI: string = 'https://mursc-qas.mahidol.ac.th/API';
+  public urlSignOut: string = ('https://mursc-qas.mahidol.ac.th/AuthADFS/Authen/SignOut?ver=' + this.getDateTimeOnUrl());
+  /*
+  //local
+  public urlAuthenResource: string = 'http://localhost:5001/API/AuthenResource/UserInfo';
+  public urlAuthenServer: string = 'http://localhost:50833';
+  public urlAPI: string = 'http://localhost:3000/API';
+  */
 
   textOverflowClamp(e: string, line: number) {
     $clamp(document.querySelector(e), {clamp: (this.deviceService.browser === 'IE' ? (line + 1) : line)});
@@ -89,7 +109,7 @@ export class AppService  {
     }
 
     return result;
-  }
+  }h
 
   setDefaultLang(lang?: string) {
     this.lang = (!lang ? this.lang : lang);
@@ -300,6 +320,31 @@ export class AppService  {
       link.download = (fileName + '.' + fileType);
       link.click();
     }
+  }
+
+  downloadManual() {
+    const pdfUrl = '../assets/document/MURSC-Manual.pdf';
+    const pdfName = 'MURSC-Manual.pdf';
+
+    this.isLoading.show = true;
+    this.isLoading.processing = true;
+
+    this.http.get(pdfUrl, {responseType: 'arraybuffer'}).subscribe((result) => {
+      try {
+        let blob = new Blob([result], {type: "application/pdf"});
+        window.open(pdfUrl, '_blank');
+        saveAs(blob, pdfName);
+
+        this.isLoading.show = false;
+        this.isLoading.processing = false;
+      }
+      catch {
+        this.isLoading.show = false;
+        this.isLoading.processing = false;
+
+        this.modalService.getModalError(false, ModalErrorComponent, 'notDownloadFile');
+      }
+    });
   }
 
   convertImageBase64ToBlob(base64image: string, imageType: string) {

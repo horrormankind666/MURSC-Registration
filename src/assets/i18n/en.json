@@ -19,6 +19,7 @@
     "checking": "Checking..."
   },
   "pageNotFound": "Page not found.",
+  "notDownloadFile": "Unable to download this file.",
   "save": {
     "label": "Save",
     "error": {
@@ -55,7 +56,8 @@
       }
     },
     "error": {
-      "notFound": "No registration details were found for this project."
+      "notFound": "No registration details were found for this project.",
+      "studentOnly": "This project accept only student."
     }
   },
   "items": "Items",
@@ -83,7 +85,7 @@
     "label": "Seat",
     "seatTotal": "Seat total",
     "seatAvailable": "Seat available",
-    "seatNo": "Seat No."
+    "seatNo": "Seat no."
   },
   "payment": {
     "label": "Payment",
@@ -91,7 +93,8 @@
     "goto": "Go to payment",
     "save": {
       "error": {
-        "issueReceiptAs": "Please fill in the name of the recipient of the receipt."
+        "issueReceiptAs": "Please fill in the name of the recipient of the receipt.",
+        "paymentExpire": "Payment expire."
       },
       "confirm": {
         "label": "Do you want to confirm payment for this registration ?",
@@ -196,5 +199,9 @@
   "score": "Score",
   "event": {
     "date": "Event date"
+  },
+  "idNo": {
+    "label": "Identification no.",
+    "abbreviations": "ID no."
   }
 }

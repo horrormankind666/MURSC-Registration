@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๒๐/๐๘/๒๕๖๓>
+Modify date : <๓๑/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -193,6 +193,7 @@ export namespace Schema {
       endDate?: string
     },
     lastPaymentDate?: string,
+    paymentExpire?: string,
     maximumSeat?: number,
     seatReserved?: number,
     minimumFee?: string,
@@ -239,7 +240,9 @@ export namespace Schema {
     transDeliAddress?: TransDeliAddress,
     invoice?: Invoice,
     invoiceFee?: InvoiceFee[],
-    totalFeeAmount?: number
+    totalFeeAmount?: number,
+    seatNO?: string,
+		applicantNO?: string
   }
 
   export interface Statuses {
@@ -780,6 +783,7 @@ namespace Data {
               endDate: (dr1['examEndDates'] ? dr1['examEndDates'] : '')
             },
             lastPaymentDate: (dr1['lastPaymentDates'] ? dr1['lastPaymentDates'] : ''),
+            paymentExpire: (dr1["paymentExpire"] ? dr1["paymentExpire"] : ''),
             contactPerson: contactPerson
           };
 
@@ -928,6 +932,8 @@ namespace Data {
             },
             invoiceFee: invoiceFee,
             totalFeeAmount: (dr1['totalFeeAmount'] ? parseFloat(dr1['totalFeeAmount']) : 0),
+            seatNO: (dr1["seatNO"] ? dr1["seatNO"] : ''),
+						applicantNO: (dr1["applicantNO"] ? dr1["applicantNO"] : '')
           });
         }
 

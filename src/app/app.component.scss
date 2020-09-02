@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๐๔/๐๘/๒๕๖๓>
+Modify date : <๓๑/๐๘/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -99,7 +99,8 @@ main header .navbar-header .d-table .d-table-cell.userinfo {
   z-index: 2;
 }
 main header .navbar-header .d-table .d-table-cell.userinfo .flags-icon,
-main header .navbar-header .d-table .d-table-cell.userinfo .home-icon {
+main header .navbar-header .d-table .d-table-cell.userinfo .home-icon,
+main header .navbar-header .d-table .d-table-cell.userinfo .manual-icon {
   width: 24px;
   padding-left: 10px;
 }
@@ -112,7 +113,8 @@ main header .navbar-header .d-table .d-table-cell.userinfo .signin-icon {
   padding-left: 10px;
 }
 main header .navbar-header .d-table .d-table-cell.userinfo .flags-icon a,
-main header .navbar-header .d-table .d-table-cell.userinfo .home-icon a {
+main header .navbar-header .d-table .d-table-cell.userinfo .home-icon a,
+main header .navbar-header .d-table .d-table-cell.userinfo .manual-icon a {
   position: relative;
 }
 main header .navbar-header .d-table .d-table-cell.userinfo .user-icon #profile,
@@ -166,6 +168,9 @@ main header .navbar-header .d-table .d-table-cell.userinfo .signin-icon a {
   main header .navbar-header .d-table .d-table-cell.userinfo .home-icon a {
     top: 2px;
   }
+  main header .navbar-header .d-table .d-table-cell.userinfo .manual-icon a {
+    top: 3px;
+  }
   _:-ms-lang(x),
   _:-webkit-full-screen,
   main header .navbar-header .d-table .d-table-cell.userinfo .flags-icon a {
@@ -192,28 +197,28 @@ main header .navbar-header .d-table .d-table-cell.userinfo .signin-icon a {
   main header .navbar-header .d-table .d-table-cell.userinfo .home-icon a {
     top: 3px;
   }
+  main header .navbar-header .d-table .d-table-cell.userinfo .manual-icon a {
+    top: 4px;
+  }
 }
 @media screen and (max-width: $screen-max-width) {
   main header .navbar-header .d-table .d-table-cell.systeminfo {
-    width: 433px;
+    width: 413px;
   }
   main header .navbar-header .d-table .d-table-cell.systeminfo .owner {
-    //width: 75px;
     width: 55px;
   }
 }
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 645px) {
   main header .navbar-header .d-table .d-table-cell.systeminfo {
-    //width: 238px;
-    width: 335px;
+    width: 331px;
   }
   main header .navbar-header .d-table .d-table-cell.systeminfo .fullname {
-    width: 280px;
-    //background-position: 0px -240px;
+    width: 276px;
     background-position: 0px -452px;
   }
 }
-@media screen and (max-width: 542px) {
+@media screen and (max-width: 565px) {
   main header .navbar-header .d-table .d-table-cell.systeminfo {
     width: 175px;
   }
@@ -222,7 +227,7 @@ main header .navbar-header .d-table .d-table-cell.userinfo .signin-icon a {
     background-position: 0px -512px;
   }
 }
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 408px) {
   main header .navbar-header .d-table .d-table-cell.systeminfo {
     width: 120px;
   }

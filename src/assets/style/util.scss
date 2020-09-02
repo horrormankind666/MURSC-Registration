@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๔/๐๘/๒๕๖๓>
+Modify date : <๐๒/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -17,7 +17,7 @@ $color-warning: #FB3;
 $color-info: #46B8DA;
 $color-black-10: rgb(0, 0, 0, .10);
 
-$screen-max-width: 796px;
+$screen-max-width: 810px;
 $screen-min-width: 344px;
 $header-max-height: 60px;
 $image-path: '../assets/images';
@@ -217,6 +217,9 @@ body {
 }
 html, body {
   height: 100%;
+}
+:focus {
+  outline: 0 !important;
 }
 a,
 a:link,
