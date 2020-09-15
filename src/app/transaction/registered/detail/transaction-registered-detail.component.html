@@ -111,6 +111,13 @@
   <div class="project-info">
     <p class="bold size20 mb-0">{{data.transRegistered$.transProject.project.name[appService.lang]}}</p>
     <div class="regular text-dark size15" *ngIf="data.transRegistered$.transProject.description[appService.lang]">{{data.transRegistered$.transProject.description[appService.lang]}}</div>
+    <div class="regular text-dark mt-1 mb-1 project-openonlyfor-info" *ngIf="data.transRegistered$.transProject.userTypeSpecific && data.transRegistered$.transProject.userTypeSpecific.length > 0">
+      <span class="bold">{{'openOnlyFor' | translate | lowercase}}</span>
+      <span> </span>
+      <div class="text-muted" *ngFor="let userTypeSpecific of data.transRegistered$.transProject.userTypeSpecific">
+        - {{('userType.' + userTypeSpecific) | translate | lowercase}}
+      </div>
+    </div>
     <a routerLink="../../../../Project/{{data.transRegistered$.transProject.project.category.initial}}" class="link regular size14">
       #{{data.transRegistered$.transProject.project.category.name[appService.lang] | titlecase}}
     </a>
@@ -403,8 +410,8 @@
               }"
               (click)="feeType.toggle[invoiceFee.feeType.toggle] = !feeType.toggle[invoiceFee.feeType.toggle]">
               <span class="regular text-white size13" *ngIf="invoiceFee.feeType.toggle === 'Address'">
-                <span *ngIf="data.transRegistered$.invoice.payment.status === 'N'">{{'addressDelivery.edit' | translate | lowercase}}</span>
-                <span *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">{{'addressDelivery.label' | translate | lowercase}}</span>
+                <span *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.invoice.payment.status === 'N'">{{'addressDelivery.edit' | translate | lowercase}}</span>
+                <span *ngIf="!appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) || data.transRegistered$.invoice.payment.status !== 'N'">{{'addressDelivery.label' | translate | lowercase}}</span>
               </span>
             </a>
           </td>
@@ -412,7 +419,7 @@
         <tr>
           <td colspan="3" class="border-0 p-0">
             <div class="mt-2" id="deliaddress-form" *ngIf="feeType.toggle[invoiceFee.feeType.toggle] && invoiceFee.feeType.toggle === 'Address'">
-              <div class="form horizontal-form bg-warning p-3" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">
+              <div class="form horizontal-form bg-warning p-3" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.invoice.payment.status === 'N'">
                 <div class="mb-2" *ngIf="!deliAddress.saveChange.isValid || deliAddress.saveChange.errorCode === 1">
                   <div class="alert alert-danger regular size16" role="alert">
                     <span *ngIf="!deliAddress.saveChange.isValid">{{'registered.save.error.deliaddress' | translate}}</span>
@@ -529,7 +536,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form bg-success rounded-xxl p-3 size14 regular text-white" *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">
+              <div class="form bg-success rounded-xxl p-3 size14 regular text-white" *ngIf="!appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) || data.transRegistered$.invoice.payment.status !== 'N'">
                 <div class="form-group row mb-2">
                   <label for="col-deliaddress-address" class="col-form-label">{{'address.label' | translate | titlecase}}</label>
                   <div class="col">
@@ -594,7 +601,7 @@
 </ng-template>
 <ng-template #paymentInfo>
   <div class="payment-info">
-    <table class="table table-bordered">
+    <table class="table table-bordered mb-0">
       <tbody>
         <tr>
           <td class="border-0 pr-0 pb-0 pl-0">
@@ -606,7 +613,7 @@
                   <span *ngIf="payment.saveChange.errorCode === 3">{{'payment.save.error.paymentExpire' | translate}}</span>
                 </div>
               </div>
-              <div class="form-group w-100">
+              <div class="form-group w-100" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type)">
                 <label for="payment-issuereceipt" class="regular text-white">{{'invoice.issueReceiptAs' | translate | titlecase}}</label>
                 <div class="input-group has-icon" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">
                   <input trimOnBlur type="text" class="form-control inputbox pl-4 regular text-white size14"
@@ -618,18 +625,25 @@
                 </div>
                 <div class="form-text regular size14" *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">{{payment.formField.issueReceipt}}</div>
               </div>
+              <div class="form-group w-100" *ngIf="!appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type)">
+                <label for="payment-issuereceipt" class="regular text-white">
+                  <span *ngIf="data.transRegistered$.invoice.payment.status === 'N'">{{'registered.error.haveNoRight' | translate}}</span>
+                  <span *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">{{'invoice.issueReceiptAs' | translate | titlecase}}</span>
+                </label>
+                <div class="form-text regular size14" *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">{{payment.formField.issueReceipt}}</div>
+              </div>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
-    <div class="d-table w-100 payment-btn" *ngIf="data.transRegistered$.invoice.payment.status === 'N' && !payment.formField.qrcodeImage">
+    <div class="d-table w-100 mt-3 payment-btn" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.invoice.payment.status === 'N' && !payment.formField.qrcodeImage">
       <div class="i-saving" *ngIf="payment.saveChange.isSaving"><i class="fas fa-circle-notch fa-spin size24"></i></div>
       <a class="btn btn-warning pt-0 pb-0" (click)="payment.saveChange.action()" *ngIf="!payment.saveChange.isSaving">
         <span class="bold size20">{{'payment.confirm' | translate | titlecase}}</span>
       </a>
     </div>
-    <div class="card mr-auto ml-auto text-center qrcode-payment" *ngIf="data.transRegistered$.invoice.payment.status !== 'N' && payment.formField.qrcodeImage">
+    <div class="card mt-3 mr-auto ml-auto text-center qrcode-payment" *ngIf="data.transRegistered$.invoice.payment.status !== 'N' && payment.formField.qrcodeImage">
       <div class="card-header">
         <img src="assets/images/thai-qr-payment-logo.png">
       </div>

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๗/๐๓/๒๕๖๓>
-Modify date : <๒๙/๐๗/๒๕๖๓>
+Modify date : <๑๕/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -16,6 +16,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeviceDetectorService} from 'ngx-device-detector';
 
 import {AppService} from '../../app.service';
+import {AuthService} from '../../auth.service';
 import {Schema, DataService} from '../../data.service';
 
 @Component({
@@ -30,6 +31,7 @@ export class ProjectDetailComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private deviceService: DeviceDetectorService,
     private appService: AppService,
+    private authService: AuthService,
     private dataService: DataService
   ) {}
 

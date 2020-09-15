@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๓๑/๐๘/๒๕๖๓>
+Modify date : <๑๔/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -199,6 +199,7 @@ export namespace Schema {
     minimumFee?: string,
     contactPerson?: ContactPerson[],
     registrationStatus?: string,
+    userTypeSpecific?: [],
     transLocation?: TransLocation[],
     transFeeType?: TransFeeType[]
   }
@@ -588,7 +589,8 @@ namespace Data {
               seatReserved: dr1['seatReserved'],
               minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
               contactPerson: contactPerson,
-              registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : '')
+              registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : ''),
+              userTypeSpecific: (dr1['userTypeSpecific'] ? dr1['userTypeSpecific'] : []),
             });
           }
 
@@ -678,6 +680,7 @@ namespace Data {
               minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
               contactPerson: contactPerson,
               registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : ''),
+              userTypeSpecific: (dr1['userTypeSpecific'] ? dr1['userTypeSpecific'] : []),
               transLocation: transLocation,
               transFeeType: transFeeType
             });
@@ -784,7 +787,8 @@ namespace Data {
             },
             lastPaymentDate: (dr1['lastPaymentDates'] ? dr1['lastPaymentDates'] : ''),
             paymentExpire: (dr1["paymentExpire"] ? dr1["paymentExpire"] : ''),
-            contactPerson: contactPerson
+            contactPerson: contactPerson,
+            userTypeSpecific: (dr1['userTypeSpecific'] ? dr1['userTypeSpecific'] : [])
           };
 
           transLocation = {

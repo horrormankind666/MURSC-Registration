@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๓๑/๐๘/๒๕๖๓>
+Modify date : <๑๕/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -70,29 +70,24 @@ export class AppService  {
   public authenResource: any = {
     type: '',
     token: ''
-  }
+  };
   public rootPath: string;
   public headerSubtitle: {} = null;
-  /*
-  //prd
-  public urlIsAuthenticated: string = ('https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/IsAuthenticated?ver=' + this.getDateTimeOnUrl());
-  public urlAuthenResource: string = ('https://mursc.mahidol.ac.th/ResourceADFS/API/AuthenResource/UserInfo?ver=' + this.getDateTimeOnUrl);
-  public urlAuthenServer: string = ('https://mursc.mahidol.ac.th/AuthADFS?ver=' + this.getDateTimeOnUrl());
-  public urlAPI: string = 'https://mursc.mahidol.ac.th/API';
-  public urlSignOut: string = ('https://mursc.mahidol.ac.th/AuthADFS/Authen/SignOut?ver=' + this.getDateTimeOnUrl());
-  */
-  //qas
-  public urlIsAuthenticated: string = ('https://mursc-qas.mahidol.ac.th/ResourceADFS/API/AuthenResource/IsAuthenticated?ver=' + this.getDateTimeOnUrl());
-  public urlAuthenResource: string = ('https://mursc-qas.mahidol.ac.th/ResourceADFS/API/AuthenResource/UserInfo?ver=' + this.getDateTimeOnUrl);
-  public urlAuthenServer: string = ('https://mursc-qas.mahidol.ac.th/AuthADFS?ver=' + this.getDateTimeOnUrl());
-  public urlAPI: string = 'https://mursc-qas.mahidol.ac.th/API';
-  public urlSignOut: string = ('https://mursc-qas.mahidol.ac.th/AuthADFS/Authen/SignOut?ver=' + this.getDateTimeOnUrl());
-  /*
-  //local
-  public urlAuthenResource: string = 'http://localhost:5001/API/AuthenResource/UserInfo';
-  public urlAuthenServer: string = 'http://localhost:50833';
-  public urlAPI: string = 'http://localhost:3000/API';
-  */
+  public hostname: any = {
+    local: 'localhost',
+    qas: 'mursc-qas.mahidol.ac.th',
+    prd: 'mursc.mahidol.ac.th'
+  };
+  public pathIsAuthenticated: string = ('/ResourceADFS/API/AuthenResource/IsAuthenticated?ver=' + this.getDateTimeOnUrl());
+  public pathAuthenResource: string = ('/ResourceADFS/API/AuthenResource/UserInfo?ver=' + this.getDateTimeOnUrl);
+  public pathAuthenServer: string = ('/AuthADFS?ver=' + this.getDateTimeOnUrl());
+  public pathAPI: string = '/API';
+  public pathSignOut: string = ('/AuthADFS/Authen/SignOut?ver=' + this.getDateTimeOnUrl());
+  public urlIsAuthenticated: string;
+  public urlAuthenResource: string;
+  public urlAuthenServer: string;
+  public urlAPI: string;
+  public urlSignOut: string;
 
   textOverflowClamp(e: string, line: number) {
     $clamp(document.querySelector(e), {clamp: (this.deviceService.browser === 'IE' ? (line + 1) : line)});
@@ -109,7 +104,24 @@ export class AppService  {
     }
 
     return result;
-  }h
+  }
+
+  setURLServer() {
+    let protocol: string = location.protocol;
+    let host: string;
+    let hostname: string = location.hostname;
+
+    if (hostname === this.hostname.local)
+      host = ('https://' + this.hostname.qas);
+    else
+      host = (protocol + "//" + hostname)
+
+    this.urlIsAuthenticated = (host + this.pathIsAuthenticated);
+    this.urlAuthenResource = (host + this.pathAuthenResource);
+    this.urlAuthenServer = (host + this.pathAuthenServer);
+    this.urlAPI = (host + this.pathAPI);
+    this.urlSignOut = (host + this.pathSignOut);
+  }
 
   setDefaultLang(lang?: string) {
     this.lang = (!lang ? this.lang : lang);
@@ -369,5 +381,16 @@ export class AppService  {
 
   enlargeImage(image: string) {
     let modalRef: NgbModalRef = this.modalService.getModalImage(false, ModalImageComponent, image);
+  }
+
+  existUserTypeSpecific(userTypeList: any = [], userType: string): boolean {
+    if (userTypeList && userTypeList.length > 0 && userType) {
+      if (userTypeList.indexOf(userType) === 0)
+        return true;
+      else
+        return false;
+    }
+    else
+      return true;
   }
 }

@@ -180,14 +180,24 @@
   </div>
 </ng-template>
 <ng-template #projectInfo let-data="data">
-  <div class="project-info">
+  <div class="project-info"
+    [ngClass]="{
+      'has-openonlyfor': (data.userTypeSpecific && data.userTypeSpecific.length > 0)
+    }">
     <div class="project-dropdown" ngbDropdown placement="top-left">
       <a class="link text-wrap bold size19" id="menu-info" href="javascript:void(0)" ngbDropdownToggle>{{data.project.name[appService.lang]}}</a>
       <div ngbDropdownMenu aria-labelledby="menu-info" class="menu-info">
         <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="menuInfo; context: {data: data}"></ng-container></div>
       </div>
     </div>
-    <div class="regular text-info size15 mt-1 mb-1" *ngIf="data.description[appService.lang]">{{data.description[appService.lang]}}</div>
+    <div class="regular text-info size15 mt-1" *ngIf="data.description[appService.lang]">{{data.description[appService.lang]}}</div>
+  </div>
+  <div class="regular text-dark mt-1 project-openonlyfor-info" *ngIf="data.userTypeSpecific && data.userTypeSpecific.length > 0">
+    <span class="bold">{{'openOnlyFor' | translate | lowercase}}</span>
+    <span> </span>
+    <div class="text-muted" *ngFor="let userTypeSpecific of data.userTypeSpecific">
+      - {{('userType.' + userTypeSpecific) | translate | lowercase}}
+    </div>
   </div>
 </ng-template>
 <ng-template #registerInfo let-data="data">

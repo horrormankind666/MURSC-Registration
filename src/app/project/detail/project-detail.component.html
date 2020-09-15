@@ -130,7 +130,14 @@
   <div class="project-info">
     <p class="bold size20 mb-0">{{data.transProject$.project.name[appService.lang]}}</p>
     <div class="regular text-dark size15" *ngIf="data.transProject$.description[appService.lang]">{{data.transProject$.description[appService.lang]}}</div>
-    <div class="badge badge-pill badge-danger project-btn-badge mt-1 mb-2" *ngIf="data.transProject$.registrationStatus !== 'Y'">
+    <div class="regular text-dark mt-1 mb-1 project-openonlyfor-info" *ngIf="data.transProject$.userTypeSpecific && data.transProject$.userTypeSpecific.length > 0">
+      <span class="bold">{{'openOnlyFor' | translate | lowercase}}</span>
+      <span> </span>
+      <div class="text-muted" *ngFor="let userTypeSpecific of data.transProject$.userTypeSpecific">
+        - {{('userType.' + userTypeSpecific) | translate | lowercase}}
+      </div>
+    </div>
+    <div class="badge badge-pill badge-danger project-btn-badge mt-2 mb-2" *ngIf="data.transProject$.registrationStatus !== 'Y'">
       <span class="regular text-white size13">{{(dataService.statuses.get(dataService.registrationStatus.data$, data.transProject$.registrationStatus)).name[appService.lang] | lowercase}}</span>
     </div>
   </div>
@@ -218,7 +225,7 @@
         'btn-success': (data.transProject$.registrationStatus === 'Y'),
         'btn-warning': (data.transProject$.registrationStatus === 'W'),
         'btn-danger': (data.transProject$.registrationStatus === 'N'),
-        'disabled': (data.transProject$.registrationStatus !== 'Y' || !data.transProject$.contactPerson.length === 0 || data.transProject$.transLocation.length === 0)
+        'disabled': (!appService.existUserTypeSpecific(data.transProject$.userTypeSpecific, (authService.getUserInfo ? authService.getUserInfo.type : '')) ||  data.transProject$.registrationStatus !== 'Y' || !data.transProject$.contactPerson.length === 0 || data.transProject$.transLocation.length === 0)
       }">
       <span class="font bold text-white size20">{{'registered.label' | translate | titlecase}}</span>
     </a>

@@ -56,8 +56,8 @@
       }
     },
     "error": {
-      "notFound": "No registration details were found for this project.",
-      "studentOnly": "This project accept only student."
+      "notFound": "No registration details were found this project.",
+      "haveNoRight": "You don’t have the right to register this project."
     }
   },
   "items": "Items",
@@ -203,5 +203,12 @@
   "idNo": {
     "label": "Identification no.",
     "abbreviations": "ID no."
+  },
+  "openOnlyFor": "Open only for",
+  "userType": {
+    "student": "Student",
+    "studentG": "Postgraduate student ",
+    "studentU": "Undergraduate student",
+    "personnel": "Personnel"
   }
 }

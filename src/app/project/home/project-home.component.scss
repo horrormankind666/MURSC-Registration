@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๐๔/๐๘/๒๕๖๓>
+Modify date : <๑๕/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -18,6 +18,9 @@ Description : <>
     -ms-flex: 0 0 100%;
     flex: 0 0 100%;
     max-width: 100%;
+  }
+  .project-home-view .project-card-vertical .project-info {
+    min-height: 0 !important;
   }
 }
 .project-home-view .project-card-horizontal {
@@ -60,6 +63,9 @@ Description : <>
   .project-home-view .project-info .dropdown-menu.show.menu-info {
     top: 24px !important;
   }
+}
+.project-home-view .project-card-vertical .project-info.has-openonlyfor {
+  min-height: 85px;
 }
 .project-home-view .project-card-vertical .card-footer .card-text .vertical {
   min-height: 54px !important;

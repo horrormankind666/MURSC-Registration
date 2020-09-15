@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๒๔/๐๘/๒๕๖๓>
+Modify date : <๑๕/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -318,7 +318,7 @@ export class RegisteredComponent implements OnInit {
         }
         else {
           if (this.data.transProject$.registrationStatus === 'Y') {
-            if (this.authService.getUserInfo.type === 'student') {
+            //if (this.appService.existUserTypeSpecific(this.data.transProject$.userTypeSpecific, this.authService.getUserInfo.type)) {
               this.watchChange();
 
               this.location.saveChange.that = this;
@@ -336,15 +336,17 @@ export class RegisteredComponent implements OnInit {
               this.saveChange.that = this;
 
               this.registeredInfos.show = true;
+            /*
             }
             else {
-              let modalRef =  this.modalService.getModalError(false, ModalErrorComponent, 'registered.error.studentOnly');
+              let modalRef =  this.modalService.getModalError(false, ModalErrorComponent, 'registered.error.haveNoRight');
 
               this.modalService.close(modalRef).then((result: string) => {
                 if (result === 'close')
                   this.router.navigate(['Project/' + this.route.snapshot.params['projectCategory']]);
               });
             }
+            */
           }
         }
       });
@@ -401,7 +403,7 @@ export class RegisteredComponent implements OnInit {
           this.that.appService.gotoSignIn();
         }
         else {
-          if (this.that.authService.getUserInfo.type === 'student') {
+          if (this.that.appService.existUserTypeSpecific(this.that.data.transProject$.userTypeSpecific, this.that.authService.getUserInfo.type)) {
             this.that.location.saveChange.action();
             this.that.feeType.saveChange.action();
             this.that.deliAddress.saveChange.action();
@@ -433,15 +435,16 @@ export class RegisteredComponent implements OnInit {
                         };
                       }
                       if (saveResult.errorCode === 4) message = ('registered.save.error.registrationStatus.' + result.registrationStatus);
-                      if (saveResult.errorCode === 5) message = ('registered.save.error.locationSelected');
-                      if (saveResult.errorCode === 6) message = ('registered.save.error.seatAvailable');
-                      if (saveResult.errorCode === 7) message = ('registered.save.error.fee');
+                      if (saveResult.errorCode === 5) message = ('registered.error.haveNoRight');
+                      if (saveResult.errorCode === 6) message = ('registered.save.error.locationSelected');
+                      if (saveResult.errorCode === 7) message = ('registered.save.error.seatAvailable');
+                      if (saveResult.errorCode === 8) message = ('registered.save.error.fee');
 
                       modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message, btnMsg);
 
                       this.that.modalService.close(modalRef).then((result: string) => {
                         if (result === 'close') {
-                          if (saveResult.errorCode === 2)
+                          if (saveResult.errorCode === 2 || saveResult.errorCode === 5)
                             this.that.router.navigate(['Project/' + this.that.data.transProject$.project.category.initial]);
                           else {
                             if (saveResult.errorCode === 3)
@@ -460,14 +463,14 @@ export class RegisteredComponent implements OnInit {
                                   this.that.data.transProject$ = transProject;
                                   this.that.registeredInfos.show = false;
                                 }
-                                if (saveResult.errorCode === 5 || saveResult.errorCode === 6) {
-                                  if (saveResult.errorCode === 6)
+                                if (saveResult.errorCode === 6 || saveResult.errorCode === 7) {
+                                  if (saveResult.errorCode === 7)
                                     this.that.data.transProject$.seatReserved = transProject.seatReserved;
 
                                   this.that.location.setValue();
                                   this.that.data.transProject$.transLocation = transProject.transLocation;
                                 }
-                                if (saveResult.errorCode === 7) {
+                                if (saveResult.errorCode === 8) {
                                   this.that.feeType.setValue();
                                   this.that.deliAddress.setValue();
                                   this.that.data.transProject$.transFeeType = transProject.transFeeType;
@@ -507,7 +510,7 @@ export class RegisteredComponent implements OnInit {
             this.that.appService.isLoading.show = false;
             this.that.appService.isLoading.checking = false;
 
-            let modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, 'registered.error.studentOnly');
+            let modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, 'registered.error.haveNoRight');
 
             this.that.modalService.close(modalRef).then((result: string) => {
               if (result === 'close')

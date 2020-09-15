@@ -178,6 +178,13 @@
   <div class="project-info">
     <div><a [routerLink]="['../Detail', data.CUID]" routerLinkActive="active" class="link text-wrap bold size20">{{data.transProject.project.name[appService.lang]}}</a></div>
     <div class="regular text-dark size15" *ngIf="data.transProject.description[appService.lang]">{{data.transProject.description[appService.lang]}}</div>
+    <div class="regular text-dark mt-1 mb-1 project-openonlyfor-info" *ngIf="data.transProject.userTypeSpecific && data.transProject.userTypeSpecific.length > 0">
+      <span class="bold">{{'openOnlyFor' | translate | lowercase}}</span>
+      <span> </span>
+      <div class="text-muted" *ngFor="let userTypeSpecific of data.transProject.userTypeSpecific">
+        - {{('userType.' + userTypeSpecific) | translate | lowercase}}
+      </div>
+    </div>
     <a routerLink="../../../Project/{{data.transProject.project.category.initial}}" class="link regular size14">
       #{{data.transProject.project.category.name[appService.lang] | titlecase}}
     </a>

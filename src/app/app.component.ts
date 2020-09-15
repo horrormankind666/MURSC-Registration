@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๐/๐๖/๒๕๖๓>
+Modify date : <๐๙/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -10,6 +10,7 @@ Description : <>
 'use strict';
 
 import {NgModule, Component, ElementRef, ViewChild, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
 import {Router, ActivatedRoute, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError} from '@angular/router';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -40,6 +41,7 @@ export class AppComponent implements OnInit {
   @ViewChild('footerView', {static: false}) footerView: ElementRef;
 
   constructor(
+    private location: Location,
     private elementRef: ElementRef,
     private router: Router,
     private route: ActivatedRoute,
@@ -81,6 +83,7 @@ export class AppComponent implements OnInit {
   today: Date = new Date();
 
   ngOnInit() {
+    this.appService.setURLServer();
     this.appService.setDefaultLang(this.appService.lang);
     this.userBackgrondColor = this.appService.getRandomColor();
   }
