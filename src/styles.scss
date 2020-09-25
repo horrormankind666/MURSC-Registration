@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๑๔/๐๙/๒๕๖๓>
+Modify date : <๒๔/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -156,6 +156,18 @@ Description : <>
   width: 70px;
   vertical-align: top !important;
 }
+.project-aboutresult-info .badge-timetable {
+  width: 90px;
+  vertical-align: top !important;
+}
+.project-aboutresult-info .badge-sectiontimetable {
+  width: 150px;
+  vertical-align: top !important;
+}
+.project-aboutresult-info .badge-studyresultstranscript {
+  width: 190px;
+  vertical-align: top !important;
+}
 .project-aboutresult-info #projectAbout .project-register-info .form-group .col-form-label {
   width: 55px;
 }
@@ -251,7 +263,8 @@ Description : <>
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0px;
 }
-.project-location-info .table tbody:last-child td {
+.project-location-info .table tbody:last-child td,
+.project-section-info .table tbody:last-child td {
   padding-bottom: 0;
   border-bottom: 0;
 }
@@ -263,10 +276,20 @@ Description : <>
   width: 258px;
   min-width: 258px;
 }
-.project-location-info .table .col-seat {
+.project-location-info .table .col-seat,
+.project-section-info .table .col-seat {
   width: 202px;
 }
-.project-location-info .location-building-seat-info .form .form-group:last-child .col span:last-child {
+.project-section-info .table .col-seattotal {
+  width: 284px;
+  min-width: 284px;
+}
+.project-section-info .table .col-seatavailable {
+  width: 272px;
+  min-width: 272px;
+}
+.project-location-info .location-building-seat-info .form .form-group:last-child .col span:last-child,
+.project-section-info .section-teachingtype-seat-info .form .form-group:last-child .col span:last-child {
   position: relative;
   top: -5px;
 }

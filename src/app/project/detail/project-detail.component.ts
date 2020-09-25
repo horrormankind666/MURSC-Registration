@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๗/๐๓/๒๕๖๓>
-Modify date : <๑๕/๐๙/๒๕๖๓>
+Modify date : <๒๑/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -40,6 +40,10 @@ export class ProjectDetailComponent implements OnInit {
   };
 
   projectAbout = {
+    isCollapsed: false
+  };
+
+  timetable: any = {
     isCollapsed: false
   };
 

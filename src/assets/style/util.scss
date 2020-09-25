@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๐๒/๐๙/๒๕๖๓>
+Modify date : <๒๑/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -186,6 +186,9 @@ $line-clamp-line-height: 1.7;
 }
 .mt-07 {
   margin-top: 0.7rem !important
+}
+.mt-08 {
+  margin-top: 0.8rem !important
 }
 .mb-01 {
   margin-bottom: 0.1rem !important;
@@ -484,7 +487,7 @@ body.modal-open {
 }
 .modal-content {
   border-radius: 0 !important;
-  background: #5BC0DE;
+  background: #FFFFFF !important;
 }
 .modal-header {
   background: #5BC0DE;
@@ -581,15 +584,15 @@ body.modal-open {
   width: 100%;
 }
 .info-dialog .modal-content {
-  background: $color-info;
+  background: $color-info !important;
   border: 0;
 }
 .success-dialog .modal-content {
-  background: $color-success;
+  background: $color-success !important;
   border: 0;
 }
 .error-dialog .modal-content {
-  background: $color-danger;
+  background: $color-danger !important;
   border: 0;
 }
 .error-dialog .modal-content .modal-footer .btn-danger {
@@ -599,7 +602,7 @@ body.modal-open {
   background: #C82333;
 }
 .confirm-dialog .modal-content {
-  background: $color-primary;
+  background: $color-primary !important;
   border: 0;
 }
 .form-dialog .modal-dialog {
@@ -610,7 +613,7 @@ body.modal-open {
   border: 10px solid #9AC3BD;
 }
 .image-dialog .modal-content {
-  background: transparent;
+  background: transparent !important;
   border: 0;
 }
 .image-dialog .modal-header {

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๘/๐๖/๒๕๖๓>
-Modify date : <๐๒/๐๙/๒๕๖๓>
+Modify date : <๒๔/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -91,6 +91,14 @@ export class TransactionRegisteredHomeComponent implements OnInit {
   };
 
   examScore: any = {
+    isCollapsed: []
+  };
+
+  sectionTimetable: any = {
+    isCollapsed: []
+  };
+
+  studyResultsTranscript: any = {
     isCollapsed: []
   };
 

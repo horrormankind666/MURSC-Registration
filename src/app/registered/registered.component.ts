@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๑๕/๐๙/๒๕๖๓>
+Modify date : <๒๔/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -49,6 +49,10 @@ export class RegisteredComponent implements OnInit {
   };
 
   projectAbout: any = {
+    isCollapsed: false
+  };
+
+  timetable: any = {
     isCollapsed: false
   };
 
@@ -318,7 +322,7 @@ export class RegisteredComponent implements OnInit {
         }
         else {
           if (this.data.transProject$.registrationStatus === 'Y') {
-            //if (this.appService.existUserTypeSpecific(this.data.transProject$.userTypeSpecific, this.authService.getUserInfo.type)) {
+            if (this.appService.existUserTypeSpecific(this.data.transProject$.userTypeSpecific, this.authService.getUserInfo.type)) {
               this.watchChange();
 
               this.location.saveChange.that = this;
@@ -336,7 +340,6 @@ export class RegisteredComponent implements OnInit {
               this.saveChange.that = this;
 
               this.registeredInfos.show = true;
-            /*
             }
             else {
               let modalRef =  this.modalService.getModalError(false, ModalErrorComponent, 'registered.error.haveNoRight');
@@ -346,7 +349,6 @@ export class RegisteredComponent implements OnInit {
                   this.router.navigate(['Project/' + this.route.snapshot.params['projectCategory']]);
               });
             }
-            */
           }
         }
       });
@@ -436,8 +438,14 @@ export class RegisteredComponent implements OnInit {
                       }
                       if (saveResult.errorCode === 4) message = ('registered.save.error.registrationStatus.' + result.registrationStatus);
                       if (saveResult.errorCode === 5) message = ('registered.error.haveNoRight');
-                      if (saveResult.errorCode === 6) message = ('registered.save.error.locationSelected');
-                      if (saveResult.errorCode === 7) message = ('registered.save.error.seatAvailable');
+                      if (saveResult.errorCode === 6) {
+                        if (this.that.data.transProject$.project.isExam === 'Y')      message = ('registered.save.error.locationSelected');
+                        if (this.that.data.transProject$.project.isTeaching === 'Y')  message = ('registered.save.error.sectionSelected');
+                      }
+                      if (saveResult.errorCode === 7) {
+                        if (this.that.data.transProject$.project.isExam === 'Y')      message = ('registered.save.error.locationSelectedSeatAvailable');
+                        if (this.that.data.transProject$.project.isTeaching === 'Y')  message = ('registered.save.error.sectionSelectedSeatAvailable');
+                      }
                       if (saveResult.errorCode === 8) message = ('registered.save.error.fee');
 
                       modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message, btnMsg);

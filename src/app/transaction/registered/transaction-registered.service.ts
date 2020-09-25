@@ -138,10 +138,10 @@ class Operate {
   providedIn: 'root'
 })
 export class TransactionRegisteredService {
-  constructor(    
+  constructor(
   ) {}
 
-  public service: any = null;  
+  public service: any = null;
 }
 
 @Injectable({

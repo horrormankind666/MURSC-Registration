@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๑๔/๐๙/๒๕๖๓>
+Modify date : <๒๐/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -79,7 +79,8 @@ export namespace Schema {
       en?: string
     },
     logo?: string,
-    initial?: string
+    initial?: string,
+    projectCount?: number
   }
 
   export interface Project {
@@ -96,7 +97,10 @@ export namespace Schema {
     },
     ownerCode?: string,
     minimumPassScore?: number,
-    logo?: string
+    logo?: string,
+    subject?: string,
+    isExam?: string,
+    isTeaching?: string
   }
 
   export interface ContactPerson {
@@ -194,6 +198,7 @@ export namespace Schema {
     },
     lastPaymentDate?: string,
     paymentExpire?: string,
+    announceDate?: string,
     maximumSeat?: number,
     seatReserved?: number,
     minimumFee?: string,
@@ -232,6 +237,16 @@ export namespace Schema {
     phoneNumber?: string
   }
 
+  export interface TransScore {
+    transRegisteredID?: string,
+    eventCode?: string,
+    subject?: string,
+    applicantNo?: string,
+    adfsID?: string,
+    totalScore?: number,
+    examResult?: string
+  }
+
   export interface TransRegistered {
     ID?: string,
     CUID?: string,
@@ -243,7 +258,8 @@ export namespace Schema {
     invoiceFee?: InvoiceFee[],
     totalFeeAmount?: number,
     seatNO?: string,
-		applicantNO?: string
+    applicantNO?: string,
+    transScore?: TransScore
   }
 
   export interface Statuses {
@@ -497,7 +513,8 @@ namespace Data {
               en: (dr['projectCategoryNameEN'] ? dr['projectCategoryNameEN'] : dr['projectCategoryNameTH'])
             },
             logo: (dr['logo'] ? dr['logo'] : ''),
-            initial: (dr['initial'] ? dr['initial'] : '')
+            initial: (dr['initial'] ? dr['initial'] : ''),
+            projectCount: (dr['projectCount'] ? dr['projectCount'] : 0),
           });
         }
 
@@ -571,7 +588,9 @@ namespace Data {
                 about: {
                   th: (dr1['aboutTH'] ? dr1['aboutTH'] : dr1['aboutEN']),
                   en: (dr1['aboutEN'] ? dr1['aboutEN'] : dr1['aboutTH'])
-                }
+                },
+                isExam: (dr1['isExam'] ? dr1['isExam'] : ''),
+                isTeaching: (dr1['isTeaching'] ? dr1['isTeaching'] : '')
               },
               description: {
                 th: (dr1['descriptionTH'] ? dr1['descriptionTH'] : dr1['descriptionEN']),
@@ -590,7 +609,7 @@ namespace Data {
               minimumFee: (dr1['minimumFee'] ? dr1['minimumFee'] : ''),
               contactPerson: contactPerson,
               registrationStatus: (dr1['registrationStatus'] ? dr1['registrationStatus'] : ''),
-              userTypeSpecific: (dr1['userTypeSpecific'] ? dr1['userTypeSpecific'] : []),
+              userTypeSpecific: (dr1['userTypeSpecific'] ? dr1['userTypeSpecific'] : [])
             });
           }
 
@@ -660,7 +679,9 @@ namespace Data {
                 about: {
                   th: (dr1['aboutTH'] ? dr1['aboutTH'] : dr1['aboutEN']),
                   en: (dr1['aboutEN'] ? dr1['aboutEN'] : dr1['aboutTH'])
-                }
+                },
+                isExam: (dr1['isExam'] ? dr1['isExam'] : ''),
+                isTeaching: (dr1['isTeaching'] ? dr1['isTeaching'] : '')
               },
               description: {
                 th: (dr1['descriptionTH'] ? dr1['descriptionTH'] : dr1['descriptionEN']),
@@ -733,6 +754,7 @@ namespace Data {
           subdistrict: {}
         };
         let invoiceFee: Schema.InvoiceFee[] = [];
+        let transScore: Schema.TransScore = {};
 
         for (let dr1 of result) {
           let contactPerson: Schema.ContactPerson[] = [];
@@ -775,7 +797,9 @@ namespace Data {
               about: {
                 th: (dr1['aboutTH'] ? dr1['aboutTH'] : dr1['aboutEN']),
                 en: (dr1['aboutEN'] ? dr1['aboutEN'] : dr1['aboutTH'])
-              }
+              },
+              isExam: (dr1['isExam'] ? dr1['isExam'] : ''),
+              isTeaching: (dr1['isTeaching'] ? dr1['isTeaching'] : '')
             },
             description: {
               th: (dr1['descriptionTH'] ? dr1['descriptionTH'] : dr1['descriptionEN']),
@@ -787,6 +811,7 @@ namespace Data {
             },
             lastPaymentDate: (dr1['lastPaymentDates'] ? dr1['lastPaymentDates'] : ''),
             paymentExpire: (dr1["paymentExpire"] ? dr1["paymentExpire"] : ''),
+            announceDate: (dr1["announceDates"] ? dr1["announceDates"] : ''),
             contactPerson: contactPerson,
             userTypeSpecific: (dr1['userTypeSpecific'] ? dr1['userTypeSpecific'] : [])
           };
@@ -903,6 +928,15 @@ namespace Data {
             }
           }
 
+          transScore = {
+            eventCode: (dr1['eventCode'] ? dr1['eventCode'] : ''),
+            subject: (dr1['subject'] ? dr1['subject'] : ''),
+            applicantNo: (dr1['applicantNO'] ? dr1['applicantNO'] : ''),
+            adfsID: (dr1['personID'] ? dr1["personID"] : ''),
+            totalScore: (dr1['totalScore'] ? parseFloat(dr1['totalScore']) : null),
+            examResult: (dr1['examResult'] ? dr1["examResult"] : ''),
+          }
+
           transRegistered.push({
             ID: (dr1['transRegisteredID'] ? dr1['transRegisteredID'] : ''),
             CUID: ((dr1['transRegisteredID'] && transProject.ID) ? this.appService.getCUID([dr1['transRegisteredID'], transProject.ID]) : ''),
@@ -937,7 +971,8 @@ namespace Data {
             invoiceFee: invoiceFee,
             totalFeeAmount: (dr1['totalFeeAmount'] ? parseFloat(dr1['totalFeeAmount']) : 0),
             seatNO: (dr1["seatNO"] ? dr1["seatNO"] : ''),
-						applicantNO: (dr1["applicantNO"] ? dr1["applicantNO"] : '')
+            applicantNO: (dr1["applicantNO"] ? dr1["applicantNO"] : ''),
+            transScore: transScore
           });
         }
 

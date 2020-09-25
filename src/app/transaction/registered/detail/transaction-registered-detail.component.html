@@ -128,20 +128,32 @@
     <a class="d-inline-block badge badge-pill badge-light-dark badge-projectabout project-btn-badge" href="javascript:void(0)"
       (click)="
         examScore.isCollapsed = false;
+        timetable.isCollapsed = false;
         projectAbout.isCollapsed = !projectAbout.isCollapsed
       "
       [attr.aria-expanded]="projectAbout.isCollapsed"
       aria-controls="projectAbout">
       <span class="regular size13">{{'about' | translate | lowercase}}</span>
     </a>
-    <a class="d-inline-block badge badge-pill badge-light-dark badge-examscore project-btn-badge ml-2" href="javascript:void(0)"
+    <a class="d-inline-block badge badge-pill badge-light-dark badge-examscore project-btn-badge ml-2" href="javascript:void(0)" *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'"
       (click)="
         projectAbout.isCollapsed = false;
+        timetable.isCollapsed = false;
         examScore.isCollapsed = !examScore.isCollapsed
       "
       [attr.aria-expanded]="examScore.isCollapsed"
       aria-controls="examScore">
       <span class="regular size13">{{'score' | translate | lowercase}}</span>
+    </a>
+    <a class="d-inline-block badge badge-pill badge-light-dark badge-timetable project-btn-badge ml-2" href="javascript:void(0)" *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'"
+      (click)="
+        projectAbout.isCollapsed = false;
+        examScore.isCollapsed = false;
+        timetable.isCollapsed = !timetable.isCollapsed
+      "
+      [attr.aria-expanded]="timetable.isCollapsed"
+      aria-controls="timetable">
+      <span class="regular size13">{{'timetable.label' | translate | lowercase}}</span>
     </a>
     <p class="regular text-black-50 size16 line-clamp mt-2 mb-0">
       <span id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed">
@@ -177,6 +189,17 @@
         <div><ng-container *ngTemplateOutlet="contactInfo; context: {isDropdown: false}"></ng-container></div>
       </span>
       <span id="examScore" [ngbCollapse]="!examScore.isCollapsed">
+        <span class="bold" *ngIf="data.transRegistered$.transScore.examResult"
+          [ngClass]="{
+            'text-success': (data.transRegistered$.transScore.examResult === 'PASS'),
+            'text-danger': (data.transRegistered$.transScore.examResult === 'FAIL')
+          }">
+          {{data.transRegistered$.transScore.totalScore !== null  ? (data.transRegistered$.transScore.totalScore | number: '.2') : 'n/a'}}<br />
+          {{data.transRegistered$.transScore.examResult | translate | titlecase}}
+        </span>
+        <span class="bold text-dark" *ngIf="!data.transRegistered$.transScore.examResult">n/a</span>
+      </span>
+      <span id="timetable" [ngbCollapse]="!timetable.isCollapsed">
         <span class="bold text-dark">n/a</span>
       </span>
     </p>

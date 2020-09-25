@@ -42,12 +42,16 @@
           </div>
         </div>
       </div>
-      <div class="bg-white pr-3 pl-3">
+      <div class="pr-3 pl-3">
         <div class="jumbotron rounded-xl mb-0 p-3">
           <div class="border-bottom border-white pb-2">
-            <span class="bold text-primary size20">{{'location.info' | translate | titlecase}}</span>
+            <span class="bold text-primary size20" *ngIf="data.transProject$.project.isExam === 'Y'">{{'location.info' | translate | titlecase}}</span>
+            <span class="bold text-primary size20" *ngIf="data.transProject$.project.isTeaching === 'Y'">{{'section.info' | translate | titlecase}}</span>
           </div>
-          <div *ngIf="data.transProject$.transLocation.length"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
+          <div *ngIf="data.transProject$.transLocation.length">
+            <div *ngIf="data.transProject$.project.isExam === 'Y'"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
+            <div *ngIf="data.transProject$.project.isTeaching === 'Y'"><ng-container *ngTemplateOutlet="sectionInfo"></ng-container></div>
+          </div>
         </div>
       </div>
     </div>
@@ -145,10 +149,22 @@
 <ng-template #projectAboutResultInfo>
   <div class="aboutresult-info project-aboutresult-info">
     <a class="d-inline-block badge badge-pill badge-light-dark badge-projectabout project-btn-badge" href="javascript:void(0)"
-      (click)="projectAbout.isCollapsed = !projectAbout.isCollapsed"
+      (click)="
+        timetable.isCollapsed = false;
+        projectAbout.isCollapsed = !projectAbout.isCollapsed
+      "
       [attr.aria-expanded]="projectAbout.isCollapsed"
       aria-controls="projectAbout">
       <span class="regular size13">{{'about' | translate | lowercase}}</span>
+    </a>
+    <a class="d-inline-block badge badge-pill badge-light-dark badge-timetable project-btn-badge ml-2" href="javascript:void(0)" *ngIf="data.transProject$.project.isTeaching === 'Y'"
+      (click)="
+        projectAbout.isCollapsed = false;
+        timetable.isCollapsed = !timetable.isCollapsed
+      "
+      [attr.aria-expanded]="timetable.isCollapsed"
+      aria-controls="timetable">
+      <span class="regular size13">{{'timetable.label' | translate | lowercase}}</span>
     </a>
     <p class="regular text-black-50 size16 line-clamp mt-2 mb-0">
       <span id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed">
@@ -182,6 +198,9 @@
         </div>
         <div class="text-dark mt-2">{{'contact.label' | translate | titlecase}}</div>
         <div><ng-container *ngTemplateOutlet="contactInfo; context: {isDropdown: false}"></ng-container></div>
+      </span>
+      <span id="timetable" [ngbCollapse]="!timetable.isCollapsed">
+        <span class="bold text-dark">n/a</span>
       </span>
     </p>
   </div>
@@ -352,6 +371,89 @@
       <div class="form-group row mb-1" ngbTooltip="{{'building.label' | translate | titlecase}}" title="{{'building.label' | translate | titlecase}}">
         <div class="col pl-0">
           <span class="form-text regular">{{data.location.building.name[appService.lang]}}</span>
+        </div>
+      </div>
+      <div class="form-group row mb-0" ngbTooltip="{{'seat.label' | translate | titlecase}}" title="{{'seat.label' | translate | titlecase}}">
+        <div class="col pl-0">
+          <span class="form-text regular">{{'seat.label' | translate | titlecase}} {{data.seatTotal}} / {{data.seatAvailable}}</span>
+          <span class="regular text-muted size12">{{'total.label' | translate | titlecase}} / {{'remain' | translate | titlecase}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #sectionInfo>
+  <div class="section-info project-section-info">
+    <table class="table table-bordered mb-0">
+      <thead class="text-black-50 size18">
+        <tr>
+          <th class="border-top-0 border-left-0 border-white pl-0 bold col-index">{{'order' | translate | titlecase}}</th>
+          <th class="border-top-0 border-white bold col-section">{{'section.label' | translate | titlecase}}</th>
+          <th class="border-top-0 border-white bold col-teachingtype">{{'teachingType.label' | translate | titlecase}}</th>
+          <th class="border-top-0 border-white bold col-seattotal">{{'section.seatTotal' | translate | titlecase}}</th>
+          <th class="border-top-0 border-right-0 border-white pr-0 bold col-seatavailable">{{'section.seatAvailable' | translate | titlecase}}</th>
+          <th class="border-top-0 border-white bold col-wrap col-wrap-step1 col-section-teachingtype">{{'section.label' | translate | titlecase}} / {{'teachingType.label' | translate | titlecase}}</th>
+          <th class="border-top-0 border-right-0 border-white pr-0 bold col-wrap col-wrap-step1 col-seat">{{'seat.label' | translate | titlecase}} <span class="regular text-muted size12">( {{'total.label' | translate | titlecase}} / {{'remain' | translate | titlecase}} )</span></th>
+        </tr>
+      </thead>
+      <tbody class="border-top-0 size16" *ngFor="let transLocation of data.transProject$.transLocation; index as order">
+        <tr>
+          <td class="border-top-0 border-right-transparent border-left-0 pl-0 regular col-index" ngbTooltip="{{'order' | translate | titlecase}}" title="{{'order' | translate | titlecase}}">
+            {{(order + 1) | number}}
+          </td>
+          <td class="border-top-0 border-right-transparent regular col-section" ngbTooltip="{{'section.label' | translate | titlecase}}" title="{{'section.label' | translate | titlecase}}">
+            {{transLocation.location.name[appService.lang]}}
+          </td>
+          <td class="border-top-0 border-right-transparent regular col-teachingtype" ngbTooltip="{{'teachingType.label' | translate | titlecase}}" title="{{'teachingType.label' | translate | titlecase}}">
+            {{'teachingType.onlineClass' | translate | titlecase}}
+          </td>
+          <td class="border-top-0 border-right-transparent regular col-seattotal" ngbTooltip="{{'section.seatTotal' | translate | titlecase}}" title="{{'section.seatTotal' | translate | titlecase}}">
+            {{transLocation.seatTotal}}
+          </td>
+          <td class="border-top-0 border-right-0 pr-0 regular col-seatavailable" ngbTooltip="{{'section.seatAvailable' | translate | titlecase}}" title="{{'section.seatAvailable' | translate | titlecase}}">
+            {{transLocation.seatAvailable}}
+          </td>
+          <td class="border-top-0 border-right-transparent regular col-wrap col-wrap-step1 col-section-teachingtype">
+            <ng-container *ngTemplateOutlet="sectionTeachingTypeInfo; context: {data: transLocation}"></ng-container>
+          </td>
+          <td class="border-top-0 border-right-0 pr-0 regular col-wrap col-wrap-step1 col-seat">
+            {{transLocation.seatTotal}} / {{transLocation.seatAvailable}}
+          </td>
+          <td class="border-top-0 border-top-0 border-right-0 border-left-0 pr-0 pl-0 col-wrap col-wrap-step2 regular col-section-teachingtype-seat">
+            <ng-container *ngTemplateOutlet="sectionTeachingTypeSeatInfo; context: {data: transLocation}"></ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+<ng-template #sectionTeachingTypeInfo let-data="data">
+  <div class="section-teachingtype-info">
+    <div class="form">
+      <div class="form-group row mb-1" ngbTooltip="{{'section.label' | translate | titlecase}}" title="{{'section.label' | translate | titlecase}}">
+        <div class="col pl-0">
+          <span class="form-text regular">{{data.location.name[appService.lang]}}</span>
+        </div>
+      </div>
+      <div class="form-group row mb-0" ngbTooltip="{{'teachingType.label' | translate | titlecase}}" title="{{'teachingType.label' | translate | titlecase}}">
+        <div class="col pl-0">
+          <span class="form-text regular">{{'teachingType.onlineClass' | translate | titlecase}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #sectionTeachingTypeSeatInfo let-data="data">
+  <div class="section-teachingtype-seat-info">
+    <div class="form">
+      <div class="form-group row mb-1" ngbTooltip="{{'section.label' | translate | titlecase}}" title="{{'section.label' | translate | titlecase}}">
+        <div class="col pl-0">
+          <span class="form-text regular">{{data.location.name[appService.lang]}}</span>
+        </div>
+      </div>
+      <div class="form-group row mb-1" ngbTooltip="{{'teachingType.label' | translate | titlecase}}" title="{{'teachingType.label' | translate | titlecase}}">
+        <div class="col pl-0">
+          <span class="form-text regular">{{'teachingType.onlineClass' | translate | titlecase}}</span>
         </div>
       </div>
       <div class="form-group row mb-0" ngbTooltip="{{'seat.label' | translate | titlecase}}" title="{{'seat.label' | translate | titlecase}}">

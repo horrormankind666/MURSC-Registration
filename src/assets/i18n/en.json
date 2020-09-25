@@ -44,13 +44,16 @@
     "save": {
       "error": {
         "location": "Please select a location.",
+        "section": "Please select a section.",
         "registrationStatus": {
           "W": "This project not yet opened for registration.",
           "N": "This project expired for registration."
         },
         "projectRegistered": "This project has already been registered.",
         "locationSelected": "Location selected not found.",
-        "seatAvailable": "This location does not have enough seat available.",
+        "sectionSelected": "Section selected not found.",
+        "locationSelectedSeatAvailable": "This location does not have enough seat available.",
+        "sectionSelectedSeatAvailable": "This section does not have enough seat available.",
         "fee": "Fee not found.",
         "deliaddress": "Please fill in the address information correctly and completely."
       }
@@ -201,8 +204,8 @@
     "date": "Event date"
   },
   "idNo": {
-    "label": "Identification no.",
-    "abbreviations": "ID no."
+    "label": "Applicant no.",
+    "abbreviations": "App. no."
   },
   "openOnlyFor": "Open only for",
   "userType": {
@@ -210,5 +213,26 @@
     "studentG": "Postgraduate student ",
     "studentU": "Undergraduate student",
     "personnel": "Personnel"
+  },
+  "timetable": {
+    "label": "Timetable"
+  },
+  "section": {
+    "label": "Section",
+    "info": "Section information",
+    "name": "Section name",
+    "seatTotal": "Seat total",
+    "seatAvailable": "Seat available"
+  },
+  "teachingType": {
+    "label": "Teaching type",
+    "onlineClass": "Online class"
+  },
+  "studyResults": {
+    "label": "Study results"
+  },
+  "transcript": {
+    "label": "Transcript",
+    "aka": "Transcript"
   }
 }

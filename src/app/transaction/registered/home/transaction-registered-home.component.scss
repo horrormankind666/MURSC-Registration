@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๕/๐๘/๒๕๖๓>
-Modify date : <๐๒/๐๙/๒๕๖๓>
+Modify date : <๒๔/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -64,10 +64,8 @@ Description : <>
   }
   @include form-responsive('.transaction-registered-home-view .register-info');
 }
-@media screen and (max-width: 404px) {
-  .transaction-registered-home-view .aboutresult-info .badge-projectabout,
-  .transaction-registered-home-view .aboutresult-info .badge-registeredlocationidnoseatno,
-  .transaction-registered-home-view .aboutresult-info .badge-examscore {
+@media screen and (max-width: 474px) {
+  .transaction-registered-home-view .aboutresult-info .badge-inline {
     display: block !important;
     margin-top: 0.25rem;
     margin-left: 0 !important;

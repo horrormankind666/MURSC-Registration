@@ -192,11 +192,13 @@
 </ng-template>
 <ng-template #projectAboutResultInfo let-data="data">
   <div class="aboutresult-info project-aboutresult-info">
-    <div class="d-inline-block badge-projectabout">
+    <div class="d-inline-block badge-inline badge-projectabout">
       <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
         (click)="
           registeredLocationIDNoSeatNo.isCollapsed[data.ID] = false;
           examScore.isCollapsed[data.ID] = false;
+          sectionTimetable.isCollapsed[data.ID] = false;
+          studyResultsTranscript.isCollapsed[data.ID] = false;
           projectAbout.isCollapsed[data.ID] = !projectAbout.isCollapsed[data.ID]
         "
         [attr.aria-expanded]="projectAbout.isCollapsed[data.ID] === undefined ? false : projectAbout.isCollapsed[data.ID]"
@@ -204,11 +206,13 @@
         <span class="regular size13">{{'about' | translate | lowercase}}</span>
       </a>
     </div>
-    <div class="d-inline-block badge-registeredlocationidnoseatno ml-2">
+    <div class="d-inline-block badge-inline badge-registeredlocationidnoseatno ml-2" *ngIf="data.transProject.project.isExam === 'Y'">
       <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
         (click)="
           projectAbout.isCollapsed[data.ID] = false;
           examScore.isCollapsed[data.ID] = false;
+          sectionTimetable.isCollapsed[data.ID] = false;
+          studyResultsTranscript.isCollapsed[data.ID] = false;
           registeredLocationIDNoSeatNo.isCollapsed[data.ID] = !registeredLocationIDNoSeatNo.isCollapsed[data.ID]
         "
         [attr.aria-expanded]="registeredLocationIDNoSeatNo.isCollapsed[data.ID] === undefined ? false : registeredLocationIDNoSeatNo.isCollapsed[data.ID]"
@@ -216,16 +220,46 @@
         <span class="regular size13">{{'location.label' | translate | lowercase}} / {{'idNo.abbreviations' | translate | lowercase}} / {{'seat.seatNo' | translate | lowercase}}</span>
       </a>
     </div>
-    <div class="d-inline-block badge-examscore ml-2">
+    <div class="d-inline-block badge-inline badge-examscore ml-2" *ngIf="data.transProject.project.isExam === 'Y'">
       <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
         (click)="
           projectAbout.isCollapsed[data.ID] = false;
           registeredLocationIDNoSeatNo.isCollapsed[data.ID] = false;
+          sectionTimetable.isCollapsed[data.ID] = false;
+          studyResultsTranscript.isCollapsed[data.ID] = false;
           examScore.isCollapsed[data.ID] = !examScore.isCollapsed[data.ID]
         "
         [attr.aria-expanded]="examScore.isCollapsed[data.ID] === undefined ? false : examScore.isCollapsed[data.ID]"
         aria-controls="examScore">
         <span class="regular size13">{{'score' | translate | lowercase}}</span>
+      </a>
+    </div>
+    <div class="d-inline-block badge-inline badge-sectiontimetable ml-2" *ngIf="data.transProject.project.isTeaching === 'Y'">
+      <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
+        (click)="
+          projectAbout.isCollapsed[data.ID] = false;
+          registeredLocationIDNoSeatNo.isCollapsed[data.ID] = false;
+          examScore.isCollapsed[data.ID] = false;
+          studyResultsTranscript.isCollapsed[data.ID] = false;
+          sectionTimetable.isCollapsed[data.ID] = !sectionTimetable.isCollapsed[data.ID]
+        "
+        [attr.aria-expanded]="sectionTimetable.isCollapsed[data.ID] === undefined ? false : sectionTimetable.isCollapsed[data.ID]"
+        aria-controls="sectionTimetable">
+        <span class="regular size13">{{'section.label' | translate | lowercase}} / {{'timetable.label' | translate | lowercase}}</span>
+      </a>
+    </div>
+    <div class="d-inline-block badge-inline badge-studyresultstranscript ml-2" *ngIf="data.transProject.project.isTeaching === 'Y'">
+      <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
+        (click)="
+          projectAbout.isCollapsed[data.ID] = false;
+          registeredLocationIDNoSeatNo.isCollapsed[data.ID] = false;
+          examScore.isCollapsed[data.ID] = false;
+          sectionTimetable.isCollapsed[data.ID] = false;
+          studyResultsTranscript.isCollapsed[data.ID] = !studyResultsTranscript.isCollapsed[data.ID]
+        "
+        [attr.aria-expanded]="studyResultsTranscript.isCollapsed[data.ID] === undefined ? false : studyResultsTranscript.isCollapsed[data.ID]"
+        aria-controls="studyResultsTranscript">
+        <span class="regular size13">{{'studyResults.label' | translate | lowercase}} / {{'transcript.aka' | translate | lowercase}}</span>
       </a>
     </div>
     <p class="regular text-black-50 size16 line-clamp mt-2 mb-0">
@@ -270,6 +304,23 @@
         </div>
       </span>
       <span id="examScore" [ngbCollapse]="!examScore.isCollapsed[data.ID]">
+        <span class="bold" *ngIf="data.transScore.examResult"
+          [ngClass]="{
+            'text-success': (data.transScore.examResult === 'PASS'),
+            'text-danger': (data.transScore.examResult === 'FAIL')
+          }">
+          {{data.transScore.totalScore !== null  ? (data.transScore.totalScore | number: '.2') : 'n/a'}}<br />
+          {{data.transScore.examResult | translate | titlecase}}
+        </span>
+        <span class="bold text-dark" *ngIf="!data.transScore.examResult">n/a</span>
+      </span>
+      <span id="sectionTimetable" [ngbCollapse]="!sectionTimetable.isCollapsed[data.ID]">
+        {{data.transLocation.location.name[appService.lang]}}<br />
+        {{'teachingType.onlineClass' | translate | titlecase}}<br />
+        <div class="text-dark mt-2">{{'timetable.label' | translate | titlecase}}</div>
+        <span class="bold text-dark">n/a</span>
+      </span>
+      <span id="studyResultsTranscript" [ngbCollapse]="!studyResultsTranscript.isCollapsed[data.ID]">
         <span class="bold text-dark">n/a</span>
       </span>
     </p>

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๗/๐๔/๒๕๖๓>
-Modify date : <๑๘/๐๘/๒๕๖๓>
+Modify date : <๒๒/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,7 +12,8 @@ Description : <>
 .registered-view .project-card-vertical {
   display: none;
 }
-.registered-view .location-info .table .col-index {
+.registered-view .location-info .table .col-index,
+.registered-view .section-info .table .col-index {
   width: 72px;
   min-width: 72px;
 }
@@ -20,11 +21,18 @@ Description : <>
   position: absolute;
   top: 0;
 }
+@media screen and (max-width: 1747px) and (min-width: 1082px) {
+  @include table-responsive-step1('.registered-view .section-info');
+}
 @media screen and (max-width: 1520px) and (min-width: 1082px) {
   .registered-view .registered-info .d-table .col-locations {
     width: 50% !important;
   }
   @include table-responsive-step1('.registered-view .location-info');
+  @include table-responsive-step1('.registered-view .section-info');
+}
+@media screen and (max-width: 1174px) and (min-width: 1082px) {
+  @include table-responsive-step2('.registered-view .registered-info .section-info');
 }
 @media screen and (max-width: 1081px) {
   .registered-view .registered-info .d-table .table-cell-divider.col-wrap {
@@ -43,8 +51,14 @@ Description : <>
     display: none;
   }
 }
+@media screen and (max-width: 1040px) {
+  @include table-responsive-step1('.registered-view .registered-info .section-info');
+}
 @media screen and (max-width: 908px) {
   @include table-responsive-step1('.registered-view .registered-info .location-info');
+}
+@media screen and (max-width: 611px) {
+  @include table-responsive-step2('.registered-view .registered-info .section-info');
 }
 @media screen and (max-width: 565px) {
   @include table-responsive-step2('.registered-view .registered-info .location-info');

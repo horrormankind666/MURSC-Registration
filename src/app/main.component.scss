@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๗/๐๔/๒๕๖๓>
-Modify date : <๒๓/๐๗/๒๕๖๓>
+Modify date : <๒๐/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -11,8 +11,24 @@ Description : <>
   width: 254px !important;
   background: transparent;
 }
-.main-view a.btn i {
+.main-view a.btn .logo {
   border-color: transparent !important;
+  position: relative;
+}
+.main-view a.btn .logo .badge {
+  position: absolute;
+  top: 13px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome,
+  .main-view a.btn .logo .badge {
+    top: 12px;
+  }
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .main-view a.btn .logo .badge {
+    top: 10px;
+  }
 }
 .main-view a.btn:hover,
 .main-view a.btn:focus,
@@ -21,11 +37,11 @@ Description : <>
 .main-view a.btn.active {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 15px 0 rgba(0, 0, 0, 0.3) !important;
 }
-.main-view a.btn:hover i,
-.main-view a.btn:focus i,
-.main-view a.btn.focus i,
-.main-view a.btn:active i,
-.main-view a.btn.active i {
+.main-view a.btn:hover .logo,
+.main-view a.btn:focus .logo,
+.main-view a.btn.focus .logo,
+.main-view a.btn:active .logo,
+.main-view a.btn.active .logo {
   color: #FFFFFF !important;
   background: #4DABF7 !important;
   border-color: #4DABF7 !important;
