@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๑/๐๙/๒๕๖๓>
+Modify date : <๒๕/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -127,6 +127,20 @@ $line-clamp-line-height: 1.7;
     font-size: 1rem;
     height: auto;
     line-height: 1.5;
+  }
+}
+
+@mixin badge-responsive($class) {
+  #{$class} .badge-inline {
+    display: block !important;
+    margin-top: 0.25rem;
+    margin-left: 0 !important;
+  }
+  #{$class} .badge-inline:first-child {
+    margin-top: 0;
+  }
+  #{$class} .badge {
+    text-align: left;
   }
 }
 

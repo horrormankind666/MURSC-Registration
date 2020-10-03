@@ -368,7 +368,7 @@
               <div class="form-group w-100 row mb-01" *ngIf="data.invoice.payment.status === 'N'">
                 <label for="col-dateofpayment" class="col-form-label">{{'project.lastPaymentDate' | translate | titlecase}}</label>
                 <div class="col">
-                  <div class="d-table w-100 size-l calendar-date" *ngIf="data.transProject.lastPaymentDate">
+                  <div class="d-table w-100 size-l calendar-date" *ngIf="data.transProject.lastPaymentDate && data.transProject.paymentExpire === 'N'">
                     <div class="d-table-row">
                       <div class="d-table-cell align-middle col-icon"><span class="text-danger size22"><i class="fas fa-calendar-alt"></i></span></div>
                       <div class="d-table-cell align-middle col-calendar"><span class="text-danger">{{data.transProject.lastPaymentDate ? (data.transProject.lastPaymentDate | slice:0:16) : ''}}</span></div>
@@ -376,6 +376,7 @@
                       <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-danger size14">{{data.transProject.lastPaymentDate ? (data.transProject.lastPaymentDate | slice:16:22) : ''}}</span></div>
                     </div>
                   </div>
+                  <span class="form-text regular text-danger" *ngIf="data.transProject.paymentExpire === 'Y'">{{'paymentExpire' | translate | titlecase}}</span>
                 </div>
               </div>
               <div class="form-group w-100 row mb-01" *ngIf="data.invoice.payment.status === 'Y'">

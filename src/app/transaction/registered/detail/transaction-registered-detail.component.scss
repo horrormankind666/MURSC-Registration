@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๑/๐๖/๒๕๖๓>
-Modify date : <๑๕/๐๙/๒๕๖๓>
+Modify date : <๒๕/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -65,7 +65,8 @@ Description : <>
     width: 100% !important;
   }
 }
-.transaction-registered-detail-view .location-info .form .form-text {
+.transaction-registered-detail-view .location-info .form .form-text,
+.transaction-registered-detail-view .section-info .form .form-text {
   line-height: 1.5;
 }
 .transaction-registered-detail-view .fee-info .table .col-index {
@@ -172,4 +173,7 @@ Description : <>
   border-top-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0px;
+}
+@media screen and (max-width: 414px) {
+  @include badge-responsive('.transaction-registered-detail-view .aboutresult-info.project-teaching');
 }

@@ -65,15 +65,5 @@ Description : <>
   @include form-responsive('.transaction-registered-home-view .register-info');
 }
 @media screen and (max-width: 474px) {
-  .transaction-registered-home-view .aboutresult-info .badge-inline {
-    display: block !important;
-    margin-top: 0.25rem;
-    margin-left: 0 !important;
-  }
-  .transaction-registered-home-view .aboutresult-info .badge-projectabout {
-    margin-top: 0;
-  }
-  .transaction-registered-home-view .aboutresult-info .project-btn-badge {
-    text-align: left;
-  }
+  @include badge-responsive('.transaction-registered-home-view .aboutresult-info');
 }

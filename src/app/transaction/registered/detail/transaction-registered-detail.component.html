@@ -40,7 +40,9 @@
         </div>
       </div>
       <div class="pr-3 pl-3">
-        <ng-container *ngTemplateOutlet="registeredInfo"></ng-container>
+        <div *ngIf="registeredInfos.show">
+          <ng-container *ngTemplateOutlet="registeredInfo"></ng-container>
+        </div>
       </div>
     </div>
   </div>
@@ -124,37 +126,63 @@
   </div>
 </ng-template>
 <ng-template #projectAboutResultInfo>
-  <div class="aboutresult-info project-aboutresult-info">
-    <a class="d-inline-block badge badge-pill badge-light-dark badge-projectabout project-btn-badge" href="javascript:void(0)"
-      (click)="
-        examScore.isCollapsed = false;
-        timetable.isCollapsed = false;
-        projectAbout.isCollapsed = !projectAbout.isCollapsed
-      "
-      [attr.aria-expanded]="projectAbout.isCollapsed"
-      aria-controls="projectAbout">
-      <span class="regular size13">{{'about' | translate | lowercase}}</span>
-    </a>
-    <a class="d-inline-block badge badge-pill badge-light-dark badge-examscore project-btn-badge ml-2" href="javascript:void(0)" *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'"
-      (click)="
-        projectAbout.isCollapsed = false;
-        timetable.isCollapsed = false;
-        examScore.isCollapsed = !examScore.isCollapsed
-      "
-      [attr.aria-expanded]="examScore.isCollapsed"
-      aria-controls="examScore">
-      <span class="regular size13">{{'score' | translate | lowercase}}</span>
-    </a>
-    <a class="d-inline-block badge badge-pill badge-light-dark badge-timetable project-btn-badge ml-2" href="javascript:void(0)" *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'"
-      (click)="
-        projectAbout.isCollapsed = false;
-        examScore.isCollapsed = false;
-        timetable.isCollapsed = !timetable.isCollapsed
-      "
-      [attr.aria-expanded]="timetable.isCollapsed"
-      aria-controls="timetable">
-      <span class="regular size13">{{'timetable.label' | translate | lowercase}}</span>
-    </a>
+  <div class="aboutresult-info project-aboutresult-info"
+    [ngClass]="{
+      'project-exam': (data.transRegistered$.transProject.project.isExam === 'Y'),
+      'project-teaching': (data.transRegistered$.transProject.project.isTeaching === 'Y')
+    }">
+    <div class="d-inline-block badge-inline badge-projectabout">
+      <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
+        (click)="
+          examScore.isCollapsed = false;
+          timetable.isCollapsed = false;
+          studyResultsTranscript.isCollapsed = false;
+          projectAbout.isCollapsed = !projectAbout.isCollapsed
+        "
+        [attr.aria-expanded]="projectAbout.isCollapsed"
+        aria-controls="projectAbout">
+        <span class="regular size13">{{'about' | translate | lowercase}}</span>
+      </a>
+    </div>
+    <div class="d-inline-block badge-inline badge-examscore ml-2" *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'">
+      <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
+        (click)="
+          projectAbout.isCollapsed = false;
+          timetable.isCollapsed = false;
+          studyResultsTranscript.isCollapsed = false;
+          examScore.isCollapsed = !examScore.isCollapsed
+        "
+        [attr.aria-expanded]="examScore.isCollapsed"
+        aria-controls="examScore">
+        <span class="regular size13">{{'score' | translate | lowercase}}</span>
+      </a>
+    </div>
+    <div class="d-inline-block badge-inline badge-timetable ml-2" *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">
+      <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
+        (click)="
+          projectAbout.isCollapsed = false;
+          examScore.isCollapsed = false;
+          studyResultsTranscript.isCollapsed = false;
+          timetable.isCollapsed = !timetable.isCollapsed
+        "
+        [attr.aria-expanded]="timetable.isCollapsed"
+        aria-controls="timetable">
+        <span class="regular size13">{{'timetable.label' | translate | lowercase}}</span>
+      </a>
+    </div>
+    <div class="d-inline-block badge-inline badge-studyresultstranscript ml-2" *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">
+      <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
+        (click)="
+          projectAbout.isCollapsed = false;
+          examScore.isCollapsed = false;
+          timetable.isCollapsed = false;
+          studyResultsTranscript.isCollapsed = !studyResultsTranscript.isCollapsed
+        "
+        [attr.aria-expanded]="studyResultsTranscript.isCollapsed"
+        aria-controls="studyResultsTranscript">
+        <span class="regular size13">{{'studyResults.label' | translate | lowercase}} / {{'transcript.aka' | translate | lowercase}}</span>
+      </a>
+    </div>
     <p class="regular text-black-50 size16 line-clamp mt-2 mb-0">
       <span id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed">
         <span class="text-justify-distribute" [innerHTML]="data.transRegistered$.transProject.project.about[appService.lang] | nl2br"></span>
@@ -200,6 +228,9 @@
         <span class="bold text-dark" *ngIf="!data.transRegistered$.transScore.examResult">n/a</span>
       </span>
       <span id="timetable" [ngbCollapse]="!timetable.isCollapsed">
+        <span class="bold text-dark">n/a</span>
+      </span>
+      <span id="studyResultsTranscript" [ngbCollapse]="!studyResultsTranscript.isCollapsed">
         <span class="bold text-dark">n/a</span>
       </span>
     </p>
@@ -256,7 +287,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group w-100 row mb-01" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">
+              <div class="form-group w-100 row mb-01" *ngIf="data.transRegistered$.invoice.payment.status === 'N' && data.transRegistered$.transProject.paymentExpire === 'N'">
                 <label for="col-dateofpayment" class="col-form-label">{{'project.lastPaymentDate' | translate | titlecase}}</label>
                 <div class="col">
                   <div class="d-table w-100 size-l calendar-date">
@@ -342,16 +373,24 @@
   <div class="registered-info">
     <div class="d-block w-100 jumbotron rounded-xl mb-0 p-3 col-locations">
       <div class="border-bottom border-light pb-2">
-        <span class="bold text-primary size20">{{'location.label' | translate | titlecase}}</span>
+        <div class="bold text-primary size20">
+          <span *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'">{{'location.label' | translate | titlecase}}</span>
+          <span *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">{{'section.label' | translate | titlecase}}</span>
+        </div>
       </div>
-      <ng-container *ngTemplateOutlet="locationInfo"></ng-container>
+      <div *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
+      <div *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'"><ng-container *ngTemplateOutlet="sectionInfo"></ng-container></div>
     </div>
     <div class="d-table table-registered">
       <div class="d-table-cell w-25 jumbotron rounded-xl mb-0 p-3 col-locations">
         <div class="border-bottom border-light pb-2">
-          <span class="bold text-primary size20">{{'location.label' | translate | titlecase}}</span>
+          <div class="bold text-primary size20">
+            <span *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'">{{'location.label' | translate | titlecase}}</span>
+            <span *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">{{'section.label' | translate | titlecase}}</span>
+          </div>
         </div>
-        <ng-container *ngTemplateOutlet="locationInfo"></ng-container>
+        <div *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
+        <div *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'"><ng-container *ngTemplateOutlet="sectionInfo"></ng-container></div>
       </div>
       <div class="d-table-cell table-cell-divider col-wrap"></div>
       <div class="d-table-cell w-375 jumbotron rounded-xl mb-0 p-3 col-feetype">
@@ -409,40 +448,67 @@
     </table>
   </div>
 </ng-template>
-<ng-template #feeInfo>
-  <div class="fee-info project-fee-info">
+<ng-template #sectionInfo>
+  <div class="section-info project-section-info">
     <table class="table table-bordered mb-0">
-      <tbody class="border-top-0 size16" [ngClass]="{'pb-1': last}" *ngFor="let invoiceFee of data.transRegistered$.invoiceFee; index as order; let last = last">
+      <tbody class="border-top-0 size16">
         <tr>
-          <td class="border-0 pr-0 pb-0 pl-0 regular col-index" [ngClass]="{'pt-1': (order !== 0)}">
-            <i class="fas fa-check-square text-muted size18"></i>
-          </td>
-          <td class="w-auto border-0 pr-0 pb-0 pl-0 regular col-name" [ngClass]="{'pt-1': (order !== 0)}">
-            {{invoiceFee.feeType.name[appService.lang]}}
-          </td>
-          <td class="border-0 pr-0 pb-0 regular text-right col-amount" [ngClass]="{'pt-1': (order !== 0)}">
-            {{invoiceFee.feeType.amount ? ((invoiceFee.feeType.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
+          <td class="border-top-0 border-right-0 border-left-0 pr-0 pl-0 regular">
+            <div class="form">
+              <div class="form-group row mb-1" ngbTooltip="{{'section.label' | translate | titlecase}}" title="{{'section.label' | translate | titlecase}}">
+                <div class="col pl-0">
+                  <span class="form-text regular">{{data.transRegistered$.transLocation.location.name[appService.lang]}}</span>
+                </div>
+              </div>
+              <div class="form-group row mb-0" ngbTooltip="{{'teachingType.label' | translate | titlecase}}" title="{{'teachingType.label' | translate | titlecase}}">
+                <div class="col pl-0">
+                  <span class="form-text regular">{{'teachingType.onlineClass' | translate | titlecase}}</span>
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
-        <tr *ngIf="invoiceFee.feeType.toggle">
-          <td colspan="3" class="border-0 p-0">
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+<ng-template #feeInfo>
+  <div class="fee-info project-fee-info">
+    <table class="table table-bordered mb-0" *ngIf="data.transRegistered$.invoice.payment.status === 'N' && data.transRegistered$.transProject.paymentExpire === 'N'">
+      <tbody class="border-top-0 size16" *ngFor="let transFeeType of data.transRegistered$.transFeeType; index as order; let last = last">
+        <tr>
+          <td class="w-auto border-0 pr-0 pb-0 pl-0 regular col-check" [ngClass]="{'pt-1': (order !== 0)}">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="select-feetype-{{transFeeType.ID}}" name="select-feetype"
+                [value]="transFeeType.ID"
+                [(ngModel)]="transFeeType.isSelected"
+                [disabled]="(transFeeType.requiredStatus === 'Y')"
+                (change)="feeType.totalFeeAmount = feeType.getTotalFeeAmount(); feeType.setToggle(transFeeType)">
+              <label class="custom-control-label" for="select-feetype-{{transFeeType.ID}}">{{transFeeType.feeType.name[appService.lang]}}</label>
+            </div>
+          </td>
+          <td class="border-0 pr-0 pb-0 regular text-right col-amount" [ngClass]="{'pt-1': (order !== 0)}">
+            {{transFeeType.feeType.amount ? ((transFeeType.feeType.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
+          </td>
+        </tr>
+        <tr *ngIf="transFeeType.feeType.toggle">
+          <td colspan="2" class="border-0 p-0">
             <a class="badge badge-pill badge-info mt-1 project-btn-badge" href="javascript:void(0)"
               [ngClass]="{
-                'has-focus': feeType.toggle[invoiceFee.feeType.toggle],
-                'disabled': (invoiceFee.feeType.toggle === 'Address' && deliAddress.isSaving)
+                'has-focus': feeType.toggle[transFeeType.feeType.toggle]
               }"
-              (click)="feeType.toggle[invoiceFee.feeType.toggle] = !feeType.toggle[invoiceFee.feeType.toggle]">
-              <span class="regular text-white size13" *ngIf="invoiceFee.feeType.toggle === 'Address'">
-                <span *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.invoice.payment.status === 'N'">{{'addressDelivery.edit' | translate | lowercase}}</span>
-                <span *ngIf="!appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) || data.transRegistered$.invoice.payment.status !== 'N'">{{'addressDelivery.label' | translate | lowercase}}</span>
+              (click)="feeType.toggle[transFeeType.feeType.toggle] = !feeType.toggle[transFeeType.feeType.toggle]">
+              <span class="regular text-white size13" *ngIf="transFeeType.feeType.toggle === 'Address'">
+                <span *ngIf="data.transRegistered$.transDeliAddress.ID">{{'addressDelivery.edit' | translate | lowercase}}</span>
+                <span *ngIf="!data.transRegistered$.transDeliAddress.ID">{{'addressDelivery.label' | translate | lowercase}}</span>
               </span>
             </a>
           </td>
         </tr>
         <tr>
-          <td colspan="3" class="border-0 p-0">
-            <div class="mt-2" id="deliaddress-form" *ngIf="feeType.toggle[invoiceFee.feeType.toggle] && invoiceFee.feeType.toggle === 'Address'">
-              <div class="form horizontal-form bg-warning p-3" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.invoice.payment.status === 'N'">
+          <td colspan="2" class="border-0 p-0">
+            <div class="mt-2" id="deliaddress-form" *ngIf="feeType.toggle[transFeeType.feeType.toggle] && transFeeType.feeType.toggle === 'Address'">
+              <div class="form horizontal-form bg-warning p-3">
                 <div class="mb-2" *ngIf="!deliAddress.saveChange.isValid || deliAddress.saveChange.errorCode === 1">
                   <div class="alert alert-danger regular size16" role="alert">
                     <span *ngIf="!deliAddress.saveChange.isValid">{{'registered.save.error.deliaddress' | translate}}</span>
@@ -553,13 +619,59 @@
                     <a class="btn btn-sm btn-transparent" (click)="deliAddress.setValue(true)" *ngIf="!deliAddress.saveChange.isSaving">
                       <span class="bold text-danger size16">{{'cancel' | translate | titlecase}}</span>
                     </a>
+                    <!--
                     <a class="btn btn-sm btn-transparent ml-1" (click)="deliAddress.saveChange.action()" *ngIf="!deliAddress.saveChange.isSaving">
                       <span class="bold text-success size16">{{'save.label' | translate | titlecase}}</span>
                     </a>
+                    -->
                   </div>
                 </div>
               </div>
-              <div class="form bg-success rounded-xxl p-3 size14 regular text-white" *ngIf="!appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) || data.transRegistered$.invoice.payment.status !== 'N'">
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2" class="border-0 p-0">
+            <div class="d-table w-100 border border-right-0 border-bottom-0 border-left-0 border-white mt-2 size18">
+              <div class="d-table-cell w-auto pt-25 bold col-total">{{'total.amount' | translate | titlecase}}</div>
+              <div class="d-table-cell pt-25 bold text-right col-total-amount">
+                {{feeType.totalFeeAmount ? ((feeType.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+    <table class="table table-bordered mb-0" *ngIf="data.transRegistered$.invoice.payment.status !== 'N' || data.transRegistered$.transProject.paymentExpire === 'Y'">
+      <tbody class="border-top-0 size16" [ngClass]="{'pb-1': last}" *ngFor="let invoiceFee of data.transRegistered$.invoiceFee; index as order; let last = last">
+        <tr>
+          <td class="border-0 pr-0 pb-0 pl-0 regular col-index" [ngClass]="{'pt-1': (order !== 0)}">
+            <i class="fas fa-check-square text-muted size18"></i>
+          </td>
+          <td class="w-auto border-0 pr-0 pb-0 pl-0 regular col-name" [ngClass]="{'pt-1': (order !== 0)}">
+            {{invoiceFee.feeType.name[appService.lang]}}
+          </td>
+          <td class="border-0 pr-0 pb-0 regular text-right col-amount" [ngClass]="{'pt-1': (order !== 0)}">
+            {{invoiceFee.feeType.amount ? ((invoiceFee.feeType.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
+          </td>
+        </tr>
+        <tr *ngIf="invoiceFee.feeType.toggle">
+          <td colspan="3" class="border-0 p-0">
+            <a class="badge badge-pill badge-info mt-1 project-btn-badge" href="javascript:void(0)"
+              [ngClass]="{
+                'has-focus': feeType.toggle[invoiceFee.feeType.toggle]
+              }"
+              (click)="feeType.toggle[invoiceFee.feeType.toggle] = !feeType.toggle[invoiceFee.feeType.toggle]">
+              <span class="regular text-white size13" *ngIf="invoiceFee.feeType.toggle === 'Address'">{{'addressDelivery.label' | translate | lowercase}}</span>
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" class="border-0 p-0">
+            <div class="mt-2" id="deliaddress-form" *ngIf="feeType.toggle[invoiceFee.feeType.toggle] && invoiceFee.feeType.toggle === 'Address'">
+              <div class="form bg-success rounded-xxl p-3 size14 regular text-white">
                 <div class="form-group row mb-2">
                   <label for="col-deliaddress-address" class="col-form-label">{{'address.label' | translate | titlecase}}</label>
                   <div class="col">
@@ -629,14 +741,14 @@
         <tr>
           <td class="border-0 pr-0 pb-0 pl-0">
             <div class="form flat-form">
-              <div class="mt-2 mb-055" *ngIf="!payment.saveChange.isValid || payment.saveChange.errorCode === 1 || payment.saveChange.errorCode === 3">
+              <div class="mt-2 mb-055" *ngIf="!payment.saveChange.isValid || payment.saveChange.errorCode === 1 || payment.saveChange.errorCode === 3 || data.transRegistered$.transProject.paymentExpire === 'Y'">
                 <div class="alert alert-danger mb-0 regular size16" role="alert">
                   <span *ngIf="!payment.saveChange.isValid">{{'payment.save.error.issueReceiptAs' | translate}}</span>
                   <span *ngIf="payment.saveChange.errorCode === 1">{{'qrcode.error' | translate}}</span>
-                  <span *ngIf="payment.saveChange.errorCode === 3">{{'payment.save.error.paymentExpire' | translate}}</span>
+                  <span *ngIf="payment.saveChange.errorCode === 3 || data.transRegistered$.transProject.paymentExpire === 'Y'">{{'payment.save.error.paymentExpire' | translate}}</span>
                 </div>
               </div>
-              <div class="form-group w-100" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type)">
+              <div class="form-group w-100" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.transProject.paymentExpire === 'N'">
                 <label for="payment-issuereceipt" class="regular text-white">{{'invoice.issueReceiptAs' | translate | titlecase}}</label>
                 <div class="input-group has-icon" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">
                   <input trimOnBlur type="text" class="form-control inputbox pl-4 regular text-white size14"
@@ -660,7 +772,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="d-table w-100 mt-3 payment-btn" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.invoice.payment.status === 'N' && !payment.formField.qrcodeImage">
+    <div class="d-table w-100 mt-3 payment-btn" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.invoice.payment.status === 'N' && data.transRegistered$.transProject.paymentExpire === 'N' && !payment.formField.qrcodeImage">
       <div class="i-saving" *ngIf="payment.saveChange.isSaving"><i class="fas fa-circle-notch fa-spin size24"></i></div>
       <a class="btn btn-warning pt-0 pb-0" (click)="payment.saveChange.action()" *ngIf="!payment.saveChange.isSaving">
         <span class="bold size20">{{'payment.confirm' | translate | titlecase}}</span>

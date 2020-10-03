@@ -105,6 +105,7 @@
       }
     }
   },
+  "paymentExpire": "Payment expire",
   "unit": {
     "label": "Unit",
     "baht": "Bath",

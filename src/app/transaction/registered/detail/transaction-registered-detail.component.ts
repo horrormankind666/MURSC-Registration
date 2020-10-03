@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๙/๐๖/๒๕๖๓>
-Modify date : <๒๔/๐๙/๒๕๖๓>
+Modify date : <๐๒/๑๐/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -54,8 +54,71 @@ export class TransactionRegisteredDetailComponent implements OnInit {
     isCollapsed: false
   };
 
+  studyResultsTranscript: any = {
+    isCollapsed: false
+  };
+
+  registeredInfos: any = {
+    show: false
+  };
+
   feeType: any = {
-    toggle: []
+    that: {},
+    toggle: [],
+    address: {
+      isSelected: false
+    },
+    totalFeeAmount: 0,
+    setValue(restore?: boolean) {
+      if (!restore) {
+        this.toggle = [];
+        this.address.isSelected = false;
+      }
+    },
+    setToggle(transFeeType: Schema.TransFeeType) {
+      if (transFeeType.feeType.toggle === 'Address') {
+        this.address.isSelected = transFeeType.isSelected;
+        this.toggle[transFeeType.feeType.toggle] = this.address.isSelected;
+      }
+    },
+    getTotalFeeAmount(): number {
+      let amount: number = 0;
+
+      if (this.that.data.transRegistered$) {
+        for (let i = 0; i < this.that.data.transRegistered$.transFeeType.length; i++) {
+          if (this.that.data.transRegistered$.transFeeType[i].isSelected) {
+            amount = (amount + this.that.data.transRegistered$.transFeeType[i].feeType.amount);
+          }
+        }
+      }
+
+      return amount;
+    },
+    watchChange() {
+      this.saveChange.isValid = true;
+    },
+    saveChange: {
+      that: {},
+      isValid: true,
+      /*
+      getValue(): Schema.TransFeeType[] {
+        let result: Schema.TransFeeType[] = [];
+
+        for (let i = 0; i < this.that.data.transProject$.transFeeType.length; i++) {
+          if (this.that.data.transProject$.transFeeType[i].isSelected)
+            result.push(this.that.data.transProject$.transFeeType[i].feeType);
+        }
+
+        return (result ? result : null);
+      },
+      validate(): boolean {
+        return true;
+      },
+      action() {
+        this.isValid = this.validate();
+      }
+      */
+    }
   };
 
   deliAddress: any = {
@@ -82,31 +145,44 @@ export class TransactionRegisteredDetailComponent implements OnInit {
       phoneNumber: ''
     },
     setValue(restore?: boolean) {
-      if (this.that.data.transRegistered$.transDeliAddress.ID) {
-        this.watchChange();
+      this.watchChange();
 
-        if (!restore) {
-          this.formField.address = '';
-          this.formField.country.selected = null;
-          this.formField.province.selected = null;
-          this.formField.district.selected = null;
-          this.formField.subdistrict.selected = null;
-          this.formField.postalCode = '';
-          this.formField.phoneNumber = '';
+      if (!restore) {
+        this.formField.address = '';
+        this.formField.country.selected = null;
+        this.formField.province.selected = null;
+        this.formField.district.selected = null;
+        this.formField.subdistrict.selected = null;
+        this.formField.postalCode = '';
+        this.formField.phoneNumber = '';
+      }
+      else {
+        let address: string;
+        let phoneNumber: string;
+        let country: string;
+
+        if (this.that.data.transRegistered$.transDeliAddress.ID) {
+          address = this.that.data.transRegistered$.transDeliAddress.address;
+          phoneNumber = this.that.data.transRegistered$.transDeliAddress.phoneNumber;
+          country = this.that.data.transRegistered$.transDeliAddress.country.ID
         }
         else {
-          this.formField.address = this.that.data.transRegistered$.transDeliAddress.address;
-          this.formField.phoneNumber = this.that.data.transRegistered$.transDeliAddress.phoneNumber;
-
-          this.formField.country.isLoading = true;
-          this.that.dataService.country.getList().then((result: Schema.Country[]) => {
-            this.formField.country.isLoading = false;
-            this.that.data.country$ = result;
-            this.formField.country.selected = this.that.data.country$[this.that.data.country$.findIndex(k => k.ID === this.that.data.transRegistered$.transDeliAddress.country.ID)];
-
-            this.getListProvince(true);
-          });
+          address = this.that.authService.getUserInfo.address;
+          phoneNumber = this.that.authService.getUserInfo.phoneNumber;
+          country = this.that.authService.getUserInfo.country;
         }
+
+        this.formField.address = address;
+        this.formField.phoneNumber = phoneNumber;
+
+        this.formField.country.isLoading = true;
+        this.that.dataService.country.getList().then((result: Schema.Country[]) => {
+          this.formField.country.isLoading = false;
+          this.that.data.country$ = result;
+          this.formField.country.selected = this.that.data.country$[this.that.data.country$.findIndex(k => k.ID === country)];
+
+          this.getListProvince(true);
+        });
       }
     },
     getListProvince(restore?: boolean) {
@@ -410,13 +486,35 @@ export class TransactionRegisteredDetailComponent implements OnInit {
       });
     }
     else {
-      this.deliAddress.that = this;
-      this.deliAddress.saveChange.that = this;
-      this.deliAddress.setValue(true);
+      if (this.data.transRegistered$.invoice.payment.status === 'N') {
+        if (this.appService.existUserTypeSpecific(this.data.transRegistered$.transProject.userTypeSpecific, this.authService.getUserInfo.type))
+          this.registeredInfos.show = true;
+        else {
+          let modalRef =  this.modalService.getModalError(false, ModalErrorComponent, 'registered.error.haveNoRight');
 
-      this.payment.that = this;
-      this.payment.saveChange.that = this;
-      this.payment.setValue(true);
+          this.modalService.close(modalRef).then((result: string) => {
+            if (result === 'close')
+              this.router.navigate(['Transaction/Registered']);
+          });
+        }
+      }
+      else
+        this.registeredInfos.show = true;
+
+      if (this.registeredInfos.show) {
+        this.feeType.that = this;
+        this.feeType.saveChange.that = this;
+        this.feeType.setValue();
+        this.feeType.totalFeeAmount = this.feeType.getTotalFeeAmount();
+
+        this.deliAddress.that = this;
+        this.deliAddress.saveChange.that = this;
+        this.deliAddress.setValue(true);
+
+        this.payment.that = this;
+        this.payment.saveChange.that = this;
+        this.payment.setValue(true);
+      }
     }
   }
 

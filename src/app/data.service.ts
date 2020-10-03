@@ -257,6 +257,7 @@ export namespace Schema {
     invoice?: Invoice,
     invoiceFee?: InvoiceFee[],
     totalFeeAmount?: number,
+    transFeeType?: TransFeeType[]
     seatNO?: string,
     applicantNO?: string,
     transScore?: TransScore
@@ -746,6 +747,7 @@ namespace Data {
         let transRegistered: Schema.TransRegistered[] = [];
         let transProject: Schema.TransProject = {};
         let transLocation: Schema.TransLocation = {};
+        let transFeeType: Schema.TransFeeType[] = [];
         let transDeliAddress: Schema.TransDeliAddress = {};
         let deliAddress = {
           country: {},
@@ -912,6 +914,8 @@ namespace Data {
           };
 
           if (action === 'get') {
+            let feeType: [] = (dr1['feeType'] ? dr1['feeType'] : []);
+
             for (let dr7 of fee) {
               invoiceFee.push({
                 invoiceID: (dr7['invoiceID'] ? dr7['invoiceID'] : ''),
@@ -924,6 +928,24 @@ namespace Data {
                   amount: (dr7['amount'] ? parseFloat(dr7['amount']) : 0),
                   toggle: (dr7['toggle'] ? dr7['toggle'] : ''),
                 }
+              });
+            }
+
+            for (let dr8 of feeType) {
+              transFeeType.push({
+                ID: (dr8['transFeeTypeID'] ? dr8['transFeeTypeID'] : ''),
+                transProjectID: (dr8['transProjectID'] ? dr8['transProjectID'] : ''),
+                feeType: {
+                  ID: (dr8['feeTypeID'] ? dr8['feeTypeID'] : ''),
+                  name: {
+                    th: (dr8['feeTypeNameTH'] ? dr8['feeTypeNameTH'] : dr8['feeTypeNameEN']),
+                    en: (dr8['feeTypeNameEN'] ? dr8['feeTypeNameEN'] : dr8['feeTypeNameTH'])
+                  },
+                  amount: (dr8['amount'] ? parseFloat(dr8['amount']) : 0),
+                  toggle: (dr8['toggle'] ? dr8['toggle'] : ''),
+                },
+                requiredStatus: (dr8['requiredStatus'] ? dr8['requiredStatus'] : ''),
+                isSelected: (dr8['isSelected'] ? (dr8['isSelected'] === 'Y' ? true : false) : false),
               });
             }
           }
@@ -970,6 +992,7 @@ namespace Data {
             },
             invoiceFee: invoiceFee,
             totalFeeAmount: (dr1['totalFeeAmount'] ? parseFloat(dr1['totalFeeAmount']) : 0),
+            transFeeType: transFeeType,
             seatNO: (dr1["seatNO"] ? dr1["seatNO"] : ''),
             applicantNO: (dr1["applicantNO"] ? dr1["applicantNO"] : ''),
             transScore: transScore

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๖/๐๙/๒๕๖๓>
+Modify date : <๐๑/๑๐/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -181,6 +181,16 @@ export class AppService  {
         (btoa(data.join('.')).split('').reverse().join(''))
       )
     );
+  }
+
+  getObjectByValue(array: [], key: string[], value: any) {
+    return array.filter(function (object) {
+      key.forEach(function (value) {
+        object = object[value];
+      })
+
+      return object == value;
+    });
   }
 
   getDataSource(routePrefix: string, action: string, query?: string): Promise<any> {
