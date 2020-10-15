@@ -346,10 +346,13 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group w-100 row mb-01 wrap wrap-step2" *ngIf="data.invoice.payment.status === 'N'">
+              <div class="form-group w-100 row mb-01 wrap wrap-step2">
                 <label for="col-registrationfee" class="col-form-label">{{'project.registrationFee' | translate | titlecase}}</label>
                 <div class="col">
-                  <span class="form-text regular">{{(data.totalFeeAmount ? ((data.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '')}}</span>
+                  <span class="form-text regular">
+                    {{(data.invoice.payment.status === 'Y' || data.invoice.payment.status === 'W') ? (data.invoice.payment.amount ? ((data.invoice.payment.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
+                    {{data.invoice.payment.status === 'N' ? (data.totalFeeAmount ? ((data.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
+                  </span>
                 </div>
               </div>
               <div class="form-group w-100 row mb-01" *ngIf="data.invoice.payment.status !== 'N'">
@@ -401,15 +404,14 @@
 </ng-template>
 <ng-template #registeredInfo let-data="data">
   <div class="registered-info">
-    <div class="d-inline-block jumbotron rounded-xl bg-dark text-left pt-2 pr-3 pb-1 pl-3 mr-2 mb-0 jumbotron-registrationfee" *ngIf="data.invoice.payment.status === 'N'">
+    <div class="d-inline-block jumbotron rounded-xl bg-dark text-left pt-2 pr-3 pb-1 pl-3 mr-2 mb-0 jumbotron-registrationfee">
       <div class="regular text-white-50 size14">{{'project.registrationFee' | translate | titlecase}}</div>
       <div class="jumbotron-body">
         <div class="regular text-white">
           <span class="bold size20">
-            {{(data.invoice.payment.status === 'Y' || data.invoice.payment.status === 'W') ? (data.invoice.payment.amount ? (data.invoice.payment.amount | number: '.2') : '') : ''}}
-            {{data.invoice.payment.status === 'N' ? (data.totalFeeAmount ? (data.totalFeeAmount | number: '.2') : '') : ''}}
+            {{(data.invoice.payment.status === 'Y' || data.invoice.payment.status === 'W') ? (data.invoice.payment.amount ? ((data.invoice.payment.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
+            {{data.invoice.payment.status === 'N' ? (data.totalFeeAmount ? ((data.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
           </span>
-          <span>{{'unit.baht' | translate | titlecase}}</span>
         </div>
       </div>
     </div>

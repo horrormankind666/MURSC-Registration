@@ -1,6 +1,6 @@
 <ngx-loading [show]="appService.isLoading.show"></ngx-loading>
 <span class="msg-loading font regular size16">
-  <span *ngIf="appService.isLoading.show && (appService.isLoading.page || appService.isLoading.modal)">{{'msgLoading.loading' | translate | titlecase}}</span>
+  <span *ngIf="appService.isLoading.show && (appService.isLoading.page || appService.isLoading.modal || appService.isLoading.reloading)">{{'msgLoading.loading' | translate | titlecase}}</span>
   <span *ngIf="appService.isLoading.show && appService.isLoading.processing">{{'msgLoading.processing' | translate | titlecase}}</span>
   <span *ngIf="appService.isLoading.show && appService.isLoading.saving">{{'msgLoading.saving' | translate | titlecase}}</span>
   <span *ngIf="appService.isLoading.show && appService.isLoading.checking">{{'msgLoading.checking' | translate | titlecase}}</span>

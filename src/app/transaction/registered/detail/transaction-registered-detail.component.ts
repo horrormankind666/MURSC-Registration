@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๙/๐๖/๒๕๖๓>
-Modify date : <๐๒/๑๐/๒๕๖๓>
+Modify date : <๑๒/๑๐/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -70,9 +70,11 @@ export class TransactionRegisteredDetailComponent implements OnInit {
     },
     totalFeeAmount: 0,
     setValue(restore?: boolean) {
+      let transFeeType: Schema.TransFeeType = this.that.appService.getObjectByValue(this.that.data.transRegistered$.transFeeType, ['feeType', 'toggle'], 'Address')[0];
+
       if (!restore) {
         this.toggle = [];
-        this.address.isSelected = false;
+        this.address.isSelected = (transFeeType ? transFeeType.isSelected : false);
       }
     },
     setToggle(transFeeType: Schema.TransFeeType) {
@@ -100,13 +102,17 @@ export class TransactionRegisteredDetailComponent implements OnInit {
     saveChange: {
       that: {},
       isValid: true,
-      /*
-      getValue(): Schema.TransFeeType[] {
-        let result: Schema.TransFeeType[] = [];
+      getValue(): {} {
+        let fee: Schema.TransFeeType[] = [];
 
-        for (let i = 0; i < this.that.data.transProject$.transFeeType.length; i++) {
-          if (this.that.data.transProject$.transFeeType[i].isSelected)
-            result.push(this.that.data.transProject$.transFeeType[i].feeType);
+        for (let i = 0; i < this.that.data.transRegistered$.transFeeType.length; i++) {
+          if (this.that.data.transRegistered$.transFeeType[i].isSelected)
+          fee.push(this.that.data.transRegistered$.transFeeType[i].feeType);
+        }
+
+        let result: {} = {
+          transRegisteredID: (this.that.data.transRegistered$.ID ? this.that.data.transRegistered$.ID : null),
+          fee: fee
         }
 
         return (result ? result : null);
@@ -117,7 +123,55 @@ export class TransactionRegisteredDetailComponent implements OnInit {
       action() {
         this.isValid = this.validate();
       }
-      */
+    },
+    privilege: {
+      that: {},
+      formField: {
+        code: ''
+      },
+      watchChange() {
+        this.confirm.isValid = true;
+      },
+      confirm: {
+        that: {},
+        isValid: true,
+        isVerifying: false,
+        getValue(): {} {
+          /*
+          let fee: Schema.TransFeeType[] = [];
+
+          for (let i = 0; i < this.that.data.transRegistered$.transFeeType.length; i++) {
+            if (this.that.data.transRegistered$.transFeeType[i].isSelected)
+            fee.push(this.that.data.transRegistered$.transFeeType[i].feeType);
+          }
+
+          let result: {} = {
+            transRegisteredID: (this.that.data.transRegistered$.ID ? this.that.data.transRegistered$.ID : null),
+            fee: fee
+          }
+
+          return (result ? result : null);
+          */
+         return null;
+        },
+        validate(): boolean {
+          if (!this.that.feeType.privilege.formField.code)
+              return false;
+
+          return true;
+        },
+        action() {
+          this.isValid = this.validate();
+
+          if (this.isValid) {
+            this.isVerifying = true;
+
+            setTimeout(() => {
+              this.isVerifying = false;
+            }, 2000)
+          }
+        }
+      }
     }
   };
 
@@ -145,8 +199,6 @@ export class TransactionRegisteredDetailComponent implements OnInit {
       phoneNumber: ''
     },
     setValue(restore?: boolean) {
-      this.watchChange();
-
       if (!restore) {
         this.formField.address = '';
         this.formField.country.selected = null;
@@ -224,7 +276,7 @@ export class TransactionRegisteredDetailComponent implements OnInit {
         postalCode = this.formField.district.selected.zipCode;
       }
 
-      this.formField.postalCode = (restore ? this.that.data.transRegistered$.transDeliAddress.postalCode : postalCode);
+      this.formField.postalCode = (restore ? (this.that.data.transRegistered$.transDeliAddress.ID ? this.that.data.transRegistered$.transDeliAddress.postalCode : '') : postalCode);
       this.that.dataService.subdistrict.getList(countryID, provinceID, districtID).then((result: Schema.Subdistrict[]) => {
         this.formField.subdistrict.isLoading = false;
         this.that.data.subdistrict$ = result;
@@ -233,18 +285,15 @@ export class TransactionRegisteredDetailComponent implements OnInit {
     },
     watchChange() {
       this.saveChange.isValid = true;
-      this.saveChange.errorCode = 0;
     },
     saveChange: {
       that: {},
-      isSaving: false,
       isValid: true,
-      errorCode: 0,
       getValue(): {} {
-        let result: {} = {
-          transDeliAddressID: (this.that.data.transRegistered$.transDeliAddress.ID ? this.that.data.transRegistered$.transDeliAddress.ID : null),
-          transRegisteredID: (this.that.data.transRegistered$.ID ? this.that.data.transRegistered$.ID : null),
-          deliAddress: {
+        let deliAddress: {};
+
+        if (this.that.feeType.address.isSelected) {
+          deliAddress = {
             address: (this.that.deliAddress.formField.address ? this.that.deliAddress.formField.address : null),
             country: (this.that.deliAddress.formField.country.selected ? this.that.deliAddress.formField.country.selected.ID : null),
             province: (this.that.deliAddress.formField.province.selected ? this.that.deliAddress.formField.province.selected.ID : null),
@@ -253,80 +302,35 @@ export class TransactionRegisteredDetailComponent implements OnInit {
             postalCode: (this.that.deliAddress.formField.postalCode ? this.that.deliAddress.formField.postalCode : null),
             phoneNumber: (this.that.deliAddress.formField.phoneNumber ? this.that.deliAddress.formField.phoneNumber : null)
           }
+        }
+
+        let result: {} = {
+          transDeliAddressID: (this.that.data.transRegistered$.transDeliAddress.ID ? this.that.data.transRegistered$.transDeliAddress.ID : null),
+          transRegisteredID: (this.that.data.transRegistered$.ID ? this.that.data.transRegistered$.ID : null),
+          deliAddress: (deliAddress ? deliAddress : null)
         };
 
         return (result ? result : null);
       },
       validate(): boolean {
-        if (!this.that.deliAddress.formField.address ||
-            !this.that.deliAddress.formField.country.selected ||
-            !this.that.deliAddress.formField.province.selected ||
-            !this.that.deliAddress.formField.district.selected ||
-            !this.that.deliAddress.formField.subdistrict.selected ||
-            !this.that.deliAddress.formField.postalCode ||
-            !this.that.deliAddress.formField.phoneNumber)
-          return false;
+        if (this.that.feeType.address.isSelected) {
+          if (!this.that.deliAddress.formField.address ||
+              !this.that.deliAddress.formField.country.selected ||
+              !this.that.deliAddress.formField.province.selected ||
+              !this.that.deliAddress.formField.district.selected ||
+              !this.that.deliAddress.formField.subdistrict.selected ||
+              !this.that.deliAddress.formField.postalCode ||
+              !this.that.deliAddress.formField.phoneNumber) {
+            this.that.feeType.toggle['Address'] = true;
+
+            return false;
+          }
+        }
 
         return true;
       },
       action() {
-        this.isSaving = true;
-
-        this.that.authService.getIsAuthenticated().then((result: boolean) => {
-          if (!result) {
-            this.isSaving = false;
-
-            this.that.appService.gotoSignIn();
-          }
-          else {
-            this.isValid = this.validate();
-
-            if (this.isValid) {
-              let value: {} = this.getValue();
-
-              this.that.appService.save('TransDeliveryAddress', 'PUT', JSON.stringify(value), false).then((result: any) => {
-                let saveResult: any = result;
-                let message: string;
-                let btnMsg: BtnMsg;
-                let modalRef: any;
-
-                this.isSaving = false;
-                this.errorCode = saveResult.errorCode;
-
-                if (this.errorCode !== 0 && this.errorCode !== 1) {
-                  if (this.errorCode === 2) {
-                    message = ('registered.error.notFound');
-                    btnMsg = {
-                      close: 'registered.info'
-                    };
-                  }
-
-                  modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message, btnMsg);
-
-                  this.that.modalService.close(modalRef).then((result: string) => {
-                    if (result === 'close') {
-                        if (this.errorCode === 2)
-                          this.that.router.navigate(['Transaction/Registered']);
-                    }
-                  });
-                }
-                else {
-                  if (this.errorCode === 0) {
-                    this.that.data.transRegistered$.transDeliAddress.address      = this.that.deliAddress.formField.address;
-                    this.that.data.transRegistered$.transDeliAddress.country      = this.that.deliAddress.formField.country.selected;
-                    this.that.data.transRegistered$.transDeliAddress.province     = this.that.deliAddress.formField.province.selected;
-                    this.that.data.transRegistered$.transDeliAddress.district     = this.that.deliAddress.formField.district.selected;
-                    this.that.data.transRegistered$.transDeliAddress.subdistrict  = this.that.deliAddress.formField.subdistrict.selected;
-                    this.that.data.transRegistered$.transDeliAddress.postalCode   = this.that.deliAddress.formField.postalCode;
-                    this.that.data.transRegistered$.transDeliAddress.phoneNumber  = this.that.deliAddress.formField.phoneNumber;
-                  }
-                }
-              });
-            }
-            else
-              this.isSaving = false;
-          }
-        });
+        this.isValid = this.validate();
       }
     }
   };
@@ -338,8 +342,6 @@ export class TransactionRegisteredDetailComponent implements OnInit {
       qrcodeImage: ''
     },
     setValue(restore?: boolean) {
-      this.watchChange();
-
       if (!restore) {
         this.formField.issueReceipt = '';
         this.formField.qrcodeImage = '';
@@ -355,9 +357,7 @@ export class TransactionRegisteredDetailComponent implements OnInit {
     },
     saveChange: {
       that: {},
-      isSaving: false,
       isValid: true,
-      errorCode: 0,
       getValue(): {} {
         let result: {} = {
           transRegisteredID: (this.that.data.transRegistered$.ID ? this.that.data.transRegistered$.ID : null),
@@ -374,99 +374,7 @@ export class TransactionRegisteredDetailComponent implements OnInit {
         return true;
       },
       action() {
-        this.isSaving = true;
-
-        this.that.authService.getIsAuthenticated().then((result: boolean) => {
-          if (!result) {
-            this.isSaving = false;
-
-            this.that.appService.gotoSignIn();
-          }
-          else {
-            this.isValid = this.validate();
-
-            if (this.isValid) {
-              let modalRef = this.that.modalService.getModalConfirm(false, ModalConfirmComponent, 'payment.save.confirm.label', 'payment.save.confirm.description');
-
-              this.that.modalService.close(modalRef).then((result: string) => {
-                if (result === 'ok') {
-                  this.that.dataService.transRegistered.get(this.that.appService.getCUID([this.that.data.transRegistered$.ID, this.that.data.transRegistered$.transProject.ID])).then((result: Schema.TransRegistered) => {
-                    let transRegistered: Schema.TransRegistered = result;
-
-                    if (this.that.appService.existUserTypeSpecific(transRegistered.transProject.userTypeSpecific, this.that.authService.getUserInfo.type)) {
-                      if (this.that.data.transRegistered$.invoice.payment.status !== transRegistered.invoice.payment.status)
-                        this.that.data.transRegistered$ = transRegistered;
-
-                      if (this.that.data.transRegistered$.invoice.payment.status === 'N') {
-                        if (this.that.data.transRegistered$.transProject.paymentExpire === 'N') {
-                          let value: {} = this.getValue();
-
-                          this.that.appService.save(('QRCodePayment/' + this.that.data.transRegistered$.transProject.project.category.initial), 'PUT', JSON.stringify(value), false).then((result: any) => {
-                            let saveResult: any = result;
-                            let message: string;
-                            let btnMsg: BtnMsg;
-                            let modalRef: any;
-
-                            this.isSaving = false;
-                            this.errorCode = saveResult.errorCode;
-
-                            if (this.errorCode !== 0 && this.errorCode !== 1) {
-                              if (this.errorCode === 2) {
-                                message = ('registered.error.notFound');
-                                btnMsg = {
-                                  close: 'registered.info'
-                                };
-                              }
-
-                              modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message);
-
-                              this.that.modalService.close(modalRef).then((result: string) => {
-                                if (result === 'close') {
-                                    if (this.errorCode === 2)
-                                      this.that.router.navigate(['Transaction/Registered']);
-                                }
-                              });
-                            }
-                            else {
-                              if (this.errorCode === 0) {
-                                this.that.data.transRegistered$.invoice.merchantName = saveResult.merchantName;
-                                this.that.data.transRegistered$.invoice.qrRef1 = saveResult.qrRef1;
-                                this.that.data.transRegistered$.invoice.qrRef2 = saveResult.qrRef2;
-                                this.that.data.transRegistered$.invoice.qrRef3 = saveResult.qrRef3;
-                                this.that.data.transRegistered$.invoice.payment.amount = saveResult.paidAmount;
-                                this.that.data.transRegistered$.invoice.payment.confirmDate = saveResult.actionDate;
-                                this.that.data.transRegistered$.invoice.payment.status = saveResult.paidStatus;
-                                this.that.payment.formField.qrcodeImage = saveResult.qrImage64;
-                              }
-                            }
-                          });
-                        }
-                        else {
-                          this.isSaving = false;
-                          this.errorCode = 3;
-                        }
-                      }
-                      else {
-                        this.isSaving = false;
-
-                        this.that.payment.setValue(true);
-                      }
-                    }
-                    else {
-                      this.isSaving = false;
-
-                      this.that.data.transRegistered$.transProject.userTypeSpecific = transRegistered.transProject.userTypeSpecific;
-                    }
-                  });
-                }
-                else
-                  this.isSaving = false;
-              });
-            }
-            else
-              this.isSaving = false;
-          }
-        });
+        this.isValid = this.validate();
       }
     }
   }
@@ -502,10 +410,15 @@ export class TransactionRegisteredDetailComponent implements OnInit {
         this.registeredInfos.show = true;
 
       if (this.registeredInfos.show) {
+        this.watchChange();
+
         this.feeType.that = this;
         this.feeType.saveChange.that = this;
         this.feeType.setValue();
         this.feeType.totalFeeAmount = this.feeType.getTotalFeeAmount();
+
+        this.feeType.privilege.that = this;
+        this.feeType.privilege.confirm.that = this;
 
         this.deliAddress.that = this;
         this.deliAddress.saveChange.that = this;
@@ -514,7 +427,171 @@ export class TransactionRegisteredDetailComponent implements OnInit {
         this.payment.that = this;
         this.payment.saveChange.that = this;
         this.payment.setValue(true);
+
+        this.saveChange.that = this;
       }
+    }
+  }
+
+  watchChange() {
+    this.feeType.watchChange();
+    this.feeType.privilege.watchChange();
+    this.deliAddress.watchChange();
+    this.payment.watchChange();
+    this.saveChange.isValid = true;
+  }
+
+  saveChange = {
+    that: {},
+    isValid: true,
+    validate(): boolean {
+      if (!this.that.feeType.saveChange.isValid ||
+          !this.that.deliAddress.saveChange.isValid ||
+          !this.that.payment.saveChange.isValid)
+        return false;
+
+      return true;
+    },
+    action() {
+      this.that.appService.isLoading.show = true;
+      this.that.appService.isLoading.checking = true;
+
+      this.that.authService.getIsAuthenticated().then((result: boolean) => {
+        if (!result) {
+          this.that.appService.isLoading.show = false;
+          this.that.appService.isLoading.checking = false;
+
+          this.that.appService.gotoSignIn();
+        }
+        else {
+          if (this.that.appService.existUserTypeSpecific(this.that.data.transRegistered$.transProject.userTypeSpecific, this.that.authService.getUserInfo.type)) {
+            this.that.feeType.saveChange.action();
+            this.that.deliAddress.saveChange.action();
+            this.that.payment.saveChange.action();
+
+            this.isValid = this.validate();
+
+            this.that.appService.isLoading.show = false;
+            this.that.appService.isLoading.checking = false;
+
+            if (this.isValid) {
+              let modalRef = this.that.modalService.getModalConfirm(false, ModalConfirmComponent, 'payment.save.confirm.label', 'payment.save.confirm.description');
+
+              this.that.modalService.close(modalRef).then((result: string) => {
+                if (result === 'ok') {
+                  let value: {} = this.that.feeType.saveChange.getValue();
+
+                  this.that.appService.save('TransInvoice', 'PUT', JSON.stringify(value)).then((result: any) => {
+                    let saveResult: any = result;
+                    let modalRef: any;
+
+                    if (saveResult.errorCode === 0) {
+                      value = this.that.deliAddress.saveChange.getValue();
+
+                      this.that.appService.save('TransDeliveryAddress', 'PUT', JSON.stringify(value)).then((result: any) => {
+                        saveResult = result;
+
+                        if (saveResult.errorCode === 0) {
+                          this.that.appService.isLoading.show = true;
+                          this.that.appService.isLoading.checking = true;
+
+                          this.that.dataService.transRegistered.get(this.that.appService.getCUID([this.that.data.transRegistered$.ID, this.that.data.transRegistered$.transProject.ID])).then((result: Schema.TransRegistered) => {
+                            let transRegistered: Schema.TransRegistered = result;
+
+                            this.that.appService.isLoading.show = false;
+                            this.that.appService.isLoading.checking = false;
+
+                            if (this.that.appService.existUserTypeSpecific(transRegistered.transProject.userTypeSpecific, this.that.authService.getUserInfo.type)) {
+                              if (this.that.data.transRegistered$.invoice.payment.status !== transRegistered.invoice.payment.status)
+                                this.that.data.transRegistered$ = transRegistered;
+
+                              if (this.that.data.transRegistered$.invoice.payment.status === 'N') {
+                                if (this.that.data.transRegistered$.transProject.paymentExpire === 'N') {
+                                  value = this.that.payment.saveChange.getValue();
+
+                                  this.that.appService.save(('QRCodePayment/' + this.that.data.transRegistered$.transProject.project.category.initial), 'PUT', JSON.stringify(value)).then((result: any) => {
+                                    saveResult = result;
+
+                                    if (saveResult.errorCode === 0) {
+                                      this.that.appService.isLoading.show = true;
+                                      this.that.appService.isLoading.reloading = true;
+
+                                      this.that.dataService.transRegistered.get(this.that.appService.getCUID([this.that.data.transRegistered$.ID, this.that.data.transRegistered$.transProject.ID])).then((result: Schema.TransRegistered) => {
+                                        this.that.data.transRegistered$ = result;
+                                        this.that.payment.setValue(true);
+
+                                        this.that.appService.isLoading.show = false;
+                                        this.that.appService.isLoading.reloading = false;
+                                      });
+                                    }
+                                    else {
+                                      if (saveResult.errorCode === 2) {
+                                        modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, 'registered.error.notFound', 'registered.info');
+
+                                        this.that.modalService.close(modalRef).then((result: string) => {
+                                          if (result === 'close')
+                                            this.that.router.navigate(['Transaction/Registered']);
+                                        });
+                                      }
+                                    }
+                                  });
+                                }
+                                else
+                                  this.that.payment.setValue(true);
+                              }
+                            }
+                            else {
+                              modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, 'registered.error.haveNoRight');
+
+                              this.that.modalService.close(modalRef).then((result: string) => {
+                                if (result === 'close')
+                                  this.that.router.navigate(['Transaction/Registered']);
+                              });
+                            }
+                          });
+                        }
+                        else {
+                          if (saveResult.errorCode === 2) {
+                            modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, 'registered.error.notFound', 'registered.info');
+
+                            this.that.modalService.close(modalRef).then((result: string) => {
+                              if (result === 'close')
+                                this.that.router.navigate(['Transaction/Registered']);
+                            });
+                          }
+                        }
+                      });
+                    }
+                    else {
+                      if (saveResult.errorCode === 2) {
+                        modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, 'registered.error.notFound', 'registered.info');
+
+                        this.that.modalService.close(modalRef).then((result: string) => {
+                          if (result === 'close')
+                            this.that.router.navigate(['Transaction/Registered']);
+                        });
+                      }
+                    }
+                  });
+                }
+              });
+            }
+            else
+              this.that.modalService.getModalError(false, ModalErrorComponent, 'save.error.validate');
+          }
+          else {
+            this.that.appService.isLoading.show = false;
+            this.that.appService.isLoading.checking = false;
+
+            let modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, 'registered.error.haveNoRight');
+
+            this.that.modalService.close(modalRef).then((result: string) => {
+              if (result === 'close')
+              this.that.router.navigate(['Transaction/Registered']);
+            });
+          }
+        }
+      });
     }
   }
 

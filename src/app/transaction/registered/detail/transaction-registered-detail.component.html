@@ -482,7 +482,8 @@
               <input type="checkbox" class="custom-control-input" id="select-feetype-{{transFeeType.ID}}" name="select-feetype"
                 [value]="transFeeType.ID"
                 [(ngModel)]="transFeeType.isSelected"
-                [disabled]="(transFeeType.requiredStatus === 'Y')"
+                (ngModelChange)="watchChange()"
+                [disabled]="(transFeeType.requiredStatus === 'Y') || feeType.privilege.confirm.isVerifying"
                 (change)="feeType.totalFeeAmount = feeType.getTotalFeeAmount(); feeType.setToggle(transFeeType)">
               <label class="custom-control-label" for="select-feetype-{{transFeeType.ID}}">{{transFeeType.feeType.name[appService.lang]}}</label>
             </div>
@@ -508,12 +509,9 @@
         <tr>
           <td colspan="2" class="border-0 p-0">
             <div class="mt-2" id="deliaddress-form" *ngIf="feeType.toggle[transFeeType.feeType.toggle] && transFeeType.feeType.toggle === 'Address'">
-              <div class="form horizontal-form bg-warning p-3">
-                <div class="mb-2" *ngIf="!deliAddress.saveChange.isValid || deliAddress.saveChange.errorCode === 1">
-                  <div class="alert alert-danger regular size16" role="alert">
-                    <span *ngIf="!deliAddress.saveChange.isValid">{{'registered.save.error.deliaddress' | translate}}</span>
-                    <span *ngIf="deliAddress.saveChange.errorCode === 1">{{'save.error.notSuccess' | translate}}</span>
-                  </div>
+              <div class="form horizontal-form bg-warning rounded-xxl p-3">
+                <div class="alert alert-danger mb-2" role="alert" *ngIf="!deliAddress.saveChange.isValid">
+                  <span class="regular size16">{{'registered.save.error.deliaddress' | translate}}</span>
                 </div>
                 <div class="form-group row w-100 mb-1">
                   <label for="col-deliaddress-address" class="col-form-label col-form-label-sm pl-0 regular">{{'address.label' | translate | titlecase}}</label>
@@ -521,8 +519,8 @@
                     <textarea autosize trimOnBlur class="form-control form-control-sm regular"
                       name="col-deliaddress-address"
                       [(ngModel)]="deliAddress.formField.address"
-                      (ngModelChange)="deliAddress.watchChange()"
-                      [disabled]="deliAddress.saveChange.isSaving || payment.saveChange.isSaving">
+                      (ngModelChange)="watchChange()"
+                      [disabled]="feeType.privilege.confirm.isVerifying">
                     </textarea>
                   </div>
                 </div>
@@ -534,9 +532,9 @@
                       class="size-sm"
                       placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
                       [(ngModel)]="deliAddress.formField.country.selected"
-                      (ngModelChange)="deliAddress.watchChange()"
+                      (ngModelChange)="watchChange()"
                       (change)="deliAddress.getListProvince()"
-                      [disabled]="deliAddress.saveChange.isSaving || payment.saveChange.isSaving"
+                      [disabled]="feeType.privilege.confirm.isVerifying"
                       *ngIf="!deliAddress.formField.country.isLoading">
                       <ng-option *ngFor="let item of data.country$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
                     </ng-select>
@@ -550,9 +548,9 @@
                       class="size-sm"
                       placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
                       [(ngModel)]="deliAddress.formField.province.selected"
-                      (ngModelChange)="deliAddress.watchChange()"
+                      (ngModelChange)="watchChange()"
                       (change)="deliAddress.getListDistrict()"
-                      [disabled]="deliAddress.saveChange.isSaving || payment.saveChange.isSaving"
+                      [disabled]="feeType.privilege.confirm.isVerifying"
                       *ngIf="!deliAddress.formField.province.isLoading">
                       <ng-option *ngFor="let item of data.province$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
                     </ng-select>
@@ -566,9 +564,9 @@
                       class="size-sm"
                       placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
                       [(ngModel)]="deliAddress.formField.district.selected"
-                      (ngModelChange)="deliAddress.watchChange()"
+                      (ngModelChange)="watchChange()"
                       (change)="deliAddress.getListSubdistrict()"
-                      [disabled]="deliAddress.saveChange.isSaving || payment.saveChange.isSaving"
+                      [disabled]="feeType.privilege.confirm.isVerifying"
                       *ngIf="!deliAddress.formField.district.isLoading">
                       <ng-option *ngFor="let item of data.district$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
                     </ng-select>
@@ -582,8 +580,8 @@
                       class="size-sm"
                       placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
                       [(ngModel)]="deliAddress.formField.subdistrict.selected"
-                      (ngModelChange)="deliAddress.watchChange()"
-                      [disabled]="deliAddress.saveChange.isSaving || payment.saveChange.isSaving"
+                      (ngModelChange)="watchChange()"
+                      [disabled]="feeType.privilege.confirm.isVerifying"
                       *ngIf="!deliAddress.formField.subdistrict.isLoading">
                       <ng-option *ngFor="let item of data.subdistrict$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
                     </ng-select>
@@ -595,35 +593,29 @@
                     <input trimOnBlur type="text" class="form-control form-control-sm regular"
                       name="col-deliaddress-postalcode"
                       [(ngModel)]="deliAddress.formField.postalCode"
-                      (ngModelChange)="deliAddress.watchChange()"
-                      [disabled]="deliAddress.saveChange.isSaving || payment.saveChange.isSaving" />
+                      (ngModelChange)="watchChange()"
+                      [disabled]="feeType.privilege.confirm.isVerifying" />
                   </div>
                 </div>
-                <div class="form-group row w-100"
-                  [ngClass]="{
-                    'mb-3': !payment.saveChange.isSaving
-                  }">
+                <div class="form-group row w-100">
                   <label for="col-deliaddress-phoneNumber" class="col-form-label col-form-label-sm pl-0 regular">{{'phone' | translate | titlecase}}</label>
                   <div class="col">
                     <input trimOnBlur type="text" class="form-control form-control-sm regular"
                       name="col-deliaddress-phoneNumber"
                       [(ngModel)]="deliAddress.formField.phoneNumber"
-                      (ngModelChange)="deliAddress.watchChange()"
-                      [disabled]="deliAddress.saveChange.isSaving || payment.saveChange.isSaving" />
+                      (ngModelChange)="watchChange()"
+                      [disabled]="feeType.privilege.confirm.isVerifying" />
                   </div>
                 </div>
-                <div class="form-group row w-100" *ngIf="!payment.saveChange.isSaving">
+                <div class="form-group row w-100 mt-3">
                   <label class="col-form-label"></label>
                   <div class="col">
-                    <div class="i-saving" *ngIf="deliAddress.saveChange.isSaving"><i class="fas fa-circle-notch fa-spin size24"></i></div>
-                    <a class="btn btn-sm btn-transparent" (click)="deliAddress.setValue(true)" *ngIf="!deliAddress.saveChange.isSaving">
+                    <a class="btn btn-sm btn-transparent" (click)="deliAddress.setValue(true)"
+                      [ngClass]="{
+                        'disabled': feeType.privilege.confirm.isVerifying
+                      }">
                       <span class="bold text-danger size16">{{'cancel' | translate | titlecase}}</span>
                     </a>
-                    <!--
-                    <a class="btn btn-sm btn-transparent ml-1" (click)="deliAddress.saveChange.action()" *ngIf="!deliAddress.saveChange.isSaving">
-                      <span class="bold text-success size16">{{'save.label' | translate | titlecase}}</span>
-                    </a>
-                    -->
                   </div>
                 </div>
               </div>
@@ -634,7 +626,42 @@
       <tfoot>
         <tr>
           <td colspan="2" class="border-0 p-0">
-            <div class="d-table w-100 border border-right-0 border-bottom-0 border-left-0 border-white mt-2 size18">
+            <div class="d-block w-100 border border-right-0 border-bottom-0 border-left-0 border-white mt-2 pt-08">
+              <div class="form flat-form">
+                <div class="mb-055" *ngIf="!feeType.privilege.confirm.isValid">
+                  <div class="alert alert-danger mb-0 regular size16" role="alert">{{'privilege.confirm.error.code' | translate}}</div>
+                </div>
+                <div class="form-group w-100 mb-0 col-privilegecode">
+                  <label for="col-privilegecode" class="regular text-danger">{{'privilege.label' | translate | titlecase}}</label>
+                  <div class="d-table input-group has-icon">
+                    <div class="d-table-cell w-100 align-top">
+                      <input trimOnBlur type="text" class="form-control inputbox pl-4 pr-1 regular size14"
+                        name="col-privilegecode"
+                        placeholder="{{'privilege.placeholder' | translate | titlecase}}"
+                        [(ngModel)]="feeType.privilege.formField.code"
+                        (ngModelChange)="watchChange()"
+                        [disabled]="feeType.privilege.confirm.isVerifying" />
+                      <i class="fas fa-hand-holding-heart right-0 left-0"></i>
+                    </div>
+                    <div class="d-table-cell align-top">
+                      <a class="btn btn-danger border-0 rounded-0 rounded-right-xl text-center"
+                        [ngClass]="{
+                          'disabled': feeType.privilege.confirm.isVerifying
+                        }"
+                        (click)="feeType.privilege.confirm.action()">
+                        <i class="fas fa-circle-notch fa-spin text-white size16" *ngIf="feeType.privilege.confirm.isVerifying"></i>
+                        <span class="bold text-white size16" *ngIf="!feeType.privilege.confirm.isVerifying">{{'confirm' | translate | titlecase}}</span>
+                      </a>
+                   </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="border-0 p-0">
+            <div class="d-table w-100 mt-2 size18">
               <div class="d-table-cell w-auto pt-25 bold col-total">{{'total.amount' | translate | titlecase}}</div>
               <div class="d-table-cell pt-25 bold text-right col-total-amount">
                 {{feeType.totalFeeAmount ? ((feeType.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
@@ -741,11 +768,11 @@
         <tr>
           <td class="border-0 pr-0 pb-0 pl-0">
             <div class="form flat-form">
-              <div class="mt-2 mb-055" *ngIf="!payment.saveChange.isValid || payment.saveChange.errorCode === 1 || payment.saveChange.errorCode === 3 || data.transRegistered$.transProject.paymentExpire === 'Y'">
+              <div class="mt-2 mb-055" *ngIf="!payment.saveChange.isValid || payment.saveChange.errorCode === 1 || data.transRegistered$.transProject.paymentExpire === 'Y'">
                 <div class="alert alert-danger mb-0 regular size16" role="alert">
                   <span *ngIf="!payment.saveChange.isValid">{{'payment.save.error.issueReceiptAs' | translate}}</span>
                   <span *ngIf="payment.saveChange.errorCode === 1">{{'qrcode.error' | translate}}</span>
-                  <span *ngIf="payment.saveChange.errorCode === 3 || data.transRegistered$.transProject.paymentExpire === 'Y'">{{'payment.save.error.paymentExpire' | translate}}</span>
+                  <span *ngIf="data.transRegistered$.transProject.paymentExpire === 'Y'">{{'payment.save.error.paymentExpire' | translate}}</span>
                 </div>
               </div>
               <div class="form-group w-100" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.transProject.paymentExpire === 'N'">
@@ -754,9 +781,9 @@
                   <input trimOnBlur type="text" class="form-control inputbox pl-4 regular text-white size14"
                     name="payment-issuereceipt"
                     [(ngModel)]="payment.formField.issueReceipt"
-                    (ngModelChange)="payment.watchChange()"
-                    [disabled]="payment.saveChange.isSaving" />
-                  <i class="fas fa-pencil-alt cursor-pointer" (click)="!payment.saveChange.isSaving ? payment.setValue(true) : $event.stopPropagation()" ngbTooltip="{{'reset' | translate | titlecase}}" title="{{'reset' | translate | titlecase}}"></i>
+                    (ngModelChange)="watchChange()"
+                    [disabled]="feeType.privilege.confirm.isVerifying" />
+                  <i class="fas fa-pencil-alt cursor-pointer right-0 left-0" (click)="watchChange(); payment.setValue(true)" ngbTooltip="{{'reset' | translate | titlecase}}" title="{{'reset' | translate | titlecase}}"></i>
                 </div>
                 <div class="form-text regular size14" *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">{{payment.formField.issueReceipt}}</div>
               </div>
@@ -773,8 +800,10 @@
       </tbody>
     </table>
     <div class="d-table w-100 mt-3 payment-btn" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.invoice.payment.status === 'N' && data.transRegistered$.transProject.paymentExpire === 'N' && !payment.formField.qrcodeImage">
-      <div class="i-saving" *ngIf="payment.saveChange.isSaving"><i class="fas fa-circle-notch fa-spin size24"></i></div>
-      <a class="btn btn-warning pt-0 pb-0" (click)="payment.saveChange.action()" *ngIf="!payment.saveChange.isSaving">
+      <a class="btn btn-warning border-0 rounded-xl pt-0 pb-0" (click)="saveChange.action()"
+        [ngClass]="{
+          'disabled': feeType.privilege.confirm.isVerifying
+        }">
         <span class="bold size20">{{'payment.confirm' | translate | titlecase}}</span>
       </a>
     </div>

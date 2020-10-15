@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๑/๐๖/๒๕๖๓>
-Modify date : <๒๕/๐๙/๒๕๖๓>
+Modify date : <๑๒/๑๐/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -77,12 +77,6 @@ Description : <>
   position: relative;
   top: 1px;
 }
-.transaction-registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group .col .i-saving {
-  display: table-cell;
-  height: 34px;
-  text-align: center;
-  vertical-align: middle;
-}
 @media screen and (max-width: 780px) and (min-width: 562px) {
   @include project-card-image-fixed('.transaction-registered-detail-view');
 }
@@ -105,34 +99,17 @@ Description : <>
     margin-top: 0.25rem;
     margin-left: 0 !important;
   }
-  .transaction-registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group:last-child .col .btn:first-child,
-  .transaction-registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group .col .i-saving {
-    margin-top: 0.5rem;
-  }
-  .transaction-registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group .col .i-saving {
-    display: block;
-    height: auto;
-  }
 }
-.transaction-registered-detail-view .payment-info .form.flat-form .form-group label {
-  margin-bottom: 1px !important
-}
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  ::i-block-chrome,
-  .transaction-registered-detail-view .payment-info .form.flat-form .form-group label {
-    margin-bottom: 2px !important
-  }
+.transaction-registered-detail-view .fee-info .form .col-privilegecode .input-group .btn {
+  min-width: 85px !important;
+  width: 85px !important;
+  border-bottom-right-radius: 0 !important;
 }
 .transaction-registered-detail-view .payment-info .form .inputbox {
   border-color: rgba(0, 0, 0, 0.15) !important;
 }
 .transaction-registered-detail-view .payment-info .form .form-control:focus {
   border-color: rgba(0, 0, 0, 0.35) !important;
-}
-.transaction-registered-detail-view .payment-info .form .form-group .input-group.has-icon i {
-  top: 7px;
-  right: 0;
-  left: 0;
 }
 .transaction-registered-detail-view .payment-info .form.flat-form .form-group .form-text {
   margin-top: 0.3rem !important;
@@ -148,8 +125,7 @@ Description : <>
     margin-top: 0.35rem !important
   }
 }
-.transaction-registered-detail-view .payment-info .payment-btn,
-.transaction-registered-detail-view .payment-info .payment-btn .i-saving {
+.transaction-registered-detail-view .payment-info .payment-btn {
   height: 42px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
@@ -158,21 +134,12 @@ Description : <>
     height: 38px;
   }
 }
-.transaction-registered-detail-view .payment-info .payment-btn .i-saving {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-}
 .transaction-registered-detail-view .payment-info .payment-btn .btn {
   display: table-cell;
   width: inherit;
   height: inherit;
-  vertical-align: middle;
-  border-width: 2px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0px;
+  border-top-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 @media screen and (max-width: 414px) {
   @include badge-responsive('.transaction-registered-detail-view .aboutresult-info.project-teaching');

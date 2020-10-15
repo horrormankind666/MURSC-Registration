@@ -40,7 +40,7 @@
         <div *ngIf="registeredInfos.show">
           <ng-container *ngTemplateOutlet="registeredInfo"></ng-container>
           <div class="registered-btn mt-3 ml-auto project-registered-btn">
-            <a class="btn btn-success"
+            <a class="btn btn-success border-0"
               [ngClass]="{
                 'disabled': (!appService.existUserTypeSpecific(data.transProject$.userTypeSpecific, authService.getUserInfo.type) || data.transProject$.contactPerson === 0 || data.transProject$.transLocation.length === 0 || data.transProject$.transFeeType.length === 0)
               }"

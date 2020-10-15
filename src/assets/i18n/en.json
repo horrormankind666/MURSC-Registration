@@ -33,6 +33,7 @@
   "reset": "Reset",
   "ok": "Ok",
   "close": "Close",
+  "confirm": "Confirm",
   "select": "Select",
   "registered": {
     "label": "Registered",
@@ -235,5 +236,14 @@
   "transcript": {
     "label": "Transcript",
     "aka": "Transcript"
+  },
+  "privilege": {
+    "label": "Privilege",
+    "placeholder": "Enter the privilege code",
+    "confirm": {
+      "error": {
+        "code": "Please fill in the privilege code."
+      }
+    }
   }
 }

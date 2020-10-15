@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๐๑/๑๐/๒๕๖๓>
+Modify date : <๑๒/๑๐/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -62,7 +62,8 @@ export class AppService  {
     modal: false,
     processing: false,
     saving: false,
-    checking: false
+    checking: false,
+    reloading: false
   };
   public lang: string = 'th';
   public headerViewHeight: any;
@@ -396,7 +397,7 @@ export class AppService  {
   existUserTypeSpecific(userTypeList: any = [], userType: string): boolean {
     if (userType) {
       if (userTypeList && userTypeList.length > 0) {
-        if (userTypeList.indexOf(userType) === 0)
+        if (userTypeList.indexOf(userType) >= 0)
           return true;
         else
           return false;
