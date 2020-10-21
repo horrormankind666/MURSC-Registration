@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๔/๑๑/๒๕๖๒>
-Modify date : <๑๒/๐๘/๒๕๖๓>
+Modify date : <๒๐/๑๐/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,7 +12,7 @@ Description : <>
 import {Routes} from '@angular/router';
 
 import {AuthGuardService} from './auth-guard.service';
-import {AuthenADFSPageResolve, HeaderSubtitleProjectCategoryResolve, HeaderSubtitleTransactionRegisteredResolve, GetListProjectCategoryResolve, GetTransProjectResolve, GetTransRegisteredResolve} from './app-routing-resolve.service'
+import {AuthenADFSPageResolve, HeaderSubtitleProjectCategoryResolve, HeaderSubtitleTransactionRegisteredResolve, GetListProjectCategoryResolve, GetTransProjectResolve, GetTransRegisteredResolve, GetListTransProjectResolve} from './app-routing-resolve.service'
 
 import {PageEmptyComponent } from './page-empty.component';
 import {PageNotFoundComponent} from './page-not-found.component';
@@ -39,7 +39,8 @@ export const appRouting: Routes = [
       hasHearderSubtitle: false
     },
     resolve: {
-      projectCategory$: GetListProjectCategoryResolve
+      projectCategory$: GetListProjectCategoryResolve,
+      transProject$: GetListTransProjectResolve
     }
   },
   {

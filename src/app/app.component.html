@@ -79,13 +79,13 @@
     </div>
   </header>
   <section [ngStyle]="sectionStyle">
-    <div class="container pt-3">
-      <router-outlet *ngIf="!appService.isLoading.page"></router-outlet>
+    <div class="container pt-3" *ngIf="!appService.isLoading.page">
+      <router-outlet></router-outlet>
     </div>
   </section>
   <footer #footerView>
     <div class="container text-center p-3">
-      <span class="regular text-secondary size14">
+      <span class="regular size14">
         <div *ngIf="appService.lang === 'th'"><span class="regular size16"><i class="fas fa-copyright"></i></span> สงวนลิขสิทธิ์ พ.ศ.2562{{(today.getFullYear() + 543) > 2562 ? (' - ' + (today.getFullYear() + 543)) : ''}} มหาวิทยาลัยมหิดล, พัฒนาโดย กองเทคโนโลยีสารสนเทศ</div>
         <div *ngIf="appService.lang === 'en'">Copyright <span class="regular size16"><i class="fas fa-copyright"></i></span> 2019{{today.getFullYear() > 2019 ? (' - ' + today.getFullYear()) : ''}} Mahidol University. All rights reserved.</div>
       </span>

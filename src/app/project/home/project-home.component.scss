@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๑/๐๒/๒๕๖๓>
-Modify date : <๑๕/๐๙/๒๕๖๓>
+Modify date : <๒๐/๐๙/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -19,31 +19,12 @@ Description : <>
     flex: 0 0 100%;
     max-width: 100%;
   }
-  .project-home-view .project-card-vertical .project-info {
+  .project-home-view .card-group .card-col .card .card-body .project-info {
     min-height: 0 !important;
   }
-}
-.project-home-view .project-card-horizontal {
-  display: none;
-}
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
   ::i-block-chrome,
-  .project-home-view .project-card-vertical {
-    display: none;
-  }
-  ::i-block-chrome,
-  .project-home-view .project-card-horizontal {
-    display: block;
-  }
-}
-@media screen and (max-width: 520px) {
-  ::i-block-chrome,
-  .project-home-view .project-card-vertical {
-    display: block;
-  }
-  ::i-block-chrome,
-  .project-home-view .project-card-horizontal {
-    display: none;
+  .project-home-view .card-group .card-col.col-sm-6 .project-openonlyfor-info {
+    min-height: 0 !important;
   }
 }
 .project-home-view .dropdown-menu.menu-info {
@@ -63,26 +44,30 @@ Description : <>
   .project-home-view .project-info .dropdown-menu.show.menu-info {
     top: 24px !important;
   }
+  ::i-block-chrome,
+  .project-home-view .project-openonlyfor-info {
+    min-height: 70px;
+  }
 }
-.project-home-view .project-card-vertical .project-info.has-openonlyfor {
+.project-home-view .card-group .card-col .card .project-info.has-openonlyfor {
   min-height: 85px;
 }
-.project-home-view .project-card-vertical .card-footer .card-text .vertical {
+.project-home-view .card-group .card-col .card .card-footer .project-about {
   min-height: 54px !important;
 }
-.project-home-view .card-group.card-striped .card-col .card .project-footer .btn,
-.project-home-view .card-group.card-striped .card-col .card .project-footer .btn:focus,
-.project-home-view .card-group.card-striped .card-col .card .project-footer .btn.focus {
+.project-home-view .card-group.card-striped .card-col .card .card-footer .btn,
+.project-home-view .card-group.card-striped .card-col .card .card-footer .btn:focus,
+.project-home-view .card-group.card-striped .card-col .card .card-footer .btn.focus {
   background-color: #DDDDDD;
 }
-.project-home-view .card-group.card-striped .card-col .card .project-footer .btn:hover {
+.project-home-view .card-group.card-striped .card-col .card .card-footer .btn:hover {
   background-color: #BBBBBB;
 }
-.project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .project-footer .btn,
-.project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .project-footer .btn:focus,
-.project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .project-footer .btn.focus {
+.project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .card-footer .btn,
+.project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .card-footer .btn:focus,
+.project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .card-footer .btn.focus {
   background-color: #ABFFAB;
 }
-.project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .project-footer .btn:hover {
+.project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .card-footer .btn:hover {
   background-color: #69FF69;
 }

@@ -35,6 +35,10 @@
   "close": "ปิด",
   "confirm": "ยืนยัน",
   "select": "เลือก",
+  "registration": {
+    "nowOpen": "เปิดให้ลงทะเบียน",
+    "comingSoon": "เปิดให้ลงทะเบียนเร็ว ๆ นี้"
+  },
   "registered": {
     "label": "ลงทะเบียน",
     "info": "ข้อมูลการลงทะเบียน",

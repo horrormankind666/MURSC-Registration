@@ -132,7 +132,6 @@
     <div class="regular text-dark size15" *ngIf="data.transProject$.description[appService.lang]">{{data.transProject$.description[appService.lang]}}</div>
     <div class="regular text-dark mt-1 mb-1 project-openonlyfor-info" *ngIf="data.transProject$.userTypeSpecific && data.transProject$.userTypeSpecific.length > 0">
       <span class="bold">{{'openOnlyFor' | translate | lowercase}}</span>
-      <span> </span>
       <div class="text-muted" *ngFor="let userTypeSpecific of data.transProject$.userTypeSpecific">
         - {{('userType.' + userTypeSpecific) | translate | lowercase}}
       </div>

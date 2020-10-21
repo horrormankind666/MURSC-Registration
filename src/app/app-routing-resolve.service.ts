@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๒>
-Modify date : <๑๔/๐๘/๒๕๖๓>
+Modify date : <๒๐/๑๐/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -88,6 +88,21 @@ export class GetListProjectCategoryResolve implements Resolve<Schema.ProjectCate
 
   resolve(route: ActivatedRouteSnapshot): Observable<Schema.ProjectCategory[]> | Promise<Schema.ProjectCategory[]> | Schema.ProjectCategory[] {
     return this.dataService.projectCategory.getList().then((result: Schema.ProjectCategory[]) => {
+      return result;
+    });
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class GetListTransProjectResolve implements Resolve<Schema.TransProject[]> {
+  constructor(
+    private dataService: DataService
+  ) {}
+
+  resolve(route: ActivatedRouteSnapshot): Observable<Schema.TransProject[]> | Promise<Schema.TransProject[]> | Schema.TransProject[] {
+    return this.dataService.transProject.getList('').then((result: Schema.TransProject[]) => {
       return result;
     });
   }

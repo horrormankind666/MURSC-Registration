@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๒/๑๐/๒๕๖๓>
+Modify date : <๒๐/๑๐/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -90,8 +90,8 @@ export class AppService  {
   public urlAPI: string;
   public urlSignOut: string;
 
-  textOverflowClamp(e: string, line: number) {
-    $clamp(document.querySelector(e), {clamp: (this.deviceService.browser === 'IE' ? (line + 1) : line)});
+  textOverflowClamp(selector: string, line: number) {
+    $clamp(document.querySelector(selector), {clamp: (this.deviceService.browser === 'IE' ? (line + 1) : line)});
   }
 
   generateRandAlphaNumStr(len: number = 10) {

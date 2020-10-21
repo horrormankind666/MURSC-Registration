@@ -35,6 +35,10 @@
   "close": "Close",
   "confirm": "Confirm",
   "select": "Select",
+  "registration": {
+    "nowOpen": "Registration now open",
+    "comingSoon": "Registration coming soon"
+  },
   "registered": {
     "label": "Registered",
     "info": "Registered information",

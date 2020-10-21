@@ -1,14 +1,99 @@
-<div class="main-view pr-3 pl-3">
-  <div class="d-table w-auto mr-auto ml-auto">
-    <a routerLink="../Project/{{projectCategory.initial}}" routerLinkActive="active" class="btn d-table-cell border-0 align-top rounded-xxl p-0" *ngFor="let projectCategory of data.projectCategory$">
-      <div class="d-block logo w-100 border rounded-xxl rounded-bottom-0 text-secondary pt-08 pr-3 pb-07 pl-3">
-        <i class="{{projectCategory.logo}} fa-4x"></i>
-        <span class="badge badge-danger ml-2 regular">{{projectCategory.projectCount | number}}</span>
+<div class="main-view">
+  <div id="project-category" class="pr-3 pl-3">
+    <div class="container-fluid">
+      <div class="d-table w-auto mr-auto ml-auto">
+        <a routerLink="../Project/{{projectCategory.initial}}" routerLinkActive="active" class="btn d-table-cell border-0 align-top rounded-xxl p-0" *ngFor="let projectCategory of data.projectCategory$">
+          <div class="d-block logo w-100 border rounded-xxl rounded-bottom-0 text-light pt-08 pr-3 pb-07 pl-3">
+            <i class="{{projectCategory.logo}} fa-4x"></i>
+            <span class="badge badge-danger ml-2 regular">{{projectCategory.projectCount | number}}</span>
+          </div>
+          <div class="d-block name w-inherit pt-2 pr-3 pb-2 pl-3 regular text-light">
+            <span class="bold size18">{{projectCategory.name[appService.lang] | titlecase}}</span><br />
+            <span class="size16 initial">( {{projectCategory.initial | uppercase}} )</span>
+          </div>
+        </a>
       </div>
-      <div class="d-block w-inherit pt-2 pr-3 pb-2 pl-3 regular text-black-50">
-        <span class="bold size18">{{projectCategory.name[appService.lang] | titlecase}}</span><br />
-        <span class="size16">( {{projectCategory.initial | uppercase}} )</span>
+    </div>
+  </div>
+  <div id="registration-nowopen" class="pr-3">
+    <div class="container-fluid pr-0 pl-0">
+      <div class="section-header text-center">
+        <span class="regular text-black size24">{{'registration.nowOpen' | translate | titlecase}}</span>
+        <div class="divider mt-2 mb-0">
+          <div class="divider-inner"></div>
+        </div>
       </div>
-    </a>
+      <div class="d-block border border-success rounded-xxl ml-3" *ngIf="!data.transProject.registrationNowOpen$ || data.transProject.registrationNowOpen$.length === 0"></div>
+      <div *ngIf="data.transProject.registrationNowOpen$ && data.transProject.registrationNowOpen$.length > 0">
+        <ng-container *ngTemplateOutlet="transProjectInfo; context: {data: data.transProject.registrationNowOpen$}"></ng-container>
+      </div>
+    </div>
+  </div>
+  <div id="registration-comingsoon" class="pr-3">
+    <div class="container-fluid pr-0 pl-0">
+      <div class="section-header text-center">
+        <span class="regular text-black size24">{{'registration.comingSoon' | translate | titlecase}}</span>
+        <div class="divider mt-2 mb-0">
+          <div class="divider-inner"></div>
+        </div>
+      </div>
+      <div class="d-block border border-warning rounded-xxl ml-3" *ngIf="!data.transProject.registrationComingSoon$ || data.transProject.registrationComingSoon$.length === 0"></div>
+      <div *ngIf="data.transProject.registrationComingSoon$ && data.transProject.registrationComingSoon$.length > 0">
+        <ng-container *ngTemplateOutlet="transProjectInfo; context: {data: data.transProject.registrationComingSoon$}"></ng-container>
+      </div>
+    </div>
   </div>
 </div>
+<ng-template #transProjectInfo let-data="data">
+  <div class="card-group">
+    <div class="card-col col-sm-6 col-md-4 col-lg-3 col-xl-2-1 mb-3 pl-3 pr-0" *ngFor="let project of data">
+      <div class="card card-vertical shadow rounded-xxl h-100 project-card-vertical">
+        <div class="card-body p-0 project-body">
+          <div class="card-text">
+            <ng-container *ngTemplateOutlet="titleInfo; context: {data: project}"></ng-container>
+            <div class="p-3"><ng-container *ngTemplateOutlet="projectInfo; context: {data: project}"></ng-container></div>
+          </div>
+        </div>
+        <div class="card-footer text-center bg-transparent pt-0 pr-3 pb-2 pl-3 border-top-0">
+          <div class="mb-2">
+            <a routerLink="../Project/{{project.project.category.initial}}/Registered/{{project.CUID}}" routerLinkActive="active" class="btn btn-outline-success rounded-pill" *ngIf="project.registrationStatus === 'Y'">
+              <span class="regular size16">{{'registered.label' | translate | titlecase}}</span>
+            </a>
+            <a class="btn btn-outline-warning rounded-pill" href="javascript:void(0)" (click)="getTransProject(project)" *ngIf="project.registrationStatus !== 'Y'">
+              <span class="regular size16">{{'detail' | translate | titlecase}}</span>
+            </a>
+          </div>
+          <div>
+            <a routerLink="../Project/{{project.project.category.initial}}" class="link regular size13">
+              #{{project.project.category.name[appService.lang] | titlecase}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #titleInfo let-data="data">
+  <div class="title-info project-title-info">
+    <div class="embed-responsive embed-responsive-16by9 project-logo">
+      <div class="card-img rounded-top-xxl" [ngStyle]="{'background-image': ('url(' + data.project.logo + ')')}"></div>
+      <a class="enlarge" href="javascript:void(0)" (click)="appService.enlargeImage(data.project.logo)">
+        <i class="fas fa-expand text-white size18"></i>
+      </a>
+    </div>
+  </div>
+</ng-template>
+<ng-template #projectInfo let-data="data">
+  <div class="project-info">
+    <p class="bold size18 mb-0">{{data.project.name[appService.lang]}}</p>
+    <div class="regular text-info size16 mt-1" *ngIf="data.description[appService.lang]">{{data.description[appService.lang]}}</div>
+  </div>
+  <div class="mt-2 project-openonlyfor-info" *ngIf="data.userTypeSpecific && data.userTypeSpecific.length > 0">
+    <div class="regular text-dark size14">
+      <span class="bold">{{'openOnlyFor' | translate | lowercase}}</span>
+      <div class="text-muted" *ngFor="let userTypeSpecific of data.userTypeSpecific">
+        - {{('userType.' + userTypeSpecific) | translate | lowercase}}
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -2,57 +2,138 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๗/๐๔/๒๕๖๓>
-Modify date : <๒๐/๐๙/๒๕๖๓>
+Modify date : <๒๑/๑๐/๒๕๖๓>
 Description : <>
 =============================================
 */
 
-.main-view a.btn {
+@import '../assets/style/util.scss';
+
+.main-view {
+  position: relative;
+  top: -1rem;
+}
+.main-view #project-category {
+  background-image: url($image-path + '/background1.png');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  position: relative;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.main-view #project-category::before,
+.main-view #registration-nowopen::before,
+.main-view #registration-comingsoon::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 9;
+}
+.main-view #project-category::before {
+  background: rgba(29, 79, 145, 0.8);
+}
+.main-view #project-category .container-fluid,
+.main-view #registration-nowopen .container-fluid,
+.main-view #registration-comingsoon .container-fluid {
+  position: relative;
+  z-index: 10;
+}
+.main-view #project-category a.btn {
   width: 254px !important;
   background: transparent;
 }
-.main-view a.btn .logo {
+.main-view #project-category a.btn .logo {
   border-color: transparent !important;
   position: relative;
 }
-.main-view a.btn .logo .badge {
+.main-view #project-category a.btn .logo .badge {
   position: absolute;
   top: 13px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   ::i-block-chrome,
-  .main-view a.btn .logo .badge {
+  .main-view #project-category a.btn .logo .badge {
     top: 12px;
   }
 }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-  .main-view a.btn .logo .badge {
+  .main-view #project-category a.btn .logo .badge {
     top: 10px;
   }
 }
-.main-view a.btn:hover,
-.main-view a.btn:focus,
-.main-view a.btn.focus,
-.main-view a.btn:active,
-.main-view a.btn.active {
+.main-view #project-category a.btn:hover,
+.main-view #project-category a.btn:focus,
+.main-view #project-category a.btn.focus,
+.main-view #project-category a.btn:active,
+.main-view #project-category a.btn.active {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 15px 0 rgba(0, 0, 0, 0.3) !important;
+  background: #FFFFFF !important;
 }
-.main-view a.btn:hover .logo,
-.main-view a.btn:focus .logo,
-.main-view a.btn.focus .logo,
-.main-view a.btn:active .logo,
-.main-view a.btn.active .logo {
+.main-view #project-category a.btn:hover .logo,
+.main-view #project-category a.btn:focus .logo,
+.main-view #project-category a.btn.focus .logo,
+.main-view #project-category a.btn:active .logo,
+.main-view #project-category a.btn.active .logo {
   color: #FFFFFF !important;
   background: #4DABF7 !important;
   border-color: #4DABF7 !important;
 }
+.main-view #project-category a.btn:hover .name,
+.main-view #project-category a.btn:focus .name,
+.main-view #project-category a.btn.focus .name,
+.main-view #project-category a.btn:active .name,
+.main-view #project-category a.btn.active .name {
+  color: #000000 !important;
+}
+.main-view #project-category a.btn:hover .name .initial,
+.main-view #project-category a.btn:focus .name .initial,
+.main-view #project-category a.btn.focus .name .initial,
+.main-view #project-category a.btn:active .name .initial,
+.main-view #project-category a.btn.active .name .initial{
+  color: rgb(0, 0, 0, 0.5) !important;
+}
 @media screen and (max-width: 576px) {
-  .main-view .d-table,
-  .main-view .d-table-cell {
+  .main-view #project-category .d-table,
+  .main-view #project-category .d-table-cell {
     display: block !important;
     width: 254px !important;
   }
-  .main-view a.d-table-cell:not(:first-child) {
+  .main-view #project-category a.d-table-cell:not(:first-child) {
     margin-top: 16px;
   }
+}
+.main-view .d-block.border {
+  width: 5rem;
+  height: 5rem;
+  border-style: dashed !important;
+}
+.main-view .card-group .card-col .card .project-info p {
+  color: #124265;
+}
+.main-view .card-group .card-col .card .card-footer .btn {
+  width: 110px;
+}
+.main-view #registration-nowopen {
+  background: rgba(210, 210, 210, 0.35);
+  position: relative;
+  padding-top: 2rem;
+}
+.main-view #registration-nowopen .card-group .card {
+  background: #D5FFD5;
+  border-color: rgba(40, 167, 69, 0.5) !important;
+}
+.main-view #registration-comingsoon {
+  position: relative;
+  padding-top: 2rem;
+}
+.main-view #registration-comingsoon .section-header .divider .divider-inner {
+  background: #FFC107 ;
+}
+.main-view #registration-comingsoon .card-group .card {
+  background: rgba(255, 193, 7, 0.3);
+  border-color: rgba(255, 193, 7, 0.5) !important;
 }
