@@ -15,7 +15,7 @@
       </div>
     </div>
   </div>
-  <div id="registration-nowopen" class="pr-3">
+  <div id="registration-nowopen" class="pr-3 pb-3">
     <div class="container-fluid pr-0 pl-0">
       <div class="section-header text-center">
         <span class="regular text-black size24">{{'registration.nowOpen' | translate | titlecase}}</span>
@@ -56,10 +56,13 @@
         </div>
         <div class="card-footer text-center bg-transparent pt-0 pr-3 pb-2 pl-3 border-top-0">
           <div class="mb-2">
-            <a routerLink="../Project/{{project.project.category.initial}}/Registered/{{project.CUID}}" routerLinkActive="active" class="btn btn-outline-success rounded-pill" *ngIf="project.registrationStatus === 'Y'">
-              <span class="regular size16">{{'registered.label' | translate | titlecase}}</span>
-            </a>
-            <a class="btn btn-outline-warning rounded-pill" href="javascript:void(0)" (click)="getTransProject(project)" *ngIf="project.registrationStatus !== 'Y'">
+            <a class="btn rounded-pill"
+              [ngClass]="{
+                'btn-outline-success': project.registrationStatus === 'Y',
+                'btn-outline-warning': project.registrationStatus !== 'Y'
+              }"
+              href="javascript:void(0)"
+              (click)="getTransProject(project)">
               <span class="regular size16">{{'detail' | translate | titlecase}}</span>
             </a>
           </div>

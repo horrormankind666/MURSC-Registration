@@ -244,7 +244,7 @@
         'btn-success': (data.transProject$.registrationStatus === 'Y'),
         'btn-warning': (data.transProject$.registrationStatus === 'W'),
         'btn-danger': (data.transProject$.registrationStatus === 'N'),
-        'disabled': (!appService.existUserTypeSpecific(data.transProject$.userTypeSpecific, (authService.getUserInfo ? authService.getUserInfo.type : '')) ||  data.transProject$.registrationStatus !== 'Y' || !data.transProject$.contactPerson.length === 0 || data.transProject$.transLocation.length === 0)
+        'disabled': (data.transProject$.registrationStatus !== 'Y' || !data.transProject$.contactPerson.length === 0 || data.transProject$.transLocation.length === 0)
       }">
       <span class="font bold text-white size20">{{'registered.label' | translate | titlecase}}</span>
     </a>
