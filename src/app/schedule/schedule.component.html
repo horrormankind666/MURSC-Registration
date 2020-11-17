@@ -1,0 +1,14 @@
+<div class="schedule-view">
+  <div class="bold text-light text-center size24 pb-2">{{data.transSchedule$[0].transProject.project.name[appService.lang]}}</div>
+  <div class="tabset text-center mt-3">
+    <ul ngbNav class="nav-tabs" #tabContent="ngbNav">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>1</a>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink>2</a>
+      </li>
+    </ul>
+  </div>
+  <div [ngbNavOutlet]="tabContent"></div>
+</div>

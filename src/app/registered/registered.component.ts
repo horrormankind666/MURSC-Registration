@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๒๔/๐๙/๒๕๖๓>
+Modify date : <๑๗/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -19,8 +19,7 @@ import {AppService} from '../app.service';
 import {AuthService} from '../auth.service';
 import {Schema, DataService} from '../data.service';
 import {ModalService, BtnMsg} from '../modal/modal.service';
-
-import {ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent} from '../modal/modal.component';
+import {ScheduleService} from '../schedule/schedule.service';
 
 @Component({
   selector: 'app-registered',
@@ -36,7 +35,8 @@ export class RegisteredComponent implements OnInit {
     private appService: AppService,
     private authService: AuthService,
     private dataService: DataService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private scheduleService: ScheduleService
   ) {}
 
   data: any = {
@@ -52,7 +52,7 @@ export class RegisteredComponent implements OnInit {
     isCollapsed: false
   };
 
-  timetable: any = {
+  schedule: any = {
     isCollapsed: false
   };
 
@@ -296,7 +296,7 @@ export class RegisteredComponent implements OnInit {
     this.data.transProject$ = this.route.snapshot.data.transProject$;
 
     if (!this.data.transProject$) {
-      let modalRef = this.modalService.getModalError(false, ModalErrorComponent, 'project.error.notFound');
+      let modalRef = this.modalService.getModalError(false, 'project.error.notFound');
 
       this.modalService.close(modalRef).then((result: string) => {
         if (result === 'close')
@@ -313,7 +313,7 @@ export class RegisteredComponent implements OnInit {
           let btnMsg: BtnMsg = {
             close: 'registered.detail'
           };
-          let modalRef =  this.modalService.getModalError(false, ModalErrorComponent, 'registered.save.error.projectRegistered', btnMsg);
+          let modalRef =  this.modalService.getModalError(false, 'registered.save.error.projectRegistered', btnMsg);
 
           this.modalService.close(modalRef).then((result: string) => {
             if (result === 'close')
@@ -342,7 +342,7 @@ export class RegisteredComponent implements OnInit {
               this.registeredInfos.show = true;
             }
             else {
-              let modalRef =  this.modalService.getModalError(false, ModalErrorComponent, 'registered.error.haveNoRight');
+              let modalRef =  this.modalService.getModalError(false, 'registered.error.haveNoRight');
 
               this.modalService.close(modalRef).then((result: string) => {
                 if (result === 'close')
@@ -416,7 +416,7 @@ export class RegisteredComponent implements OnInit {
             this.that.appService.isLoading.checking = false;
 
             if (this.isValid) {
-              let modalRef = this.that.modalService.getModalConfirm(false, ModalConfirmComponent, 'save.confirm');
+              let modalRef = this.that.modalService.getModalConfirm(false, 'save.confirm');
 
               this.that.modalService.close(modalRef).then((result: string) => {
                 if (result === 'ok') {
@@ -448,7 +448,7 @@ export class RegisteredComponent implements OnInit {
                       }
                       if (saveResult.errorCode === 8) message = ('registered.save.error.fee');
 
-                      modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, message, btnMsg);
+                      modalRef = this.that.modalService.getModalError(false, message, btnMsg);
 
                       this.that.modalService.close(modalRef).then((result: string) => {
                         if (result === 'close') {
@@ -499,7 +499,7 @@ export class RegisteredComponent implements OnInit {
                           close: 'payment.confirm'
                         };
 
-                        modalRef = this.that.modalService.getModalSuccess(false, ModalSuccessComponent, 'save.success', btnMsg);
+                        modalRef = this.that.modalService.getModalSuccess(false, 'save.success', btnMsg);
 
                         this.that.modalService.close(modalRef).then((result: string) => {
                           if (result === 'close')
@@ -512,13 +512,13 @@ export class RegisteredComponent implements OnInit {
               });
             }
             else
-              this.that.modalService.getModalError(false, ModalErrorComponent, 'save.error.validate');
+              this.that.modalService.getModalError(false, 'save.error.validate');
           }
           else {
             this.that.appService.isLoading.show = false;
             this.that.appService.isLoading.checking = false;
 
-            let modalRef = this.that.modalService.getModalError(false, ModalErrorComponent, 'registered.error.haveNoRight');
+            let modalRef = this.that.modalService.getModalError(false, 'registered.error.haveNoRight');
 
             this.that.modalService.close(modalRef).then((result: string) => {
               if (result === 'close')

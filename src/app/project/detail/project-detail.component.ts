@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๗/๐๓/๒๕๖๓>
-Modify date : <๒๑/๐๙/๒๕๖๓>
+Modify date : <๑๗/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -11,13 +11,9 @@ Description : <>
 
 import {Component, Input, OnInit} from '@angular/core';
 
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-
-import {DeviceDetectorService} from 'ngx-device-detector';
-
 import {AppService} from '../../app.service';
-import {AuthService} from '../../auth.service';
 import {Schema, DataService} from '../../data.service';
+import {ScheduleService} from '../../schedule/schedule.service';
 
 @Component({
   selector: 'app-project-detail',
@@ -28,11 +24,9 @@ export class ProjectDetailComponent implements OnInit {
   @Input() data$: Schema.TransProject;
 
   constructor(
-    private activeModal: NgbActiveModal,
-    private deviceService: DeviceDetectorService,
     private appService: AppService,
-    private authService: AuthService,
-    private dataService: DataService
+    private dataService: DataService,
+    private scheduleService: ScheduleService
   ) {}
 
   data: any = {
@@ -43,7 +37,7 @@ export class ProjectDetailComponent implements OnInit {
     isCollapsed: false
   };
 
-  timetable: any = {
+  schedule: any = {
     isCollapsed: false
   };
 

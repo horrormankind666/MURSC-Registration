@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๐/๑๐/๒๕๖๓>
+Modify date : <๑๗/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -26,8 +26,6 @@ import {saveAs} from 'file-saver';
 
 import {ModalService} from './modal/modal.service'
 
-import {ModalErrorComponent, ModalImageComponent} from './modal/modal.component'
-
 import * as $ from 'jquery';
 import {stringify} from 'querystring';
 
@@ -49,7 +47,7 @@ export class AppService  {
     private translateService: TranslateService,
     private cookieService: CookieService,
     private deviceService: DeviceDetectorService,
-    private modalService: ModalService
+    private modalService: ModalService,
   ) {
     this.tooltipConfig.placement = 'top';
     this.tooltipConfig.container = 'body';
@@ -303,7 +301,7 @@ export class AppService  {
         let data = (result['data'] !== undefined && result['data'] !== null ? result['data'][0] : {});
 
         if (data.errorCode === 1) {
-          let modalRef = this.modalService.getModalError(false, ModalErrorComponent, 'save.error.notSuccess');
+          let modalRef = this.modalService.getModalError(false, 'save.error.notSuccess');
 
           this.modalService.close(modalRef).then((result: string) => {
             if (result === 'close') {
@@ -365,7 +363,7 @@ export class AppService  {
         this.isLoading.show = false;
         this.isLoading.processing = false;
 
-        this.modalService.getModalError(false, ModalErrorComponent, 'notDownloadFile');
+        this.modalService.getModalError(false, 'notDownloadFile');
       }
     });
   }
@@ -391,7 +389,7 @@ export class AppService  {
   }
 
   enlargeImage(image: string) {
-    let modalRef: NgbModalRef = this.modalService.getModalImage(false, ModalImageComponent, image);
+    let modalRef: NgbModalRef = this.modalService.getModalImage(false, image);
   }
 
   existUserTypeSpecific(userTypeList: any = [], userType: string): boolean {

@@ -62,7 +62,7 @@
                 'btn-outline-warning': project.registrationStatus !== 'Y'
               }"
               href="javascript:void(0)"
-              (click)="getTransProject(project)">
+              (click)="projectService.getModalTransProject(project)">
               <span class="regular size16">{{'detail' | translate | titlecase}}</span>
             </a>
           </div>

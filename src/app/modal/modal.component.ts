@@ -2,18 +2,16 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๒๑/๐๘/๒๕๖๓>
+Modify date : <๑๗/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 'use strict';
 
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, ViewChild, OnInit, Input, Type, ComponentRef, ComponentFactoryResolver, ViewContainerRef} from '@angular/core';
 
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-modal-info',
@@ -127,12 +125,96 @@ export class ModalConfirmComponent implements OnInit {
 }
 
 @Component({
+  selector: 'app-modal-form',
+  template: `
+    <div class="modal-header">
+      <div class="modal-title">{{title | translate | titlecase}}</div>
+      <div class="modal-close">
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.close('close')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+    <div class="modal-body pt-0 pr-0 pb-0 pl-0">
+      <ng-template #contentView></ng-template>
+    </div>
+  `,
+  styleUrls: []
+})
+export class ModalFormComponent implements OnInit {
+  @Input() component: Type<any>;
+  @Input() title: string;
+  @Input() data$;
+
+  @ViewChild('contentView', {read: ViewContainerRef, static: true}) contentView: ViewContainerRef;
+
+  componentRef: ComponentRef<any>;
+
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private activeModal: NgbActiveModal
+  ) { }
+
+  ngOnInit() {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.component)
+
+    this.contentView.clear();
+    this.componentRef = this.contentView.createComponent(componentFactory, 0);
+
+    if (this.data$) this.componentRef.instance.data$ = this.data$;
+  }
+}
+
+@Component({
+  selector: 'app-modal-formless',
+  template: `
+    <div class="modal-header">
+      <div class="modal-title text-white-50 text-center" *ngIf="title">{{title | translate | titlecase}}</div>
+      <div class="modal-close">
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.close('close')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <ng-template #contentView></ng-template>
+    </div>
+  `,
+  styleUrls: []
+})
+export class ModalFormlessComponent implements OnInit {
+  @Input() component: Type<any>;
+  @Input() title: string;
+  @Input() data$;
+
+  @ViewChild('contentView', {read: ViewContainerRef, static: true}) contentView: ViewContainerRef;
+
+  componentRef: ComponentRef<any>;
+
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private activeModal: NgbActiveModal
+  ) { }
+
+  ngOnInit() {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.component)
+
+    this.contentView.clear();
+    this.componentRef = this.contentView.createComponent(componentFactory, 0);
+
+    if (this.data$) this.componentRef.instance.data$ = this.data$;
+  }
+}
+
+@Component({
   selector: 'app-modal-image',
   template: `
     <div class="modal-header">
-      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('close')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+      <div class="modal-close">
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.close('close')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     </div>
     <div class="modal-body">
       <div class='img' [ngStyle]="{'background-image': ('url(' + message + ')')}"></div>

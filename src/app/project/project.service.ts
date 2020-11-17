@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๐/๐๒/๒๕๖๓>
-Modify date : <๒๙/๐๗/๒๕๖๓>
+Modify date : <๑๗/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -13,10 +13,16 @@ import {Injectable, PipeTransform} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DecimalPipe} from '@angular/common';
 
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 
+import {AppService} from '../app.service';
+import {ModalService} from '../modal/modal.service';
 import {Schema, DataService} from '../data.service';
+
+import {ProjectDetailComponent} from './detail/project-detail.component'
 
 interface TableState {
   page: number;
@@ -141,8 +147,31 @@ export class ProjectService {
   constructor(
     private route: ActivatedRoute,
     private pipe: DecimalPipe,
-    private dataService: DataService
+    private modal: NgbModal,
+    private appService: AppService,
+    private modalService: ModalService,
+    private dataService: DataService,
   ) {}
 
   public operate = new Operate(this.route, this.pipe, this.dataService);
+
+  getModalTransProject(data: Schema.TransProject) {
+    if (!this.modal.hasOpenModals()) {
+      this.appService.isLoading.show = true;
+      this.appService.isLoading.modal = true;
+
+      this.dataService.transProject.get(data.project.category.initial, this.appService.getCUID([data.ID])).then((result: Schema.TransProject) => {
+        this.appService.isLoading.show = false;
+        this.appService.isLoading.modal = false;
+
+        let modalRef: NgbModalRef = this.modalService.getModalForm(true);
+        modalRef.componentInstance.component = ProjectDetailComponent;
+        modalRef.componentInstance.title = 'project.detail';
+        modalRef.componentInstance.data$ = result;
+
+        this.modalService.close(modalRef).then((result: string) => {
+        });
+      });
+    }
+  }
 }

@@ -1,0 +1,41 @@
+/*
+=============================================
+Author      : <ยุทธภูมิ ตวันนา>
+Create date : <๑๒/๑๑/๒๕๖๓>
+Modify date : <๑๖/๑๑/๒๕๖๓>
+Description : <>
+=============================================
+*/
+
+@import '../../styles.scss';
+
+.schedule-view .tab-content {
+  border: 3px solid #2CC185;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  height: 100px;
+}
+.schedule-view .tabset .nav-tabs {
+  display: block !important;
+  border-bottom-width: 0 !important;
+}
+.schedule-view .tabset .nav-tabs .nav-item {
+  display: inline-block !important;
+  width: 100px;
+  margin-right: 16px;
+  margin-bottom: 0;
+}
+.schedule-view .tabset .nav-tabs .nav-link {
+  border-top-right-radius: 0.5rem !important;
+  border-top-left-radius: 0.5rem !important;
+}
+.schedule-view .tabset .nav-tabs .nav-link,
+.schedule-view .tabset .nav-tabs .nav-link:focus {
+  box-shadow: 5px 0 0 0 rgba(255, 255, 255, 0.2);
+  height: inherit;
+}
+.schedule-view .tabset .nav-tabs .nav-link.active,
+.schedule-view .tabset .nav-tabs .nav-item.show .nav-link {
+  box-shadow: 5px 0 0 0 rgba(255, 255, 255, 0.2);
+  margin-right: 0;
+}

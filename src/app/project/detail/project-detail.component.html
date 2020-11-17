@@ -1,57 +1,47 @@
 <div class="project-detail-view">
-  <div class="modal-header">
-    <div class="modal-title">{{'project.detail' | translate | titlecase}}</div>
-    <div class="modal-close">
-      <button type="button" class="close" aria-label="Close" (click)="activeModal.close('close')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  </div>
-  <div class="modal-body pt-0 pr-0 pb-0 pl-0">
-    <div class="card-group">
-      <div class="card-col pr-0 pb-3 pl-0 w-100">
-        <div class="card card-horizontal bg-white border-0 rounded-0 project-card-horizontal on-modal">
-          <div class="card-body pt-0 pr-3 pb-3 pl-3 project-body">
-            <div class="card-text">
-              <div class="d-table w-100">
-                <div class="d-table-cell col-sm-3 w-25 pr-0 pl-0 align-top">
-                  <ng-container *ngTemplateOutlet="titleInfo; context: {cardType: 'horizontal'}"></ng-container>
-                </div>
-                <div class="d-table-cell col-sm-9 w-75 pt-2 pr-0 align-top">
-                  <ng-container *ngTemplateOutlet="projectInfo"></ng-container>
-                  <div class="mt-2"><ng-container *ngTemplateOutlet="projectAboutResultInfo"></ng-container></div>
-                  <div class="mt-3"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
-                  <div class="mt-3"><ng-container *ngTemplateOutlet="registerButtonInfo"></ng-container></div>
+  <div class="card-group">
+    <div class="card-col pr-0 pb-3 pl-0 w-100">
+      <div class="card card-horizontal bg-white border-0 rounded-0 project-card-horizontal on-modal">
+        <div class="card-body pt-0 pr-3 pb-3 pl-3 project-body">
+          <div class="card-text">
+            <div class="d-table w-100">
+              <div class="d-table-cell col-sm-3 w-25 pr-0 pl-0 align-top">
+                <ng-container *ngTemplateOutlet="titleInfo; context: {cardType: 'horizontal'}"></ng-container>
               </div>
+              <div class="d-table-cell col-sm-9 w-75 pt-2 pr-0 align-top">
+                <ng-container *ngTemplateOutlet="projectInfo"></ng-container>
+                <div class="mt-1"><ng-container *ngTemplateOutlet="projectAboutResultInfo"></ng-container></div>
+                <div class="mt-06"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
+                <div class="mt-3"><ng-container *ngTemplateOutlet="registerButtonInfo"></ng-container></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="card card-vertical bg-white border-0 rounded-0 project-card-vertical">
-        <div class="card-body pt-0 pr-3 pb-3 pl-3 project-body">
-          <div class="card-text">
-            <ng-container *ngTemplateOutlet="titleInfo; context: {cardType: 'vertical'}"></ng-container>
-            <div class="mt-3"><ng-container *ngTemplateOutlet="projectInfo"></ng-container></div>
-            <div class="mt-2"><ng-container *ngTemplateOutlet="projectAboutResultInfo"></ng-container></div>
-            <div class="mt-3"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
-          </div>
-        </div>
-        <div class="card-footer text-right border-top-0 bg-transparent pt-0 pr-3 pb-3 pl-3 project-footer">
-          <div class="card-text">
-            <ng-container *ngTemplateOutlet="registerButtonInfo"></ng-container>
-          </div>
+    </div>
+    <div class="card card-vertical bg-white border-0 rounded-0 project-card-vertical">
+      <div class="card-body pt-0 pr-3 pb-3 pl-3 project-body">
+        <div class="card-text">
+          <ng-container *ngTemplateOutlet="titleInfo; context: {cardType: 'vertical'}"></ng-container>
+          <div class="mt-3"><ng-container *ngTemplateOutlet="projectInfo"></ng-container></div>
+          <div class="mt-1"><ng-container *ngTemplateOutlet="projectAboutResultInfo"></ng-container></div>
+          <div class="mt-06"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
         </div>
       </div>
-      <div class="pr-3 pl-3">
-        <div class="jumbotron rounded-xl mb-0 p-3">
-          <div class="border-bottom border-white pb-2">
-            <span class="bold text-primary size20" *ngIf="data.transProject$.project.isExam === 'Y'">{{'location.info' | translate | titlecase}}</span>
-            <span class="bold text-primary size20" *ngIf="data.transProject$.project.isTeaching === 'Y'">{{'section.info' | translate | titlecase}}</span>
-          </div>
-          <div *ngIf="data.transProject$.transLocation.length">
-            <div *ngIf="data.transProject$.project.isExam === 'Y'"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
-            <div *ngIf="data.transProject$.project.isTeaching === 'Y'"><ng-container *ngTemplateOutlet="sectionInfo"></ng-container></div>
-          </div>
+      <div class="card-footer text-right border-top-0 bg-transparent pt-0 pr-3 pb-3 pl-3 project-footer">
+        <div class="card-text">
+          <ng-container *ngTemplateOutlet="registerButtonInfo"></ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="pr-3 pl-3">
+      <div class="jumbotron rounded-xl mb-0 p-3">
+        <div class="border-bottom border-white pb-2">
+          <span class="bold text-primary size20" *ngIf="data.transProject$.project.isExam === 'Y'">{{'location.info' | translate | titlecase}}</span>
+          <span class="bold text-primary size20" *ngIf="data.transProject$.project.isTeaching === 'Y'">{{'section.info' | translate | titlecase}}</span>
+        </div>
+        <div *ngIf="data.transProject$.transLocation.length">
+          <div *ngIf="data.transProject$.project.isExam === 'Y'"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
+          <div *ngIf="data.transProject$.project.isTeaching === 'Y'"><ng-container *ngTemplateOutlet="sectionInfo"></ng-container></div>
         </div>
       </div>
     </div>
@@ -150,26 +140,24 @@
   <div class="aboutresult-info project-aboutresult-info">
     <a class="d-inline-block badge badge-pill badge-light-dark badge-projectabout project-btn-badge" href="javascript:void(0)"
       (click)="
-        timetable.isCollapsed = false;
         projectAbout.isCollapsed = !projectAbout.isCollapsed
       "
       [attr.aria-expanded]="projectAbout.isCollapsed"
       aria-controls="projectAbout">
       <span class="regular size13">{{'about' | translate | lowercase}}</span>
     </a>
-    <a class="d-inline-block badge badge-pill badge-light-dark badge-timetable project-btn-badge ml-2" href="javascript:void(0)" *ngIf="data.transProject$.project.isTeaching === 'Y'"
-      (click)="
-        projectAbout.isCollapsed = false;
-        timetable.isCollapsed = !timetable.isCollapsed
-      "
-      [attr.aria-expanded]="timetable.isCollapsed"
-      aria-controls="timetable">
-      <span class="regular size13">{{'timetable.label' | translate | lowercase}}</span>
+    <a class="d-inline-block badge badge-pill badge-light-dark badge-schedule project-btn-badge ml-2" href="javascript:void(0)" *ngIf="data.transProject$.project.isTeaching === 'Y'"
+      (click)="scheduleService.getModalTransSchedule(data.transProject$)"
+      [attr.aria-expanded]="schedule.isCollapsed">
+      <span class="regular size13">{{'schedule.label' | translate | lowercase}}</span>
     </a>
     <p class="regular text-black-50 size16 line-clamp mt-2 mb-0">
       <span id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed">
         <span class="text-justify-distribute" [innerHTML]="data.transProject$.project.about[appService.lang] | nl2br"></span>
-        <div class="text-dark mt-2">{{'event.date' | translate | titlecase}}</div>
+        <div class="text-dark mt-2">
+          <span *ngIf="data.transProject$.project.isExam === 'Y'">{{'event.timePeriod.exam' | translate | titlecase}}</span>
+          <span *ngIf="data.transProject$.project.isTeaching === 'Y'">{{'event.timePeriod.teaching' | translate | titlecase}}</span>
+        </div>
         <div class="project-register-info">
           <div class="form">
             <div class="form-group w-100 row mr-0 mb-0 ml-0" *ngIf="data.transProject$.examDate.startDate">
@@ -199,15 +187,16 @@
         <div class="text-dark mt-2">{{'contact.label' | translate | titlecase}}</div>
         <div><ng-container *ngTemplateOutlet="contactInfo; context: {isDropdown: false}"></ng-container></div>
       </span>
-      <span id="timetable" [ngbCollapse]="!timetable.isCollapsed">
-        <span class="bold text-dark">n/a</span>
-      </span>
     </p>
   </div>
 </ng-template>
 <ng-template #registerInfo>
   <div class="register-info project-register-info">
     <div class="regular size16">
+      <div class="text-dark">
+        {{'registration.label' | translate | titlecase}}<br />
+        <span class="text-black-50 size14">{{'event.timePeriod.registration' | translate | lowercase}}</span>
+      </div>
       <div class="d-table w-100 size-l mb-01 calendar-date">
         <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )">
           <div class="d-table-cell align-middle col-icon"><span class="text-success size22"><i class="fas fa-calendar-alt"></i></span></div>

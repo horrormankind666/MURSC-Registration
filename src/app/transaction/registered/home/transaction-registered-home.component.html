@@ -196,7 +196,7 @@
         (click)="
           registeredLocationIDNoSeatNo.isCollapsed[data.ID] = false;
           examScore.isCollapsed[data.ID] = false;
-          sectionTimetable.isCollapsed[data.ID] = false;
+          sectionSchedule.isCollapsed[data.ID] = false;
           studyResultsTranscript.isCollapsed[data.ID] = false;
           projectAbout.isCollapsed[data.ID] = !projectAbout.isCollapsed[data.ID]
         "
@@ -210,7 +210,7 @@
         (click)="
           projectAbout.isCollapsed[data.ID] = false;
           examScore.isCollapsed[data.ID] = false;
-          sectionTimetable.isCollapsed[data.ID] = false;
+          sectionSchedule.isCollapsed[data.ID] = false;
           studyResultsTranscript.isCollapsed[data.ID] = false;
           registeredLocationIDNoSeatNo.isCollapsed[data.ID] = !registeredLocationIDNoSeatNo.isCollapsed[data.ID]
         "
@@ -224,7 +224,7 @@
         (click)="
           projectAbout.isCollapsed[data.ID] = false;
           registeredLocationIDNoSeatNo.isCollapsed[data.ID] = false;
-          sectionTimetable.isCollapsed[data.ID] = false;
+          sectionSchedule.isCollapsed[data.ID] = false;
           studyResultsTranscript.isCollapsed[data.ID] = false;
           examScore.isCollapsed[data.ID] = !examScore.isCollapsed[data.ID]
         "
@@ -233,18 +233,18 @@
         <span class="regular size13">{{'score' | translate | lowercase}}</span>
       </a>
     </div>
-    <div class="d-inline-block badge-inline badge-sectiontimetable ml-2" *ngIf="data.transProject.project.isTeaching === 'Y'">
+    <div class="d-inline-block badge-inline badge-sectionschedule ml-2" *ngIf="data.transProject.project.isTeaching === 'Y'">
       <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
         (click)="
           projectAbout.isCollapsed[data.ID] = false;
           registeredLocationIDNoSeatNo.isCollapsed[data.ID] = false;
           examScore.isCollapsed[data.ID] = false;
           studyResultsTranscript.isCollapsed[data.ID] = false;
-          sectionTimetable.isCollapsed[data.ID] = !sectionTimetable.isCollapsed[data.ID]
+          sectionSchedule.isCollapsed[data.ID] = !sectionSchedule.isCollapsed[data.ID]
         "
-        [attr.aria-expanded]="sectionTimetable.isCollapsed[data.ID] === undefined ? false : sectionTimetable.isCollapsed[data.ID]"
-        aria-controls="sectionTimetable">
-        <span class="regular size13">{{'section.label' | translate | lowercase}} / {{'timetable.label' | translate | lowercase}}</span>
+        [attr.aria-expanded]="sectionSchedule.isCollapsed[data.ID] === undefined ? false : sectionSchedule.isCollapsed[data.ID]"
+        aria-controls="sectionSchedule">
+        <span class="regular size13">{{'section.label' | translate | lowercase}} / {{'schedule.label' | translate | lowercase}}</span>
       </a>
     </div>
     <div class="d-inline-block badge-inline badge-studyresultstranscript ml-2" *ngIf="data.transProject.project.isTeaching === 'Y'">
@@ -253,7 +253,7 @@
           projectAbout.isCollapsed[data.ID] = false;
           registeredLocationIDNoSeatNo.isCollapsed[data.ID] = false;
           examScore.isCollapsed[data.ID] = false;
-          sectionTimetable.isCollapsed[data.ID] = false;
+          sectionSchedule.isCollapsed[data.ID] = false;
           studyResultsTranscript.isCollapsed[data.ID] = !studyResultsTranscript.isCollapsed[data.ID]
         "
         [attr.aria-expanded]="studyResultsTranscript.isCollapsed[data.ID] === undefined ? false : studyResultsTranscript.isCollapsed[data.ID]"
@@ -264,7 +264,10 @@
     <p class="regular text-black-50 size16 line-clamp mt-2 mb-0">
       <span id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed[data.ID]">
         <span class="text-justify-distribute" [innerHTML]="data.transProject.project.about[appService.lang] | nl2br"></span>
-        <div class="text-dark mt-2">{{'event.date' | translate | titlecase}}</div>
+        <div class="text-dark mt-2">
+          <span *ngIf="data.transProject.project.isExam === 'Y'">{{'event.timePeriod.exam' | translate | titlecase}}</span>
+          <span *ngIf="data.transProject.project.isTeaching === 'Y'">{{'event.timePeriod.teaching' | translate | titlecase}}</span>
+        </div>
         <div class="project-register-info">
           <div class="form">
             <div class="form-group w-100 row mr-0 mb-0 ml-0" *ngIf="data.transProject.examDate.startDate">
@@ -313,11 +316,10 @@
         </span>
         <span class="bold text-dark" *ngIf="!data.transScore.examResult">n/a</span>
       </span>
-      <span id="sectionTimetable" [ngbCollapse]="!sectionTimetable.isCollapsed[data.ID]">
+      <span id="sectionSchedule" [ngbCollapse]="!sectionSchedule.isCollapsed[data.ID]">
         {{data.transLocation.location.name[appService.lang]}}<br />
         {{'teachingType.onlineClass' | translate | titlecase}}<br />
-        <div class="text-dark mt-2">{{'timetable.label' | translate | titlecase}}</div>
-        <span class="bold text-dark">n/a</span>
+        <a class="link regular size14" href="javascript:void(0)" (click)="scheduleService.getModalTransSchedule(data.transProject)">#{{'schedule.label' | translate | lowercase}}</a>
       </span>
       <span id="studyResultsTranscript" [ngbCollapse]="!studyResultsTranscript.isCollapsed[data.ID]">
         <span class="bold text-dark">n/a</span>

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๒๐/๐๙/๒๕๖๓>
+Modify date : <๑๑/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -279,6 +279,33 @@ export namespace Schema {
     qrImage64?: string,
     qrResponse?: string,
     qrNewRef1?: string
+  }
+
+  export interface Schedules {
+    ID?: string,
+    lessonName?: {
+      th?: string,
+      en?: string
+    },
+    dateTime?: {
+      start?: {
+        date?: string,
+        time?: string
+      },
+      end?: {
+        date?: string,
+        time?: string
+      }
+    },
+    instructor?: string,
+    typeSchedule?: string
+  }
+
+  export interface TransSchedule {
+    ID?: string,
+    transProject?: TransProject,
+    section?: string,
+		schedules?: Schedules[]
   }
 }
 
@@ -1144,6 +1171,98 @@ namespace Data {
       });
     }
   }
+
+  export class TransSchedule {
+    constructor(
+      private appService: AppService
+    ) {}
+
+    private getDataSource(action: string, query?: string): Promise<Schema.TransSchedule[]> {
+      return this.appService.getDataSource('TransSchedule', action, query).then((result: []) => {
+        let transSchedule: Schema.TransSchedule[] = [];
+        let transProject: Schema.TransProject = {};
+
+        for (let dr1 of result) {
+          let schedule: Schema.Schedules[] = [];
+          let schedules: [] = (dr1['schedules'] ? dr1['schedules'] : []);
+
+          for (let dr2 of schedules) {
+            let startDateTime: string = (dr2['startTime'] ? dr2['startTime'] : '');
+            let endDateTime: string = (dr2['endTime'] ? dr2['endTime'] : '');
+
+            schedule.push({
+              ID: (dr2['id'] ? dr2['id'] : ''),
+              lessonName: {
+                th: (dr2['lessonNameTH'] ? dr2['lessonNameTH'] : dr2['lessonNameEN']),
+                en: (dr2['lessonNameEN'] ? dr2['lessonNameEN'] : dr2['lessonNameTH'])
+              },
+              dateTime: {
+                start: {
+                  date: startDateTime.substring(0, 10),
+                  time: startDateTime.substring(11, 5)
+                },
+                end: {
+                  date: endDateTime.substring(0, 10),
+                  time: endDateTime.substring(11, 5)
+                }
+              },
+              instructor: (dr2['instructor'] ? dr2['instructor'] : ''),
+              typeSchedule: (dr2['typeSchedule'] ? dr2['typeSchedule'] : '')
+            });
+          }
+
+          transProject = {
+            ID: (dr1['transProjectID'] ? dr1['transProjectID'] : ''),
+            project: {
+              ID: (dr1['projectID'] ? dr1['projectID'] : ''),
+              category: {
+                ID: (dr1['projectCategoryID'] ? dr1['projectCategoryID'] : ''),
+                name: {
+                  th: (dr1['projectCategoryNameTH'] ? dr1['projectCategoryNameTH'] : dr1['projectCategoryNameEN']),
+                  en: (dr1['projectCategoryNameEN'] ? dr1['projectCategoryNameEN'] : dr1['projectCategoryNameTH'])
+                },
+                initial: (dr1['projectCategoryInitial'] ? dr1['projectCategoryInitial'] : '')
+              },
+              logo: (dr1['logo'] ? dr1['logo'] : ''),
+              name: {
+                th: (dr1['projectNameTH'] ? dr1['projectNameTH'] : dr1['projectNameEN']),
+                en: (dr1['projectNameEN'] ? dr1['projectNameEN'] : dr1['projectNameTH'])
+              },
+              about: {
+                th: (dr1['aboutTH'] ? dr1['aboutTH'] : dr1['aboutEN']),
+                en: (dr1['aboutEN'] ? dr1['aboutEN'] : dr1['aboutTH'])
+              }
+            },
+            description: {
+              th: (dr1['descriptionTH'] ? dr1['descriptionTH'] : dr1['descriptionEN']),
+              en: (dr1['descriptionEN'] ? dr1['descriptionEN'] : dr1['descriptionTH'])
+            }
+          };
+
+          transSchedule.push({
+            ID: (dr1['transScheduleID'] ? dr1['transScheduleID'] : ''),
+            transProject: transProject,
+            section: (dr1['section'] ? dr1['section'] : ''),
+            schedules: schedule
+          });
+        }
+
+        return transSchedule;
+      });
+    }
+
+    get(projectCategory: string, cuid: string): Promise<Schema.TransSchedule[]> {
+      let query = [
+        '',
+        ('projectCategory=' + projectCategory),
+        ('cuid=' + cuid)
+      ].join('&');
+
+      return this.getDataSource('get', query).then((result: Schema.TransSchedule[]) => {
+        return result;
+      });
+    }
+  }
 }
 
 @Injectable({
@@ -1165,4 +1284,5 @@ export class DataService {
   public registrationStatus = new Data.RegistrationStatus();
   public paymentStatus = new Data.PaymentStatus();
   public qrcode = new Data.QRCode(this.appService);
+  public transSchedule = new Data.TransSchedule(this.appService);
 }

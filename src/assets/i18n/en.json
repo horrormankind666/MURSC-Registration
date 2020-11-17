@@ -36,6 +36,7 @@
   "confirm": "Confirm",
   "select": "Select",
   "registration": {
+    "label": "Registration",
     "nowOpen": "Registration now open",
     "comingSoon": "Registration coming soon"
   },
@@ -79,6 +80,8 @@
   "reload": "Reload",
   "start": "Start",
   "end": "End",
+  "startingDate": "Starting date",
+  "endingDate": "Ending Date",
   "total": {
     "label": "Total",
     "amount": "Total amount"
@@ -207,7 +210,11 @@
   "enlarge": "Enlarge",
   "score": "Score",
   "event": {
-    "date": "Event date"
+    "timePeriod": {
+      "registration": "Starting date - ending date",
+      "exam": "Exam duration",
+      "teaching": "Class duration"
+    }
   },
   "idNo": {
     "label": "Applicant no.",
@@ -220,8 +227,11 @@
     "studentU": "Undergraduate student",
     "personnel": "Personnel"
   },
-  "timetable": {
-    "label": "Timetable"
+  "schedule": {
+    "label": "Schedule",
+    "error": {
+      "notFound": "Schedule not found."
+    }
   },
   "section": {
     "label": "Section",
@@ -246,7 +256,8 @@
     "placeholder": "Enter the privilege code",
     "confirm": {
       "error": {
-        "code": "Please fill in the privilege code."
+        "code": "Please fill in the privilege code.",
+        "privilegeExpire": "This privilege has expired."
       }
     }
   }

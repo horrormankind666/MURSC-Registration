@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๑/๑๐/๒๕๖๓>
+Modify date : <๑๗/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -507,11 +507,15 @@ body.modal-open {
   padding-right: 0 !important;
   overflow: hidden !important;
 }
+
 .modal {
-  top: 96px !important;
+  top: 60px !important;
   //height: -webkit-calc(100% - #{$header-max-height}) !important;
   //height: -moz-calc(100% - #{$header-max-height}) !important;
   //height: calc(100% - #{$header-max-height}) !important;
+}
+.modal.has-navbar-header-title {
+  top: 96px !important;
 }
 .modal-dialog {
   margin: 0 !important;
@@ -611,6 +615,7 @@ body.modal-open {
 .error-dialog .modal-dialog,
 .confirm-dialog .modal-dialog,
 .form-dialog .modal-dialog,
+.formless-dialog .modal-dialog,
 .image-dialog .modal-dialog {
   max-width: 100%;
   min-width: $screen-min-width;
@@ -645,34 +650,38 @@ body.modal-open {
 .form-dialog .modal-content {
   border: 10px solid #9AC3BD;
 }
-.image-dialog .modal-content {
+.image-dialog,
+.formless-dialog {
+  background: rgb(0, 0, 0, 0.5);
+}
+.image-dialog .modal-content,
+.formless-dialog .modal-content {
   background: transparent !important;
   border: 0;
 }
-.image-dialog .modal-header {
+.image-dialog .modal-header,
+.formless-dialog .modal-header {
   background: transparent;
-  height: 30px;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
 }
-.image-dialog .modal-header .close {
-  height: inherit;
-  font-size: 100px;
-  font-weight: 300;
+.image-dialog .modal-header .close,
+.formless-dialog .modal-header .close {
   color: #FFFFFF;
   opacity: 1 !important;
-  position: relative;
-  right: -5px;
 }
-.image-dialog .modal-dialog .modal-content .modal-body {
-  padding-bottom: 0;
-  height: auto;
+.image-dialog .modal-body,
+.formless-dialog .modal-body {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  //height: auto;
 }
-.image-dialog .modal-dialog .modal-content .modal-body .img {
+.image-dialog .modal-body .img {
   position: relative;
   background-position: top;
   background-repeat: no-repeat;
   background-size: contain;
+}
+.formless-dialog .modal-header .modal-title {
+  width: 100%;
 }
 .card-group .card-col {
   display: inline-block;

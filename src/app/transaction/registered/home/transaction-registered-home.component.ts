@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๘/๐๖/๒๕๖๓>
-Modify date : <๒๔/๐๙/๒๕๖๓>
+Modify date : <๑๖/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -17,6 +17,7 @@ import {NgbNavChangeEvent} from '@ng-bootstrap/ng-bootstrap';
 import {AppService} from '../../../app.service';
 import {AuthService} from '../../../auth.service';
 import {DataService} from '../../../data.service';
+import {ScheduleService} from '../../../schedule/schedule.service';
 import {TransactionRegisteredService as TransRegisteredService} from '../transaction-registered.service';
 
 import {TransactionRegisteredAllComponent} from './transaction-registered-all.component';
@@ -35,6 +36,7 @@ export class TransactionRegisteredHomeComponent implements OnInit {
     private appService: AppService,
     private authService: AuthService,
     private dataService: DataService,
+    private scheduleService: ScheduleService,
     private transRegisteredService: TransRegisteredService
   ) {}
 
@@ -94,7 +96,7 @@ export class TransactionRegisteredHomeComponent implements OnInit {
     isCollapsed: []
   };
 
-  sectionTimetable: any = {
+  sectionSchedule: any = {
     isCollapsed: []
   };
 

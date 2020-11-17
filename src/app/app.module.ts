@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๔/๐๘/๒๕๖๓>
+Modify date : <๑๗/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -36,7 +36,7 @@ import {TrimOnBlurDirective, FocusRemoverDirective, DynamicComponentDirective, N
 import {appRouting} from './app-routing.module';
 
 import {AppComponent} from './app.component';
-import {ModalInfoComponent, ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent, ModalImageComponent} from './modal/modal.component';
+import {ModalInfoComponent, ModalSuccessComponent, ModalErrorComponent, ModalConfirmComponent, ModalImageComponent, ModalFormComponent, ModalFormlessComponent} from './modal/modal.component';
 import {PageEmptyComponent} from './page-empty.component'
 import {PageNotFoundComponent} from './page-not-found.component';
 import {MainComponent} from './main.component';
@@ -50,6 +50,7 @@ import {TransactionRegisteredPaymentCompletedComponent} from './transaction/regi
 import {TransactionRegisteredCheckPaymentComponent} from './transaction/registered/home/transaction-registered-check-payment.component';
 import {TransactionRegisteredPendingPaymentComponent} from './transaction/registered/home/transaction-registered-pending-payment.component';
 import {TransactionRegisteredDetailComponent} from './transaction/registered/detail/transaction-registered-detail.component';
+import {ScheduleComponent} from './schedule/schedule.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -63,6 +64,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalErrorComponent,
     ModalConfirmComponent,
     ModalImageComponent,
+    ModalFormComponent,
+    ModalFormlessComponent,
     PageEmptyComponent,
     PageNotFoundComponent,
     MainComponent,
@@ -76,6 +79,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TransactionRegisteredCheckPaymentComponent,
     TransactionRegisteredPendingPaymentComponent,
     TransactionRegisteredDetailComponent,
+    ScheduleComponent,
     TrimOnBlurDirective,
     FocusRemoverDirective,
     DynamicComponentDirective,
@@ -123,11 +127,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalErrorComponent,
     ModalConfirmComponent,
     ModalImageComponent,
+    ModalFormComponent,
+    ModalFormlessComponent,
     ProjectDetailComponent,
     TransactionRegisteredAllComponent,
     TransactionRegisteredPaymentCompletedComponent,
     TransactionRegisteredCheckPaymentComponent,
-    TransactionRegisteredPendingPaymentComponent
+    TransactionRegisteredPendingPaymentComponent,
+    ScheduleComponent
   ]
 })
 

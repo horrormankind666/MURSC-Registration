@@ -134,7 +134,6 @@
       <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
         (click)="
           examScore.isCollapsed = false;
-          timetable.isCollapsed = false;
           studyResultsTranscript.isCollapsed = false;
           projectAbout.isCollapsed = !projectAbout.isCollapsed
         "
@@ -147,7 +146,6 @@
       <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
         (click)="
           projectAbout.isCollapsed = false;
-          timetable.isCollapsed = false;
           studyResultsTranscript.isCollapsed = false;
           examScore.isCollapsed = !examScore.isCollapsed
         "
@@ -156,17 +154,11 @@
         <span class="regular size13">{{'score' | translate | lowercase}}</span>
       </a>
     </div>
-    <div class="d-inline-block badge-inline badge-timetable ml-2" *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">
+    <div class="d-inline-block badge-inline badge-schedule ml-2" *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">
       <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
-        (click)="
-          projectAbout.isCollapsed = false;
-          examScore.isCollapsed = false;
-          studyResultsTranscript.isCollapsed = false;
-          timetable.isCollapsed = !timetable.isCollapsed
-        "
-        [attr.aria-expanded]="timetable.isCollapsed"
-        aria-controls="timetable">
-        <span class="regular size13">{{'timetable.label' | translate | lowercase}}</span>
+        (click)="scheduleService.getModalTransSchedule(data.transRegistered$.transProject)"
+        [attr.aria-expanded]="schedule.isCollapsed">
+        <span class="regular size13">{{'schedule.label' | translate | lowercase}}</span>
       </a>
     </div>
     <div class="d-inline-block badge-inline badge-studyresultstranscript ml-2" *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">
@@ -174,7 +166,7 @@
         (click)="
           projectAbout.isCollapsed = false;
           examScore.isCollapsed = false;
-          timetable.isCollapsed = false;
+          schedule.isCollapsed = false;
           studyResultsTranscript.isCollapsed = !studyResultsTranscript.isCollapsed
         "
         [attr.aria-expanded]="studyResultsTranscript.isCollapsed"
@@ -185,7 +177,10 @@
     <p class="regular text-black-50 size16 line-clamp mt-2 mb-0">
       <span id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed">
         <span class="text-justify-distribute" [innerHTML]="data.transRegistered$.transProject.project.about[appService.lang] | nl2br"></span>
-        <div class="text-dark mt-2">{{'event.date' | translate | titlecase}}</div>
+        <div class="text-dark mt-2">
+          <span *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'">{{'event.timePeriod.exam' | translate | titlecase}}</span>
+          <span *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">{{'event.timePeriod.teaching' | translate | titlecase}}</span>
+        </div>
         <div class="project-register-info">
           <div class="form">
             <div class="form-group w-100 row mr-0 mb-0 ml-0" *ngIf="data.transRegistered$.transProject.examDate.startDate">
@@ -225,9 +220,6 @@
           {{data.transRegistered$.transScore.examResult | translate | titlecase}}
         </span>
         <span class="bold text-dark" *ngIf="!data.transRegistered$.transScore.examResult">n/a</span>
-      </span>
-      <span id="timetable" [ngbCollapse]="!timetable.isCollapsed">
-        <span class="bold text-dark">n/a</span>
       </span>
       <span id="studyResultsTranscript" [ngbCollapse]="!studyResultsTranscript.isCollapsed">
         <span class="bold text-dark">n/a</span>
@@ -627,8 +619,11 @@
           <td colspan="2" class="border-0 p-0">
             <div class="d-block w-100 border border-right-0 border-bottom-0 border-left-0 border-white mt-2 pt-08">
               <div class="form flat-form">
-                <div class="mb-055" *ngIf="!feeType.privilege.confirm.isValid">
-                  <div class="alert alert-danger mb-0 regular size16" role="alert">{{'privilege.confirm.error.code' | translate}}</div>
+                <div class="mt-2 mb-055" *ngIf="!feeType.privilege.confirm.isVerifying && (!feeType.privilege.confirm.isValid || feeType.privilege.confirm.errorCode === 1)">
+                  <div class="alert alert-danger mb-0 regular size16" role="alert">
+                    <span *ngIf="!feeType.privilege.confirm.isValid">{{'privilege.confirm.error.code' | translate}}</span>
+                    <span *ngIf="feeType.privilege.confirm.errorCode === 1">{{'privilege.confirm.error.privilegeExpire' | translate}}</span>
+                  </div>
                 </div>
                 <div class="form-group w-100 mb-0 col-privilegecode">
                   <label for="col-privilegecode" class="regular text-danger">{{'privilege.label' | translate | titlecase}}</label>

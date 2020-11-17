@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๑๒/๐๕/๒๕๖๓>
+Modify date : <๑๗/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -12,8 +12,6 @@ Description : <>
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 
 import {ModalService} from './modal/modal.service';
-
-import {ModalErrorComponent} from './modal/modal.component';
 
 @Component({
   selector: '',
@@ -29,6 +27,6 @@ export class PageNotFoundComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.modalService.getModalError(false, ModalErrorComponent, 'pageNotFound');
+    this.modalService.getModalError(false, 'pageNotFound');
   }
 }

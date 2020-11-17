@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๒๔/๐๘/๒๕๖๓>
+Modify date : <๑๗/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -17,8 +17,6 @@ import {CookieService} from 'ngx-cookie-service';
 
 import {AppService} from './app.service';
 import {ModalService} from './modal/modal.service';
-
-import {ModalConfirmComponent} from './modal/modal.component';
 
 interface UserInfo {
   type?: string,
@@ -238,7 +236,7 @@ export class AuthService {
   }
 
   signout() {
-    let modalRef = this.modalService.getModalConfirm(false, ModalConfirmComponent, 'signout.confirm');
+    let modalRef = this.modalService.getModalConfirm(false, 'signout.confirm');
 
     this.modalService.close(modalRef).then((result: string) => {
       if (result === 'ok') {
