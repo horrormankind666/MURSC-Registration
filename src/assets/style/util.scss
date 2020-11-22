@@ -2,20 +2,42 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๑๗/๑๑/๒๕๖๓>
+Modify date : <๑๙/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 @import 'font.scss';
 
-$color-primary: #337AB7;
+$color-primary: #FF007A;
 $color-secondary: #A6C;
 $color-success: mediumseagreen;
 $color-danger: #D43F3A;
 $color-warning: #FB3;
 $color-info: #46B8DA;
 $color-black-10: rgb(0, 0, 0, .10);
+$color-palegoldenrod: palegoldenrod;
+$color-silver: silver;
+$color-burlywood: burlywood;
+$color-orange: orange;
+$color-bisque: bisque;
+$color-lightgreen: lightgreen;
+$color-cornflowerblue: cornflowerblue;
+$color-gold: gold;
+$color-lightcoral: lightcoral;
+$color-samritdat: #454841; //สัมฤทธิ์เดช
+$color-dammuek: #5B5C61; //ดำหนมึก
+$color-lueamphai: #E3C0AB; //เลื่อมพราย
+$color-lueamlueang: #E7D993; //เลื่อมเหลือง
+$color-dokbuab: #FFE85E; //ดอกบวบ
+$color-lueamprapasson: #CEC9A2; //เลื่อมประภัสสร
+$color-khaokabang: #CFCDCD; //ขาวกะบัง
+$color-khaophong: #F0EBE1; //ขาวผ่อง
+$color-sang: #FFEFCF; //สังข์
+$color-ngachang: #FFFCDF; //งาช้าง
+$color-nuan: #DBCC91; //นวล
+$color-lek: #BDBDB7; //เหล็ก
+$color-ngen: #BCC3C0; //เงิน
 
 $screen-max-width: 810px;
 $screen-min-width: 344px;
@@ -149,6 +171,9 @@ $line-clamp-line-height: 1.7;
 }
 .font-tahoma {
   font-family: Tahoma;
+}
+.font-sans-serif {
+  font-family: sans-serif;
 }
 .line-height-0 {
   line-height: 0 !important;
@@ -672,7 +697,7 @@ body.modal-open {
 .formless-dialog .modal-body {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  //height: auto;
+  height: auto;
 }
 .image-dialog .modal-body .img {
   position: relative;
@@ -1311,6 +1336,28 @@ textarea {
 .datetime-vertical .time div {
   width: 20%;
 }
+.date-card.card {
+  font-family: sans-serif;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(230, 30, 50);
+  width: 75px;
+}
+.date-card.card .card-header {
+  font-weight: bold;
+  background: rgb(230, 30, 50);
+  padding: 0.1rem;
+  padding-top: 0;
+  border-top-right-radius: 0.3rem;
+  border-top-left-radius: 0.3rem;
+}
+.date-card.card .card-body {
+  font-weight: 800;
+  padding: 0.3rem;
+  height: 60px;
+}
+.date-card.card .card-body span {
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.3);
+}
 .d-table.calendar-date .d-table-cell {
   vertical-align: top;
 }
@@ -1509,10 +1556,22 @@ textarea {
   }
 }
 .text-decoration {
-  text-decoration: underline
+  text-decoration: underline !important;
 }
 .text-black {
   color: #000000 !important;
+}
+.text-samritdat {
+  color: $color-samritdat !important;
+}
+.text-dammuek {
+  color: $color-dammuek !important;
+}
+.text-primary-v2 {
+  color: $color-primary !important;
+}
+.text-success-v2 {
+  color: $color-success !important;
 }
 .cursor-pointer {
   cursor: pointer

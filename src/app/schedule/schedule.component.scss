@@ -2,18 +2,26 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๒/๑๑/๒๕๖๓>
-Modify date : <๑๖/๑๑/๒๕๖๓>
+Modify date : <๑๙/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 @import '../../styles.scss';
 
+.schedule-view {
+  max-width: 992px;
+  margin-right: auto;
+  margin-left: auto;
+}
 .schedule-view .tab-content {
-  border: 3px solid #2CC185;
-  border-top-right-radius: 0.5rem;
-  border-top-left-radius: 0.5rem;
-  height: 100px;
+  border-top: 5px solid #2CC185;
+  background: rgba(44, 193, 133, 0.1);
+  padding: 0 1rem 0.5rem;
+  -webkit-box-shadow: 0 13px 35px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 13px 35px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 13px 35px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 .schedule-view .tabset .nav-tabs {
   display: block !important;
@@ -21,21 +29,105 @@ Description : <>
 }
 .schedule-view .tabset .nav-tabs .nav-item {
   display: inline-block !important;
-  width: 100px;
-  margin-right: 16px;
+  width: 123px;
+  height: 50px;
+  margin-right: 0;
   margin-bottom: 0;
 }
 .schedule-view .tabset .nav-tabs .nav-link {
-  border-top-right-radius: 0.5rem !important;
-  border-top-left-radius: 0.5rem !important;
+  line-height: 1.5 !important;
+  font-size: 1.4rem;
 }
 .schedule-view .tabset .nav-tabs .nav-link,
 .schedule-view .tabset .nav-tabs .nav-link:focus {
-  box-shadow: 5px 0 0 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 transparent;
   height: inherit;
+  background: #E08F24;
 }
 .schedule-view .tabset .nav-tabs .nav-link.active,
 .schedule-view .tabset .nav-tabs .nav-item.show .nav-link {
-  box-shadow: 5px 0 0 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 transparent;
   margin-right: 0;
+  font-weight: $font-weight-class-bold !important;
+}
+.schedule-view .section-schedule-info .jumbotron {
+  background: rgba(255, 255, 255, 0.6);
+  margin-bottom: 5px;
+  border-radius: 16px;
+  box-shadow: 0 8px 6px -6px rgba(50, 51, 51, 0.1);
+  padding: 1rem 1rem 0.5rem 1rem;
+}
+.schedule-view .section-schedule-info .jumbotron:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.schedule-view .section-schedule-info .time {
+  //background: rgba(239, 165, 6, .1);
+  font-family: sans-serif;
+  font-weight: 600;
+  //padding: 0.4rem 0.6rem; 
+  padding: 0;
+  border-radius: 0; 
+}
+.schedule-view .date-card.card.start {
+  border: 1px solid rgb(40, 167, 69);
+}
+.schedule-view .date-card.card.start .card-header {
+  background: rgb(40, 167, 69);
+}
+.schedule-view .section-schedule-info .jumbotron .d-table {
+  table-layout: fixed;
+}
+.schedule-view .section-schedule-info .jumbotron .col-datetime {
+  width: 170px;
+  min-width: 170px;
+}
+.schedule-view .section-schedule-info .jumbotron .col-lesson {
+  width: 100%;
+  vertical-align: top;
+  word-wrap: break-word;
+}
+.schedule-view .section-schedule-info .jumbotron .col-lesson .title {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 1rem 1.5rem 0.81rem 1.8rem;
+  border-radius: 8px;
+}
+.schedule-view .section-schedule-info .jumbotron .col-lesson .title .lessonname {
+  line-height: 1.2;
+}
+.schedule-view .section-schedule-info .jumbotron .col-lesson .title .timeby .time {
+  width: 86px;
+  overflow: hidden;
+}
+.schedule-view .section-schedule-info .jumbotron .col-lesson .title .timeby .by .by-info {
+  width: 26px;
+  min-width: 26px;
+}
+.schedule-view .section-schedule-info .jumbotron .col-lesson .type span + span {
+  position: relative;
+  top: -3px;
+}
+@media screen and (max-width: 600px) {
+  .schedule-view .section-schedule-info .jumbotron {
+    padding-bottom: 1rem !important;
+  }
+  .schedule-view .section-schedule-info .jumbotron .col-datetime {
+    width: 91px;
+    min-width: 91px;
+  }
+  .schedule-view .section-schedule-info .jumbotron .col-datetime .float-left {
+    clear: both;
+    display: block;
+    margin-left: 0 !important;
+  }
+  .schedule-view .section-schedule-info .jumbotron .col-datetime .float-left + .float-left {
+    margin-top: 0.5rem;
+  }
+  .schedule-view .section-schedule-info .jumbotron .col-lesson .title .timeby .time,
+  .schedule-view .section-schedule-info .jumbotron .col-lesson .title .timeby .by {
+    display: block !important;
+  }
+  .schedule-view .section-schedule-info .jumbotron .col-lesson .title .timeby .by {
+    padding-left: 0.1rem !important;
+  } 
 }

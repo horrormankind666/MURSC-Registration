@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๒/๑๑/๒๕๖๓>
-Modify date : <๑๗/๑๑/๒๕๖๓>
+Modify date : <๑๘/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -11,7 +11,7 @@ Description : <>
 
 import {Component, Input, OnInit} from '@angular/core';
 
-import {NgbNav} from '@ng-bootstrap/ng-bootstrap';
+import {NgbNav, NgbNavChangeEvent} from '@ng-bootstrap/ng-bootstrap';
 
 import {AppService} from '../app.service';
 import {Schema} from '../data.service';
@@ -30,6 +30,10 @@ export class ScheduleComponent implements OnInit {
 
   data: any = {
     transSchedule$: null
+  };
+
+  section: any = {
+    active: 1
   };
 
   ngOnInit() {

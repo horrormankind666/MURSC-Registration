@@ -14,7 +14,7 @@
       <div class="dropdown-divider mt-2 mb-0"></div>
       <div class="tabset">
         <div [ngbCollapse]="tab.isCollapsed">
-          <ul ngbNav class="nav-tabs" #tabContent="ngbNav" (activeId)="tab.active" (navChange)="tabOnChange($event)">
+          <ul ngbNav class="nav-tabs" #tabContent="ngbNav" (activeId)="tab.active" (navChange)="tab.onChange($event)">
             <li [ngbNavItem]="tabList.ID" *ngFor="let tabList of tab.list">
               <a ngbNavLink (click)="tab.title = tabList.label">{{tabList.label[appService.lang] | titlecase}}</a>
               <ng-template ngbNavContent>

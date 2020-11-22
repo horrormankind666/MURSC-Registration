@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๗/๑๑/๒๕๖๓>
+Modify date : <๑๘/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -87,6 +87,10 @@ export class AppService  {
   public urlAuthenServer: string;
   public urlAPI: string;
   public urlSignOut: string;
+  public monthNames: any = {
+    long: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    short: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  };
 
   textOverflowClamp(selector: string, line: number) {
     $clamp(document.querySelector(selector), {clamp: (this.deviceService.browser === 'IE' ? (line + 1) : line)});

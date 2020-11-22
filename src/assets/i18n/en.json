@@ -1,6 +1,7 @@
 {
   "systemName": "Mahidol University Registration Support Center ( MURSC )",
   "about": "About",
+  "by": "By",
   "undefined": "Undefined",
   "signin": {
     "label": "Sign in",

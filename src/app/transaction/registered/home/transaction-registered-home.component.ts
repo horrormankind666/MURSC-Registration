@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๘/๐๖/๒๕๖๓>
-Modify date : <๑๖/๑๑/๒๕๖๓>
+Modify date : <๑๘/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -81,7 +81,18 @@ export class TransactionRegisteredHomeComponent implements OnInit {
         },
         component: TransactionRegisteredPendingPaymentComponent
       }
-    ]
+    ],
+    onChange: (e: NgbNavChangeEvent) => {
+      this.authService.getIsAuthenticated().then((result: boolean) => {
+        if (!result)
+          this.appService.gotoSignIn();
+        else {
+          this.projectAbout.isCollapsed = [];
+          this.registeredLocationIDNoSeatNo.isCollapsed = [];
+          this.examScore.isCollapsed = [];
+        }
+      });
+    }
   };
 
   projectAbout: any = {
@@ -103,18 +114,6 @@ export class TransactionRegisteredHomeComponent implements OnInit {
   studyResultsTranscript: any = {
     isCollapsed: []
   };
-
-  tabOnChange(e: NgbNavChangeEvent) {
-    this.authService.getIsAuthenticated().then((result: boolean) => {
-      if (!result)
-        this.appService.gotoSignIn();
-      else {
-        this.projectAbout.isCollapsed = [];
-        this.registeredLocationIDNoSeatNo.isCollapsed = [];
-        this.examScore.isCollapsed = [];
-      }
-    });
-  }
 
   ngOnInit() {
     this.data.projectCategory$ = this.route.snapshot.data.projectCategory$;
