@@ -2,14 +2,14 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๑๙/๑๑/๒๕๖๓>
+Modify date : <๒๔/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 @import 'font.scss';
 
-$color-primary: #FF007A;
+$color-primary: #337AB7;
 $color-secondary: #A6C;
 $color-success: mediumseagreen;
 $color-danger: #D43F3A;
@@ -174,6 +174,9 @@ $line-clamp-line-height: 1.7;
 }
 .font-sans-serif {
   font-family: sans-serif;
+}
+.font-oswald {
+  font-family: 'Oswald', sans-serif;
 }
 .line-height-0 {
   line-height: 0 !important;
@@ -1555,11 +1558,14 @@ textarea {
     padding-top: 0.65rem;
   }
 }
-.text-decoration {
+.text-underline {
   text-decoration: underline !important;
 }
 .text-black {
   color: #000000 !important;
+}
+.text-black-10 {
+  color: $color-black-10 !important;
 }
 .text-samritdat {
   color: $color-samritdat !important;
@@ -1568,7 +1574,7 @@ textarea {
   color: $color-dammuek !important;
 }
 .text-primary-v2 {
-  color: $color-primary !important;
+  color: #FF007A !important;
 }
 .text-success-v2 {
   color: $color-success !important;
@@ -1703,5 +1709,67 @@ textarea {
     -ms-flex: 0 0 20%;
     flex: 0 0 20%;
     max-width: 20%;
+  }
+}
+.coupon {
+  table-layout: fixed;
+  border: 1px dashed #000000;
+  min-height: 120px;
+}
+.coupon .kiri {
+  width: 120px;
+  max-width: 120px;
+  border-top-left-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+}
+.coupon .kiri .icon-container {
+  display: block;
+}
+.coupon .tengah .title .category {
+  display: none;
+  background: rgba(239, 165, 6, .1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  width: max-content;
+}
+.coupon .kanan {
+  border-left: 2px dashed #DDDDDD;
+  width: 120px;
+  max-width: 120px;
+  position: relative;
+}
+.coupon .kanan::after,
+.coupon .kanan::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: #171717;
+  border-radius: 50%;
+  position: absolute;
+  left: -11px
+}
+.coupon .kanan::before {
+  top: -10px;
+}
+.coupon .kanan::after {
+  bottom: -10px;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .coupon .kanan::after {
+    display: none;
+  }
+}
+.coupon .time {
+  font-size: 1.6rem;
+}
+@media screen and (max-width: 576px) {
+  .coupon .kiri {
+    width: 90px;
+    max-width: 90px;
+  }
+  .coupon .kanan {
+    width: 40%;
+    max-width: 0;
   }
 }

@@ -2,10 +2,12 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๙/๑๐/๒๕๖๒>
-Modify date : <๑๓/๐๘/๒๕๖๓>
+Modify date : <๒๔/๑๑/๒๕๖๓>
 Description : <style sheet สำหรับจัดรูปแบบฟอนต์>
 =============================================
 */
+
+@import url('https://fonts.googleapis.com/css?family=Oswald');
 
 $path-font: 'src/assets/font/';
 $path-font-extralight: ($path-font + 'pridi-extralight.ttf');
@@ -132,6 +134,12 @@ $font-src-local-medium: 'medium';
 }
 .bolder {
   font-weight: $font-weight-class-bolder !important;
+}
+.strike {
+  text-decoration: line-through !important;
+}
+.underline {
+  text-decoration: underline !important;
 }
 .size72 {
   font-size: 72px !important;

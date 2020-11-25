@@ -319,7 +319,7 @@
       <span id="sectionSchedule" [ngbCollapse]="!sectionSchedule.isCollapsed[data.ID]">
         {{data.transLocation.location.name[appService.lang]}}<br />
         {{'teachingType.onlineClass' | translate | titlecase}}<br />
-        <a class="link regular size14" href="javascript:void(0)" (click)="scheduleService.getModalTransSchedule(data.transProject)">#{{'schedule.label' | translate | lowercase}}</a>
+        <a class="link regular size14" href="javascript:void(0)" (click)="scheduleService.getModalTransSchedule(data.transProject)">#{{'schedule.label' | translate | titlecase}}</a>
       </span>
       <span id="studyResultsTranscript" [ngbCollapse]="!studyResultsTranscript.isCollapsed[data.ID]">
         <span class="bold text-dark">n/a</span>
@@ -350,10 +350,20 @@
               <div class="form-group w-100 row mb-01 wrap wrap-step2">
                 <label for="col-registrationfee" class="col-form-label">{{'project.registrationFee' | translate | titlecase}}</label>
                 <div class="col">
-                  <span class="form-text regular">
-                    {{(data.invoice.payment.status === 'Y' || data.invoice.payment.status === 'W') ? (data.invoice.payment.amount ? ((data.invoice.payment.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
-                    {{data.invoice.payment.status === 'N' ? (data.totalFeeAmount ? ((data.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
-                  </span>
+                  <div class="form-text">
+                    <span class="regular"
+                      [ngClass]="{
+                        'strike': data.invoice.privilegeCode,
+                        'text-muted': data.invoice.privilegeCode
+                      }">
+                      {{(data.invoice.payment.status === 'Y' || data.invoice.payment.status === 'W') ? (data.invoice.payment.amount ? ((data.invoice.payment.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
+                      {{data.invoice.payment.status === 'N' ? (data.totalFeeAmount ? ((data.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
+                    </span>
+                    <div *ngIf="data.invoice.privilegeCode">
+                      0 {{'unit.baht' | translate | titlecase}}
+                      <span class="ml-1"><a class="link regular size14" href="javascript:void(0)" (click)="privilegeService.getModalPrivilegeUsed()">#{{'privilege.used' | translate | titlecase}}</a></span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group w-100 row mb-01" *ngIf="data.invoice.payment.status !== 'N'">
@@ -408,11 +418,22 @@
     <div class="d-inline-block jumbotron rounded-xl bg-dark text-left pt-2 pr-3 pb-1 pl-3 mr-2 mb-0 jumbotron-registrationfee">
       <div class="regular text-white-50 size14">{{'project.registrationFee' | translate | titlecase}}</div>
       <div class="jumbotron-body">
-        <div class="regular text-white">
-          <span class="bold size20">
+        <div class="regular text-white bold size20">
+          <span
+            [ngClass]="{
+              'strike': data.invoice.privilegeCode,
+              'text-muted': data.invoice.privilegeCode
+            }">
             {{(data.invoice.payment.status === 'Y' || data.invoice.payment.status === 'W') ? (data.invoice.payment.amount ? ((data.invoice.payment.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
             {{data.invoice.payment.status === 'N' ? (data.totalFeeAmount ? ((data.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
           </span>
+          <div *ngIf="data.invoice.privilegeCode">
+            <div>
+              <div class="float-left">0 {{'unit.baht' | translate | titlecase}}</div>
+              <div class="float-right"><a class="link regular size14" href="javascript:void(0)" (click)="privilegeService.getModalPrivilegeUsed()">#{{'privilege.used' | translate | titlecase}}</a></div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
         </div>
       </div>
     </div>

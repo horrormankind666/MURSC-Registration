@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๑๑/๑๑/๒๕๖๓>
+Modify date : <๒๓/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -172,7 +172,8 @@ export namespace Schema {
       by?: string,
       date?: string,
       status?: string
-    }
+    },
+    privilegeCode?: string
   }
 
   export interface InvoiceFee {
@@ -1015,7 +1016,8 @@ namespace Data {
                 by: (dr1['paidBy'] ? dr1['paidBy'] : ''),
                 date: (dr1['paidDates'] ? dr1['paidDates'] : ''),
                 status: (dr1['paidStatus'] ? dr1['paidStatus'] : 'N')
-              }
+              },
+              privilegeCode: (dr1['privilegeCode'] ? dr1['privilegeCode'] : '')
             },
             invoiceFee: invoiceFee,
             totalFeeAmount: (dr1['totalFeeAmount'] ? parseFloat(dr1['totalFeeAmount']) : 0),

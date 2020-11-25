@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๘/๐๖/๒๕๖๓>
-Modify date : <๑๘/๑๑/๒๕๖๓>
+Modify date : <๒๓/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -18,6 +18,7 @@ import {AppService} from '../../../app.service';
 import {AuthService} from '../../../auth.service';
 import {DataService} from '../../../data.service';
 import {ScheduleService} from '../../../schedule/schedule.service';
+import {PrivilegeService} from '../../../privilege/privilege.service';
 import {TransactionRegisteredService as TransRegisteredService} from '../transaction-registered.service';
 
 import {TransactionRegisteredAllComponent} from './transaction-registered-all.component';
@@ -37,6 +38,7 @@ export class TransactionRegisteredHomeComponent implements OnInit {
     private authService: AuthService,
     private dataService: DataService,
     private scheduleService: ScheduleService,
+    private privilegeService: PrivilegeService,
     private transRegisteredService: TransRegisteredService
   ) {}
 

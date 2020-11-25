@@ -260,6 +260,7 @@
         "code": "Please fill in the privilege code.",
         "privilegeExpire": "This privilege has expired."
       }
-    }
+    },
+    "used": "Privileges used"
   }
 }
