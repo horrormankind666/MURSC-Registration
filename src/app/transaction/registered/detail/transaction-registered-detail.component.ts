@@ -2,14 +2,14 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๙/๐๖/๒๕๖๓>
-Modify date : <๑๗/๑๑/๒๕๖๓>
+Modify date : <๒๕/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 'use strict';
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {AppService} from '../../../app.service';
@@ -18,10 +18,13 @@ import {Schema, DataService} from '../../../data.service';
 import {ModalService, BtnMsg} from '../../../modal/modal.service';
 import {ScheduleService} from '../../../schedule/schedule.service';
 
+import {PrivilegeComponent} from '../../../privilege/privilege.component';
+
 @Component({
   selector: 'app-transaction-registered-detail',
   templateUrl: './transaction-registered-detail.component.html',
-  styleUrls: ['./transaction-registered-detail.component.scss']
+  styleUrls: ['./transaction-registered-detail.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TransactionRegisteredDetailComponent implements OnInit {
   constructor(
@@ -122,58 +125,6 @@ export class TransactionRegisteredDetailComponent implements OnInit {
       },
       action() {
         this.isValid = this.validate();
-      }
-    },
-    privilege: {
-      that: {},
-      formField: {
-        code: ''
-      },
-      watchChange() {
-        this.confirm.isValid = true;
-        this.confirm.errorCode = 0;
-      },
-      confirm: {
-        that: {},
-        isValid: true,
-        isVerifying: false,
-        errorCode: 0,
-        getValue(): {} {
-          /*
-          let fee: Schema.TransFeeType[] = [];
-
-          for (let i = 0; i < this.that.data.transRegistered$.transFeeType.length; i++) {
-            if (this.that.data.transRegistered$.transFeeType[i].isSelected)
-            fee.push(this.that.data.transRegistered$.transFeeType[i].feeType);
-          }
-
-          let result: {} = {
-            transRegisteredID: (this.that.data.transRegistered$.ID ? this.that.data.transRegistered$.ID : null),
-            fee: fee
-          }
-
-          return (result ? result : null);
-          */
-         return null;
-        },
-        validate(): boolean {
-          if (!this.that.feeType.privilege.formField.code)
-              return false;
-
-          return true;
-        },
-        action() {
-          this.isValid = this.validate();
-
-          if (this.isValid) {
-            this.isVerifying = true;
-
-            setTimeout(() => {
-              this.isVerifying = false;
-              this.errorCode = 1;
-            }, 2000)
-          }
-        }
       }
     }
   };
@@ -380,7 +331,61 @@ export class TransactionRegisteredDetailComponent implements OnInit {
         this.isValid = this.validate();
       }
     }
-  }
+  };
+
+  privilege: any = {
+    that: {},
+    formField: {
+      code: ''
+    },
+    component: PrivilegeComponent,
+    watchChange() {
+      this.confirm.isValid = true;
+      this.confirm.errorCode = 0;
+    },
+    confirm: {
+      that: {},
+      isValid: true,
+      isVerifying: false,
+      errorCode: 0,
+      getValue(): {} {
+        /*
+        let fee: Schema.TransFeeType[] = [];
+
+        for (let i = 0; i < this.that.data.transRegistered$.transFeeType.length; i++) {
+          if (this.that.data.transRegistered$.transFeeType[i].isSelected)
+          fee.push(this.that.data.transRegistered$.transFeeType[i].feeType);
+        }
+
+        let result: {} = {
+          transRegisteredID: (this.that.data.transRegistered$.ID ? this.that.data.transRegistered$.ID : null),
+          fee: fee
+        }
+
+        return (result ? result : null);
+        */
+       return null;
+      },
+      validate(): boolean {
+        if (!this.that.privilege.formField.code)
+            return false;
+
+        return true;
+      },
+      action() {
+        this.isValid = this.validate();
+
+        if (this.isValid) {
+          this.isVerifying = true;
+
+          setTimeout(() => {
+            this.isVerifying = false;
+            this.errorCode = 1;
+          }, 2000)
+        }
+      }
+    }
+  };
 
   ngOnInit() {
     this.data.transRegistered$ = this.route.snapshot.data.transRegistered$;
@@ -420,9 +425,6 @@ export class TransactionRegisteredDetailComponent implements OnInit {
         this.feeType.setValue();
         this.feeType.totalFeeAmount = this.feeType.getTotalFeeAmount();
 
-        this.feeType.privilege.that = this;
-        this.feeType.privilege.confirm.that = this;
-
         this.deliAddress.that = this;
         this.deliAddress.saveChange.that = this;
         this.deliAddress.setValue(true);
@@ -431,6 +433,9 @@ export class TransactionRegisteredDetailComponent implements OnInit {
         this.payment.saveChange.that = this;
         this.payment.setValue(true);
 
+        this.privilege.that = this;
+        this.privilege.confirm.that = this;
+
         this.saveChange.that = this;
       }
     }
@@ -438,9 +443,9 @@ export class TransactionRegisteredDetailComponent implements OnInit {
 
   watchChange() {
     this.feeType.watchChange();
-    this.feeType.privilege.watchChange();
     this.deliAddress.watchChange();
     this.payment.watchChange();
+    this.privilege.watchChange();
     this.saveChange.isValid = true;
   }
 

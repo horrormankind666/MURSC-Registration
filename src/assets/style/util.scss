@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๔/๑๑/๒๕๖๓>
+Modify date : <๒๕/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -1714,11 +1714,12 @@ textarea {
 .coupon {
   table-layout: fixed;
   border: 1px dashed #000000;
-  min-height: 120px;
+  border-collapse: separate;
+  min-height: 114px;
 }
 .coupon .kiri {
-  width: 120px;
-  max-width: 120px;
+  width: 114px;
+  max-width: 114px;
   border-top-left-radius: 0.75rem;
   border-bottom-left-radius: 0.75rem;
 }
@@ -1734,8 +1735,8 @@ textarea {
 }
 .coupon .kanan {
   border-left: 2px dashed #DDDDDD;
-  width: 120px;
-  max-width: 120px;
+  width: 114px;
+  max-width: 114px;
   position: relative;
 }
 .coupon .kanan::after,
@@ -1760,16 +1761,13 @@ textarea {
     display: none;
   }
 }
-.coupon .time {
-  font-size: 1.6rem;
-}
 @media screen and (max-width: 576px) {
   .coupon .kiri {
-    width: 90px;
-    max-width: 90px;
+    width: 90px !important;
+    max-width: 90px !important;
   }
   .coupon .kanan {
-    width: 40%;
-    max-width: 0;
+    width: 40% !important;
+    max-width: 0 !important;
   }
 }

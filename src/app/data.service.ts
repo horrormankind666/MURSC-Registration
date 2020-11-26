@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๒๓/๑๑/๒๕๖๓>
+Modify date : <๒๕/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -1201,11 +1201,11 @@ namespace Data {
               dateTime: {
                 start: {
                   date: startDateTime.substring(0, 10),
-                  time: startDateTime.substring(11, 5)
+                  time: startDateTime.substring(11, 16)
                 },
                 end: {
                   date: endDateTime.substring(0, 10),
-                  time: endDateTime.substring(11, 5)
+                  time: endDateTime.substring(11, 16)
                 }
               },
               instructor: (dr2['instructor'] ? dr2['instructor'] : ''),

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๒/๑๑/๒๕๖๓>
-Modify date : <๑๙/๑๑/๒๕๖๓>
+Modify date : <๒๖/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -29,14 +29,14 @@ Description : <>
 }
 .schedule-view .tabset .nav-tabs .nav-item {
   display: inline-block !important;
-  width: 123px;
+  width: 140px;
   height: 50px;
   margin-right: 0;
   margin-bottom: 0;
 }
 .schedule-view .tabset .nav-tabs .nav-link {
-  line-height: 1.5 !important;
-  font-size: 1.4rem;
+  line-height: 1.6 !important;
+  font-size: 1.2rem;
 }
 .schedule-view .tabset .nav-tabs .nav-link,
 .schedule-view .tabset .nav-tabs .nav-link:focus {
@@ -49,6 +49,26 @@ Description : <>
   box-shadow: 0 0 0 transparent;
   margin-right: 0;
   font-weight: $font-weight-class-bold !important;
+}
+@media screen and (max-width: 468px) {
+  @include tabset-responsive('.schedule-view.tabset-wrap-item3');
+}
+@media screen and (max-width: 608px) {
+  @include tabset-responsive('.schedule-view.tabset-wrap-item4');
+}
+@media screen and (max-width: 748px) {
+  @include tabset-responsive('.schedule-view.tabset-wrap-item5');
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  @media screen and (max-width: 469px) {
+    @include tabset-responsive('.schedule-view.tabset-wrap-item3');
+  }
+  @media screen and (max-width: 609px) {
+    @include tabset-responsive('.schedule-view.tabset-wrap-item4');
+  }
+  @media screen and (max-width: 749px) {
+    @include tabset-responsive('.schedule-view.tabset-wrap-item5');
+  }
 }
 .schedule-view .section-schedule-info .jumbotron {
   background: rgba(255, 255, 255, 0.6);
@@ -65,9 +85,9 @@ Description : <>
   //background: rgba(239, 165, 6, .1);
   font-family: sans-serif;
   font-weight: 600;
-  //padding: 0.4rem 0.6rem; 
+  //padding: 0.4rem 0.6rem;
   padding: 0;
-  border-radius: 0; 
+  border-radius: 0;
 }
 .schedule-view .date-card.card.start {
   border: 1px solid rgb(40, 167, 69);
@@ -129,5 +149,5 @@ Description : <>
   }
   .schedule-view .section-schedule-info .jumbotron .col-lesson .title .timeby .by {
     padding-left: 0.1rem !important;
-  } 
+  }
 }

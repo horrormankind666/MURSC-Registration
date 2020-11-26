@@ -2,14 +2,14 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๓๑/๐๓/๒๕๖๓>
-Modify date : <๑๗/๑๑/๒๕๖๓>
+Modify date : <๒๕/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
 
 'use strict';
 
-import {Component, ViewChild, OnInit, Input, Type, ComponentRef, ComponentFactoryResolver, ViewContainerRef} from '@angular/core';
+import {Component, ComponentRef, ComponentFactoryResolver, ViewChild, ViewContainerRef, Input, Type, OnInit} from '@angular/core';
 
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 

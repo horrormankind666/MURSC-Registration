@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๑/๐๖/๒๕๖๓>
-Modify date : <๑๒/๑๐/๒๕๖๓>
+Modify date : <๒๕/๑๐/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -104,6 +104,30 @@ Description : <>
   min-width: 85px !important;
   width: 85px !important;
   border-bottom-right-radius: 0 !important;
+}
+.transaction-registered-detail-view .fee-info .privilege-view .coupon {
+  border: 0;
+  min-height: 92px;
+}
+.transaction-registered-detail-view .fee-info .privilege-view .coupon .kiri,
+.transaction-registered-detail-view .fee-info .privilege-view .coupon .kanan {
+  width: 92px;
+  max-width: 92px;
+}
+.transaction-registered-detail-view .fee-info .privilege-view .coupon .tengah,
+.transaction-registered-detail-view .fee-info .privilege-view .coupon .kanan {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+.transaction-registered-detail-view .fee-info .privilege-view .coupon .tengah .title .subject {
+  font-size: 16px !important;
+}
+.transaction-registered-detail-view .fee-info .privilege-view .coupon .tengah .detail {
+  font-size: 0.9rem !important;
+}
+.transaction-registered-detail-view .fee-info .privilege-view .coupon .kanan::after,
+.transaction-registered-detail-view .fee-info .privilege-view .coupon .kanan::before {
+  background: #E9ECEF;
 }
 .transaction-registered-detail-view .payment-info .form .inputbox {
   border-color: rgba(0, 0, 0, 0.15) !important;

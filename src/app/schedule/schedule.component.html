@@ -1,9 +1,14 @@
-<div class="schedule-view">
+<div class="schedule-view"
+  [ngClass]="{
+    'tabset-wrap-item3': (data.transSchedule$.length === 3),
+    'tabset-wrap-item4': (data.transSchedule$.length === 4),
+    'tabset-wrap-item5': (data.transSchedule$.length === 5)
+  }">
   <div class="bold text-light text-center size24 pb-2">{{data.transSchedule$[0].transProject.project.name[appService.lang]}}</div>
   <div class="tabset text-center mt-3">
     <ul ngbNav class="nav-tabs" #tabContent="ngbNav" [(activeId)]="section.active">
       <li [ngbNavItem]="order + 1" *ngFor="let sections of data.transSchedule$; index as order">
-        <a ngbNavLink>{{sections.section | titlecase}}</a>
+        <a class="font-oswald" ngbNavLink>{{sections.section | titlecase}}</a>
         <ng-template ngbNavContent>
           <div class="section-schedule-info">
             <div class="jumbotron" *ngFor="let schedule of sections.schedules; index as order">
@@ -16,10 +21,10 @@
                 <div class="d-table-cell col-lesson">
                   <div class="title">
                     <div class="bold text-samritdat size22 lessonname">{{schedule.lessonName[appService.lang] | titlecase}}</div>
-                    <div class="text-primary-v2 size16 mt-06 timeby">  
+                    <div class="text-primary-v2 size16 mt-06 timeby">
                       <div class="d-table">
                         <div class="d-table-cell time">
-                          <span class="text-dammuek size14">00:00 - 00:00</span>
+                          <span class="text-dammuek size14">{{schedule.dateTime.start.time}} - {{schedule.dateTime.end.time}}</span>
                         </div>
                         <div class="d-table-cell pl-2 by">
                           <span class="bold size14">{{'by' | translate | titlecase}}</span>
