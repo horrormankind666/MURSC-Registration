@@ -9,13 +9,16 @@
     <div class="d-table-cell align-middle w-100 p-3 tengah">
       <div class="title">
         <div class="regular text-monospace text-muted size12 category">MU Privilege</div>
-        <span class="bold size20 subject">โครงการสอบซ่อม MU-ELT</span>
+        <span class="bold size20 subject">{{data.privilege$.name}}</span>
       </div>
-      <p class="regular text-dammuek mb-0 detail">สอบฟรี 1 ครั้ง</p>
-      <div class="font-oswald regular text-black-50 size12 mt-2 date-exp">Exp. 10/10/2020</div>
+      <p class="regular text-dammuek mb-0 detail">{{data.privilege$.detail}}</p>
+      <div class="font-oswald regular text-black-50 size10 mt-2 date-exp">
+        <span *ngIf="data.privilege$.status === 'Y'">Usaged Date {{data.privilege$.usagedDate | slice:0:16}}</span>
+        <span *ngIf="data.privilege$.status !== 'Y'">Expired Date {{data.privilege$.expiredDate | slice:0:16}}</span>
+      </div>
     </div>
     <div class="d-table-cell align-middle pt-3 pr-2 pb-3 pl-2 kanan">
-      <div class="text-center text-success-v2 size36"><i class="fas fa-check-circle"></i></div>
+      <div class="text-center text-success-v2 size36" *ngIf="data.privilege$.status === 'Y'"><i class="fas fa-check-circle"></i></div>
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๕/๑๑/๒๕๖๓>
+Modify date : <๒๗/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -170,13 +170,13 @@ $line-clamp-line-height: 1.7;
   font-family: $font-family;
 }
 .font-tahoma {
-  font-family: Tahoma;
+  font-family: Tahoma !important;
 }
 .font-sans-serif {
-  font-family: sans-serif;
+  font-family: sans-serif !important;
 }
 .font-oswald {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', sans-serif !important;
 }
 .line-height-0 {
   line-height: 0 !important;
@@ -1715,11 +1715,14 @@ textarea {
   table-layout: fixed;
   border: 1px dashed #000000;
   border-collapse: separate;
-  min-height: 114px;
+  min-height: 111px;
+}
+.coupon .kiri,
+.coupon .kanan {
+  width: 111px;
+  max-width: 111px;
 }
 .coupon .kiri {
-  width: 114px;
-  max-width: 114px;
   border-top-left-radius: 0.75rem;
   border-bottom-left-radius: 0.75rem;
 }
@@ -1735,8 +1738,6 @@ textarea {
 }
 .coupon .kanan {
   border-left: 2px dashed #DDDDDD;
-  width: 114px;
-  max-width: 114px;
   position: relative;
 }
 .coupon .kanan::after,

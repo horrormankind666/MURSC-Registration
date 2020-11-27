@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๑/๐๖/๒๕๖๓>
-Modify date : <๒๕/๑๐/๒๕๖๓>
+Modify date : <๒๗/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -107,17 +107,24 @@ Description : <>
 }
 .transaction-registered-detail-view .fee-info .privilege-view .coupon {
   border: 0;
-  min-height: 92px;
+  min-height: 88px;
 }
 .transaction-registered-detail-view .fee-info .privilege-view .coupon .kiri,
 .transaction-registered-detail-view .fee-info .privilege-view .coupon .kanan {
-  width: 92px;
-  max-width: 92px;
+  width: 88px;
+  max-width: 88px;
+}
+@media screen and (max-width: 576px) {
+  .transaction-registered-detail-view .fee-info .privilege-view .coupon .kiri {
+    width: 75px !important;
+    max-width: 75px !important;
+  }
 }
 .transaction-registered-detail-view .fee-info .privilege-view .coupon .tengah,
 .transaction-registered-detail-view .fee-info .privilege-view .coupon .kanan {
   padding-top: 0.5rem !important;
   padding-bottom: 0.5rem !important;
+  padding-left: 0.5rem !important;
 }
 .transaction-registered-detail-view .fee-info .privilege-view .coupon .tengah .title .subject {
   font-size: 16px !important;

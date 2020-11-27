@@ -353,15 +353,15 @@
                   <div class="form-text">
                     <span class="regular"
                       [ngClass]="{
-                        'strike': data.invoice.privilegeCode,
-                        'text-muted': data.invoice.privilegeCode
+                        'strike': data.invoice.privilege.code,
+                        'text-muted': data.invoice.privilege.code
                       }">
                       {{(data.invoice.payment.status === 'Y' || data.invoice.payment.status === 'W') ? (data.invoice.payment.amount ? ((data.invoice.payment.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
                       {{data.invoice.payment.status === 'N' ? (data.totalFeeAmount ? ((data.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
                     </span>
-                    <div *ngIf="data.invoice.privilegeCode">
-                      0 {{'unit.baht' | translate | titlecase}}
-                      <span class="ml-1"><a class="link regular size14" href="javascript:void(0)" (click)="privilegeService.getModalPrivilegeUsed()">#{{'privilege.used' | translate | titlecase}}</a></span>
+                    <div *ngIf="data.invoice.privilege.code">
+                      {{data.invoice.payment.amount - data.invoice.privilege.discount}} {{'unit.baht' | translate | titlecase}}
+                      <span class="ml-1"><a class="link regular size14" href="javascript:void(0)" (click)="privilegeService.getModalPrivilegeUsed(data.invoice.privilege)">#{{'privilege.used' | translate | titlecase}}</a></span>
                     </div>
                   </div>
                 </div>
@@ -421,16 +421,16 @@
         <div class="regular text-white bold size20">
           <span
             [ngClass]="{
-              'strike': data.invoice.privilegeCode,
-              'text-muted': data.invoice.privilegeCode
+              'strike': data.invoice.privilege.code,
+              'text-muted': data.invoice.privilege.code
             }">
             {{(data.invoice.payment.status === 'Y' || data.invoice.payment.status === 'W') ? (data.invoice.payment.amount ? ((data.invoice.payment.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
             {{data.invoice.payment.status === 'N' ? (data.totalFeeAmount ? ((data.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
           </span>
-          <div *ngIf="data.invoice.privilegeCode">
+          <div *ngIf="data.invoice.privilege.code">
             <div>
-              <div class="float-left">0 {{'unit.baht' | translate | titlecase}}</div>
-              <div class="float-right"><a class="link regular size14" href="javascript:void(0)" (click)="privilegeService.getModalPrivilegeUsed()">#{{'privilege.used' | translate | titlecase}}</a></div>
+              <div class="float-left">{{data.invoice.payment.amount - data.invoice.privilege.discount}} {{'unit.baht' | translate | titlecase}}</div>
+              <div class="float-right"><a class="link regular size14" href="javascript:void(0)" (click)="privilegeService.getModalPrivilegeUsed(data.invoice.privilege)">#{{'privilege.used' | translate | titlecase}}</a></div>
             </div>
             <div class="clearfix"></div>
           </div>

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๒๕/๑๑/๒๕๖๓>
+Modify date : <๒๗/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -173,7 +173,7 @@ export namespace Schema {
       date?: string,
       status?: string
     },
-    privilegeCode?: string
+    privilege?: Privilege
   }
 
   export interface InvoiceFee {
@@ -307,6 +307,17 @@ export namespace Schema {
     transProject?: TransProject,
     section?: string,
 		schedules?: Schedules[]
+  }
+
+  export interface Privilege {
+    ID?: string,
+    code?: string,
+    name?: string,
+    detail?: string,
+    discount?: number,
+    expiredDate?: string,
+    usagedDate?: string,
+    status?: string
   }
 }
 
@@ -1017,7 +1028,16 @@ namespace Data {
                 date: (dr1['paidDates'] ? dr1['paidDates'] : ''),
                 status: (dr1['paidStatus'] ? dr1['paidStatus'] : 'N')
               },
-              privilegeCode: (dr1['privilegeCode'] ? dr1['privilegeCode'] : '')
+              privilege: {
+                ID: (dr1['privilegeID'] ? dr1['privilegeID'] : ''),
+                code: (dr1['privilegeCode'] ? dr1['privilegeCode'] : ''),
+                name: (dr1['privilegeName'] ? dr1['privilegeName'] : ''),
+                detail: (dr1['privilegeDetail'] ? dr1['privilegeDetail'] : ''),
+                discount: (dr1['discount'] ? parseFloat(dr1['discount']) : 0),
+                expiredDate: (dr1['privilegeExpireds'] ? dr1['privilegeExpireds'] : ''),
+                usagedDate: (dr1['privilegeUsagedDates'] ? dr1['privilegeUsagedDates'] : ''),
+                status: (dr1['privilegeStatus'] ? dr1['privilegeStatus'] : '')
+              }
             },
             invoiceFee: invoiceFee,
             totalFeeAmount: (dr1['totalFeeAmount'] ? parseFloat(dr1['totalFeeAmount']) : 0),

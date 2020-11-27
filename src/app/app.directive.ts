@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๕/๐๕/๒๕๖๓>
-Modify date : <๑๑/๐๘/๒๕๖๓>
+Modify date : <๒๗/๑๑/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -54,6 +54,7 @@ export class FocusRemoverDirective {
 })
 export class DynamicComponentDirective implements OnInit {
   @Input('dynamicComponent') component: Type<any>;
+  @Input('data$') data$;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -65,7 +66,8 @@ export class DynamicComponentDirective implements OnInit {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.component)
 
     this.viewContainerRef.clear();
-    this.viewContainerRef.createComponent(componentFactory);
+    const newViewContainerRef = this.viewContainerRef.createComponent(componentFactory);
+    if (this.data$) newViewContainerRef.instance.data$ = this.data$;
     this.changeDetectorRef.detectChanges();
   }
 }
