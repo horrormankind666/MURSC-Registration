@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๒๗/๑๑/๒๕๖๓>
+Modify date : <๑๘/๑๒/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -176,7 +176,7 @@ $line-clamp-line-height: 1.7;
   font-family: sans-serif !important;
 }
 .font-oswald {
-  font-family: 'Oswald', sans-serif !important;
+  font-family: 'Oswald', $font-family !important;
 }
 .line-height-0 {
   line-height: 0 !important;
@@ -690,6 +690,9 @@ body.modal-open {
 .image-dialog .modal-header,
 .formless-dialog .modal-header {
   background: transparent;
+}
+.formless-dialog .modal-header {
+  padding-left: 40px !important;
 }
 .image-dialog .modal-header .close,
 .formless-dialog .modal-header .close {

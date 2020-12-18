@@ -232,7 +232,7 @@
           'w-50': (data.registrationStatus === 'Y'),
           'w-100': (data.registrationStatus !== 'Y')
         }">
-        <a class="btn w-100 rounded-0" href="javascript:void(0)" (click)="getTransProject(data)"><span class="regular text-dark size16">{{'detail' | translate | titlecase}}</span></a>
+        <a class="btn w-100 rounded-0" href="javascript:void(0)" (click)="projectService.getModalTransProject(data)"><span class="regular text-dark size16">{{'detail' | translate | titlecase}}</span></a>
       </div>
       <div class="d-table-cell w-50 pl-1" *ngIf="data.registrationStatus === 'Y'">
         <a [routerLink]="['../Registered', data.CUID]" routerLinkActive="active" class="btn w-100 rounded-0"><span class="regular text-dark size16">{{'registered.label' | translate | titlecase}}</span></a>

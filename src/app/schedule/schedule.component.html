@@ -1,5 +1,6 @@
 <div class="schedule-view"
   [ngClass]="{
+    'tabset-wrap-item2': (data.transSchedule$.length === 2),
     'tabset-wrap-item3': (data.transSchedule$.length === 3),
     'tabset-wrap-item4': (data.transSchedule$.length === 4),
     'tabset-wrap-item5': (data.transSchedule$.length === 5)
