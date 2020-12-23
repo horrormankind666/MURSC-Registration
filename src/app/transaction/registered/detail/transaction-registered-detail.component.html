@@ -762,7 +762,7 @@
                   {{data.transRegistered$.totalFeeAmount ? ((data.transRegistered$.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
                 </span>
                 <div *ngIf="data.transRegistered$.invoice.privilege.code">
-                  {{data.transRegistered$.totalFeeAmount - data.transRegistered$.invoice.privilege.discount}} {{'unit.baht' | translate | titlecase}}
+                  {{(data.transRegistered$.totalFeeAmount >= data.transRegistered$.invoice.privilege.discount) ? (data.transRegistered$.totalFeeAmount - data.transRegistered$.invoice.privilege.discount) : 0}} {{'unit.baht' | translate | titlecase}}
                 </div>
               </div>
             </div>

@@ -360,7 +360,7 @@
                       {{data.invoice.payment.status === 'N' ? (data.totalFeeAmount ? ((data.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : '') : ''}}
                     </span>
                     <div *ngIf="data.invoice.privilege.code">
-                      {{data.invoice.payment.amount - data.invoice.privilege.discount}} {{'unit.baht' | translate | titlecase}}
+                      {{(data.invoice.payment.amount >= data.invoice.privilege.discount) ? (data.invoice.payment.amount - data.invoice.privilege.discount) : 0}} {{'unit.baht' | translate | titlecase}}
                       <span class="ml-1"><a class="link regular size14" href="javascript:void(0)" (click)="privilegeService.getModalPrivilegeUsed(data.invoice.privilege)">#{{'privilege.used' | translate | titlecase}}</a></span>
                     </div>
                   </div>
@@ -429,7 +429,7 @@
           </span>
           <div *ngIf="data.invoice.privilege.code">
             <div>
-              <div class="float-left">{{data.invoice.payment.amount - data.invoice.privilege.discount}} {{'unit.baht' | translate | titlecase}}</div>
+              <div class="float-left">{{(data.invoice.payment.amount >= data.invoice.privilege.discount) ? (data.invoice.payment.amount - data.invoice.privilege.discount) : 0}} {{'unit.baht' | translate | titlecase}}</div>
               <div class="float-right"><a class="link regular size14" href="javascript:void(0)" (click)="privilegeService.getModalPrivilegeUsed(data.invoice.privilege)">#{{'privilege.used' | translate | titlecase}}</a></div>
             </div>
             <div class="clearfix"></div>
