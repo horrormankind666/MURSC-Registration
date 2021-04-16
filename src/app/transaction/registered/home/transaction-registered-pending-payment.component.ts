@@ -9,30 +9,30 @@ Description : <>
 
 'use strict';
 
-import {Component, OnInit} from '@angular/core';
-import {DecimalPipe} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 
 import {
-  TransactionRegisteredService as TransRegisteredService,
-  TransactionRegisteredPendingPaymentService as TransRegisteredPendingPaymentService
+    TransactionRegisteredService as TransRegisteredService,
+    TransactionRegisteredPendingPaymentService as TransRegisteredPendingPaymentService
 } from '../transaction-registered.service';
 
 @Component({
-  selector: 'app-transaction-registered-pending-payment',
-  template: '',
-  styles: [],
-  providers: [
-    TransRegisteredPendingPaymentService,
-    DecimalPipe
-  ]
+    selector: 'app-transaction-registered-pending-payment',
+    template: '',
+    styles: [],
+    providers: [
+        TransRegisteredPendingPaymentService,
+        DecimalPipe
+    ]
 })
 export class TransactionRegisteredPendingPaymentComponent implements OnInit {
-  constructor(
-    private transRegisteredService: TransRegisteredService,
-    private transRegisteredPendingPaymentService: TransRegisteredPendingPaymentService
-  ) {}
+    constructor(
+        private transRegisteredService: TransRegisteredService,
+        private transRegisteredPendingPaymentService: TransRegisteredPendingPaymentService
+    ) { }
 
-  ngOnInit() {
-    this.transRegisteredService.service = this.transRegisteredPendingPaymentService;
-  }
+    ngOnInit() {
+        this.transRegisteredService.service = this.transRegisteredPendingPaymentService;
+    }
 }

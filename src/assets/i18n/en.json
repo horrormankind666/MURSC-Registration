@@ -1,266 +1,266 @@
 {
-  "systemName": "Mahidol University Registration Support Center ( MURSC )",
-  "about": "About",
-  "by": "By",
-  "undefined": "Undefined",
-  "signin": {
-    "label": "Sign in",
-    "error": {
-      "validate": "Please sign in."
-    }
-  },
-  "signout": {
-    "label": "Sign out",
-    "confirm": "Confirm your would like to sign out."
-  },
-  "msgLoading": {
-    "loading": "Loading...",
-    "processing": "Processing...",
-    "saving": "Saving...",
-    "checking": "Checking..."
-  },
-  "pageNotFound": "Page not found.",
-  "notDownloadFile": "Unable to download this file.",
-  "save": {
-    "label": "Save",
-    "error": {
-      "validate": "Please fill in the information correctly and completely.",
-      "notSuccess": "Not successfully saved."
+    "systemName": "Mahidol University Registration Support Center ( MURSC )",
+    "about": "About",
+    "by": "By",
+    "undefined": "Undefined",
+    "signin": {
+        "label": "Sign in",
+        "error": {
+            "validate": "Please sign in."
+        }
     },
-    "confirm": "Do you want to save changes ?",
-    "success": "Successfully saved."
-  },
-  "cancel":"Cancel",
-  "reset": "Reset",
-  "ok": "Ok",
-  "close": "Close",
-  "confirm": "Confirm",
-  "select": "Select",
-  "registration": {
-    "label": "Registration",
-    "nowOpen": "Registration now open",
-    "comingSoon": "Registration coming soon"
-  },
-  "registered": {
-    "label": "Registered",
-    "info": "Registered information",
-    "detail": "Registered detail",
-    "date": "Registered date",
-    "on": "Registered on",
-    "confirm": "Confirm registered",
+    "signout": {
+        "label": "Sign out",
+        "confirm": "Confirm your would like to sign out."
+    },
+    "msgLoading": {
+        "loading": "Loading...",
+        "processing": "Processing...",
+        "saving": "Saving...",
+        "checking": "Checking..."
+    },
+    "pageNotFound": "Page not found.",
+    "notDownloadFile": "Unable to download this file.",
     "save": {
-      "error": {
-        "location": "Please select a location.",
-        "section": "Please select a section.",
-        "registrationStatus": {
-          "W": "This project not yet opened for registration.",
-          "N": "This project expired for registration."
+        "label": "Save",
+        "error": {
+            "validate": "Please fill in the information correctly and completely.",
+            "notSuccess": "Not successfully saved."
         },
-        "projectRegistered": "This project has already been registered.",
-        "locationSelected": "Location selected not found.",
-        "sectionSelected": "Section selected not found.",
-        "locationSelectedSeatAvailable": "This location does not have enough seat available.",
-        "sectionSelectedSeatAvailable": "This section does not have enough seat available.",
-        "fee": "Fee not found.",
-        "deliaddress": "Please fill in the address information correctly and completely."
-      }
+        "confirm": "Do you want to save changes ?",
+        "success": "Successfully saved."
     },
-    "error": {
-      "notFound": "No registration details were found this project.",
-      "haveNoRight": "You don’t have the right to register this project."
-    }
-  },
-  "items": "Items",
-  "order": "Order",
-  "status": "Status",
-  "detail": "Detail",
-  "found": "Found",
-  "from": "From",
-  "entries": "Entries",
-  "filter": "Filter",
-  "reload": "Reload",
-  "start": "Start",
-  "end": "End",
-  "startingDate": "Starting date",
-  "endingDate": "Ending Date",
-  "total": {
-    "label": "Total",
-    "amount": "Total amount"
-  },
-  "remain": "Remain",
-  "name": "Name",
-  "email": "Email",
-  "phone": "Phone",
-  "fee": "Fee",
-  "amount": "Amount",
-  "seat": {
-    "label": "Seat",
-    "seatTotal": "Seat total",
-    "seatAvailable": "Seat available",
-    "seatNo": "Seat no."
-  },
-  "payment": {
-    "label": "Payment",
-    "confirm": "Confirm payment",
-    "goto": "Go to payment",
-    "save": {
-      "error": {
-        "issueReceiptAs": "Please fill in the name of the recipient of the receipt.",
-        "paymentExpire": "Payment expire."
-      },
-      "confirm": {
-        "label": "Do you want to confirm payment for this registration ?",
-        "description": "Press \"Ok\" to generate a QR code for payment."
-      }
-    }
-  },
-  "paymentExpire": "Payment expire",
-  "unit": {
-    "label": "Unit",
-    "baht": "Bath",
-    "persons": "Persons"
-  },
-  "placeholder": {
-    "selectItem": "Select item"
-  },
-  "download": "Download",
-  "keyword": "Keyword",
-  "registrationStatus": "Registration status",
-  "user": {
-    "label": "User",
-    "info": "User information",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "ok": "Ok",
+    "close": "Close",
+    "confirm": "Confirm",
+    "select": "Select",
+    "registration": {
+        "label": "Registration",
+        "nowOpen": "Registration now open",
+        "comingSoon": "Registration coming soon"
+    },
     "registered": {
-      "label": "User registered",
-      "info": "User registered information"
-    }
-  },
-  "project": {
-    "label": "Project",
-    "name": "Project name",
-    "registrationDate": "Registration date",
-    "seat": "Seat",
-    "seatAvailable": "Seat available",
-    "registrationFee": "Registration fee",
-    "lastPaymentDate": "Last payment date",
-    "detail": "Project detail",
-    "category": "Project category",
-    "error": {
-      "notFound": "Project detail not found."
-    }
-  },
-  "location": {
-    "label": "Location",
-    "info": "Location information",
-    "name": "Location name",
-    "seatTotal": "Seat total",
-    "seatAvailable": "Seat available"
-  },
-  "building": {
-    "label": "Building",
-    "name": "Building name"
-  },
-  "contact": {
-    "label": "Contact",
-    "name": "Contact name"
-  },
-  "address": {
-    "label": "Address",
-    "apartment": "Apartment",
-    "building": "Building",
-    "floor": "Floor",
-    "houseNo": "House no.",
-    "village": "Village",
-    "villageNo": "Village no.",
-    "alley": "Alley",
-    "lane": "Lane",
-    "road": "Road",
-    "street": "Street",
-    "subdistrict": "Sub-district / sub-area",
-    "district": "District / area",
-    "province": "Province",
-    "country": "Country",
-    "postalCode": "Postal code"
-  },
-  "addressDelivery": {
-    "label": "Address for delivery",
-    "edit": "Edit address for delivery"
-  },
-  "invoice": {
-    "label": "Invoice",
-    "paymentStatus": "Payment status",
-    "dateOfPayment": "Date of payment",
-    "successfulPayment": {
-      "date": "Successful payment date",
-      "on": "Payment was successful on"
+        "label": "Registered",
+        "info": "Registered information",
+        "detail": "Registered detail",
+        "date": "Registered date",
+        "on": "Registered on",
+        "confirm": "Confirm registered",
+        "save": {
+            "error": {
+                "location": "Please select a location.",
+                "section": "Please select a section.",
+                "registrationStatus": {
+                    "W": "This project not yet opened for registration.",
+                    "N": "This project expired for registration."
+                },
+                "projectRegistered": "This project has already been registered.",
+                "locationSelected": "Location selected not found.",
+                "sectionSelected": "Section selected not found.",
+                "locationSelectedSeatAvailable": "This location does not have enough seat available.",
+                "sectionSelectedSeatAvailable": "This section does not have enough seat available.",
+                "fee": "Fee not found.",
+                "deliaddress": "Please fill in the address information correctly and completely."
+            }
+        },
+        "error": {
+            "notFound": "No registration details were found this project.",
+            "haveNoRight": "You don’t have the right to register this project."
+        }
     },
-    "issueReceiptAs": "Issue a receipt as",
-    "confirmPayment": {
-      "date": "Payment confirmed date",
-      "on": "Confirm payment on"
-    }
-  },
-  "qrcode": {
-    "error": "Cannot show QR code",
-    "amount": "Amount"
-  },
-  "receipt": {
-    "label": "Receipt",
-    "download": "Download receipt"
-  },
-  "recheck": "Recheck",
-  "enlarge": "Enlarge",
-  "score": "Score",
-  "event": {
-    "timePeriod": {
-      "registration": "Starting date - ending date",
-      "exam": "Exam duration",
-      "teaching": "Class duration"
-    }
-  },
-  "idNo": {
-    "label": "Applicant no.",
-    "abbreviations": "App. no."
-  },
-  "openOnlyFor": "Open only for",
-  "userType": {
-    "student": "Student",
-    "studentG": "Postgraduate student ",
-    "studentU": "Undergraduate student",
-    "personnel": "Personnel"
-  },
-  "schedule": {
-    "label": "Schedule",
-    "error": {
-      "notFound": "Schedule not found."
-    }
-  },
-  "section": {
-    "label": "Section",
-    "info": "Section information",
-    "name": "Section name",
-    "seatTotal": "Seat total",
-    "seatAvailable": "Seat available"
-  },
-  "teachingType": {
-    "label": "Teaching type",
-    "onlineClass": "Online class"
-  },
-  "studyResults": {
-    "label": "Study results"
-  },
-  "transcript": {
-    "label": "Transcript",
-    "aka": "Transcript"
-  },
-  "privilege": {
-    "label": "Privilege",
-    "placeholder": "Enter the privilege code",
-    "confirm": {
-      "error": {
-        "code": "Please fill in the privilege code.",
-        "privilegeExpire": "This privilege has expired."
-      }
+    "items": "Items",
+    "order": "Order",
+    "status": "Status",
+    "detail": "Detail",
+    "found": "Found",
+    "from": "From",
+    "entries": "Entries",
+    "filter": "Filter",
+    "reload": "Reload",
+    "start": "Start",
+    "end": "End",
+    "startingDate": "Starting date",
+    "endingDate": "Ending Date",
+    "total": {
+        "label": "Total",
+        "amount": "Total amount"
     },
-    "used": "Privileges used"
-  }
+    "remain": "Remain",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "fee": "Fee",
+    "amount": "Amount",
+    "seat": {
+        "label": "Seat",
+        "seatTotal": "Seat total",
+        "seatAvailable": "Seat available",
+        "seatNo": "Seat no."
+    },
+    "payment": {
+        "label": "Payment",
+        "confirm": "Confirm payment",
+        "goto": "Go to payment",
+        "save": {
+            "error": {
+                "issueReceiptAs": "Please fill in the name of the recipient of the receipt.",
+                "paymentExpire": "Payment expire."
+            },
+            "confirm": {
+                "label": "Do you want to confirm payment for this registration ?",
+                "description": "Press \"Ok\" to generate a QR code for payment."
+            }
+        }
+    },
+    "paymentExpire": "Payment expire",
+    "unit": {
+        "label": "Unit",
+        "baht": "Bath",
+        "persons": "Persons"
+    },
+    "placeholder": {
+        "selectItem": "Select item"
+    },
+    "download": "Download",
+    "keyword": "Keyword",
+    "registrationStatus": "Registration status",
+    "user": {
+        "label": "User",
+        "info": "User information",
+        "registered": {
+            "label": "User registered",
+            "info": "User registered information"
+        }
+    },
+    "project": {
+        "label": "Project",
+        "name": "Project name",
+        "registrationDate": "Registration date",
+        "seat": "Seat",
+        "seatAvailable": "Seat available",
+        "registrationFee": "Registration fee",
+        "lastPaymentDate": "Last payment date",
+        "detail": "Project detail",
+        "category": "Project category",
+        "error": {
+            "notFound": "Project detail not found."
+        }
+    },
+    "location": {
+        "label": "Location",
+        "info": "Location information",
+        "name": "Location name",
+        "seatTotal": "Seat total",
+        "seatAvailable": "Seat available"
+    },
+    "building": {
+        "label": "Building",
+        "name": "Building name"
+    },
+    "contact": {
+        "label": "Contact",
+        "name": "Contact name"
+    },
+    "address": {
+        "label": "Address",
+        "apartment": "Apartment",
+        "building": "Building",
+        "floor": "Floor",
+        "houseNo": "House no.",
+        "village": "Village",
+        "villageNo": "Village no.",
+        "alley": "Alley",
+        "lane": "Lane",
+        "road": "Road",
+        "street": "Street",
+        "subdistrict": "Sub-district / sub-area",
+        "district": "District / area",
+        "province": "Province",
+        "country": "Country",
+        "postalCode": "Postal code"
+    },
+    "addressDelivery": {
+        "label": "Address for delivery",
+        "edit": "Edit address for delivery"
+    },
+    "invoice": {
+        "label": "Invoice",
+        "paymentStatus": "Payment status",
+        "dateOfPayment": "Date of payment",
+        "successfulPayment": {
+            "date": "Successful payment date",
+            "on": "Payment was successful on"
+        },
+        "issueReceiptAs": "Issue a receipt as",
+        "confirmPayment": {
+            "date": "Payment confirmed date",
+            "on": "Confirm payment on"
+        }
+    },
+    "qrcode": {
+        "error": "Cannot show QR code",
+        "amount": "Amount"
+    },
+    "receipt": {
+        "label": "Receipt",
+        "download": "Download receipt"
+    },
+    "recheck": "Recheck",
+    "enlarge": "Enlarge",
+    "score": "Score",
+    "event": {
+        "timePeriod": {
+            "registration": "Starting date - ending date",
+            "exam": "Exam duration",
+            "teaching": "Class duration"
+        }
+    },
+    "idNo": {
+        "label": "Applicant no.",
+        "abbreviations": "App. no."
+    },
+    "openOnlyFor": "Open only for",
+    "userType": {
+        "student": "Student",
+        "studentG": "Postgraduate student ",
+        "studentU": "Undergraduate student",
+        "personnel": "Personnel"
+    },
+    "schedule": {
+        "label": "Schedule",
+        "error": {
+            "notFound": "Schedule not found."
+        }
+    },
+    "section": {
+        "label": "Section",
+        "info": "Section information",
+        "name": "Section name",
+        "seatTotal": "Seat total",
+        "seatAvailable": "Seat available"
+    },
+    "teachingType": {
+        "label": "Teaching type",
+        "onlineClass": "Online class"
+    },
+    "studyResults": {
+        "label": "Study results"
+    },
+    "transcript": {
+        "label": "Transcript",
+        "aka": "Transcript"
+    },
+    "privilege": {
+        "label": "Privilege",
+        "placeholder": "Enter the privilege code",
+        "confirm": {
+            "error": {
+                "code": "Please fill in the privilege code.",
+                "privilegeExpire": "This privilege has expired."
+            }
+        },
+        "used": "Privileges used"
+    }
 }

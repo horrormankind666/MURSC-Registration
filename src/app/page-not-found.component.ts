@@ -9,24 +9,24 @@ Description : <>
 
 'use strict';
 
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
-import {ModalService} from './modal/modal.service';
+import { ModalService } from './modal/modal.service';
 
 @Component({
-  selector: '',
-  template: '',
-  styleUrls: []
+    selector: '',
+    template: '',
+    styleUrls: []
 })
 export class PageNotFoundComponent implements OnInit, AfterViewInit {
-  constructor(
-    private modalService: ModalService
-  ) {}
+    constructor(
+        private modalService: ModalService
+    ) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  ngAfterViewInit() {
-    this.modalService.getModalError(false, 'pageNotFound');
-  }
+    ngAfterViewInit() {
+        this.modalService.getModalError(false, 'pageNotFound');
+    }
 }

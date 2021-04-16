@@ -7,63 +7,63 @@ Description : <>
 =============================================
 */
 
-@import '../../../../styles.scss';
+@import "../../../../styles.scss";
 
 .transaction-registered-home-view .project-body .wrap {
-  display: none !important;
+    display: none !important;
 }
 .transaction-registered-home-view .nav-tabs .nav-item {
-  width: 25%;
+    width: 25%;
 }
 .transaction-registered-home-view .tab-title {
-  display: none;
+    display: none;
 }
 .transaction-registered-home-view .tab-title .d-table {
-  table-layout: fixed;
+    table-layout: fixed;
 }
 .transaction-registered-home-view .dropdown-divider {
-  border-top-width: 0;
+    border-top-width: 0;
 }
-@include project-card-horizontal-fixed(':not(.on-modal)', 189px);
+@include project-card-horizontal-fixed(":not(.on-modal)", 189px);
 .transaction-registered-home-view .register-info .form .form-group .col-form-label {
-  width: 227px;
+    width: 227px;
 }
 .transaction-registered-home-view .registered-info .jumbotron {
-  width: 300px !important;
-  max-width: 300px !important;
+    width: 300px !important;
+    max-width: 300px !important;
 }
 @media screen and (max-width: 842px) {
-  .transaction-registered-home-view .tab-title {
-    display: -ms-flexbox;
-    display: flex;
-  }
-  @media screen and (-webkit-min-device-pixel-ratio: 0) {
-    ::i-block-chrome,
     .transaction-registered-home-view .tab-title {
-      display: block;
+        display: -ms-flexbox;
+        display: flex;
     }
-  }
-  .transaction-registered-home-view .dropdown-divider {
-    border-top-width: 1px;
-  }
-  @include tabset-responsive('.transaction-registered-home-view');
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+        ::i-block-chrome,
+        .transaction-registered-home-view .tab-title {
+            display: block;
+        }
+    }
+    .transaction-registered-home-view .dropdown-divider {
+        border-top-width: 1px;
+    }
+    @include tabset-responsive(".transaction-registered-home-view");
 }
 @media screen and (max-width: 876px) {
-  @include project-card-image-fixed('.transaction-registered-home-view');
+    @include project-card-image-fixed(".transaction-registered-home-view");
 }
 @media screen and (max-width: 656px) {
-  .transaction-registered-home-view .registered-info .jumbotron.jumbotron-registrationfee {
-    display: none !important;
-  }
-  .transaction-registered-home-view .registered-info .jumbotron.jumbotron-paymentstatus {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-  .transaction-registered-home-view .register-info .form-group.wrap.wrap-step2 {
-    display: table !important;
-  }
-  @include form-responsive('.transaction-registered-home-view .register-info');
+    .transaction-registered-home-view .registered-info .jumbotron.jumbotron-registrationfee {
+        display: none !important;
+    }
+    .transaction-registered-home-view .registered-info .jumbotron.jumbotron-paymentstatus {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    .transaction-registered-home-view .register-info .form-group.wrap.wrap-step2 {
+        display: table !important;
+    }
+    @include form-responsive(".transaction-registered-home-view .register-info");
 }
 @media screen and (max-width: 474px) {
-  @include badge-responsive('.transaction-registered-home-view .aboutresult-info');
+    @include badge-responsive(".transaction-registered-home-view .aboutresult-info");
 }

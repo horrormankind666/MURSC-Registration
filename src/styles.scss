@@ -7,353 +7,351 @@ Description : <>
 =============================================
 */
 
-@import '~@ng-select/ng-select/themes/default.theme.css';
-@import 'assets/style/util.scss';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "assets/style/util.scss";
 
-@mixin project-card-horizontal-fixed($class, $width-fixed)
-{
-  .project-card-horizontal#{$class} .project-body {
-    display: table !important;
-    table-layout: fixed;
-    width: 100%;
-  }
-  .project-card-horizontal#{$class} .project-body .col-sm-3 {
-    display: table-cell !important;
-    vertical-align: top;
-    width: $width-fixed !important;
-    max-width: $width-fixed !important;
-  }
-  .project-card-horizontal#{$class} .project-body .col-sm-9,
-  .project-card-horizontal#{$class} .project-body .col-sm-12 {
-    display: table-cell !important;
-    vertical-align: top;
-    width: auto !important;
-    max-width: 100% !important;
-  }
+@mixin project-card-horizontal-fixed($class, $width-fixed) {
+    .project-card-horizontal#{$class} .project-body {
+        display: table !important;
+        table-layout: fixed;
+        width: 100%;
+    }
+    .project-card-horizontal#{$class} .project-body .col-sm-3 {
+        display: table-cell !important;
+        vertical-align: top;
+        width: $width-fixed !important;
+        max-width: $width-fixed !important;
+    }
+    .project-card-horizontal#{$class} .project-body .col-sm-9,
+    .project-card-horizontal#{$class} .project-body .col-sm-12 {
+        display: table-cell !important;
+        vertical-align: top;
+        width: auto !important;
+        max-width: 100% !important;
+    }
 }
 
-@mixin project-card-image-fixed($class)
-{
-  @include project-card-horizontal-fixed(':not(.on-modal)', 50px);
-  #{$class} .title-info {
-    margin-top: 0.7rem;
-  }
-  #{$class} .title-info .hide {
-    display: none;
-  }
-  #{$class} .title-info .embed-responsive-16by9::before {
-    padding-top: 100%;
-  }
-  #{$class} .title-info .project-card-img {
-    border-radius: 50% !important;
-  }
-  #{$class} .title-info .project-logo .enlarge {
-    bottom: 0;
-    right: 0;
-    top: 28%;
-    left: 35%
-  }
-  #{$class} .project-card-horizontal .project-body .col-sm-9 {
-    padding-left: 8px;
-  }
-  #{$class} .project-body .hide {
-    display: none !important;
-  }
-  #{$class} .project-body .d-block.wrap.wrap-step1 {
-    display: block !important;
-  }
+@mixin project-card-image-fixed($class) {
+    @include project-card-horizontal-fixed(":not(.on-modal)", 50px);
+    #{$class} .title-info {
+        margin-top: 0.7rem;
+    }
+    #{$class} .title-info .hide {
+        display: none;
+    }
+    #{$class} .title-info .embed-responsive-16by9::before {
+        padding-top: 100%;
+    }
+    #{$class} .title-info .project-card-img {
+        border-radius: 50% !important;
+    }
+    #{$class} .title-info .project-logo .enlarge {
+        bottom: 0;
+        right: 0;
+        top: 28%;
+        left: 35%;
+    }
+    #{$class} .project-card-horizontal .project-body .col-sm-9 {
+        padding-left: 8px;
+    }
+    #{$class} .project-body .hide {
+        display: none !important;
+    }
+    #{$class} .project-body .d-block.wrap.wrap-step1 {
+        display: block !important;
+    }
 }
 
 .project-card-horizontal .project-body .col-sm-9,
 .project-card-horizontal .project-body .col-sm-12 {
-  padding-left: 31px;
+    padding-left: 31px;
 }
 .project-card-img {
-  border-bottom-right-radius: 1rem !important;
-  border-bottom-left-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important;
+    border-bottom-left-radius: 1rem !important;
 }
 .project-registration-status i {
-  position: relative;
-  top: 1px;
+    position: relative;
+    top: 1px;
 }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-  .project-registration-status i {
-    top: 2px;
-  }
+    .project-registration-status i {
+        top: 2px;
+    }
 }
 .project-btn-badge {
-  line-height: 1.4 !important;
-  padding-right: 1rem !important;
-  padding-left: 1rem !important;
-  vertical-align: top !important;
+    line-height: 1.4 !important;
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+    vertical-align: top !important;
 }
 .project-openonlyfor-info {
-  font-size: 0.85rem !important;
-  line-height: 1.7;
+    font-size: 0.85rem !important;
+    line-height: 1.7;
 }
 .project-dropdown .btn-contact-info {
-  margin-top: 0;
-  padding-right: 0;
-  padding-left: 0;
-  width: 24px;
-  height: 24px;
-  line-height: 0;
-  position: relative;
+    margin-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+    width: 24px;
+    height: 24px;
+    line-height: 0;
+    position: relative;
 }
 .project-dropdown .btn-contact-info i {
-  top: 3px;
+    top: 3px;
 }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-  .project-dropdown .btn-contact-info i {
-    top: 4px;
-  }
+    .project-dropdown .btn-contact-info i {
+        top: 4px;
+    }
 }
 .project-dropdown .dropdown-toggle::after {
-  border: 0;
-  margin-left: 0;
+    border: 0;
+    margin-left: 0;
 }
 .project-dropdown .dropdown-menu.contact-info {
-  width: 260px;
-  min-width: 260px;
-  line-height: 1.5 !important;
+    width: 260px;
+    min-width: 260px;
+    line-height: 1.5 !important;
 }
 .project-card-vertical .project-dropdown .dropdown-menu.show.contact-info {
-  top: 24px !important;
-  left: -226px !important;
-  transform: translate(0, 0) !important;
+    top: 24px !important;
+    left: -226px !important;
+    transform: translate(0, 0) !important;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  ::i-block-chrome,
-  .project-dropdown .dropdown-menu.show.contact-info {
-    top: 26px !important;
-    left: 10px !important;
-  }
-  ::i-block-chrome,
-  .project-card-vertical .project-dropdown .dropdown-menu.show.contact-info {
-    left: -226px !important;
-  }
+    ::i-block-chrome,
+    .project-dropdown .dropdown-menu.show.contact-info {
+        top: 26px !important;
+        left: 10px !important;
+    }
+    ::i-block-chrome,
+    .project-card-vertical .project-dropdown .dropdown-menu.show.contact-info {
+        left: -226px !important;
+    }
 }
 .project-text-line-clamp::after {
-  background-color: #FFFFFF;
+    background-color: #ffffff;
 }
 .project-title-info .project-logo .enlarge {
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
 }
 .project-title-info .card-title .float-right {
-  width: 34px !important;
+    width: 34px !important;
 }
 .project-aboutresult-info .badge-projectabout {
-  width: 70px;
-  vertical-align: top !important;
+    width: 70px;
+    vertical-align: top !important;
 }
 .project-aboutresult-info .badge-registeredlocationidnoseatno {
-  width: 200px;
-  vertical-align: top !important;
+    width: 200px;
+    vertical-align: top !important;
 }
 .project-aboutresult-info .badge-examscore {
-  width: 70px;
-  vertical-align: top !important;
+    width: 70px;
+    vertical-align: top !important;
 }
 .project-aboutresult-info .badge-schedule {
-  width: 90px;
-  vertical-align: top !important;
+    width: 90px;
+    vertical-align: top !important;
 }
 .project-aboutresult-info .badge-sectionschedule {
-  width: 150px;
-  vertical-align: top !important;
+    width: 150px;
+    vertical-align: top !important;
 }
 .project-aboutresult-info .badge-studyresultstranscript {
-  width: 190px;
-  vertical-align: top !important;
+    width: 190px;
+    vertical-align: top !important;
 }
 .project-aboutresult-info #projectAbout .project-register-info .form-group .col-form-label {
-  width: 55px;
+    width: 55px;
 }
 .project-register-info .form .form-group .col-form-label {
-  width: 161px;
+    width: 161px;
 }
 .project-register-info .d-table .col-icon {
-  width: 26px;
+    width: 26px;
 }
 .project-register-info .d-table.size-s .col-icon {
-  width: 23px;
+    width: 23px;
 }
 .project-register-info .d-table.size-l .col-icon {
-  width: 32px;
+    width: 32px;
 }
 .project-register-info .d-table.calendar-date {
-  table-layout: fixed !important;
-  position: relative;
+    table-layout: fixed !important;
+    position: relative;
 }
 .project-register-info .d-table.size-l.calendar-date {
-  top: 3px;
+    top: 3px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  ::i-block-chrome,
-  .project-register-info .d-table.size-l.calendar-date {
-    top: 4px;
-  }
+    ::i-block-chrome,
+    .project-register-info .d-table.size-l.calendar-date {
+        top: 4px;
+    }
 }
 .project-register-info .d-table.calendar-date .col-calendar {
-  width: 156px;
+    width: 156px;
 }
 .project-register-info .d-table.size-s.calendar-date .col-calendar {
-  width: 146px;
+    width: 146px;
 }
 .project-register-info .d-table.calendar-date .col-clock span {
-  position: relative;
+    position: relative;
 }
 .project-register-info .d-table:not(.size-l).calendar-date .col-clock span {
-  top: -1px;
+    top: -1px;
 }
 @media screen and (min--moz-device-pixel-ratio: 0) {
-  .project-register-info .d-table.size-l.calendar-date .col-clock span {
-    top: -1px;
-  }
+    .project-register-info .d-table.size-l.calendar-date .col-clock span {
+        top: -1px;
+    }
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  ::i-block-chrome,
-  .project-register-info .d-table.size-l.calendar-date .col-clock span {
-    top: -2px;
-  }
+    ::i-block-chrome,
+    .project-register-info .d-table.size-l.calendar-date .col-clock span {
+        top: -2px;
+    }
 }
 .project-contact-info .form .form-group .col-form-label,
 .project-menu-info .form .form-group .col-form-label {
-  width: 15px !important;
+    width: 15px !important;
 }
 .project-contact-info .form .form-group .col-form-label::after,
 .project-menu-info .form .form-group .col-form-label::after {
-  float: none !important;
-  content: '' !important;
-  margin-left: 0 !important;
+    float: none !important;
+    content: "" !important;
+    margin-left: 0 !important;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  ::i-block-chrome,
-  .project-contact-info .form .form-group .col-form-label,
-  .project-menu-info .form .form-group .col-form-label,
-  .project-contact-info .form .form-group .col,
-  .project-menu-info .form .form-group .col {
-    display: table-cell;
-  }
+    ::i-block-chrome,
+    .project-contact-info .form .form-group .col-form-label,
+    .project-menu-info .form .form-group .col-form-label,
+    .project-contact-info .form .form-group .col,
+    .project-menu-info .form .form-group .col {
+        display: table-cell;
+    }
 }
 .project-contact-info .form .form-group .col {
-  word-break: break-all;
+    word-break: break-all;
 }
 .project-registered-btn {
-  display: table;
-  width: 215px;
-  height: 50px;
+    display: table;
+    width: 215px;
+    height: 50px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  ::i-block-chrome,
-  .project-registered-btn {
-    height: 34px;
-  }
+    ::i-block-chrome,
+    .project-registered-btn {
+        height: 34px;
+    }
 }
 .project-registered-btn .btn {
-  display: table-cell !important;
-  width: inherit;
-  height: inherit;
-  vertical-align: middle;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0px;
+    display: table-cell !important;
+    width: inherit;
+    height: inherit;
+    vertical-align: middle;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0px;
 }
 .project-location-info .table tbody:last-child td,
 .project-section-info .table tbody:last-child td {
-  padding-bottom: 0;
-  border-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
 }
 .project-location-info .table .col-seattotal {
-  width: 270px;
-  min-width: 270px;
+    width: 270px;
+    min-width: 270px;
 }
 .project-location-info .table .col-seatavailable {
-  width: 258px;
-  min-width: 258px;
+    width: 258px;
+    min-width: 258px;
 }
 .project-location-info .table .col-seat,
 .project-section-info .table .col-seat {
-  width: 202px;
+    width: 202px;
 }
 .project-section-info .table .col-seattotal {
-  width: 284px;
-  min-width: 284px;
+    width: 284px;
+    min-width: 284px;
 }
 .project-section-info .table .col-seatavailable {
-  width: 272px;
-  min-width: 272px;
+    width: 272px;
+    min-width: 272px;
 }
 .project-location-info .location-building-seat-info .form .form-group:last-child .col span:last-child,
 .project-section-info .section-teachingtype-seat-info .form .form-group:last-child .col span:last-child {
-  position: relative;
-  top: -5px;
+    position: relative;
+    top: -5px;
 }
 @media screen and (max-width: 800px) {
-  @include project-card-horizontal-fixed(':not(.on-modal)', 189px);
-  @include project-card-horizontal-fixed('.on-modal', 162px);
+    @include project-card-horizontal-fixed(":not(.on-modal)", 189px);
+    @include project-card-horizontal-fixed(".on-modal", 162px);
 }
 .project-fee-info .table .col-amount,
 .project-fee-info .table .col-total-amount {
-  width: 150px;
-  min-width: 150px;
+    width: 150px;
+    min-width: 150px;
 }
 .project-fee-info #deliaddress-form .col-form-label {
-  width: 150px;
+    width: 150px;
 }
 .project-fee-info #deliaddress-form .form:not(.horizontal-form) .col-form-label {
-  width: 189px;
+    width: 189px;
 }
 .project-fee-info #deliaddress-form textarea {
-  min-height: 52px;
+    min-height: 52px;
 }
 .card.qrcode-payment {
-  width: 280px;
-  border-radius: 0.75rem !important;
-  border-color: #FFFFFF;
+    width: 280px;
+    border-radius: 0.75rem !important;
+    border-color: #ffffff;
 }
 .card.qrcode-payment .card-header {
-  background: #113566;
-  height: 48px;
-  padding: 0;
-  border-bottom: 0;
+    background: #113566;
+    height: 48px;
+    padding: 0;
+    border-bottom: 0;
 }
 .card.qrcode-payment .card-header:first-child,
 .card.qrcode-payment .card-header img {
-  border-radius: 0.75rem 0.75rem 0 0;
+    border-radius: 0.75rem 0.75rem 0 0;
 }
 .card.qrcode-payment .card-header img,
 .card.qrcode-payment .card-footer .btn {
-  width: 100%;
+    width: 100%;
 }
 .card.qrcode-payment .card-body {
-  background: #FFFFFF;
-  padding: 1rem !important;
-  padding-bottom: 0.5rem !important;
+    background: #ffffff;
+    padding: 1rem !important;
+    padding-bottom: 0.5rem !important;
 }
 .card.qrcode-payment .card-body .form .form-group .col-form-label {
-  width: 80px;
+    width: 80px;
 }
 .card.qrcode-payment .card-body .form .form-group .col-form-label::after,
 .card.qrcode-payment .card-body .form .form-group .col-form-label::after {
-  float: none !important;
-  content: '' !important;
-  margin-left: 0 !important;
+    float: none !important;
+    content: "" !important;
+    margin-left: 0 !important;
 }
 .card.qrcode-payment .card-footer {
-  padding: 0;
-  border-top: 0
+    padding: 0;
+    border-top: 0;
 }
 .card.qrcode-payment .card-footer:last-child,
 .card.qrcode-payment .card-footer .btn {
-  border-radius: 0 0 0.75rem 0.75rem;
+    border-radius: 0 0 0.75rem 0.75rem;
 }
 .card.qrcode-payment .card-footer .btn {
-  min-width: 0 !important;
+    min-width: 0 !important;
 }
 .card.qrcode-payment .card-footer .btn i {
-  margin-right: 5px;
+    margin-right: 5px;
 }

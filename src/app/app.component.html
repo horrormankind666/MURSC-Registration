@@ -1,94 +1,94 @@
 <ngx-loading [show]="appService.isLoading.show"></ngx-loading>
 <span class="msg-loading font regular size16">
-  <span *ngIf="appService.isLoading.show && (appService.isLoading.page || appService.isLoading.modal || appService.isLoading.reloading)">{{'msgLoading.loading' | translate | titlecase}}</span>
-  <span *ngIf="appService.isLoading.show && appService.isLoading.processing">{{'msgLoading.processing' | translate | titlecase}}</span>
-  <span *ngIf="appService.isLoading.show && appService.isLoading.saving">{{'msgLoading.saving' | translate | titlecase}}</span>
-  <span *ngIf="appService.isLoading.show && appService.isLoading.checking">{{'msgLoading.checking' | translate | titlecase}}</span>
+    <span *ngIf="appService.isLoading.show && (appService.isLoading.page || appService.isLoading.modal || appService.isLoading.reloading)">{{'msgLoading.loading' | translate | titlecase}}</span>
+    <span *ngIf="appService.isLoading.show && appService.isLoading.processing">{{'msgLoading.processing' | translate | titlecase}}</span>
+    <span *ngIf="appService.isLoading.show && appService.isLoading.saving">{{'msgLoading.saving' | translate | titlecase}}</span>
+    <span *ngIf="appService.isLoading.show && appService.isLoading.checking">{{'msgLoading.checking' | translate | titlecase}}</span>
 </span>
 <main>
-  <header #headerView class="sticky">
-    <div class="container">
-      <div class="navbar-header-background" [ngClass]="{'has-header-subtitle': appService.headerSubtitle}"></div>
-      <div class="navbar-header pr-3 pl-3" [ngClass]="{'has-header-subtitle': appService.headerSubtitle}">
-        <div class="d-table">
-          <div class="d-table-cell systeminfo">
-            <div class="d-table">
-              <div class="d-table-cell owner">
-                <div class='label label-th' *ngIf="appService.lang === 'th'"></div>
-                <div class='label label-en' *ngIf="appService.lang === 'en'"></div>
-              </div>
-              <div class="d-table-cell fullname"></div>
-            </div>
-          </div>
-          <div class="d-table-cell userinfo">
-            <div class="d-table">
-              <div class="d-table-cell flags-icon">
-                <a href="javascript:void(0)" *ngIf="appService.lang === 'en'" (click)="appService.setDefaultLang('th')"><span class="regular flag-icon flag-icon-th"></span></a>
-                <a href="javascript:void(0)" *ngIf="appService.lang === 'th'" (click)="appService.setDefaultLang('en')"><span class="regular flag-icon flag-icon-gb"></span></a>
-              </div>
-              <div class="d-table-cell home-icon">
-                <a routerLink="Main" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size19"><i class='fas fa-home'></i></span></a>
-              </div>
-              <div class="d-table-cell manual-icon">
-                <a href="javascript:void(0)" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}" (click)="appService.downloadManual()"><span class="regular text-white size22"><i class='fab fa-readme'></i></span></a>
-              </div>
-              <div class="d-table-cell text-center user-icon" ngbDropdown #profileDropdown="ngbDropdown" placement="bottom-right" *ngIf="authService.isAuthenticated">
-                <a href="javascript:void(0)" id="profile" ngbDropdownToggle [ngStyle]="{'background-color': userBackgrondColor}" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}">
-                  <span class="regular text-white size18">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.familyName[0] | uppercase)}}</span>
-                </a>
-                <div ngbDropdownMenu aria-labelledby="profile" class="pt-3 pb-3">
-                  <div class="dropdown-menu-inner w-100 bg-white border pr-0 pl-0">
-                    <div class="d-table">
-                      <div class="d-table-row">
-                        <div class="d-table-cell text-center">
-                          <div class="mr-auto ml-auto center user-icon" [ngStyle]="{'background-color': userBackgrondColor}">
-                            <span class="regular text-white size48">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.familyName[0] | uppercase)}}</span>
-                          </div>
+    <header #headerView class="sticky">
+        <div class="container">
+            <div class="navbar-header-background" [ngClass]="{'has-header-subtitle': appService.headerSubtitle}"></div>
+            <div class="navbar-header pr-3 pl-3" [ngClass]="{'has-header-subtitle': appService.headerSubtitle}">
+                <div class="d-table">
+                    <div class="d-table-cell systeminfo">
+                        <div class="d-table">
+                            <div class="d-table-cell owner">
+                                <div class='label label-th' *ngIf="appService.lang === 'th'"></div>
+                                <div class='label label-en' *ngIf="appService.lang === 'en'"></div>
+                            </div>
+                            <div class="d-table-cell fullname"></div>
                         </div>
-                      </div>
-                      <div class="d-table-row">
-                        <div class="d-table-cell text-center pt-3">
-                          <div class="regular size18 text-truncate">{{authService.getUserInfo.fullName[appService.lang] | titlecase}}</div>
-                          <div class="regular text-black-50 size16 text-truncate">{{authService.getUserInfo.email | lowercase}}</div>
+                    </div>
+                    <div class="d-table-cell userinfo">
+                        <div class="d-table">
+                            <div class="d-table-cell flags-icon">
+                                <a href="javascript:void(0)" *ngIf="appService.lang === 'en'" (click)="appService.setDefaultLang('th')"><span class="regular flag-icon flag-icon-th"></span></a>
+                                <a href="javascript:void(0)" *ngIf="appService.lang === 'th'" (click)="appService.setDefaultLang('en')"><span class="regular flag-icon flag-icon-gb"></span></a>
+                            </div>
+                            <div class="d-table-cell home-icon">
+                                <a routerLink="Main" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size19"><i class='fas fa-home'></i></span></a>
+                            </div>
+                            <div class="d-table-cell manual-icon">
+                                <a href="javascript:void(0)" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}" (click)="appService.downloadManual()"><span class="regular text-white size22"><i class='fab fa-readme'></i></span></a>
+                            </div>
+                            <div class="d-table-cell text-center user-icon" ngbDropdown #profileDropdown="ngbDropdown" placement="bottom-right" *ngIf="authService.isAuthenticated">
+                                <a href="javascript:void(0)" id="profile" ngbDropdownToggle [ngStyle]="{'background-color': userBackgrondColor}" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}">
+                                    <span class="regular text-white size18">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.familyName[0] | uppercase)}}</span>
+                                </a>
+                                <div ngbDropdownMenu aria-labelledby="profile" class="pt-3 pb-3">
+                                    <div class="dropdown-menu-inner w-100 bg-white border pr-0 pl-0">
+                                        <div class="d-table">
+                                            <div class="d-table-row">
+                                                <div class="d-table-cell text-center">
+                                                    <div class="mr-auto ml-auto center user-icon" [ngStyle]="{'background-color': userBackgrondColor}">
+                                                        <span class="regular text-white size48">{{(authService.getUserInfo.givenName[0] | uppercase)}}{{(authService.getUserInfo.familyName[0] | uppercase)}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-table-row">
+                                                <div class="d-table-cell text-center pt-3">
+                                                    <div class="regular size18 text-truncate">{{authService.getUserInfo.fullName[appService.lang] | titlecase}}</div>
+                                                    <div class="regular text-black-50 size16 text-truncate">{{authService.getUserInfo.email | lowercase}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-divider mt-3 mb-0"></div>
+                                        <a routerLink="Transaction/Registered" class="text-center" role="button" ngbDropdownItem><span class="regular grey-dark size15">{{'registered.info' | translate | titlecase}}</span></a>
+                                        <div class="dropdown-divider mb-3 mt-0"></div>
+                                        <div class="d-block w-100 text-center">
+                                            <button type="button" class="btn btn-transparent" (click)="profileDropdown.close(); authService.signout()"><span class="regular size16">{{'signout.label' | translate | titlecase}}</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-table-cell text-center signin-icon" *ngIf="!authService.isAuthenticated">
+                                <a href="javascript:void(0)" (click)="appService.gotoSignIn()" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size15">{{'signin.label' | translate | titlecase}}</span></a>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                    <div class="dropdown-divider mt-3 mb-0"></div>
-                    <a routerLink="Transaction/Registered" class="text-center" role="button" ngbDropdownItem><span class="regular grey-dark size15">{{'registered.info' | translate | titlecase}}</span></a>
-                    <div class="dropdown-divider mb-3 mt-0"></div>
-                    <div class="d-block w-100 text-center">
-                      <button type="button" class="btn btn-transparent" (click)="profileDropdown.close(); authService.signout()"><span class="regular size16">{{'signout.label' | translate | titlecase}}</span></button>
-                    </div>
-                  </div>
                 </div>
-              </div>
-              <div class="d-table-cell text-center signin-icon" *ngIf="!authService.isAuthenticated">
-                <a href="javascript:void(0)" (click)="appService.gotoSignIn()" [ngClass]="{disabled: (appService.isLoading.page || appService.isLoading.modal)}"><span class="regular text-white size15">{{'signin.label' | translate | titlecase}}</span></a>
-              </div>
             </div>
-          </div>
+            <div class="navbar-header-title row mr-0 ml-0" *ngIf="appService.headerSubtitle !== null">
+                <div class="col align-middle text-center text-truncate text-light">
+                    <a routerLink="{{appService.rootPath}}" class="bold size18">
+                        <span class="text-light">#{{appService.headerSubtitle[appService.lang] | titlecase}}</span>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="navbar-header-title row mr-0 ml-0" *ngIf="appService.headerSubtitle !== null">
-        <div class="col align-middle text-center text-truncate text-light">
-          <a routerLink="{{appService.rootPath}}" class="bold size18">
-            <span class="text-light">#{{appService.headerSubtitle[appService.lang] | titlecase}}</span>
-          </a>
+    </header>
+    <section [ngStyle]="sectionStyle">
+        <div class="container pt-3" *ngIf="!appService.isLoading.page">
+            <router-outlet></router-outlet>
         </div>
-      </div>
-    </div>
-  </header>
-  <section [ngStyle]="sectionStyle">
-    <div class="container pt-3" *ngIf="!appService.isLoading.page">
-      <router-outlet></router-outlet>
-    </div>
-  </section>
-  <footer #footerView>
-    <div class="container text-center p-3">
-      <span class="regular size14">
-        <div *ngIf="appService.lang === 'th'"><span class="regular size16"><i class="fas fa-copyright"></i></span> สงวนลิขสิทธิ์ พ.ศ.2562{{(today.getFullYear() + 543) > 2562 ? (' - ' + (today.getFullYear() + 543)) : ''}} มหาวิทยาลัยมหิดล, พัฒนาโดย กองเทคโนโลยีสารสนเทศ</div>
-        <div *ngIf="appService.lang === 'en'">Copyright <span class="regular size16"><i class="fas fa-copyright"></i></span> 2019{{today.getFullYear() > 2019 ? (' - ' + today.getFullYear()) : ''}} Mahidol University. All rights reserved.</div>
-      </span>
-    </div>
-  </footer>
+    </section>
+    <footer #footerView>
+        <div class="container text-center p-3">
+            <span class="regular size14">
+                <div *ngIf="appService.lang === 'th'"><span class="regular size16"><i class="fas fa-copyright"></i></span> สงวนลิขสิทธิ์ พ.ศ.2562{{(today.getFullYear() + 543) > 2562 ? (' - ' + (today.getFullYear() + 543)) : ''}} มหาวิทยาลัยมหิดล, พัฒนาโดย กองเทคโนโลยีสารสนเทศ</div>
+                <div *ngIf="appService.lang === 'en'">Copyright <span class="regular size16"><i class="fas fa-copyright"></i></span> 2019{{today.getFullYear() > 2019 ? (' - ' + today.getFullYear()) : ''}} Mahidol University. All rights reserved.</div>
+            </span>
+        </div>
+    </footer>
 </main>

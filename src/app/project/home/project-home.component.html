@@ -1,267 +1,268 @@
 <div class="project-home-view">
-  <div class="toolbars pr-3 pb-2 pl-3">
-    <div class="d-table w-100">
-      <div class="d-table-cell col-button">
-        <button type="button" class="btn btn-secondary mr-1"
-          [ngClass]="{
-            'has-focus': projectService.operate.table.filter.showForm
-          }"
-          [disabled]="(projectService.operate.table.service.searching$ | async)"
-          ngbTooltip="{{'filter' | translate | titlecase}}"
-          title="{{'filter' | translate | titlecase}}"
-          (click)="projectService.operate.table.filter.showForm = !projectService.operate.table.filter.showForm">
-          <i class="fas fa-filter text-white size16"></i>
-        </button>
-        <button type="button" class="btn btn-secondary"
-          [ngClass]="{
-            'has-focus': (projectService.operate.table.service.searching$ | async)
-          }"
-          [disabled]="(projectService.operate.table.service.searching$ | async)"
-          ngbTooltip="{{'reload' | translate | titlecase}}"
-          title="{{'reload' | translate | titlecase}}"
-          (click)="projectService.operate.table.service.reload(route.snapshot.params['projectCategory'])">
-          <i class="fas fa-sync-alt text-white size16" *ngIf="!(projectService.operate.table.service.searching$ | async)"></i>
-          <i class="fas fa-sync-alt fa-spin text-white size16" *ngIf="(projectService.operate.table.service.searching$ | async)"></i>
-        </button>
-      </div>
-      <div class="d-table-cell text-right col-recordcount">
-        <span class="regular size15" *ngIf="!(projectService.operate.table.service.searching$ | async)">{{appService.getTextRecordCount((projectService.operate.table.service.total$ | async), (projectService.operate.table.service.totalSearch$ | async))}}</span>
-      </div>
-    </div>
-  </div>
-  <div class="filter form bg-secondary pt-2 pr-3 pb-0 pl-3" *ngIf="projectService.operate.table.filter.showForm">
-    <div class="card">
-      <div class="card-header p-0">
-        <span class="bold text-white size18">{{'filter' | translate | titlecase}}</span>
-      </div>
-      <div class="card-body p-0 pt-1">
-        <div class="form">
-          <div class="form-row d-table">
-            <div class="form-group col-md-6 pl-0">
-              <label for="keyword" class="regular text-white size16">{{'keyword' | translate | titlecase}}</label>
-              <input trimOnBlur type="text" class="form-control inputbox regular size16" name="keyword" [(ngModel)]="projectService.operate.table.service.keyword" />
+    <div class="toolbars pr-3 pb-2 pl-3">
+        <div class="d-table w-100">
+            <div class="d-table-cell col-button">
+                <button type="button" class="btn btn-secondary mr-1"
+                    [ngClass]="{
+                        'has-focus': projectService.operate.table.filter.showForm
+                    }"
+                    [disabled]="(projectService.operate.table.service.searching$ | async)"
+                    ngbTooltip="{{'filter' | translate | titlecase}}"
+                    title="{{'filter' | translate | titlecase}}"
+                    (click)="projectService.operate.table.filter.showForm = !projectService.operate.table.filter.showForm">
+                    <i class="fas fa-filter text-white size16"></i>
+                </button>
+                <button type="button" class="btn btn-secondary"
+                    [ngClass]="{
+                        'has-focus': (projectService.operate.table.service.searching$ | async)
+                    }"
+                    [disabled]="(projectService.operate.table.service.searching$ | async)"
+                    ngbTooltip="{{'reload' | translate | titlecase}}"
+                    title="{{'reload' | translate | titlecase}}"
+                    (click)="projectService.operate.table.service.reload(route.snapshot.params['projectCategory'])">
+                    <i class="fas fa-sync-alt text-white size16" *ngIf="!(projectService.operate.table.service.searching$ | async)"></i>
+                    <i class="fas fa-sync-alt fa-spin text-white size16" *ngIf="(projectService.operate.table.service.searching$ | async)"></i>
+                </button>
             </div>
-            <div class="form-group col-md-6 pr-0">
-              <label for="registration-status" class="regular text-white size16">{{'registrationStatus' | translate | titlecase}}</label>
-              <ng-select placeholder="{{'placeholder.selectItem' | translate | titlecase}}" [(ngModel)]="projectService.operate.table.service.registrationStatus">
-                <ng-option *ngFor="let item of dataService.statuses.getList(dataService.registrationStatus.data$)" [value]="item.ID">{{item.name[appService.lang] | titlecase}}</ng-option>
-              </ng-select>
+            <div class="d-table-cell text-right col-recordcount">
+                <span class="regular size15" *ngIf="!(projectService.operate.table.service.searching$ | async)">{{appService.getTextRecordCount((projectService.operate.table.service.total$ | async), (projectService.operate.table.service.totalSearch$ | async))}}</span>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="card-group card-striped" *ngIf="!(projectService.operate.table.service.searching$ | async)">
-    <div class="card-col col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-1 pl-1 pr-0" *ngFor="let project of projectService.operate.table.service.data$ | async; index as order; let last = last">
-      <div class="card card-vertical border-0 rounded-0 h-100 project-card-vertical">
-        <div class="card-body pt-0 pr-3 pb-2 pl-3 project-body">
-          <div class="card-text">
-            <ng-container *ngTemplateOutlet="titleInfo; context: {data: project}"></ng-container>
-            <div class="mt-3"><ng-container *ngTemplateOutlet="projectInfo; context: {data: project}"></ng-container></div>
-          </div>
-        </div>
-        <div class="card-footer bg-transparent border-top-0 pt-0 pr-3 pb-07 pl-3 project-footer">
-          <div class="card-text">
-            <div class="mt-2"><ng-container *ngTemplateOutlet="registerInfo; context: {data: project}"></ng-container></div>
-            <div class="project-about">
-              <p class="regular text-black-50 size16 line-clamp line-clamp-{{project.ID}} mt-3 mb-0" [innerHTML]="project.project.about[appService.lang] | nl2br"></p>
-              {{appService.textOverflowClamp(('.project-about .line-clamp-' + project.ID), 2)}}
+    <div class="filter form bg-secondary pt-2 pr-3 pb-0 pl-3" *ngIf="projectService.operate.table.filter.showForm">
+        <div class="card">
+            <div class="card-header p-0">
+                <span class="bold text-white size18">{{'filter' | translate | titlecase}}</span>
             </div>
-          </div>
-          <div class='mt-3'><ng-container *ngTemplateOutlet="menuButtonInfo; context: {data: project}"></ng-container></div>
+            <div class="card-body p-0 pt-1">
+                <div class="form">
+                    <div class="form-row d-table">
+                        <div class="form-group col-md-6 pl-0">
+                            <label for="keyword" class="regular text-white size16">{{'keyword' | translate | titlecase}}</label>
+                            <input trimOnBlur type="text" class="form-control inputbox regular size16" name="keyword" [(ngModel)]="projectService.operate.table.service.keyword" />
+                        </div>
+                        <div class="form-group col-md-6 pr-0">
+                            <label for="registration-status" class="regular text-white size16">{{'registrationStatus' | translate | titlecase}}</label>
+                            <ng-select placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
+                                [(ngModel)]="projectService.operate.table.service.registrationStatus">
+                                <ng-option *ngFor="let item of dataService.statuses.getList(dataService.registrationStatus.data$)" [value]="item.ID">{{item.name[appService.lang] | titlecase}}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+    <div class="card-group card-striped" *ngIf="!(projectService.operate.table.service.searching$ | async)">
+        <div class="card-col col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-1 pl-1 pr-0" *ngFor="let project of projectService.operate.table.service.data$ | async; index as order; let last = last">
+            <div class="card card-vertical border-0 rounded-0 h-100 project-card-vertical">
+                <div class="card-body pt-0 pr-3 pb-2 pl-3 project-body">
+                    <div class="card-text">
+                        <ng-container *ngTemplateOutlet="titleInfo; context: {data: project}"></ng-container>
+                        <div class="mt-3"><ng-container *ngTemplateOutlet="projectInfo; context: {data: project}"></ng-container></div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-top-0 pt-0 pr-3 pb-07 pl-3 project-footer">
+                    <div class="card-text">
+                        <div class="mt-2"><ng-container *ngTemplateOutlet="registerInfo; context: {data: project}"></ng-container></div>
+                        <div class="project-about">
+                            <p class="regular text-black-50 size16 line-clamp line-clamp-{{project.ID}} mt-3 mb-0" [innerHTML]="project.project.about[appService.lang] | nl2br"></p>
+                            {{appService.textOverflowClamp(('.project-about .line-clamp-' + project.ID), 2)}}
+                        </div>
+                    </div>
+                    <div class='mt-3'><ng-container *ngTemplateOutlet="menuButtonInfo; context: {data: project}"></ng-container></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <ng-template #datetimeVerticalInfo let-data="data">
-  <div class="datetime-vertical bold text-body" *ngIf="data">
-    <div class="day bolder size24">
-      <div>{{data | slice:5:6}}</div>
-      <div>{{data | slice:6:7}}</div>
+    <div class="datetime-vertical bold text-body" *ngIf="data">
+        <div class="day bolder size24">
+            <div>{{data | slice:5:6}}</div>
+            <div>{{data | slice:6:7}}</div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="month size16">
+            <div>{{(data | slice:8:9) | uppercase}}</div>
+            <div>{{(data | slice:9:10) | uppercase}}</div>
+            <div>{{(data | slice:10:11) | uppercase}}</div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="year size14">
+            <div>{{data | slice:12:13}}</div>
+            <div>{{data | slice:13:14}}</div>
+            <div>{{data | slice:14:15}}</div>
+            <div>{{data | slice:15:16}}</div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="time size11 text-secondary">
+            <div>{{data | slice:17:18}}</div>
+            <div>{{data | slice:18:19}}</div>
+            <div>{{data | slice:19:20}}</div>
+            <div>{{data | slice:20:21}}</div>
+            <div>{{data | slice:21:22}}</div>
+        </div>
+        <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
-    <div class="month size16">
-      <div>{{(data | slice:8:9) | uppercase}}</div>
-      <div>{{(data | slice:9:10) | uppercase}}</div>
-      <div>{{(data | slice:10:11) | uppercase}}</div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="year size14">
-      <div>{{data | slice:12:13}}</div>
-      <div>{{data | slice:13:14}}</div>
-      <div>{{data | slice:14:15}}</div>
-      <div>{{data | slice:15:16}}</div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="time size11 text-secondary">
-      <div>{{data | slice:17:18}}</div>
-      <div>{{data | slice:18:19}}</div>
-      <div>{{data | slice:19:20}}</div>
-      <div>{{data | slice:20:21}}</div>
-      <div>{{data | slice:21:22}}</div>
-    </div>
-    <div class="clearfix"></div>
-  </div>
 </ng-template>
 <ng-template #titleInfo let-data="data">
-  <div class="title-info project-title-info">
-    <div class="embed-responsive embed-responsive-16by9 mb-3 project-logo">
-      <div class="card-img project-card-img" [ngStyle]="{'background-image': ('url(' + data.project.logo + ')')}"></div>
-      <a class="enlarge" href="javascript:void(0)" (click)="appService.enlargeImage(data.project.logo)">
-        <i class="fas fa-expand text-white size18"></i>
-      </a>
+    <div class="title-info project-title-info">
+        <div class="embed-responsive embed-responsive-16by9 mb-3 project-logo">
+            <div class="card-img project-card-img" [ngStyle]="{'background-image': ('url(' + data.project.logo + ')')}"></div>
+            <a class="enlarge" href="javascript:void(0)" (click)="appService.enlargeImage(data.project.logo)">
+                <i class="fas fa-expand text-white size18"></i>
+            </a>
+        </div>
+        <div class="card-title mt-07 mb-0">
+            <div class="float-left" *ngIf="data.examDate.startDate">
+                <ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.examDate.startDate}"></ng-container>
+            </div>
+            <div class="float-left" *ngIf="data.examDate.endDate">
+                <div class="d-table">
+                    <div class="d-table-cell align-middle"><span class="bolder size20">&nbsp;-&nbsp;</span></div>
+                    <div class="d-table-cell"><ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.examDate.endDate}"></ng-container></div>
+                </div>
+            </div>
+            <div class="float-right line-height-0">
+                <div class="registration-status text-right project-registration-status" ngbTooltip="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.registrationStatus)).name[appService.lang] | titlecase}}" placement="left" title="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.registrationStatus)).name[appService.lang] | titlecase}}">
+                    <i class="fas fa-lock size30"
+                        [ngClass]="{
+                            'text-success': (data.registrationStatus === 'Y'),
+                            'text-warning': (data.registrationStatus === 'W'),
+                            'text-danger': (data.registrationStatus === 'N'),
+                            'fa-unlock': (data.registrationStatus === 'Y'),
+                            'fa-lock': (data.registrationStatus !== 'Y')
+                        }">
+                    </i>
+                </div>
+                <div class="text-right project-dropdown mt-2" ngbDropdown placement="bottom-right">
+                    <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle>
+                        <i class="fas fa-phone text-white size11"></i>
+                    </a>
+                    <div ngbDropdownMenu aria-labelledby="contact-info" class="contact-info">
+                        <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo; context: {data: data.contactPerson}"></ng-container></div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
     </div>
-    <div class="card-title mt-07 mb-0">
-      <div class="float-left" *ngIf="data.examDate.startDate">
-        <ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.examDate.startDate}"></ng-container>
-      </div>
-      <div class="float-left" *ngIf="data.examDate.endDate">
-        <div class="d-table">
-          <div class="d-table-cell align-middle"><span class="bolder size20">&nbsp;-&nbsp;</span></div>
-          <div class="d-table-cell"><ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.examDate.endDate}"></ng-container></div>
-        </div>
-      </div>
-      <div class="float-right line-height-0">
-        <div class="registration-status text-right project-registration-status" ngbTooltip="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.registrationStatus)).name[appService.lang] | titlecase}}" placement="left" title="{{(dataService.statuses.get(dataService.registrationStatus.data$, data.registrationStatus)).name[appService.lang] | titlecase}}">
-          <i class="fas fa-lock size30"
-            [ngClass]="{
-              'text-success': (data.registrationStatus === 'Y'),
-              'text-warning': (data.registrationStatus === 'W'),
-              'text-danger': (data.registrationStatus === 'N'),
-              'fa-unlock': (data.registrationStatus === 'Y'),
-              'fa-lock': (data.registrationStatus !== 'Y')
-            }">
-          </i>
-        </div>
-        <div class="text-right project-dropdown mt-2" ngbDropdown placement="bottom-right">
-          <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle>
-            <i class="fas fa-phone text-white size11"></i>
-          </a>
-          <div ngbDropdownMenu aria-labelledby="contact-info" class="contact-info">
-            <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo; context: {data: data.contactPerson}"></ng-container></div>
-          </div>
-        </div>
-      </div>
-      <div class="clearfix"></div>
-    </div>
-  </div>
 </ng-template>
 <ng-template #projectInfo let-data="data">
-  <div class="project-info"
-    [ngClass]="{
-      'has-openonlyfor': ((data.userTypeSpecific && data.userTypeSpecific.length > 0) || (deviceService.browser === 'Safari'))
-    }">
-    <div class="project-dropdown" ngbDropdown placement="top-left">
-      <a class="link text-wrap bold size19" id="menu-info" href="javascript:void(0)" ngbDropdownToggle>{{data.project.name[appService.lang]}}</a>
-      <div ngbDropdownMenu aria-labelledby="menu-info" class="menu-info">
-        <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="menuInfo; context: {data: data}"></ng-container></div>
-      </div>
+    <div class="project-info"
+        [ngClass]="{
+        'has-openonlyfor': ((data.userTypeSpecific && data.userTypeSpecific.length > 0) || (deviceService.browser === 'Safari'))
+        }">
+        <div class="project-dropdown" ngbDropdown placement="top-left">
+            <a class="link text-wrap bold size19" id="menu-info" href="javascript:void(0)" ngbDropdownToggle>{{data.project.name[appService.lang]}}</a>
+            <div ngbDropdownMenu aria-labelledby="menu-info" class="menu-info">
+                <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="menuInfo; context: {data: data}"></ng-container></div>
+            </div>
+        </div>
+        <div class="regular text-info size15 mt-1" *ngIf="data.description[appService.lang]">{{data.description[appService.lang]}}</div>
     </div>
-    <div class="regular text-info size15 mt-1" *ngIf="data.description[appService.lang]">{{data.description[appService.lang]}}</div>
-  </div>
-  <div class="mt-1 project-openonlyfor-info">
-    <div class="regular text-dark" *ngIf="data.userTypeSpecific && data.userTypeSpecific.length > 0">
-      <span class="bold">{{'openOnlyFor' | translate | lowercase}}</span>
-      <div class="text-muted" *ngFor="let userTypeSpecific of data.userTypeSpecific">
-        - {{('userType.' + userTypeSpecific) | translate | lowercase}}
-      </div>
+    <div class="mt-1 project-openonlyfor-info">
+        <div class="regular text-dark" *ngIf="data.userTypeSpecific && data.userTypeSpecific.length > 0">
+            <span class="bold">{{'openOnlyFor' | translate | lowercase}}</span>
+            <div class="text-muted" *ngFor="let userTypeSpecific of data.userTypeSpecific">
+                - {{('userType.' + userTypeSpecific) | translate | lowercase}}
+            </div>
+        </div>
     </div>
-  </div>
 </ng-template>
 <ng-template #registerInfo let-data="data">
-  <div class="register-info project-register-info">
-    <div class="regular size15">
-      <div class="text-dark">
-        {{'registration.label' | translate | titlecase}}<br />
-        <span class="text-black-50 size13">{{'event.timePeriod.registration' | translate | lowercase}}</span>
-      </div>
-      <div class="d-table w-auto mt-1 mb-01 calendar-date">
-        <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )">
-          <div class="d-table-cell align-middle col-icon"><span class="text-success size18"><i class="fas fa-calendar-alt"></i></span></div>
-          <div class="d-table-cell align-middle col-calendar"><span class="text-success">{{data.registrationDate.startDate ? (data.registrationDate.startDate | slice:0:16) : ''}}</span></div>
-          <div class="d-table-cell align-middle col-icon"><span class="text-success size18"><i class="fas fa-clock"></i></span></div>
-          <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-success size14">{{data.registrationDate.startDate ? (data.registrationDate.startDate | slice:16:22) : ''}}</span></div>
+    <div class="register-info project-register-info">
+        <div class="regular size15">
+            <div class="text-dark">
+                {{'registration.label' | translate | titlecase}}<br />
+                <span class="text-black-50 size13">{{'event.timePeriod.registration' | translate | lowercase}}</span>
+            </div>
+            <div class="d-table w-auto mt-1 mb-01 calendar-date">
+                <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'start' | translate | titlecase}} )">
+                    <div class="d-table-cell align-middle col-icon"><span class="text-success size18"><i class="fas fa-calendar-alt"></i></span></div>
+                    <div class="d-table-cell align-middle col-calendar"><span class="text-success">{{data.registrationDate.startDate ? (data.registrationDate.startDate | slice:0:16) : ''}}</span></div>
+                    <div class="d-table-cell align-middle col-icon"><span class="text-success size18"><i class="fas fa-clock"></i></span></div>
+                    <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-success size14">{{data.registrationDate.startDate ? (data.registrationDate.startDate | slice:16:22) : ''}}</span></div>
+                </div>
+            </div>
+            <div class="d-table w-auto calendar-date">
+                <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )">
+                    <div class="d-table-cell align-middle col-icon"><span class="text-danger size18"><i class="fas fa-calendar-alt"></i></span></div>
+                    <div class="d-table-cell align-middle col-calendar"><span class="text-danger">{{data.registrationDate.endDate ? (data.registrationDate.endDate | slice:0:16) : ''}}</span></div>
+                    <div class="d-table-cell align-middle col-icon"><span class="text-danger size18"><i class="fas fa-clock"></i></span></div>
+                    <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-danger size14">{{data.registrationDate.endDate ? (data.registrationDate.endDate | slice:16:22) : ''}}</span></div>
+                </div>
+            </div>
+            <div class="d-table w-auto mt-06">
+                <div class="d-table-row line-height-0">
+                    <div class="d-table-cell align-middle pb-2 col-icon"><span class="text-dark size14"><i class="fas fa-users"></i></span></div>
+                    <div class="d-table-cell align-middle pb-2"><span class="text-dark">{{'project.seat' | translate | titlecase}}<span class="bold">{{data.maximumSeat ? (' ' + (data.maximumSeat | number) + ' / ' + (data.seatReserved | number) + ' ') : ''}}</span>{{data.maximumSeat ? ('unit.persons' | translate | titlecase) : ''}}</span></div>
+                </div>
+                <div class="d-table-row line-height-0">
+                    <div class="d-table-cell align-middle col-icon"><span class="size18"><i class="fab fa-btc"></i></span></div>
+                    <div class="d-table-cell align-middle"><span class="text-dark">{{'project.registrationFee' | translate | titlecase}}<span class="bold">{{data.minimumFee ? (' ' + (data.minimumFee | number: '.2') + ' ') : ''}}</span>{{data.minimumFee ? ('unit.baht' | translate | titlecase) : ''}}</span></div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="d-table w-auto calendar-date">
-        <div class="d-table-row" ngbTooltip="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )" title="{{'project.registrationDate' | translate | titlecase}} ( {{'end' | translate | titlecase}} )">
-          <div class="d-table-cell align-middle col-icon"><span class="text-danger size18"><i class="fas fa-calendar-alt"></i></span></div>
-          <div class="d-table-cell align-middle col-calendar"><span class="text-danger">{{data.registrationDate.endDate ? (data.registrationDate.endDate | slice:0:16) : ''}}</span></div>
-          <div class="d-table-cell align-middle col-icon"><span class="text-danger size18"><i class="fas fa-clock"></i></span></div>
-          <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-danger size14">{{data.registrationDate.endDate ? (data.registrationDate.endDate | slice:16:22) : ''}}</span></div>
-        </div>
-      </div>
-      <div class="d-table w-auto mt-06">
-        <div class="d-table-row line-height-0">
-          <div class="d-table-cell align-middle pb-2 col-icon"><span class="text-dark size14"><i class="fas fa-users"></i></span></div>
-          <div class="d-table-cell align-middle pb-2"><span class="text-dark">{{'project.seat' | translate | titlecase}}<span class="bold">{{data.maximumSeat ? (' ' + (data.maximumSeat | number) + ' / ' + (data.seatReserved | number) + ' ') : ''}}</span>{{data.maximumSeat ? ('unit.persons' | translate | titlecase) : ''}}</span></div>
-        </div>
-        <div class="d-table-row line-height-0">
-          <div class="d-table-cell align-middle col-icon"><span class="size18"><i class="fab fa-btc"></i></span></div>
-          <div class="d-table-cell align-middle"><span class="text-dark">{{'project.registrationFee' | translate | titlecase}}<span class="bold">{{data.minimumFee ? (' ' + (data.minimumFee | number: '.2') + ' ') : ''}}</span>{{data.minimumFee ? ('unit.baht' | translate | titlecase) : ''}}</span></div>
-        </div>
-      </div>
     </div>
-  </div>
 </ng-template>
 <ng-template #menuInfo let-data="data">
-  <div class="menu-info text-white size16 project-menu-info">
-    <div class="form">
-      <div class="form-group row mr-0 mb-0 ml-0">
-        <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fas fa-info-circle"></i></label>
-        <div class="col text-left">
-          <span class="form-text regular mt-0"><a class="link text-white" href="javascript:void(0)" (click)="projectService.getModalTransProject(data)">{{'project.detail' | translate | titlecase}}</a></span>
+    <div class="menu-info text-white size16 project-menu-info">
+        <div class="form">
+            <div class="form-group row mr-0 mb-0 ml-0">
+                <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fas fa-info-circle"></i></label>
+                <div class="col text-left">
+                    <span class="form-text regular mt-0"><a class="link text-white" href="javascript:void(0)" (click)="projectService.getModalTransProject(data)">{{'project.detail' | translate | titlecase}}</a></span>
+                </div>
+            </div>
+            <div class="form-group row mt-1 mr-0 mb-0 ml-0" *ngIf="data.registrationStatus === 'Y'">
+                <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fas fa-registered"></i></label>
+                <div class="col text-left">
+                    <span class="form-text regular mt-0"><a [routerLink]="['../Registered', data.CUID]" routerLinkActive="active" class="link text-white">{{'registered.label' | translate | titlecase}}</a></span>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="form-group row mt-1 mr-0 mb-0 ml-0" *ngIf="data.registrationStatus === 'Y'">
-        <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fas fa-registered"></i></label>
-        <div class="col text-left">
-          <span class="form-text regular mt-0"><a [routerLink]="['../Registered', data.CUID]" routerLinkActive="active" class="link text-white">{{'registered.label' | translate | titlecase}}</a></span>
-        </div>
-      </div>
     </div>
-  </div>
 </ng-template>
 <ng-template #menuButtonInfo let-data="data">
-  <div class="menu-button-info">
-    <div class="d-table">
-      <div class="d-table-cell"
-        [ngClass]="{
-          'w-50': (data.registrationStatus === 'Y'),
-          'w-100': (data.registrationStatus !== 'Y')
-        }">
-        <a class="btn w-100 rounded-0" href="javascript:void(0)" (click)="projectService.getModalTransProject(data)"><span class="regular text-dark size16">{{'detail' | translate | titlecase}}</span></a>
-      </div>
-      <div class="d-table-cell w-50 pl-1" *ngIf="data.registrationStatus === 'Y'">
-        <a [routerLink]="['../Registered', data.CUID]" routerLinkActive="active" class="btn w-100 rounded-0"><span class="regular text-dark size16">{{'registered.label' | translate | titlecase}}</span></a>
-      </div>
+    <div class="menu-button-info">
+        <div class="d-table">
+            <div class="d-table-cell"
+                [ngClass]="{
+                    'w-50': (data.registrationStatus === 'Y'),
+                    'w-100': (data.registrationStatus !== 'Y')
+                }">
+                <a class="btn w-100 rounded-0" href="javascript:void(0)" (click)="projectService.getModalTransProject(data)"><span class="regular text-dark size16">{{'detail' | translate | titlecase}}</span></a>
+            </div>
+            <div class="d-table-cell w-50 pl-1" *ngIf="data.registrationStatus === 'Y'">
+                <a [routerLink]="['../Registered', data.CUID]" routerLinkActive="active" class="btn w-100 rounded-0"><span class="regular text-dark size16">{{'registered.label' | translate | titlecase}}</span></a>
+            </div>
+        </div>
     </div>
-  </div>
 </ng-template>
 <ng-template #contactInfo let-data="data">
-  <div class="contact-info text-white size14 project-contact-info">
-    <div class="form" *ngFor="let contactPerson of data; index as order">
-      <div class="dropdown-divider mt-2 mb-2" *ngIf="order > 0"></div>
-      <div class="form-group row mr-0 mb-0 ml-0">
-        <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fas fa-address-book"></i></label>
-        <div class="col text-left">
-          <span class="form-text regular mt-0">{{contactPerson.fullName[appService.lang] | titlecase}}</span>
+    <div class="contact-info text-white size14 project-contact-info">
+        <div class="form" *ngFor="let contactPerson of data; index as order">
+            <div class="dropdown-divider mt-2 mb-2" *ngIf="order > 0"></div>
+            <div class="form-group row mr-0 mb-0 ml-0">
+                <label for="col-name" class="col-form-label pt-0 pb-0"><i class="fas fa-address-book"></i></label>
+                <div class="col text-left">
+                    <span class="form-text regular mt-0">{{contactPerson.fullName[appService.lang] | titlecase}}</span>
+                </div>
+            </div>
+            <div class="form-group row mr-0 mb-0 ml-0">
+                <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fas fa-envelope"></i></label>
+                <div class="col text-left">
+                    <span class="form-text regular mt-0">{{contactPerson.email | lowercase}}</span>
+                </div>
+            </div>
+            <div class="form-group row mr-0 mb-0 ml-0">
+                <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fas fa-phone"></i></label>
+                <div class="col text-left">
+                    <span class="form-text regular mt-0">{{contactPerson.phoneNumber}}</span>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="form-group row mr-0 mb-0 ml-0">
-        <label for="col-email" class="col-form-label pt-0 pb-0"><i class="fas fa-envelope"></i></label>
-        <div class="col text-left">
-          <span class="form-text regular mt-0">{{contactPerson.email | lowercase}}</span>
-        </div>
-      </div>
-      <div class="form-group row mr-0 mb-0 ml-0">
-        <label for="col-phone" class="col-form-label pt-0 pb-0"><i class="fas fa-phone"></i></label>
-        <div class="col text-left">
-          <span class="form-text regular mt-0">{{contactPerson.phoneNumber}}</span>
-        </div>
-      </div>
     </div>
-  </div>
 </ng-template>

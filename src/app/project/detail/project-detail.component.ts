@@ -9,39 +9,39 @@ Description : <>
 
 'use strict';
 
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-import {AppService} from '../../app.service';
-import {Schema, DataService} from '../../data.service';
-import {ScheduleService} from '../../schedule/schedule.service';
+import { AppService } from '../../app.service';
+import { Schema, DataService } from '../../data.service';
+import { ScheduleService } from '../../schedule/schedule.service';
 
 @Component({
-  selector: 'app-project-detail',
-  templateUrl: './project-detail.component.html',
-  styleUrls: ['./project-detail.component.scss'],
+    selector: 'app-project-detail',
+    templateUrl: './project-detail.component.html',
+    styleUrls: ['./project-detail.component.scss'],
 })
 export class ProjectDetailComponent implements OnInit {
-  @Input() data$: Schema.TransProject;
+    @Input() data$: Schema.TransProject;
 
-  constructor(
-    private appService: AppService,
-    private dataService: DataService,
-    private scheduleService: ScheduleService
-  ) {}
+    constructor(
+        private appService: AppService,
+        private dataService: DataService,
+        private scheduleService: ScheduleService
+    ) { }
 
-  data: any = {
-    transProject$: null
-  };
+    data: any = {
+        transProject$: null
+    };
 
-  projectAbout = {
-    isCollapsed: false
-  };
+    projectAbout = {
+        isCollapsed: false
+    };
 
-  schedule: any = {
-    isCollapsed: false
-  };
+    schedule: any = {
+        isCollapsed: false
+    };
 
-  ngOnInit() {
-    this.data.transProject$ = this.data$;
-  }
+    ngOnInit() {
+        this.data.transProject$ = this.data$;
+    }
 }

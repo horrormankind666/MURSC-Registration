@@ -7,50 +7,50 @@ Description : <>
 =============================================
 */
 
-import {Injectable} from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-import {CookieService} from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 
-import {AppService} from './app.service';
-import {AuthService} from './auth.service';
+import { AppService } from './app.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate {
-  constructor(
-    private cookieService: CookieService,
-    private appService: AppService,
-    private authService: AuthService
-  ) {}
+    constructor(
+        private cookieService: CookieService,
+        private appService: AppService,
+        private authService: AuthService
+    ) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    let url: string = state.url;
-    let urlArray: string[] = url.split('/');
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+        let url: string = state.url;
+        let urlArray: string[] = url.split('/');
 
-    this.cookieService.set('MURSC.Url', url);
-    document.cookie = ('MURSC.Url=' + url);
+        this.cookieService.set('MURSC.Url', url);
+        document.cookie = ('MURSC.Url=' + url);
 
-    this.appService.rootPath = (urlArray[1] + '/' + urlArray[2]);
-    if (!route.data.hasHearderSubtitle) this.appService.headerSubtitle = null;
+        this.appService.rootPath = (urlArray[1] + '/' + urlArray[2]);
+        if (!route.data.hasHearderSubtitle) this.appService.headerSubtitle = null;
 
-    return this.authService.getAuthenResource().then((result: any) => {
-      if (!this.authService.isAuthenticated) {
-        if (this.cookieService.check(this.appService.cookieName))
-          this.cookieService.delete(this.appService.cookieName);
+        return this.authService.getAuthenResource().then((result: any) => {
+            if (!this.authService.isAuthenticated) {
+                if (this.cookieService.check(this.appService.cookieName))
+                    this.cookieService.delete(this.appService.cookieName);
 
-        if (this.cookieService.check(this.appService.cookieName))
-          document.cookie = (this.appService.cookieName + '=; Max-Age=-99999999;');
+                if (this.cookieService.check(this.appService.cookieName))
+                    document.cookie = (this.appService.cookieName + '=; Max-Age=-99999999;');
 
-        if (route.data.signin) {
-          this.appService.gotoSignIn();
+                if (route.data.signin) {
+                    this.appService.gotoSignIn();
 
-          return false;
-        }
-      }
+                    return false;
+                }
+            }
 
-      return true;
-    });
-  }
+            return true;
+        });
+    }
 }

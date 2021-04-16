@@ -7,73 +7,73 @@ Description : <>
 =============================================
 */
 
-@import '../../styles.scss';
+@import "../../styles.scss";
 
 .registered-view .project-card-vertical {
-  display: none;
+    display: none;
 }
 .registered-view .location-info .table .col-index,
 .registered-view .section-info .table .col-index {
-  width: 72px;
-  min-width: 72px;
+    width: 72px;
+    min-width: 72px;
 }
 .registered-view .fee-info .table .col-check .toggle {
-  position: absolute;
-  top: 0;
+    position: absolute;
+    top: 0;
 }
 @media screen and (max-width: 1747px) and (min-width: 1082px) {
-  @include table-responsive-step1('.registered-view .section-info');
+    @include table-responsive-step1(".registered-view .section-info");
 }
 @media screen and (max-width: 1520px) and (min-width: 1082px) {
-  .registered-view .registered-info .d-table .col-locations {
-    width: 50% !important;
-  }
-  @include table-responsive-step1('.registered-view .location-info');
-  @include table-responsive-step1('.registered-view .section-info');
+    .registered-view .registered-info .d-table .col-locations {
+        width: 50% !important;
+    }
+    @include table-responsive-step1(".registered-view .location-info");
+    @include table-responsive-step1(".registered-view .section-info");
 }
 @media screen and (max-width: 1174px) and (min-width: 1082px) {
-  @include table-responsive-step2('.registered-view .registered-info .section-info');
+    @include table-responsive-step2(".registered-view .registered-info .section-info");
 }
 @media screen and (max-width: 1081px) {
-  .registered-view .registered-info .d-table .table-cell-divider.col-wrap {
-    display: none;
-  }
-  .registered-view .registered-info .d-table.table-registered,
-  .registered-view .registered-info .d-table .col-locations,
-  .registered-view .registered-info .d-table .col-feetype {
-    display: block !important;
-    width: 100% !important;
-  }
-  .registered-view .registered-info .d-table .col-feetype {
-    margin-top: 1rem !important;
-  }
-  .registered-view .registered-info .fee-info .table thead {
-    display: none;
-  }
+    .registered-view .registered-info .d-table .table-cell-divider.col-wrap {
+        display: none;
+    }
+    .registered-view .registered-info .d-table.table-registered,
+    .registered-view .registered-info .d-table .col-locations,
+    .registered-view .registered-info .d-table .col-feetype {
+        display: block !important;
+        width: 100% !important;
+    }
+    .registered-view .registered-info .d-table .col-feetype {
+        margin-top: 1rem !important;
+    }
+    .registered-view .registered-info .fee-info .table thead {
+        display: none;
+    }
 }
 @media screen and (max-width: 1040px) {
-  @include table-responsive-step1('.registered-view .registered-info .section-info');
+    @include table-responsive-step1(".registered-view .registered-info .section-info");
 }
 @media screen and (max-width: 908px) {
-  @include table-responsive-step1('.registered-view .registered-info .location-info');
+    @include table-responsive-step1(".registered-view .registered-info .location-info");
 }
 @media screen and (max-width: 611px) {
-  @include table-responsive-step2('.registered-view .registered-info .section-info');
+    @include table-responsive-step2(".registered-view .registered-info .section-info");
 }
 @media screen and (max-width: 565px) {
-  @include table-responsive-step2('.registered-view .registered-info .location-info');
-  @include form-responsive('.registered-view .fee-info #deliaddress-form');
+    @include table-responsive-step2(".registered-view .registered-info .location-info");
+    @include form-responsive(".registered-view .fee-info #deliaddress-form");
 }
 @media screen and (max-width: 530px) {
-  .registered-view .project-card-vertical {
-    display: block;
-  }
-  .registered-view .project-card-horizontal {
-    display: none;
-  }
+    .registered-view .project-card-vertical {
+        display: block;
+    }
+    .registered-view .project-card-horizontal {
+        display: none;
+    }
 }
 @media screen and (max-width: 473px) {
-  .registered-view .registered-btn {
-    width: 100% !important;
-  }
+    .registered-view .registered-btn {
+        width: 100% !important;
+    }
 }

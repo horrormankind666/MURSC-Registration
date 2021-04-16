@@ -7,36 +7,36 @@ Description : <>
 =============================================
 */
 
-@import '../../../styles.scss';
+@import "../../../styles.scss";
 
 .project-detail-view .project-card-vertical {
-  display: none;
+    display: none;
 }
 .project-detail-view .location-info .table .col-index,
 .project-detail-view .section-info .table .col-index {
-  width: 64px;
-  min-width: 64px;
+    width: 64px;
+    min-width: 64px;
 }
 @media screen and (max-width: 1068px) {
-  @include table-responsive-step1('.project-detail-view .section-info');
+    @include table-responsive-step1(".project-detail-view .section-info");
 }
 @media screen and (max-width: 934px) {
-  @include table-responsive-step1('.project-detail-view .location-info');
+    @include table-responsive-step1(".project-detail-view .location-info");
 }
 @media screen and (max-width: 640px) {
-  @include table-responsive-step2('.project-detail-view .section-info');
+    @include table-responsive-step2(".project-detail-view .section-info");
 }
 @media screen and (max-width: 600px) {
-  .project-detail-view .project-card-horizontal {
-    display: none;
-  }
-  .project-detail-view .project-card-vertical {
-    display: block;
-  }
-  @include table-responsive-step2('.project-detail-view .location-info');
+    .project-detail-view .project-card-horizontal {
+        display: none;
+    }
+    .project-detail-view .project-card-vertical {
+        display: block;
+    }
+    @include table-responsive-step2(".project-detail-view .location-info");
 }
 @media screen and (max-width: 533px) {
-  .project-detail-view .registered-btn {
-    width: 100% !important;
-  }
+    .project-detail-view .registered-btn {
+        width: 100% !important;
+    }
 }

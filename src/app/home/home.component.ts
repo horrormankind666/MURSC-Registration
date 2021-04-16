@@ -9,18 +9,18 @@ Description : <>
 
 'use strict';
 
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html'
+    selector: 'app-home',
+    templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
-  constructor(
-    private route: ActivatedRoute
-  ) {}
+    constructor(
+        private route: ActivatedRoute
+    ) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 }

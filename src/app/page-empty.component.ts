@@ -9,17 +9,17 @@ Description : <>
 
 'use strict';
 
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: '',
-  template: '',
-  styleUrls: []
+    selector: '',
+    template: '',
+    styleUrls: []
 })
 export class PageEmptyComponent implements OnInit {
-  constructor(
-  ) {}
+    constructor(
+    ) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 }

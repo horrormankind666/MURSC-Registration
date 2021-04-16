@@ -7,67 +7,67 @@ Description : <>
 =============================================
 */
 
-@import '../../../styles.scss';
+@import "../../../styles.scss";
 
 .project-home-view .card-group {
-  margin-left: -0.25rem;
-  margin-bottom: -0.25rem;
+    margin-left: -0.25rem;
+    margin-bottom: -0.25rem;
 }
 @media screen and (max-width: 606px) {
-  .project-home-view .card-group .card-col.col-sm-6 {
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-  .project-home-view .card-group .card-col .card .card-body .project-info {
-    min-height: 0 !important;
-  }
-  ::i-block-chrome,
-  .project-home-view .card-group .card-col.col-sm-6 .project-openonlyfor-info {
-    min-height: 0 !important;
-  }
+    .project-home-view .card-group .card-col.col-sm-6 {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .project-home-view .card-group .card-col .card .card-body .project-info {
+        min-height: 0 !important;
+    }
+    ::i-block-chrome,
+    .project-home-view .card-group .card-col.col-sm-6 .project-openonlyfor-info {
+        min-height: 0 !important;
+    }
 }
 .project-home-view .dropdown-menu.menu-info {
-  width: 171px;
-  min-width: 171px;
+    width: 171px;
+    min-width: 171px;
 }
 .project-home-view .title-info .dropdown-menu.show.menu-info {
-  transform: translate(0px, -2px) !important;
+    transform: translate(0px, -2px) !important;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  ::i-block-chrome,
-  .project-home-view .title-info .dropdown-menu.show.menu-info {
-    top: -2px !important;
-    left: 1px !important;
-  }
-  ::i-block-chrome,
-  .project-home-view .project-info .dropdown-menu.show.menu-info {
-    top: 24px !important;
-  }
-  ::i-block-chrome,
-  .project-home-view .project-openonlyfor-info {
-    min-height: 70px;
-  }
+    ::i-block-chrome,
+    .project-home-view .title-info .dropdown-menu.show.menu-info {
+        top: -2px !important;
+        left: 1px !important;
+    }
+    ::i-block-chrome,
+    .project-home-view .project-info .dropdown-menu.show.menu-info {
+        top: 24px !important;
+    }
+    ::i-block-chrome,
+    .project-home-view .project-openonlyfor-info {
+        min-height: 70px;
+    }
 }
 .project-home-view .card-group .card-col .card .project-info.has-openonlyfor {
-  min-height: 85px;
+    min-height: 85px;
 }
 .project-home-view .card-group .card-col .card .card-footer .project-about {
-  min-height: 54px !important;
+    min-height: 54px !important;
 }
 .project-home-view .card-group.card-striped .card-col .card .card-footer .btn,
 .project-home-view .card-group.card-striped .card-col .card .card-footer .btn:focus,
 .project-home-view .card-group.card-striped .card-col .card .card-footer .btn.focus {
-  background-color: #DDDDDD;
+    background-color: #dddddd;
 }
 .project-home-view .card-group.card-striped .card-col .card .card-footer .btn:hover {
-  background-color: #BBBBBB;
+    background-color: #bbbbbb;
 }
 .project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .card-footer .btn,
 .project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .card-footer .btn:focus,
 .project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .card-footer .btn.focus {
-  background-color: #ABFFAB;
+    background-color: #abffab;
 }
 .project-home-view .card-group.card-striped .card-col:nth-of-type(even) .card .card-footer .btn:hover {
-  background-color: #69FF69;
+    background-color: #69ff69;
 }

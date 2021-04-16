@@ -9,34 +9,34 @@ Description : <>
 
 'use strict';
 
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-import {NgbNav, NgbNavChangeEvent} from '@ng-bootstrap/ng-bootstrap';
+import { NgbNav, NgbNavChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
-import {AppService} from '../app.service';
-import {Schema} from '../data.service';
+import { AppService } from '../app.service';
+import { Schema } from '../data.service';
 
 @Component({
-  selector: 'app-formless',
-  templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.scss']
+    selector: 'app-formless',
+    templateUrl: './schedule.component.html',
+    styleUrls: ['./schedule.component.scss']
 })
 export class ScheduleComponent implements OnInit {
-  @Input() data$: Schema.TransSchedule;
+    @Input() data$: Schema.TransSchedule;
 
-  constructor(
-    private appService: AppService
-  ) {}
+    constructor(
+        private appService: AppService
+    ) { }
 
-  data: any = {
-    transSchedule$: null
-  };
+    data: any = {
+        transSchedule$: null
+    };
 
-  section: any = {
-    active: 1
-  };
+    section: any = {
+        active: 1
+    };
 
-  ngOnInit() {
-    this.data.transSchedule$ = this.data$;
-  }
+    ngOnInit() {
+        this.data.transSchedule$ = this.data$;
+    }
 }

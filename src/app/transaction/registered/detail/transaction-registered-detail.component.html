@@ -1,850 +1,835 @@
 <div class="transaction-registered-detail-view" *ngIf="data.transRegistered$">
-  <div class="card-group">
-    <div class="card-col pr-0 pb-3 pl-0 w-100">
-      <div class="card bg-white border-0 rounded-0">
-        <div class="card-body pt-0 pr-3 pb-0 pl-3">
-          <div class="card-title mb-0">
-            <span class="bold text-dark size24">{{'registered.detail' | translate | titlecase}}</span>
-          </div>
-        </div>
-      </div>
-      <div class="dropdown-divider mt-2 mb-0"></div>
-      <div class="card card-horizontal bg-white border-0 rounded-0 project-card-horizontal">
-        <div class="card-body pt-0 pr-3 pb-3 pl-3 project-body">
-          <div class="card-text">
-            <div class="d-table w-100">
-              <div class="d-table-cell col-sm-3 w-25 pr-0 pl-0 align-top">
-                <ng-container *ngTemplateOutlet="titleInfo; context: {cardType: 'horizontal'}"></ng-container>
-              </div>
-              <div class="d-table-cell col-sm-9 w-75 pt-2 pr-0 align-top">
-                <ng-container *ngTemplateOutlet="projectInfo"></ng-container>
-                <div class="mt-2 hide"><ng-container *ngTemplateOutlet="projectAboutResultInfo"></ng-container></div>
-                <div class="mt-3 hide"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
-              </div>
+    <div class="card-group">
+        <div class="card-col pr-0 pb-3 pl-0 w-100">
+            <div class="card bg-white border-0 rounded-0">
+                <div class="card-body pt-0 pr-3 pb-0 pl-3">
+                    <div class="card-title mb-0">
+                        <span class="bold text-dark size24">{{'registered.detail' | translate | titlecase}}</span>
+                    </div>
+                </div>
             </div>
-            <div class="d-block wrap wrap-step1">
-              <div class="mt-2"><ng-container *ngTemplateOutlet="projectAboutResultInfo"></ng-container></div>
-              <div class="mt-3"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
+            <div class="dropdown-divider mt-2 mb-0"></div>
+            <div class="card card-horizontal bg-white border-0 rounded-0 project-card-horizontal">
+                <div class="card-body pt-0 pr-3 pb-3 pl-3 project-body">
+                    <div class="card-text">
+                        <div class="d-table w-100">
+                            <div class="d-table-cell col-sm-3 w-25 pr-0 pl-0 align-top">
+                                <ng-container *ngTemplateOutlet="titleInfo; context: {cardType: 'horizontal'}"></ng-container>
+                            </div>
+                            <div class="d-table-cell col-sm-9 w-75 pt-2 pr-0 align-top">
+                                <ng-container *ngTemplateOutlet="projectInfo"></ng-container>
+                                <div class="mt-2 hide"><ng-container *ngTemplateOutlet="projectAboutResultInfo"></ng-container></div>
+                                <div class="mt-3 hide"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
+                            </div>
+                        </div>
+                        <div class="d-block wrap wrap-step1">
+                            <div class="mt-2"><ng-container *ngTemplateOutlet="projectAboutResultInfo"></ng-container></div>
+                            <div class="mt-3"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="card card-vertical bg-white border-0 rounded-0 project-card-vertical">
+                <div class="card-body pt-0 pr-3 pb-3 pl-3 project-body">
+                    <div class="card-text">
+                        <ng-container *ngTemplateOutlet="titleInfo; context: {cardType: 'vertical'}"></ng-container>
+                        <div class="mt-3"><ng-container *ngTemplateOutlet="projectInfo"></ng-container></div>
+                        <div class="mt-2"><ng-container *ngTemplateOutlet="projectAboutResultInfo"></ng-container></div>
+                        <div class="mt-3"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pr-3 pl-3">
+                <div *ngIf="registeredInfos.show">
+                    <ng-container *ngTemplateOutlet="registeredInfo"></ng-container>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="card card-vertical bg-white border-0 rounded-0 project-card-vertical">
-        <div class="card-body pt-0 pr-3 pb-3 pl-3 project-body">
-          <div class="card-text">
-            <ng-container *ngTemplateOutlet="titleInfo; context: {cardType: 'vertical'}"></ng-container>
-            <div class="mt-3"><ng-container *ngTemplateOutlet="projectInfo"></ng-container></div>
-            <div class="mt-2"><ng-container *ngTemplateOutlet="projectAboutResultInfo"></ng-container></div>
-            <div class="mt-3"><ng-container *ngTemplateOutlet="registerInfo"></ng-container></div>
-          </div>
-        </div>
-      </div>
-      <div class="pr-3 pl-3">
-        <div *ngIf="registeredInfos.show">
-          <ng-container *ngTemplateOutlet="registeredInfo"></ng-container>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
 <ng-template #datetimeVerticalInfo let-data="data">
-  <div class="datetime-vertical bold text-body" *ngIf="data">
-    <div class="day bolder size24">
-      <div>{{data | slice:5:6}}</div>
-      <div>{{data | slice:6:7}}</div>
+    <div class="datetime-vertical bold text-body" *ngIf="data">
+        <div class="day bolder size24">
+            <div>{{data | slice:5:6}}</div>
+            <div>{{data | slice:6:7}}</div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="month size16">
+            <div>{{(data | slice:8:9) | uppercase}}</div>
+            <div>{{(data | slice:9:10) | uppercase}}</div>
+            <div>{{(data | slice:10:11) | uppercase}}</div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="year size14">
+            <div>{{data | slice:12:13}}</div>
+            <div>{{data | slice:13:14}}</div>
+            <div>{{data | slice:14:15}}</div>
+            <div>{{data | slice:15:16}}</div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="time size11 text-secondary">
+            <div>{{data | slice:17:18}}</div>
+            <div>{{data | slice:18:19}}</div>
+            <div>{{data | slice:19:20}}</div>
+            <div>{{data | slice:20:21}}</div>
+            <div>{{data | slice:21:22}}</div>
+        </div>
+        <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
-    <div class="month size16">
-      <div>{{(data | slice:8:9) | uppercase}}</div>
-      <div>{{(data | slice:9:10) | uppercase}}</div>
-      <div>{{(data | slice:10:11) | uppercase}}</div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="year size14">
-      <div>{{data | slice:12:13}}</div>
-      <div>{{data | slice:13:14}}</div>
-      <div>{{data | slice:14:15}}</div>
-      <div>{{data | slice:15:16}}</div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="time size11 text-secondary">
-      <div>{{data | slice:17:18}}</div>
-      <div>{{data | slice:18:19}}</div>
-      <div>{{data | slice:19:20}}</div>
-      <div>{{data | slice:20:21}}</div>
-      <div>{{data | slice:21:22}}</div>
-    </div>
-    <div class="clearfix"></div>
-  </div>
 </ng-template>
 <ng-template #titleInfo let-cardType="cardType">
-  <div class="title-info project-title-info">
-    <div class="embed-responsive embed-responsive-16by9 project-logo">
-      <div class="card-img project-card-img" [ngStyle]="{'background-image': ('url(' + data.transRegistered$.transProject.project.logo + ')')}"></div>
-      <a class="enlarge" href="javascript:void(0)" (click)="appService.enlargeImage(data.transRegistered$.transProject.project.logo)">
-        <i class="fas fa-expand text-white size18"></i>
-      </a>
-    </div>
-    <div class="card-title hide mt-07 mb-0">
-      <div class="float-left" *ngIf="data.transRegistered$.transProject.examDate.startDate">
-        <ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.transRegistered$.transProject.examDate.startDate}"></ng-container>
-      </div>
-      <div class="float-left" *ngIf="data.transRegistered$.transProject.examDate.endDate">
-        <div class="d-table">
-          <div class="d-table-cell align-middle"><span class="bolder size20">&nbsp;-&nbsp;</span></div>
-          <div class="d-table-cell"><ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.transRegistered$.transProject.examDate.endDate}"></ng-container></div>
+    <div class="title-info project-title-info">
+        <div class="embed-responsive embed-responsive-16by9 project-logo">
+            <div class="card-img project-card-img" [ngStyle]="{'background-image': ('url(' + data.transRegistered$.transProject.project.logo + ')')}"></div>
+            <a class="enlarge" href="javascript:void(0)" (click)="appService.enlargeImage(data.transRegistered$.transProject.project.logo)">
+                <i class="fas fa-expand text-white size18"></i>
+            </a>
         </div>
-      </div>
-      <div class="float-right line-height-0">
-        <div class="text-right project-dropdown" ngbDropdown placement="bottom-{{cardType === 'horizontal' ? 'left' : 'right'}}">
-          <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle>
-            <i class="fas fa-phone text-white size11"></i>
-          </a>
-          <div ngbDropdownMenu aria-labelledby="contact-info" class="contact-info">
-            <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo; context: {isDropdown: true}"></ng-container></div>
-          </div>
+        <div class="card-title hide mt-07 mb-0">
+            <div class="float-left" *ngIf="data.transRegistered$.transProject.examDate.startDate">
+                <ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.transRegistered$.transProject.examDate.startDate}"></ng-container>
+            </div>
+            <div class="float-left" *ngIf="data.transRegistered$.transProject.examDate.endDate">
+                <div class="d-table">
+                    <div class="d-table-cell align-middle"><span class="bolder size20">&nbsp;-&nbsp;</span></div>
+                    <div class="d-table-cell"><ng-container *ngTemplateOutlet="datetimeVerticalInfo; context: {data: data.transRegistered$.transProject.examDate.endDate}"></ng-container></div>
+                </div>
+            </div>
+            <div class="float-right line-height-0">
+                <div class="text-right project-dropdown" ngbDropdown placement="bottom-{{cardType === 'horizontal' ? 'left' : 'right'}}">
+                    <a class="badge badge-pill badge-dark btn-contact-info" href="javascript:void(0)" ngbDropdownToggle>
+                        <i class="fas fa-phone text-white size11"></i>
+                    </a>
+                    <div ngbDropdownMenu aria-labelledby="contact-info" class="contact-info">
+                        <div class="dropdown-menu-inner"><ng-container *ngTemplateOutlet="contactInfo; context: {isDropdown: true}"></ng-container></div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
         </div>
-      </div>
-      <div class="clearfix"></div>
     </div>
-  </div>
 </ng-template>
 <ng-template #projectInfo>
-  <div class="project-info">
-    <p class="bold size20 mb-0">{{data.transRegistered$.transProject.project.name[appService.lang]}}</p>
-    <div class="regular text-dark size15" *ngIf="data.transRegistered$.transProject.description[appService.lang]">{{data.transRegistered$.transProject.description[appService.lang]}}</div>
-    <div class="regular text-dark mt-1 mb-1 project-openonlyfor-info" *ngIf="data.transRegistered$.transProject.userTypeSpecific && data.transRegistered$.transProject.userTypeSpecific.length > 0">
-      <span class="bold">{{'openOnlyFor' | translate | lowercase}}</span>
-      <div class="text-muted" *ngFor="let userTypeSpecific of data.transRegistered$.transProject.userTypeSpecific">
-        - {{('userType.' + userTypeSpecific) | translate | lowercase}}
-      </div>
+    <div class="project-info">
+        <p class="bold size20 mb-0">{{data.transRegistered$.transProject.project.name[appService.lang]}}</p>
+        <div class="regular text-dark size15" *ngIf="data.transRegistered$.transProject.description[appService.lang]">{{data.transRegistered$.transProject.description[appService.lang]}}</div>
+        <div class="regular text-dark mt-1 mb-1 project-openonlyfor-info" *ngIf="data.transRegistered$.transProject.userTypeSpecific && data.transRegistered$.transProject.userTypeSpecific.length > 0">
+            <span class="bold">{{'openOnlyFor' | translate | lowercase}}</span>
+            <div class="text-muted" *ngFor="let userTypeSpecific of data.transRegistered$.transProject.userTypeSpecific">
+                - {{('userType.' + userTypeSpecific) | translate | lowercase}}
+            </div>
+        </div>
+        <a routerLink="../../../../Project/{{data.transRegistered$.transProject.project.category.initial}}" class="link regular size14">
+            #{{data.transRegistered$.transProject.project.category.name[appService.lang] | titlecase}}
+        </a>
     </div>
-    <a routerLink="../../../../Project/{{data.transRegistered$.transProject.project.category.initial}}" class="link regular size14">
-      #{{data.transRegistered$.transProject.project.category.name[appService.lang] | titlecase}}
-    </a>
-  </div>
 </ng-template>
 <ng-template #projectAboutResultInfo>
-  <div class="aboutresult-info project-aboutresult-info"
-    [ngClass]="{
-      'project-exam': (data.transRegistered$.transProject.project.isExam === 'Y'),
-      'project-teaching': (data.transRegistered$.transProject.project.isTeaching === 'Y')
-    }">
-    <div class="d-inline-block badge-inline badge-projectabout">
-      <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
-        (click)="
-          examScore.isCollapsed = false;
-          studyResultsTranscript.isCollapsed = false;
-          projectAbout.isCollapsed = !projectAbout.isCollapsed
-        "
-        [attr.aria-expanded]="projectAbout.isCollapsed"
-        aria-controls="projectAbout">
-        <span class="regular size13">{{'about' | translate | lowercase}}</span>
-      </a>
-    </div>
-    <div class="d-inline-block badge-inline badge-examscore ml-2" *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'">
-      <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
-        (click)="
-          projectAbout.isCollapsed = false;
-          studyResultsTranscript.isCollapsed = false;
-          examScore.isCollapsed = !examScore.isCollapsed
-        "
-        [attr.aria-expanded]="examScore.isCollapsed"
-        aria-controls="examScore">
-        <span class="regular size13">{{'score' | translate | lowercase}}</span>
-      </a>
-    </div>
-    <div class="d-inline-block badge-inline badge-schedule ml-2" *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">
-      <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
-        (click)="scheduleService.getModalTransSchedule(data.transRegistered$.transProject)"
-        [attr.aria-expanded]="schedule.isCollapsed">
-        <span class="regular size13">{{'schedule.label' | translate | lowercase}}</span>
-      </a>
-    </div>
-    <div class="d-inline-block badge-inline badge-studyresultstranscript ml-2" *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">
-      <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
-        (click)="
-          projectAbout.isCollapsed = false;
-          examScore.isCollapsed = false;
-          schedule.isCollapsed = false;
-          studyResultsTranscript.isCollapsed = !studyResultsTranscript.isCollapsed
-        "
-        [attr.aria-expanded]="studyResultsTranscript.isCollapsed"
-        aria-controls="studyResultsTranscript">
-        <span class="regular size13">{{'studyResults.label' | translate | lowercase}} / {{'transcript.aka' | translate | lowercase}}</span>
-      </a>
-    </div>
-    <p class="regular text-black-50 size16 line-clamp mt-2 mb-0">
-      <span id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed">
-        <span class="text-justify-distribute" [innerHTML]="data.transRegistered$.transProject.project.about[appService.lang] | nl2br"></span>
-        <div class="text-dark mt-2">
-          <span *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'">{{'event.timePeriod.exam' | translate | titlecase}}</span>
-          <span *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">{{'event.timePeriod.teaching' | translate | titlecase}}</span>
+    <div class="aboutresult-info project-aboutresult-info"
+        [ngClass]="{
+            'project-exam': (data.transRegistered$.transProject.project.isExam === 'Y'),
+            'project-teaching': (data.transRegistered$.transProject.project.isTeaching === 'Y')
+        }">
+        <div class="d-inline-block badge-inline badge-projectabout">
+            <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
+                (click)="
+                    examScore.isCollapsed = false;
+                    studyResultsTranscript.isCollapsed = false;
+                    projectAbout.isCollapsed = !projectAbout.isCollapsed
+                "
+                [attr.aria-expanded]="projectAbout.isCollapsed"
+                aria-controls="projectAbout">
+                <span class="regular size13">{{'about' | translate | lowercase}}</span>
+            </a>
         </div>
-        <div class="project-register-info">
-          <div class="form">
-            <div class="form-group w-100 row mr-0 mb-0 ml-0" *ngIf="data.transRegistered$.transProject.examDate.startDate">
-              <label for="col-eventstartdate" class="col-form-label">{{'start' | translate | titlecase}}</label>
-              <div class="col">
-                <div class="d-table w-100 size-l calendar-date">
-                  <div class="d-table-row">
-                    <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.transProject.examDate.startDate ? (data.transRegistered$.transProject.examDate.startDate | slice:0:16) : ''}}</span></div>
-                    <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transRegistered$.transProject.examDate.startDate ? (data.transRegistered$.transProject.examDate.startDate | slice:16:22) : ''}}</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group w-100 row mr-0 mb-0 ml-0" *ngIf="data.transRegistered$.transProject.examDate.endDate">
-              <label for="col-eventenddate" class="col-form-label">{{'end' | translate | titlecase}}</label>
-              <div class="col">
-                <div class="d-table w-100 size-l calendar-date">
-                  <div class="d-table-row">
-                    <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.transProject.examDate.endDate ? (data.transRegistered$.transProject.examDate.endDate | slice:0:16) : ''}}</span></div>
-                    <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transRegistered$.transProject.examDate.endDate ? (data.transRegistered$.transProject.examDate.endDate | slice:16:22) : ''}}</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="d-inline-block badge-inline badge-examscore ml-2" *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'">
+            <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
+                (click)="
+                    projectAbout.isCollapsed = false;
+                    studyResultsTranscript.isCollapsed = false;
+                    examScore.isCollapsed = !examScore.isCollapsed
+                "
+                [attr.aria-expanded]="examScore.isCollapsed"
+                aria-controls="examScore">
+                <span class="regular size13">{{'score' | translate | lowercase}}</span>
+            </a>
         </div>
-        <div class="text-dark mt-2">{{'contact.label' | translate | titlecase}}</div>
-        <div><ng-container *ngTemplateOutlet="contactInfo; context: {isDropdown: false}"></ng-container></div>
-      </span>
-      <span id="examScore" [ngbCollapse]="!examScore.isCollapsed">
-        <span class="bold" *ngIf="data.transRegistered$.transScore.examResult"
-          [ngClass]="{
-            'text-success': (data.transRegistered$.transScore.examResult === 'PASS'),
-            'text-danger': (data.transRegistered$.transScore.examResult === 'FAIL')
-          }">
-          {{data.transRegistered$.transScore.totalScore !== null  ? (data.transRegistered$.transScore.totalScore | number: '.2') : 'n/a'}}<br />
-          {{data.transRegistered$.transScore.examResult | translate | titlecase}}
-        </span>
-        <span class="bold text-dark" *ngIf="!data.transRegistered$.transScore.examResult">n/a</span>
-      </span>
-      <span id="studyResultsTranscript" [ngbCollapse]="!studyResultsTranscript.isCollapsed">
-        <span class="bold text-dark">n/a</span>
-      </span>
-    </p>
-  </div>
+        <div class="d-inline-block badge-inline badge-schedule ml-2" *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">
+            <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
+                (click)="scheduleService.getModalTransSchedule(data.transRegistered$.transProject)"
+                [attr.aria-expanded]="schedule.isCollapsed">
+                <span class="regular size13">{{'schedule.label' | translate | lowercase}}</span>
+            </a>
+        </div>
+        <div class="d-inline-block badge-inline badge-studyresultstranscript ml-2" *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">
+            <a class="d-block badge badge-pill badge-light-dark w-auto project-btn-badge" href="javascript:void(0)"
+                (click)="
+                    projectAbout.isCollapsed = false;
+                    examScore.isCollapsed = false;
+                    schedule.isCollapsed = false;
+                    studyResultsTranscript.isCollapsed = !studyResultsTranscript.isCollapsed
+                "
+                [attr.aria-expanded]="studyResultsTranscript.isCollapsed"
+                aria-controls="studyResultsTranscript">
+                <span class="regular size13">{{'studyResults.label' | translate | lowercase}} / {{'transcript.aka' | translate | lowercase}}</span>
+            </a>
+        </div>
+        <p class="regular text-black-50 size16 line-clamp mt-2 mb-0">
+            <span id="projectAbout" [ngbCollapse]="!projectAbout.isCollapsed">
+                <span class="text-justify-distribute" [innerHTML]="data.transRegistered$.transProject.project.about[appService.lang] | nl2br"></span>
+                <div class="text-dark mt-2">
+                    <span *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'">{{'event.timePeriod.exam' | translate | titlecase}}</span>
+                    <span *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">{{'event.timePeriod.teaching' | translate | titlecase}}</span>
+                </div>
+                <div class="project-register-info">
+                    <div class="form">
+                        <div class="form-group w-100 row mr-0 mb-0 ml-0" *ngIf="data.transRegistered$.transProject.examDate.startDate">
+                            <label for="col-eventstartdate" class="col-form-label">{{'start' | translate | titlecase}}</label>
+                            <div class="col">
+                                <div class="d-table w-100 size-l calendar-date">
+                                    <div class="d-table-row">
+                                        <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.transProject.examDate.startDate ? (data.transRegistered$.transProject.examDate.startDate | slice:0:16) : ''}}</span></div>
+                                        <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transRegistered$.transProject.examDate.startDate ? (data.transRegistered$.transProject.examDate.startDate | slice:16:22) : ''}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group w-100 row mr-0 mb-0 ml-0" *ngIf="data.transRegistered$.transProject.examDate.endDate">
+                            <label for="col-eventenddate" class="col-form-label">{{'end' | translate | titlecase}}</label>
+                            <div class="col">
+                                <div class="d-table w-100 size-l calendar-date">
+                                    <div class="d-table-row">
+                                        <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.transProject.examDate.endDate ? (data.transRegistered$.transProject.examDate.endDate | slice:0:16) : ''}}</span></div>
+                                        <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transRegistered$.transProject.examDate.endDate ? (data.transRegistered$.transProject.examDate.endDate | slice:16:22) : ''}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-dark mt-2">{{'contact.label' | translate | titlecase}}</div>
+                <div><ng-container *ngTemplateOutlet="contactInfo; context: {isDropdown: false}"></ng-container></div>
+            </span>
+            <span id="examScore" [ngbCollapse]="!examScore.isCollapsed">
+                <span class="bold" *ngIf="data.transRegistered$.transScore.examResult"
+                    [ngClass]="{
+                        'text-success': (data.transRegistered$.transScore.examResult === 'PASS'),
+                        'text-danger': (data.transRegistered$.transScore.examResult === 'FAIL')
+                    }">
+                    {{data.transRegistered$.transScore.totalScore !== null  ? (data.transRegistered$.transScore.totalScore | number: '.2') : 'n/a'}}<br />
+                    {{data.transRegistered$.transScore.examResult | translate | titlecase}}
+                </span>
+                <span class="bold text-dark" *ngIf="!data.transRegistered$.transScore.examResult">n/a</span>
+            </span>
+            <span id="studyResultsTranscript" [ngbCollapse]="!studyResultsTranscript.isCollapsed">
+                <span class="bold text-dark">n/a</span>
+            </span>
+        </p>
+    </div>
 </ng-template>
 <ng-template #registerInfo>
-  <div class="register-info project-register-info">
-    <div class="d-table w-100">
-      <div class="d-table-row">
-        <div class="d-table-cell registered-info">
-          <div class="regular size16">
-            <div class="form">
-              <div class="form-group w-100 row mb-01">
-                <label for="col-registereddate" class="col-form-label">{{'registered.on' | translate | titlecase}}</label>
-                <div class="col">
-                  <div class="d-table w-100 size-l calendar-date">
-                    <div class="d-table-row">
-                      <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
-                      <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.registeredDate ? (data.transRegistered$.registeredDate | slice:0:16) : ''}}</span></div>
-                      <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
-                      <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transRegistered$.registeredDate ? (data.transRegistered$.registeredDate | slice:16:22) : ''}}</span></div>
+    <div class="register-info project-register-info">
+        <div class="d-table w-100">
+            <div class="d-table-row">
+                <div class="d-table-cell registered-info">
+                    <div class="regular size16">
+                        <div class="form">
+                            <div class="form-group w-100 row mb-01">
+                                <label for="col-registereddate" class="col-form-label">{{'registered.on' | translate | titlecase}}</label>
+                                <div class="col">
+                                    <div class="d-table w-100 size-l calendar-date">
+                                        <div class="d-table-row">
+                                            <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
+                                            <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.registeredDate ? (data.transRegistered$.registeredDate | slice:0:16) : ''}}</span></div>
+                                            <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
+                                            <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transRegistered$.registeredDate ? (data.transRegistered$.registeredDate | slice:16:22) : ''}}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group w-100 row mb-01">
+                                <label for="col-paymentstatus" class="col-form-label">{{'invoice.paymentStatus' | translate | titlecase}}</label>
+                                <div class="col">
+                                    <span class="form-text regular"
+                                        [ngClass]="{
+                                            'text-success': (data.transRegistered$.invoice.payment.status === 'Y'),
+                                            'text-warning': (data.transRegistered$.invoice.payment.status === 'W'),
+                                            'text-secondary': (data.transRegistered$.invoice.payment.status === 'N')
+                                        }">
+                                        {{(dataService.statuses.get(dataService.paymentStatus.data$, data.transRegistered$.invoice.payment.status)).name[appService.lang] | titlecase}}
+                                        <span class="text-primary size15">
+                                            <a href="javascript:void(0)" class="link" (click)="appService.scrollIntoView('paymentInfo')" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">#{{'payment.confirm' | translate | lowercase}}</a>
+                                            <a href="javascript:void(0)" class="link" (click)="getRecheckPayment()" *ngIf="data.transRegistered$.invoice.payment.status === 'W'">#{{'recheck' | translate | lowercase}}</a>
+                                            <a href="javascript:void(0)" class="link" (click)="appService.scrollIntoView('receiptInfo')" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">#{{'receipt.download' | translate | lowercase}}</a>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group w-100 row mb-01" *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">
+                                <label for="col-confirmdateofpayment" class="col-form-label">{{'invoice.confirmPayment.on' | translate | titlecase}}</label>
+                                <div class="col">
+                                    <div class="d-table w-100 size-l calendar-date">
+                                        <div class="d-table-row">
+                                            <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
+                                            <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.invoice.payment.confirmDate ? (data.transRegistered$.invoice.payment.confirmDate | slice:0:16) : ''}}</span></div>
+                                            <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
+                                            <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transRegistered$.invoice.payment.confirmDate ? (data.transRegistered$.invoice.payment.confirmDate | slice:16:22) : ''}}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group w-100 row mb-01" *ngIf="data.transRegistered$.invoice.payment.status !== 'Y'">
+                                <label for="col-dateofpayment" class="col-form-label">{{'project.lastPaymentDate' | translate | titlecase}}</label>
+                                <div class="col">
+                                    <div class="d-table w-100 size-l calendar-date">
+                                        <div class="d-table-row">
+                                            <div class="d-table-cell align-middle col-icon"><span class="text-danger size22"><i class="fas fa-calendar-alt"></i></span></div>
+                                            <div class="d-table-cell align-middle col-calendar"><span class="text-danger">{{data.transRegistered$.transProject.lastPaymentDate ? (data.transRegistered$.transProject.lastPaymentDate | slice:0:16) : ''}}</span></div>
+                                            <div class="d-table-cell align-middle col-icon"><span class="text-danger size22"><i class="fas fa-clock"></i></span></div>
+                                            <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-danger size14">{{data.transRegistered$.transProject.lastPaymentDate ? (data.transRegistered$.transProject.lastPaymentDate | slice:16:22) : ''}}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group w-100 row mb-01" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">
+                                <label for="col-successfulpayment" class="col-form-label">{{'invoice.successfulPayment.on' | translate | titlecase}}</label>
+                                <div class="col">
+                                    <div class="d-table w-100 size-l calendar-date">
+                                        <div class="d-table-row">
+                                            <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
+                                            <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.invoice.payment.date ? (data.transRegistered$.invoice.payment.date | slice:0:16) : ''}}</span></div>
+                                            <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
+                                            <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transRegistered$.invoice.payment.date ? (data.transRegistered$.invoice.payment.date | slice:16:22) : ''}}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-              <div class="form-group w-100 row mb-01">
-                <label for="col-paymentstatus" class="col-form-label">{{'invoice.paymentStatus' | translate | titlecase}}</label>
-                <div class="col">
-                  <span class="form-text regular"
-                    [ngClass]="{
-                      'text-success': (data.transRegistered$.invoice.payment.status === 'Y'),
-                      'text-warning': (data.transRegistered$.invoice.payment.status === 'W'),
-                      'text-secondary': (data.transRegistered$.invoice.payment.status === 'N')
-                    }">
-                    {{(dataService.statuses.get(dataService.paymentStatus.data$, data.transRegistered$.invoice.payment.status)).name[appService.lang] | titlecase}}
-                    <span class="text-primary size15">
-                      <a href="javascript:void(0)" class="link" (click)="appService.scrollIntoView('paymentInfo')" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">#{{'payment.confirm' | translate | lowercase}}</a>
-                      <a href="javascript:void(0)" class="link" (click)="getRecheckPayment()" *ngIf="data.transRegistered$.invoice.payment.status === 'W'">#{{'recheck' | translate | lowercase}}</a>
-                      <a href="javascript:void(0)" class="link" (click)="appService.scrollIntoView('receiptInfo')" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">#{{'receipt.download' | translate | lowercase}}</a>
-                    </span>
-                  </span>
-                </div>
-              </div>
-              <div class="form-group w-100 row mb-01" *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">
-                <label for="col-confirmdateofpayment" class="col-form-label">{{'invoice.confirmPayment.on' | translate | titlecase}}</label>
-                <div class="col">
-                  <div class="d-table w-100 size-l calendar-date">
-                    <div class="d-table-row">
-                      <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
-                      <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.invoice.payment.confirmDate ? (data.transRegistered$.invoice.payment.confirmDate | slice:0:16) : ''}}</span></div>
-                      <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
-                      <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transRegistered$.invoice.payment.confirmDate ? (data.transRegistered$.invoice.payment.confirmDate | slice:16:22) : ''}}</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group w-100 row mb-01" *ngIf="data.transRegistered$.invoice.payment.status !== 'Y'">
-                <label for="col-dateofpayment" class="col-form-label">{{'project.lastPaymentDate' | translate | titlecase}}</label>
-                <div class="col">
-                  <div class="d-table w-100 size-l calendar-date">
-                    <div class="d-table-row">
-                      <div class="d-table-cell align-middle col-icon"><span class="text-danger size22"><i class="fas fa-calendar-alt"></i></span></div>
-                      <div class="d-table-cell align-middle col-calendar"><span class="text-danger">{{data.transRegistered$.transProject.lastPaymentDate ? (data.transRegistered$.transProject.lastPaymentDate | slice:0:16) : ''}}</span></div>
-                      <div class="d-table-cell align-middle col-icon"><span class="text-danger size22"><i class="fas fa-clock"></i></span></div>
-                      <div class="d-table-cell align-middle col-clock"><span class="font-tahoma text-danger size14">{{data.transRegistered$.transProject.lastPaymentDate ? (data.transRegistered$.transProject.lastPaymentDate | slice:16:22) : ''}}</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group w-100 row mb-01" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">
-                <label for="col-successfulpayment" class="col-form-label">{{'invoice.successfulPayment.on' | translate | titlecase}}</label>
-                <div class="col">
-                  <div class="d-table w-100 size-l calendar-date">
-                    <div class="d-table-row">
-                      <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-calendar-alt"></i></span></div>
-                      <div class="d-table-cell align-middle col-calendar"><span>{{data.transRegistered$.invoice.payment.date ? (data.transRegistered$.invoice.payment.date | slice:0:16) : ''}}</span></div>
-                      <div class="d-table-cell align-middle col-icon"><span class="size22"><i class="fas fa-clock"></i></span></div>
-                      <div class="d-table-cell align-middle col-clock"><span class="font-tahoma size14">{{data.transRegistered$.invoice.payment.date ? (data.transRegistered$.invoice.payment.date | slice:16:22) : ''}}</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </ng-template>
 <ng-template #contactInfo let-isDropdown="isDropdown">
-  <div class="contact-info project-contact-info"
-    [ngClass]="{
-      'text-white': isDropdown,
-      'text-black-50': !isDropdown,
-      'size14': isDropdown,
-      'size16': !isDropdown
-    }">
-    <div class="form" *ngFor="let contactPerson of data.transRegistered$.transProject.contactPerson; index as order">
-      <div class="dropdown-divider mt-2 mb-2" *ngIf="order > 0"></div>
-      <div class="form-group row mr-0 mb-0 ml-0">
-        <label for="col-name" class="col-form-label pb-0"
-          [ngClass]="{
-            'pt-0': isDropdown,
-            'pt-015': !isDropdown
-          }">
-          <i class="fas fa-address-book"></i>
-        </label>
-        <div class="col text-left">
-          <span class="form-text regular mt-0">{{contactPerson.fullName[appService.lang] | titlecase}}</span>
+    <div class="contact-info project-contact-info"
+        [ngClass]="{
+            'text-white': isDropdown,
+            'text-black-50': !isDropdown,
+            'size14': isDropdown,
+            'size16': !isDropdown
+        }">
+        <div class="form" *ngFor="let contactPerson of data.transRegistered$.transProject.contactPerson; index as order">
+            <div class="dropdown-divider mt-2 mb-2" *ngIf="order > 0"></div>
+            <div class="form-group row mr-0 mb-0 ml-0">
+                <label for="col-name" class="col-form-label pb-0"
+                    [ngClass]="{
+                        'pt-0': isDropdown,
+                        'pt-015': !isDropdown
+                    }">
+                    <i class="fas fa-address-book"></i>
+                </label>
+                <div class="col text-left">
+                    <span class="form-text regular mt-0">{{contactPerson.fullName[appService.lang] | titlecase}}</span>
+                </div>
+            </div>
+            <div class="form-group row mr-0 mb-0 ml-0">
+                <label for="col-email" class="col-form-label pb-0"
+                    [ngClass]="{
+                        'pt-0': isDropdown,
+                        'pt-015': !isDropdown
+                    }">
+                    <i class="fas fa-envelope"></i>
+                </label>
+                <div class="col text-left">
+                    <span class="form-text regular mt-0">{{contactPerson.email | lowercase}}</span>
+                </div>
+            </div>
+            <div class="form-group row mr-0 mb-0 ml-0">
+                <label for="col-phone" class="col-form-label pb-0"
+                    [ngClass]="{
+                        'pt-0': isDropdown,
+                        'pt-015': !isDropdown
+                    }">
+                    <i class="fas fa-phone"></i>
+                </label>
+                <div class="col text-left">
+                    <span class="form-text regular mt-0">{{contactPerson.phoneNumber}}</span>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="form-group row mr-0 mb-0 ml-0">
-        <label for="col-email" class="col-form-label pb-0"
-          [ngClass]="{
-            'pt-0': isDropdown,
-            'pt-015': !isDropdown
-          }">
-          <i class="fas fa-envelope"></i>
-        </label>
-        <div class="col text-left">
-          <span class="form-text regular mt-0">{{contactPerson.email | lowercase}}</span>
-        </div>
-      </div>
-      <div class="form-group row mr-0 mb-0 ml-0">
-        <label for="col-phone" class="col-form-label pb-0"
-          [ngClass]="{
-            'pt-0': isDropdown,
-            'pt-015': !isDropdown
-          }">
-          <i class="fas fa-phone"></i>
-        </label>
-        <div class="col text-left">
-          <span class="form-text regular mt-0">{{contactPerson.phoneNumber}}</span>
-        </div>
-      </div>
     </div>
-  </div>
 </ng-template>
 <ng-template #registeredInfo>
-  <div class="registered-info">
-    <div class="d-block w-100 jumbotron rounded-xl mb-0 p-3 col-locations">
-      <div class="border-bottom border-light pb-2">
-        <div class="bold text-primary size20">
-          <span *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'">{{'location.label' | translate | titlecase}}</span>
-          <span *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">{{'section.label' | translate | titlecase}}</span>
+    <div class="registered-info">
+        <div class="d-block w-100 jumbotron rounded-xl mb-0 p-3 col-locations">
+            <div class="border-bottom border-light pb-2">
+                <div class="bold text-primary size20">
+                    <span *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'">{{'location.label' | translate | titlecase}}</span>
+                    <span *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">{{'section.label' | translate | titlecase}}</span>
+                </div>
+            </div>
+            <div *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
+            <div *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'"><ng-container *ngTemplateOutlet="sectionInfo"></ng-container></div>
         </div>
-      </div>
-      <div *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
-      <div *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'"><ng-container *ngTemplateOutlet="sectionInfo"></ng-container></div>
+        <div class="d-table table-registered">
+            <div class="d-table-cell w-25 jumbotron rounded-xl mb-0 p-3 col-locations">
+                <div class="border-bottom border-light pb-2">
+                    <div class="bold text-primary size20">
+                        <span *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'">{{'location.label' | translate | titlecase}}</span>
+                        <span *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">{{'section.label' | translate | titlecase}}</span>
+                    </div>
+                </div>
+                <div *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
+                <div *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'"><ng-container *ngTemplateOutlet="sectionInfo"></ng-container></div>
+            </div>
+            <div class="d-table-cell table-cell-divider col-wrap"></div>
+            <div class="d-table-cell w-375 jumbotron rounded-xl mb-0 p-3 col-feetype">
+                <div class="border-bottom border-light pb-2">
+                    <span class="bold text-primary size20">{{'fee' | translate | titlecase}}</span>
+                </div>
+                <ng-container *ngTemplateOutlet="feeInfo"></ng-container>
+            </div>
+            <div class="d-table-cell table-cell-divider"></div>
+            <div id="paymentInfo" class="d-table-cell w-auto jumbotron rounded-xl bg-primary mb-0 p-3 col-payment" *ngIf="data.transRegistered$.invoice.payment.status !== 'Y'">
+                <div class="border-bottom border-info pb-2">
+                    <span class="bold text-white size20">{{'payment.label' | translate | titlecase}}</span>
+                </div>
+                <ng-container *ngTemplateOutlet="paymentInfo"></ng-container>
+            </div>
+            <div id="receiptInfo"  class="d-table-cell w-auto jumbotron rounded-xl bg-primary mb-0 p-3 col-receipt" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">
+                <div class="border-bottom border-info pb-2">
+                    <span class="bold text-white size20">{{'receipt.label' | translate | titlecase}}</span>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="d-table table-registered">
-      <div class="d-table-cell w-25 jumbotron rounded-xl mb-0 p-3 col-locations">
-        <div class="border-bottom border-light pb-2">
-          <div class="bold text-primary size20">
-            <span *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'">{{'location.label' | translate | titlecase}}</span>
-            <span *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'">{{'section.label' | translate | titlecase}}</span>
-          </div>
-        </div>
-        <div *ngIf="data.transRegistered$.transProject.project.isExam === 'Y'"><ng-container *ngTemplateOutlet="locationInfo"></ng-container></div>
-        <div *ngIf="data.transRegistered$.transProject.project.isTeaching === 'Y'"><ng-container *ngTemplateOutlet="sectionInfo"></ng-container></div>
-      </div>
-      <div class="d-table-cell table-cell-divider col-wrap"></div>
-      <div class="d-table-cell w-375 jumbotron rounded-xl mb-0 p-3 col-feetype">
-        <div class="border-bottom border-light pb-2">
-          <span class="bold text-primary size20">{{'fee' | translate | titlecase}}</span>
-        </div>
-        <ng-container *ngTemplateOutlet="feeInfo"></ng-container>
-      </div>
-      <div class="d-table-cell table-cell-divider"></div>
-      <div id="paymentInfo" class="d-table-cell w-auto jumbotron rounded-xl bg-primary mb-0 p-3 col-payment" *ngIf="data.transRegistered$.invoice.payment.status !== 'Y'">
-        <div class="border-bottom border-info pb-2">
-          <span class="bold text-white size20">{{'payment.label' | translate | titlecase}}</span>
-        </div>
-        <ng-container *ngTemplateOutlet="paymentInfo"></ng-container>
-      </div>
-      <div id="receiptInfo"  class="d-table-cell w-auto jumbotron rounded-xl bg-primary mb-0 p-3 col-receipt" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">
-        <div class="border-bottom border-info pb-2">
-          <span class="bold text-white size20">{{'receipt.label' | translate | titlecase}}</span>
-        </div>
-      </div>
-    </div>
-  </div>
 </ng-template>
 <ng-template #locationInfo>
-  <div class="location-info project-location-info">
-    <table class="table table-bordered mb-0">
-      <tbody class="border-top-0 size16">
-        <tr>
-          <td class="border-top-0 border-right-0 border-left-0 pr-0 pl-0 regular">
-            <div class="form">
-              <div class="form-group row mb-1" ngbTooltip="{{'location.label' | translate | titlecase}}" title="{{'location.label' | translate | titlecase}}">
-                <div class="col pl-0">
-                  <span class="form-text regular">{{data.transRegistered$.transLocation.location.name[appService.lang]}}</span>
-                </div>
-              </div>
-              <div class="form-group row mb-1" ngbTooltip="{{'building.label' | translate | titlecase}}" title="{{'building.label' | translate | titlecase}}">
-                <div class="col pl-0">
-                  <span class="form-text regular">{{data.transRegistered$.transLocation.location.building.name[appService.lang]}}</span>
-                </div>
-              </div>
-              <div class="form-group row mb-1" ngbTooltip="{{'idNo.label' | translate | titlecase}}" title="{{'idNo.label' | translate | titlecase}}" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">
-                <div class="col pl-0">
-                  <span class="form-text regular">{{'idNo.label' | translate | titlecase}} : <span class="bold">{{data.transRegistered$.applicantNO ? data.transRegistered$.applicantNO : 'n/a'}}</span></span>
-                </div>
-              </div>
-              <div class="form-group row mb-0" ngbTooltip="{{'seat.seatNo' | translate | titlecase}}" title="{{'seat.seatNo' | translate | titlecase}}" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">
-                <div class="col pl-0">
-                  <span class="form-text regular">{{'seat.seatNo' | translate | titlecase}} : <span class="bold">{{data.transRegistered$.seatNO ? data.transRegistered$.seatNO : 'n/a'}}</span></span>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="location-info project-location-info">
+        <table class="table table-bordered mb-0">
+            <tbody class="border-top-0 size16">
+                <tr>
+                    <td class="border-top-0 border-right-0 border-left-0 pr-0 pl-0 regular">
+                        <div class="form">
+                            <div class="form-group row mb-1" ngbTooltip="{{'location.label' | translate | titlecase}}" title="{{'location.label' | translate | titlecase}}">
+                                <div class="col pl-0">
+                                    <span class="form-text regular">{{data.transRegistered$.transLocation.location.name[appService.lang]}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1" ngbTooltip="{{'building.label' | translate | titlecase}}" title="{{'building.label' | translate | titlecase}}">
+                                <div class="col pl-0">
+                                    <span class="form-text regular">{{data.transRegistered$.transLocation.location.building.name[appService.lang]}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1" ngbTooltip="{{'idNo.label' | translate | titlecase}}" title="{{'idNo.label' | translate | titlecase}}" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">
+                                <div class="col pl-0">
+                                    <span class="form-text regular">{{'idNo.label' | translate | titlecase}} : <span class="bold">{{data.transRegistered$.applicantNO ? data.transRegistered$.applicantNO : 'n/a'}}</span></span>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0" ngbTooltip="{{'seat.seatNo' | translate | titlecase}}" title="{{'seat.seatNo' | translate | titlecase}}" *ngIf="data.transRegistered$.invoice.payment.status === 'Y'">
+                                <div class="col pl-0">
+                                    <span class="form-text regular">{{'seat.seatNo' | translate | titlecase}} : <span class="bold">{{data.transRegistered$.seatNO ? data.transRegistered$.seatNO : 'n/a'}}</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </ng-template>
 <ng-template #sectionInfo>
-  <div class="section-info project-section-info">
-    <table class="table table-bordered mb-0">
-      <tbody class="border-top-0 size16">
-        <tr>
-          <td class="border-top-0 border-right-0 border-left-0 pr-0 pl-0 regular">
-            <div class="form">
-              <div class="form-group row mb-1" ngbTooltip="{{'section.label' | translate | titlecase}}" title="{{'section.label' | translate | titlecase}}">
-                <div class="col pl-0">
-                  <span class="form-text regular">{{data.transRegistered$.transLocation.location.name[appService.lang]}}</span>
-                </div>
-              </div>
-              <div class="form-group row mb-0" ngbTooltip="{{'teachingType.label' | translate | titlecase}}" title="{{'teachingType.label' | translate | titlecase}}">
-                <div class="col pl-0">
-                  <span class="form-text regular">{{'teachingType.onlineClass' | translate | titlecase}}</span>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="section-info project-section-info">
+        <table class="table table-bordered mb-0">
+            <tbody class="border-top-0 size16">
+                <tr>
+                    <td class="border-top-0 border-right-0 border-left-0 pr-0 pl-0 regular">
+                        <div class="form">
+                            <div class="form-group row mb-1" ngbTooltip="{{'section.label' | translate | titlecase}}" title="{{'section.label' | translate | titlecase}}">
+                                <div class="col pl-0">
+                                    <span class="form-text regular">{{data.transRegistered$.transLocation.location.name[appService.lang]}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0" ngbTooltip="{{'teachingType.label' | translate | titlecase}}" title="{{'teachingType.label' | translate | titlecase}}">
+                                <div class="col pl-0">
+                                    <span class="form-text regular">{{'teachingType.onlineClass' | translate | titlecase}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </ng-template>
 <ng-template #feeInfo>
-  <div class="fee-info project-fee-info">
-    <table class="table table-bordered mb-0" *ngIf="data.transRegistered$.invoice.payment.status === 'N' && data.transRegistered$.transProject.paymentExpire === 'N'">
-      <tbody class="border-top-0 size16" *ngFor="let transFeeType of data.transRegistered$.transFeeType; index as order; let last = last">
-        <tr>
-          <td class="w-auto border-0 pr-0 pb-0 pl-0 regular col-check" [ngClass]="{'pt-1': (order !== 0)}">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="select-feetype-{{transFeeType.ID}}" name="select-feetype"
-                [value]="transFeeType.ID"
-                [(ngModel)]="transFeeType.isSelected"
-                (ngModelChange)="watchChange()"
-                [disabled]="(transFeeType.requiredStatus === 'Y') || privilege.confirm.isVerifying"
-                (change)="feeType.totalFeeAmount = feeType.getTotalFeeAmount(); feeType.setToggle(transFeeType)">
-              <label class="custom-control-label" for="select-feetype-{{transFeeType.ID}}">{{transFeeType.feeType.name[appService.lang]}}</label>
-            </div>
-          </td>
-          <td class="border-0 pr-0 pb-0 regular text-right col-amount" [ngClass]="{'pt-1': (order !== 0)}">
-            {{transFeeType.feeType.amount ? ((transFeeType.feeType.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
-          </td>
-        </tr>
-        <tr *ngIf="transFeeType.feeType.toggle">
-          <td colspan="2" class="border-0 p-0">
-            <a class="badge badge-pill badge-info mt-1 project-btn-badge" href="javascript:void(0)"
-              [ngClass]="{
-                'has-focus': feeType.toggle[transFeeType.feeType.toggle]
-              }"
-              (click)="feeType.toggle[transFeeType.feeType.toggle] = !feeType.toggle[transFeeType.feeType.toggle]">
-              <span class="regular text-white size13" *ngIf="transFeeType.feeType.toggle === 'Address'">
-                <span *ngIf="data.transRegistered$.transDeliAddress.ID">{{'addressDelivery.edit' | translate | lowercase}}</span>
-                <span *ngIf="!data.transRegistered$.transDeliAddress.ID">{{'addressDelivery.label' | translate | lowercase}}</span>
-              </span>
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" class="border-0 p-0">
-            <div class="mt-2" id="deliaddress-form" *ngIf="feeType.toggle[transFeeType.feeType.toggle] && transFeeType.feeType.toggle === 'Address'">
-              <div class="form horizontal-form bg-warning rounded-xxl p-3">
-                <div class="alert alert-danger mb-2" role="alert" *ngIf="!deliAddress.saveChange.isValid">
-                  <span class="regular size16">{{'registered.save.error.deliaddress' | translate}}</span>
-                </div>
-                <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-address" class="col-form-label col-form-label-sm pl-0 regular">{{'address.label' | translate | titlecase}}</label>
-                  <div class="col">
-                    <textarea autosize trimOnBlur class="form-control form-control-sm regular"
-                      name="col-deliaddress-address"
-                      [(ngModel)]="deliAddress.formField.address"
-                      (ngModelChange)="watchChange()"
-                      [disabled]="privilege.confirm.isVerifying">
-                    </textarea>
-                  </div>
-                </div>
-                <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-country" class="col-form-label col-form-label-sm pl-0 regular">{{'address.country' | translate | titlecase}}</label>
-                  <div class="col">
-                    <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.country.isLoading"></i>
-                    <ng-select
-                      class="size-sm"
-                      placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
-                      [(ngModel)]="deliAddress.formField.country.selected"
-                      (ngModelChange)="watchChange()"
-                      (change)="deliAddress.getListProvince()"
-                      [disabled]="privilege.confirm.isVerifying"
-                      *ngIf="!deliAddress.formField.country.isLoading">
-                      <ng-option *ngFor="let item of data.country$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
-                    </ng-select>
-                  </div>
-                </div>
-                <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-province" class="col-form-label col-form-label-sm pl-0 regular">{{'address.province' | translate | titlecase}}</label>
-                  <div class="col">
-                    <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.province.isLoading"></i>
-                    <ng-select
-                      class="size-sm"
-                      placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
-                      [(ngModel)]="deliAddress.formField.province.selected"
-                      (ngModelChange)="watchChange()"
-                      (change)="deliAddress.getListDistrict()"
-                      [disabled]="privilege.confirm.isVerifying"
-                      *ngIf="!deliAddress.formField.province.isLoading">
-                      <ng-option *ngFor="let item of data.province$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
-                    </ng-select>
-                  </div>
-                </div>
-                <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-district" class="col-form-label col-form-label-sm pl-0 regular">{{'address.district' | translate | titlecase}}</label>
-                  <div class="col">
-                    <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.district.isLoading"></i>
-                    <ng-select
-                      class="size-sm"
-                      placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
-                      [(ngModel)]="deliAddress.formField.district.selected"
-                      (ngModelChange)="watchChange()"
-                      (change)="deliAddress.getListSubdistrict()"
-                      [disabled]="privilege.confirm.isVerifying"
-                      *ngIf="!deliAddress.formField.district.isLoading">
-                      <ng-option *ngFor="let item of data.district$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
-                    </ng-select>
-                  </div>
-                </div>
-                <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-subdistrict" class="col-form-label col-form-label-sm pl-0 regular">{{'address.subdistrict' | translate | titlecase}}</label>
-                  <div class="col">
-                    <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.subdistrict.isLoading"></i>
-                    <ng-select
-                      class="size-sm"
-                      placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
-                      [(ngModel)]="deliAddress.formField.subdistrict.selected"
-                      (ngModelChange)="watchChange()"
-                      [disabled]="privilege.confirm.isVerifying"
-                      *ngIf="!deliAddress.formField.subdistrict.isLoading">
-                      <ng-option *ngFor="let item of data.subdistrict$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
-                    </ng-select>
-                  </div>
-                </div>
-                <div class="form-group row w-100 mb-1">
-                  <label for="col-deliaddress-postalcode" class="col-form-label col-form-label-sm pl-0 regular">{{'address.postalCode' | translate | titlecase}}</label>
-                  <div class="col">
-                    <input trimOnBlur type="text" class="form-control form-control-sm regular"
-                      name="col-deliaddress-postalcode"
-                      [(ngModel)]="deliAddress.formField.postalCode"
-                      (ngModelChange)="watchChange()"
-                      [disabled]="privilege.confirm.isVerifying" />
-                  </div>
-                </div>
-                <div class="form-group row w-100">
-                  <label for="col-deliaddress-phoneNumber" class="col-form-label col-form-label-sm pl-0 regular">{{'phone' | translate | titlecase}}</label>
-                  <div class="col">
-                    <input trimOnBlur type="text" class="form-control form-control-sm regular"
-                      name="col-deliaddress-phoneNumber"
-                      [(ngModel)]="deliAddress.formField.phoneNumber"
-                      (ngModelChange)="watchChange()"
-                      [disabled]="privilege.confirm.isVerifying" />
-                  </div>
-                </div>
-                <div class="form-group row w-100 mt-3">
-                  <label class="col-form-label"></label>
-                  <div class="col">
-                    <a class="btn btn-sm btn-transparent" (click)="deliAddress.setValue(true)"
-                      [ngClass]="{
-                        'disabled': privilege.confirm.isVerifying
-                      }">
-                      <span class="bold text-danger size16">{{'cancel' | translate | titlecase}}</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="2" class="border-0 p-0">
-            <div class="d-block w-100 border border-right-0 border-bottom-0 border-left-0 border-white mt-2 pt-08">
-              <div class="form flat-form">
-                <div class="mt-2 mb-055" *ngIf="!privilege.confirm.isVerifying && (!privilege.confirm.isValid || privilege.confirm.errorCode === 1)">
-                  <div class="alert alert-danger mb-0 regular size16" role="alert">
-                    <span *ngIf="!privilege.confirm.isValid">{{'privilege.confirm.error.code' | translate}}</span>
-                    <span *ngIf="privilege.confirm.errorCode === 1">{{'privilege.confirm.error.privilegeExpire' | translate}}</span>
-                  </div>
-                </div>
-                <div class="form-group w-100 mb-0 col-privilegecode">
-                  <label for="col-privilegecode" class="regular text-danger">{{'privilege.label' | translate | titlecase}}</label>
-                  <div class="d-table input-group has-icon">
-                    <div class="d-table-cell w-100 align-top">
-                      <input trimOnBlur type="text" class="form-control inputbox pl-4 pr-1 regular size14"
-                        name="col-privilegecode"
-                        placeholder="{{'privilege.placeholder' | translate | titlecase}}"
-                        [(ngModel)]="privilege.formField.code"
-                        (ngModelChange)="watchChange()"
-                        [disabled]="privilege.confirm.isVerifying" />
-                      <i class="fas fa-hand-holding-heart right-0 left-0"></i>
-                    </div>
-                    <div class="d-table-cell align-top">
-                      <a class="btn btn-danger border-0 rounded-0 rounded-right-xl text-center"
-                        [ngClass]="{
-                          'disabled': privilege.confirm.isVerifying
-                        }"
-                        (click)="privilege.confirm.action()">
-                        <i class="fas fa-circle-notch fa-spin text-white size16" *ngIf="privilege.confirm.isVerifying"></i>
-                        <span class="bold text-white size16" *ngIf="!privilege.confirm.isVerifying">{{'confirm' | translate | titlecase}}</span>
-                      </a>
-                   </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" class="border-0 p-0">
-            <div class="d-table w-100 mt-2 size18">
-              <div class="d-table-cell w-auto pt-25 bold col-total">{{'total.amount' | translate | titlecase}}</div>
-              <div class="d-table-cell pt-25 bold text-right col-total-amount">
-                {{feeType.totalFeeAmount ? ((feeType.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-    <table class="table table-bordered mb-0" *ngIf="data.transRegistered$.invoice.payment.status !== 'N' || data.transRegistered$.transProject.paymentExpire === 'Y'">
-      <tbody class="border-top-0 size16" [ngClass]="{'pb-1': last}" *ngFor="let invoiceFee of data.transRegistered$.invoiceFee; index as order; let last = last">
-        <tr>
-          <td class="border-0 pr-0 pb-0 pl-0 regular col-index" [ngClass]="{'pt-1': (order !== 0)}">
-            <i class="fas fa-check-square text-muted size18"></i>
-          </td>
-          <td class="w-auto border-0 pr-0 pb-0 pl-0 regular col-name" [ngClass]="{'pt-1': (order !== 0)}">
-            {{invoiceFee.feeType.name[appService.lang]}}
-          </td>
-          <td class="border-0 pr-0 pb-0 regular text-right col-amount" [ngClass]="{'pt-1': (order !== 0)}">
-            {{invoiceFee.feeType.amount ? ((invoiceFee.feeType.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
-          </td>
-        </tr>
-        <tr *ngIf="invoiceFee.feeType.toggle">
-          <td colspan="3" class="border-0 p-0">
-            <a class="badge badge-pill badge-info mt-1 project-btn-badge" href="javascript:void(0)"
-              [ngClass]="{
-                'has-focus': feeType.toggle[invoiceFee.feeType.toggle]
-              }"
-              (click)="feeType.toggle[invoiceFee.feeType.toggle] = !feeType.toggle[invoiceFee.feeType.toggle]">
-              <span class="regular text-white size13" *ngIf="invoiceFee.feeType.toggle === 'Address'">{{'addressDelivery.label' | translate | lowercase}}</span>
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="3" class="border-0 p-0">
-            <div class="mt-2" id="deliaddress-form" *ngIf="feeType.toggle[invoiceFee.feeType.toggle] && invoiceFee.feeType.toggle === 'Address'">
-              <div class="form bg-success rounded-xxl p-3 size14 regular text-white">
-                <div class="form-group row mb-2">
-                  <label for="col-deliaddress-address" class="col-form-label">{{'address.label' | translate | titlecase}}</label>
-                  <div class="col">
-                    <span class="form-text" [innerHTML]="data.transRegistered$.transDeliAddress.address | nl2br"></span>
-                  </div>
-                </div>
-                <div class="form-group row mb-2">
-                  <label for="col-deliaddress-country" class="col-form-label">{{'address.country' | translate | titlecase}}</label>
-                  <div class="col">
-                    <span class="form-text">{{data.transRegistered$.transDeliAddress.country.name[appService.lang]}}</span>
-                  </div>
-                </div>
-                <div class="form-group row mb-2">
-                  <label for="col-deliaddress-province" class="col-form-label">{{'address.province' | translate | titlecase}}</label>
-                  <div class="col">
-                    <span class="form-text">{{data.transRegistered$.transDeliAddress.province.name[appService.lang]}}</span>
-                  </div>
-                </div>
-                <div class="form-group row mb-2">
-                  <label for="col-deliaddress-district" class="col-form-label">{{'address.district' | translate | titlecase}}</label>
-                  <div class="col">
-                    <span class="form-text">{{data.transRegistered$.transDeliAddress.district.name[appService.lang]}}</span>
-                  </div>
-                </div>
-                <div class="form-group row mb-2">
-                  <label for="col-deliaddress-subdistrict" class="col-form-label">{{'address.subdistrict' | translate | titlecase}}</label>
-                  <div class="col">
-                    <span class="form-text">{{data.transRegistered$.transDeliAddress.subdistrict.name[appService.lang]}}</span>
-                  </div>
-                </div>
-                <div class="form-group row mb-2">
-                  <label for="col-deliaddress-postalcode" class="col-form-label">{{'address.postalCode' | translate | titlecase}}</label>
-                  <div class="col">
-                    <span class="form-text">{{data.transRegistered$.transDeliAddress.postalCode}}</span>
-                  </div>
-                </div>
-                <div class="form-group row mb-0">
-                  <label for="col-deliaddress-phoneNumber" class="col-form-label">{{'phone' | translate | titlecase}}</label>
-                  <div class="col">
-                    <span class="form-text">{{data.transRegistered$.transDeliAddress.phoneNumber}}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr *ngIf="data.transRegistered$.invoice.privilege.code">
-          <td colspan="3" class="border-0 p-0">
-            <div class="d-block w-100 border border-right-0 border-bottom-0 border-left-0 border-white mt-2 pt-08">
-              <div class="regular text-danger size16">{{'privilege.label' | translate | titlecase}}</div>
-              <div class="mt-2 "><ng-template [dynamicComponent]='privilege.component' [data$]='data.transRegistered$.invoice.privilege'></ng-template></div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="3" class="border-0 p-0">
-            <div class="d-table w-100 border border-right-0 border-bottom-0 border-left-0 border-white mt-2 size18">
-              <div class="d-table-cell w-auto pt-25 bold col-total">{{'total.amount' | translate | titlecase}}</div>
-              <div class="d-table-cell pt-25 bold text-right col-total-amount">
-                <span
-                  [ngClass]="{
-                    'strike': data.transRegistered$.invoice.privilege.code,
-                    'text-muted': data.transRegistered$.invoice.privilege.code
-                  }">
-                  {{data.transRegistered$.totalFeeAmount ? ((data.transRegistered$.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
-                </span>
-                <div *ngIf="data.transRegistered$.invoice.privilege.code">
-                  {{(data.transRegistered$.totalFeeAmount >= data.transRegistered$.invoice.privilege.discount) ? (data.transRegistered$.totalFeeAmount - data.transRegistered$.invoice.privilege.discount) : 0}} {{'unit.baht' | translate | titlecase}}
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-  </div>
+    <div class="fee-info project-fee-info">
+        <table class="table table-bordered mb-0" *ngIf="data.transRegistered$.invoice.payment.status === 'N' && data.transRegistered$.transProject.paymentExpire === 'N'">
+            <tbody class="border-top-0 size16" *ngFor="let transFeeType of data.transRegistered$.transFeeType; index as order; let last = last">
+                <tr>
+                    <td class="w-auto border-0 pr-0 pb-0 pl-0 regular col-check" [ngClass]="{'pt-1': (order !== 0)}">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="select-feetype-{{transFeeType.ID}}" name="select-feetype"
+                                [value]="transFeeType.ID"
+                                [(ngModel)]="transFeeType.isSelected"
+                                (ngModelChange)="watchChange()"
+                                [disabled]="(transFeeType.requiredStatus === 'Y') || privilege.confirm.isVerifying"
+                                (change)="feeType.totalFeeAmount = feeType.getTotalFeeAmount(); feeType.setToggle(transFeeType)">
+                            <label class="custom-control-label" for="select-feetype-{{transFeeType.ID}}">{{transFeeType.feeType.name[appService.lang]}}</label>
+                        </div>
+                    </td>
+                    <td class="border-0 pr-0 pb-0 regular text-right col-amount" [ngClass]="{'pt-1': (order !== 0)}">
+                        {{transFeeType.feeType.amount ? ((transFeeType.feeType.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
+                    </td>
+                </tr>
+                <tr *ngIf="transFeeType.feeType.toggle">
+                    <td colspan="2" class="border-0 p-0">
+                        <a class="badge badge-pill badge-info mt-1 project-btn-badge" href="javascript:void(0)"
+                            [ngClass]="{
+                                'has-focus': feeType.toggle[transFeeType.feeType.toggle]
+                            }"
+                            (click)="feeType.toggle[transFeeType.feeType.toggle] = !feeType.toggle[transFeeType.feeType.toggle]">
+                            <span class="regular text-white size13" *ngIf="transFeeType.feeType.toggle === 'Address'">
+                                <span *ngIf="data.transRegistered$.transDeliAddress.ID">{{'addressDelivery.edit' | translate | lowercase}}</span>
+                                <span *ngIf="!data.transRegistered$.transDeliAddress.ID">{{'addressDelivery.label' | translate | lowercase}}</span>
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="border-0 p-0">
+                        <div class="mt-2" id="deliaddress-form" *ngIf="feeType.toggle[transFeeType.feeType.toggle] && transFeeType.feeType.toggle === 'Address'">
+                            <div class="form horizontal-form bg-warning rounded-xxl p-3">
+                                <div class="alert alert-danger mb-2" role="alert" *ngIf="!deliAddress.saveChange.isValid">
+                                    <span class="regular size16">{{'registered.save.error.deliaddress' | translate}}</span>
+                                </div>
+                                <div class="form-group row w-100 mb-1">
+                                    <label for="col-deliaddress-address" class="col-form-label col-form-label-sm pl-0 regular">{{'address.label' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <textarea autosize trimOnBlur class="form-control form-control-sm regular"
+                                            name="col-deliaddress-address"
+                                            [(ngModel)]="deliAddress.formField.address"
+                                            (ngModelChange)="watchChange()"
+                                            [disabled]="privilege.confirm.isVerifying">
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row w-100 mb-1">
+                                    <label for="col-deliaddress-country" class="col-form-label col-form-label-sm pl-0 regular">{{'address.country' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.country.isLoading"></i>
+                                        <ng-select class="size-sm" placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
+                                            [(ngModel)]="deliAddress.formField.country.selected"
+                                            (ngModelChange)="watchChange()"
+                                            (change)="deliAddress.getListProvince()"
+                                            [disabled]="privilege.confirm.isVerifying"
+                                            *ngIf="!deliAddress.formField.country.isLoading">
+                                            <ng-option *ngFor="let item of data.country$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-group row w-100 mb-1">
+                                    <label for="col-deliaddress-province" class="col-form-label col-form-label-sm pl-0 regular">{{'address.province' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.province.isLoading"></i>
+                                        <ng-select class="size-sm" placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
+                                            [(ngModel)]="deliAddress.formField.province.selected"
+                                            (ngModelChange)="watchChange()"
+                                            (change)="deliAddress.getListDistrict()"
+                                            [disabled]="privilege.confirm.isVerifying"
+                                            *ngIf="!deliAddress.formField.province.isLoading">
+                                            <ng-option *ngFor="let item of data.province$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-group row w-100 mb-1">
+                                    <label for="col-deliaddress-district" class="col-form-label col-form-label-sm pl-0 regular">{{'address.district' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.district.isLoading"></i>
+                                        <ng-select class="size-sm" placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
+                                            [(ngModel)]="deliAddress.formField.district.selected"
+                                            (ngModelChange)="watchChange()"
+                                            (change)="deliAddress.getListSubdistrict()"
+                                            [disabled]="privilege.confirm.isVerifying"
+                                            *ngIf="!deliAddress.formField.district.isLoading">
+                                            <ng-option *ngFor="let item of data.district$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-group row w-100 mb-1">
+                                    <label for="col-deliaddress-subdistrict" class="col-form-label col-form-label-sm pl-0 regular">{{'address.subdistrict' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.subdistrict.isLoading"></i>
+                                        <ng-select class="size-sm" placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
+                                            [(ngModel)]="deliAddress.formField.subdistrict.selected"
+                                            (ngModelChange)="watchChange()"
+                                            [disabled]="privilege.confirm.isVerifying"
+                                            *ngIf="!deliAddress.formField.subdistrict.isLoading">
+                                            <ng-option *ngFor="let item of data.subdistrict$" [value]="item">{{item.name[appService.lang] | titlecase}}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="form-group row w-100 mb-1">
+                                    <label for="col-deliaddress-postalcode" class="col-form-label col-form-label-sm pl-0 regular">{{'address.postalCode' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <input trimOnBlur type="text" class="form-control form-control-sm regular" name="col-deliaddress-postalcode"
+                                            [(ngModel)]="deliAddress.formField.postalCode"
+                                            (ngModelChange)="watchChange()"
+                                            [disabled]="privilege.confirm.isVerifying" />
+                                    </div>
+                                </div>
+                                <div class="form-group row w-100">
+                                    <label for="col-deliaddress-phoneNumber" class="col-form-label col-form-label-sm pl-0 regular">{{'phone' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <input trimOnBlur type="text" class="form-control form-control-sm regular" name="col-deliaddress-phoneNumber"
+                                            [(ngModel)]="deliAddress.formField.phoneNumber"
+                                            (ngModelChange)="watchChange()"
+                                            [disabled]="privilege.confirm.isVerifying" />
+                                    </div>
+                                </div>
+                                <div class="form-group row w-100 mt-3">
+                                    <label class="col-form-label"></label>
+                                    <div class="col">
+                                        <a class="btn btn-sm btn-transparent" (click)="deliAddress.setValue(true)"
+                                            [ngClass]="{
+                                                'disabled': privilege.confirm.isVerifying
+                                            }">
+                                            <span class="bold text-danger size16">{{'cancel' | translate | titlecase}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2" class="border-0 p-0">
+                        <div class="d-block w-100 border border-right-0 border-bottom-0 border-left-0 border-white mt-2 pt-08">
+                            <div class="form flat-form">
+                                <div class="mt-2 mb-055" *ngIf="!privilege.confirm.isVerifying && (!privilege.confirm.isValid || privilege.confirm.errorCode === 1)">
+                                    <div class="alert alert-danger mb-0 regular size16" role="alert">
+                                        <span *ngIf="!privilege.confirm.isValid">{{'privilege.confirm.error.code' | translate}}</span>
+                                        <span *ngIf="privilege.confirm.errorCode === 1">{{'privilege.confirm.error.privilegeExpire' | translate}}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group w-100 mb-0 col-privilegecode">
+                                    <label for="col-privilegecode" class="regular text-danger">{{'privilege.label' | translate | titlecase}}</label>
+                                    <div class="d-table input-group has-icon">
+                                        <div class="d-table-cell w-100 align-top">
+                                            <input trimOnBlur type="text" class="form-control inputbox pl-4 pr-1 regular size14" name="col-privilegecode" placeholder="{{'privilege.placeholder' | translate | titlecase}}"
+                                                [(ngModel)]="privilege.formField.code"
+                                                (ngModelChange)="watchChange()"
+                                                [disabled]="privilege.confirm.isVerifying" />
+                                            <i class="fas fa-hand-holding-heart right-0 left-0"></i>
+                                        </div>
+                                        <div class="d-table-cell align-top">
+                                            <a class="btn btn-danger border-0 rounded-0 rounded-right-xl text-center"
+                                                [ngClass]="{
+                                                    'disabled': privilege.confirm.isVerifying
+                                                }"
+                                                (click)="privilege.confirm.action()">
+                                                <i class="fas fa-circle-notch fa-spin text-white size16" *ngIf="privilege.confirm.isVerifying"></i>
+                                                <span class="bold text-white size16" *ngIf="!privilege.confirm.isVerifying">{{'confirm' | translate | titlecase}}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="border-0 p-0">
+                        <div class="d-table w-100 mt-2 size18">
+                            <div class="d-table-cell w-auto pt-25 bold col-total">{{'total.amount' | translate | titlecase}}</div>
+                            <div class="d-table-cell pt-25 bold text-right col-total-amount">
+                                {{feeType.totalFeeAmount ? ((feeType.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <table class="table table-bordered mb-0" *ngIf="data.transRegistered$.invoice.payment.status !== 'N' || data.transRegistered$.transProject.paymentExpire === 'Y'">
+            <tbody class="border-top-0 size16" [ngClass]="{'pb-1': last}" *ngFor="let invoiceFee of data.transRegistered$.invoiceFee; index as order; let last = last">
+                <tr>
+                    <td class="border-0 pr-0 pb-0 pl-0 regular col-index" [ngClass]="{'pt-1': (order !== 0)}">
+                        <i class="fas fa-check-square text-muted size18"></i>
+                    </td>
+                    <td class="w-auto border-0 pr-0 pb-0 pl-0 regular col-name" [ngClass]="{'pt-1': (order !== 0)}">
+                        {{invoiceFee.feeType.name[appService.lang]}}
+                    </td>
+                    <td class="border-0 pr-0 pb-0 regular text-right col-amount" [ngClass]="{'pt-1': (order !== 0)}">
+                        {{invoiceFee.feeType.amount ? ((invoiceFee.feeType.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
+                    </td>
+                </tr>
+                <tr *ngIf="invoiceFee.feeType.toggle">
+                    <td colspan="3" class="border-0 p-0">
+                        <a class="badge badge-pill badge-info mt-1 project-btn-badge" href="javascript:void(0)"
+                            [ngClass]="{
+                                'has-focus': feeType.toggle[invoiceFee.feeType.toggle]
+                            }"
+                            (click)="feeType.toggle[invoiceFee.feeType.toggle] = !feeType.toggle[invoiceFee.feeType.toggle]">
+                            <span class="regular text-white size13" *ngIf="invoiceFee.feeType.toggle === 'Address'">{{'addressDelivery.label' | translate | lowercase}}</span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="border-0 p-0">
+                        <div class="mt-2" id="deliaddress-form" *ngIf="feeType.toggle[invoiceFee.feeType.toggle] && invoiceFee.feeType.toggle === 'Address'">
+                            <div class="form bg-success rounded-xxl p-3 size14 regular text-white">
+                                <div class="form-group row mb-2">
+                                    <label for="col-deliaddress-address" class="col-form-label">{{'address.label' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <span class="form-text" [innerHTML]="data.transRegistered$.transDeliAddress.address | nl2br"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label for="col-deliaddress-country" class="col-form-label">{{'address.country' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <span class="form-text">{{data.transRegistered$.transDeliAddress.country.name[appService.lang]}}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label for="col-deliaddress-province" class="col-form-label">{{'address.province' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <span class="form-text">{{data.transRegistered$.transDeliAddress.province.name[appService.lang]}}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label for="col-deliaddress-district" class="col-form-label">{{'address.district' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <span class="form-text">{{data.transRegistered$.transDeliAddress.district.name[appService.lang]}}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label for="col-deliaddress-subdistrict" class="col-form-label">{{'address.subdistrict' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <span class="form-text">{{data.transRegistered$.transDeliAddress.subdistrict.name[appService.lang]}}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label for="col-deliaddress-postalcode" class="col-form-label">{{'address.postalCode' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <span class="form-text">{{data.transRegistered$.transDeliAddress.postalCode}}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-0">
+                                    <label for="col-deliaddress-phoneNumber" class="col-form-label">{{'phone' | translate | titlecase}}</label>
+                                    <div class="col">
+                                        <span class="form-text">{{data.transRegistered$.transDeliAddress.phoneNumber}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr *ngIf="data.transRegistered$.invoice.privilege.code">
+                    <td colspan="3" class="border-0 p-0">
+                        <div class="d-block w-100 border border-right-0 border-bottom-0 border-left-0 border-white mt-2 pt-08">
+                            <div class="regular text-danger size16">{{'privilege.label' | translate | titlecase}}</div>
+                            <div class="mt-2 "><ng-template [dynamicComponent]='privilege.component' [data$]='data.transRegistered$.invoice.privilege'></ng-template></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="border-0 p-0">
+                        <div class="d-table w-100 border border-right-0 border-bottom-0 border-left-0 border-white mt-2 size18">
+                            <div class="d-table-cell w-auto pt-25 bold col-total">{{'total.amount' | translate | titlecase}}</div>
+                            <div class="d-table-cell pt-25 bold text-right col-total-amount">
+                                <span
+                                    [ngClass]="{
+                                        'strike': data.transRegistered$.invoice.privilege.code,
+                                        'text-muted': data.transRegistered$.invoice.privilege.code
+                                    }">
+                                    {{data.transRegistered$.totalFeeAmount ? ((data.transRegistered$.totalFeeAmount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}
+                                </span>
+                                <div *ngIf="data.transRegistered$.invoice.privilege.code">
+                                    {{(data.transRegistered$.totalFeeAmount >= data.transRegistered$.invoice.privilege.discount) ? (data.transRegistered$.totalFeeAmount - data.transRegistered$.invoice.privilege.discount) : 0}} {{'unit.baht' | translate | titlecase}}
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </ng-template>
 <ng-template #paymentInfo>
-  <div class="payment-info">
-    <table class="table table-bordered mb-0">
-      <tbody>
-        <tr>
-          <td class="border-0 pr-0 pb-0 pl-0">
-            <div class="form flat-form">
-              <div class="mt-2 mb-055" *ngIf="!payment.saveChange.isValid || payment.saveChange.errorCode === 1 || data.transRegistered$.transProject.paymentExpire === 'Y'">
-                <div class="alert alert-danger mb-0 regular size16" role="alert">
-                  <span *ngIf="!payment.saveChange.isValid">{{'payment.save.error.issueReceiptAs' | translate}}</span>
-                  <span *ngIf="payment.saveChange.errorCode === 1">{{'qrcode.error' | translate}}</span>
-                  <span *ngIf="data.transRegistered$.transProject.paymentExpire === 'Y'">{{'payment.save.error.paymentExpire' | translate}}</span>
-                </div>
-              </div>
-              <div class="form-group w-100" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.transProject.paymentExpire === 'N'">
-                <label for="payment-issuereceipt" class="regular text-white">{{'invoice.issueReceiptAs' | translate | titlecase}}</label>
-                <div class="input-group has-icon" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">
-                  <input trimOnBlur type="text" class="form-control inputbox pl-4 regular text-white size14"
-                    name="payment-issuereceipt"
-                    [(ngModel)]="payment.formField.issueReceipt"
-                    (ngModelChange)="watchChange()"
-                    [disabled]="privilege.confirm.isVerifying" />
-                  <i class="fas fa-pencil-alt cursor-pointer right-0 left-0" (click)="watchChange(); payment.setValue(true)" ngbTooltip="{{'reset' | translate | titlecase}}" title="{{'reset' | translate | titlecase}}"></i>
-                </div>
-                <div class="form-text regular size14" *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">{{payment.formField.issueReceipt}}</div>
-              </div>
-              <div class="form-group w-100" *ngIf="!appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type)">
-                <label for="payment-issuereceipt" class="regular text-white">
-                  <span *ngIf="data.transRegistered$.invoice.payment.status === 'N'">{{'registered.error.haveNoRight' | translate}}</span>
-                  <span *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">{{'invoice.issueReceiptAs' | translate | titlecase}}</span>
-                </label>
-                <div class="form-text regular size14" *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">{{payment.formField.issueReceipt}}</div>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="d-table w-100 mt-3 payment-btn" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.invoice.payment.status === 'N' && data.transRegistered$.transProject.paymentExpire === 'N' && !payment.formField.qrcodeImage">
-      <a class="btn btn-warning border-0 rounded-xl pt-0 pb-0" (click)="saveChange.action()"
-        [ngClass]="{
-          'disabled': privilege.confirm.isVerifying
-        }">
-        <span class="bold size20">{{'payment.confirm' | translate | titlecase}}</span>
-      </a>
-    </div>
-    <div class="card mt-3 mr-auto ml-auto text-center qrcode-payment" *ngIf="data.transRegistered$.invoice.payment.status !== 'N' && payment.formField.qrcodeImage">
-      <div class="card-header">
-        <img src="assets/images/thai-qr-payment-logo.png">
-      </div>
-      <div class="card-body">
-        <div class="card-text">
-          <img #qrcodeImage class="qrcode-image" src="data:image/png;base64,{{payment.formField.qrcodeImage}}" />
-          <div class="bold size20 mt-1">{{data.transRegistered$.invoice.merchantName}}</div>
-          <div class="form mt-2">
-            <div class="form-group w-100 mr-0 mb-0 ml-0">
-              <label for="col-amount" class="col-form-label text-left regular pt-0 pb-0">{{'qrcode.amount' | translate | titlecase}}</label>
-              <div class="col text-right">
-                <span class="form-text regular mt-0">{{data.transRegistered$.invoice.payment.amount ? ((data.transRegistered$.invoice.payment.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}</span>
-              </div>
-            </div>
-          </div>
+    <div class="payment-info">
+        <table class="table table-bordered mb-0">
+            <tbody>
+                <tr>
+                    <td class="border-0 pr-0 pb-0 pl-0">
+                        <div class="form flat-form">
+                            <div class="mt-2 mb-055" *ngIf="!payment.saveChange.isValid || payment.saveChange.errorCode === 1 || data.transRegistered$.transProject.paymentExpire === 'Y'">
+                                <div class="alert alert-danger mb-0 regular size16" role="alert">
+                                    <span *ngIf="!payment.saveChange.isValid">{{'payment.save.error.issueReceiptAs' | translate}}</span>
+                                    <span *ngIf="payment.saveChange.errorCode === 1">{{'qrcode.error' | translate}}</span>
+                                    <span *ngIf="data.transRegistered$.transProject.paymentExpire === 'Y'">{{'payment.save.error.paymentExpire' | translate}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group w-100" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.transProject.paymentExpire === 'N'">
+                                <label for="payment-issuereceipt" class="regular text-white">{{'invoice.issueReceiptAs' | translate | titlecase}}</label>
+                                <div class="input-group has-icon" *ngIf="data.transRegistered$.invoice.payment.status === 'N'">
+                                    <input trimOnBlur type="text" class="form-control inputbox pl-4 regular text-white size14" name="payment-issuereceipt"
+                                        [(ngModel)]="payment.formField.issueReceipt"
+                                        (ngModelChange)="watchChange()"
+                                        [disabled]="privilege.confirm.isVerifying" />
+                                    <i class="fas fa-pencil-alt cursor-pointer right-0 left-0" (click)="watchChange(); payment.setValue(true)" ngbTooltip="{{'reset' | translate | titlecase}}" title="{{'reset' | translate | titlecase}}"></i>
+                                </div>
+                                <div class="form-text regular size14" *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">{{payment.formField.issueReceipt}}</div>
+                            </div>
+                            <div class="form-group w-100" *ngIf="!appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type)">
+                                <label for="payment-issuereceipt" class="regular text-white">
+                                    <span *ngIf="data.transRegistered$.invoice.payment.status === 'N'">{{'registered.error.haveNoRight' | translate}}</span>
+                                    <span *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">{{'invoice.issueReceiptAs' | translate | titlecase}}</span>
+                                </label>
+                                <div class="form-text regular size14" *ngIf="data.transRegistered$.invoice.payment.status !== 'N'">{{payment.formField.issueReceipt}}</div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-table w-100 mt-3 payment-btn" *ngIf="appService.existUserTypeSpecific(data.transRegistered$.transProject.userTypeSpecific, authService.getUserInfo.type) && data.transRegistered$.invoice.payment.status === 'N' && data.transRegistered$.transProject.paymentExpire === 'N' && !payment.formField.qrcodeImage">
+            <a class="btn btn-warning border-0 rounded-xl pt-0 pb-0" (click)="saveChange.action()"
+                [ngClass]="{
+                    'disabled': privilege.confirm.isVerifying
+                }">
+                <span class="bold size20">{{'payment.confirm' | translate | titlecase}}</span>
+            </a>
         </div>
-      </div>
-      <div class="card-footer">
-        <button
-          type="button"
-          class="btn btn-warning bold size16"
-          (click)="appService.downloadBase64Image(payment.formField.qrcodeImage, ('QRCode' + data.transRegistered$.invoice.qrRef1 + data.transRegistered$.invoice.qrRef2), 'png')">
-          <i class="fas fa-download"></i>
-          {{'download' | translate | titlecase}} QR Code
-        </button>
-      </div>
+        <div class="card mt-3 mr-auto ml-auto text-center qrcode-payment" *ngIf="data.transRegistered$.invoice.payment.status !== 'N' && payment.formField.qrcodeImage">
+            <div class="card-header">
+                <img src="assets/images/thai-qr-payment-logo.png">
+            </div>
+            <div class="card-body">
+                <div class="card-text">
+                    <img #qrcodeImage class="qrcode-image" src="data:image/png;base64,{{payment.formField.qrcodeImage}}" />
+                    <div class="bold size20 mt-1">{{data.transRegistered$.invoice.merchantName}}</div>
+                    <div class="form mt-2">
+                        <div class="form-group w-100 mr-0 mb-0 ml-0">
+                            <label for="col-amount" class="col-form-label text-left regular pt-0 pb-0">{{'qrcode.amount' | translate | titlecase}}</label>
+                            <div class="col text-right">
+                                <span class="form-text regular mt-0">{{data.transRegistered$.invoice.payment.amount ? ((data.transRegistered$.invoice.payment.amount | number: '.2') + ' ' + ('unit.baht' | translate | titlecase)) : ''}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-warning bold size16"
+                    (click)="appService.downloadBase64Image(payment.formField.qrcodeImage, ('QRCode' + data.transRegistered$.invoice.qrRef1 + data.transRegistered$.invoice.qrRef2), 'png')">
+                    <i class="fas fa-download"></i>
+                    {{'download' | translate | titlecase}} QR Code
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </ng-template>

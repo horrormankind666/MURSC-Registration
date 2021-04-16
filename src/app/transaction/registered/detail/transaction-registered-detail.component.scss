@@ -7,171 +7,182 @@ Description : <>
 =============================================
 */
 
-@import '../../../../styles.scss';
+@import "../../../../styles.scss";
 
 .transaction-registered-detail-view .project-card-vertical,
 .transaction-registered-detail-view .project-body .wrap {
-  display: none !important;
+    display: none !important;
 }
 .transaction-registered-detail-view .d-table.calendar-date {
-  position: relative;
-  top: 2px;
+    position: relative;
+    top: 2px;
 }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-  .transaction-registered-detail-view .d-table.calendar-date {
-    top: 1px;
-  }
+    .transaction-registered-detail-view .d-table.calendar-date {
+        top: 1px;
+    }
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  ::i-block-chrome,
-  .transaction-registered-detail-view .d-table.calendar-date {
-    top: 3px;
-  }
+    ::i-block-chrome,
+    .transaction-registered-detail-view .d-table.calendar-date {
+        top: 3px;
+    }
 }
 .transaction-registered-detail-view .register-info .form .form-group .col-form-label {
-  width: 227px;
+    width: 227px;
 }
 .transaction-registered-detail-view .registered-info .d-block.col-locations {
-  display: none !important;
+    display: none !important;
 }
 @media screen and (max-width: 1200px) {
-  .transaction-registered-detail-view .registered-info .d-table .col-locations,
-  .transaction-registered-detail-view .registered-info .d-table .table-cell-divider.col-wrap {
-    display: none !important;
-  }
-  .transaction-registered-detail-view .registered-info .d-block.col-locations {
-    display: block !important;
-    margin-bottom: 1rem !important;
-  }
-  .transaction-registered-detail-view .registered-info .d-table .col-feetype {
-    width: 50% !important;
-  }
+    .transaction-registered-detail-view .registered-info .d-table .col-locations,
+    .transaction-registered-detail-view .registered-info .d-table .table-cell-divider.col-wrap {
+        display: none !important;
+    }
+    .transaction-registered-detail-view .registered-info .d-block.col-locations {
+        display: block !important;
+        margin-bottom: 1rem !important;
+    }
+    .transaction-registered-detail-view .registered-info .d-table .col-feetype {
+        width: 50% !important;
+    }
 }
 @media screen and (max-width: 880px) {
-  .transaction-registered-detail-view .registered-info .d-block.col-locations {
-    display: none !important;
-  }
-  .transaction-registered-detail-view .registered-info .d-table .col-feetype,
-  .transaction-registered-detail-view .registered-info .d-table .col-payment,
-  .transaction-registered-detail-view .registered-info .d-table .col-receipt {
-    margin-top: 1rem !important;
-  }
-  .transaction-registered-detail-view .registered-info .d-table.table-registered,
-  .transaction-registered-detail-view .registered-info .d-table .col-locations,
-  .transaction-registered-detail-view .registered-info .d-table .col-feetype,
-  .transaction-registered-detail-view .registered-info .d-table .col-payment,
-  .transaction-registered-detail-view .registered-info .d-table .col-receipt {
-    display: block !important;
-    width: 100% !important;
-  }
+    .transaction-registered-detail-view .registered-info .d-block.col-locations {
+        display: none !important;
+    }
+    .transaction-registered-detail-view .registered-info .d-table .col-feetype,
+    .transaction-registered-detail-view .registered-info .d-table .col-payment,
+    .transaction-registered-detail-view .registered-info .d-table .col-receipt {
+        margin-top: 1rem !important;
+    }
+    .transaction-registered-detail-view .registered-info .d-table.table-registered,
+    .transaction-registered-detail-view .registered-info .d-table .col-locations,
+    .transaction-registered-detail-view .registered-info .d-table .col-feetype,
+    .transaction-registered-detail-view .registered-info .d-table .col-payment,
+    .transaction-registered-detail-view .registered-info .d-table .col-receipt {
+        display: block !important;
+        width: 100% !important;
+    }
 }
 .transaction-registered-detail-view .location-info .form .form-text,
 .transaction-registered-detail-view .section-info .form .form-text {
-  line-height: 1.5;
+    line-height: 1.5;
 }
 .transaction-registered-detail-view .fee-info .table .col-index {
-  width: 23px !important;
-  min-width: 23px !important;
+    width: 23px !important;
+    min-width: 23px !important;
 }
 .transaction-registered-detail-view .fee-info .table .col-index i {
-  position: relative;
-  top: 1px;
+    position: relative;
+    top: 1px;
 }
 @media screen and (max-width: 780px) and (min-width: 562px) {
-  @include project-card-image-fixed('.transaction-registered-detail-view');
+    @include project-card-image-fixed(".transaction-registered-detail-view");
 }
 @media screen and (max-width: 561px) {
-  .transaction-registered-detail-view .project-card-vertical {
-    display: block !important;
-  }
-  .transaction-registered-detail-view .project-card-horizontal {
-    display: none !important;
-  }
-  @include form-responsive('.transaction-registered-detail-view .register-info');
+    .transaction-registered-detail-view .project-card-vertical {
+        display: block !important;
+    }
+    .transaction-registered-detail-view .project-card-horizontal {
+        display: none !important;
+    }
+    @include form-responsive(".transaction-registered-detail-view .register-info");
 }
 @media screen and (max-width: 428px) {
-  @include form-responsive('.transaction-registered-detail-view .fee-info #deliaddress-form');
-  .transaction-registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group:last-child .col-form-label {
-    display: none !important;
-  }
-  .transaction-registered-detail-view .fee-info #deliaddress-form .form.horizontal-form .form-group:last-child .col .btn {
-    display: block;
-    margin-top: 0.25rem;
-    margin-left: 0 !important;
-  }
+    @include form-responsive(".transaction-registered-detail-view .fee-info #deliaddress-form");
+    .transaction-registered-detail-view
+        .fee-info
+        #deliaddress-form
+        .form.horizontal-form
+        .form-group:last-child
+        .col-form-label {
+        display: none !important;
+    }
+    .transaction-registered-detail-view
+        .fee-info
+        #deliaddress-form
+        .form.horizontal-form
+        .form-group:last-child
+        .col
+        .btn {
+        display: block;
+        margin-top: 0.25rem;
+        margin-left: 0 !important;
+    }
 }
 .transaction-registered-detail-view .fee-info .form .col-privilegecode .input-group .btn {
-  min-width: 85px !important;
-  width: 85px !important;
-  border-bottom-right-radius: 0 !important;
+    min-width: 85px !important;
+    width: 85px !important;
+    border-bottom-right-radius: 0 !important;
 }
 .transaction-registered-detail-view .fee-info .privilege-view .coupon {
-  border: 0;
-  min-height: 88px;
+    border: 0;
+    min-height: 88px;
 }
 .transaction-registered-detail-view .fee-info .privilege-view .coupon .kiri,
 .transaction-registered-detail-view .fee-info .privilege-view .coupon .kanan {
-  width: 88px;
-  max-width: 88px;
+    width: 88px;
+    max-width: 88px;
 }
 @media screen and (max-width: 576px) {
-  .transaction-registered-detail-view .fee-info .privilege-view .coupon .kiri {
-    width: 75px !important;
-    max-width: 75px !important;
-  }
+    .transaction-registered-detail-view .fee-info .privilege-view .coupon .kiri {
+        width: 75px !important;
+        max-width: 75px !important;
+    }
 }
 .transaction-registered-detail-view .fee-info .privilege-view .coupon .tengah,
 .transaction-registered-detail-view .fee-info .privilege-view .coupon .kanan {
-  padding-top: 0.5rem !important;
-  padding-bottom: 0.5rem !important;
-  padding-left: 0.5rem !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    padding-left: 0.5rem !important;
 }
 .transaction-registered-detail-view .fee-info .privilege-view .coupon .tengah .title .subject {
-  font-size: 16px !important;
+    font-size: 16px !important;
 }
 .transaction-registered-detail-view .fee-info .privilege-view .coupon .tengah .detail {
-  font-size: 0.9rem !important;
+    font-size: 0.9rem !important;
 }
 .transaction-registered-detail-view .fee-info .privilege-view .coupon .kanan::after,
 .transaction-registered-detail-view .fee-info .privilege-view .coupon .kanan::before {
-  background: #E9ECEF;
+    background: #e9ecef;
 }
 .transaction-registered-detail-view .payment-info .form .inputbox {
-  border-color: rgba(0, 0, 0, 0.15) !important;
+    border-color: rgba(0, 0, 0, 0.15) !important;
 }
 .transaction-registered-detail-view .payment-info .form .form-control:focus {
-  border-color: rgba(0, 0, 0, 0.35) !important;
+    border-color: rgba(0, 0, 0, 0.35) !important;
 }
 .transaction-registered-detail-view .payment-info .form.flat-form .form-group .form-text {
-  margin-top: 0.3rem !important;
+    margin-top: 0.3rem !important;
 }
 @media screen and (min--moz-device-pixel-ratio: 0) {
-  .transaction-registered-detail-view .payment-info .form.flat-form .form-group .form-text {
-    margin-top: 0.35rem !important
-  }
+    .transaction-registered-detail-view .payment-info .form.flat-form .form-group .form-text {
+        margin-top: 0.35rem !important;
+    }
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  ::i-block-chrome,
-  .transaction-registered-detail-view .payment-info .form.flat-form .form-group .form-text {
-    margin-top: 0.35rem !important
-  }
+    ::i-block-chrome,
+    .transaction-registered-detail-view .payment-info .form.flat-form .form-group .form-text {
+        margin-top: 0.35rem !important;
+    }
 }
 .transaction-registered-detail-view .payment-info .payment-btn {
-  height: 42px;
+    height: 42px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  ::i-block-chrome,
-  .transaction-registered-detail-view .payment-info .payment-btn {
-    height: 38px;
-  }
+    ::i-block-chrome,
+    .transaction-registered-detail-view .payment-info .payment-btn {
+        height: 38px;
+    }
 }
 .transaction-registered-detail-view .payment-info .payment-btn .btn {
-  display: table-cell;
-  width: inherit;
-  height: inherit;
-  border-top-left-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
+    display: table-cell;
+    width: inherit;
+    height: inherit;
+    border-top-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
 }
 @media screen and (max-width: 414px) {
-  @include badge-responsive('.transaction-registered-detail-view .aboutresult-info.project-teaching');
+    @include badge-responsive(".transaction-registered-detail-view .aboutresult-info.project-teaching");
 }

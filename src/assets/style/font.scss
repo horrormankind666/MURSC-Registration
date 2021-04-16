@@ -7,13 +7,13 @@ Description : <style sheet สำหรับจัดรูปแบบฟอ�
 =============================================
 */
 
-@import url('https://fonts.googleapis.com/css?family=Oswald');
+@import url("https://fonts.googleapis.com/css?family=Oswald");
 
-$path-font: 'src/assets/font/';
-$path-font-extralight: ($path-font + 'pridi-extralight.ttf');
-$path-font-light: ($path-font + 'pridi-light.ttf');
-$path-font-medium: ($path-font + 'pridi-medium.ttf');
-$font-family: 'pridi';
+$path-font: "src/assets/font/";
+$path-font-extralight: ($path-font + "pridi-extralight.ttf");
+$path-font-light: ($path-font + "pridi-light.ttf");
+$path-font-medium: ($path-font + "pridi-medium.ttf");
+$font-family: "pridi";
 $font-style: normal;
 $font-weight-extralight: 200;
 $font-weight-light: 300;
@@ -23,187 +23,187 @@ $font-weight-class-regular: 300;
 
 $font-weight-class-bold: 400;
 $font-weight-class-bolder: 600;
-$font-src-local-extralight: 'extralight';
-$font-src-local-light: 'light';
-$font-src-local-medium: 'medium';
+$font-src-local-extralight: "extralight";
+$font-src-local-light: "light";
+$font-src-local-medium: "medium";
 
 /* thai */
 @font-face {
-  font-family: $font-family;
-  font-style: $font-style;
-  font-weight: $font-weight-extralight;
-  src: local($font-family + ' ' + $font-src-local-extralight), local($font-family + '-' + $font-src-local-extralight), url($path-font-extralight) format('truetype');
-  unicode-range: U+0E01-0E5B, U+200B-200D, U+25CC;
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight-extralight;
+    src: local($font-family + " " + $font-src-local-extralight), local($font-family + "-" + $font-src-local-extralight), url($path-font-extralight) format("truetype");
+    unicode-range: U+0E01-0E5B, U+200B-200D, U+25CC;
 }
 /* vietnamese */
 @font-face {
-  font-family: $font-family;
-  font-style: $font-style;
-  font-weight: $font-weight-extralight;
-  src: local($font-family + ' ' + $font-src-local-extralight), local($font-family + '-' + $font-src-local-extralight), url($path-font-extralight) format('truetype');
-  unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight-extralight;
+    src: local($font-family + " " + $font-src-local-extralight), local($font-family + "-" + $font-src-local-extralight), url($path-font-extralight) format("truetype");
+    unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
 }
 /* latin-ext */
 @font-face {
-  font-family: $font-family;
-  font-style: $font-style;
-  font-weight: $font-weight-extralight;
-  src: local($font-family + ' ' + $font-src-local-extralight), local($font-family + '-' + $font-src-local-extralight), url($path-font-extralight) format('truetype');
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight-extralight;
+    src: local($font-family + " " + $font-src-local-extralight), local($font-family + "-" + $font-src-local-extralight), url($path-font-extralight) format("truetype");
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
 @font-face {
-  font-family: $font-family;
-  font-style: $font-style;
-  font-weight: $font-weight-extralight;
-  src: local($font-family + ' ' + $font-src-local-extralight), local($font-family + '-' + $font-src-local-extralight), url($path-font-extralight) format('truetype');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight-extralight;
+    src: local($font-family + " " + $font-src-local-extralight), local($font-family + "-" + $font-src-local-extralight), url($path-font-extralight) format("truetype");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 /* thai */
 @font-face {
     font-family: $font-family;
     font-style: $font-style;
     font-weight: $font-weight-light;
-    src: local($font-family + ' ' + $font-src-local-light), local($font-family + '-' + $font-src-local-light), url($path-font-light) format('truetype');
+    src: local($font-family + " " + $font-src-local-light), local($font-family + "-" + $font-src-local-light), url($path-font-light) format("truetype");
     unicode-range: U+0E01-0E5B, U+200B-200D, U+25CC;
 }
 /* vietnamese */
 @font-face {
-  font-family: $font-family;
-  font-style: $font-style;
-  font-weight: $font-weight-light;
-  src: local($font-family + ' ' + $font-src-local-light), local($font-family + '-' + $font-src-local-light), url($path-font-light) format('truetype');
-  unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight-light;
+    src: local($font-family + " " + $font-src-local-light), local($font-family + "-" + $font-src-local-light), url($path-font-light) format("truetype");
+    unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
 }
 /* latin-ext */
 @font-face {
-  font-family: $font-family;
-  font-style: $font-style;
-  font-weight: $font-weight-light;
-  src: local($font-family + ' ' + $font-src-local-light), local($font-family + '-' + $font-src-local-light), url($path-font-light) format('truetype');
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight-light;
+    src: local($font-family + " " + $font-src-local-light), local($font-family + "-" + $font-src-local-light), url($path-font-light) format("truetype");
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
 @font-face {
-  font-family: $font-family;
-  font-style: $font-style;
-  font-weight: $font-weight-light;
-  src: local($font-family + ' ' + $font-src-local-light), local($font-family + '-' + $font-src-local-light), url($path-font-light) format('truetype');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight-light;
+    src: local($font-family + " " + $font-src-local-light), local($font-family + "-" + $font-src-local-light), url($path-font-light) format("truetype");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 /* thai */
 @font-face {
-  font-family: $font-family;
-  font-style: $font-style;
-  font-weight: $font-weight-medium;
-  src: local($font-family + ' ' + $font-src-local-medium), local($font-family + '-' + $font-src-local-medium), url($path-font-medium) format('truetype');
-  unicode-range: U+0E01-0E5B, U+200B-200D, U+25CC;
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight-medium;
+    src: local($font-family + " " + $font-src-local-medium), local($font-family + "-" + $font-src-local-medium), url($path-font-medium) format("truetype");
+    unicode-range: U+0E01-0E5B, U+200B-200D, U+25CC;
 }
 /* vietnamese */
 @font-face {
-  font-family: $font-family;
-  font-style: $font-style;
-  font-weight: $font-weight-medium;
-  src: local($font-family + ' ' + $font-src-local-medium), local($font-family + '-' + $font-src-local-medium), url($path-font-medium) format('truetype');
-  unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight-medium;
+    src: local($font-family + " " + $font-src-local-medium), local($font-family + "-" + $font-src-local-medium), url($path-font-medium) format("truetype");
+    unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
 }
 /* latin-ext */
 @font-face {
-  font-family: $font-family;
-  font-style: $font-style;
-  font-weight: $font-weight-medium;
-  src: local($font-family + ' ' + $font-src-local-medium), local($font-family + '-' + $font-src-local-medium), url($path-font-medium) format('truetype');
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight-medium;
+    src: local($font-family + " " + $font-src-local-medium), local($font-family + "-" + $font-src-local-medium), url($path-font-medium) format("truetype");
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
 @font-face {
-  font-family: $font-family;
-  font-style: $font-style;
-  font-weight: $font-weight-medium;
-  src: local($font-family + ' ' + $font-src-local-medium), local($font-family + '-' + $font-src-local-medium), url($path-font-medium) format('truetype');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight-medium;
+    src: local($font-family + " " + $font-src-local-medium), local($font-family + "-" + $font-src-local-medium), url($path-font-medium) format("truetype");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 .light {
-  font-weight: $font-weight-class-light !important;
+    font-weight: $font-weight-class-light !important;
 }
 .regular {
-  font-weight: $font-weight-class-regular !important;
+    font-weight: $font-weight-class-regular !important;
 }
 .bold {
-  font-weight: $font-weight-class-bold !important;
+    font-weight: $font-weight-class-bold !important;
 }
 .bolder {
-  font-weight: $font-weight-class-bolder !important;
+    font-weight: $font-weight-class-bolder !important;
 }
 .strike {
-  text-decoration: line-through !important;
+    text-decoration: line-through !important;
 }
 .underline {
-  text-decoration: underline !important;
+    text-decoration: underline !important;
 }
 .size72 {
-  font-size: 72px !important;
+    font-size: 72px !important;
 }
 .size48 {
-  font-size: 48px !important;
+    font-size: 48px !important;
 }
 .size36 {
-  font-size: 36px !important;
+    font-size: 36px !important;
 }
 .size32 {
-  font-size: 32px !important;
+    font-size: 32px !important;
 }
 .size30 {
-  font-size: 30px !important;
+    font-size: 30px !important;
 }
 .size28 {
-  font-size: 28px !important;
+    font-size: 28px !important;
 }
 .size26 {
-  font-size: 26px !important;
+    font-size: 26px !important;
 }
 .size24 {
-  font-size: 24px !important;
+    font-size: 24px !important;
 }
 .size22 {
-  font-size: 22px !important;
+    font-size: 22px !important;
 }
 .size21 {
-  font-size: 21px !important;
+    font-size: 21px !important;
 }
 .size20 {
-  font-size: 20px !important;
+    font-size: 20px !important;
 }
 .size19 {
-  font-size: 19px !important;
+    font-size: 19px !important;
 }
 .size18 {
-  font-size: 18px !important;
+    font-size: 18px !important;
 }
 .size17 {
-  font-size: 17px !important;
+    font-size: 17px !important;
 }
 .size16 {
-  font-size: 16px !important;
+    font-size: 16px !important;
 }
 .size15 {
-  font-size: 15px !important;
+    font-size: 15px !important;
 }
 .size14 {
-  font-size: 14px !important;
+    font-size: 14px !important;
 }
 .size13 {
-  font-size: 13px !important;
+    font-size: 13px !important;
 }
 .size12 {
-  font-size: 12px !important;
+    font-size: 12px !important;
 }
 .size11 {
-  font-size: 11px !important;
+    font-size: 11px !important;
 }
 .size10 {
-  font-size: 10px !important;
+    font-size: 10px !important;
 }
 .size9 {
-  font-size: 9px !important;
+    font-size: 9px !important;
 }
