@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๘/๑๑/๒๕๖๓>
+Modify date : <๑๘/๐๔/๒๕๖๔>
 Description : <>
 =============================================
 */
@@ -28,6 +28,7 @@ import { ModalService } from './modal/modal.service'
 
 import * as $ from 'jquery';
 import { stringify } from 'querystring';
+import { AngularFontAwesomeComponent } from 'angular-font-awesome';
 
 declare function $clamp(element, options): any;
 declare var require: any;
@@ -196,15 +197,32 @@ export class AppService {
         });
     }
 
-    getDataSource(routePrefix: string, action: string, query?: string): Promise<any> {
+    getDeviceInfo(): any {
+        let deviceDetector: any = this.deviceService.getDeviceInfo();
+
+        Object.assign(deviceDetector, {
+            isMobile: this.deviceService.isMobile(),
+            isTablet: this.deviceService.isTablet(),
+            isDesktop: this.deviceService.isDesktop()
+        });
+
+        return deviceDetector;
+    }
+
+
+    getDataSource(routePrefix: string, action: string, query?: string, contents?: string): Promise<any> {
         routePrefix = (routePrefix === undefined ? '' : routePrefix);
         action = (action === undefined ? '' : action);
         query = (query === undefined || query.length === 0 ? '' : query);
+        contents = (contents === undefined ? 'detail' : contents);
 
         let url = (this.urlAPI + '/' + routePrefix + '/');
         let route = '';
         let option = {
-            headers: new HttpHeaders().set('Authorization', ('Bearer ' + this.authenResource.token))
+            headers: new HttpHeaders()
+                        .set('Authorization', ('Bearer ' + this.authenResource.token))
+                        .set('Contents', contents)
+                        .set('DeviceInfo', JSON.stringify(this.getDeviceInfo()))
         };
 
         switch (action) {
