@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๑๘/๐๔/๒๕๖๔>
+Modify date : <๒๒/๐๔/๒๕๖๔>
 Description : <>
 =============================================
 */
@@ -79,7 +79,7 @@ export class AppService {
         prd: 'mursc.mahidol.ac.th'
     };
     public pathIsAuthenticated: string = ('/ResourceADFS/API/AuthenResource/IsAuthenticated?ver=' + this.getDateTimeOnUrl());
-    public pathAuthenResource: string = ('/ResourceADFS/API/AuthenResource/UserInfo?ver=' + this.getDateTimeOnUrl);
+    public pathAuthenResource: string = ('/ResourceADFS/API/AuthenResource/UserInfo?ver=' + this.getDateTimeOnUrl());
     public pathAuthenServer: string = ('/AuthADFS?ver=' + this.getDateTimeOnUrl());
     public pathAPI: string = '/API';
     public pathSignOut: string = ('/AuthADFS/Authen/SignOut?ver=' + this.getDateTimeOnUrl());
@@ -135,6 +135,15 @@ export class AppService {
 
         this.translateService.get('systemName').subscribe((result: string) => {
             this.titleService.setTitle(result);
+        });
+    }
+
+    setFormLabelActive() {
+        $(document).on('focus', '.form-control, .ng-select',function () {
+            $('label[for=' + $(this).attr('name') + ']').addClass('form-label-active');
+        });
+        $(document).on('blur', '.form-control, .ng-select',function () {
+            $('label[for=' + $(this).attr('name') + ']').removeClass('form-label-active');
         });
     }
 
@@ -317,8 +326,7 @@ export class AppService {
                 let data = (result['data'] !== undefined && result['data'] !== null ? result['data'][0] : {});
 
                 if (data.errorCode === 1) {
-                    let modalRef = this.modalService.getModalError(false, 'save.error.notSuccess');
-
+                    let modalRef: NgbModalRef = this.modalService.getModalError(false, 'save.error.notSuccess');
                     this.modalService.close(modalRef).then((result: string) => {
                         if (result === 'close') {
                             resolve(data);

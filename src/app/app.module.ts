@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๓/๑๑/๒๕๖๓>
+Modify date : <๒๕/๐๔/๒๕๖๔>
 Description : <>
 =============================================
 */
@@ -52,6 +52,7 @@ import { TransactionRegisteredPendingPaymentComponent } from './transaction/regi
 import { TransactionRegisteredDetailComponent } from './transaction/registered/detail/transaction-registered-detail.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { PrivilegeComponent } from './privilege/privilege.component';
+import { PhoneNumberVerifyComponent } from './phonenumber/phonenumber-verify.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -82,10 +83,11 @@ export function HttpLoaderFactory(http: HttpClient) {
         TransactionRegisteredDetailComponent,
         ScheduleComponent,
         PrivilegeComponent,
+        PhoneNumberVerifyComponent,
         TrimOnBlurDirective,
         FocusRemoverDirective,
         DynamicComponentDirective,
-        Nl2BrPipe
+        Nl2BrPipe,
     ],
     imports: [
         BrowserModule,
@@ -137,7 +139,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         TransactionRegisteredCheckPaymentComponent,
         TransactionRegisteredPendingPaymentComponent,
         ScheduleComponent,
-        PrivilegeComponent
+        PrivilegeComponent,
+        PhoneNumberVerifyComponent
     ]
 })
 

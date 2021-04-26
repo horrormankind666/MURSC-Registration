@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group col-md-6 pr-0">
                             <label for="registration-status" class="regular text-white size16">{{'registrationStatus' | translate | titlecase}}</label>
-                            <ng-select placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
+                            <ng-select placeholder="{{'placeholder.selectItem' | translate | titlecase}}" name="registration-status"
                                 [(ngModel)]="projectService.operate.table.service.registrationStatus">
                                 <ng-option *ngFor="let item of dataService.statuses.getList(dataService.registrationStatus.data$)" [value]="item.ID">{{item.name[appService.lang] | titlecase}}</ng-option>
                             </ng-select>

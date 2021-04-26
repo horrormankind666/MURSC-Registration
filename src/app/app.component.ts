@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๐๙/๐๙/๒๕๖๓>
+Modify date : <๒๒/๐๔/๒๕๖๓>
 Description : <>
 =============================================
 */
@@ -83,6 +83,7 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.appService.setURLServer();
         this.appService.setDefaultLang(this.appService.lang);
+        this.appService.setFormLabelActive();
         this.userBackgrondColor = this.appService.getRandomColor();
     }
 

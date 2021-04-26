@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๑๘/๐๔/๒๕๖๔>
+Modify date : <๒๕/๐๔/๒๕๖๔>
 Description : <>
 =============================================
 */
@@ -1285,6 +1285,33 @@ namespace Data {
             });
         }
     }
+
+    export class MaskPhoneNumber {
+        public data$ = [
+            {
+                ID: 'mobile',
+                type: {
+                    name: {
+                        th: 'โทรศัพท์มือถือ',
+                        en: 'Mobile phone'
+                     },
+                     image: '/assets/images/smartphone.png',
+                },
+                mask: '99 9999 9999'
+            },
+            {
+                ID: 'home',
+                type: {
+                    name: {
+                        th: 'โทรศัพท์บ้าน',
+                        en: 'Mobile phone'
+                    },
+                    image: '/assets/images/phone.png',
+                },
+                mask: '9 9999 9999'
+            }
+        ]
+    }
 }
 
 @Injectable({
@@ -1307,4 +1334,5 @@ export class DataService {
     public paymentStatus = new Data.PaymentStatus();
     public qrcode = new Data.QRCode(this.appService);
     public transSchedule = new Data.TransSchedule(this.appService);
+    public maskPhoneNumber = new Data.MaskPhoneNumber();
 }

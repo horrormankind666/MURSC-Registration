@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๓>
-Modify date : <๑๗/๑๑/๒๕๖๓>
+Modify date : <๒๓/๐๔/๒๕๖๔>
 Description : <>
 =============================================
 */
@@ -12,6 +12,8 @@ Description : <>
 import { Component, OnInit } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { DeviceDetectorService } from 'ngx-device-detector';
 
@@ -296,8 +298,7 @@ export class RegisteredComponent implements OnInit {
         this.data.transProject$ = this.route.snapshot.data.transProject$;
 
         if (!this.data.transProject$) {
-            let modalRef = this.modalService.getModalError(false, 'project.error.notFound');
-
+            let modalRef: NgbModalRef = this.modalService.getModalError(false, 'project.error.notFound');
             this.modalService.close(modalRef).then((result: string) => {
                 if (result === 'close')
                     this.router.navigate(['Project/' + this.route.snapshot.params['projectCategory']]);
@@ -313,8 +314,7 @@ export class RegisteredComponent implements OnInit {
                     let btnMsg: BtnMsg = {
                         close: 'registered.detail'
                     };
-                    let modalRef = this.modalService.getModalError(false, 'registered.save.error.projectRegistered', btnMsg);
-
+                    let modalRef: NgbModalRef = this.modalService.getModalError(false, 'registered.save.error.projectRegistered', btnMsg);
                     this.modalService.close(modalRef).then((result: string) => {
                         if (result === 'close')
                             this.router.navigate(['Transaction/Registered/Detail/' + this.appService.getCUID([this.data.transRegistered$.ID, this.data.transProject$.ID])]);
@@ -342,8 +342,7 @@ export class RegisteredComponent implements OnInit {
                             this.registeredInfos.show = true;
                         }
                         else {
-                            let modalRef = this.modalService.getModalError(false, 'registered.error.haveNoRight');
-
+                            let modalRef: NgbModalRef = this.modalService.getModalError(false, 'registered.error.haveNoRight');
                             this.modalService.close(modalRef).then((result: string) => {
                                 if (result === 'close')
                                     this.router.navigate(['Project/' + this.route.snapshot.params['projectCategory']]);

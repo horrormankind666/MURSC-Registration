@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๙/๐๖/๒๕๖๓>
-Modify date : <๒๕/๑๑/๒๕๖๓>
+Modify date : <๒๖/๐๔/๒๕๖๔>
 Description : <>
 =============================================
 */
@@ -12,11 +12,14 @@ Description : <>
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppService } from '../../../app.service';
 import { AuthService } from '../../../auth.service';
 import { Schema, DataService } from '../../../data.service';
 import { ModalService, BtnMsg } from '../../../modal/modal.service';
 import { ScheduleService } from '../../../schedule/schedule.service';
+import { PhoneNumberService } from '../../../phonenumber/phonenumber.service';
 
 import { PrivilegeComponent } from '../../../privilege/privilege.component';
 
@@ -30,11 +33,13 @@ export class TransactionRegisteredDetailComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
+        private modal: NgbModal,
         private appService: AppService,
         private authService: AuthService,
         private dataService: DataService,
         private modalService: ModalService,
-        private scheduleService: ScheduleService
+        private scheduleService: ScheduleService,
+        private phoneNumberService: PhoneNumberService
     ) { }
 
     data: any = {
@@ -387,6 +392,30 @@ export class TransactionRegisteredDetailComponent implements OnInit {
         }
     };
 
+    phoneNumberVerify: any = {
+        that: {},
+        formField: {
+            phoneNumber: {
+                value: ''
+            }
+        },
+        setValue() {
+            this.formField.phoneNumber.value = (this.that.authService.getUserInfo.phoneNumber ? this.that.authService.getUserInfo.phoneNumber : this.that.deliAddress.formField.phoneNumber);
+        },
+        saveChange: {
+            that: {},
+            getValue(): {} {
+                let result: {} = {
+                    transRegisteredID: (this.that.data.transRegistered$.ID ? this.that.data.transRegistered$.ID : null),
+                    transProjectID: (this.that.data.transRegistered$.transProject.ID ? this.that.data.transRegistered$.transProject.ID : null),
+                    phoneNumber: (this.that.phoneNumberVerify.formField.phoneNumber.value ? this.that.phoneNumberVerify.formField.phoneNumber.value : null)
+                };
+
+                return result;
+            }
+        }
+    };
+
     ngOnInit() {
         this.data.transRegistered$ = this.route.snapshot.data.transRegistered$;
 
@@ -436,6 +465,10 @@ export class TransactionRegisteredDetailComponent implements OnInit {
                 this.privilege.that = this;
                 this.privilege.confirm.that = this;
 
+                this.phoneNumberVerify.that = this;
+                this.phoneNumberVerify.saveChange.that = this;
+                this.phoneNumberVerify.setValue();
+
                 this.saveChange.that = this;
             }
         }
@@ -483,78 +516,111 @@ export class TransactionRegisteredDetailComponent implements OnInit {
                         this.that.appService.isLoading.checking = false;
 
                         if (this.isValid) {
-                            let modalRef = this.that.modalService.getModalConfirm(false, 'payment.save.confirm.label', 'payment.save.confirm.description');
+                            let modalRef: NgbModalRef = this.that.phoneNumberService.getModalPhoneNumberVerify(this.that.phoneNumberVerify.formField.phoneNumber.value);
+                            this.that.modalService.close(modalRef).then((result: any) => {
+                                if (result.action === 'ok') {
+                                    this.that.phoneNumberVerify.formField.phoneNumber.value = result.formField.phoneNumber.value;
 
-                            this.that.modalService.close(modalRef).then((result: string) => {
-                                if (result === 'ok') {
-                                    let value: {} = this.that.feeType.saveChange.getValue();
+                                    modalRef = this.that.modalService.getModalConfirm(false, 'payment.save.confirm.label', 'payment.save.confirm.description');
+                                    this.that.modalService.close(modalRef).then((result: string) => {
+                                        if (result === 'ok') {
+                                            let value: {} = this.that.phoneNumberVerify.saveChange.getValue();
 
-                                    this.that.appService.save('TransInvoice', 'PUT', JSON.stringify(value)).then((result: any) => {
-                                        let saveResult: any = result;
-                                        let modalRef: any;
-
-                                        if (saveResult.errorCode === 0) {
-                                            value = this.that.deliAddress.saveChange.getValue();
-
-                                            this.that.appService.save('TransDeliveryAddress', 'PUT', JSON.stringify(value)).then((result: any) => {
-                                                saveResult = result;
+                                            this.that.appService.save('TransRegistered', 'PUT', JSON.stringify(value)).then((result: any) => {
+                                                let saveResult: any = result;
 
                                                 if (saveResult.errorCode === 0) {
-                                                    this.that.appService.isLoading.show = true;
-                                                    this.that.appService.isLoading.checking = true;
+                                                    value = this.that.feeType.saveChange.getValue();
 
-                                                    this.that.dataService.transRegistered.get(this.that.appService.getCUID([this.that.data.transRegistered$.ID, this.that.data.transRegistered$.transProject.ID])).then((result: Schema.TransRegistered) => {
-                                                        let transRegistered: Schema.TransRegistered = result;
+                                                    this.that.appService.save('TransInvoice', 'PUT', JSON.stringify(value)).then((result: any) => {
+                                                        saveResult = result;
 
-                                                        this.that.appService.isLoading.show = false;
-                                                        this.that.appService.isLoading.checking = false;
+                                                        if (saveResult.errorCode === 0) {
+                                                            value = this.that.deliAddress.saveChange.getValue();
 
-                                                        if (this.that.appService.existUserTypeSpecific(transRegistered.transProject.userTypeSpecific, this.that.authService.getUserInfo.type)) {
-                                                            if (this.that.data.transRegistered$.invoice.payment.status !== transRegistered.invoice.payment.status)
-                                                                this.that.data.transRegistered$ = transRegistered;
+                                                            this.that.appService.save('TransDeliveryAddress', 'PUT', JSON.stringify(value)).then((result: any) => {
+                                                                saveResult = result;
 
-                                                            if (this.that.data.transRegistered$.invoice.payment.status === 'N') {
-                                                                if (this.that.data.transRegistered$.transProject.paymentExpire === 'N') {
-                                                                    value = this.that.payment.saveChange.getValue();
+                                                                if (saveResult.errorCode === 0) {
+                                                                    this.that.appService.isLoading.show = true;
+                                                                    this.that.appService.isLoading.checking = true;
 
-                                                                    this.that.appService.save(('QRCodePayment/' + this.that.data.transRegistered$.transProject.project.category.initial), 'PUT', JSON.stringify(value)).then((result: any) => {
-                                                                        saveResult = result;
+                                                                    this.that.dataService.transRegistered.get(this.that.appService.getCUID([this.that.data.transRegistered$.ID, this.that.data.transRegistered$.transProject.ID])).then((result: Schema.TransRegistered) => {
+                                                                        let transRegistered: Schema.TransRegistered = result;
 
-                                                                        if (saveResult.errorCode === 0) {
-                                                                            this.that.appService.isLoading.show = true;
-                                                                            this.that.appService.isLoading.reloading = true;
+                                                                        this.that.appService.isLoading.show = false;
+                                                                        this.that.appService.isLoading.checking = false;
 
-                                                                            this.that.dataService.transRegistered.get(this.that.appService.getCUID([this.that.data.transRegistered$.ID, this.that.data.transRegistered$.transProject.ID])).then((result: Schema.TransRegistered) => {
-                                                                                this.that.data.transRegistered$ = result;
-                                                                                this.that.payment.setValue(true);
+                                                                        if (this.that.appService.existUserTypeSpecific(transRegistered.transProject.userTypeSpecific, this.that.authService.getUserInfo.type)) {
+                                                                            if (this.that.data.transRegistered$.invoice.payment.status !== transRegistered.invoice.payment.status)
+                                                                                this.that.data.transRegistered$ = transRegistered;
 
-                                                                                this.that.appService.isLoading.show = false;
-                                                                                this.that.appService.isLoading.reloading = false;
-                                                                            });
+                                                                            if (this.that.data.transRegistered$.invoice.payment.status === 'N') {
+                                                                                if (this.that.data.transRegistered$.transProject.paymentExpire === 'N') {
+                                                                                    value = this.that.payment.saveChange.getValue();
+
+                                                                                    this.that.appService.save(('QRCodePayment/' + this.that.data.transRegistered$.transProject.project.category.initial), 'PUT', JSON.stringify(value)).then((result: any) => {
+                                                                                        saveResult = result;
+
+                                                                                        if (saveResult.errorCode === 0) {
+                                                                                            this.that.appService.isLoading.show = true;
+                                                                                            this.that.appService.isLoading.reloading = true;
+
+                                                                                            this.that.dataService.transRegistered.get(this.that.appService.getCUID([this.that.data.transRegistered$.ID, this.that.data.transRegistered$.transProject.ID])).then((result: Schema.TransRegistered) => {
+                                                                                                this.that.data.transRegistered$ = result;
+                                                                                                this.that.payment.setValue(true);
+
+                                                                                                this.that.appService.isLoading.show = false;
+                                                                                                this.that.appService.isLoading.reloading = false;
+                                                                                            });
+                                                                                        }
+                                                                                        else {
+                                                                                            if (saveResult.errorCode === 2) {
+                                                                                                modalRef = this.that.modalService.getModalError(false, 'registered.error.notFound', 'registered.info');
+
+                                                                                                this.that.modalService.close(modalRef).then((result: string) => {
+                                                                                                    if (result === 'close')
+                                                                                                        this.that.router.navigate(['Transaction/Registered']);
+                                                                                                });
+                                                                                            }
+                                                                                        }
+                                                                                    });
+                                                                                }
+                                                                                else
+                                                                                    this.that.payment.setValue(true);
+                                                                            }
                                                                         }
                                                                         else {
-                                                                            if (saveResult.errorCode === 2) {
-                                                                                modalRef = this.that.modalService.getModalError(false, 'registered.error.notFound', 'registered.info');
+                                                                            modalRef = this.that.modalService.getModalError(false, 'registered.error.haveNoRight');
 
-                                                                                this.that.modalService.close(modalRef).then((result: string) => {
-                                                                                    if (result === 'close')
-                                                                                        this.that.router.navigate(['Transaction/Registered']);
-                                                                                });
-                                                                            }
+                                                                            this.that.modalService.close(modalRef).then((result: string) => {
+                                                                                if (result === 'close')
+                                                                                    this.that.router.navigate(['Transaction/Registered']);
+                                                                            });
                                                                         }
                                                                     });
                                                                 }
-                                                                else
-                                                                    this.that.payment.setValue(true);
-                                                            }
+                                                                else {
+                                                                    if (saveResult.errorCode === 2) {
+                                                                        modalRef = this.that.modalService.getModalError(false, 'registered.error.notFound', 'registered.info');
+
+                                                                        this.that.modalService.close(modalRef).then((result: string) => {
+                                                                            if (result === 'close')
+                                                                                this.that.router.navigate(['Transaction/Registered']);
+                                                                        });
+                                                                    }
+                                                                }
+                                                            });
                                                         }
                                                         else {
-                                                            modalRef = this.that.modalService.getModalError(false, 'registered.error.haveNoRight');
+                                                            if (saveResult.errorCode === 2) {
+                                                                modalRef = this.that.modalService.getModalError(false, 'registered.error.notFound', 'registered.info');
 
-                                                            this.that.modalService.close(modalRef).then((result: string) => {
-                                                                if (result === 'close')
-                                                                    this.that.router.navigate(['Transaction/Registered']);
-                                                            });
+                                                                this.that.modalService.close(modalRef).then((result: string) => {
+                                                                    if (result === 'close')
+                                                                        this.that.router.navigate(['Transaction/Registered']);
+                                                                });
+                                                            }
                                                         }
                                                     });
                                                 }
@@ -569,16 +635,6 @@ export class TransactionRegisteredDetailComponent implements OnInit {
                                                     }
                                                 }
                                             });
-                                        }
-                                        else {
-                                            if (saveResult.errorCode === 2) {
-                                                modalRef = this.that.modalService.getModalError(false, 'registered.error.notFound', 'registered.info');
-
-                                                this.that.modalService.close(modalRef).then((result: string) => {
-                                                    if (result === 'close')
-                                                        this.that.router.navigate(['Transaction/Registered']);
-                                                });
-                                            }
                                         }
                                     });
                                 }

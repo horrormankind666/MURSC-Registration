@@ -1,0 +1,42 @@
+/*
+=============================================
+Author      : <ยุทธภูมิ ตวันนา>
+Create date : <๒๐/๐๔/๒๕๖๔>
+Modify date : <๒๖/๐๔/๒๕๖๔>
+Description : <>
+=============================================
+*/
+
+@import "../../styles.scss";
+
+::ng-deep .phonenumber-verify-dialog .modal-dialog {
+    max-width: 576px;
+}
+.phonenumber-verify-view .form .field-btn .btn {
+    min-width: 85px;
+}
+@media screen and (max-width: 768px) {
+    .phonenumber-verify-view .form .form-row {
+        display: table;
+        table-layout: fixed;
+    }
+    .phonenumber-verify-view .form .form-row .form-group {
+        display: table-cell;
+        padding-bottom: 1rem;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+}
+@media screen and (max-width: 478px) {
+    .phonenumber-verify-view .form .form-row .form-group {
+        display: block;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        padding-right: 0 !important;
+        padding-bottom: 0 !important;
+        padding-left: 0 !important;
+    }
+    .phonenumber-verify-view .form .form-row .form-group.field-btn {
+        margin-bottom: 0;
+    }
+}

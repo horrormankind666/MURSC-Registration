@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๑๗/๐๓/๒๕๖๓>
-Modify date : <๑๗/๑๑/๒๕๖๓>
+Modify date : <๒๐/๐๔/๒๕๖๔>
 Description : <>
 =============================================
 */
@@ -43,5 +43,10 @@ export class ProjectDetailComponent implements OnInit {
 
     ngOnInit() {
         this.data.transProject$ = this.data$;
+
+        setTimeout(() => {
+            this.appService.isLoading.show = false;
+            this.appService.isLoading.modal = false;
+        }, 0);
     }
 }

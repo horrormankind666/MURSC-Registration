@@ -9,13 +9,13 @@ Description : <>
 
 'use strict';
 
-import { Component, ComponentRef, ComponentFactoryResolver, ViewChild, ViewContainerRef, Input, Type, OnInit } from '@angular/core';
+import { Component, ComponentRef, ComponentFactoryResolver, ViewChild, ViewContainerRef, Input, Output, EventEmitter, Type, OnInit } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-modal-info',
-    template: `
+    template: `,
     <div class="font">
         <div class="modal-body">
             <span class="regular text-white size16">{{message | translate}}</span>

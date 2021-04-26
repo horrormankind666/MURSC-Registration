@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๖/๑๑/๒๕๖๒>
-Modify date : <๑๘/๑๒/๒๕๖๓>
+Modify date : <๒๑/๐๔/๒๕๖๔>
 Description : <>
 =============================================
 */
@@ -257,6 +257,9 @@ $line-clamp-line-height: 1.7;
 }
 .left-0 {
     left: 0 !important;
+}
+.left-auto {
+    left: auto !important;
 }
 
 body {
@@ -551,6 +554,11 @@ body.modal-open {
     border-radius: 0 !important;
     background: #ffffff !important;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .modal-content {
+        display: block;
+    }
+}
 .modal-header {
     background: #5bc0de;
     border-bottom: 0 !important;
@@ -645,6 +653,8 @@ body.modal-open {
     max-width: 100%;
     min-width: $screen-min-width;
     width: 100%;
+    margin-right: auto !important;
+    margin-left: auto !important;
 }
 .info-dialog .modal-content {
     background: $color-info !important;
@@ -920,9 +930,12 @@ textarea {
 .ng-select.ng-select-focused:not(.ng-select-opened),
 .ng-select.ng-select-focused:not(.ng-select-opened) > .ng-select-container,
 .ng-dropdown-panel {
-    border-color: #0078d7 !important;
+    border-color: blue !important;
     outline: 0;
     box-shadow: 0 0 0 0;
+}
+.form-label-active {
+    color: blue !important;
 }
 .form-control,
 .inputbox {
@@ -936,12 +949,15 @@ textarea {
     cursor: default;
 }
 .form-control::placeholder {
-    opacity: 0.8;
+    opacity: 0.8 !important;
 }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     .form-control::placeholder {
         opacity: 0.5;
     }
+}
+.form-control:focus-visible {
+    text-shadow: none;
 }
 .inputbox,
 .ng-select .ng-select-container {
@@ -1126,6 +1142,11 @@ textarea {
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected .ng-option-label,
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked .ng-option-label {
     font-weight: $font-weight-class-bold;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option .ng-option-label img,
+.ng-select .ng-select-container .ng-value-container .ng-value .ng-value-label img {
+    width: 20px;
+    height: 20px;
 }
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
     background: #0078d7;

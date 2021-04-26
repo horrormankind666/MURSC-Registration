@@ -35,6 +35,9 @@
     "ok": "Ok",
     "close": "Close",
     "confirm": "Confirm",
+    "edit": {
+        "label": "Edit"
+    },
     "select": "Select",
     "registration": {
         "label": "Registration",
@@ -91,6 +94,28 @@
     "name": "Name",
     "email": "Email",
     "phone": "Phone",
+    "phoneNumber": {
+        "label": "Phone Number",
+        "mask": {
+            "label": "Input mask"
+        },
+        "verify": {
+            "label": "Verify your phone number to contact"
+        },
+        "placeholder": {
+            "label": "Enter the phone number"
+        },
+        "save": {
+            "error": {
+                "inputmask": {
+                    "label": "Please select a input mask."
+                },
+                "phoneNumber": {
+                    "label": "Please fill in the phone number correctly and completely."
+                }
+            }
+        }
+    },
     "fee": "Fee",
     "amount": "Amount",
     "seat": {

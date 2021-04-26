@@ -555,7 +555,7 @@
                                     <label for="col-deliaddress-country" class="col-form-label col-form-label-sm pl-0 regular">{{'address.country' | translate | titlecase}}</label>
                                     <div class="col">
                                         <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.country.isLoading"></i>
-                                        <ng-select class="size-sm" placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
+                                        <ng-select class="size-sm" placeholder="{{'placeholder.selectItem' | translate | titlecase}}" name="col-deliaddress-country"
                                             [(ngModel)]="deliAddress.formField.country.selected"
                                             (ngModelChange)="watchChange()"
                                             (change)="deliAddress.getListProvince()"
@@ -568,7 +568,7 @@
                                     <label for="col-deliaddress-province" class="col-form-label col-form-label-sm pl-0 regular">{{'address.province' | translate | titlecase}}</label>
                                     <div class="col">
                                         <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.province.isLoading"></i>
-                                        <ng-select class="size-sm" placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
+                                        <ng-select class="size-sm" placeholder="{{'placeholder.selectItem' | translate | titlecase}}" name="col-deliaddress-province"
                                             [(ngModel)]="deliAddress.formField.province.selected"
                                             (ngModelChange)="watchChange()"
                                             (change)="deliAddress.getListDistrict()"
@@ -581,7 +581,7 @@
                                     <label for="col-deliaddress-district" class="col-form-label col-form-label-sm pl-0 regular">{{'address.district' | translate | titlecase}}</label>
                                     <div class="col">
                                         <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.district.isLoading"></i>
-                                        <ng-select class="size-sm" placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
+                                        <ng-select class="size-sm" placeholder="{{'placeholder.selectItem' | translate | titlecase}}" name="col-deliaddress-district"
                                             [(ngModel)]="deliAddress.formField.district.selected"
                                             (ngModelChange)="watchChange()"
                                             (change)="deliAddress.getListSubdistrict()"
@@ -594,7 +594,7 @@
                                     <label for="col-deliaddress-subdistrict" class="col-form-label col-form-label-sm pl-0 regular">{{'address.subdistrict' | translate | titlecase}}</label>
                                     <div class="col">
                                         <i class="fas fa-circle-notch fa-spin mt-2 mb-044" *ngIf="deliAddress.formField.subdistrict.isLoading"></i>
-                                        <ng-select class="size-sm" placeholder="{{'placeholder.selectItem' | translate | titlecase}}"
+                                        <ng-select class="size-sm" placeholder="{{'placeholder.selectItem' | translate | titlecase}}" name="col-deliaddress-subdistrict"
                                             [(ngModel)]="deliAddress.formField.subdistrict.selected"
                                             (ngModelChange)="watchChange()"
                                             *ngIf="!deliAddress.formField.subdistrict.isLoading">

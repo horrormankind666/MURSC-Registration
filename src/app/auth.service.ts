@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๕/๑๑/๒๕๖๒>
-Modify date : <๑๗/๑๑/๒๕๖๓>
+Modify date : <๒๖/๐๔/๒๕๖๔>
 Description : <>
 =============================================
 */
@@ -12,6 +12,8 @@ Description : <>
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -158,7 +160,7 @@ export class AuthService {
                 province: province,
                 country: country,
                 zipCode: zipCode,
-                phoneNumber: phoneNumber
+                phoneNumber: phoneNumber.replace(/-/g, '').replace(/ /g, '')
             };
 
             userInfo.fullName = {
@@ -236,8 +238,7 @@ export class AuthService {
     }
 
     signout() {
-        let modalRef = this.modalService.getModalConfirm(false, 'signout.confirm');
-
+        let modalRef: NgbModalRef = this.modalService.getModalConfirm(false, 'signout.confirm');
         this.modalService.close(modalRef).then((result: string) => {
             if (result === 'ok') {
                 this.isAuthenticated = false;

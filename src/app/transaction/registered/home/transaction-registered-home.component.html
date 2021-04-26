@@ -75,7 +75,8 @@
                             </div>
                             <div class="form-group col-md-6 pr-0">
                                 <label for="project-category" class="regular text-white size16">{{'project.category' | translate | titlecase}}</label>
-                                <ng-select placeholder="{{'placeholder.selectItem' | translate | titlecase}}" [(ngModel)]="transRegisteredService.service.operate.table.service.projectCategory">
+                                <ng-select placeholder="{{'placeholder.selectItem' | translate | titlecase}}" name="project-category"
+                                    [(ngModel)]="transRegisteredService.service.operate.table.service.projectCategory">
                                     <ng-option *ngFor="let item of data.projectCategory$" [value]="item.initial">{{item.name[appService.lang] | titlecase}}</ng-option>
                                 </ng-select>
                             </div>

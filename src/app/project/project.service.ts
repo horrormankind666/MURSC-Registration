@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๐/๐๒/๒๕๖๓>
-Modify date : <๑๘/๐๔/๒๕๖๔>
+Modify date : <๒๐/๐๔/๒๕๖๔>
 Description : <>
 =============================================
 */
@@ -160,9 +160,6 @@ export class ProjectService {
             this.appService.isLoading.modal = true;
 
             this.dataService.transProject.get(data.project.category.initial, this.appService.getCUID([data.ID])).then((result: Schema.TransProject) => {
-                this.appService.isLoading.show = false;
-                this.appService.isLoading.modal = false;
-
                 let modalRef: NgbModalRef = this.modalService.getModalForm(true);
                 modalRef.componentInstance.component = ProjectDetailComponent;
                 modalRef.componentInstance.title = 'project.detail';
