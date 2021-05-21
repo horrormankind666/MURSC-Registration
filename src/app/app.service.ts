@@ -219,18 +219,18 @@ export class AppService {
     }
 
 
-    getDataSource(routePrefix: string, action: string, query?: string, contents?: string): Promise<any> {
+    getDataSource(routePrefix: string, action: string, query?: string, forContent?: string): Promise<any> {
         routePrefix = (routePrefix === undefined ? '' : routePrefix);
         action = (action === undefined ? '' : action);
         query = (query === undefined || query.length === 0 ? '' : query);
-        contents = (contents === undefined ? 'detail' : contents);
+        forContent = (forContent === undefined ? 'detail' : forContent);
 
         let url = (this.urlAPI + '/' + routePrefix + '/');
         let route = '';
         let option = {
             headers: new HttpHeaders()
                         .set('Authorization', ('Bearer ' + this.authenResource.token))
-                        .set('Contents', contents)
+                        .set('ForContent', forContent)
                         .set('DeviceInfo', JSON.stringify(this.getDeviceInfo()))
         };
 
