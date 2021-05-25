@@ -64,10 +64,12 @@ export class AppComponent implements OnInit {
                 case event instanceof NavigationEnd:
                 case event instanceof NavigationCancel:
                 case event instanceof NavigationError:
-                    setTimeout(() => {
-                        appService.isLoading.show = false;
-                        appService.isLoading.page = false;
-                    }, 1000);
+                    this.appService.setSysEvent().then(() => {;
+                        setTimeout(() => {
+                            appService.isLoading.show = false;
+                            appService.isLoading.page = false;
+                        }, 1000);
+                    });
                     break;
                 default: {
                     break;

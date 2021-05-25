@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๒/๐๒/๒๕๖๓>
-Modify date : <๒๕/๐๔/๒๕๖๔>
+Modify date : <๒๔/๐๔/๒๕๖๔>
 Description : <>
 =============================================
 */
@@ -585,8 +585,8 @@ namespace Data {
             private appService: AppService
         ) { }
 
-        private getDataSource(action: string, query?: string, forContent?: string): Promise<Schema.TransProject[]> {
-            return this.appService.getDataSource('TransProject', action, query, forContent).then((result: []) => {
+        private getDataSource(action: string, query?: string, remark?: string): Promise<Schema.TransProject[]> {
+            return this.appService.getDataSource('TransProject', action, query, remark).then((result: []) => {
                 let transProject: Schema.TransProject[] = [];
                 let transLocation: Schema.TransLocation[] = [];
                 let transFeeType: Schema.TransFeeType[] = [];
@@ -763,14 +763,14 @@ namespace Data {
             })
         }
 
-        get(projectCategory: string, cuid: string, forContent?: string): Promise<Schema.TransProject> {
+        get(projectCategory: string, cuid: string, remark?: string): Promise<Schema.TransProject> {
             let query = [
                 '',
                 ('projectCategory=' + projectCategory),
                 ('cuid=' + cuid)
             ].join('&');
 
-            return this.getDataSource('get', query, forContent).then((result: Schema.TransProject[]) => {
+            return this.getDataSource('get', query, remark).then((result: Schema.TransProject[]) => {
                 return result[0];
             });
         }

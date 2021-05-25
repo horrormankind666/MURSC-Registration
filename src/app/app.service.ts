@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๒๘/๑๐/๒๕๖๒>
-Modify date : <๒๒/๐๔/๒๕๖๔>
+Modify date : <๒๔/๐๕/๒๕๖๔>
 Description : <>
 =============================================
 */
@@ -147,6 +147,14 @@ export class AppService {
         });
     }
 
+    getHost(): string {
+        let protocol: string = location.protocol;
+        let port: string = location.port;
+        let hostname: string = location.hostname;
+
+        return (protocol + "//" + hostname + (port ? (":" + port) : ''));
+    }
+
     getDateTimeOnUrl(): string {
         return formatDate(new Date(), 'dd/MM/yyyyHH:mm:ss', 'en');
     }
@@ -219,19 +227,19 @@ export class AppService {
     }
 
 
-    getDataSource(routePrefix: string, action: string, query?: string, forContent?: string): Promise<any> {
+    getDataSource(routePrefix: string, action: string, query?: string, remark?: string): Promise<any> {
         routePrefix = (routePrefix === undefined ? '' : routePrefix);
         action = (action === undefined ? '' : action);
         query = (query === undefined || query.length === 0 ? '' : query);
-        forContent = (forContent === undefined ? 'detail' : forContent);
+        remark = (remark === undefined ? '' : remark);
 
         let url = (this.urlAPI + '/' + routePrefix + '/');
         let route = '';
         let option = {
             headers: new HttpHeaders()
                         .set('Authorization', ('Bearer ' + this.authenResource.token))
-                        .set('ForContent', forContent)
                         .set('DeviceInfo', JSON.stringify(this.getDeviceInfo()))
+                        .set('Remark', remark)
         };
 
         switch (action) {
@@ -299,7 +307,7 @@ export class AppService {
         data = (data === undefined ? '' : data);
 
         let url = (this.urlAPI + '/' + routePrefix + "/");
-        var route = "";
+        let route = "";
         let option = {
             headers: new HttpHeaders().set('Authorization', ('Bearer ' + this.authenResource.token))
         };
@@ -335,6 +343,31 @@ export class AppService {
                 }
                 else
                     resolve(data);
+            });
+        });
+
+        return promise;
+    }
+
+    setSysEvent(remark?: string): Promise<any> {
+        let routePrefix: string = 'SysEvent';
+        let data: string = JSON.stringify({
+            url: (this.getHost() + this.router.routerState.snapshot.url)
+        });
+        let url = (this.urlAPI + '/' + routePrefix + "/");
+        let route = "Post";
+        let option = {
+            headers: new HttpHeaders()
+                        .set('Authorization', ('Bearer ' + this.authenResource.token))
+                        .set('DeviceInfo', JSON.stringify(this.getDeviceInfo()))
+                        .set('Remark', (remark ? remark : ''))
+        };
+
+        url += ("Post" + "?ver=" + this.getDateTimeOnUrl());
+
+        let promise = new Promise((resolve, reject) => {
+            this.httpMethod(route, url, data, option).then((result: {}) => {
+                resolve(result);
             });
         });
 

@@ -2,7 +2,7 @@
 =============================================
 Author      : <ยุทธภูมิ ตวันนา>
 Create date : <๐๑/๐๔/๒๕๖๒>
-Modify date : <๑๘/๐๔/๒๕๖๔>
+Modify date : <๒๔/๐๕/๒๕๖๔>
 Description : <>
 =============================================
 */
@@ -117,7 +117,7 @@ export class GetTransProjectResolve implements Resolve<Schema.TransProject> {
     ) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<Schema.TransProject> | Promise<Schema.TransProject> | Schema.TransProject {
-        return this.dataService.transProject.get(route.params['projectCategory'], route.params['cuid'], "registered").then((result: Schema.TransProject) => {
+        return this.dataService.transProject.get(route.params['projectCategory'], route.params['cuid'], "registered project").then((result: Schema.TransProject) => {
             return result;
         });
     }

@@ -27,7 +27,7 @@ export const appRouting: Routes = [
         path: 'SignIn',
         component: PageEmptyComponent,
         resolve: {
-            AuthenADFSPageResolve
+            AuthenADFSPageResolve,
         }
     },
     {
